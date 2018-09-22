@@ -1,0 +1,11 @@
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\bin\Debug\HomeCare.exe.config
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\bin\Debug\HomeCare.exe
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\bin\Debug\HomeCare.pdb
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\bin\Debug\HomeCare.xml
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.vbprojResolveAssemblyReference.cache
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.visitas.resources
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.Resources.resources
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.vbproj.GenerateResource.Cache
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.exe
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.xml
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.pdb
