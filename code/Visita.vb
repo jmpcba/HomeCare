@@ -8,4 +8,10 @@
         paciente = _paciente
         prestacion = _prestacion
     End Sub
+
+    Public Sub insertar()
+        Dim db = New DB()
+        db.insertar(Me)
+    End Sub
+
 End Class

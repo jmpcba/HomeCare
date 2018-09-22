@@ -62,4 +62,8 @@
             End Try
         End If
     End Sub
+
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+
+    End Sub
 End Class
