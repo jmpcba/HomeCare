@@ -5,7 +5,19 @@
     Public beneficio As Integer
 
     Public Sub New(_DNI As Integer)
-        'TODO: CODIGO PARA QUE BUSQUE EL CLIENTE EN LA DB Y CONSTRUYA EL OBJETO CON ESOS DATOS
+        Dim db = New DB()
+        Dim dt As DataTable
+
+        Try
+            dt = db.getPaciente(_DNI)
+
+            DNI = dt(0)(0)
+            nombre = dt(0)(1)
+            beneficio = dt(0)(2)
+        Catch ex As Exception
+            Throw
+        End Try
+
     End Sub
 
     Public Sub New(_dni As Integer, _nombre As String, _beneficio As Integer)

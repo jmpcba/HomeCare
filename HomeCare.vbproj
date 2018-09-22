@@ -72,14 +72,27 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="code\DB.vb" />
     <Compile Include="code\Medico.vb" />
     <Compile Include="code\Paciente.vb" />
     <Compile Include="code\Prestacion.vb" />
-    <Compile Include="visitas.vb">
+    <Compile Include="frmPrincipal.Designer.vb">
+      <DependentUpon>frmPrincipal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="visitas.Designer.vb">
-      <DependentUpon>visitas.vb</DependentUpon>
+    <Compile Include="HomeCareDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeCareDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="frmVisitas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVisitas.Designer.vb">
+      <DependentUpon>frmVisitas.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -99,8 +112,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="visitas.resx">
-      <DependentUpon>visitas.vb</DependentUpon>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVisitas.resx">
+      <DependentUpon>frmVisitas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -110,6 +126,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="HomeCareDataSet.xsc">
+      <DependentUpon>HomeCareDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HomeCareDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HomeCareDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HomeCareDataSet.xss">
+      <DependentUpon>HomeCareDataSet.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
