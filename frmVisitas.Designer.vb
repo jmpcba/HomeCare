@@ -25,6 +25,7 @@ Partial Class frmVisitas
         Me.components = New System.ComponentModel.Container()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.tsLbl = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -36,7 +37,14 @@ Partial Class frmVisitas
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtMat = New System.Windows.Forms.TextBox()
         Me.txtPrestador = New System.Windows.Forms.TextBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.dgVisitas = New System.Windows.Forms.DataGridView()
+        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PACIENTEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MEDICODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FECHADataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FECHACARGADataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PRESTACIONDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.VISITASBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label6 = New System.Windows.Forms.Label()
         Me.DTFecha = New System.Windows.Forms.DateTimePicker()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -55,19 +63,20 @@ Partial Class frmVisitas
         Me.PACIENTESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PACIENTESTableAdapter()
         Me.MEDICOSTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.MEDICOSTableAdapter()
         Me.PRESTACIONESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTACIONESTableAdapter()
-        Me.tsLbl = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.VISITASTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.VISITASTableAdapter()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.MEDICOSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgVisitas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.VISITASBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(516, 753)
+        Me.btnCerrar.Location = New System.Drawing.Point(550, 585)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 1
@@ -77,11 +86,17 @@ Partial Class frmVisitas
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsLbl})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 791)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 638)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(634, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(673, 22)
         Me.StatusStrip1.TabIndex = 3
         Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'tsLbl
+        '
+        Me.tsLbl.Name = "tsLbl"
+        Me.tsLbl.Size = New System.Drawing.Size(120, 17)
+        Me.tsLbl.Text = "ToolStripStatusLabel1"
         '
         'Label1
         '
@@ -97,7 +112,7 @@ Partial Class frmVisitas
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 157)
+        Me.Label2.Location = New System.Drawing.Point(14, 132)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(103, 24)
         Me.Label2.TabIndex = 6
@@ -106,7 +121,7 @@ Partial Class frmVisitas
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(15, 201)
+        Me.Label3.Location = New System.Drawing.Point(17, 176)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(91, 13)
         Me.Label3.TabIndex = 7
@@ -118,7 +133,7 @@ Partial Class frmVisitas
         Me.cbMedico.DisplayMember = "NOMBRE"
         Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMedico.FormattingEnabled = True
-        Me.cbMedico.Location = New System.Drawing.Point(113, 192)
+        Me.cbMedico.Location = New System.Drawing.Point(115, 167)
         Me.cbMedico.Name = "cbMedico"
         Me.cbMedico.Size = New System.Drawing.Size(121, 21)
         Me.cbMedico.TabIndex = 8
@@ -142,7 +157,7 @@ Partial Class frmVisitas
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(15, 233)
+        Me.Label4.Location = New System.Drawing.Point(17, 208)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(50, 13)
         Me.Label4.TabIndex = 9
@@ -151,7 +166,7 @@ Partial Class frmVisitas
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(262, 233)
+        Me.Label5.Location = New System.Drawing.Point(264, 208)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(52, 13)
         Me.Label5.TabIndex = 10
@@ -159,7 +174,7 @@ Partial Class frmVisitas
         '
         'txtMat
         '
-        Me.txtMat.Location = New System.Drawing.Point(113, 225)
+        Me.txtMat.Location = New System.Drawing.Point(115, 200)
         Me.txtMat.Name = "txtMat"
         Me.txtMat.ReadOnly = True
         Me.txtMat.Size = New System.Drawing.Size(121, 20)
@@ -167,25 +182,73 @@ Partial Class frmVisitas
         '
         'txtPrestador
         '
-        Me.txtPrestador.Location = New System.Drawing.Point(338, 226)
+        Me.txtPrestador.Location = New System.Drawing.Point(340, 201)
         Me.txtPrestador.Name = "txtPrestador"
         Me.txtPrestador.ReadOnly = True
         Me.txtPrestador.Size = New System.Drawing.Size(121, 20)
         Me.txtPrestador.TabIndex = 12
         '
-        'DataGridView1
+        'dgVisitas
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(18, 487)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(604, 260)
-        Me.DataGridView1.TabIndex = 13
+        Me.dgVisitas.AllowUserToAddRows = False
+        Me.dgVisitas.AllowUserToDeleteRows = False
+        Me.dgVisitas.AllowUserToOrderColumns = True
+        Me.dgVisitas.AutoGenerateColumns = False
+        Me.dgVisitas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgVisitas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.PACIENTEDataGridViewTextBoxColumn, Me.MEDICODataGridViewTextBoxColumn, Me.FECHADataGridViewTextBoxColumn, Me.FECHACARGADataGridViewTextBoxColumn, Me.PRESTACIONDataGridViewTextBoxColumn})
+        Me.dgVisitas.DataSource = Me.VISITASBindingSource
+        Me.dgVisitas.Location = New System.Drawing.Point(12, 391)
+        Me.dgVisitas.Name = "dgVisitas"
+        Me.dgVisitas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgVisitas.Size = New System.Drawing.Size(644, 188)
+        Me.dgVisitas.TabIndex = 13
+        '
+        'IDDataGridViewTextBoxColumn
+        '
+        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
+        '
+        'PACIENTEDataGridViewTextBoxColumn
+        '
+        Me.PACIENTEDataGridViewTextBoxColumn.DataPropertyName = "PACIENTE"
+        Me.PACIENTEDataGridViewTextBoxColumn.HeaderText = "PACIENTE"
+        Me.PACIENTEDataGridViewTextBoxColumn.Name = "PACIENTEDataGridViewTextBoxColumn"
+        '
+        'MEDICODataGridViewTextBoxColumn
+        '
+        Me.MEDICODataGridViewTextBoxColumn.DataPropertyName = "MEDICO"
+        Me.MEDICODataGridViewTextBoxColumn.HeaderText = "MEDICO"
+        Me.MEDICODataGridViewTextBoxColumn.Name = "MEDICODataGridViewTextBoxColumn"
+        '
+        'FECHADataGridViewTextBoxColumn
+        '
+        Me.FECHADataGridViewTextBoxColumn.DataPropertyName = "FECHA"
+        Me.FECHADataGridViewTextBoxColumn.HeaderText = "FECHA"
+        Me.FECHADataGridViewTextBoxColumn.Name = "FECHADataGridViewTextBoxColumn"
+        '
+        'FECHACARGADataGridViewTextBoxColumn
+        '
+        Me.FECHACARGADataGridViewTextBoxColumn.DataPropertyName = "FECHA_CARGA"
+        Me.FECHACARGADataGridViewTextBoxColumn.HeaderText = "FECHA_CARGA"
+        Me.FECHACARGADataGridViewTextBoxColumn.Name = "FECHACARGADataGridViewTextBoxColumn"
+        '
+        'PRESTACIONDataGridViewTextBoxColumn
+        '
+        Me.PRESTACIONDataGridViewTextBoxColumn.DataPropertyName = "PRESTACION"
+        Me.PRESTACIONDataGridViewTextBoxColumn.HeaderText = "PRESTACION"
+        Me.PRESTACIONDataGridViewTextBoxColumn.Name = "PRESTACIONDataGridViewTextBoxColumn"
+        '
+        'VISITASBindingSource
+        '
+        Me.VISITASBindingSource.DataMember = "VISITAS"
+        Me.VISITASBindingSource.DataSource = Me.HomeCareDataSetBindingSource
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(12, 307)
+        Me.Label6.Location = New System.Drawing.Point(13, 256)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(98, 24)
         Me.Label6.TabIndex = 14
@@ -193,7 +256,7 @@ Partial Class frmVisitas
         '
         'DTFecha
         '
-        Me.DTFecha.Location = New System.Drawing.Point(338, 332)
+        Me.DTFecha.Location = New System.Drawing.Point(339, 281)
         Me.DTFecha.Name = "DTFecha"
         Me.DTFecha.Size = New System.Drawing.Size(200, 20)
         Me.DTFecha.TabIndex = 15
@@ -201,7 +264,7 @@ Partial Class frmVisitas
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(262, 338)
+        Me.Label7.Location = New System.Drawing.Point(263, 287)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(37, 13)
         Me.Label7.TabIndex = 16
@@ -210,7 +273,7 @@ Partial Class frmVisitas
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(14, 339)
+        Me.Label8.Location = New System.Drawing.Point(15, 288)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(28, 13)
         Me.Label8.TabIndex = 17
@@ -222,7 +285,7 @@ Partial Class frmVisitas
         Me.CBPrestacion.DisplayMember = "DESCRIPCCION"
         Me.CBPrestacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBPrestacion.FormattingEnabled = True
-        Me.CBPrestacion.Location = New System.Drawing.Point(48, 336)
+        Me.CBPrestacion.Location = New System.Drawing.Point(49, 285)
         Me.CBPrestacion.Name = "CBPrestacion"
         Me.CBPrestacion.Size = New System.Drawing.Size(186, 21)
         Me.CBPrestacion.TabIndex = 18
@@ -235,7 +298,7 @@ Partial Class frmVisitas
         '
         'btnAgregar
         '
-        Me.btnAgregar.Location = New System.Drawing.Point(18, 436)
+        Me.btnAgregar.Location = New System.Drawing.Point(12, 340)
         Me.btnAgregar.Name = "btnAgregar"
         Me.btnAgregar.Size = New System.Drawing.Size(186, 33)
         Me.btnAgregar.TabIndex = 19
@@ -244,7 +307,7 @@ Partial Class frmVisitas
         '
         'btnEliminarVisita
         '
-        Me.btnEliminarVisita.Location = New System.Drawing.Point(436, 436)
+        Me.btnEliminarVisita.Location = New System.Drawing.Point(470, 340)
         Me.btnEliminarVisita.Name = "btnEliminarVisita"
         Me.btnEliminarVisita.Size = New System.Drawing.Size(186, 33)
         Me.btnEliminarVisita.TabIndex = 20
@@ -323,18 +386,16 @@ Partial Class frmVisitas
         '
         Me.PRESTACIONESTableAdapter.ClearBeforeFill = True
         '
-        'tsLbl
+        'VISITASTableAdapter
         '
-        Me.tsLbl.Name = "tsLbl"
-        Me.tsLbl.Size = New System.Drawing.Size(120, 17)
-        Me.tsLbl.Text = "ToolStripStatusLabel1"
+        Me.VISITASTableAdapter.ClearBeforeFill = True
         '
         'frmVisitas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(634, 813)
+        Me.ClientSize = New System.Drawing.Size(673, 660)
         Me.Controls.Add(Me.txtBeneficio)
         Me.Controls.Add(Me.txtDni)
         Me.Controls.Add(Me.Label9)
@@ -348,7 +409,7 @@ Partial Class frmVisitas
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.DTFecha)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.dgVisitas)
         Me.Controls.Add(Me.txtPrestador)
         Me.Controls.Add(Me.txtMat)
         Me.Controls.Add(Me.Label5)
@@ -366,7 +427,8 @@ Partial Class frmVisitas
         CType(Me.MEDICOSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgVisitas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.VISITASBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -384,7 +446,7 @@ Partial Class frmVisitas
     Friend WithEvents Label5 As Label
     Friend WithEvents txtMat As TextBox
     Friend WithEvents txtPrestador As TextBox
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgVisitas As DataGridView
     Friend WithEvents Label6 As Label
     Friend WithEvents DTFecha As DateTimePicker
     Friend WithEvents Label7 As Label
@@ -407,4 +469,12 @@ Partial Class frmVisitas
     Friend WithEvents PRESTACIONESBindingSource As BindingSource
     Friend WithEvents PRESTACIONESTableAdapter As HomeCareDataSetTableAdapters.PRESTACIONESTableAdapter
     Friend WithEvents tsLbl As ToolStripStatusLabel
+    Friend WithEvents VISITASBindingSource As BindingSource
+    Friend WithEvents VISITASTableAdapter As HomeCareDataSetTableAdapters.VISITASTableAdapter
+    Friend WithEvents IDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PACIENTEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents MEDICODataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents FECHADataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents FECHACARGADataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PRESTACIONDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 End Class

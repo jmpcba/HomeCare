@@ -17,6 +17,20 @@ Public Class DB
         cmd.Connection = cnn
     End Sub
 
+    Friend Function getVisitas(fec As Date) As DataTable
+        Dim query = "SELECT * FROM VISITAS WHERE  FECHA > " & fec.ToShortDateString
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            da.Fill(ds, "RESULTADO")
+            Return ds.Tables("RESULTADO")
+        Catch ex As Exception
+            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
+        End Try
+    End Function
+
     Public Enum tablas
         medicos
         pacientes
@@ -33,8 +47,9 @@ Public Class DB
             query = "SELECT * FROM PACIENTES WHERE dni = " & _priKey
         ElseIf _tabla = tablas.prestaciones Then
             query = "SELECT * FROM PRESTACIONES WHERE ID = " & _priKey
+        ElseIf _tabla = tablas.visitas Then
+            query = "SELECT * FROM VISITAS WHERE ID = " & _priKey
         End If
-
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -47,6 +62,40 @@ Public Class DB
         End Try
 
     End Function
+
+    Friend Sub eliminar(_visita As Visita)
+        Try
+            Dim query = "DELETE FROM VISITAS WHERE ID=" & _visita.id
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
+    Friend Sub eliminar(_visita As Visita, _id As Integer)
+        'REVISAR MAS ADELANTE POR AHORA EL OBJETO VISITA SE USA SOLO PARA QUE SE SEPA QUE ESTOY ELIMINANDO UNA VISITA
+        'SE ELIMINA LA VISITA _id
+        Try
+            Dim query = "DELETE FROM VISITAS WHERE ID=" & _id
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
 
     Public Function getPaciente(_dni As Object) As DataTable
         Dim query = "SELECT * FROM PACIENTES where dni = " & _dni
@@ -63,8 +112,24 @@ Public Class DB
 
     End Function
 
-    Friend Sub insertar(visita As Visita)
-        Dim query = "INSERT INTO VISITAS VALUES ()"
+    Friend Sub insertar(_visita As Visita)
+        Try
+            Dim query = String.Format("INSERT INTO VISITAS (PACIENTE, MEDICO, FECHA, FECHA_CARGA, PRESTACION) VALUES ({0}, {1}, {2}, {3}, {4})", _visita.paciente.DNI, _visita.medico.matricula, _visita.fecha.ToShortDateString, _visita.fecha_registrado.ToShortDateString, _visita.prestacion.tipo)
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
+    Friend Sub insertar(_prestacion As Prestacion)
+
     End Sub
 
 End Class

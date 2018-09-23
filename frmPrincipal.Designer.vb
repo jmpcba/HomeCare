@@ -23,6 +23,7 @@ Partial Class frmPrincipal
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.btnVisita = New System.Windows.Forms.Button()
+        Me.btnReporte = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnVisita
@@ -34,11 +35,21 @@ Partial Class frmPrincipal
         Me.btnVisita.Text = "Cargar Visita"
         Me.btnVisita.UseVisualStyleBackColor = True
         '
+        'btnReporte
+        '
+        Me.btnReporte.Location = New System.Drawing.Point(12, 104)
+        Me.btnReporte.Name = "btnReporte"
+        Me.btnReporte.Size = New System.Drawing.Size(260, 53)
+        Me.btnReporte.TabIndex = 1
+        Me.btnReporte.Text = "Historial De Visitas"
+        Me.btnReporte.UseVisualStyleBackColor = True
+        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.btnReporte)
         Me.Controls.Add(Me.btnVisita)
         Me.Name = "frmPrincipal"
         Me.Text = "frmPrincipal"
@@ -47,4 +58,5 @@ Partial Class frmPrincipal
     End Sub
 
     Friend WithEvents btnVisita As Button
+    Friend WithEvents btnReporte As Button
 End Class
