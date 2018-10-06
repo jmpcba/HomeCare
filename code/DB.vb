@@ -7,7 +7,7 @@ Public Class DB
     Private cmd As OleDbCommand
     Private da As OleDbDataAdapter
     Private ds As DataSet
-    Private conStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source='C:\Users\Manuel\Google Drive\HomeCare.accdb'"
+    Private conStr As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}\Google Drive\HomeCare.accdb'", Environ("USERPROFILE"))
 
     Sub New()
         cnn = New OleDbConnection(conStr)

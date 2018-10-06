@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmVisitas
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmVisitas
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.btnCerrar = New System.Windows.Forms.Button()
@@ -37,13 +37,7 @@ Partial Class frmVisitas
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtMat = New System.Windows.Forms.TextBox()
         Me.txtPrestador = New System.Windows.Forms.TextBox()
-        Me.dgVisitas = New System.Windows.Forms.DataGridView()
-        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PACIENTEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MEDICODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FECHADataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FECHACARGADataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PRESTACIONDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgFechas = New System.Windows.Forms.DataGridView()
         Me.VISITASBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label6 = New System.Windows.Forms.Label()
         Me.DTFecha = New System.Windows.Forms.DateTimePicker()
@@ -51,8 +45,7 @@ Partial Class frmVisitas
         Me.Label8 = New System.Windows.Forms.Label()
         Me.CBPrestacion = New System.Windows.Forms.ComboBox()
         Me.PRESTACIONESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.btnAgregar = New System.Windows.Forms.Button()
-        Me.btnEliminarVisita = New System.Windows.Forms.Button()
+        Me.btnGuardar = New System.Windows.Forms.Button()
         Me.txtBeneficio = New System.Windows.Forms.TextBox()
         Me.txtDni = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -64,19 +57,29 @@ Partial Class frmVisitas
         Me.MEDICOSTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.MEDICOSTableAdapter()
         Me.PRESTACIONESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTACIONESTableAdapter()
         Me.VISITASTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.VISITASTableAdapter()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.cbSubModulo = New System.Windows.Forms.ComboBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.cbModulo = New System.Windows.Forms.ComboBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.MEDICOSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dgVisitas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VISITASBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnCerrar
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(550, 585)
+        Me.btnCerrar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnCerrar.Location = New System.Drawing.Point(863, 432)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 1
@@ -88,7 +91,7 @@ Partial Class frmVisitas
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsLbl})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 638)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(673, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1051, 22)
         Me.StatusStrip1.TabIndex = 3
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -112,7 +115,7 @@ Partial Class frmVisitas
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(14, 132)
+        Me.Label2.Location = New System.Drawing.Point(3, 7)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(103, 24)
         Me.Label2.TabIndex = 6
@@ -121,7 +124,7 @@ Partial Class frmVisitas
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(17, 176)
+        Me.Label3.Location = New System.Drawing.Point(518, 68)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(91, 13)
         Me.Label3.TabIndex = 7
@@ -133,7 +136,7 @@ Partial Class frmVisitas
         Me.cbMedico.DisplayMember = "NOMBRE"
         Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMedico.FormattingEnabled = True
-        Me.cbMedico.Location = New System.Drawing.Point(115, 167)
+        Me.cbMedico.Location = New System.Drawing.Point(616, 59)
         Me.cbMedico.Name = "cbMedico"
         Me.cbMedico.Size = New System.Drawing.Size(121, 21)
         Me.cbMedico.TabIndex = 8
@@ -157,7 +160,7 @@ Partial Class frmVisitas
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(17, 208)
+        Me.Label4.Location = New System.Drawing.Point(518, 100)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(50, 13)
         Me.Label4.TabIndex = 9
@@ -166,7 +169,7 @@ Partial Class frmVisitas
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(264, 208)
+        Me.Label5.Location = New System.Drawing.Point(765, 100)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(52, 13)
         Me.Label5.TabIndex = 10
@@ -174,7 +177,7 @@ Partial Class frmVisitas
         '
         'txtMat
         '
-        Me.txtMat.Location = New System.Drawing.Point(115, 200)
+        Me.txtMat.Location = New System.Drawing.Point(616, 92)
         Me.txtMat.Name = "txtMat"
         Me.txtMat.ReadOnly = True
         Me.txtMat.Size = New System.Drawing.Size(121, 20)
@@ -182,62 +185,25 @@ Partial Class frmVisitas
         '
         'txtPrestador
         '
-        Me.txtPrestador.Location = New System.Drawing.Point(340, 201)
+        Me.txtPrestador.Location = New System.Drawing.Point(841, 93)
         Me.txtPrestador.Name = "txtPrestador"
         Me.txtPrestador.ReadOnly = True
         Me.txtPrestador.Size = New System.Drawing.Size(121, 20)
         Me.txtPrestador.TabIndex = 12
         '
-        'dgVisitas
+        'dgFechas
         '
-        Me.dgVisitas.AllowUserToAddRows = False
-        Me.dgVisitas.AllowUserToDeleteRows = False
-        Me.dgVisitas.AllowUserToOrderColumns = True
-        Me.dgVisitas.AutoGenerateColumns = False
-        Me.dgVisitas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgVisitas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.PACIENTEDataGridViewTextBoxColumn, Me.MEDICODataGridViewTextBoxColumn, Me.FECHADataGridViewTextBoxColumn, Me.FECHACARGADataGridViewTextBoxColumn, Me.PRESTACIONDataGridViewTextBoxColumn})
-        Me.dgVisitas.DataSource = Me.VISITASBindingSource
-        Me.dgVisitas.Location = New System.Drawing.Point(12, 391)
-        Me.dgVisitas.Name = "dgVisitas"
-        Me.dgVisitas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgVisitas.Size = New System.Drawing.Size(644, 188)
-        Me.dgVisitas.TabIndex = 13
-        '
-        'IDDataGridViewTextBoxColumn
-        '
-        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
-        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
-        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
-        '
-        'PACIENTEDataGridViewTextBoxColumn
-        '
-        Me.PACIENTEDataGridViewTextBoxColumn.DataPropertyName = "PACIENTE"
-        Me.PACIENTEDataGridViewTextBoxColumn.HeaderText = "PACIENTE"
-        Me.PACIENTEDataGridViewTextBoxColumn.Name = "PACIENTEDataGridViewTextBoxColumn"
-        '
-        'MEDICODataGridViewTextBoxColumn
-        '
-        Me.MEDICODataGridViewTextBoxColumn.DataPropertyName = "MEDICO"
-        Me.MEDICODataGridViewTextBoxColumn.HeaderText = "MEDICO"
-        Me.MEDICODataGridViewTextBoxColumn.Name = "MEDICODataGridViewTextBoxColumn"
-        '
-        'FECHADataGridViewTextBoxColumn
-        '
-        Me.FECHADataGridViewTextBoxColumn.DataPropertyName = "FECHA"
-        Me.FECHADataGridViewTextBoxColumn.HeaderText = "FECHA"
-        Me.FECHADataGridViewTextBoxColumn.Name = "FECHADataGridViewTextBoxColumn"
-        '
-        'FECHACARGADataGridViewTextBoxColumn
-        '
-        Me.FECHACARGADataGridViewTextBoxColumn.DataPropertyName = "FECHA_CARGA"
-        Me.FECHACARGADataGridViewTextBoxColumn.HeaderText = "FECHA_CARGA"
-        Me.FECHACARGADataGridViewTextBoxColumn.Name = "FECHACARGADataGridViewTextBoxColumn"
-        '
-        'PRESTACIONDataGridViewTextBoxColumn
-        '
-        Me.PRESTACIONDataGridViewTextBoxColumn.DataPropertyName = "PRESTACION"
-        Me.PRESTACIONDataGridViewTextBoxColumn.HeaderText = "PRESTACION"
-        Me.PRESTACIONDataGridViewTextBoxColumn.Name = "PRESTACIONDataGridViewTextBoxColumn"
+        Me.dgFechas.AllowUserToAddRows = False
+        Me.dgFechas.AllowUserToDeleteRows = False
+        Me.dgFechas.AllowUserToOrderColumns = True
+        Me.dgFechas.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.dgFechas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgFechas.Location = New System.Drawing.Point(543, 16)
+        Me.dgFechas.Name = "dgFechas"
+        Me.dgFechas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgFechas.Size = New System.Drawing.Size(314, 392)
+        Me.dgFechas.TabIndex = 13
         '
         'VISITASBindingSource
         '
@@ -248,7 +214,7 @@ Partial Class frmVisitas
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(13, 256)
+        Me.Label6.Location = New System.Drawing.Point(0, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(98, 24)
         Me.Label6.TabIndex = 14
@@ -256,28 +222,29 @@ Partial Class frmVisitas
         '
         'DTFecha
         '
-        Me.DTFecha.Location = New System.Drawing.Point(339, 281)
+        Me.DTFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DTFecha.Location = New System.Drawing.Point(325, 55)
         Me.DTFecha.Name = "DTFecha"
-        Me.DTFecha.Size = New System.Drawing.Size(200, 20)
+        Me.DTFecha.Size = New System.Drawing.Size(186, 20)
         Me.DTFecha.TabIndex = 15
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(263, 287)
+        Me.Label7.Location = New System.Drawing.Point(249, 19)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(37, 13)
+        Me.Label7.Size = New System.Drawing.Size(57, 13)
         Me.Label7.TabIndex = 16
-        Me.Label7.Text = "Fecha"
+        Me.Label7.Text = "Prestacion"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(15, 288)
+        Me.Label8.Location = New System.Drawing.Point(249, 55)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(28, 13)
+        Me.Label8.Size = New System.Drawing.Size(37, 13)
         Me.Label8.TabIndex = 17
-        Me.Label8.Text = "Tipo"
+        Me.Label8.Text = "Fecha"
         '
         'CBPrestacion
         '
@@ -285,7 +252,7 @@ Partial Class frmVisitas
         Me.CBPrestacion.DisplayMember = "DESCRIPCCION"
         Me.CBPrestacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBPrestacion.FormattingEnabled = True
-        Me.CBPrestacion.Location = New System.Drawing.Point(49, 285)
+        Me.CBPrestacion.Location = New System.Drawing.Point(325, 16)
         Me.CBPrestacion.Name = "CBPrestacion"
         Me.CBPrestacion.Size = New System.Drawing.Size(186, 21)
         Me.CBPrestacion.TabIndex = 18
@@ -296,23 +263,15 @@ Partial Class frmVisitas
         Me.PRESTACIONESBindingSource.DataMember = "PRESTACIONES"
         Me.PRESTACIONESBindingSource.DataSource = Me.HomeCareDataSetBindingSource
         '
-        'btnAgregar
+        'btnGuardar
         '
-        Me.btnAgregar.Location = New System.Drawing.Point(12, 340)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(186, 33)
-        Me.btnAgregar.TabIndex = 19
-        Me.btnAgregar.Text = "A&gregar Visita"
-        Me.btnAgregar.UseVisualStyleBackColor = True
-        '
-        'btnEliminarVisita
-        '
-        Me.btnEliminarVisita.Location = New System.Drawing.Point(470, 340)
-        Me.btnEliminarVisita.Name = "btnEliminarVisita"
-        Me.btnEliminarVisita.Size = New System.Drawing.Size(186, 33)
-        Me.btnEliminarVisita.TabIndex = 20
-        Me.btnEliminarVisita.Text = "&Eliminar Visita"
-        Me.btnEliminarVisita.UseVisualStyleBackColor = True
+        Me.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnGuardar.Location = New System.Drawing.Point(751, 432)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
+        Me.btnGuardar.TabIndex = 19
+        Me.btnGuardar.Text = "&Guardar"
+        Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'txtBeneficio
         '
@@ -390,36 +349,113 @@ Partial Class frmVisitas
         '
         Me.VISITASTableAdapter.ClearBeforeFill = True
         '
+        'Panel1
+        '
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Location = New System.Drawing.Point(12, 24)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(482, 108)
+        Me.Panel1.TabIndex = 27
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Location = New System.Drawing.Point(513, 24)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(482, 108)
+        Me.Panel2.TabIndex = 28
+        '
+        'Panel3
+        '
+        Me.Panel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.cbSubModulo)
+        Me.Panel3.Controls.Add(Me.Label13)
+        Me.Panel3.Controls.Add(Me.cbModulo)
+        Me.Panel3.Controls.Add(Me.Label12)
+        Me.Panel3.Controls.Add(Me.Label6)
+        Me.Panel3.Controls.Add(Me.CBPrestacion)
+        Me.Panel3.Controls.Add(Me.Label7)
+        Me.Panel3.Controls.Add(Me.btnGuardar)
+        Me.Panel3.Controls.Add(Me.Label8)
+        Me.Panel3.Controls.Add(Me.dgFechas)
+        Me.Panel3.Controls.Add(Me.DTFecha)
+        Me.Panel3.Controls.Add(Me.btnCerrar)
+        Me.Panel3.Location = New System.Drawing.Point(12, 138)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(983, 489)
+        Me.Panel3.TabIndex = 29
+        '
+        'cbSubModulo
+        '
+        Me.cbSubModulo.DataSource = Me.PRESTACIONESBindingSource
+        Me.cbSubModulo.DisplayMember = "DESCRIPCCION"
+        Me.cbSubModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSubModulo.FormattingEnabled = True
+        Me.cbSubModulo.Location = New System.Drawing.Point(100, 47)
+        Me.cbSubModulo.Name = "cbSubModulo"
+        Me.cbSubModulo.Size = New System.Drawing.Size(121, 21)
+        Me.cbSubModulo.TabIndex = 22
+        Me.cbSubModulo.ValueMember = "ID"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(3, 55)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(64, 13)
+        Me.Label13.TabIndex = 21
+        Me.Label13.Text = "Sub-Modulo"
+        '
+        'cbModulo
+        '
+        Me.cbModulo.DataSource = Me.PRESTACIONESBindingSource
+        Me.cbModulo.DisplayMember = "DESCRIPCCION"
+        Me.cbModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbModulo.FormattingEnabled = True
+        Me.cbModulo.Location = New System.Drawing.Point(100, 16)
+        Me.cbModulo.Name = "cbModulo"
+        Me.cbModulo.Size = New System.Drawing.Size(121, 21)
+        Me.cbModulo.TabIndex = 20
+        Me.cbModulo.ValueMember = "ID"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(3, 24)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(42, 13)
+        Me.Label12.TabIndex = 19
+        Me.Label12.Text = "Modulo"
+        '
         'frmVisitas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(673, 660)
+        Me.ClientSize = New System.Drawing.Size(1051, 660)
+        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.txtBeneficio)
         Me.Controls.Add(Me.txtDni)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cbPaciente)
         Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.btnEliminarVisita)
-        Me.Controls.Add(Me.btnAgregar)
-        Me.Controls.Add(Me.CBPrestacion)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.DTFecha)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.dgVisitas)
         Me.Controls.Add(Me.txtPrestador)
         Me.Controls.Add(Me.txtMat)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.cbMedico)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.StatusStrip1)
-        Me.Controls.Add(Me.btnCerrar)
+        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Panel2)
         Me.Name = "frmVisitas"
         Me.Text = "Ingresar Visitas Paciente"
         Me.StatusStrip1.ResumeLayout(False)
@@ -427,10 +463,14 @@ Partial Class frmVisitas
         CType(Me.MEDICOSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dgVisitas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VISITASBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -446,14 +486,13 @@ Partial Class frmVisitas
     Friend WithEvents Label5 As Label
     Friend WithEvents txtMat As TextBox
     Friend WithEvents txtPrestador As TextBox
-    Friend WithEvents dgVisitas As DataGridView
+    Friend WithEvents dgFechas As DataGridView
     Friend WithEvents Label6 As Label
     Friend WithEvents DTFecha As DateTimePicker
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents CBPrestacion As ComboBox
-    Friend WithEvents btnAgregar As Button
-    Friend WithEvents btnEliminarVisita As Button
+    Friend WithEvents btnGuardar As Button
     Friend WithEvents txtBeneficio As TextBox
     Friend WithEvents txtDni As TextBox
     Friend WithEvents Label9 As Label
@@ -471,10 +510,11 @@ Partial Class frmVisitas
     Friend WithEvents tsLbl As ToolStripStatusLabel
     Friend WithEvents VISITASBindingSource As BindingSource
     Friend WithEvents VISITASTableAdapter As HomeCareDataSetTableAdapters.VISITASTableAdapter
-    Friend WithEvents IDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents PACIENTEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents MEDICODataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents FECHADataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents FECHACARGADataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents PRESTACIONDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents cbSubModulo As ComboBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents cbModulo As ComboBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel2 As Panel
 End Class

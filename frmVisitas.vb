@@ -1,4 +1,6 @@
-﻿Public Class frmVisitas
+﻿Imports System.DateTime
+
+Public Class frmVisitas
     Dim pac As Paciente
     Dim med As Medico
     Dim prest As Prestacion
@@ -19,6 +21,9 @@
             CBPrestacion.SelectedIndex = -1
             cbPaciente.SelectedIndex = -1
             statusBar("CARGA INICIAL", False)
+
+            DTFecha.CustomFormat = " MMMM - yyyy"
+            cargarGrilla()
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
         End Try
@@ -67,7 +72,7 @@
         End If
     End Sub
 
-    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
             If IsNothing(pac) Then
                 statusBar("SELECCIONE UN PACIENTE", True)
@@ -101,24 +106,20 @@
     Private Sub dgVisitas_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
         index = e.RowIndex
 
-        If dgVisitas.SelectedRows.Count = 0 Then
-            btnEliminarVisita.Enabled = False
-        Else
-            btnEliminarVisita.Enabled = True
-        End If
+
     End Sub
 
-    Private Sub btnEliminarVisita_Click(sender As Object, e As EventArgs) Handles btnEliminarVisita.Click
+    Private Sub btnEliminarVisita_Click(sender As Object, e As EventArgs)
         Dim index As Integer
         Dim r As DataGridViewRow
         Dim idVisita As Integer
         Dim visita As Visita
 
-        If dgVisitas.SelectedRows.Count = 0 Then
+        If dgFechas.SelectedRows.Count = 0 Then
             statusBar("SELECCIONE UNA VISITA EN LA GRILLA", True)
         Else
             If MsgBox("DESEA ELIMINAR ESTA VISITA?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                r = dgVisitas.Rows(index)
+                r = dgFechas.Rows(index)
                 idVisita = r.Cells(0).Value
                 visita = New Visita()
                 visita.eliminar(idVisita)
@@ -128,17 +129,43 @@
 
     End Sub
 
-    Private Sub dgVisitas_SelectionChanged(sender As Object, e As EventArgs) Handles dgVisitas.SelectionChanged
+    Private Sub dgVisitas_SelectionChanged(sender As Object, e As EventArgs) Handles dgFechas.SelectionChanged
 
     End Sub
 
-    Private Sub dgVisitas_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgVisitas.CellClick
+    Private Sub dgVisitas_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgFechas.CellClick
         index = e.RowIndex
 
-        If dgVisitas.SelectedRows.Count = 0 Then
-            btnEliminarVisita.Enabled = False
-        Else
-            btnEliminarVisita.Enabled = True
-        End If
+
+    End Sub
+
+    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
+
+    End Sub
+
+    Private Sub DTFecha_ValueChanged(sender As Object, e As EventArgs) Handles DTFecha.ValueChanged
+        cargarGrilla()
+    End Sub
+
+    Public Sub cargarGrilla()
+        Dim month = DTFecha.Value.Month
+        Dim year = DTFecha.Value.Year
+        Dim days = DaysInMonth(year, month)
+        Dim dt As New DataTable()
+
+        dgFechas.DataSource = Nothing
+
+        dt.Columns.Add("DIA")
+        dt.Columns.Add("CANTIDAD")
+
+        For i = 0 To days - 1
+            Dim r = dt.NewRow
+            r("DIA") = i + 1
+            dt.Rows.Add(r)
+        Next
+
+        dt.Columns("DIA").ReadOnly = True
+        dgFechas.DataSource = dt
+
     End Sub
 End Class
