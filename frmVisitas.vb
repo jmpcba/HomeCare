@@ -84,10 +84,26 @@ Public Class frmVisitas
                 statusBar("SELECCIONE UNA PRESTACION", True)
 
             Else
-                Dim visita = New Visita(med, pac, prest, DTFecha.Value)
-                visita.insertar()
-                Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
+                ' Dim visita = New Visita(med, pac, prest, DTFecha.Value)
+                'Visita.insertar()
+                'Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
+                Dim practicas = New List(Of Visita)
 
+                For Each r As DataGridViewRow In dgFechas.Rows
+                    Dim cant As Integer
+                    Dim dia As Integer
+
+                    If IsDBNull(r.Cells("HORAS").Value) Then
+                        Continue For
+                    Else
+                        cant = r.Cells("HORAS").Value
+                        dia = r.Cells("DIA").Value
+
+                        Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
+                        Dim visita = New Visita(med, pac, prest, fec)
+                        practicas.Add(visita)
+                    End If
+                Next
             End If
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
@@ -156,7 +172,7 @@ Public Class frmVisitas
         dgFechas.DataSource = Nothing
 
         dt.Columns.Add("DIA")
-        dt.Columns.Add("CANTIDAD")
+        dt.Columns.Add("HORAS")
 
         For i = 0 To days - 1
             Dim r = dt.NewRow
