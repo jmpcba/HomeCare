@@ -1,10 +1,10 @@
 ﻿Public Class frmPrincipal
     Private Sub btnVisita_Click(sender As Object, e As EventArgs) Handles btnVisita.Click
-        frmVisitas.Show()
+        frmPracticas.Show()
     End Sub
 
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
-        frmReporte.Show()
+
     End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load

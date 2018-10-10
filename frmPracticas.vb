@@ -1,21 +1,20 @@
 ﻿Imports System.DateTime
 
-Public Class frmVisitas
+Public Class frmPracticas
     Dim pac As Paciente
-    Dim med As Medico
+    Dim med As Prestador
     Dim prest As Prestacion
     Dim index As Integer
     Private Sub visitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PRESTADORES' Puede moverla o quitarla según sea necesario.
+        Me.PRESTADORESTableAdapter.Fill(Me.HomeCareDataSet.PRESTADORES)
+        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.MODULO_SUBMODULO' Puede moverla o quitarla según sea necesario.
+        Me.MODULO_SUBMODULOTableAdapter.Fill(Me.HomeCareDataSet.MODULO_SUBMODULO)
+        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PACIENTES' Puede moverla o quitarla según sea necesario.
+        Me.PACIENTESTableAdapter.Fill(Me.HomeCareDataSet.PACIENTES)
 
         Try
-            'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.VISITAS' Puede moverla o quitarla según sea necesario.
-            Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
-            'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PRESTACIONES' Puede moverla o quitarla según sea necesario.
-            Me.PRESTACIONESTableAdapter.Fill(Me.HomeCareDataSet.PRESTACIONES)
-            'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.MEDICOS' Puede moverla o quitarla según sea necesario.
-            Me.MEDICOSTableAdapter.Fill(Me.HomeCareDataSet.MEDICOS)
-            'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PACIENTES' Puede moverla o quitarla según sea necesario.
-            Me.PACIENTESTableAdapter.Fill(Me.HomeCareDataSet.PACIENTES)
+
 
             cbMedico.SelectedIndex = -1
             CBPrestacion.SelectedIndex = -1
@@ -45,7 +44,7 @@ Public Class frmVisitas
 
         If cbMedico.SelectedIndex <> -1 Then
             Try
-                med = New Medico(cbMedico.SelectedValue)
+                med = New Prestador(cbMedico.SelectedValue)
                 txtMat.Text = med.matricula
                 txtPrestador.Text = med.prestador
                 statusBar("MEDICO CARGADO", False)
@@ -87,7 +86,7 @@ Public Class frmVisitas
                 ' Dim visita = New Visita(med, pac, prest, DTFecha.Value)
                 'Visita.insertar()
                 'Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
-                Dim practicas = New List(Of Visita)
+                Dim practicas = New List(Of Practica)
 
                 For Each r As DataGridViewRow In dgFechas.Rows
                     Dim cant As Integer
@@ -100,7 +99,7 @@ Public Class frmVisitas
                         dia = r.Cells("DIA").Value
 
                         Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
-                        Dim visita = New Visita(med, pac, prest, fec)
+                        Dim visita = New Practica(med, pac, prest, fec)
                         practicas.Add(visita)
                     End If
                 Next
@@ -129,7 +128,7 @@ Public Class frmVisitas
         Dim index As Integer
         Dim r As DataGridViewRow
         Dim idVisita As Integer
-        Dim visita As Visita
+        Dim visita As Practica
 
         If dgFechas.SelectedRows.Count = 0 Then
             statusBar("SELECCIONE UNA VISITA EN LA GRILLA", True)
@@ -137,9 +136,9 @@ Public Class frmVisitas
             If MsgBox("DESEA ELIMINAR ESTA VISITA?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                 r = dgFechas.Rows(index)
                 idVisita = r.Cells(0).Value
-                visita = New Visita()
+                visita = New Practica()
                 visita.eliminar(idVisita)
-                Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
+                'Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
             End If
         End If
 

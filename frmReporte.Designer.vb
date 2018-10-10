@@ -28,7 +28,6 @@ Partial Class frmReporte
         Me.btnActualizar = New System.Windows.Forms.Button()
         Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
         Me.VISITASBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.VISITASTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.VISITASTableAdapter()
         Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PACIENTEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MEDICODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -79,7 +78,6 @@ Partial Class frmReporte
         '
         'VISITASTableAdapter
         '
-        Me.VISITASTableAdapter.ClearBeforeFill = True
         '
         'IDDataGridViewTextBoxColumn
         '
@@ -145,7 +143,6 @@ Partial Class frmReporte
     Friend WithEvents btnActualizar As Button
     Friend WithEvents HomeCareDataSet As HomeCareDataSet
     Friend WithEvents VISITASBindingSource As BindingSource
-    Friend WithEvents VISITASTableAdapter As HomeCareDataSetTableAdapters.VISITASTableAdapter
     Friend WithEvents IDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents PACIENTEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents MEDICODataGridViewTextBoxColumn As DataGridViewTextBoxColumn

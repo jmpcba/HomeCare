@@ -1,4 +1,4 @@
-﻿Public Class Medico
+﻿Public Class Prestador
     Public matricula As Integer
     Public nombre As String
     Public prestador As String

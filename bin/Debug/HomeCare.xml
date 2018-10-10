@@ -27,12 +27,27 @@ HomeCare
 Represents a strongly typed in-memory cache of data.
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSet.MEDICOSDataTable">
+<member name="T:HomeCare.HomeCareDataSet.LIQUIDACIONDataTable">
 <summary>
 Represents the strongly named DataTable class.
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSet.PACIENTESDataTable">
+<member name="T:HomeCare.HomeCareDataSet.MODULO_SUBMODULODataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSet.PRACTICASDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSet.PRESTADORESDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSet.USUARIOSDataTable">
 <summary>
 Represents the strongly named DataTable class.
 </summary>
@@ -42,17 +57,32 @@ Represents the strongly named DataTable class.
 Represents the strongly named DataTable class.
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSet.VISITASDataTable">
+<member name="T:HomeCare.HomeCareDataSet.PACIENTESDataTable">
 <summary>
 Represents the strongly named DataTable class.
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSet.MEDICOSRow">
+<member name="T:HomeCare.HomeCareDataSet.LIQUIDACIONRow">
 <summary>
 Represents strongly named DataRow class.
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSet.PACIENTESRow">
+<member name="T:HomeCare.HomeCareDataSet.MODULO_SUBMODULORow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSet.PRACTICASRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSet.PRESTADORESRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSet.USUARIOSRow">
 <summary>
 Represents strongly named DataRow class.
 </summary>
@@ -62,17 +92,32 @@ Represents strongly named DataRow class.
 Represents strongly named DataRow class.
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSet.VISITASRow">
+<member name="T:HomeCare.HomeCareDataSet.PACIENTESRow">
 <summary>
 Represents strongly named DataRow class.
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSet.MEDICOSRowChangeEvent">
+<member name="T:HomeCare.HomeCareDataSet.LIQUIDACIONRowChangeEvent">
 <summary>
 Row event argument class
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSet.PACIENTESRowChangeEvent">
+<member name="T:HomeCare.HomeCareDataSet.MODULO_SUBMODULORowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSet.PRACTICASRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSet.PRESTADORESRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSet.USUARIOSRowChangeEvent">
 <summary>
 Row event argument class
 </summary>
@@ -82,17 +127,32 @@ Row event argument class
 Row event argument class
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSet.VISITASRowChangeEvent">
+<member name="T:HomeCare.HomeCareDataSet.PACIENTESRowChangeEvent">
 <summary>
 Row event argument class
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSetTableAdapters.MEDICOSTableAdapter">
+<member name="T:HomeCare.HomeCareDataSetTableAdapters.LIQUIDACIONTableAdapter">
 <summary>
 Represents the connection and commands used to retrieve and save data.
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSetTableAdapters.PACIENTESTableAdapter">
+<member name="T:HomeCare.HomeCareDataSetTableAdapters.MODULO_SUBMODULOTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSetTableAdapters.PRACTICASTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSetTableAdapters.PRESTADORESTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member>
+<member name="T:HomeCare.HomeCareDataSetTableAdapters.USUARIOSTableAdapter">
 <summary>
 Represents the connection and commands used to retrieve and save data.
 </summary>
@@ -102,7 +162,7 @@ Represents the connection and commands used to retrieve and save data.
 Represents the connection and commands used to retrieve and save data.
 </summary>
 </member>
-<member name="T:HomeCare.HomeCareDataSetTableAdapters.VISITASTableAdapter">
+<member name="T:HomeCare.HomeCareDataSetTableAdapters.PACIENTESTableAdapter">
 <summary>
 Represents the connection and commands used to retrieve and save data.
 </summary>

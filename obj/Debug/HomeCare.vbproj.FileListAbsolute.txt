@@ -9,5 +9,5 @@ C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.exe
 C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.xml
 C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.pdb
 C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.frmPrincipal.resources
-C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.frmVisitas.resources
 C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.frmReporte.resources
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.frmPracticas.resources

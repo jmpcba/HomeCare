@@ -1,6 +1,6 @@
-﻿Public Class Visita
+﻿Public Class Practica
     Public id As Integer
-    Public medico As Medico
+    Public medico As Prestador
     Public paciente As Paciente
     Public prestacion As Prestacion
     Public fecha As Date
@@ -18,7 +18,7 @@
             dt = db.getRow(_nro, DB.tablas.visitas)
             id = dt(0)(0)
             paciente = New Paciente(dt(0)(1))
-            medico = New Medico(dt(0)(2))
+            medico = New Prestador(dt(0)(2))
             fecha = dt(0)(3)
             fecha_registrado = dt(0)(4)
             prestacion = New Prestacion(dt(0)(5))
@@ -27,7 +27,7 @@
         End Try
     End Sub
 
-    Public Sub New(_medico As Medico, _paciente As Paciente, _prestacion As Prestacion, _fecha As Date)
+    Public Sub New(_medico As Prestador, _paciente As Paciente, _prestacion As Prestacion, _fecha As Date)
         medico = _medico
         paciente = _paciente
         prestacion = _prestacion

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmVisitas
+Partial Class frmPracticas
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -30,7 +30,7 @@ Partial Class frmVisitas
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbMedico = New System.Windows.Forms.ComboBox()
-        Me.MEDICOSBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PRESTADORESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.HomeCareDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -38,12 +38,12 @@ Partial Class frmVisitas
         Me.txtMat = New System.Windows.Forms.TextBox()
         Me.txtPrestador = New System.Windows.Forms.TextBox()
         Me.dgFechas = New System.Windows.Forms.DataGridView()
-        Me.VISITASBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label6 = New System.Windows.Forms.Label()
         Me.DTFecha = New System.Windows.Forms.DateTimePicker()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.CBPrestacion = New System.Windows.Forms.ComboBox()
+        Me.PRESTACIONESBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.PRESTACIONESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.txtBeneficio = New System.Windows.Forms.TextBox()
@@ -51,34 +51,41 @@ Partial Class frmVisitas
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPaciente = New System.Windows.Forms.ComboBox()
+        Me.PACIENTESBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.PACIENTESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.PACIENTESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PACIENTESTableAdapter()
-        Me.MEDICOSTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.MEDICOSTableAdapter()
         Me.PRESTACIONESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTACIONESTableAdapter()
-        Me.VISITASTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.VISITASTableAdapter()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.cbSubModulo = New System.Windows.Forms.ComboBox()
+        Me.MODULOSUBMODULOBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label13 = New System.Windows.Forms.Label()
         Me.cbModulo = New System.Windows.Forms.ComboBox()
+        Me.MODULOSUBMODULOBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.PACIENTESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PACIENTESTableAdapter()
+        Me.MODULO_SUBMODULOTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.MODULO_SUBMODULOTableAdapter()
+        Me.PRESTADORESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTADORESTableAdapter()
         Me.StatusStrip1.SuspendLayout()
-        CType(Me.MEDICOSBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.VISITASBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        CType(Me.MODULOSUBMODULOBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MODULOSUBMODULOBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnCerrar
         '
-        Me.btnCerrar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCerrar.Location = New System.Drawing.Point(863, 432)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
@@ -132,25 +139,24 @@ Partial Class frmVisitas
         '
         'cbMedico
         '
-        Me.cbMedico.DataSource = Me.MEDICOSBindingSource
-        Me.cbMedico.DisplayMember = "NOMBRE"
+        Me.cbMedico.DataSource = Me.PRESTADORESBindingSource
+        Me.cbMedico.DisplayMember = "APELLIDO"
         Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMedico.FormattingEnabled = True
         Me.cbMedico.Location = New System.Drawing.Point(616, 59)
         Me.cbMedico.Name = "cbMedico"
         Me.cbMedico.Size = New System.Drawing.Size(121, 21)
         Me.cbMedico.TabIndex = 8
-        Me.cbMedico.ValueMember = "MATRICULA"
+        Me.cbMedico.ValueMember = "CUIT"
         '
-        'MEDICOSBindingSource
+        'PRESTADORESBindingSource
         '
-        Me.MEDICOSBindingSource.DataMember = "MEDICOS"
-        Me.MEDICOSBindingSource.DataSource = Me.HomeCareDataSetBindingSource
+        Me.PRESTADORESBindingSource.DataMember = "PRESTADORES"
+        Me.PRESTADORESBindingSource.DataSource = Me.HomeCareDataSetBindingSource
         '
         'HomeCareDataSetBindingSource
         '
         Me.HomeCareDataSetBindingSource.DataSource = Me.HomeCareDataSet
-        Me.HomeCareDataSetBindingSource.Position = 0
         '
         'HomeCareDataSet
         '
@@ -205,11 +211,6 @@ Partial Class frmVisitas
         Me.dgFechas.Size = New System.Drawing.Size(314, 392)
         Me.dgFechas.TabIndex = 13
         '
-        'VISITASBindingSource
-        '
-        Me.VISITASBindingSource.DataMember = "VISITAS"
-        Me.VISITASBindingSource.DataSource = Me.HomeCareDataSetBindingSource
-        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -248,15 +249,20 @@ Partial Class frmVisitas
         '
         'CBPrestacion
         '
-        Me.CBPrestacion.DataSource = Me.PRESTACIONESBindingSource
-        Me.CBPrestacion.DisplayMember = "DESCRIPCCION"
+        Me.CBPrestacion.DataSource = Me.PRESTACIONESBindingSource1
+        Me.CBPrestacion.DisplayMember = "DESCRIPCION"
         Me.CBPrestacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBPrestacion.FormattingEnabled = True
         Me.CBPrestacion.Location = New System.Drawing.Point(325, 16)
         Me.CBPrestacion.Name = "CBPrestacion"
         Me.CBPrestacion.Size = New System.Drawing.Size(186, 21)
         Me.CBPrestacion.TabIndex = 18
-        Me.CBPrestacion.ValueMember = "ID"
+        Me.CBPrestacion.ValueMember = "CODIGO"
+        '
+        'PRESTACIONESBindingSource1
+        '
+        Me.PRESTACIONESBindingSource1.DataMember = "PRESTACIONES"
+        Me.PRESTACIONESBindingSource1.DataSource = Me.HomeCareDataSetBindingSource
         '
         'PRESTACIONESBindingSource
         '
@@ -265,7 +271,7 @@ Partial Class frmVisitas
         '
         'btnGuardar
         '
-        Me.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnGuardar.Location = New System.Drawing.Point(751, 432)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
@@ -309,15 +315,20 @@ Partial Class frmVisitas
         '
         'cbPaciente
         '
-        Me.cbPaciente.DataSource = Me.PACIENTESBindingSource
-        Me.cbPaciente.DisplayMember = "NOMBRE"
+        Me.cbPaciente.DataSource = Me.PACIENTESBindingSource1
+        Me.cbPaciente.DisplayMember = "APELLIDO"
         Me.cbPaciente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPaciente.FormattingEnabled = True
         Me.cbPaciente.Location = New System.Drawing.Point(113, 61)
         Me.cbPaciente.Name = "cbPaciente"
         Me.cbPaciente.Size = New System.Drawing.Size(121, 21)
         Me.cbPaciente.TabIndex = 22
-        Me.cbPaciente.ValueMember = "DNI"
+        Me.cbPaciente.ValueMember = "AFILIADO"
+        '
+        'PACIENTESBindingSource1
+        '
+        Me.PACIENTESBindingSource1.DataMember = "PACIENTES"
+        Me.PACIENTESBindingSource1.DataSource = Me.HomeCareDataSetBindingSource
         '
         'PACIENTESBindingSource
         '
@@ -333,21 +344,9 @@ Partial Class frmVisitas
         Me.Label11.TabIndex = 21
         Me.Label11.Text = "Nombre y apellido"
         '
-        'PACIENTESTableAdapter
-        '
-        Me.PACIENTESTableAdapter.ClearBeforeFill = True
-        '
-        'MEDICOSTableAdapter
-        '
-        Me.MEDICOSTableAdapter.ClearBeforeFill = True
-        '
         'PRESTACIONESTableAdapter
         '
         Me.PRESTACIONESTableAdapter.ClearBeforeFill = True
-        '
-        'VISITASTableAdapter
-        '
-        Me.VISITASTableAdapter.ClearBeforeFill = True
         '
         'Panel1
         '
@@ -393,15 +392,20 @@ Partial Class frmVisitas
         '
         'cbSubModulo
         '
-        Me.cbSubModulo.DataSource = Me.PRESTACIONESBindingSource
-        Me.cbSubModulo.DisplayMember = "DESCRIPCCION"
+        Me.cbSubModulo.DataSource = Me.MODULOSUBMODULOBindingSource1
+        Me.cbSubModulo.DisplayMember = "DESCRIPCION"
         Me.cbSubModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSubModulo.FormattingEnabled = True
         Me.cbSubModulo.Location = New System.Drawing.Point(100, 47)
         Me.cbSubModulo.Name = "cbSubModulo"
         Me.cbSubModulo.Size = New System.Drawing.Size(121, 21)
         Me.cbSubModulo.TabIndex = 22
-        Me.cbSubModulo.ValueMember = "ID"
+        Me.cbSubModulo.ValueMember = "CODIGO"
+        '
+        'MODULOSUBMODULOBindingSource1
+        '
+        Me.MODULOSUBMODULOBindingSource1.DataMember = "MODULO_SUBMODULO"
+        Me.MODULOSUBMODULOBindingSource1.DataSource = Me.HomeCareDataSetBindingSource
         '
         'Label13
         '
@@ -414,15 +418,20 @@ Partial Class frmVisitas
         '
         'cbModulo
         '
-        Me.cbModulo.DataSource = Me.PRESTACIONESBindingSource
-        Me.cbModulo.DisplayMember = "DESCRIPCCION"
+        Me.cbModulo.DataSource = Me.MODULOSUBMODULOBindingSource
+        Me.cbModulo.DisplayMember = "DESCRIPCION"
         Me.cbModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbModulo.FormattingEnabled = True
         Me.cbModulo.Location = New System.Drawing.Point(100, 16)
         Me.cbModulo.Name = "cbModulo"
         Me.cbModulo.Size = New System.Drawing.Size(121, 21)
         Me.cbModulo.TabIndex = 20
-        Me.cbModulo.ValueMember = "ID"
+        Me.cbModulo.ValueMember = "CODIGO"
+        '
+        'MODULOSUBMODULOBindingSource
+        '
+        Me.MODULOSUBMODULOBindingSource.DataMember = "MODULO_SUBMODULO"
+        Me.MODULOSUBMODULOBindingSource.DataSource = Me.HomeCareDataSetBindingSource
         '
         'Label12
         '
@@ -433,11 +442,24 @@ Partial Class frmVisitas
         Me.Label12.TabIndex = 19
         Me.Label12.Text = "Modulo"
         '
-        'frmVisitas
+        'PACIENTESTableAdapter
+        '
+        Me.PACIENTESTableAdapter.ClearBeforeFill = True
+        '
+        'MODULO_SUBMODULOTableAdapter
+        '
+        Me.MODULO_SUBMODULOTableAdapter.ClearBeforeFill = True
+        '
+        'PRESTADORESTableAdapter
+        '
+        Me.PRESTADORESTableAdapter.ClearBeforeFill = True
+        '
+        'frmPracticas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(1051, 660)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.txtBeneficio)
@@ -456,21 +478,24 @@ Partial Class frmVisitas
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
-        Me.Name = "frmVisitas"
+        Me.Name = "frmPracticas"
         Me.Text = "Ingresar Visitas Paciente"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
-        CType(Me.MEDICOSBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.VISITASBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        CType(Me.MODULOSUBMODULOBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MODULOSUBMODULOBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -502,14 +527,9 @@ Partial Class frmVisitas
     Friend WithEvents HomeCareDataSetBindingSource As BindingSource
     Friend WithEvents HomeCareDataSet As HomeCareDataSet
     Friend WithEvents PACIENTESBindingSource As BindingSource
-    Friend WithEvents PACIENTESTableAdapter As HomeCareDataSetTableAdapters.PACIENTESTableAdapter
-    Friend WithEvents MEDICOSBindingSource As BindingSource
-    Friend WithEvents MEDICOSTableAdapter As HomeCareDataSetTableAdapters.MEDICOSTableAdapter
     Friend WithEvents PRESTACIONESBindingSource As BindingSource
     Friend WithEvents PRESTACIONESTableAdapter As HomeCareDataSetTableAdapters.PRESTACIONESTableAdapter
     Friend WithEvents tsLbl As ToolStripStatusLabel
-    Friend WithEvents VISITASBindingSource As BindingSource
-    Friend WithEvents VISITASTableAdapter As HomeCareDataSetTableAdapters.VISITASTableAdapter
     Friend WithEvents Panel3 As Panel
     Friend WithEvents cbSubModulo As ComboBox
     Friend WithEvents Label13 As Label
@@ -517,4 +537,12 @@ Partial Class frmVisitas
     Friend WithEvents Label12 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
+    Friend WithEvents PACIENTESBindingSource1 As BindingSource
+    Friend WithEvents PACIENTESTableAdapter As HomeCareDataSetTableAdapters.PACIENTESTableAdapter
+    Friend WithEvents MODULOSUBMODULOBindingSource As BindingSource
+    Friend WithEvents MODULO_SUBMODULOTableAdapter As HomeCareDataSetTableAdapters.MODULO_SUBMODULOTableAdapter
+    Friend WithEvents PRESTACIONESBindingSource1 As BindingSource
+    Friend WithEvents MODULOSUBMODULOBindingSource1 As BindingSource
+    Friend WithEvents PRESTADORESBindingSource As BindingSource
+    Friend WithEvents PRESTADORESTableAdapter As HomeCareDataSetTableAdapters.PRESTADORESTableAdapter
 End Class

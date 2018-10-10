@@ -63,7 +63,7 @@ Public Class DB
 
     End Function
 
-    Friend Sub eliminar(_visita As Visita)
+    Friend Sub eliminar(_visita As Practica)
         Try
             Dim query = "DELETE FROM VISITAS WHERE ID=" & _visita.id
 
@@ -79,7 +79,7 @@ Public Class DB
         End Try
     End Sub
 
-    Friend Sub eliminar(_visita As Visita, _id As Integer)
+    Friend Sub eliminar(_visita As Practica, _id As Integer)
         'REVISAR MAS ADELANTE POR AHORA EL OBJETO VISITA SE USA SOLO PARA QUE SE SEPA QUE ESTOY ELIMINANDO UNA VISITA
         'SE ELIMINA LA VISITA _id
         Try
@@ -112,7 +112,7 @@ Public Class DB
 
     End Function
 
-    Friend Sub insertar(_visita As Visita)
+    Friend Sub insertar(_visita As Practica)
         Try
             Dim query = String.Format("INSERT INTO VISITAS (PACIENTE, MEDICO, FECHA, FECHA_CARGA, PRESTACION) VALUES ({0}, {1}, {2}, {3}, {4})", _visita.paciente.DNI, _visita.medico.matricula, _visita.fecha.ToShortDateString, _visita.fecha_registrado.ToShortDateString, _visita.prestacion.tipo)
 

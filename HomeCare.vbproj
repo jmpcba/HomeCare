@@ -74,10 +74,13 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="code\DB.vb" />
-    <Compile Include="code\Medico.vb" />
+    <Compile Include="code\Liquidacion.vb" />
+    <Compile Include="code\Modulo.vb" />
+    <Compile Include="code\Prestador.vb" />
     <Compile Include="code\Paciente.vb" />
     <Compile Include="code\Prestacion.vb" />
-    <Compile Include="code\Visita.vb" />
+    <Compile Include="code\Practica.vb" />
+    <Compile Include="code\Usuario.vb" />
     <Compile Include="frmPrincipal.Designer.vb">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </Compile>
@@ -95,11 +98,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HomeCareDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="frmVisitas.vb">
+    <Compile Include="frmPracticas.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmVisitas.Designer.vb">
-      <DependentUpon>frmVisitas.vb</DependentUpon>
+    <Compile Include="frmPracticas.Designer.vb">
+      <DependentUpon>frmPracticas.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -125,8 +128,8 @@
     <EmbeddedResource Include="frmReporte.resx">
       <DependentUpon>frmReporte.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmVisitas.resx">
-      <DependentUpon>frmVisitas.vb</DependentUpon>
+    <EmbeddedResource Include="frmPracticas.resx">
+      <DependentUpon>frmPracticas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
