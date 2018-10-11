@@ -17,7 +17,7 @@
         Try
             dt = db.getRow(_nro, DB.tablas.visitas)
             id = dt(0)(0)
-            paciente = New Paciente(dt(0)(1))
+            'paciente = New Paciente(dt(0)(1))
             medico = New Prestador(dt(0)(2))
             fecha = dt(0)(3)
             fecha_registrado = dt(0)(4)

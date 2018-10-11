@@ -23,6 +23,9 @@ Public Class frmPracticas
 
             DTFecha.CustomFormat = " MMMM - yyyy"
             cargarGrilla()
+
+            pac = New Paciente()
+
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
         End Try
@@ -61,10 +64,11 @@ Public Class frmPracticas
     Private Sub cbPaciente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaciente.SelectedIndexChanged
         If cbPaciente.SelectedIndex <> -1 Then
             Try
-                pac = New Paciente(cbPaciente.SelectedValue)
-                txtDni.Text = pac.DNI
-                txtBeneficio.Text = pac.beneficio
+                pac.afiliado = cbPaciente.SelectedValue
+                txtAfiliado.Text = pac.afiliado
+                txtBeneficio.Text = pac.obraSocial
                 statusBar("PACIENTE CARGADO", False)
+
             Catch ex As Exception
                 MessageBox.Show("ERROR: " & ex.Message)
             End Try

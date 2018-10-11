@@ -9,6 +9,7 @@ Public Class DB
     Private ds As DataSet
     Private conStr As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}\Google Drive\HomeCare.accdb'", Environ("USERPROFILE"))
 
+
     Sub New()
         cnn = New OleDbConnection(conStr)
         cmd = New OleDbCommand()
@@ -114,7 +115,7 @@ Public Class DB
 
     Friend Sub insertar(_visita As Practica)
         Try
-            Dim query = String.Format("INSERT INTO VISITAS (PACIENTE, MEDICO, FECHA, FECHA_CARGA, PRESTACION) VALUES ({0}, {1}, {2}, {3}, {4})", _visita.paciente.DNI, _visita.medico.matricula, _visita.fecha.ToShortDateString, _visita.fecha_registrado.ToShortDateString, _visita.prestacion.tipo)
+            Dim query = String.Format("INSERT INTO VISITAS (PACIENTE, MEDICO, FECHA, FECHA_CARGA, PRESTACION) VALUES ({0}, {1}, {2}, {3}, {4})", _visita.paciente.afiliado, _visita.medico.matricula, _visita.fecha.ToShortDateString, _visita.fecha_registrado.ToShortDateString, _visita.prestacion.tipo)
 
             cmd.CommandType = CommandType.Text
             cmd.CommandText = query
@@ -131,5 +132,20 @@ Public Class DB
     Friend Sub insertar(_prestacion As Prestacion)
 
     End Sub
+
+    Public Function getTable(_tabla As tablas)
+        Dim query = "SELECT * FROM " & _tabla.ToString()
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            da.Fill(ds, _tabla.ToString)
+            Return ds.Tables(_tabla.ToString)
+        Catch ex As Exception
+            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
+        End Try
+
+    End Function
 
 End Class

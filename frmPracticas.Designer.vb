@@ -47,7 +47,7 @@ Partial Class frmPracticas
         Me.PRESTACIONESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.txtBeneficio = New System.Windows.Forms.TextBox()
-        Me.txtDni = New System.Windows.Forms.TextBox()
+        Me.txtAfiliado = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPaciente = New System.Windows.Forms.ComboBox()
@@ -76,6 +76,7 @@ Partial Class frmPracticas
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.MODULOSUBMODULOBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -157,6 +158,7 @@ Partial Class frmPracticas
         'HomeCareDataSetBindingSource
         '
         Me.HomeCareDataSetBindingSource.DataSource = Me.HomeCareDataSet
+        Me.HomeCareDataSetBindingSource.Position = 0
         '
         'HomeCareDataSet
         '
@@ -287,13 +289,13 @@ Partial Class frmPracticas
         Me.txtBeneficio.Size = New System.Drawing.Size(121, 20)
         Me.txtBeneficio.TabIndex = 26
         '
-        'txtDni
+        'txtAfiliado
         '
-        Me.txtDni.Location = New System.Drawing.Point(113, 91)
-        Me.txtDni.Name = "txtDni"
-        Me.txtDni.ReadOnly = True
-        Me.txtDni.Size = New System.Drawing.Size(121, 20)
-        Me.txtDni.TabIndex = 25
+        Me.txtAfiliado.Location = New System.Drawing.Point(113, 91)
+        Me.txtAfiliado.Name = "txtAfiliado"
+        Me.txtAfiliado.ReadOnly = True
+        Me.txtAfiliado.Size = New System.Drawing.Size(121, 20)
+        Me.txtAfiliado.TabIndex = 25
         '
         'Label9
         '
@@ -307,11 +309,11 @@ Partial Class frmPracticas
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(15, 99)
+        Me.Label10.Location = New System.Drawing.Point(3, 71)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(26, 13)
+        Me.Label10.Size = New System.Drawing.Size(56, 13)
         Me.Label10.TabIndex = 23
-        Me.Label10.Text = "DNI"
+        Me.Label10.Text = "N° Afiliado"
         '
         'cbPaciente
         '
@@ -351,6 +353,7 @@ Partial Class frmPracticas
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Location = New System.Drawing.Point(12, 24)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(482, 108)
@@ -463,9 +466,8 @@ Partial Class frmPracticas
         Me.ClientSize = New System.Drawing.Size(1051, 660)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.txtBeneficio)
-        Me.Controls.Add(Me.txtDni)
+        Me.Controls.Add(Me.txtAfiliado)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cbPaciente)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtPrestador)
@@ -490,6 +492,8 @@ Partial Class frmPracticas
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
@@ -519,7 +523,7 @@ Partial Class frmPracticas
     Friend WithEvents CBPrestacion As ComboBox
     Friend WithEvents btnGuardar As Button
     Friend WithEvents txtBeneficio As TextBox
-    Friend WithEvents txtDni As TextBox
+    Friend WithEvents txtAfiliado As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents cbPaciente As ComboBox
