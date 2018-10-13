@@ -33,43 +33,44 @@ Public Class DB
     End Function
 
     Public Enum tablas
-        medicos
+        prestadores
         pacientes
         prestaciones
         visitas
+        modulos
     End Enum
 
-    Public Function getRow(_priKey As Object, _tabla As tablas) As DataTable
-        Dim query As String
+    'Public Function getRow(_priKey As Object, _tabla As tablas) As DataTable
+    '    Dim query As String
 
-        If _tabla = tablas.medicos Then
-            query = "SELECT * FROM MEDICOS WHERE MATRICULA = " & _priKey
-        ElseIf _tabla = tablas.pacientes Then
-            query = "SELECT * FROM PACIENTES WHERE dni = " & _priKey
-        ElseIf _tabla = tablas.prestaciones Then
-            query = "SELECT * FROM PRESTACIONES WHERE ID = " & _priKey
-        ElseIf _tabla = tablas.visitas Then
-            query = "SELECT * FROM VISITAS WHERE ID = " & _priKey
-        End If
+    '    If _tabla = tablas.medicos Then
+    '        query = "SELECT * FROM MEDICOS WHERE MATRICULA = " & _priKey
+    '    ElseIf _tabla = tablas.pacientes Then
+    '        query = "SELECT * FROM PACIENTES WHERE dni = " & _priKey
+    '    ElseIf _tabla = tablas.prestaciones Then
+    '        query = "SELECT * FROM PRESTACIONES WHERE ID = " & _priKey
+    '    ElseIf _tabla = tablas.visitas Then
+    '        query = "SELECT * FROM VISITAS WHERE ID = " & _priKey
+    '    End If
 
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
+    '    cmd.CommandType = CommandType.Text
+    '    cmd.CommandText = query
 
-        Try
-            da.Fill(ds, "RESULTADO")
-            Return ds.Tables("RESULTADO")
-        Catch ex As Exception
-            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
-        End Try
+    '    Try
+    '        da.Fill(ds, "RESULTADO")
+    '        Return ds.Tables("RESULTADO")
+    '    Catch ex As Exception
+    '        Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
+    '    End Try
 
-    End Function
+    'End Function
 
     Friend Sub eliminar(_visita As Practica)
         Try
-            Dim query = "DELETE FROM VISITAS WHERE ID=" & _visita.id
+            'Dim query = "DELETE FROM VISITAS WHERE ID=" & _visita.id
 
             cmd.CommandType = CommandType.Text
-            cmd.CommandText = query
+            'cmd.CommandText = query
 
             cnn.Open()
             cmd.ExecuteNonQuery()
@@ -115,10 +116,10 @@ Public Class DB
 
     Friend Sub insertar(_visita As Practica)
         Try
-            Dim query = String.Format("INSERT INTO VISITAS (PACIENTE, MEDICO, FECHA, FECHA_CARGA, PRESTACION) VALUES ({0}, {1}, {2}, {3}, {4})", _visita.paciente.afiliado, _visita.medico.matricula, _visita.fecha.ToShortDateString, _visita.fecha_registrado.ToShortDateString, _visita.prestacion.tipo)
+            'Dim query = String.Format("INSERT INTO VISITAS (PACIENTE, MEDICO, FECHA, FECHA_CARGA, PRESTACION) VALUES ({0}, {1}, {2}, {3}, {4})", _visita.paciente.afiliado, _visita.prestador.matricula, _visita.fecha.ToShortDateString, _visita.fecha_registrado.ToShortDateString, _visita.prestacion.tipo)
 
             cmd.CommandType = CommandType.Text
-            cmd.CommandText = query
+            'cmd.CommandText = query
 
             cnn.Open()
             cmd.ExecuteNonQuery()

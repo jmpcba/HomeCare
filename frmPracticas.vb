@@ -25,6 +25,8 @@ Public Class frmPracticas
             cargarGrilla()
 
             pac = New Paciente()
+            prest = New Prestacion()
+            med = New Prestador()
 
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
@@ -35,7 +37,7 @@ Public Class frmPracticas
     Private Sub CBPrestacion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBPrestacion.SelectedIndexChanged
         If CBPrestacion.SelectedIndex <> -1 Then
             Try
-                prest = New Prestacion(CBPrestacion.SelectedValue)
+                prest.codigo = CBPrestacion.SelectedValue
                 statusBar("PRESTACION CARGADA", False)
             Catch ex As Exception
                 MessageBox.Show("ERROR: " & ex.Message)
@@ -47,9 +49,9 @@ Public Class frmPracticas
 
         If cbMedico.SelectedIndex <> -1 Then
             Try
-                med = New Prestador(cbMedico.SelectedValue)
-                txtMat.Text = med.matricula
-                txtPrestador.Text = med.prestador
+                med.cuit = cbMedico.SelectedValue
+                txtMat.Text = med.cuit
+                txtPrestador.Text = med.especialidad
                 statusBar("MEDICO CARGADO", False)
             Catch ex As Exception
                 MessageBox.Show("ERROR: " & ex.Message)
@@ -103,8 +105,8 @@ Public Class frmPracticas
                         dia = r.Cells("DIA").Value
 
                         Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
-                        Dim visita = New Practica(med, pac, prest, fec)
-                        practicas.Add(visita)
+                        'Dim visita = New Practica(med, pac, prest, fec)
+                        'practicas.Add(visita)
                     End If
                 Next
             End If

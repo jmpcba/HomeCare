@@ -1,38 +1,25 @@
 ﻿Public Class Practica
-    Public id As Integer
-    Public medico As Prestador
+    Public prestador As Prestador
     Public paciente As Paciente
     Public prestacion As Prestacion
+    Public modulo As Modulo
     Public fecha As Date
     Public fecha_registrado As Date
+    Public observaciones As String
 
     Public Sub New()
         'CONSTRUCTOR VACIO PARA PODER USAR EL METODO ELIMINAR(_ID)
     End Sub
 
-    Public Sub New(_nro As Integer)
-        Dim db = New DB()
-        Dim dt As DataTable
 
-        Try
-            dt = db.getRow(_nro, DB.tablas.visitas)
-            id = dt(0)(0)
-            'paciente = New Paciente(dt(0)(1))
-            medico = New Prestador(dt(0)(2))
-            fecha = dt(0)(3)
-            fecha_registrado = dt(0)(4)
-            prestacion = New Prestacion(dt(0)(5))
-        Catch ex As Exception
-            Throw
-        End Try
-    End Sub
-
-    Public Sub New(_medico As Prestador, _paciente As Paciente, _prestacion As Prestacion, _fecha As Date)
-        medico = _medico
+    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Modulo, _prestacion As Prestacion, _fecha As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _observaciones As String)
+        prestador = _prestador
         paciente = _paciente
         prestacion = _prestacion
+        modulo = _modulo
         fecha = _fecha
         fecha_registrado = Date.Today.Date
+        observaciones = _observaciones
     End Sub
 
     Public Sub insertar()

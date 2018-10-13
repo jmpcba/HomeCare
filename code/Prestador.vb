@@ -1,29 +1,75 @@
 ﻿Public Class Prestador
-    Public matricula As Integer
-    Public nombre As String
-    Public prestador As String
+    Private _cuit As Integer
+    Private _nombre As String
+    Private _apellido As String
+    Private _mail As String
+    Private _especialidad As String
+    Private _localidad As String
+    Private _montoLV As Decimal
+    Private _montoFer As Decimal
+    Private _montoFijo As Decimal
+    Private _porcentaje As Decimal
+    Private _modifUser As Integer
+    Private _creoUser As Integer
+    Private _fechaCarga As Date
+    Private _fechaMod As Date
+    Private _prestadores As DataTable
 
-    Public Sub New(_matricula As Integer)
+    Public Property cuit As Integer
+        Set(value As Integer)
+            Dim r As DataRow()
+            r = _prestadores.Select("cuit=" & value)
+            _cuit = r(0)("cuit")
+            _nombre = r(0)("nombre")
+            _apellido = r(0)("apellido")
+            _mail = r(0)("mail")
+            _especialidad = r(0)("especialidad")
+            _localidad = r(0)("localidad")
+            _montoLV = r(0)("monto_semana")
+            _montoFer = r(0)("monto_feriado")
+            _montoFijo = r(0)("monto_fijo")
+            _porcentaje = r(0)("porcentaje")
+            _modifUser = r(0)("modifico_usuario")
+            _creoUser = r(0)("cargo_usuario")
+            _fechaCarga = r(0)("fecha_carga")
+            _fechaMod = r(0)("fecha_modificacion")
+        End Set
+        Get
+            Return _cuit
+        End Get
+    End Property
+
+    Public ReadOnly Property especialidad
+        Get
+            Return _especialidad
+        End Get
+    End Property
+    Public ReadOnly Property nombre
+        Get
+            Return _nombre
+        End Get
+    End Property
+
+    Public ReadOnly Property apellido
+        Get
+            Return _apellido
+        End Get
+    End Property
+
+    Public Sub New()
         Dim db = New DB()
-        Dim dt As DataTable
-
         Try
-            dt = db.getRow(_matricula, DB.tablas.medicos)
-            matricula = dt(0)(0)
-            nombre = dt(0)(1)
-            prestador = dt(0)(2)
-
+            _prestadores = db.getTable(DB.tablas.prestadores)
         Catch ex As Exception
             Throw
         End Try
-
     End Sub
 
     Public Sub New(_matricula As Integer, _nombre As String, _prestador As String)
         Try
-            matricula = _matricula
-            nombre = _nombre
-            prestador = _prestador
+            _matricula = _matricula
+            _nombre = _nombre
+            _prestador = _prestador
         Catch ex As Exception
             Throw
         End Try
