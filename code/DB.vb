@@ -116,10 +116,14 @@ Public Class DB
 
     Friend Sub insertar(_visita As Practica)
         Try
-            'Dim query = String.Format("INSERT INTO VISITAS (PACIENTE, MEDICO, FECHA, FECHA_CARGA, PRESTACION) VALUES ({0}, {1}, {2}, {3}, {4})", _visita.paciente.afiliado, _visita.prestador.matricula, _visita.fecha.ToShortDateString, _visita.fecha_registrado.ToShortDateString, _visita.prestacion.tipo)
+            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, COD_PRESTACION, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', {1}, {2}, {3}, {4}, {5}, {6}, '{7}', '{8}', '{9}', {10}, '{11}', {12}, '{13}' )",
+                                      _visita.prestador.cuit, _visita.paciente.afiliado, _visita.modulo, _visita.subModulo,
+                                      _visita.prestacion.codigo, _visita.hsSemana, _visita.hsFeriado, _visita.fecha.ToShortDateString,
+                                      DateTime.Today.ToShortDateString, _visita.observaciones, _visita.creoUser,
+                                      _visita.fechaCarga.ToShortDateString, _visita.modifUser, _visita.fechaMod.ToShortDateString)
 
             cmd.CommandType = CommandType.Text
-            'cmd.CommandText = query
+            cmd.CommandText = query
 
             cnn.Open()
             cmd.ExecuteNonQuery()

@@ -4,7 +4,7 @@
     End Sub
 
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
-
+        frmReporte.Show()
     End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load

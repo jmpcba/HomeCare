@@ -1,5 +1,5 @@
 ﻿Public Class Prestador
-    Private _cuit As Integer
+    Private _cuit As String
     Private _nombre As String
     Private _apellido As String
     Private _mail As String
@@ -15,14 +15,15 @@
     Private _fechaMod As Date
     Private _prestadores As DataTable
 
-    Public Property cuit As Integer
-        Set(value As Integer)
+    Public Property cuit As String
+        Set(value As String)
             Dim r As DataRow()
-            r = _prestadores.Select("cuit=" & value)
+            r = _prestadores.Select("CUIT = '" & value.ToString & "'")
+
             _cuit = r(0)("cuit")
             _nombre = r(0)("nombre")
             _apellido = r(0)("apellido")
-            _mail = r(0)("mail")
+            _mail = r(0)("email")
             _especialidad = r(0)("especialidad")
             _localidad = r(0)("localidad")
             _montoLV = r(0)("monto_semana")

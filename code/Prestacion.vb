@@ -23,6 +23,29 @@
         End Get
     End Property
 
+    Public ReadOnly Property modificoUser
+        Get
+            Return _modifUser
+        End Get
+    End Property
+
+    Public ReadOnly Property creoUser
+        Get
+            Return _creoUser
+        End Get
+    End Property
+
+    Public ReadOnly Property fechaCarga
+        Get
+            Return _fechaCarga
+        End Get
+    End Property
+
+    Public ReadOnly Property fechaModificacion
+        Get
+            Return _fechaMod
+        End Get
+    End Property
 
     Public Sub New()
         Dim db = New DB()

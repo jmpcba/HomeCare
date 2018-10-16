@@ -1,25 +1,50 @@
-﻿Public Class Practica
+﻿Imports System
+Public Class Practica
     Public prestador As Prestador
     Public paciente As Paciente
     Public prestacion As Prestacion
-    Public modulo As Modulo
+    Public modulo As Integer
+    Public subModulo As Integer
+    Public hsSemana As Decimal
+    Public hsFeriado As Decimal
     Public fecha As Date
     Public fecha_registrado As Date
     Public observaciones As String
+    Public creoUser As Integer
+    Public modifUser As Integer
+    Public fechaCarga As Date
+    Public fechaMod As Date
+
 
     Public Sub New()
         'CONSTRUCTOR VACIO PARA PODER USAR EL METODO ELIMINAR(_ID)
     End Sub
 
 
-    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Modulo, _prestacion As Prestacion, _fecha As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _observaciones As String)
+    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _prestacion As Prestacion, _fecha As Date, _horas As Decimal, _observaciones As String)
         prestador = _prestador
         paciente = _paciente
         prestacion = _prestacion
         modulo = _modulo
+        subModulo = _subModulo
         fecha = _fecha
         fecha_registrado = Date.Today.Date
         observaciones = _observaciones
+        calcularHoras(_horas)
+        creoUser = 29188989
+        modifUser = 29188989
+        fechaCarga = Today.ToShortDateString
+        fechaMod = Today.ToShortDateString
+    End Sub
+
+    Private Sub calcularHoras(_horas As Decimal)
+        If fecha.DayOfWeek = DayOfWeek.Saturday Or fecha.DayOfWeek = DayOfWeek.Sunday Then
+            hsFeriado = _horas
+            hsSemana = 0
+        Else
+            hsSemana = _horas
+            hsFeriado = 0
+        End If
     End Sub
 
     Public Sub insertar()

@@ -27,24 +27,33 @@ Partial Class frmReporte
         Me.dtFiltro = New System.Windows.Forms.DateTimePicker()
         Me.btnActualizar = New System.Windows.Forms.Button()
         Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
-        Me.VISITASBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PACIENTEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MEDICODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PRESTACIONDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FECHADataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PRACTICASBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PRACTICASTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRACTICASTableAdapter()
+        Me.CUITDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AFILIADODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SUBMODULODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MODULODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CODPRESTACIONDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HSNORMALESDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HSFERIADODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FECHAPRACTICADataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FECHAINICIODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OBSERVACIONESDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CARGOUSUARIODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FECHACARGADataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MODIFICOUSUARIODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FECHAMODIFICACIONDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.VISITASBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PRACTICASBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
         '
         Me.DataGridView1.AutoGenerateColumns = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.PACIENTEDataGridViewTextBoxColumn, Me.MEDICODataGridViewTextBoxColumn, Me.PRESTACIONDataGridViewTextBoxColumn, Me.FECHADataGridViewTextBoxColumn, Me.FECHACARGADataGridViewTextBoxColumn})
-        Me.DataGridView1.DataSource = Me.VISITASBindingSource
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CUITDataGridViewTextBoxColumn, Me.AFILIADODataGridViewTextBoxColumn, Me.SUBMODULODataGridViewTextBoxColumn, Me.MODULODataGridViewTextBoxColumn, Me.CODPRESTACIONDataGridViewTextBoxColumn, Me.HSNORMALESDataGridViewTextBoxColumn, Me.HSFERIADODataGridViewTextBoxColumn, Me.FECHAPRACTICADataGridViewTextBoxColumn, Me.FECHAINICIODataGridViewTextBoxColumn, Me.OBSERVACIONESDataGridViewTextBoxColumn, Me.CARGOUSUARIODataGridViewTextBoxColumn, Me.FECHACARGADataGridViewTextBoxColumn, Me.MODIFICOUSUARIODataGridViewTextBoxColumn, Me.FECHAMODIFICACIONDataGridViewTextBoxColumn})
+        Me.DataGridView1.DataSource = Me.PRACTICASBindingSource
         Me.DataGridView1.Location = New System.Drawing.Point(12, 67)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(643, 391)
@@ -71,55 +80,98 @@ Partial Class frmReporte
         Me.HomeCareDataSet.DataSetName = "HomeCareDataSet"
         Me.HomeCareDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'VISITASBindingSource
+        'PRACTICASBindingSource
         '
-        Me.VISITASBindingSource.DataMember = "VISITAS"
-        Me.VISITASBindingSource.DataSource = Me.HomeCareDataSet
+        Me.PRACTICASBindingSource.DataMember = "PRACTICAS"
+        Me.PRACTICASBindingSource.DataSource = Me.HomeCareDataSet
         '
-        'VISITASTableAdapter
+        'PRACTICASTableAdapter
         '
+        Me.PRACTICASTableAdapter.ClearBeforeFill = True
         '
-        'IDDataGridViewTextBoxColumn
+        'CUITDataGridViewTextBoxColumn
         '
-        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
-        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
-        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
-        Me.IDDataGridViewTextBoxColumn.ReadOnly = True
+        Me.CUITDataGridViewTextBoxColumn.DataPropertyName = "CUIT"
+        Me.CUITDataGridViewTextBoxColumn.HeaderText = "CUIT"
+        Me.CUITDataGridViewTextBoxColumn.Name = "CUITDataGridViewTextBoxColumn"
         '
-        'PACIENTEDataGridViewTextBoxColumn
+        'AFILIADODataGridViewTextBoxColumn
         '
-        Me.PACIENTEDataGridViewTextBoxColumn.DataPropertyName = "PACIENTE"
-        Me.PACIENTEDataGridViewTextBoxColumn.HeaderText = "PACIENTE"
-        Me.PACIENTEDataGridViewTextBoxColumn.Name = "PACIENTEDataGridViewTextBoxColumn"
-        Me.PACIENTEDataGridViewTextBoxColumn.ReadOnly = True
+        Me.AFILIADODataGridViewTextBoxColumn.DataPropertyName = "AFILIADO"
+        Me.AFILIADODataGridViewTextBoxColumn.HeaderText = "AFILIADO"
+        Me.AFILIADODataGridViewTextBoxColumn.Name = "AFILIADODataGridViewTextBoxColumn"
         '
-        'MEDICODataGridViewTextBoxColumn
+        'SUBMODULODataGridViewTextBoxColumn
         '
-        Me.MEDICODataGridViewTextBoxColumn.DataPropertyName = "MEDICO"
-        Me.MEDICODataGridViewTextBoxColumn.HeaderText = "MEDICO"
-        Me.MEDICODataGridViewTextBoxColumn.Name = "MEDICODataGridViewTextBoxColumn"
-        Me.MEDICODataGridViewTextBoxColumn.ReadOnly = True
+        Me.SUBMODULODataGridViewTextBoxColumn.DataPropertyName = "SUB_MODULO"
+        Me.SUBMODULODataGridViewTextBoxColumn.HeaderText = "SUB_MODULO"
+        Me.SUBMODULODataGridViewTextBoxColumn.Name = "SUBMODULODataGridViewTextBoxColumn"
         '
-        'PRESTACIONDataGridViewTextBoxColumn
+        'MODULODataGridViewTextBoxColumn
         '
-        Me.PRESTACIONDataGridViewTextBoxColumn.DataPropertyName = "PRESTACION"
-        Me.PRESTACIONDataGridViewTextBoxColumn.HeaderText = "PRESTACION"
-        Me.PRESTACIONDataGridViewTextBoxColumn.Name = "PRESTACIONDataGridViewTextBoxColumn"
-        Me.PRESTACIONDataGridViewTextBoxColumn.ReadOnly = True
+        Me.MODULODataGridViewTextBoxColumn.DataPropertyName = "MODULO"
+        Me.MODULODataGridViewTextBoxColumn.HeaderText = "MODULO"
+        Me.MODULODataGridViewTextBoxColumn.Name = "MODULODataGridViewTextBoxColumn"
         '
-        'FECHADataGridViewTextBoxColumn
+        'CODPRESTACIONDataGridViewTextBoxColumn
         '
-        Me.FECHADataGridViewTextBoxColumn.DataPropertyName = "FECHA"
-        Me.FECHADataGridViewTextBoxColumn.HeaderText = "FECHA"
-        Me.FECHADataGridViewTextBoxColumn.Name = "FECHADataGridViewTextBoxColumn"
-        Me.FECHADataGridViewTextBoxColumn.ReadOnly = True
+        Me.CODPRESTACIONDataGridViewTextBoxColumn.DataPropertyName = "COD_PRESTACION"
+        Me.CODPRESTACIONDataGridViewTextBoxColumn.HeaderText = "COD_PRESTACION"
+        Me.CODPRESTACIONDataGridViewTextBoxColumn.Name = "CODPRESTACIONDataGridViewTextBoxColumn"
+        '
+        'HSNORMALESDataGridViewTextBoxColumn
+        '
+        Me.HSNORMALESDataGridViewTextBoxColumn.DataPropertyName = "HS_NORMALES"
+        Me.HSNORMALESDataGridViewTextBoxColumn.HeaderText = "HS_NORMALES"
+        Me.HSNORMALESDataGridViewTextBoxColumn.Name = "HSNORMALESDataGridViewTextBoxColumn"
+        '
+        'HSFERIADODataGridViewTextBoxColumn
+        '
+        Me.HSFERIADODataGridViewTextBoxColumn.DataPropertyName = "HS_FERIADO"
+        Me.HSFERIADODataGridViewTextBoxColumn.HeaderText = "HS_FERIADO"
+        Me.HSFERIADODataGridViewTextBoxColumn.Name = "HSFERIADODataGridViewTextBoxColumn"
+        '
+        'FECHAPRACTICADataGridViewTextBoxColumn
+        '
+        Me.FECHAPRACTICADataGridViewTextBoxColumn.DataPropertyName = "FECHA_PRACTICA"
+        Me.FECHAPRACTICADataGridViewTextBoxColumn.HeaderText = "FECHA_PRACTICA"
+        Me.FECHAPRACTICADataGridViewTextBoxColumn.Name = "FECHAPRACTICADataGridViewTextBoxColumn"
+        '
+        'FECHAINICIODataGridViewTextBoxColumn
+        '
+        Me.FECHAINICIODataGridViewTextBoxColumn.DataPropertyName = "FECHA_INICIO"
+        Me.FECHAINICIODataGridViewTextBoxColumn.HeaderText = "FECHA_INICIO"
+        Me.FECHAINICIODataGridViewTextBoxColumn.Name = "FECHAINICIODataGridViewTextBoxColumn"
+        '
+        'OBSERVACIONESDataGridViewTextBoxColumn
+        '
+        Me.OBSERVACIONESDataGridViewTextBoxColumn.DataPropertyName = "OBSERVACIONES"
+        Me.OBSERVACIONESDataGridViewTextBoxColumn.HeaderText = "OBSERVACIONES"
+        Me.OBSERVACIONESDataGridViewTextBoxColumn.Name = "OBSERVACIONESDataGridViewTextBoxColumn"
+        '
+        'CARGOUSUARIODataGridViewTextBoxColumn
+        '
+        Me.CARGOUSUARIODataGridViewTextBoxColumn.DataPropertyName = "CARGO_USUARIO"
+        Me.CARGOUSUARIODataGridViewTextBoxColumn.HeaderText = "CARGO_USUARIO"
+        Me.CARGOUSUARIODataGridViewTextBoxColumn.Name = "CARGOUSUARIODataGridViewTextBoxColumn"
         '
         'FECHACARGADataGridViewTextBoxColumn
         '
         Me.FECHACARGADataGridViewTextBoxColumn.DataPropertyName = "FECHA_CARGA"
         Me.FECHACARGADataGridViewTextBoxColumn.HeaderText = "FECHA_CARGA"
         Me.FECHACARGADataGridViewTextBoxColumn.Name = "FECHACARGADataGridViewTextBoxColumn"
-        Me.FECHACARGADataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'MODIFICOUSUARIODataGridViewTextBoxColumn
+        '
+        Me.MODIFICOUSUARIODataGridViewTextBoxColumn.DataPropertyName = "MODIFICO_USUARIO"
+        Me.MODIFICOUSUARIODataGridViewTextBoxColumn.HeaderText = "MODIFICO_USUARIO"
+        Me.MODIFICOUSUARIODataGridViewTextBoxColumn.Name = "MODIFICOUSUARIODataGridViewTextBoxColumn"
+        '
+        'FECHAMODIFICACIONDataGridViewTextBoxColumn
+        '
+        Me.FECHAMODIFICACIONDataGridViewTextBoxColumn.DataPropertyName = "FECHA_MODIFICACION"
+        Me.FECHAMODIFICACIONDataGridViewTextBoxColumn.HeaderText = "FECHA_MODIFICACION"
+        Me.FECHAMODIFICACIONDataGridViewTextBoxColumn.Name = "FECHAMODIFICACIONDataGridViewTextBoxColumn"
         '
         'frmReporte
         '
@@ -133,7 +185,7 @@ Partial Class frmReporte
         Me.Text = "frmReporte"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.VISITASBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PRACTICASBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -142,11 +194,20 @@ Partial Class frmReporte
     Friend WithEvents dtFiltro As DateTimePicker
     Friend WithEvents btnActualizar As Button
     Friend WithEvents HomeCareDataSet As HomeCareDataSet
-    Friend WithEvents VISITASBindingSource As BindingSource
-    Friend WithEvents IDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents PACIENTEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents MEDICODataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents PRESTACIONDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents FECHADataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents PRACTICASBindingSource As BindingSource
+    Friend WithEvents PRACTICASTableAdapter As HomeCareDataSetTableAdapters.PRACTICASTableAdapter
+    Friend WithEvents CUITDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents AFILIADODataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents SUBMODULODataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents MODULODataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents CODPRESTACIONDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents HSNORMALESDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents HSFERIADODataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents FECHAPRACTICADataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents FECHAINICIODataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents OBSERVACIONESDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents CARGOUSUARIODataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents FECHACARGADataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents MODIFICOUSUARIODataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents FECHAMODIFICACIONDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 End Class

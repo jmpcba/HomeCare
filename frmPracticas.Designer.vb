@@ -43,6 +43,7 @@ Partial Class frmPracticas
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.CBPrestacion = New System.Windows.Forms.ComboBox()
+        Me.PRESTACIONESBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.PRESTACIONESBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.PRESTACIONESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.btnGuardar = New System.Windows.Forms.Button()
@@ -58,20 +59,31 @@ Partial Class frmPracticas
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtObservaciones = New System.Windows.Forms.TextBox()
         Me.cbSubModulo = New System.Windows.Forms.ComboBox()
-        Me.MODULOSUBMODULOBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.SUBMODULOBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label13 = New System.Windows.Forms.Label()
         Me.cbModulo = New System.Windows.Forms.ComboBox()
-        Me.MODULOSUBMODULOBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.MODULOBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label12 = New System.Windows.Forms.Label()
         Me.PACIENTESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PACIENTESTableAdapter()
-        Me.MODULO_SUBMODULOTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.MODULO_SUBMODULOTableAdapter()
         Me.PRESTADORESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTADORESTableAdapter()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnLimpiarGrilla = New System.Windows.Forms.Button()
+        Me.lblMes = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.MODULOTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.MODULOTableAdapter()
+        Me.SUBMODULOTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.SUBMODULOTableAdapter()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.lblHoras = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PRESTACIONESBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,18 +91,19 @@ Partial Class frmPracticas
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        CType(Me.MODULOSUBMODULOBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MODULOSUBMODULOBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SUBMODULOBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MODULOBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnCerrar
         '
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCerrar.Location = New System.Drawing.Point(863, 432)
+        Me.btnCerrar.Location = New System.Drawing.Point(889, 592)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
-        Me.btnCerrar.TabIndex = 1
+        Me.btnCerrar.TabIndex = 8
         Me.btnCerrar.Text = "&Cerrar"
         Me.btnCerrar.UseVisualStyleBackColor = True
         '
@@ -132,7 +145,7 @@ Partial Class frmPracticas
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(518, 68)
+        Me.Label3.Location = New System.Drawing.Point(2, 42)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(91, 13)
         Me.Label3.TabIndex = 7
@@ -144,10 +157,10 @@ Partial Class frmPracticas
         Me.cbMedico.DisplayMember = "APELLIDO"
         Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMedico.FormattingEnabled = True
-        Me.cbMedico.Location = New System.Drawing.Point(616, 59)
+        Me.cbMedico.Location = New System.Drawing.Point(100, 33)
         Me.cbMedico.Name = "cbMedico"
         Me.cbMedico.Size = New System.Drawing.Size(121, 21)
-        Me.cbMedico.TabIndex = 8
+        Me.cbMedico.TabIndex = 1
         Me.cbMedico.ValueMember = "CUIT"
         '
         'PRESTADORESBindingSource
@@ -168,24 +181,24 @@ Partial Class frmPracticas
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(518, 100)
+        Me.Label4.Location = New System.Drawing.Point(2, 74)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(50, 13)
+        Me.Label4.Size = New System.Drawing.Size(32, 13)
         Me.Label4.TabIndex = 9
-        Me.Label4.Text = "Matricula"
+        Me.Label4.Text = "CUIT"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(765, 100)
+        Me.Label5.Location = New System.Drawing.Point(249, 74)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(52, 13)
+        Me.Label5.Size = New System.Drawing.Size(67, 13)
         Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Prestador"
+        Me.Label5.Text = "Especialidad"
         '
         'txtMat
         '
-        Me.txtMat.Location = New System.Drawing.Point(616, 92)
+        Me.txtMat.Location = New System.Drawing.Point(100, 66)
         Me.txtMat.Name = "txtMat"
         Me.txtMat.ReadOnly = True
         Me.txtMat.Size = New System.Drawing.Size(121, 20)
@@ -193,7 +206,7 @@ Partial Class frmPracticas
         '
         'txtPrestador
         '
-        Me.txtPrestador.Location = New System.Drawing.Point(841, 93)
+        Me.txtPrestador.Location = New System.Drawing.Point(325, 67)
         Me.txtPrestador.Name = "txtPrestador"
         Me.txtPrestador.ReadOnly = True
         Me.txtPrestador.Size = New System.Drawing.Size(121, 20)
@@ -206,12 +219,13 @@ Partial Class frmPracticas
         Me.dgFechas.AllowUserToOrderColumns = True
         Me.dgFechas.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.dgFechas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgFechas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgFechas.Location = New System.Drawing.Point(543, 16)
+        Me.dgFechas.Location = New System.Drawing.Point(7, 60)
         Me.dgFechas.Name = "dgFechas"
         Me.dgFechas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgFechas.Size = New System.Drawing.Size(314, 392)
-        Me.dgFechas.TabIndex = 13
+        Me.dgFechas.Size = New System.Drawing.Size(404, 478)
+        Me.dgFechas.TabIndex = 6
         '
         'Label6
         '
@@ -226,15 +240,15 @@ Partial Class frmPracticas
         'DTFecha
         '
         Me.DTFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DTFecha.Location = New System.Drawing.Point(325, 55)
+        Me.DTFecha.Location = New System.Drawing.Point(100, 111)
         Me.DTFecha.Name = "DTFecha"
-        Me.DTFecha.Size = New System.Drawing.Size(186, 20)
-        Me.DTFecha.TabIndex = 15
+        Me.DTFecha.Size = New System.Drawing.Size(346, 20)
+        Me.DTFecha.TabIndex = 5
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(249, 19)
+        Me.Label7.Location = New System.Drawing.Point(4, 87)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(57, 13)
         Me.Label7.TabIndex = 16
@@ -243,7 +257,7 @@ Partial Class frmPracticas
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(249, 55)
+        Me.Label8.Location = New System.Drawing.Point(4, 111)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(37, 13)
         Me.Label8.TabIndex = 17
@@ -251,15 +265,20 @@ Partial Class frmPracticas
         '
         'CBPrestacion
         '
-        Me.CBPrestacion.DataSource = Me.PRESTACIONESBindingSource1
+        Me.CBPrestacion.DataSource = Me.PRESTACIONESBindingSource2
         Me.CBPrestacion.DisplayMember = "DESCRIPCION"
         Me.CBPrestacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBPrestacion.FormattingEnabled = True
-        Me.CBPrestacion.Location = New System.Drawing.Point(325, 16)
+        Me.CBPrestacion.Location = New System.Drawing.Point(100, 79)
         Me.CBPrestacion.Name = "CBPrestacion"
-        Me.CBPrestacion.Size = New System.Drawing.Size(186, 21)
-        Me.CBPrestacion.TabIndex = 18
+        Me.CBPrestacion.Size = New System.Drawing.Size(346, 21)
+        Me.CBPrestacion.TabIndex = 4
         Me.CBPrestacion.ValueMember = "CODIGO"
+        '
+        'PRESTACIONESBindingSource2
+        '
+        Me.PRESTACIONESBindingSource2.DataMember = "PRESTACIONES"
+        Me.PRESTACIONESBindingSource2.DataSource = Me.HomeCareDataSetBindingSource
         '
         'PRESTACIONESBindingSource1
         '
@@ -274,10 +293,10 @@ Partial Class frmPracticas
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Location = New System.Drawing.Point(751, 432)
+        Me.btnGuardar.Location = New System.Drawing.Point(777, 592)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
-        Me.btnGuardar.TabIndex = 19
+        Me.btnGuardar.TabIndex = 7
         Me.btnGuardar.Text = "&Guardar"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
@@ -324,7 +343,7 @@ Partial Class frmPracticas
         Me.cbPaciente.Location = New System.Drawing.Point(113, 61)
         Me.cbPaciente.Name = "cbPaciente"
         Me.cbPaciente.Size = New System.Drawing.Size(121, 21)
-        Me.cbPaciente.TabIndex = 22
+        Me.cbPaciente.TabIndex = 0
         Me.cbPaciente.ValueMember = "AFILIADO"
         '
         'PACIENTESBindingSource1
@@ -365,7 +384,13 @@ Partial Class frmPracticas
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Location = New System.Drawing.Point(513, 24)
+        Me.Panel2.Controls.Add(Me.Label3)
+        Me.Panel2.Controls.Add(Me.cbMedico)
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Controls.Add(Me.Label5)
+        Me.Panel2.Controls.Add(Me.txtMat)
+        Me.Panel2.Controls.Add(Me.txtPrestador)
+        Me.Panel2.Location = New System.Drawing.Point(12, 138)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(482, 108)
         Me.Panel2.TabIndex = 28
@@ -376,6 +401,8 @@ Partial Class frmPracticas
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.Label15)
+        Me.Panel3.Controls.Add(Me.txtObservaciones)
         Me.Panel3.Controls.Add(Me.cbSubModulo)
         Me.Panel3.Controls.Add(Me.Label13)
         Me.Panel3.Controls.Add(Me.cbModulo)
@@ -383,32 +410,46 @@ Partial Class frmPracticas
         Me.Panel3.Controls.Add(Me.Label6)
         Me.Panel3.Controls.Add(Me.CBPrestacion)
         Me.Panel3.Controls.Add(Me.Label7)
-        Me.Panel3.Controls.Add(Me.btnGuardar)
         Me.Panel3.Controls.Add(Me.Label8)
-        Me.Panel3.Controls.Add(Me.dgFechas)
         Me.Panel3.Controls.Add(Me.DTFecha)
-        Me.Panel3.Controls.Add(Me.btnCerrar)
-        Me.Panel3.Location = New System.Drawing.Point(12, 138)
+        Me.Panel3.Location = New System.Drawing.Point(12, 252)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(983, 489)
+        Me.Panel3.Size = New System.Drawing.Size(482, 334)
         Me.Panel3.TabIndex = 29
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(1, 193)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(78, 13)
+        Me.Label15.TabIndex = 24
+        Me.Label15.Text = "Observaciones"
+        '
+        'txtObservaciones
+        '
+        Me.txtObservaciones.Location = New System.Drawing.Point(100, 193)
+        Me.txtObservaciones.Multiline = True
+        Me.txtObservaciones.Name = "txtObservaciones"
+        Me.txtObservaciones.Size = New System.Drawing.Size(346, 117)
+        Me.txtObservaciones.TabIndex = 5
         '
         'cbSubModulo
         '
-        Me.cbSubModulo.DataSource = Me.MODULOSUBMODULOBindingSource1
+        Me.cbSubModulo.DataSource = Me.SUBMODULOBindingSource
         Me.cbSubModulo.DisplayMember = "DESCRIPCION"
         Me.cbSubModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSubModulo.FormattingEnabled = True
         Me.cbSubModulo.Location = New System.Drawing.Point(100, 47)
         Me.cbSubModulo.Name = "cbSubModulo"
-        Me.cbSubModulo.Size = New System.Drawing.Size(121, 21)
-        Me.cbSubModulo.TabIndex = 22
+        Me.cbSubModulo.Size = New System.Drawing.Size(346, 21)
+        Me.cbSubModulo.TabIndex = 3
         Me.cbSubModulo.ValueMember = "CODIGO"
         '
-        'MODULOSUBMODULOBindingSource1
+        'SUBMODULOBindingSource
         '
-        Me.MODULOSUBMODULOBindingSource1.DataMember = "MODULO_SUBMODULO"
-        Me.MODULOSUBMODULOBindingSource1.DataSource = Me.HomeCareDataSetBindingSource
+        Me.SUBMODULOBindingSource.DataMember = "SUBMODULO"
+        Me.SUBMODULOBindingSource.DataSource = Me.HomeCareDataSetBindingSource
         '
         'Label13
         '
@@ -421,20 +462,20 @@ Partial Class frmPracticas
         '
         'cbModulo
         '
-        Me.cbModulo.DataSource = Me.MODULOSUBMODULOBindingSource
-        Me.cbModulo.DisplayMember = "DESCRIPCION"
+        Me.cbModulo.DataSource = Me.MODULOBindingSource
+        Me.cbModulo.DisplayMember = "CODIGO"
         Me.cbModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbModulo.FormattingEnabled = True
         Me.cbModulo.Location = New System.Drawing.Point(100, 16)
         Me.cbModulo.Name = "cbModulo"
-        Me.cbModulo.Size = New System.Drawing.Size(121, 21)
-        Me.cbModulo.TabIndex = 20
+        Me.cbModulo.Size = New System.Drawing.Size(346, 21)
+        Me.cbModulo.TabIndex = 2
         Me.cbModulo.ValueMember = "CODIGO"
         '
-        'MODULOSUBMODULOBindingSource
+        'MODULOBindingSource
         '
-        Me.MODULOSUBMODULOBindingSource.DataMember = "MODULO_SUBMODULO"
-        Me.MODULOSUBMODULOBindingSource.DataSource = Me.HomeCareDataSetBindingSource
+        Me.MODULOBindingSource.DataMember = "MODULO"
+        Me.MODULOBindingSource.DataSource = Me.HomeCareDataSetBindingSource
         '
         'Label12
         '
@@ -449,13 +490,92 @@ Partial Class frmPracticas
         '
         Me.PACIENTESTableAdapter.ClearBeforeFill = True
         '
-        'MODULO_SUBMODULOTableAdapter
-        '
-        Me.MODULO_SUBMODULOTableAdapter.ClearBeforeFill = True
-        '
         'PRESTADORESTableAdapter
         '
         Me.PRESTADORESTableAdapter.ClearBeforeFill = True
+        '
+        'Panel4
+        '
+        Me.Panel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.Label17)
+        Me.Panel4.Controls.Add(Me.lblHoras)
+        Me.Panel4.Controls.Add(Me.Label16)
+        Me.Panel4.Controls.Add(Me.btnLimpiarGrilla)
+        Me.Panel4.Controls.Add(Me.lblMes)
+        Me.Panel4.Controls.Add(Me.Label14)
+        Me.Panel4.Controls.Add(Me.dgFechas)
+        Me.Panel4.Location = New System.Drawing.Point(513, 24)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(482, 562)
+        Me.Panel4.TabIndex = 30
+        '
+        'btnLimpiarGrilla
+        '
+        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(335, 9)
+        Me.btnLimpiarGrilla.Name = "btnLimpiarGrilla"
+        Me.btnLimpiarGrilla.Size = New System.Drawing.Size(75, 23)
+        Me.btnLimpiarGrilla.TabIndex = 15
+        Me.btnLimpiarGrilla.Text = "&Limpiar"
+        Me.btnLimpiarGrilla.UseVisualStyleBackColor = True
+        '
+        'lblMes
+        '
+        Me.lblMes.AutoSize = True
+        Me.lblMes.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMes.Location = New System.Drawing.Point(69, 7)
+        Me.lblMes.Name = "lblMes"
+        Me.lblMes.Size = New System.Drawing.Size(0, 24)
+        Me.lblMes.TabIndex = 14
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(3, 6)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(60, 24)
+        Me.Label14.TabIndex = 6
+        Me.Label14.Text = "Horas"
+        '
+        'MODULOTableAdapter
+        '
+        Me.MODULOTableAdapter.ClearBeforeFill = True
+        '
+        'SUBMODULOTableAdapter
+        '
+        Me.SUBMODULOTableAdapter.ClearBeforeFill = True
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(3, 37)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(48, 20)
+        Me.Label16.TabIndex = 16
+        Me.Label16.Text = "Total:"
+        '
+        'lblHoras
+        '
+        Me.lblHoras.AutoSize = True
+        Me.lblHoras.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHoras.Location = New System.Drawing.Point(54, 37)
+        Me.lblHoras.Name = "lblHoras"
+        Me.lblHoras.Size = New System.Drawing.Size(18, 20)
+        Me.lblHoras.TabIndex = 17
+        Me.lblHoras.Text = "0"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(76, 37)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(26, 20)
+        Me.Label17.TabIndex = 18
+        Me.Label17.Text = "hs"
         '
         'frmPracticas
         '
@@ -464,18 +584,15 @@ Partial Class frmPracticas
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(1051, 660)
+        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.txtBeneficio)
         Me.Controls.Add(Me.txtAfiliado)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.cbPaciente)
         Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.txtPrestador)
-        Me.Controls.Add(Me.txtMat)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.cbMedico)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.btnGuardar)
+        Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Panel1)
@@ -488,6 +605,7 @@ Partial Class frmPracticas
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PRESTACIONESBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -498,8 +616,10 @@ Partial Class frmPracticas
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        CType(Me.MODULOSUBMODULOBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MODULOSUBMODULOBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SUBMODULOBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MODULOBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -543,10 +663,21 @@ Partial Class frmPracticas
     Friend WithEvents Panel2 As Panel
     Friend WithEvents PACIENTESBindingSource1 As BindingSource
     Friend WithEvents PACIENTESTableAdapter As HomeCareDataSetTableAdapters.PACIENTESTableAdapter
-    Friend WithEvents MODULOSUBMODULOBindingSource As BindingSource
-    Friend WithEvents MODULO_SUBMODULOTableAdapter As HomeCareDataSetTableAdapters.MODULO_SUBMODULOTableAdapter
     Friend WithEvents PRESTACIONESBindingSource1 As BindingSource
-    Friend WithEvents MODULOSUBMODULOBindingSource1 As BindingSource
     Friend WithEvents PRESTADORESBindingSource As BindingSource
     Friend WithEvents PRESTADORESTableAdapter As HomeCareDataSetTableAdapters.PRESTADORESTableAdapter
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents txtObservaciones As TextBox
+    Friend WithEvents lblMes As Label
+    Friend WithEvents MODULOBindingSource As BindingSource
+    Friend WithEvents MODULOTableAdapter As HomeCareDataSetTableAdapters.MODULOTableAdapter
+    Friend WithEvents SUBMODULOBindingSource As BindingSource
+    Friend WithEvents SUBMODULOTableAdapter As HomeCareDataSetTableAdapters.SUBMODULOTableAdapter
+    Friend WithEvents PRESTACIONESBindingSource2 As BindingSource
+    Friend WithEvents btnLimpiarGrilla As Button
+    Friend WithEvents lblHoras As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Label17 As Label
 End Class

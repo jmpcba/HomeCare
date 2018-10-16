@@ -1,17 +1,25 @@
 ﻿Imports System.DateTime
+Imports System.Data.OleDb
 
 Public Class frmPracticas
     Dim pac As Paciente
     Dim med As Prestador
     Dim prest As Prestacion
+    Dim modu As Modulo
     Dim index As Integer
+    Dim edicion As Boolean = False
+    Dim cellVal
     Private Sub visitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.SUBMODULO' Puede moverla o quitarla según sea necesario.
+        Me.SUBMODULOTableAdapter.Fill(Me.HomeCareDataSet.SUBMODULO)
+        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.MODULO' Puede moverla o quitarla según sea necesario.
+        Me.MODULOTableAdapter.Fill(Me.HomeCareDataSet.MODULO)
         'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PRESTADORES' Puede moverla o quitarla según sea necesario.
         Me.PRESTADORESTableAdapter.Fill(Me.HomeCareDataSet.PRESTADORES)
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.MODULO_SUBMODULO' Puede moverla o quitarla según sea necesario.
-        Me.MODULO_SUBMODULOTableAdapter.Fill(Me.HomeCareDataSet.MODULO_SUBMODULO)
         'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PACIENTES' Puede moverla o quitarla según sea necesario.
         Me.PACIENTESTableAdapter.Fill(Me.HomeCareDataSet.PACIENTES)
+
+        Me.PRESTACIONESTableAdapter.Fill(Me.HomeCareDataSet.PRESTACIONES)
 
         Try
 
@@ -19,9 +27,14 @@ Public Class frmPracticas
             cbMedico.SelectedIndex = -1
             CBPrestacion.SelectedIndex = -1
             cbPaciente.SelectedIndex = -1
+            cbModulo.SelectedIndex = -1
+            cbSubModulo.SelectedIndex = -1
+            CBPrestacion.SelectedIndex = -1
+
             statusBar("CARGA INICIAL", False)
 
             DTFecha.CustomFormat = " MMMM - yyyy"
+            lblMes.Text = MonthName(DTFecha.Value.Month)
             cargarGrilla()
 
             pac = New Paciente()
@@ -48,8 +61,10 @@ Public Class frmPracticas
     Private Sub cbMedico_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMedico.SelectedIndexChanged
 
         If cbMedico.SelectedIndex <> -1 Then
+
+            med.cuit = cbMedico.SelectedValue.ToString
             Try
-                med.cuit = cbMedico.SelectedValue
+
                 txtMat.Text = med.cuit
                 txtPrestador.Text = med.especialidad
                 statusBar("MEDICO CARGADO", False)
@@ -78,7 +93,10 @@ Public Class frmPracticas
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        Dim err = False
         Try
+            dgFechas.Columns("RESULTADO CARGA").ReadOnly = False
+
             If IsNothing(pac) Then
                 statusBar("SELECCIONE UN PACIENTE", True)
 
@@ -88,46 +106,67 @@ Public Class frmPracticas
             ElseIf IsNothing(prest) Then
                 statusBar("SELECCIONE UNA PRESTACION", True)
 
-            Else
-                ' Dim visita = New Visita(med, pac, prest, DTFecha.Value)
-                'Visita.insertar()
-                'Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
-                Dim practicas = New List(Of Practica)
+            ElseIf cbModulo.SelectedIndex = -1 Then
+                statusBar("SELECCIONE UN MODULO", True)
 
+            ElseIf cbSubModulo.SelectedIndex = -1 Then
+                statusBar("SELECCIONE UN SUB-MODULO", True)
+            Else
+
+                Dim practicas = New List(Of Practica)
+                Dim obs = txtObservaciones.Text
                 For Each r As DataGridViewRow In dgFechas.Rows
-                    Dim cant As Integer
+                    Dim horas As Integer
                     Dim dia As Integer
 
-                    If IsDBNull(r.Cells("HORAS").Value) Then
+                    If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
+                        r.DefaultCellStyle.BackColor = Color.LightGray
                         Continue For
                     Else
-                        cant = r.Cells("HORAS").Value
+                        horas = r.Cells("HORAS").Value
                         dia = r.Cells("DIA").Value
 
                         Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
-                        'Dim visita = New Practica(med, pac, prest, fec)
-                        'practicas.Add(visita)
+                        Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, prest, fec, horas, obs)
+
+                        Try
+                            practica.insertar()
+                            r.DefaultCellStyle.BackColor = Color.LightGreen
+                            r.Cells("RESULTADO CARGA").Value = "Cargado"
+
+                        Catch ex As Exception
+                            err = True
+                            r.DefaultCellStyle.BackColor = Color.Red
+                            If ex.Message.Contains("duplicate values in the index") Then
+                                r.Cells("RESULTADO CARGA").Value = "Ya existe una practica igual para este dia"
+                            Else
+                                r.Cells("RESULTADO CARGA").Value = ex.Message
+                            End If
+                        End Try
                     End If
                 Next
+                If err Then
+                    MessageBox.Show("Ocurrieron Errores durante la carga")
+                Else
+                    MessageBox.Show("Datos Cargados exitosamente")
+                End If
             End If
+            statusBar("TERMINADO", False)
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
+        Finally
+            dgFechas.Columns("RESULTADO CARGA").ReadOnly = True
+
         End Try
     End Sub
-    Public Sub statusBar(_msg As String, _error As Boolean)
 
+    Public Sub statusBar(_msg As String, _error As Boolean)
         tsLbl.Text = _msg
         If _error Then
             tsLbl.ForeColor = Color.Red
         Else
             tsLbl.ForeColor = Color.Black
         End If
-    End Sub
-
-    Private Sub dgVisitas_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
-        index = e.RowIndex
-
-
     End Sub
 
     Private Sub btnEliminarVisita_Click(sender As Object, e As EventArgs)
@@ -150,22 +189,19 @@ Public Class frmPracticas
 
     End Sub
 
-    Private Sub dgVisitas_SelectionChanged(sender As Object, e As EventArgs) Handles dgFechas.SelectionChanged
-
-    End Sub
-
-    Private Sub dgVisitas_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgFechas.CellClick
-        index = e.RowIndex
-
-
-    End Sub
-
-    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
-
-    End Sub
-
     Private Sub DTFecha_ValueChanged(sender As Object, e As EventArgs) Handles DTFecha.ValueChanged
-        cargarGrilla()
+        If edicion Then
+            If MsgBox("Se perderan los datos que ya cargo" & vbCrLf & "Desea continuar?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                cargarGrilla()
+                lblMes.Text = MonthName(DTFecha.Value.Month)
+                edicion = False
+            Else
+                DTFecha.Value = Today
+            End If
+        Else
+            lblMes.Text = MonthName(DTFecha.Value.Month)
+            cargarGrilla()
+        End If
     End Sub
 
     Public Sub cargarGrilla()
@@ -178,6 +214,7 @@ Public Class frmPracticas
 
         dt.Columns.Add("DIA")
         dt.Columns.Add("HORAS")
+        dt.Columns.Add("RESULTADO CARGA")
 
         For i = 0 To days - 1
             Dim r = dt.NewRow
@@ -185,8 +222,48 @@ Public Class frmPracticas
             dt.Rows.Add(r)
         Next
 
-        dt.Columns("DIA").ReadOnly = True
         dgFechas.DataSource = dt
+        dgFechas.AutoResizeColumns()
+        dgFechas.Columns("DIA").DefaultCellStyle.BackColor = Color.LightGray
+        dgFechas.Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
 
+        dgFechas.Columns("DIA").ReadOnly = True
+        dgFechas.Columns("RESULTADO CARGA").ReadOnly = True
+
+    End Sub
+
+    Private Sub dgFechas_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgFechas.CellEndEdit
+        Dim val = dgFechas.Rows(e.RowIndex).Cells("HORAS").Value
+        Dim horas As Integer = 0
+
+
+        If Not IsDBNull(val) Then
+            edicion = True
+            If Not IsNumeric(val) Then
+                MessageBox.Show("Debe ingresar un valor numerico")
+                dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+            ElseIf val > 24 Then
+                MessageBox.Show("No puede ingresar mas de 24hs en un dia")
+                dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+            End If
+        End If
+
+        For Each r As DataGridViewRow In dgFechas.Rows
+            If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
+                Continue For
+            Else
+                horas += r.Cells("HORAS").Value
+            End If
+        Next
+        lblHoras.Text = horas
+
+    End Sub
+
+    Private Sub btnLimpiarGrilla_Click(sender As Object, e As EventArgs) Handles btnLimpiarGrilla.Click
+        If MsgBox("Se perderan los datos que ya cargo" & vbCrLf & "Desea continuar?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            cargarGrilla()
+            lblMes.Text = MonthName(DTFecha.Value.Month)
+            edicion = False
+        End If
     End Sub
 End Class
