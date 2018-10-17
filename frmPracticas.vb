@@ -195,6 +195,7 @@ Public Class frmPracticas
                 cargarGrilla()
                 lblMes.Text = MonthName(DTFecha.Value.Month)
                 edicion = False
+                lblHoras.Text = 0
             Else
                 DTFecha.Value = Today
             End If
