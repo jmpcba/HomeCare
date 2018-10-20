@@ -14,6 +14,7 @@ Public Class Practica
     Public modifUser As Integer
     Public fechaCarga As Date
     Public fechaMod As Date
+    Dim util As utils
 
 
     Public Sub New()
@@ -35,15 +36,17 @@ Public Class Practica
         modifUser = 29188989
         fechaCarga = Today.ToShortDateString
         fechaMod = Today.ToShortDateString
+        util = New utils()
     End Sub
 
+
     Private Sub calcularHoras(_horas As Decimal)
-        If fecha.DayOfWeek = DayOfWeek.Saturday Or fecha.DayOfWeek = DayOfWeek.Sunday Then
+        If util.calcDiaSemana(fecha) Then
+            hsFeriado = 0
+            hsSemana = _horas
+        Else
             hsFeriado = _horas
             hsSemana = 0
-        Else
-            hsSemana = _horas
-            hsFeriado = 0
         End If
     End Sub
 

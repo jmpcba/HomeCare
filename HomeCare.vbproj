@@ -81,6 +81,7 @@
     <Compile Include="code\Prestacion.vb" />
     <Compile Include="code\Practica.vb" />
     <Compile Include="code\Usuario.vb" />
+    <Compile Include="code\utils.vb" />
     <Compile Include="frmPrincipal.Designer.vb">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </Compile>

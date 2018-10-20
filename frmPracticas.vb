@@ -9,6 +9,8 @@ Public Class frmPracticas
     Dim index As Integer
     Dim edicion As Boolean = False
     Dim cellVal
+    Dim selectedRows As DataGridViewSelectedRowCollection
+    Dim ut As utils
     Private Sub visitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.SUBMODULO' Puede moverla o quitarla según sea necesario.
         Me.SUBMODULOTableAdapter.Fill(Me.HomeCareDataSet.SUBMODULO)
@@ -20,6 +22,9 @@ Public Class frmPracticas
         Me.PACIENTESTableAdapter.Fill(Me.HomeCareDataSet.PACIENTES)
 
         Me.PRESTACIONESTableAdapter.Fill(Me.HomeCareDataSet.PRESTACIONES)
+
+        Me.WindowState = FormWindowState.Maximized
+        ut = New utils
 
         Try
 
@@ -94,23 +99,29 @@ Public Class frmPracticas
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Dim err = False
+        Dim carga = False
         Try
             dgFechas.Columns("RESULTADO CARGA").ReadOnly = False
 
-            If IsNothing(pac) Then
+            If cbPaciente.SelectedIndex = -1 Then
                 statusBar("SELECCIONE UN PACIENTE", True)
+                cbPaciente.Focus()
 
-            ElseIf IsNothing(med) Then
-                statusBar("SELECCIONE UN MEDICO", True)
-
-            ElseIf IsNothing(prest) Then
-                statusBar("SELECCIONE UNA PRESTACION", True)
+            ElseIf cbMedico.SelectedIndex = -1 Then
+                statusBar("SELECCIONE UN PRESTADOR", True)
+                cbMedico.Focus()
 
             ElseIf cbModulo.SelectedIndex = -1 Then
                 statusBar("SELECCIONE UN MODULO", True)
+                cbModulo.Focus()
 
             ElseIf cbSubModulo.SelectedIndex = -1 Then
                 statusBar("SELECCIONE UN SUB-MODULO", True)
+                cbSubModulo.Focus()
+
+            ElseIf CBPrestacion.SelectedIndex = -1 Then
+                statusBar("SELECCIONE UNA PRESTACION", True)
+                CBPrestacion.Focus()
             Else
 
                 Dim practicas = New List(Of Practica)
@@ -124,7 +135,7 @@ Public Class frmPracticas
                         Continue For
                     Else
                         horas = r.Cells("HORAS").Value
-                        dia = r.Cells("DIA").Value
+                        dia = r.Cells("DIA_H").Value
 
                         Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
                         Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, prest, fec, horas, obs)
@@ -133,6 +144,7 @@ Public Class frmPracticas
                             practica.insertar()
                             r.DefaultCellStyle.BackColor = Color.LightGreen
                             r.Cells("RESULTADO CARGA").Value = "Cargado"
+                            carga = True
 
                         Catch ex As Exception
                             err = True
@@ -147,11 +159,14 @@ Public Class frmPracticas
                 Next
                 If err Then
                     MessageBox.Show("Ocurrieron Errores durante la carga")
-                Else
+                ElseIf carga Then
                     MessageBox.Show("Datos Cargados exitosamente")
+                Else
+                    MessageBox.Show("No se cargaron horas para ningun dia")
                 End If
+                statusBar("TERMINADO", False)
             End If
-            statusBar("TERMINADO", False)
+
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
         Finally
@@ -196,6 +211,7 @@ Public Class frmPracticas
                 lblMes.Text = MonthName(DTFecha.Value.Month)
                 edicion = False
                 lblHoras.Text = 0
+                lblMonto.Text = 0
             Else
                 DTFecha.Value = Today
             End If
@@ -214,49 +230,83 @@ Public Class frmPracticas
         dgFechas.DataSource = Nothing
 
         dt.Columns.Add("DIA")
+        dt.Columns.Add("DIA_H")
         dt.Columns.Add("HORAS")
         dt.Columns.Add("RESULTADO CARGA")
 
         For i = 0 To days - 1
             Dim r = dt.NewRow
-            r("DIA") = i + 1
+            Dim fecha = New Date(year, month, i + 1)
+            r("DIA") = fecha.ToString("dddd - dd")
+            r("DIA_H") = i + 1
             dt.Rows.Add(r)
         Next
 
         dgFechas.DataSource = dt
-        dgFechas.AutoResizeColumns()
         dgFechas.Columns("DIA").DefaultCellStyle.BackColor = Color.LightGray
+        dgFechas.Columns("DIA").DefaultCellStyle.Font = New Font("arial", 8)
+
         dgFechas.Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
+        dgFechas.Columns("RESULTADO CARGA").DefaultCellStyle.Font = New Font("arial", 8)
+
+        dgFechas.Columns("HORAS").DefaultCellStyle.Font = New Font("arial", 8)
 
         dgFechas.Columns("DIA").ReadOnly = True
         dgFechas.Columns("RESULTADO CARGA").ReadOnly = True
+        dgFechas.AutoResizeColumns()
+        dgFechas.AutoResizeRows()
+
+        dgFechas.Columns("DIA_H").Visible = False
+
+        For Each r As DataGridViewRow In dgFechas.Rows
+            Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
+            If ut.esFeriado(fecha) Or Not ut.calcDiaSemana(fecha) Then
+                r.DefaultCellStyle.ForeColor = Color.Red
+            End If
+        Next
+
 
     End Sub
 
     Private Sub dgFechas_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgFechas.CellEndEdit
         Dim val = dgFechas.Rows(e.RowIndex).Cells("HORAS").Value
         Dim horas As Integer = 0
+        Dim monto As Decimal = 0
 
-
-        If Not IsDBNull(val) Then
-            edicion = True
-            If Not IsNumeric(val) Then
-                MessageBox.Show("Debe ingresar un valor numerico")
-                dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
-            ElseIf val > 24 Then
-                MessageBox.Show("No puede ingresar mas de 24hs en un dia")
-                dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+        If IsNothing(med.cuit) Then
+            MessageBox.Show("Seleccione un Prestador")
+            dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+        Else
+            If Not IsDBNull(val) Then
+                edicion = True
+                If Not IsNumeric(val) Then
+                    MessageBox.Show("Debe ingresar un valor numerico")
+                    dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+                ElseIf val > 24 Then
+                    MessageBox.Show("No puede ingresar mas de 24hs en un dia")
+                    dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+                End If
             End If
+
+            For Each r As DataGridViewRow In dgFechas.Rows
+                If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
+                    Continue For
+                Else
+                    Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
+
+
+                    If ut.calcDiaSemana(fecha) Then
+                        monto += med.montoNormal * r.Cells("HORAS").Value
+                    Else
+                        monto += med.montoFeriado * r.Cells("HORAS").Value
+                    End If
+
+                    horas += r.Cells("HORAS").Value
+                End If
+            Next
+            lblHoras.Text = horas
+            lblMonto.Text = monto
         End If
-
-        For Each r As DataGridViewRow In dgFechas.Rows
-            If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
-                Continue For
-            Else
-                horas += r.Cells("HORAS").Value
-            End If
-        Next
-        lblHoras.Text = horas
 
     End Sub
 
@@ -265,6 +315,21 @@ Public Class frmPracticas
             cargarGrilla()
             lblMes.Text = MonthName(DTFecha.Value.Month)
             edicion = False
+        End If
+    End Sub
+
+    Private Sub dgFechas_SelectionChanged(sender As Object, e As EventArgs) Handles dgFechas.SelectionChanged
+        selectedRows = dgFechas.SelectedRows
+
+        If dgFechas.SelectedRows.Count > 1 Then
+            Dim valor = dgFechas.SelectedRows(0).Cells("horas").Value
+
+            If Not IsDBNull(valor) Then
+                For Each r As DataGridViewRow In dgFechas.SelectedRows
+                    r.Cells("horas") = valor
+                Next
+            End If
+
         End If
     End Sub
 End Class

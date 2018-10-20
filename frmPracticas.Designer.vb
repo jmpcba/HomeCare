@@ -37,7 +37,6 @@ Partial Class frmPracticas
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtMat = New System.Windows.Forms.TextBox()
         Me.txtPrestador = New System.Windows.Forms.TextBox()
-        Me.dgFechas = New System.Windows.Forms.DataGridView()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.DTFecha = New System.Windows.Forms.DateTimePicker()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -69,20 +68,21 @@ Partial Class frmPracticas
         Me.Label12 = New System.Windows.Forms.Label()
         Me.PACIENTESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PACIENTESTableAdapter()
         Me.PRESTADORESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTADORESTableAdapter()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.btnLimpiarGrilla = New System.Windows.Forms.Button()
-        Me.lblMes = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.MODULOTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.MODULOTableAdapter()
         Me.SUBMODULOTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.SUBMODULOTableAdapter()
-        Me.Label16 = New System.Windows.Forms.Label()
+        Me.dgFechas = New System.Windows.Forms.DataGridView()
+        Me.lblMes = New System.Windows.Forms.Label()
+        Me.btnLimpiarGrilla = New System.Windows.Forms.Button()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.lblHoras = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
+        Me.lblMonto = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.StatusStrip1.SuspendLayout()
         CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PRESTACIONESBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -93,6 +93,7 @@ Partial Class frmPracticas
         Me.Panel3.SuspendLayout()
         CType(Me.SUBMODULOBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MODULOBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -157,7 +158,7 @@ Partial Class frmPracticas
         Me.cbMedico.DisplayMember = "APELLIDO"
         Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMedico.FormattingEnabled = True
-        Me.cbMedico.Location = New System.Drawing.Point(100, 33)
+        Me.cbMedico.Location = New System.Drawing.Point(100, 34)
         Me.cbMedico.Name = "cbMedico"
         Me.cbMedico.Size = New System.Drawing.Size(121, 21)
         Me.cbMedico.TabIndex = 1
@@ -198,7 +199,7 @@ Partial Class frmPracticas
         '
         'txtMat
         '
-        Me.txtMat.Location = New System.Drawing.Point(100, 66)
+        Me.txtMat.Location = New System.Drawing.Point(100, 67)
         Me.txtMat.Name = "txtMat"
         Me.txtMat.ReadOnly = True
         Me.txtMat.Size = New System.Drawing.Size(121, 20)
@@ -211,21 +212,6 @@ Partial Class frmPracticas
         Me.txtPrestador.ReadOnly = True
         Me.txtPrestador.Size = New System.Drawing.Size(121, 20)
         Me.txtPrestador.TabIndex = 12
-        '
-        'dgFechas
-        '
-        Me.dgFechas.AllowUserToAddRows = False
-        Me.dgFechas.AllowUserToDeleteRows = False
-        Me.dgFechas.AllowUserToOrderColumns = True
-        Me.dgFechas.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.dgFechas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.dgFechas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgFechas.Location = New System.Drawing.Point(7, 60)
-        Me.dgFechas.Name = "dgFechas"
-        Me.dgFechas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgFechas.Size = New System.Drawing.Size(404, 478)
-        Me.dgFechas.TabIndex = 6
         '
         'Label6
         '
@@ -240,7 +226,7 @@ Partial Class frmPracticas
         'DTFecha
         '
         Me.DTFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DTFecha.Location = New System.Drawing.Point(100, 111)
+        Me.DTFecha.Location = New System.Drawing.Point(100, 121)
         Me.DTFecha.Name = "DTFecha"
         Me.DTFecha.Size = New System.Drawing.Size(346, 20)
         Me.DTFecha.TabIndex = 5
@@ -248,7 +234,7 @@ Partial Class frmPracticas
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(4, 87)
+        Me.Label7.Location = New System.Drawing.Point(4, 97)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(57, 13)
         Me.Label7.TabIndex = 16
@@ -257,7 +243,7 @@ Partial Class frmPracticas
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(4, 111)
+        Me.Label8.Location = New System.Drawing.Point(4, 121)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(37, 13)
         Me.Label8.TabIndex = 17
@@ -269,7 +255,7 @@ Partial Class frmPracticas
         Me.CBPrestacion.DisplayMember = "DESCRIPCION"
         Me.CBPrestacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBPrestacion.FormattingEnabled = True
-        Me.CBPrestacion.Location = New System.Drawing.Point(100, 79)
+        Me.CBPrestacion.Location = New System.Drawing.Point(100, 89)
         Me.CBPrestacion.Name = "CBPrestacion"
         Me.CBPrestacion.Size = New System.Drawing.Size(346, 21)
         Me.CBPrestacion.TabIndex = 4
@@ -340,7 +326,7 @@ Partial Class frmPracticas
         Me.cbPaciente.DisplayMember = "APELLIDO"
         Me.cbPaciente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPaciente.FormattingEnabled = True
-        Me.cbPaciente.Location = New System.Drawing.Point(113, 61)
+        Me.cbPaciente.Location = New System.Drawing.Point(113, 59)
         Me.cbPaciente.Name = "cbPaciente"
         Me.cbPaciente.Size = New System.Drawing.Size(121, 21)
         Me.cbPaciente.TabIndex = 0
@@ -380,8 +366,6 @@ Partial Class frmPracticas
         '
         'Panel2
         '
-        Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label3)
@@ -397,9 +381,8 @@ Partial Class frmPracticas
         '
         'Panel3
         '
-        Me.Panel3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel3.Controls.Add(Me.Label15)
         Me.Panel3.Controls.Add(Me.txtObservaciones)
@@ -440,7 +423,7 @@ Partial Class frmPracticas
         Me.cbSubModulo.DisplayMember = "DESCRIPCION"
         Me.cbSubModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSubModulo.FormattingEnabled = True
-        Me.cbSubModulo.Location = New System.Drawing.Point(100, 47)
+        Me.cbSubModulo.Location = New System.Drawing.Point(100, 57)
         Me.cbSubModulo.Name = "cbSubModulo"
         Me.cbSubModulo.Size = New System.Drawing.Size(346, 21)
         Me.cbSubModulo.TabIndex = 3
@@ -454,7 +437,7 @@ Partial Class frmPracticas
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(3, 55)
+        Me.Label13.Location = New System.Drawing.Point(3, 65)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(64, 13)
         Me.Label13.TabIndex = 21
@@ -466,7 +449,7 @@ Partial Class frmPracticas
         Me.cbModulo.DisplayMember = "CODIGO"
         Me.cbModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbModulo.FormattingEnabled = True
-        Me.cbModulo.Location = New System.Drawing.Point(100, 16)
+        Me.cbModulo.Location = New System.Drawing.Point(100, 26)
         Me.cbModulo.Name = "cbModulo"
         Me.cbModulo.Size = New System.Drawing.Size(346, 21)
         Me.cbModulo.TabIndex = 2
@@ -480,7 +463,7 @@ Partial Class frmPracticas
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(3, 24)
+        Me.Label12.Location = New System.Drawing.Point(3, 34)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(42, 13)
         Me.Label12.TabIndex = 19
@@ -494,31 +477,28 @@ Partial Class frmPracticas
         '
         Me.PRESTADORESTableAdapter.ClearBeforeFill = True
         '
-        'Panel4
+        'MODULOTableAdapter
         '
-        Me.Panel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Controls.Add(Me.Label17)
-        Me.Panel4.Controls.Add(Me.lblHoras)
-        Me.Panel4.Controls.Add(Me.Label16)
-        Me.Panel4.Controls.Add(Me.btnLimpiarGrilla)
-        Me.Panel4.Controls.Add(Me.lblMes)
-        Me.Panel4.Controls.Add(Me.Label14)
-        Me.Panel4.Controls.Add(Me.dgFechas)
-        Me.Panel4.Location = New System.Drawing.Point(513, 24)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(482, 562)
-        Me.Panel4.TabIndex = 30
+        Me.MODULOTableAdapter.ClearBeforeFill = True
         '
-        'btnLimpiarGrilla
+        'SUBMODULOTableAdapter
         '
-        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(335, 9)
-        Me.btnLimpiarGrilla.Name = "btnLimpiarGrilla"
-        Me.btnLimpiarGrilla.Size = New System.Drawing.Size(75, 23)
-        Me.btnLimpiarGrilla.TabIndex = 15
-        Me.btnLimpiarGrilla.Text = "&Limpiar"
-        Me.btnLimpiarGrilla.UseVisualStyleBackColor = True
+        Me.SUBMODULOTableAdapter.ClearBeforeFill = True
+        '
+        'dgFechas
+        '
+        Me.dgFechas.AllowUserToAddRows = False
+        Me.dgFechas.AllowUserToDeleteRows = False
+        Me.dgFechas.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.dgFechas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgFechas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgFechas.Location = New System.Drawing.Point(7, 34)
+        Me.dgFechas.Name = "dgFechas"
+        Me.dgFechas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgFechas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.dgFechas.Size = New System.Drawing.Size(304, 504)
+        Me.dgFechas.TabIndex = 6
         '
         'lblMes
         '
@@ -529,53 +509,83 @@ Partial Class frmPracticas
         Me.lblMes.Size = New System.Drawing.Size(0, 24)
         Me.lblMes.TabIndex = 14
         '
-        'Label14
+        'btnLimpiarGrilla
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(3, 6)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(60, 24)
-        Me.Label14.TabIndex = 6
-        Me.Label14.Text = "Horas"
+        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(321, 146)
+        Me.btnLimpiarGrilla.Name = "btnLimpiarGrilla"
+        Me.btnLimpiarGrilla.Size = New System.Drawing.Size(75, 23)
+        Me.btnLimpiarGrilla.TabIndex = 15
+        Me.btnLimpiarGrilla.Text = "&Limpiar"
+        Me.btnLimpiarGrilla.UseVisualStyleBackColor = True
         '
-        'MODULOTableAdapter
+        'Label18
         '
-        Me.MODULOTableAdapter.ClearBeforeFill = True
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(317, 7)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(111, 24)
+        Me.Label18.TabIndex = 19
+        Me.Label18.Text = "Total Horas:"
         '
-        'SUBMODULOTableAdapter
+        'Label19
         '
-        Me.SUBMODULOTableAdapter.ClearBeforeFill = True
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(3, 37)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(48, 20)
-        Me.Label16.TabIndex = 16
-        Me.Label16.Text = "Total:"
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(317, 74)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(114, 24)
+        Me.Label19.TabIndex = 20
+        Me.Label19.Text = "Monto Total:"
         '
         'lblHoras
         '
         Me.lblHoras.AutoSize = True
-        Me.lblHoras.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHoras.Location = New System.Drawing.Point(54, 37)
+        Me.lblHoras.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHoras.Location = New System.Drawing.Point(412, 44)
         Me.lblHoras.Name = "lblHoras"
-        Me.lblHoras.Size = New System.Drawing.Size(18, 20)
-        Me.lblHoras.TabIndex = 17
+        Me.lblHoras.Size = New System.Drawing.Size(16, 17)
+        Me.lblHoras.TabIndex = 21
         Me.lblHoras.Text = "0"
         '
-        'Label17
+        'lblMonto
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(76, 37)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(26, 20)
-        Me.Label17.TabIndex = 18
-        Me.Label17.Text = "hs"
+        Me.lblMonto.AutoSize = True
+        Me.lblMonto.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMonto.Location = New System.Drawing.Point(415, 111)
+        Me.lblMonto.Name = "lblMonto"
+        Me.lblMonto.Size = New System.Drawing.Size(16, 17)
+        Me.lblMonto.TabIndex = 22
+        Me.lblMonto.Text = "0"
+        '
+        'Panel4
+        '
+        Me.Panel4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.Label14)
+        Me.Panel4.Controls.Add(Me.lblMonto)
+        Me.Panel4.Controls.Add(Me.lblHoras)
+        Me.Panel4.Controls.Add(Me.Label19)
+        Me.Panel4.Controls.Add(Me.Label18)
+        Me.Panel4.Controls.Add(Me.btnLimpiarGrilla)
+        Me.Panel4.Controls.Add(Me.lblMes)
+        Me.Panel4.Controls.Add(Me.dgFechas)
+        Me.Panel4.Location = New System.Drawing.Point(513, 24)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(482, 562)
+        Me.Panel4.TabIndex = 30
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(3, 7)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(60, 24)
+        Me.Label14.TabIndex = 23
+        Me.Label14.Text = "Horas"
         '
         'frmPracticas
         '
@@ -604,7 +614,6 @@ Partial Class frmPracticas
         CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PRESTACIONESBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -618,6 +627,7 @@ Partial Class frmPracticas
         Me.Panel3.PerformLayout()
         CType(Me.SUBMODULOBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MODULOBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
@@ -635,7 +645,6 @@ Partial Class frmPracticas
     Friend WithEvents Label5 As Label
     Friend WithEvents txtMat As TextBox
     Friend WithEvents txtPrestador As TextBox
-    Friend WithEvents dgFechas As DataGridView
     Friend WithEvents Label6 As Label
     Friend WithEvents DTFecha As DateTimePicker
     Friend WithEvents Label7 As Label
@@ -666,18 +675,20 @@ Partial Class frmPracticas
     Friend WithEvents PRESTACIONESBindingSource1 As BindingSource
     Friend WithEvents PRESTADORESBindingSource As BindingSource
     Friend WithEvents PRESTADORESTableAdapter As HomeCareDataSetTableAdapters.PRESTADORESTableAdapter
-    Friend WithEvents Panel4 As Panel
-    Friend WithEvents Label14 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents txtObservaciones As TextBox
-    Friend WithEvents lblMes As Label
     Friend WithEvents MODULOBindingSource As BindingSource
     Friend WithEvents MODULOTableAdapter As HomeCareDataSetTableAdapters.MODULOTableAdapter
     Friend WithEvents SUBMODULOBindingSource As BindingSource
     Friend WithEvents SUBMODULOTableAdapter As HomeCareDataSetTableAdapters.SUBMODULOTableAdapter
     Friend WithEvents PRESTACIONESBindingSource2 As BindingSource
+    Friend WithEvents dgFechas As DataGridView
+    Friend WithEvents lblMes As Label
     Friend WithEvents btnLimpiarGrilla As Button
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label19 As Label
     Friend WithEvents lblHoras As Label
-    Friend WithEvents Label16 As Label
-    Friend WithEvents Label17 As Label
+    Friend WithEvents lblMonto As Label
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Label14 As Label
 End Class

@@ -38,6 +38,7 @@ Public Class DB
         prestaciones
         visitas
         modulos
+        feriados
     End Enum
 
     'Public Function getRow(_priKey As Object, _tabla As tablas) As DataTable
@@ -149,6 +150,24 @@ Public Class DB
             Return ds.Tables(_tabla.ToString)
         Catch ex As Exception
             Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
+        End Try
+
+    End Function
+
+    Public Function feriado(_fecha As Date) As Integer
+        Dim query = String.Format("SELECT count(FECHA) FROM feriados where fecha > {0}", _fecha.Year.ToString)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            Dim count = cmd.ExecuteScalar
+            Return count
+        Catch ex As Exception
+            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
+        Finally
+            cnn.Close()
         End Try
 
     End Function

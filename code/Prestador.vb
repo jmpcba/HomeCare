@@ -66,6 +66,18 @@
         End Try
     End Sub
 
+    Public ReadOnly Property montoNormal
+        Get
+            Return _montoLV
+        End Get
+    End Property
+
+    Public ReadOnly Property montoFeriado
+        Get
+            Return _montoFer
+        End Get
+    End Property
+
     Public Sub New(_matricula As Integer, _nombre As String, _prestador As String)
         Try
             _matricula = _matricula
