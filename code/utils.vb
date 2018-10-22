@@ -8,7 +8,7 @@ Public Class utils
         feriados = New DataTable()
     End Sub
 
-    Public Function esFindeOFeriado(_fecha As Date)
+    Public Function esFindeOFeriado(_fecha As Date) As Boolean
         'devuelve true si _fecha es fin de semana
 
         If _fecha.DayOfWeek = DayOfWeek.Saturday Or _fecha.DayOfWeek = DayOfWeek.Sunday Or esFeriado(_fecha) Then
