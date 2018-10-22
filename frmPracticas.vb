@@ -40,7 +40,7 @@ Public Class frmPracticas
             statusBar("CARGA INICIAL", False)
 
             DTFecha.CustomFormat = " MMMM - yyyy"
-            lblMes.Text = MonthName(DTFecha.Value.Month)
+            lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
             cargarGrilla()
 
             pac = New Paciente()
