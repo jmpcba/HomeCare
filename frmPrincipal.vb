@@ -8,5 +8,18 @@
     End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        My.Settings.Item("HomeCareConnectionString") = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)
+
+
+    End Sub
+
+    Private Sub BaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BaseDeDatosToolStripMenuItem.Click
+        Try
+            Dim ut = New utils
+            ut.setDB()
+        Catch ex As Exception
+            MessageBox.Show("ERROR: " & ex.Message)
+        End Try
+
     End Sub
 End Class

@@ -23,6 +23,8 @@ Public Class Practica
 
 
     Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _prestacion As Prestacion, _fecha As Date, _horas As Decimal, _observaciones As String)
+        util = New utils()
+
         prestador = _prestador
         paciente = _paciente
         prestacion = _prestacion
@@ -36,17 +38,17 @@ Public Class Practica
         modifUser = 29188989
         fechaCarga = Today.ToShortDateString
         fechaMod = Today.ToShortDateString
-        util = New utils()
+
     End Sub
 
 
     Private Sub calcularHoras(_horas As Decimal)
-        If util.calcDiaSemana(fecha) Then
-            hsFeriado = 0
-            hsSemana = _horas
-        Else
+        If util.esFindeOFeriado(fecha) Then
             hsFeriado = _horas
             hsSemana = 0
+        Else
+            hsFeriado = 0
+            hsSemana = _horas
         End If
     End Sub
 

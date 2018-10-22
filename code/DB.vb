@@ -7,10 +7,14 @@ Public Class DB
     Private cmd As OleDbCommand
     Private da As OleDbDataAdapter
     Private ds As DataSet
-    Private conStr As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}\Google Drive\HomeCare.accdb'", Environ("USERPROFILE"))
+    'Private conStr As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}\Google Drive\HomeCare.accdb'", Environ("USERPROFILE"))
+    Private conStr As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)
 
 
     Sub New()
+        If My.Settings.DBPath = "" Then
+            Throw New Exception("No se configuro una DB todavia!!!" & vbCrLf & "en la pantalla principal seleccione Configuracion - DB")
+        End If
         cnn = New OleDbConnection(conStr)
         cmd = New OleDbCommand()
         da = New OleDbDataAdapter(cmd)
@@ -40,31 +44,6 @@ Public Class DB
         modulos
         feriados
     End Enum
-
-    'Public Function getRow(_priKey As Object, _tabla As tablas) As DataTable
-    '    Dim query As String
-
-    '    If _tabla = tablas.medicos Then
-    '        query = "SELECT * FROM MEDICOS WHERE MATRICULA = " & _priKey
-    '    ElseIf _tabla = tablas.pacientes Then
-    '        query = "SELECT * FROM PACIENTES WHERE dni = " & _priKey
-    '    ElseIf _tabla = tablas.prestaciones Then
-    '        query = "SELECT * FROM PRESTACIONES WHERE ID = " & _priKey
-    '    ElseIf _tabla = tablas.visitas Then
-    '        query = "SELECT * FROM VISITAS WHERE ID = " & _priKey
-    '    End If
-
-    '    cmd.CommandType = CommandType.Text
-    '    cmd.CommandText = query
-
-    '    Try
-    '        da.Fill(ds, "RESULTADO")
-    '        Return ds.Tables("RESULTADO")
-    '    Catch ex As Exception
-    '        Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
-    '    End Try
-
-    'End Function
 
     Friend Sub eliminar(_visita As Practica)
         Try
@@ -154,20 +133,17 @@ Public Class DB
 
     End Function
 
-    Public Function feriado(_fecha As Date) As Integer
-        Dim query = String.Format("SELECT count(FECHA) FROM feriados where fecha > {0}", _fecha.Year.ToString)
+    Public Function feriado(_fecha As Date) As DataTable
+        Dim query = String.Format("SELECT * FROM feriados where fecha > 1/1/{0}", _fecha.Year.ToString)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
 
         Try
-            cnn.Open()
-            Dim count = cmd.ExecuteScalar
-            Return count
+            da.Fill(ds, "FERIADOS")
+            Return ds.Tables("FERIADOS")
         Catch ex As Exception
             Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
-        Finally
-            cnn.Close()
         End Try
 
     End Function

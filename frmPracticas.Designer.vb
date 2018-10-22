@@ -497,7 +497,7 @@ Partial Class frmPracticas
         Me.dgFechas.Name = "dgFechas"
         Me.dgFechas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgFechas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.dgFechas.Size = New System.Drawing.Size(304, 504)
+        Me.dgFechas.Size = New System.Drawing.Size(355, 504)
         Me.dgFechas.TabIndex = 6
         '
         'lblMes
@@ -511,7 +511,7 @@ Partial Class frmPracticas
         '
         'btnLimpiarGrilla
         '
-        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(321, 146)
+        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(368, 146)
         Me.btnLimpiarGrilla.Name = "btnLimpiarGrilla"
         Me.btnLimpiarGrilla.Size = New System.Drawing.Size(75, 23)
         Me.btnLimpiarGrilla.TabIndex = 15
@@ -522,7 +522,7 @@ Partial Class frmPracticas
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(317, 7)
+        Me.Label18.Location = New System.Drawing.Point(364, 7)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(111, 24)
         Me.Label18.TabIndex = 19
@@ -532,7 +532,7 @@ Partial Class frmPracticas
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(317, 74)
+        Me.Label19.Location = New System.Drawing.Point(364, 74)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(114, 24)
         Me.Label19.TabIndex = 20
@@ -542,7 +542,7 @@ Partial Class frmPracticas
         '
         Me.lblHoras.AutoSize = True
         Me.lblHoras.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHoras.Location = New System.Drawing.Point(412, 44)
+        Me.lblHoras.Location = New System.Drawing.Point(459, 44)
         Me.lblHoras.Name = "lblHoras"
         Me.lblHoras.Size = New System.Drawing.Size(16, 17)
         Me.lblHoras.TabIndex = 21
@@ -552,7 +552,7 @@ Partial Class frmPracticas
         '
         Me.lblMonto.AutoSize = True
         Me.lblMonto.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMonto.Location = New System.Drawing.Point(415, 111)
+        Me.lblMonto.Location = New System.Drawing.Point(462, 111)
         Me.lblMonto.Name = "lblMonto"
         Me.lblMonto.Size = New System.Drawing.Size(16, 17)
         Me.lblMonto.TabIndex = 22

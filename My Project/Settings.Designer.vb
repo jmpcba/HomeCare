@@ -57,12 +57,24 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=""C:\Users\Manuel\Google Drive\HomeC"& _ 
-            "are.accdb""")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=""C:\Users\Manuel\Google Drive\Homea"& _ 
+            "re.accdb""")>  _
         Public ReadOnly Property HomeCareConnectionString() As String
             Get
                 Return CType(Me("HomeCareConnectionString"),String)
             End Get
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property DBPath() As String
+            Get
+                Return CType(Me("DBPath"),String)
+            End Get
+            Set
+                Me("DBPath") = value
+            End Set
         End Property
     End Class
 End Namespace

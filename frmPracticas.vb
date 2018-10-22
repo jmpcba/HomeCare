@@ -1,5 +1,6 @@
 ﻿Imports System.DateTime
-Imports System.Data.OleDb
+Imports System.Configuration
+Imports System.Collections.Specialized
 
 Public Class frmPracticas
     Dim pac As Paciente
@@ -149,6 +150,7 @@ Public Class frmPracticas
                         Catch ex As Exception
                             err = True
                             r.DefaultCellStyle.BackColor = Color.Red
+                            r.DefaultCellStyle.ForeColor = Color.Black
                             If ex.Message.Contains("duplicate values in the index") Then
                                 r.Cells("RESULTADO CARGA").Value = "Ya existe una practica igual para este dia"
                             Else
@@ -260,7 +262,7 @@ Public Class frmPracticas
 
         For Each r As DataGridViewRow In dgFechas.Rows
             Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-            If ut.esFeriado(fecha) Or Not ut.calcDiaSemana(fecha) Then
+            If ut.esFindeOFeriado(fecha) Then
                 r.DefaultCellStyle.ForeColor = Color.Red
             End If
         Next
@@ -295,10 +297,10 @@ Public Class frmPracticas
                     Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
 
 
-                    If ut.calcDiaSemana(fecha) Then
-                        monto += med.montoNormal * r.Cells("HORAS").Value
-                    Else
+                    If ut.esFindeOFeriado(fecha) Then
                         monto += med.montoFeriado * r.Cells("HORAS").Value
+                    Else
+                        monto += med.montoNormal * r.Cells("HORAS").Value
                     End If
 
                     horas += r.Cells("HORAS").Value
