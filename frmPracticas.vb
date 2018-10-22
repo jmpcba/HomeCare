@@ -25,7 +25,6 @@ Public Class frmPracticas
         Me.PRESTACIONESTableAdapter.Fill(Me.HomeCareDataSet.PRESTACIONES)
 
         Me.WindowState = FormWindowState.Maximized
-        ut = New utils
 
         Try
 
@@ -41,11 +40,14 @@ Public Class frmPracticas
 
             DTFecha.CustomFormat = " MMMM - yyyy"
             lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
-            cargarGrilla()
 
+            ut = New utils
             pac = New Paciente()
             prest = New Prestacion()
             med = New Prestador()
+            modu = New Modulo()
+
+            cargarGrilla()
 
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
@@ -278,6 +280,9 @@ Public Class frmPracticas
         If IsNothing(med.cuit) Then
             MessageBox.Show("Seleccione un Prestador")
             dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+        ElseIf IsNothing(modu.codigo) Then
+            MessageBox.Show("Seleccione un Modulo")
+            dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
         Else
             If Not IsDBNull(val) Then
                 edicion = True
@@ -289,6 +294,7 @@ Public Class frmPracticas
                     dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
                 End If
             End If
+
 
             For Each r As DataGridViewRow In dgFechas.Rows
                 If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
@@ -306,10 +312,16 @@ Public Class frmPracticas
                     horas += r.Cells("HORAS").Value
                 End If
             Next
+
             lblHoras.Text = horas
             lblMonto.Text = monto
-        End If
 
+            If horas > modu.tope(med.especialidad) Then
+                lblHoras.ForeColor = Color.Red
+            Else
+                lblHoras.ForeColor = Color.Black
+            End If
+        End If
     End Sub
 
     Private Sub btnLimpiarGrilla_Click(sender As Object, e As EventArgs) Handles btnLimpiarGrilla.Click
@@ -333,5 +345,12 @@ Public Class frmPracticas
             End If
 
         End If
+    End Sub
+
+    Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectedIndexChanged
+        If cbModulo.SelectedIndex <> -1 Then
+            modu.codigo = cbModulo.SelectedValue
+        End If
+
     End Sub
 End Class

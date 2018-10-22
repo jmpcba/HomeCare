@@ -41,7 +41,7 @@ Public Class DB
         pacientes
         prestaciones
         visitas
-        modulos
+        modulo
         feriados
     End Enum
 
