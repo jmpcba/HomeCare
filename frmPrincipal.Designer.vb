@@ -27,6 +27,7 @@ Partial Class frmPrincipal
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ConfiguracionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnLiquidacion = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -67,14 +68,24 @@ Partial Class frmPrincipal
         'BaseDeDatosToolStripMenuItem
         '
         Me.BaseDeDatosToolStripMenuItem.Name = "BaseDeDatosToolStripMenuItem"
-        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.BaseDeDatosToolStripMenuItem.Text = "&Base De Datos"
+        '
+        'btnLiquidacion
+        '
+        Me.btnLiquidacion.Location = New System.Drawing.Point(12, 163)
+        Me.btnLiquidacion.Name = "btnLiquidacion"
+        Me.btnLiquidacion.Size = New System.Drawing.Size(260, 53)
+        Me.btnLiquidacion.TabIndex = 3
+        Me.btnLiquidacion.Text = "Liquidacion"
+        Me.btnLiquidacion.UseVisualStyleBackColor = True
         '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.btnLiquidacion)
         Me.Controls.Add(Me.btnReporte)
         Me.Controls.Add(Me.btnVisita)
         Me.Controls.Add(Me.MenuStrip1)
@@ -93,4 +104,5 @@ Partial Class frmPrincipal
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ConfiguracionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BaseDeDatosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents btnLiquidacion As Button
 End Class

@@ -228,6 +228,7 @@ Partial Class frmPracticas
         Me.DTFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DTFecha.Location = New System.Drawing.Point(100, 121)
         Me.DTFecha.Name = "DTFecha"
+        Me.DTFecha.ShowUpDown = True
         Me.DTFecha.Size = New System.Drawing.Size(346, 20)
         Me.DTFecha.TabIndex = 5
         '

@@ -7,9 +7,22 @@ Public Class DB
     Private cmd As OleDbCommand
     Private da As OleDbDataAdapter
     Private ds As DataSet
-    'Private conStr As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}\Google Drive\HomeCare.accdb'", Environ("USERPROFILE"))
     Private conStr As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)
 
+    Public Enum tablas
+        prestadores
+        pacientes
+        prestaciones
+        visitas
+        modulo
+        feriados
+    End Enum
+
+    Public Enum liquidaciones
+        detalle
+        medico
+        paciente
+    End Enum
 
     Sub New()
         If My.Settings.DBPath = "" Then
@@ -36,14 +49,27 @@ Public Class DB
         End Try
     End Function
 
-    Public Enum tablas
-        prestadores
-        pacientes
-        prestaciones
-        visitas
-        modulo
-        feriados
-    End Enum
+    Friend Function liquidacion(_fecha As Date) As DataTable
+        Dim desde As String
+        Dim hasta As String
+
+        desde = String.Format("1/{0}/{1}", _fecha.Month, _fecha.Year)
+        hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+
+        Dim query = String.Format("SELECT PACIENTES.AFILIADO, PACIENTES.APELLIDO, PRESTADORES.CUIT, PRESTADORES.APELLIDO, PRESTACIONES.DESCRIPCION, MODULO.CODIGO, SUBMODULO.DESCRIPCION, PRACTICAS.HS_NORMALES, PRACTICAS.HS_FERIADO
+        From PRESTACIONES, SUBMODULO INNER Join (PRESTADORES INNER Join (PACIENTES INNER Join (MODULO INNER Join PRACTICAS On Modulo.codigo = PRACTICAS.MODULO) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO) ON PRESTADORES.CUIT = PRACTICAS.CUIT) ON SUBMODULO.CODIGO = PRACTICAS.SUB_MODULO Where PRACTICAS.FECHA_PRACTICA BETWEEN #{0}# And #{1}#", desde, hasta)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            da.Fill(ds, "PRACTICAS")
+            Return ds.Tables("PRACTICAS")
+        Catch ex As Exception
+            Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        End Try
+
+    End Function
 
     Friend Sub eliminar(_visita As Practica)
         Try

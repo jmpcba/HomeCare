@@ -22,4 +22,8 @@
         End Try
 
     End Sub
+
+    Private Sub btnLiquidacion_Click(sender As Object, e As EventArgs) Handles btnLiquidacion.Click
+        frmLiquidacion.Show()
+    End Sub
 End Class
