@@ -23,34 +23,40 @@ Partial Class frmPrestadores
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtMat = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtEspecialidad = New System.Windows.Forms.TextBox()
-        Me.txtNombre = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtApellido = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtLocalidad = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.numFijo = New System.Windows.Forms.TextBox()
+        Me.numPorcentaje = New System.Windows.Forms.TextBox()
+        Me.numferiado = New System.Windows.Forms.TextBox()
+        Me.numLunvie = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.numLunvie = New System.Windows.Forms.TextBox()
-        Me.numferiado = New System.Windows.Forms.TextBox()
-        Me.numPorcentaje = New System.Windows.Forms.TextBox()
-        Me.numFijo = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtLocalidad = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtApellido = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtNombre = New System.Windows.Forms.TextBox()
+        Me.txtEspecialidad = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtMat = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.Button2)
+        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.btnGuardar)
         Me.Panel1.Controls.Add(Me.Label12)
         Me.Panel1.Controls.Add(Me.Label11)
         Me.Panel1.Controls.Add(Me.Label10)
@@ -78,107 +84,83 @@ Partial Class frmPrestadores
         Me.Panel1.Size = New System.Drawing.Size(766, 419)
         Me.Panel1.TabIndex = 29
         '
-        'Label2
+        'Label12
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.Label2.Location = New System.Drawing.Point(3, 7)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(154, 24)
-        Me.Label2.TabIndex = 24
-        Me.Label2.Text = "PROFESIONAL"
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(543, 309)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(56, 13)
+        Me.Label12.TabIndex = 45
+        Me.Label12.Text = "Monto Fijo"
         '
-        'Label4
+        'Label11
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(7, 46)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(32, 13)
-        Me.Label4.TabIndex = 25
-        Me.Label4.Text = "CUIT"
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(384, 309)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(58, 13)
+        Me.Label11.TabIndex = 44
+        Me.Label11.Text = "Porcentaje"
         '
-        'txtMat
+        'Label10
         '
-        Me.txtMat.Location = New System.Drawing.Point(124, 46)
-        Me.txtMat.Name = "txtMat"
-        Me.txtMat.ReadOnly = True
-        Me.txtMat.Size = New System.Drawing.Size(121, 20)
-        Me.txtMat.TabIndex = 0
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(225, 309)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(47, 13)
+        Me.Label10.TabIndex = 43
+        Me.Label10.Text = "Feriados"
         '
-        'Label5
+        'Label9
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(7, 166)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(67, 13)
-        Me.Label5.TabIndex = 27
-        Me.Label5.Text = "Especialidad"
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(51, 309)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(83, 13)
+        Me.Label9.TabIndex = 42
+        Me.Label9.Text = "Lunes a Viernes"
         '
-        'txtEspecialidad
+        'numFijo
         '
-        Me.txtEspecialidad.Location = New System.Drawing.Point(124, 159)
-        Me.txtEspecialidad.Name = "txtEspecialidad"
-        Me.txtEspecialidad.ReadOnly = True
-        Me.txtEspecialidad.Size = New System.Drawing.Size(121, 20)
-        Me.txtEspecialidad.TabIndex = 3
+        Me.numFijo.Location = New System.Drawing.Point(522, 338)
+        Me.numFijo.Name = "numFijo"
+        Me.numFijo.Size = New System.Drawing.Size(121, 20)
+        Me.numFijo.TabIndex = 9
         '
-        'txtNombre
+        'numPorcentaje
         '
-        Me.txtNombre.Location = New System.Drawing.Point(124, 94)
-        Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.ReadOnly = True
-        Me.txtNombre.Size = New System.Drawing.Size(164, 20)
-        Me.txtNombre.TabIndex = 1
+        Me.numPorcentaje.Location = New System.Drawing.Point(361, 338)
+        Me.numPorcentaje.Name = "numPorcentaje"
+        Me.numPorcentaje.Size = New System.Drawing.Size(121, 20)
+        Me.numPorcentaje.TabIndex = 8
         '
-        'Label1
+        'numferiado
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(7, 97)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(44, 13)
-        Me.Label1.TabIndex = 30
-        Me.Label1.Text = "Nombre"
+        Me.numferiado.Location = New System.Drawing.Point(193, 338)
+        Me.numferiado.Name = "numferiado"
+        Me.numferiado.Size = New System.Drawing.Size(121, 20)
+        Me.numferiado.TabIndex = 7
         '
-        'Label3
+        'numLunvie
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(343, 101)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(44, 13)
-        Me.Label3.TabIndex = 31
-        Me.Label3.Text = "Apellido"
+        Me.numLunvie.Location = New System.Drawing.Point(36, 338)
+        Me.numLunvie.Name = "numLunvie"
+        Me.numLunvie.Size = New System.Drawing.Size(121, 20)
+        Me.numLunvie.TabIndex = 6
         '
-        'txtApellido
+        'Label8
         '
-        Me.txtApellido.Location = New System.Drawing.Point(411, 101)
-        Me.txtApellido.Name = "txtApellido"
-        Me.txtApellido.ReadOnly = True
-        Me.txtApellido.Size = New System.Drawing.Size(188, 20)
-        Me.txtApellido.TabIndex = 2
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(343, 159)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(53, 13)
-        Me.Label6.TabIndex = 33
-        Me.Label6.Text = "Localidad"
-        '
-        'txtLocalidad
-        '
-        Me.txtLocalidad.Location = New System.Drawing.Point(411, 156)
-        Me.txtLocalidad.Name = "txtLocalidad"
-        Me.txtLocalidad.ReadOnly = True
-        Me.txtLocalidad.Size = New System.Drawing.Size(188, 20)
-        Me.txtLocalidad.TabIndex = 4
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(7, 271)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(88, 13)
+        Me.Label8.TabIndex = 37
+        Me.Label8.Text = "Montos a Cobrar:"
         '
         'txtEmail
         '
         Me.txtEmail.Location = New System.Drawing.Point(124, 220)
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.ReadOnly = True
         Me.txtEmail.Size = New System.Drawing.Size(358, 20)
         Me.txtEmail.TabIndex = 5
         '
@@ -191,82 +173,127 @@ Partial Class frmPrestadores
         Me.Label7.TabIndex = 35
         Me.Label7.Text = "Email"
         '
-        'Label8
+        'txtLocalidad
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(7, 271)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(88, 13)
-        Me.Label8.TabIndex = 37
-        Me.Label8.Text = "Montos a Cobrar:"
+        Me.txtLocalidad.Location = New System.Drawing.Point(411, 156)
+        Me.txtLocalidad.Name = "txtLocalidad"
+        Me.txtLocalidad.Size = New System.Drawing.Size(188, 20)
+        Me.txtLocalidad.TabIndex = 4
         '
-        'numLunvie
+        'Label6
         '
-        Me.numLunvie.Location = New System.Drawing.Point(36, 352)
-        Me.numLunvie.Name = "numLunvie"
-        Me.numLunvie.ReadOnly = True
-        Me.numLunvie.Size = New System.Drawing.Size(121, 20)
-        Me.numLunvie.TabIndex = 6
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(343, 159)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(53, 13)
+        Me.Label6.TabIndex = 33
+        Me.Label6.Text = "Localidad"
         '
-        'numferiado
+        'txtApellido
         '
-        Me.numferiado.Location = New System.Drawing.Point(196, 352)
-        Me.numferiado.Name = "numferiado"
-        Me.numferiado.ReadOnly = True
-        Me.numferiado.Size = New System.Drawing.Size(121, 20)
-        Me.numferiado.TabIndex = 7
+        Me.txtApellido.Location = New System.Drawing.Point(411, 101)
+        Me.txtApellido.Name = "txtApellido"
+        Me.txtApellido.Size = New System.Drawing.Size(188, 20)
+        Me.txtApellido.TabIndex = 2
         '
-        'numPorcentaje
+        'Label3
         '
-        Me.numPorcentaje.Location = New System.Drawing.Point(361, 352)
-        Me.numPorcentaje.Name = "numPorcentaje"
-        Me.numPorcentaje.ReadOnly = True
-        Me.numPorcentaje.Size = New System.Drawing.Size(121, 20)
-        Me.numPorcentaje.TabIndex = 8
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(343, 101)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(44, 13)
+        Me.Label3.TabIndex = 31
+        Me.Label3.Text = "Apellido"
         '
-        'numFijo
+        'Label1
         '
-        Me.numFijo.Location = New System.Drawing.Point(523, 352)
-        Me.numFijo.Name = "numFijo"
-        Me.numFijo.ReadOnly = True
-        Me.numFijo.Size = New System.Drawing.Size(121, 20)
-        Me.numFijo.TabIndex = 9
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(7, 97)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(44, 13)
+        Me.Label1.TabIndex = 30
+        Me.Label1.Text = "Nombre"
         '
-        'Label9
+        'txtNombre
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(33, 318)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(83, 13)
-        Me.Label9.TabIndex = 42
-        Me.Label9.Text = "Lunes a Viernes"
+        Me.txtNombre.Location = New System.Drawing.Point(124, 94)
+        Me.txtNombre.Name = "txtNombre"
+        Me.txtNombre.Size = New System.Drawing.Size(164, 20)
+        Me.txtNombre.TabIndex = 1
         '
-        'Label10
+        'txtEspecialidad
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(200, 318)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(47, 13)
-        Me.Label10.TabIndex = 43
-        Me.Label10.Text = "Feriados"
+        Me.txtEspecialidad.Location = New System.Drawing.Point(124, 159)
+        Me.txtEspecialidad.Name = "txtEspecialidad"
+        Me.txtEspecialidad.Size = New System.Drawing.Size(121, 20)
+        Me.txtEspecialidad.TabIndex = 3
         '
-        'Label11
+        'Label5
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(358, 309)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(58, 13)
-        Me.Label11.TabIndex = 44
-        Me.Label11.Text = "Porcentaje"
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(7, 166)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(67, 13)
+        Me.Label5.TabIndex = 27
+        Me.Label5.Text = "Especialidad"
         '
-        'Label12
+        'txtMat
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(520, 309)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(56, 13)
-        Me.Label12.TabIndex = 45
-        Me.Label12.Text = "Monto Fijo"
+        Me.txtMat.Location = New System.Drawing.Point(124, 46)
+        Me.txtMat.Name = "txtMat"
+        Me.txtMat.Size = New System.Drawing.Size(121, 20)
+        Me.txtMat.TabIndex = 0
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(7, 46)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(32, 13)
+        Me.Label4.TabIndex = 25
+        Me.Label4.Text = "CUIT"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.Label2.Location = New System.Drawing.Point(3, 7)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(154, 24)
+        Me.Label2.TabIndex = 24
+        Me.Label2.Text = "PROFESIONAL"
+        '
+        'btnGuardar
+        '
+        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGuardar.Location = New System.Drawing.Point(309, 381)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
+        Me.btnGuardar.TabIndex = 46
+        Me.btnGuardar.Text = "&Guardar"
+        Me.btnGuardar.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.Location = New System.Drawing.Point(182, 381)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(106, 33)
+        Me.Button1.TabIndex = 47
+        Me.Button1.Text = "&Buscar"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button2.Location = New System.Drawing.Point(448, 381)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(106, 33)
+        Me.Button2.TabIndex = 48
+        Me.Button2.Text = "&Cerrar"
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'frmPrestadores
         '
@@ -304,4 +331,7 @@ Partial Class frmPrestadores
     Friend WithEvents Label8 As Label
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents Label7 As Label
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents btnGuardar As Button
 End Class
