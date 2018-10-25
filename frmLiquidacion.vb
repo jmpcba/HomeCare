@@ -30,9 +30,9 @@
     Private Sub restaurarCombos()
         cbPaciente.SelectedIndex = -1
         cbPrestadores.SelectedIndex = -1
-        cbPrestPac.SelectedIndex = -1
-        cbPrestPrest.SelectedIndex = -1
-        cbPacPac.SelectedIndex = -1
+        'cbPrestPac.SelectedIndex = -1
+        cbPrestadorPrestador.SelectedIndex = -1
+        'cbPacPac.SelectedIndex = -1
     End Sub
 
     Private Sub dtFecha_ValueChanged(sender As Object, e As EventArgs) Handles dtFecha.ValueChanged
@@ -169,7 +169,10 @@
 
     Private Sub cbPrestadorPrestador_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPrestadorPrestador.SelectedIndexChanged
         If cbPrestadorPrestador.SelectedIndex <> -1 Then
-
+            Dim bs = New BindingSource
+            bs.DataSource = dt
+            bs.Filter = String.Format("CUIT='{0}'", cbPrestadorPrestador.SelectedValue)
+            dgPrestador.DataSource = bs
         End If
     End Sub
 End Class
