@@ -37,6 +37,8 @@ Partial Class frmLiquidacion
         Me.dtFecha = New System.Windows.Forms.DateTimePicker()
         Me.dgDetalle = New System.Windows.Forms.DataGridView()
         Me.tabMedico = New System.Windows.Forms.TabPage()
+        Me.cbPrestadorPrestador = New System.Windows.Forms.ComboBox()
+        Me.PRESTADORESBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.btnLimpiarPrestador = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -51,8 +53,10 @@ Partial Class frmLiquidacion
         Me.dgPaciente = New System.Windows.Forms.DataGridView()
         Me.PACIENTESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PACIENTESTableAdapter()
         Me.PRESTADORESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTADORESTableAdapter()
-        Me.cbPrestadorPrestador = New System.Windows.Forms.ComboBox()
-        Me.PRESTADORESBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.cbPacientePrestador = New System.Windows.Forms.ComboBox()
+        Me.cbPacientePaciente = New System.Windows.Forms.ComboBox()
+        Me.PRESTADORESBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PACIENTESBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.tbReporte.SuspendLayout()
         Me.tabDetalle.SuspendLayout()
         CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -60,10 +64,12 @@ Partial Class frmLiquidacion
         CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgDetalle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabMedico.SuspendLayout()
+        CType(Me.PRESTADORESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgPrestador, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPaciente.SuspendLayout()
         CType(Me.dgPaciente, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PRESTADORESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PRESTADORESBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tbReporte
@@ -210,6 +216,22 @@ Partial Class frmLiquidacion
         Me.tabMedico.TabIndex = 1
         Me.tabMedico.Text = "TOTAL POR PRESTADOR"
         '
+        'cbPrestadorPrestador
+        '
+        Me.cbPrestadorPrestador.DataSource = Me.PRESTADORESBindingSource1
+        Me.cbPrestadorPrestador.DisplayMember = "APELLIDO"
+        Me.cbPrestadorPrestador.FormattingEnabled = True
+        Me.cbPrestadorPrestador.Location = New System.Drawing.Point(350, 20)
+        Me.cbPrestadorPrestador.Name = "cbPrestadorPrestador"
+        Me.cbPrestadorPrestador.Size = New System.Drawing.Size(200, 21)
+        Me.cbPrestadorPrestador.TabIndex = 15
+        Me.cbPrestadorPrestador.ValueMember = "CUIT"
+        '
+        'PRESTADORESBindingSource1
+        '
+        Me.PRESTADORESBindingSource1.DataMember = "PRESTADORES"
+        Me.PRESTADORESBindingSource1.DataSource = Me.HomeCareDataSet
+        '
         'btnLimpiarPrestador
         '
         Me.btnLimpiarPrestador.Location = New System.Drawing.Point(569, 20)
@@ -262,6 +284,8 @@ Partial Class frmLiquidacion
         'tabPaciente
         '
         Me.tabPaciente.BackColor = System.Drawing.Color.Transparent
+        Me.tabPaciente.Controls.Add(Me.cbPacientePaciente)
+        Me.tabPaciente.Controls.Add(Me.cbPacientePrestador)
         Me.tabPaciente.Controls.Add(Me.Button2)
         Me.tabPaciente.Controls.Add(Me.Label5)
         Me.tabPaciente.Controls.Add(Me.Label7)
@@ -341,21 +365,37 @@ Partial Class frmLiquidacion
         '
         Me.PRESTADORESTableAdapter.ClearBeforeFill = True
         '
-        'cbPrestadorPrestador
+        'cbPacientePrestador
         '
-        Me.cbPrestadorPrestador.DataSource = Me.PRESTADORESBindingSource1
-        Me.cbPrestadorPrestador.DisplayMember = "APELLIDO"
-        Me.cbPrestadorPrestador.FormattingEnabled = True
-        Me.cbPrestadorPrestador.Location = New System.Drawing.Point(350, 20)
-        Me.cbPrestadorPrestador.Name = "cbPrestadorPrestador"
-        Me.cbPrestadorPrestador.Size = New System.Drawing.Size(186, 21)
-        Me.cbPrestadorPrestador.TabIndex = 15
-        Me.cbPrestadorPrestador.ValueMember = "CUIT"
+        Me.cbPacientePrestador.DataSource = Me.PRESTADORESBindingSource2
+        Me.cbPacientePrestador.DisplayMember = "APELLIDO"
+        Me.cbPacientePrestador.FormattingEnabled = True
+        Me.cbPacientePrestador.Location = New System.Drawing.Point(350, 17)
+        Me.cbPacientePrestador.Name = "cbPacientePrestador"
+        Me.cbPacientePrestador.Size = New System.Drawing.Size(200, 21)
+        Me.cbPacientePrestador.TabIndex = 15
+        Me.cbPacientePrestador.ValueMember = "CUIT"
         '
-        'PRESTADORESBindingSource1
+        'cbPacientePaciente
         '
-        Me.PRESTADORESBindingSource1.DataMember = "PRESTADORES"
-        Me.PRESTADORESBindingSource1.DataSource = Me.HomeCareDataSet
+        Me.cbPacientePaciente.DataSource = Me.PACIENTESBindingSource1
+        Me.cbPacientePaciente.DisplayMember = "APELLIDO"
+        Me.cbPacientePaciente.FormattingEnabled = True
+        Me.cbPacientePaciente.Location = New System.Drawing.Point(76, 43)
+        Me.cbPacientePaciente.Name = "cbPacientePaciente"
+        Me.cbPacientePaciente.Size = New System.Drawing.Size(200, 21)
+        Me.cbPacientePaciente.TabIndex = 16
+        Me.cbPacientePaciente.ValueMember = "AFILIADO"
+        '
+        'PRESTADORESBindingSource2
+        '
+        Me.PRESTADORESBindingSource2.DataMember = "PRESTADORES"
+        Me.PRESTADORESBindingSource2.DataSource = Me.HomeCareDataSet
+        '
+        'PACIENTESBindingSource1
+        '
+        Me.PACIENTESBindingSource1.DataMember = "PACIENTES"
+        Me.PACIENTESBindingSource1.DataSource = Me.HomeCareDataSet
         '
         'frmLiquidacion
         '
@@ -375,11 +415,13 @@ Partial Class frmLiquidacion
         CType(Me.dgDetalle, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabMedico.ResumeLayout(False)
         Me.tabMedico.PerformLayout()
+        CType(Me.PRESTADORESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgPrestador, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPaciente.ResumeLayout(False)
         Me.tabPaciente.PerformLayout()
         CType(Me.dgPaciente, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PRESTADORESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PRESTADORESBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -414,4 +456,8 @@ Partial Class frmLiquidacion
     Friend WithEvents dgPaciente As DataGridView
     Friend WithEvents cbPrestadorPrestador As ComboBox
     Friend WithEvents PRESTADORESBindingSource1 As BindingSource
+    Friend WithEvents cbPacientePrestador As ComboBox
+    Friend WithEvents cbPacientePaciente As ComboBox
+    Friend WithEvents PACIENTESBindingSource1 As BindingSource
+    Friend WithEvents PRESTADORESBindingSource2 As BindingSource
 End Class

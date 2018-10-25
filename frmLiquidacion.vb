@@ -1,5 +1,8 @@
 ﻿Public Class frmLiquidacion
-    Dim dt As New DataTable
+    Dim dataTableDetalle As New DataTable
+    Dim dataTablePaciente As New DataTable
+    Dim dataTablePrestador As New DataTable
+
 
 
 
@@ -30,9 +33,9 @@
     Private Sub restaurarCombos()
         cbPaciente.SelectedIndex = -1
         cbPrestadores.SelectedIndex = -1
-        'cbPrestPac.SelectedIndex = -1
+        cbPacientePaciente.SelectedIndex = -1
+        cbPacientePrestador.SelectedIndex = -1
         cbPrestadorPrestador.SelectedIndex = -1
-        'cbPacPac.SelectedIndex = -1
     End Sub
 
     Private Sub dtFecha_ValueChanged(sender As Object, e As EventArgs) Handles dtFecha.ValueChanged
@@ -50,8 +53,8 @@
         Dim db As New DB()
         Try
             dgDetalle.DataSource = Nothing
-            dt = db.liquidacion(_fecha, DB.liquidaciones.detalle)
-            dgDetalle.DataSource = dt
+            dataTableDetalle = db.liquidacion(_fecha, DB.liquidaciones.detalle)
+            dgDetalle.DataSource = dataTableDetalle
             dgDetalle.AutoResizeColumns()
             dgDetalle.AutoResizeRows()
 
@@ -64,7 +67,7 @@
 
         If cbPaciente.SelectedIndex <> -1 Then
             Dim bs = New BindingSource
-            bs.DataSource = dt
+            bs.DataSource = dataTableDetalle
             bs.Filter = String.Format("AFILIADO='{0}'", cbPaciente.SelectedValue)
             dgDetalle.DataSource = bs
             cbPrestadores.SelectedIndex = -1
@@ -76,7 +79,7 @@
 
         If cbPrestadores.SelectedIndex <> -1 Then
             Dim bs = New BindingSource
-            bs.DataSource = dt
+            bs.DataSource = dataTableDetalle
             bs.Filter = String.Format("CUIT='{0}'", cbPrestadores.SelectedValue)
             dgDetalle.DataSource = bs
             cbPaciente.SelectedIndex = -1
@@ -90,7 +93,7 @@
         cbPrestadores.SelectedIndex = -1
 
         Dim bs = New BindingSource
-        bs.DataSource = dt
+        bs.DataSource = dataTableDetalle
         bs.Filter = Nothing
         dgDetalle.DataSource = bs
     End Sub
@@ -123,8 +126,8 @@
         Dim db As New DB()
         Try
             dgPaciente.DataSource = Nothing
-            dt = db.liquidacion(_fecha, DB.liquidaciones.paciente)
-            dgPaciente.DataSource = dt
+            dataTablePaciente = db.liquidacion(_fecha, DB.liquidaciones.paciente)
+            dgPaciente.DataSource = dataTablePaciente
             dgPaciente.AutoResizeColumns()
             dgPaciente.AutoResizeRows()
 
@@ -137,8 +140,8 @@
         Dim db As New DB()
         Try
             dgPrestador.DataSource = Nothing
-            dt = db.liquidacion(_fecha, DB.liquidaciones.medico)
-            dgPrestador.DataSource = dt
+            dataTablePrestador = db.liquidacion(_fecha, DB.liquidaciones.medico)
+            dgPrestador.DataSource = dataTablePrestador
             dgPrestador.AutoResizeColumns()
             dgPrestador.AutoResizeRows()
 
@@ -170,9 +173,29 @@
     Private Sub cbPrestadorPrestador_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPrestadorPrestador.SelectedIndexChanged
         If cbPrestadorPrestador.SelectedIndex <> -1 Then
             Dim bs = New BindingSource
-            bs.DataSource = dt
+            bs.DataSource = dataTablePrestador
             bs.Filter = String.Format("CUIT='{0}'", cbPrestadorPrestador.SelectedValue)
             dgPrestador.DataSource = bs
+        End If
+    End Sub
+
+    Private Sub cbPacientePrestador_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPacientePrestador.SelectedIndexChanged
+        If cbPacientePrestador.SelectedIndex <> -1 Then
+            Dim bs = New BindingSource
+            bs.DataSource = dataTablePaciente
+            bs.Filter = String.Format("CUIT='{0}'", cbPacientePrestador.SelectedValue)
+            dgPaciente.DataSource = bs
+            cbPacientePaciente.SelectedIndex = -1
+        End If
+    End Sub
+
+    Private Sub cbPacientePaciente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPacientePaciente.SelectedIndexChanged
+        If cbPacientePaciente.SelectedIndex <> -1 Then
+            Dim bs = New BindingSource
+            bs.DataSource = dataTablePaciente
+            bs.Filter = String.Format("AFILIADO='{0}'", cbPacientePaciente.SelectedValue)
+            dgPaciente.DataSource = bs
+            cbPacientePrestador.SelectedIndex = -1
         End If
     End Sub
 End Class
