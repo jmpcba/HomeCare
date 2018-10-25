@@ -25,3 +25,4 @@ C:\Users\jmpcb\Documents\GitHub\HomeCare\obj\Debug\HomeCare.frmReporte.resources
 C:\Users\jmpcb\Documents\GitHub\HomeCare\obj\Debug\HomeCare.frmPracticas.resources
 C:\Users\jmpcb\Documents\GitHub\HomeCare\obj\Debug\HomeCare.Resources.resources
 C:\Users\jmpcb\Documents\GitHub\HomeCare\obj\Debug\HomeCare.vbproj.GenerateResource.Cache
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\Debug\HomeCare.frmLiquidacion.resources

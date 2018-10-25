@@ -56,11 +56,39 @@ Public Class DB
         desde = String.Format("{0}/1/{1}", _fecha.Month, _fecha.Year)
         hasta = String.Format("{1}/{0}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
 
-        Dim query = String.Format("SELECT PACIENTES.AFILIADO, PACIENTES.APELLIDO AS PACIENTE, PRESTADORES.CUIT AS CUIT_PRESTADOR, PRESTADORES.APELLIDO AS APELLIDO_PRESTADOR, PRESTACIONES.DESCRIPCION AS PRESTACION, MODULO.CODIGO AS MODULO, SUBMODULO.DESCRIPCION AS SUBMODULO, PRACTICAS.FECHA_PRACTICA, PRACTICAS.HS_NORMALES AS HORAS_Lav, PRACTICAS.HS_FERIADO AS HORAS_FERIADOS
+        Dim query = String.Format("SELECT PACIENTES.AFILIADO, PACIENTES.APELLIDO AS PACIENTE, PRESTADORES.CUIT AS CUIT_PRESTADOR, PRESTADORES.APELLIDO AS APELLIDO_PRESTADOR, PRESTACIONES.DESCRIPCION AS PRESTACION, MODULO.CODIGO AS MODULO, SUBMODULO.DESCRIPCION AS SUBMODULO, PRACTICAS.FECHA_PRACTICA, PRACTICAS.HS_NORMALES AS HORAS_LaV, PRACTICAS.HS_FERIADO AS HORAS_FERIADOS
         From PRESTACIONES, SUBMODULO INNER Join (PRESTADORES INNER Join (PACIENTES INNER Join (MODULO INNER Join PRACTICAS On Modulo.codigo = PRACTICAS.MODULO) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO) ON PRESTADORES.CUIT = PRACTICAS.CUIT) ON SUBMODULO.CODIGO = PRACTICAS.SUB_MODULO Where PRACTICAS.FECHA_PRACTICA > #{0}# And PRACTICAS.FECHA_PRACTICA < #{1}#", desde, hasta)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
+
+        Try
+            da.Fill(ds, "PRACTICAS")
+            Return ds.Tables("PRACTICAS")
+        Catch ex As Exception
+            Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        End Try
+
+    End Function
+
+    Friend Function liquidacion(_fecha As Date, _liq As liquidaciones) As DataTable
+        Dim desde As String
+        Dim hasta As String
+
+        desde = String.Format("1/{0}/{1}", _fecha.Month, _fecha.Year)
+        hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+
+        cmd.CommandType = CommandType.StoredProcedure
+        If _liq = liquidaciones.detalle Then
+            cmd.CommandText = "QUERY_DETALLES"
+        ElseIf _liq = liquidaciones.medico Then
+            cmd.CommandText = "QUERY_MEDICOS"
+        ElseIf _liq = liquidaciones.paciente Then
+            cmd.CommandText = "QUERY_PACIENTES"
+        End If
+
+        cmd.Parameters.AddWithValue("DESDE", desde)
+        cmd.Parameters.AddWithValue("HASTA", hasta)
 
         Try
             da.Fill(ds, "PRACTICAS")
