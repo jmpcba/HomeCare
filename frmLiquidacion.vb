@@ -167,32 +167,9 @@
         End Try
     End Sub
 
-    Private Sub cbPrestPrest_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPrestPrest.SelectedIndexChanged
-        If cbPrestPrest.SelectedIndex <> -1 Then
-            Dim bs = New BindingSource
-            bs.DataSource = dt
-            bs.Filter = String.Format("CUIT='{0}'", cbPrestPrest.SelectedValue)
-            dgPrestador.DataSource = bs
-        End If
-    End Sub
+    Private Sub cbPrestadorPrestador_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPrestadorPrestador.SelectedIndexChanged
+        If cbPrestadorPrestador.SelectedIndex <> -1 Then
 
-    Private Sub cbPrestPac_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPrestPac.SelectedIndexChanged
-        If cbPrestPac.SelectedIndex <> -1 Then
-            Dim bs = New BindingSource
-            bs.DataSource = dt
-            bs.Filter = String.Format("CUIT='{0}'", cbPrestPac.SelectedValue)
-            dgPaciente.DataSource = bs
-            cbPacPac.SelectedIndex = -1
-        End If
-    End Sub
-
-    Private Sub cbPacPac_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPacPac.SelectedIndexChanged
-        If cbPacPac.SelectedIndex <> -1 Then
-            Dim bs = New BindingSource
-            bs.DataSource = dt
-            bs.Filter = String.Format("AFILIADO='{0}'", cbPacPac.SelectedValue)
-            dgPaciente.DataSource = bs
-            cbPrestPac.SelectedIndex = -1
         End If
     End Sub
 End Class
