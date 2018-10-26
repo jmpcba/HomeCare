@@ -36,7 +36,7 @@ Partial Class frmPracticas
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtMat = New System.Windows.Forms.TextBox()
-        Me.txtPrestador = New System.Windows.Forms.TextBox()
+        Me.txtLocalidad = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.DTFecha = New System.Windows.Forms.DateTimePicker()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -106,7 +106,7 @@ Partial Class frmPracticas
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 8
-        Me.btnCerrar.Text = "&Cerrar"
+        Me.btnCerrar.Text = "&CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = False
         '
         'StatusStrip1
@@ -151,9 +151,9 @@ Partial Class frmPracticas
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(2, 48)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(91, 13)
+        Me.Label3.Size = New System.Drawing.Size(201, 13)
         Me.Label3.TabIndex = 7
-        Me.Label3.Text = "Nombre y apellido"
+        Me.Label3.Text = "NOMBRE Y APELLIDO/ESPECIALIDAD"
         '
         'cbMedico
         '
@@ -161,9 +161,9 @@ Partial Class frmPracticas
         Me.cbMedico.DisplayMember = "APELLIDO"
         Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMedico.FormattingEnabled = True
-        Me.cbMedico.Location = New System.Drawing.Point(100, 42)
+        Me.cbMedico.Location = New System.Drawing.Point(209, 45)
         Me.cbMedico.Name = "cbMedico"
-        Me.cbMedico.Size = New System.Drawing.Size(121, 21)
+        Me.cbMedico.Size = New System.Drawing.Size(268, 21)
         Me.cbMedico.TabIndex = 1
         Me.cbMedico.ValueMember = "CUIT"
         '
@@ -198,7 +198,7 @@ Partial Class frmPracticas
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(67, 13)
         Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Especialidad"
+        Me.Label5.Text = "LOCALIDAD"
         '
         'txtMat
         '
@@ -208,13 +208,13 @@ Partial Class frmPracticas
         Me.txtMat.Size = New System.Drawing.Size(121, 20)
         Me.txtMat.TabIndex = 11
         '
-        'txtPrestador
+        'txtLocalidad
         '
-        Me.txtPrestador.Location = New System.Drawing.Point(325, 73)
-        Me.txtPrestador.Name = "txtPrestador"
-        Me.txtPrestador.ReadOnly = True
-        Me.txtPrestador.Size = New System.Drawing.Size(121, 20)
-        Me.txtPrestador.TabIndex = 12
+        Me.txtLocalidad.Location = New System.Drawing.Point(325, 73)
+        Me.txtLocalidad.Name = "txtLocalidad"
+        Me.txtLocalidad.ReadOnly = True
+        Me.txtLocalidad.Size = New System.Drawing.Size(152, 20)
+        Me.txtLocalidad.TabIndex = 12
         '
         'Label6
         '
@@ -240,18 +240,18 @@ Partial Class frmPracticas
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(4, 106)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(57, 13)
+        Me.Label7.Size = New System.Drawing.Size(76, 13)
         Me.Label7.TabIndex = 16
-        Me.Label7.Text = "Prestacion"
+        Me.Label7.Text = "PRESTACION"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(4, 130)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(37, 13)
+        Me.Label8.Size = New System.Drawing.Size(42, 13)
         Me.Label8.TabIndex = 17
-        Me.Label8.Text = "Fecha"
+        Me.Label8.Text = "FECHA"
         '
         'CBPrestacion
         '
@@ -287,15 +287,15 @@ Partial Class frmPracticas
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
         Me.btnGuardar.TabIndex = 7
-        Me.btnGuardar.Text = "&Guardar"
+        Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'txtBeneficio
         '
-        Me.txtBeneficio.Location = New System.Drawing.Point(338, 102)
+        Me.txtBeneficio.Location = New System.Drawing.Point(311, 77)
         Me.txtBeneficio.Name = "txtBeneficio"
         Me.txtBeneficio.ReadOnly = True
-        Me.txtBeneficio.Size = New System.Drawing.Size(121, 20)
+        Me.txtBeneficio.Size = New System.Drawing.Size(149, 20)
         Me.txtBeneficio.TabIndex = 26
         '
         'txtAfiliado
@@ -309,20 +309,20 @@ Partial Class frmPracticas
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(262, 106)
+        Me.Label9.Location = New System.Drawing.Point(227, 79)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(51, 13)
+        Me.Label9.Size = New System.Drawing.Size(78, 13)
         Me.Label9.TabIndex = 24
-        Me.Label9.Text = "Beneficio"
+        Me.Label9.Text = "OBRA SOCIAL"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(3, 80)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(56, 13)
+        Me.Label10.Size = New System.Drawing.Size(70, 13)
         Me.Label10.TabIndex = 23
-        Me.Label10.Text = "N° Afiliado"
+        Me.Label10.Text = "N° AFILIADO"
         '
         'cbPaciente
         '
@@ -330,9 +330,9 @@ Partial Class frmPracticas
         Me.cbPaciente.DisplayMember = "APELLIDO"
         Me.cbPaciente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPaciente.FormattingEnabled = True
-        Me.cbPaciente.Location = New System.Drawing.Point(113, 66)
+        Me.cbPaciente.Location = New System.Drawing.Point(127, 42)
         Me.cbPaciente.Name = "cbPaciente"
-        Me.cbPaciente.Size = New System.Drawing.Size(121, 21)
+        Me.cbPaciente.Size = New System.Drawing.Size(267, 21)
         Me.cbPaciente.TabIndex = 0
         Me.cbPaciente.ValueMember = "AFILIADO"
         '
@@ -351,9 +351,9 @@ Partial Class frmPracticas
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(15, 67)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(91, 13)
+        Me.Label11.Size = New System.Drawing.Size(119, 13)
         Me.Label11.TabIndex = 21
-        Me.Label11.Text = "Nombre y apellido"
+        Me.Label11.Text = "NOMBRE Y APELLIDO"
         '
         'PRESTACIONESTableAdapter
         '
@@ -363,6 +363,9 @@ Partial Class frmPracticas
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.cbPaciente)
+        Me.Panel1.Controls.Add(Me.txtBeneficio)
+        Me.Panel1.Controls.Add(Me.Label9)
         Me.Panel1.Location = New System.Drawing.Point(12, 24)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(482, 108)
@@ -377,7 +380,7 @@ Partial Class frmPracticas
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.txtMat)
-        Me.Panel2.Controls.Add(Me.txtPrestador)
+        Me.Panel2.Controls.Add(Me.txtLocalidad)
         Me.Panel2.Location = New System.Drawing.Point(12, 138)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(482, 108)
@@ -407,18 +410,18 @@ Partial Class frmPracticas
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(1, 193)
+        Me.Label15.Location = New System.Drawing.Point(3, 167)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(78, 13)
+        Me.Label15.Size = New System.Drawing.Size(98, 13)
         Me.Label15.TabIndex = 24
-        Me.Label15.Text = "Observaciones"
+        Me.Label15.Text = "OBSERVACIONES"
         '
         'txtObservaciones
         '
-        Me.txtObservaciones.Location = New System.Drawing.Point(100, 193)
+        Me.txtObservaciones.Location = New System.Drawing.Point(33, 193)
         Me.txtObservaciones.Multiline = True
         Me.txtObservaciones.Name = "txtObservaciones"
-        Me.txtObservaciones.Size = New System.Drawing.Size(346, 117)
+        Me.txtObservaciones.Size = New System.Drawing.Size(413, 117)
         Me.txtObservaciones.TabIndex = 5
         '
         'cbSubModulo
@@ -443,9 +446,9 @@ Partial Class frmPracticas
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(3, 75)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(64, 13)
+        Me.Label13.Size = New System.Drawing.Size(79, 13)
         Me.Label13.TabIndex = 21
-        Me.Label13.Text = "Sub-Modulo"
+        Me.Label13.Text = "SUB-MODULO"
         '
         'cbModulo
         '
@@ -469,9 +472,9 @@ Partial Class frmPracticas
         Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(3, 44)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(42, 13)
+        Me.Label12.Size = New System.Drawing.Size(54, 13)
         Me.Label12.TabIndex = 19
-        Me.Label12.Text = "Modulo"
+        Me.Label12.Text = "MODULO"
         '
         'PACIENTESTableAdapter
         '
@@ -515,11 +518,11 @@ Partial Class frmPracticas
         '
         'btnLimpiarGrilla
         '
-        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(368, 146)
+        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(375, 227)
         Me.btnLimpiarGrilla.Name = "btnLimpiarGrilla"
         Me.btnLimpiarGrilla.Size = New System.Drawing.Size(75, 23)
         Me.btnLimpiarGrilla.TabIndex = 15
-        Me.btnLimpiarGrilla.Text = "&Limpiar"
+        Me.btnLimpiarGrilla.Text = "&LIMPIAR"
         Me.btnLimpiarGrilla.UseVisualStyleBackColor = True
         '
         'Label18
@@ -528,9 +531,9 @@ Partial Class frmPracticas
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(364, 7)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(111, 24)
+        Me.Label18.Size = New System.Drawing.Size(144, 24)
         Me.Label18.TabIndex = 19
-        Me.Label18.Text = "Total Horas:"
+        Me.Label18.Text = "TOTAL HORAS"
         '
         'Label19
         '
@@ -538,9 +541,9 @@ Partial Class frmPracticas
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.Location = New System.Drawing.Point(364, 74)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(114, 24)
+        Me.Label19.Size = New System.Drawing.Size(154, 24)
         Me.Label19.TabIndex = 20
-        Me.Label19.Text = "Monto Total:"
+        Me.Label19.Text = "MONTO TOTAL:"
         '
         'lblHoras
         '
@@ -578,7 +581,7 @@ Partial Class frmPracticas
         Me.Panel4.Controls.Add(Me.dgFechas)
         Me.Panel4.Location = New System.Drawing.Point(513, 24)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(482, 562)
+        Me.Panel4.Size = New System.Drawing.Size(526, 562)
         Me.Panel4.TabIndex = 30
         '
         'Label14
@@ -588,9 +591,9 @@ Partial Class frmPracticas
         Me.Label14.ForeColor = System.Drawing.Color.Red
         Me.Label14.Location = New System.Drawing.Point(3, 7)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(202, 24)
+        Me.Label14.Size = New System.Drawing.Size(214, 24)
         Me.Label14.TabIndex = 23
-        Me.Label14.Text = "PRACTICAS/HORAS"
+        Me.Label14.Text = "PRACTICAS / HORAS"
         '
         'frmPracticas
         '
@@ -601,10 +604,7 @@ Partial Class frmPracticas
         Me.ClientSize = New System.Drawing.Size(1051, 660)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
-        Me.Controls.Add(Me.txtBeneficio)
         Me.Controls.Add(Me.txtAfiliado)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.cbPaciente)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.btnCerrar)
@@ -649,7 +649,7 @@ Partial Class frmPracticas
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents txtMat As TextBox
-    Friend WithEvents txtPrestador As TextBox
+    Friend WithEvents txtLocalidad As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents DTFecha As DateTimePicker
     Friend WithEvents Label7 As Label

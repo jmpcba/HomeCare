@@ -27,6 +27,7 @@ Partial Class frmPrincipal
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ConfiguracionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnPrestadores = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -36,7 +37,7 @@ Partial Class frmPrincipal
         Me.btnVisita.Name = "btnVisita"
         Me.btnVisita.Size = New System.Drawing.Size(260, 53)
         Me.btnVisita.TabIndex = 0
-        Me.btnVisita.Text = "Cargar Visita"
+        Me.btnVisita.Text = "Cargar Practicas"
         Me.btnVisita.UseVisualStyleBackColor = True
         '
         'btnReporte
@@ -45,7 +46,7 @@ Partial Class frmPrincipal
         Me.btnReporte.Name = "btnReporte"
         Me.btnReporte.Size = New System.Drawing.Size(260, 53)
         Me.btnReporte.TabIndex = 1
-        Me.btnReporte.Text = "Historial De Visitas"
+        Me.btnReporte.Text = "Historial de Practicas"
         Me.btnReporte.UseVisualStyleBackColor = True
         '
         'MenuStrip1
@@ -67,14 +68,24 @@ Partial Class frmPrincipal
         'BaseDeDatosToolStripMenuItem
         '
         Me.BaseDeDatosToolStripMenuItem.Name = "BaseDeDatosToolStripMenuItem"
-        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.BaseDeDatosToolStripMenuItem.Text = "&Base De Datos"
+        '
+        'btnPrestadores
+        '
+        Me.btnPrestadores.Location = New System.Drawing.Point(12, 163)
+        Me.btnPrestadores.Name = "btnPrestadores"
+        Me.btnPrestadores.Size = New System.Drawing.Size(260, 53)
+        Me.btnPrestadores.TabIndex = 2
+        Me.btnPrestadores.Text = "Administrar Prestadores"
+        Me.btnPrestadores.UseVisualStyleBackColor = True
         '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Controls.Add(Me.btnPrestadores)
         Me.Controls.Add(Me.btnReporte)
         Me.Controls.Add(Me.btnVisita)
         Me.Controls.Add(Me.MenuStrip1)
@@ -93,4 +104,5 @@ Partial Class frmPrincipal
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ConfiguracionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BaseDeDatosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents btnPrestadores As Button
 End Class
