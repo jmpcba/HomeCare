@@ -198,4 +198,23 @@
             cbPacientePrestador.SelectedIndex = -1
         End If
     End Sub
+
+    Private Sub btnLimpiarPrestador_Click(sender As Object, e As EventArgs) Handles btnLimpiarPrestador.Click
+        cbPrestadorPrestador.SelectedIndex = -1
+
+        Dim bs = New BindingSource
+        bs.DataSource = dataTablePrestador
+        bs.Filter = Nothing
+        dgPrestador.DataSource = bs
+    End Sub
+
+    Private Sub btnPacienteLimpiar_Click(sender As Object, e As EventArgs) Handles btnPacienteLimpiar.Click
+        cbPacientePaciente.SelectedIndex = -1
+        cbPacientePrestador.SelectedIndex = -1
+
+        Dim bs = New BindingSource
+        bs.DataSource = dataTablePaciente
+        bs.Filter = Nothing
+        dgPaciente.DataSource = bs
+    End Sub
 End Class

@@ -37,7 +37,7 @@ Partial Class frmPrincipal
         Me.btnVisita.Name = "btnVisita"
         Me.btnVisita.Size = New System.Drawing.Size(260, 53)
         Me.btnVisita.TabIndex = 0
-        Me.btnVisita.Text = "Cargar Visita"
+        Me.btnVisita.Text = "Cargar Practica"
         Me.btnVisita.UseVisualStyleBackColor = True
         '
         'btnReporte

@@ -353,4 +353,12 @@ Public Class frmPracticas
         End If
 
     End Sub
+
+    Private Sub Label14_Click(sender As Object, e As EventArgs) Handles Label14.Click
+
+    End Sub
+
+    Private Sub lblMes_Click(sender As Object, e As EventArgs) Handles lblMes.Click
+
+    End Sub
 End Class

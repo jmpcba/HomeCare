@@ -45,7 +45,11 @@ Partial Class frmLiquidacion
         Me.dtPrestador = New System.Windows.Forms.DateTimePicker()
         Me.dgPrestador = New System.Windows.Forms.DataGridView()
         Me.tabPaciente = New System.Windows.Forms.TabPage()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.cbPacientePaciente = New System.Windows.Forms.ComboBox()
+        Me.PACIENTESBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.cbPacientePrestador = New System.Windows.Forms.ComboBox()
+        Me.PRESTADORESBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.btnPacienteLimpiar = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -53,10 +57,6 @@ Partial Class frmLiquidacion
         Me.dgPaciente = New System.Windows.Forms.DataGridView()
         Me.PACIENTESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PACIENTESTableAdapter()
         Me.PRESTADORESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTADORESTableAdapter()
-        Me.cbPacientePrestador = New System.Windows.Forms.ComboBox()
-        Me.cbPacientePaciente = New System.Windows.Forms.ComboBox()
-        Me.PRESTADORESBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PACIENTESBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.tbReporte.SuspendLayout()
         Me.tabDetalle.SuspendLayout()
         CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -67,9 +67,9 @@ Partial Class frmLiquidacion
         CType(Me.PRESTADORESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgPrestador, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPaciente.SuspendLayout()
-        CType(Me.dgPaciente, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PRESTADORESBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PRESTADORESBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgPaciente, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tbReporte
@@ -107,7 +107,7 @@ Partial Class frmLiquidacion
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(570, 4)
+        Me.Button1.Location = New System.Drawing.Point(570, 13)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(135, 23)
         Me.Button1.TabIndex = 7
@@ -117,7 +117,7 @@ Partial Class frmLiquidacion
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(292, 7)
+        Me.Label3.Location = New System.Drawing.Point(292, 16)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(70, 17)
         Me.Label3.TabIndex = 6
@@ -128,7 +128,7 @@ Partial Class frmLiquidacion
         Me.cbPrestadores.DataSource = Me.PRESTADORESBindingSource
         Me.cbPrestadores.DisplayMember = "APELLIDO"
         Me.cbPrestadores.FormattingEnabled = True
-        Me.cbPrestadores.Location = New System.Drawing.Point(363, 4)
+        Me.cbPrestadores.Location = New System.Drawing.Point(363, 12)
         Me.cbPrestadores.Name = "cbPrestadores"
         Me.cbPrestadores.Size = New System.Drawing.Size(200, 24)
         Me.cbPrestadores.TabIndex = 5
@@ -147,18 +147,18 @@ Partial Class frmLiquidacion
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 40)
+        Me.Label2.Location = New System.Drawing.Point(6, 49)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 17)
+        Me.Label2.Size = New System.Drawing.Size(54, 17)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Paciente"
+        Me.Label2.Text = "Afiliado"
         '
         'cbPaciente
         '
         Me.cbPaciente.DataSource = Me.PACIENTESBindingSource
         Me.cbPaciente.DisplayMember = "APELLIDO"
         Me.cbPaciente.FormattingEnabled = True
-        Me.cbPaciente.Location = New System.Drawing.Point(77, 37)
+        Me.cbPaciente.Location = New System.Drawing.Point(77, 45)
         Me.cbPaciente.Name = "cbPaciente"
         Me.cbPaciente.Size = New System.Drawing.Size(200, 24)
         Me.cbPaciente.TabIndex = 3
@@ -172,7 +172,7 @@ Partial Class frmLiquidacion
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(7, 7)
+        Me.Label1.Location = New System.Drawing.Point(7, 16)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(34, 17)
         Me.Label1.TabIndex = 2
@@ -181,7 +181,7 @@ Partial Class frmLiquidacion
         'dtFecha
         '
         Me.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtFecha.Location = New System.Drawing.Point(77, 7)
+        Me.dtFecha.Location = New System.Drawing.Point(77, 13)
         Me.dtFecha.Name = "dtFecha"
         Me.dtFecha.Size = New System.Drawing.Size(200, 23)
         Me.dtFecha.TabIndex = 1
@@ -220,10 +220,11 @@ Partial Class frmLiquidacion
         '
         Me.cbPrestadorPrestador.DataSource = Me.PRESTADORESBindingSource1
         Me.cbPrestadorPrestador.DisplayMember = "APELLIDO"
+        Me.cbPrestadorPrestador.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPrestadorPrestador.FormattingEnabled = True
-        Me.cbPrestadorPrestador.Location = New System.Drawing.Point(350, 20)
+        Me.cbPrestadorPrestador.Location = New System.Drawing.Point(368, 12)
         Me.cbPrestadorPrestador.Name = "cbPrestadorPrestador"
-        Me.cbPrestadorPrestador.Size = New System.Drawing.Size(200, 21)
+        Me.cbPrestadorPrestador.Size = New System.Drawing.Size(200, 24)
         Me.cbPrestadorPrestador.TabIndex = 15
         Me.cbPrestadorPrestador.ValueMember = "CUIT"
         '
@@ -234,7 +235,8 @@ Partial Class frmLiquidacion
         '
         'btnLimpiarPrestador
         '
-        Me.btnLimpiarPrestador.Location = New System.Drawing.Point(569, 20)
+        Me.btnLimpiarPrestador.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLimpiarPrestador.Location = New System.Drawing.Point(584, 13)
         Me.btnLimpiarPrestador.Name = "btnLimpiarPrestador"
         Me.btnLimpiarPrestador.Size = New System.Drawing.Size(135, 23)
         Me.btnLimpiarPrestador.TabIndex = 14
@@ -244,27 +246,30 @@ Partial Class frmLiquidacion
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(291, 23)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(291, 16)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(52, 13)
+        Me.Label4.Size = New System.Drawing.Size(67, 16)
         Me.Label4.TabIndex = 13
         Me.Label4.Text = "Prestador"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 23)
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(7, 16)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(27, 13)
+        Me.Label6.Size = New System.Drawing.Size(34, 16)
         Me.Label6.TabIndex = 9
         Me.Label6.Text = "Mes"
         '
         'dtPrestador
         '
+        Me.dtPrestador.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtPrestador.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtPrestador.Location = New System.Drawing.Point(76, 23)
+        Me.dtPrestador.Location = New System.Drawing.Point(76, 13)
         Me.dtPrestador.Name = "dtPrestador"
-        Me.dtPrestador.Size = New System.Drawing.Size(200, 20)
+        Me.dtPrestador.Size = New System.Drawing.Size(200, 22)
         Me.dtPrestador.TabIndex = 8
         '
         'dgPrestador
@@ -286,7 +291,7 @@ Partial Class frmLiquidacion
         Me.tabPaciente.BackColor = System.Drawing.Color.Transparent
         Me.tabPaciente.Controls.Add(Me.cbPacientePaciente)
         Me.tabPaciente.Controls.Add(Me.cbPacientePrestador)
-        Me.tabPaciente.Controls.Add(Me.Button2)
+        Me.tabPaciente.Controls.Add(Me.btnPacienteLimpiar)
         Me.tabPaciente.Controls.Add(Me.Label5)
         Me.tabPaciente.Controls.Add(Me.Label7)
         Me.tabPaciente.Controls.Add(Me.Label8)
@@ -297,50 +302,89 @@ Partial Class frmLiquidacion
         Me.tabPaciente.Padding = New System.Windows.Forms.Padding(3)
         Me.tabPaciente.Size = New System.Drawing.Size(1147, 727)
         Me.tabPaciente.TabIndex = 2
-        Me.tabPaciente.Text = "TOTAL POR PACIENTE"
+        Me.tabPaciente.Text = "TOTAL POR AFILIADO"
         '
-        'Button2
+        'cbPacientePaciente
         '
-        Me.Button2.Location = New System.Drawing.Point(569, 14)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(135, 23)
-        Me.Button2.TabIndex = 14
-        Me.Button2.Text = "&Limpiar Filtros"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.cbPacientePaciente.DataSource = Me.PACIENTESBindingSource1
+        Me.cbPacientePaciente.DisplayMember = "APELLIDO"
+        Me.cbPacientePaciente.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbPacientePaciente.FormattingEnabled = True
+        Me.cbPacientePaciente.Location = New System.Drawing.Point(76, 43)
+        Me.cbPacientePaciente.Name = "cbPacientePaciente"
+        Me.cbPacientePaciente.Size = New System.Drawing.Size(200, 24)
+        Me.cbPacientePaciente.TabIndex = 16
+        Me.cbPacientePaciente.ValueMember = "AFILIADO"
+        '
+        'PACIENTESBindingSource1
+        '
+        Me.PACIENTESBindingSource1.DataMember = "PACIENTES"
+        Me.PACIENTESBindingSource1.DataSource = Me.HomeCareDataSet
+        '
+        'cbPacientePrestador
+        '
+        Me.cbPacientePrestador.DataSource = Me.PRESTADORESBindingSource2
+        Me.cbPacientePrestador.DisplayMember = "APELLIDO"
+        Me.cbPacientePrestador.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbPacientePrestador.FormattingEnabled = True
+        Me.cbPacientePrestador.Location = New System.Drawing.Point(366, 12)
+        Me.cbPacientePrestador.Name = "cbPacientePrestador"
+        Me.cbPacientePrestador.Size = New System.Drawing.Size(200, 24)
+        Me.cbPacientePrestador.TabIndex = 15
+        Me.cbPacientePrestador.ValueMember = "CUIT"
+        '
+        'PRESTADORESBindingSource2
+        '
+        Me.PRESTADORESBindingSource2.DataMember = "PRESTADORES"
+        Me.PRESTADORESBindingSource2.DataSource = Me.HomeCareDataSet
+        '
+        'btnPacienteLimpiar
+        '
+        Me.btnPacienteLimpiar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPacienteLimpiar.Location = New System.Drawing.Point(591, 13)
+        Me.btnPacienteLimpiar.Name = "btnPacienteLimpiar"
+        Me.btnPacienteLimpiar.Size = New System.Drawing.Size(135, 23)
+        Me.btnPacienteLimpiar.TabIndex = 14
+        Me.btnPacienteLimpiar.Text = "&Limpiar Filtros"
+        Me.btnPacienteLimpiar.UseVisualStyleBackColor = True
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(291, 17)
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(291, 16)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(52, 13)
+        Me.Label5.Size = New System.Drawing.Size(67, 16)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "Prestador"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(5, 50)
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(5, 47)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(49, 13)
+        Me.Label7.Size = New System.Drawing.Size(53, 16)
         Me.Label7.TabIndex = 11
-        Me.Label7.Text = "Paciente"
+        Me.Label7.Text = "Afiliado"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 17)
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(6, 16)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(27, 13)
+        Me.Label8.Size = New System.Drawing.Size(34, 16)
         Me.Label8.TabIndex = 9
         Me.Label8.Text = "Mes"
         '
         'dtPaciente
         '
+        Me.dtPaciente.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtPaciente.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtPaciente.Location = New System.Drawing.Point(76, 17)
+        Me.dtPaciente.Location = New System.Drawing.Point(76, 13)
         Me.dtPaciente.Name = "dtPaciente"
-        Me.dtPaciente.Size = New System.Drawing.Size(200, 20)
+        Me.dtPaciente.Size = New System.Drawing.Size(200, 22)
         Me.dtPaciente.TabIndex = 8
         '
         'dgPaciente
@@ -365,38 +409,6 @@ Partial Class frmLiquidacion
         '
         Me.PRESTADORESTableAdapter.ClearBeforeFill = True
         '
-        'cbPacientePrestador
-        '
-        Me.cbPacientePrestador.DataSource = Me.PRESTADORESBindingSource2
-        Me.cbPacientePrestador.DisplayMember = "APELLIDO"
-        Me.cbPacientePrestador.FormattingEnabled = True
-        Me.cbPacientePrestador.Location = New System.Drawing.Point(350, 17)
-        Me.cbPacientePrestador.Name = "cbPacientePrestador"
-        Me.cbPacientePrestador.Size = New System.Drawing.Size(200, 21)
-        Me.cbPacientePrestador.TabIndex = 15
-        Me.cbPacientePrestador.ValueMember = "CUIT"
-        '
-        'cbPacientePaciente
-        '
-        Me.cbPacientePaciente.DataSource = Me.PACIENTESBindingSource1
-        Me.cbPacientePaciente.DisplayMember = "APELLIDO"
-        Me.cbPacientePaciente.FormattingEnabled = True
-        Me.cbPacientePaciente.Location = New System.Drawing.Point(76, 43)
-        Me.cbPacientePaciente.Name = "cbPacientePaciente"
-        Me.cbPacientePaciente.Size = New System.Drawing.Size(200, 21)
-        Me.cbPacientePaciente.TabIndex = 16
-        Me.cbPacientePaciente.ValueMember = "AFILIADO"
-        '
-        'PRESTADORESBindingSource2
-        '
-        Me.PRESTADORESBindingSource2.DataMember = "PRESTADORES"
-        Me.PRESTADORESBindingSource2.DataSource = Me.HomeCareDataSet
-        '
-        'PACIENTESBindingSource1
-        '
-        Me.PACIENTESBindingSource1.DataMember = "PACIENTES"
-        Me.PACIENTESBindingSource1.DataSource = Me.HomeCareDataSet
-        '
         'frmLiquidacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -419,9 +431,9 @@ Partial Class frmLiquidacion
         CType(Me.dgPrestador, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPaciente.ResumeLayout(False)
         Me.tabPaciente.PerformLayout()
-        CType(Me.dgPaciente, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PRESTADORESBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PRESTADORESBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgPaciente, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -448,7 +460,7 @@ Partial Class frmLiquidacion
     Friend WithEvents Label6 As Label
     Friend WithEvents dtPrestador As DateTimePicker
     Friend WithEvents dgPrestador As DataGridView
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnPacienteLimpiar As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
