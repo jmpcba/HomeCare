@@ -23,8 +23,8 @@ Partial Class frmPacientes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.txtApellido = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -41,8 +41,8 @@ Partial Class frmPacientes
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.Button2)
-        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.btnCerrar)
+        Me.Panel1.Controls.Add(Me.btnBuscar)
         Me.Panel1.Controls.Add(Me.btnGuardar)
         Me.Panel1.Controls.Add(Me.txtApellido)
         Me.Panel1.Controls.Add(Me.Label3)
@@ -58,26 +58,26 @@ Partial Class frmPacientes
         Me.Panel1.Size = New System.Drawing.Size(766, 419)
         Me.Panel1.TabIndex = 30
         '
-        'Button2
+        'btnCerrar
         '
-        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button2.Location = New System.Drawing.Point(424, 354)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(106, 33)
-        Me.Button2.TabIndex = 48
-        Me.Button2.Text = "&CERRAR"
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnCerrar.Location = New System.Drawing.Point(424, 354)
+        Me.btnCerrar.Name = "btnCerrar"
+        Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
+        Me.btnCerrar.TabIndex = 6
+        Me.btnCerrar.Text = "&CERRAR"
+        Me.btnCerrar.UseVisualStyleBackColor = False
         '
-        'Button1
+        'btnBuscar
         '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(182, 354)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(106, 33)
-        Me.Button1.TabIndex = 47
-        Me.Button1.Text = "&BUSCAR"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnBuscar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBuscar.Location = New System.Drawing.Point(182, 354)
+        Me.btnBuscar.Name = "btnBuscar"
+        Me.btnBuscar.Size = New System.Drawing.Size(106, 33)
+        Me.btnBuscar.TabIndex = 4
+        Me.btnBuscar.Text = "&BUSCAR"
+        Me.btnBuscar.UseVisualStyleBackColor = True
         '
         'btnGuardar
         '
@@ -85,7 +85,7 @@ Partial Class frmPacientes
         Me.btnGuardar.Location = New System.Drawing.Point(296, 354)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
-        Me.btnGuardar.TabIndex = 46
+        Me.btnGuardar.TabIndex = 5
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
@@ -179,8 +179,8 @@ Partial Class frmPacientes
     End Sub
 
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnCerrar As Button
+    Friend WithEvents btnBuscar As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents txtApellido As TextBox
     Friend WithEvents Label3 As Label

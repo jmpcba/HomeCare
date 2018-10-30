@@ -85,10 +85,46 @@
     <Compile Include="code\subModulo.vb" />
     <Compile Include="code\Usuario.vb" />
     <Compile Include="code\utils.vb" />
+    <Compile Include="frmCierreLiq.Designer.vb">
+      <DependentUpon>frmCierreLiq.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCierreLiq.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFeriados.Designer.vb">
+      <DependentUpon>FrmFeriados.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFeriados.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInformes.Designer.vb">
+      <DependentUpon>frmInformes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInformes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModulo.Designer.vb">
+      <DependentUpon>frmModulo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmModulo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNvaLiq.Designer.vb">
+      <DependentUpon>frmNvaLiq.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNvaLiq.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPacientes.Designer.vb">
       <DependentUpon>frmPacientes.vb</DependentUpon>
     </Compile>
     <Compile Include="frmPacientes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrestacion.Designer.vb">
+      <DependentUpon>frmPrestacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrestacion.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPrestadores.Designer.vb">
@@ -107,6 +143,18 @@
       <DependentUpon>frmReporte.vb</DependentUpon>
     </Compile>
     <Compile Include="frmReporte.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSubMod.Designer.vb">
+      <DependentUpon>frmSubMod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSubMod.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVerificar.Designer.vb">
+      <DependentUpon>frmVerificar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmVerificar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HomeCareDataSet.Designer.vb">
@@ -138,6 +186,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmModulo.resx">
+      <DependentUpon>frmModulo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPacientes.resx">
       <DependentUpon>frmPacientes.vb</DependentUpon>
     </EmbeddedResource>
