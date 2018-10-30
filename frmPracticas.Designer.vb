@@ -232,6 +232,7 @@ Partial Class frmPracticas
         Me.DTFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DTFecha.Location = New System.Drawing.Point(100, 130)
         Me.DTFecha.Name = "DTFecha"
+        Me.DTFecha.ShowUpDown = True
         Me.DTFecha.Size = New System.Drawing.Size(346, 20)
         Me.DTFecha.TabIndex = 5
         '
@@ -510,11 +511,13 @@ Partial Class frmPracticas
         'lblMes
         '
         Me.lblMes.AutoSize = True
-        Me.lblMes.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMes.Location = New System.Drawing.Point(69, 7)
+        Me.lblMes.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMes.ForeColor = System.Drawing.Color.Red
+        Me.lblMes.Location = New System.Drawing.Point(91, 7)
         Me.lblMes.Name = "lblMes"
-        Me.lblMes.Size = New System.Drawing.Size(0, 24)
+        Me.lblMes.Size = New System.Drawing.Size(54, 24)
         Me.lblMes.TabIndex = 14
+        Me.lblMes.Text = "MES"
         '
         'btnLimpiarGrilla
         '
@@ -572,12 +575,12 @@ Partial Class frmPracticas
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel4.Controls.Add(Me.Label14)
+        Me.Panel4.Controls.Add(Me.lblMes)
         Me.Panel4.Controls.Add(Me.lblMonto)
         Me.Panel4.Controls.Add(Me.lblHoras)
         Me.Panel4.Controls.Add(Me.Label19)
         Me.Panel4.Controls.Add(Me.Label18)
         Me.Panel4.Controls.Add(Me.btnLimpiarGrilla)
-        Me.Panel4.Controls.Add(Me.lblMes)
         Me.Panel4.Controls.Add(Me.dgFechas)
         Me.Panel4.Location = New System.Drawing.Point(513, 24)
         Me.Panel4.Name = "Panel4"
@@ -602,7 +605,6 @@ Partial Class frmPracticas
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(1051, 660)
-        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.txtAfiliado)
         Me.Controls.Add(Me.Label11)
@@ -612,6 +614,7 @@ Partial Class frmPracticas
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel4)
         Me.Name = "frmPracticas"
         Me.Text = "Ingresar Visitas Paciente"
         Me.StatusStrip1.ResumeLayout(False)

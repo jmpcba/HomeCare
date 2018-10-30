@@ -7,9 +7,22 @@ Public Class DB
     Private cmd As OleDbCommand
     Private da As OleDbDataAdapter
     Private ds As DataSet
-    'Private conStr As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}\Google Drive\HomeCare.accdb'", Environ("USERPROFILE"))
     Private conStr As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)
 
+    Public Enum tablas
+        prestadores
+        pacientes
+        prestaciones
+        visitas
+        modulo
+        feriados
+    End Enum
+
+    Public Enum liquidaciones
+        detalle
+        medico
+        paciente
+    End Enum
 
     Sub New()
         If My.Settings.DBPath = "" Then
@@ -36,14 +49,55 @@ Public Class DB
         End Try
     End Function
 
-    Public Enum tablas
-        prestadores
-        pacientes
-        prestaciones
-        visitas
-        modulo
-        feriados
-    End Enum
+    Friend Function liquidacion(_fecha As Date) As DataTable
+        Dim desde As String
+        Dim hasta As String
+
+        desde = String.Format("{0}/1/{1}", _fecha.Month, _fecha.Year)
+        hasta = String.Format("{1}/{0}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+
+        Dim query = String.Format("SELECT PACIENTES.AFILIADO, PACIENTES.APELLIDO AS PACIENTE, PRESTADORES.CUIT AS CUIT_PRESTADOR, PRESTADORES.APELLIDO AS APELLIDO_PRESTADOR, PRESTACIONES.DESCRIPCION AS PRESTACION, MODULO.CODIGO AS MODULO, SUBMODULO.DESCRIPCION AS SUBMODULO, PRACTICAS.FECHA_PRACTICA, PRACTICAS.HS_NORMALES AS HORAS_LaV, PRACTICAS.HS_FERIADO AS HORAS_FERIADOS
+        From PRESTACIONES, SUBMODULO INNER Join (PRESTADORES INNER Join (PACIENTES INNER Join (MODULO INNER Join PRACTICAS On Modulo.codigo = PRACTICAS.MODULO) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO) ON PRESTADORES.CUIT = PRACTICAS.CUIT) ON SUBMODULO.CODIGO = PRACTICAS.SUB_MODULO Where PRACTICAS.FECHA_PRACTICA > #{0}# And PRACTICAS.FECHA_PRACTICA < #{1}#", desde, hasta)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            da.Fill(ds, "PRACTICAS")
+            Return ds.Tables("PRACTICAS")
+        Catch ex As Exception
+            Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        End Try
+
+    End Function
+
+    Friend Function liquidacion(_fecha As Date, _liq As liquidaciones) As DataTable
+        Dim desde As String
+        Dim hasta As String
+
+        desde = String.Format("1/{0}/{1}", _fecha.Month, _fecha.Year)
+        hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+
+        cmd.CommandType = CommandType.StoredProcedure
+        If _liq = liquidaciones.detalle Then
+            cmd.CommandText = "QUERY_DETALLES"
+        ElseIf _liq = liquidaciones.medico Then
+            cmd.CommandText = "QUERY_MEDICOS"
+        ElseIf _liq = liquidaciones.paciente Then
+            cmd.CommandText = "QUERY_PACIENTES"
+        End If
+
+        cmd.Parameters.AddWithValue("DESDE", desde)
+        cmd.Parameters.AddWithValue("HASTA", hasta)
+
+        Try
+            da.Fill(ds, "PRACTICAS")
+            Return ds.Tables("PRACTICAS")
+        Catch ex As Exception
+            Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        End Try
+
+    End Function
 
     Friend Sub eliminar(_visita As Practica)
         Try
@@ -116,6 +170,22 @@ Public Class DB
 
     Friend Sub insertar(_prestacion As Prestacion)
 
+    End Sub
+
+    Friend Sub insertar(_subMod As subModulo)
+        Dim query = String.Format("INSERT INTO SUBMODULO (CODIGO, DESCRIPCION, CARGO_USUARIO, FECHA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ({0}, {1}, {2}, #{3}#, {4}, #{5}#)", _subMod.codigo, _subMod.descripcion, _subMod.creoUser, _subMod.fechaCarga.ToShortDateString, _subMod.modifUser, _subMod.fechaMod.ToShortDateString)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
     End Sub
 
     Public Function getTable(_tabla As tablas)

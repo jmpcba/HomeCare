@@ -1,3 +1,6 @@
+obj/Debug/*
+
+bin/Debug/*
 
 obj/Debug/DesignTimeResolveAssemblyReferences\.cache
 
@@ -14,3 +17,5 @@ obj/Debug/HomeCare\.pdb
 obj/Debug/HomeCare\.vbproj\.FileListAbsolute\.txt
 
 obj/Debug/HomeCare\.vbproj\.GenerateResource\.Cache
+
+obj/Debug/

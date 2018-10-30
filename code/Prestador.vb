@@ -16,7 +16,7 @@
     Private _prestadores As DataTable
 
     Public Property cuit As String
-        Set(value As String)
+            Set(value As String)
             Dim r As DataRow()
             r = _prestadores.Select("CUIT = '" & value.ToString & "'")
 

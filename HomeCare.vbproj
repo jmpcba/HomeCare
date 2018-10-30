@@ -82,6 +82,7 @@
     <Compile Include="code\Paciente.vb" />
     <Compile Include="code\Prestacion.vb" />
     <Compile Include="code\Practica.vb" />
+    <Compile Include="code\subModulo.vb" />
     <Compile Include="code\Usuario.vb" />
     <Compile Include="code\utils.vb" />
     <Compile Include="frmPacientes.Designer.vb">
