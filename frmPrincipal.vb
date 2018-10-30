@@ -6,6 +6,10 @@
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
         frmReporte.Show()
     End Sub
+    Private Sub btnPrestadores_Click(sender As Object, e As EventArgs) Handles btnPrestadores.Click
+        frmPrestadores.Show()
+    End Sub
+
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         My.Settings.Item("HomeCareConnectionString") = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)
@@ -23,7 +27,7 @@
 
     End Sub
 
-    Private Sub btnLiquidacion_Click(sender As Object, e As EventArgs) Handles btnLiquidacion.Click
-        frmLiquidacion.Show()
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnPrestadores.Click
+
     End Sub
 End Class

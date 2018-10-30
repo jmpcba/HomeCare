@@ -1,9 +1,15 @@
+obj/Debug/DesignTimeResolveAssemblyReferences\.cache
 
-obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-obj/Debug/HomeCare.exe
-obj/Debug/HomeCare.pdb
-obj/Debug/HomeCare.vbproj.FileListAbsolute.txt
-obj/Debug/HomeCare.vbproj.GenerateResource.Cache
-*.pdb
-*.exe
-obj/Debug/HomeCare.exe
+obj/Debug/DesignTimeResolveAssemblyReferencesInput\.cache
+
+bin/Debug/HomeCare\.exe
+
+bin/Debug/HomeCare\.pdb
+
+obj/Debug/HomeCare\.exe
+
+obj/Debug/HomeCare\.pdb
+
+obj/Debug/HomeCare\.vbproj\.FileListAbsolute\.txt
+
+obj/Debug/HomeCare\.vbproj\.GenerateResource\.Cache

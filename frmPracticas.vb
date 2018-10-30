@@ -74,7 +74,7 @@ Public Class frmPracticas
             Try
 
                 txtMat.Text = med.cuit
-                txtPrestador.Text = med.especialidad
+                txtLocalidad.Text = med.especialidad
                 statusBar("MEDICO CARGADO", False)
             Catch ex As Exception
                 MessageBox.Show("ERROR: " & ex.Message)
@@ -354,11 +354,7 @@ Public Class frmPracticas
 
     End Sub
 
-    Private Sub Label14_Click(sender As Object, e As EventArgs) Handles Label14.Click
-
-    End Sub
-
-    Private Sub lblMes_Click(sender As Object, e As EventArgs) Handles lblMes.Click
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
     End Sub
 End Class
