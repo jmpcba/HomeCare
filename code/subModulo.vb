@@ -43,7 +43,7 @@
     End Property
     Public ReadOnly Property fechaCarga As Date
         Get
-            Return fechaCarga
+            Return _fechaCarga
         End Get
     End Property
     Public ReadOnly Property fechaMod As Date
