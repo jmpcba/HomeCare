@@ -23,8 +23,8 @@ Partial Class frmPrestadores
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.BtnCerrar = New System.Windows.Forms.Button()
+        Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -54,8 +54,8 @@ Partial Class frmPrestadores
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.Button2)
-        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.BtnCerrar)
+        Me.Panel1.Controls.Add(Me.btnBuscar)
         Me.Panel1.Controls.Add(Me.btnGuardar)
         Me.Panel1.Controls.Add(Me.Label12)
         Me.Panel1.Controls.Add(Me.Label11)
@@ -84,26 +84,26 @@ Partial Class frmPrestadores
         Me.Panel1.Size = New System.Drawing.Size(766, 419)
         Me.Panel1.TabIndex = 29
         '
-        'Button2
+        'BtnCerrar
         '
-        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button2.Location = New System.Drawing.Point(448, 381)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(106, 33)
-        Me.Button2.TabIndex = 48
-        Me.Button2.Text = "&CERRAR"
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.BtnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnCerrar.Location = New System.Drawing.Point(448, 381)
+        Me.BtnCerrar.Name = "BtnCerrar"
+        Me.BtnCerrar.Size = New System.Drawing.Size(106, 33)
+        Me.BtnCerrar.TabIndex = 12
+        Me.BtnCerrar.Text = "&CERRAR"
+        Me.BtnCerrar.UseVisualStyleBackColor = False
         '
-        'Button1
+        'btnBuscar
         '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(182, 381)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(106, 33)
-        Me.Button1.TabIndex = 47
-        Me.Button1.Text = "&BUSCAR"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnBuscar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBuscar.Location = New System.Drawing.Point(182, 381)
+        Me.btnBuscar.Name = "btnBuscar"
+        Me.btnBuscar.Size = New System.Drawing.Size(106, 33)
+        Me.btnBuscar.TabIndex = 10
+        Me.btnBuscar.Text = "&BUSCAR"
+        Me.btnBuscar.UseVisualStyleBackColor = True
         '
         'btnGuardar
         '
@@ -111,7 +111,7 @@ Partial Class frmPrestadores
         Me.btnGuardar.Location = New System.Drawing.Point(309, 381)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
-        Me.btnGuardar.TabIndex = 46
+        Me.btnGuardar.TabIndex = 11
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
@@ -331,7 +331,7 @@ Partial Class frmPrestadores
     Friend WithEvents Label8 As Label
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents BtnCerrar As Button
+    Friend WithEvents btnBuscar As Button
     Friend WithEvents btnGuardar As Button
 End Class

@@ -6,8 +6,39 @@
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
         frmReporte.Show()
     End Sub
+    Private Sub btnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
+        frmInformes.Show()
+    End Sub
+    Private Sub btnVerificar_Click(sender As Object, e As EventArgs) Handles btnVerificar.Click
+        frmVerificar.Show()
+    End Sub
+    Private Sub btnNvaLiq_Click(sender As Object, e As EventArgs) Handles btnNvaLiq.Click
+        frmNvaLiq.Show()
+    End Sub
+    Private Sub btnCierreLiq_Click(sender As Object, e As EventArgs) Handles btnCierreLiq.Click
+        frmCierreLiq.Show()
+    End Sub
+
+
+
+
     Private Sub btnPrestadores_Click(sender As Object, e As EventArgs) Handles btnPrestadores.Click
         frmPrestadores.Show()
+    End Sub
+    Private Sub btnPacientes_Click(sender As Object, e As EventArgs) Handles btnPacientes.Click
+        frmPacientes.Show()
+    End Sub
+    Private Sub btnModulo_Click(sender As Object, e As EventArgs) Handles btnModulo.Click
+        frmModulo.Show()
+    End Sub
+    Private Sub btnSubMod_Click(sender As Object, e As EventArgs) Handles btnSubMod.Click
+        frmSubMod.Show()
+    End Sub
+    Private Sub btnPrestacion_Click(sender As Object, e As EventArgs) Handles btnPrestacion.Click
+        frmPrestacion.Show()
+    End Sub
+    Private Sub btnFeriados_Click(sender As Object, e As EventArgs) Handles btnFeriados.Click
+        frmFeriados.Show()
     End Sub
 
 
@@ -17,7 +48,7 @@
 
     End Sub
 
-    Private Sub BaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BaseDeDatosToolStripMenuItem.Click
+    Private Sub BaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Try
             Dim ut = New utils
             ut.setDB()
@@ -27,7 +58,7 @@
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnPrestadores.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
 
     End Sub
 End Class
