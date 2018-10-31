@@ -246,21 +246,35 @@ Public Class frmPracticas
             dt.Rows.Add(r)
         Next
 
-        dgFechas.DataSource = dt
-        dgFechas.Columns("DIA").DefaultCellStyle.BackColor = Color.LightGray
-        dgFechas.Columns("DIA").DefaultCellStyle.Font = New Font("arial", 8)
+        Dim chkclm As New DataGridViewCheckBoxColumn
 
-        dgFechas.Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
-        dgFechas.Columns("RESULTADO CARGA").DefaultCellStyle.Font = New Font("arial", 8)
+        With chkclm
+            .HeaderText = ""
+            .Name = ""
+        End With
 
-        dgFechas.Columns("HORAS").DefaultCellStyle.Font = New Font("arial", 8)
+        With dgFechas
+            .Columns.Clear()
+            .DataSource = dt
+            .Columns("DIA").DefaultCellStyle.BackColor = Color.LightGray
+            .Columns("DIA").DefaultCellStyle.Font = New Font("arial", 8)
 
-        dgFechas.Columns("DIA").ReadOnly = True
-        dgFechas.Columns("RESULTADO CARGA").ReadOnly = True
-        dgFechas.AutoResizeColumns()
-        dgFechas.AutoResizeRows()
+            .Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
+            .Columns("RESULTADO CARGA").DefaultCellStyle.Font = New Font("arial", 8)
 
-        dgFechas.Columns("DIA_H").Visible = False
+            .Columns("HORAS").DefaultCellStyle.Font = New Font("arial", 8)
+
+            .Columns("DIA").ReadOnly = True
+            .Columns("RESULTADO CARGA").ReadOnly = True
+
+            .Columns.Insert(0, chkclm)
+
+            .AutoResizeColumns()
+            .AutoResizeRows()
+
+            .Columns("DIA_H").Visible = False
+
+        End With
 
         For Each r As DataGridViewRow In dgFechas.Rows
             Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
@@ -268,14 +282,16 @@ Public Class frmPracticas
                 r.DefaultCellStyle.ForeColor = Color.Red
             End If
         Next
-
-
     End Sub
 
     Private Sub dgFechas_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgFechas.CellEndEdit
         Dim val = dgFechas.Rows(e.RowIndex).Cells("HORAS").Value
         Dim horas As Integer = 0
         Dim monto As Decimal = 0
+
+        If IsDBNull(val) Then
+            Exit Sub
+        End If
 
         If IsNothing(med.cuit) Then
             MessageBox.Show("Seleccione un Prestador")
@@ -297,11 +313,16 @@ Public Class frmPracticas
 
 
             For Each r As DataGridViewRow In dgFechas.Rows
+
+                If r.Cells(0).Value = True Then
+                    r.Cells("HORAS").Value = val
+                    r.Cells(0).Value = False
+                End If
+
                 If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
                     Continue For
                 Else
                     Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-
 
                     If ut.esFindeOFeriado(fecha) Then
                         monto += med.montoFeriado * r.Cells("HORAS").Value
@@ -329,6 +350,8 @@ Public Class frmPracticas
             cargarGrilla()
             lblMes.Text = MonthName(DTFecha.Value.Month)
             edicion = False
+            lblHoras.Text = 0
+            lblMonto.Text = 0
         End If
     End Sub
 
