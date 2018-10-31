@@ -204,6 +204,9 @@
     <EmbeddedResource Include="frmPracticas.resx">
       <DependentUpon>frmPracticas.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSubMod.resx">
+      <DependentUpon>frmSubMod.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
