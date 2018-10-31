@@ -1,6 +1,6 @@
 ﻿Public Class Paciente
 
-    Private pacientes As DataTable
+    Private _pacientes As DataTable
 
     Private _afiliado As Integer
     Private _nombre As String
@@ -14,7 +14,7 @@
 
         Set(value)
             Dim r As DataRow()
-            r = pacientes.Select("afiliado=" & value)
+            r = _pacientes.Select("afiliado=" & value)
             _afiliado = r(0)("afiliado")
             _nombre = r(0)("nombre")
             _apellido = r(0)("apellido")
@@ -43,7 +43,7 @@
     Public Sub New()
         Dim db = New DB()
         Try
-            pacientes = db.getTable(DB.tablas.pacientes)
+            _pacientes = db.getTable(DB.tablas.pacientes)
         Catch ex As Exception
             Throw
         End Try

@@ -15,6 +15,7 @@ Public Class DB
         prestaciones
         visitas
         modulo
+        subModulo
         feriados
     End Enum
 
@@ -174,6 +175,22 @@ Public Class DB
 
     Friend Sub insertar(_subMod As subModulo)
         Dim query = String.Format("INSERT INTO SUBMODULO (CODIGO, DESCRIPCION, CARGO_USUARIO, FECHA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ({0}, '{1}', {2}, #{3}#, {4}, #{5}#)", _subMod.codigo, _subMod.descripcion, _subMod.creoUser, _subMod.fechaCarga.ToShortDateString, _subMod.modifUser, _subMod.fechaMod.ToShortDateString)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
+    Friend Sub actualizar(_subMod As subModulo)
+        Dim query = String.Format("UPDATE SUBMODULO SET CODIGO={0}, DESCRIPCION='{1}', CARGO_USUARIO={2}, FECHA=#{3}#, MODIFICO_USUARIO={4}, FECHA_MODIFICACION=#{5}#", _subMod.codigo, _subMod.descripcion, _subMod.creoUser, _subMod.fechaCarga.ToShortDateString, _subMod.modifUser, _subMod.fechaMod.ToShortDateString)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
