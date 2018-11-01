@@ -163,7 +163,7 @@ Partial Class frmPracticas
         Me.cbMedico.FormattingEnabled = True
         Me.cbMedico.Location = New System.Drawing.Point(209, 45)
         Me.cbMedico.Name = "cbMedico"
-        Me.cbMedico.Size = New System.Drawing.Size(268, 21)
+        Me.cbMedico.Size = New System.Drawing.Size(292, 21)
         Me.cbMedico.TabIndex = 1
         Me.cbMedico.ValueMember = "CUIT"
         '
@@ -194,7 +194,7 @@ Partial Class frmPracticas
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(249, 80)
+        Me.Label5.Location = New System.Drawing.Point(206, 80)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(67, 13)
         Me.Label5.TabIndex = 10
@@ -202,7 +202,7 @@ Partial Class frmPracticas
         '
         'txtMat
         '
-        Me.txtMat.Location = New System.Drawing.Point(100, 73)
+        Me.txtMat.Location = New System.Drawing.Point(54, 73)
         Me.txtMat.Name = "txtMat"
         Me.txtMat.ReadOnly = True
         Me.txtMat.Size = New System.Drawing.Size(121, 20)
@@ -210,10 +210,10 @@ Partial Class frmPracticas
         '
         'txtLocalidad
         '
-        Me.txtLocalidad.Location = New System.Drawing.Point(325, 73)
+        Me.txtLocalidad.Location = New System.Drawing.Point(284, 73)
         Me.txtLocalidad.Name = "txtLocalidad"
         Me.txtLocalidad.ReadOnly = True
-        Me.txtLocalidad.Size = New System.Drawing.Size(152, 20)
+        Me.txtLocalidad.Size = New System.Drawing.Size(203, 20)
         Me.txtLocalidad.TabIndex = 12
         '
         'Label6
@@ -369,7 +369,7 @@ Partial Class frmPracticas
         Me.Panel1.Controls.Add(Me.Label9)
         Me.Panel1.Location = New System.Drawing.Point(12, 24)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(482, 108)
+        Me.Panel1.Size = New System.Drawing.Size(506, 108)
         Me.Panel1.TabIndex = 27
         '
         'Panel2
@@ -384,7 +384,7 @@ Partial Class frmPracticas
         Me.Panel2.Controls.Add(Me.txtLocalidad)
         Me.Panel2.Location = New System.Drawing.Point(12, 138)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(482, 108)
+        Me.Panel2.Size = New System.Drawing.Size(506, 108)
         Me.Panel2.TabIndex = 28
         '
         'Panel3
@@ -405,7 +405,7 @@ Partial Class frmPracticas
         Me.Panel3.Controls.Add(Me.DTFecha)
         Me.Panel3.Location = New System.Drawing.Point(12, 252)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(482, 334)
+        Me.Panel3.Size = New System.Drawing.Size(506, 334)
         Me.Panel3.TabIndex = 29
         '
         'Label15
@@ -501,7 +501,7 @@ Partial Class frmPracticas
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.dgFechas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgFechas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgFechas.Location = New System.Drawing.Point(7, 34)
+        Me.dgFechas.Location = New System.Drawing.Point(32, 34)
         Me.dgFechas.Name = "dgFechas"
         Me.dgFechas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgFechas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -521,7 +521,7 @@ Partial Class frmPracticas
         '
         'btnLimpiarGrilla
         '
-        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(375, 227)
+        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(427, 267)
         Me.btnLimpiarGrilla.Name = "btnLimpiarGrilla"
         Me.btnLimpiarGrilla.Size = New System.Drawing.Size(75, 23)
         Me.btnLimpiarGrilla.TabIndex = 15
@@ -531,20 +531,20 @@ Partial Class frmPracticas
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(364, 7)
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(393, 55)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(144, 24)
+        Me.Label18.Size = New System.Drawing.Size(121, 20)
         Me.Label18.TabIndex = 19
         Me.Label18.Text = "TOTAL HORAS"
         '
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(364, 74)
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(393, 125)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(154, 24)
+        Me.Label19.Size = New System.Drawing.Size(124, 20)
         Me.Label19.TabIndex = 20
         Me.Label19.Text = "MONTO TOTAL:"
         '
@@ -552,7 +552,7 @@ Partial Class frmPracticas
         '
         Me.lblHoras.AutoSize = True
         Me.lblHoras.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHoras.Location = New System.Drawing.Point(459, 44)
+        Me.lblHoras.Location = New System.Drawing.Point(459, 90)
         Me.lblHoras.Name = "lblHoras"
         Me.lblHoras.Size = New System.Drawing.Size(16, 17)
         Me.lblHoras.TabIndex = 21
@@ -562,7 +562,7 @@ Partial Class frmPracticas
         '
         Me.lblMonto.AutoSize = True
         Me.lblMonto.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMonto.Location = New System.Drawing.Point(462, 111)
+        Me.lblMonto.Location = New System.Drawing.Point(459, 160)
         Me.lblMonto.Name = "lblMonto"
         Me.lblMonto.Size = New System.Drawing.Size(16, 17)
         Me.lblMonto.TabIndex = 22
@@ -582,9 +582,9 @@ Partial Class frmPracticas
         Me.Panel4.Controls.Add(Me.Label18)
         Me.Panel4.Controls.Add(Me.btnLimpiarGrilla)
         Me.Panel4.Controls.Add(Me.dgFechas)
-        Me.Panel4.Location = New System.Drawing.Point(513, 24)
+        Me.Panel4.Location = New System.Drawing.Point(524, 24)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(526, 562)
+        Me.Panel4.Size = New System.Drawing.Size(515, 562)
         Me.Panel4.TabIndex = 30
         '
         'Label14
