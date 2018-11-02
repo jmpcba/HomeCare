@@ -5,7 +5,7 @@
         'dentro de un try catch se crea un objeto nuevo
         Try
             'se crea el objeto, los parametros varian segun el objeto. en este caso es codigo y descripcion
-            Dim submod As New subModulo(txtCodigo.Text, txtDescripcion.Text)
+            Dim submod As New subModulo(txtCodigo.Text, txtDescripcion.Text, numTope.Text)
 
             'llamar al metodo insertar del objeto
             submod.insertar()

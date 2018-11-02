@@ -27,12 +27,12 @@ Partial Class frmSubMod
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
-        Me.numTope = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.numTope = New System.Windows.Forms.MaskedTextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.SuspendLayout()
         '
         'btnGuardar
@@ -79,13 +79,6 @@ Partial Class frmSubMod
         Me.txtDescripcion.Size = New System.Drawing.Size(291, 20)
         Me.txtDescripcion.TabIndex = 1
         '
-        'numTope
-        '
-        Me.numTope.Location = New System.Drawing.Point(173, 240)
-        Me.numTope.Name = "numTope"
-        Me.numTope.Size = New System.Drawing.Size(48, 20)
-        Me.numTope.TabIndex = 2
-        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -124,30 +117,39 @@ Partial Class frmSubMod
         Me.Label1.TabIndex = 115
         Me.Label1.Text = "SUB-MODULOS"
         '
-        'Panel2
+        'numTope
         '
-        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel2.Location = New System.Drawing.Point(12, 21)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(518, 367)
-        Me.Panel2.TabIndex = 124
+        Me.numTope.Location = New System.Drawing.Point(173, 240)
+        Me.numTope.Mask = "99999"
+        Me.numTope.Name = "numTope"
+        Me.numTope.Size = New System.Drawing.Size(43, 20)
+        Me.numTope.TabIndex = 2
+        Me.numTope.ValidatingType = GetType(Integer)
+        '
+        'Panel1
+        '
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Location = New System.Drawing.Point(12, 12)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(553, 330)
+        Me.Panel1.TabIndex = 116
         '
         'frmSubMod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.numTope)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtCodigo)
         Me.Controls.Add(Me.txtDescripcion)
-        Me.Controls.Add(Me.numTope)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnBuscar)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnGuardar)
-        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel1)
         Me.Name = "frmSubMod"
         Me.Text = "frmSubMod"
         Me.ResumeLayout(False)
@@ -160,10 +162,10 @@ Partial Class frmSubMod
     Friend WithEvents btnBuscar As Button
     Friend WithEvents txtCodigo As TextBox
     Friend WithEvents txtDescripcion As TextBox
-    Friend WithEvents numTope As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents numTope As MaskedTextBox
+    Friend WithEvents Panel1 As Panel
 End Class

@@ -233,7 +233,7 @@ Partial Class frmPracticas
         Me.DTFecha.Location = New System.Drawing.Point(100, 130)
         Me.DTFecha.Name = "DTFecha"
         Me.DTFecha.ShowUpDown = True
-        Me.DTFecha.Size = New System.Drawing.Size(346, 20)
+        Me.DTFecha.Size = New System.Drawing.Size(165, 20)
         Me.DTFecha.TabIndex = 5
         '
         'Label7

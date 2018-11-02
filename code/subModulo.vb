@@ -2,17 +2,19 @@
 
     Private _codigo As Integer
     Private _descripcion As String
+    Private _numTope As Integer
     Private _modifUser As Integer
     Private _creoUser As Integer
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _subModulos As DataTable
 
-    Public Sub New(_cod As Integer, _desc As String)
+    Public Sub New(_cod As Integer, _desc As String, _Tope As Integer)
         Dim user As New Usuario
 
         _codigo = _cod
         _descripcion = _desc
+        _numTope = _Tope
         _modifUser = user.dni
         _creoUser = user.dni
         _fechaCarga = Date.Today
