@@ -189,8 +189,40 @@ Public Class DB
         End Try
     End Sub
 
+    Friend Sub insertar(_mod As Modulo)
+        Dim query = String.Format("INSERT INTO MODULO VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6}, #{7}#, {8}, #{9}#)", _mod.codigo, _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.creoUser, _mod.fechaCarga.ToShortDateString, _mod.modifUser, _mod.fechaMod.ToShortDateString)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
     Friend Sub actualizar(_subMod As subModulo)
         Dim query = String.Format("UPDATE SUBMODULO SET CODIGO={0}, DESCRIPCION='{1}', CARGO_USUARIO={2}, FECHA=#{3}#, MODIFICO_USUARIO={4}, FECHA_MODIFICACION=#{5}#", _subMod.codigo, _subMod.descripcion, _subMod.creoUser, _subMod.fechaCarga.ToShortDateString, _subMod.modifUser, _subMod.fechaMod.ToShortDateString)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
+    Friend Sub actualizar(_mod As Modulo)
+        Dim query = String.Format("UPDATE MODULO SET MEDICO={0}, ENFERMERIA={1}, KINESIO={2}, FONO={3}, CUIDADOR={4}, MODIFICO_USUARIO={5}, FECHA_MODIFICACION=#{6}# WHERE CODIGO={7}", _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.modifUser, _mod.fechaMod.ToShortDateString, _mod.codigo)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
