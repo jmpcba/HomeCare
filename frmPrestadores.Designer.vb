@@ -30,10 +30,6 @@ Partial Class frmPrestadores
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.numFijo = New System.Windows.Forms.TextBox()
-        Me.numPorcentaje = New System.Windows.Forms.TextBox()
-        Me.numferiado = New System.Windows.Forms.TextBox()
-        Me.numLunvie = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -48,23 +44,28 @@ Partial Class frmPrestadores
         Me.txtCuit = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.numLunVie = New System.Windows.Forms.MaskedTextBox()
+        Me.numFeriados = New System.Windows.Forms.MaskedTextBox()
+        Me.numPorcentaje = New System.Windows.Forms.MaskedTextBox()
+        Me.numFijo = New System.Windows.Forms.MaskedTextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.dtCese = New System.Windows.Forms.MaskedTextBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.BtnCerrar)
-        Me.Panel1.Controls.Add(Me.btnBuscar)
-        Me.Panel1.Controls.Add(Me.btnGuardar)
+        Me.Panel1.Controls.Add(Me.dtCese)
+        Me.Panel1.Controls.Add(Me.Label13)
+        Me.Panel1.Controls.Add(Me.numFijo)
+        Me.Panel1.Controls.Add(Me.numPorcentaje)
+        Me.Panel1.Controls.Add(Me.numFeriados)
+        Me.Panel1.Controls.Add(Me.numLunVie)
         Me.Panel1.Controls.Add(Me.Label12)
         Me.Panel1.Controls.Add(Me.Label11)
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.Label9)
-        Me.Panel1.Controls.Add(Me.numFijo)
-        Me.Panel1.Controls.Add(Me.numPorcentaje)
-        Me.Panel1.Controls.Add(Me.numferiado)
-        Me.Panel1.Controls.Add(Me.numLunvie)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.txtEmail)
         Me.Panel1.Controls.Add(Me.Label7)
@@ -81,44 +82,44 @@ Partial Class frmPrestadores
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Location = New System.Drawing.Point(4, 1)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(766, 419)
+        Me.Panel1.Size = New System.Drawing.Size(611, 437)
         Me.Panel1.TabIndex = 29
         '
         'BtnCerrar
         '
         Me.BtnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnCerrar.Location = New System.Drawing.Point(448, 381)
+        Me.BtnCerrar.Location = New System.Drawing.Point(667, 215)
         Me.BtnCerrar.Name = "BtnCerrar"
         Me.BtnCerrar.Size = New System.Drawing.Size(106, 33)
-        Me.BtnCerrar.TabIndex = 12
+        Me.BtnCerrar.TabIndex = 202
         Me.BtnCerrar.Text = "&CERRAR"
         Me.BtnCerrar.UseVisualStyleBackColor = False
         '
         'btnBuscar
         '
         Me.btnBuscar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBuscar.Location = New System.Drawing.Point(182, 381)
+        Me.btnBuscar.Location = New System.Drawing.Point(667, 79)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(106, 33)
-        Me.btnBuscar.TabIndex = 10
+        Me.btnBuscar.TabIndex = 200
         Me.btnBuscar.Text = "&BUSCAR"
         Me.btnBuscar.UseVisualStyleBackColor = True
         '
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Location = New System.Drawing.Point(309, 381)
+        Me.btnGuardar.Location = New System.Drawing.Point(667, 148)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
-        Me.btnGuardar.TabIndex = 11
+        Me.btnGuardar.TabIndex = 201
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(543, 309)
+        Me.Label12.Location = New System.Drawing.Point(457, 309)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(72, 13)
         Me.Label12.TabIndex = 45
@@ -127,7 +128,7 @@ Partial Class frmPrestadores
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(384, 309)
+        Me.Label11.Location = New System.Drawing.Point(312, 309)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(78, 13)
         Me.Label11.TabIndex = 44
@@ -136,7 +137,7 @@ Partial Class frmPrestadores
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(225, 309)
+        Me.Label10.Location = New System.Drawing.Point(199, 309)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(61, 13)
         Me.Label10.TabIndex = 43
@@ -150,34 +151,6 @@ Partial Class frmPrestadores
         Me.Label9.Size = New System.Drawing.Size(103, 13)
         Me.Label9.TabIndex = 42
         Me.Label9.Text = "LUNES A VIERNES"
-        '
-        'numFijo
-        '
-        Me.numFijo.Location = New System.Drawing.Point(522, 338)
-        Me.numFijo.Name = "numFijo"
-        Me.numFijo.Size = New System.Drawing.Size(121, 20)
-        Me.numFijo.TabIndex = 9
-        '
-        'numPorcentaje
-        '
-        Me.numPorcentaje.Location = New System.Drawing.Point(361, 338)
-        Me.numPorcentaje.Name = "numPorcentaje"
-        Me.numPorcentaje.Size = New System.Drawing.Size(121, 20)
-        Me.numPorcentaje.TabIndex = 8
-        '
-        'numferiado
-        '
-        Me.numferiado.Location = New System.Drawing.Point(193, 338)
-        Me.numferiado.Name = "numferiado"
-        Me.numferiado.Size = New System.Drawing.Size(121, 20)
-        Me.numferiado.TabIndex = 7
-        '
-        'numLunvie
-        '
-        Me.numLunvie.Location = New System.Drawing.Point(36, 338)
-        Me.numLunvie.Name = "numLunvie"
-        Me.numLunvie.Size = New System.Drawing.Size(121, 20)
-        Me.numLunvie.TabIndex = 6
         '
         'Label8
         '
@@ -295,12 +268,69 @@ Partial Class frmPrestadores
         Me.Label2.TabIndex = 24
         Me.Label2.Text = "PROFESIONAL"
         '
+        'numLunVie
+        '
+        Me.numLunVie.Location = New System.Drawing.Point(68, 346)
+        Me.numLunVie.Mask = "99999"
+        Me.numLunVie.Name = "numLunVie"
+        Me.numLunVie.Size = New System.Drawing.Size(43, 20)
+        Me.numLunVie.TabIndex = 6
+        Me.numLunVie.ValidatingType = GetType(Integer)
+        '
+        'numFeriados
+        '
+        Me.numFeriados.Location = New System.Drawing.Point(202, 346)
+        Me.numFeriados.Mask = "99999"
+        Me.numFeriados.Name = "numFeriados"
+        Me.numFeriados.Size = New System.Drawing.Size(43, 20)
+        Me.numFeriados.TabIndex = 7
+        Me.numFeriados.ValidatingType = GetType(Integer)
+        '
+        'numPorcentaje
+        '
+        Me.numPorcentaje.Location = New System.Drawing.Point(328, 346)
+        Me.numPorcentaje.Mask = "99999"
+        Me.numPorcentaje.Name = "numPorcentaje"
+        Me.numPorcentaje.Size = New System.Drawing.Size(43, 20)
+        Me.numPorcentaje.TabIndex = 8
+        Me.numPorcentaje.ValidatingType = GetType(Integer)
+        '
+        'numFijo
+        '
+        Me.numFijo.Location = New System.Drawing.Point(460, 346)
+        Me.numFijo.Mask = "99999"
+        Me.numFijo.Name = "numFijo"
+        Me.numFijo.Size = New System.Drawing.Size(59, 20)
+        Me.numFijo.TabIndex = 9
+        Me.numFijo.ValidatingType = GetType(Integer)
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(31, 396)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(165, 13)
+        Me.Label13.TabIndex = 46
+        Me.Label13.Text = "FECHA CESE DE ACTIVIDADES"
+        '
+        'dtCese
+        '
+        Me.dtCese.Location = New System.Drawing.Point(226, 389)
+        Me.dtCese.Mask = "00/00/0000"
+        Me.dtCese.Name = "dtCese"
+        Me.dtCese.Size = New System.Drawing.Size(79, 20)
+        Me.dtCese.TabIndex = 10
+        Me.dtCese.ValidatingType = GetType(Date)
+        '
         'frmPrestadores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.btnBuscar)
+        Me.Controls.Add(Me.btnGuardar)
+        Me.Controls.Add(Me.BtnCerrar)
         Me.Name = "frmPrestadores"
         Me.Text = "frmPrestadores"
         Me.Panel1.ResumeLayout(False)
@@ -324,14 +354,16 @@ Partial Class frmPrestadores
     Friend WithEvents Label11 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents numFijo As TextBox
-    Friend WithEvents numPorcentaje As TextBox
-    Friend WithEvents numferiado As TextBox
-    Friend WithEvents numLunvie As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents BtnCerrar As Button
     Friend WithEvents btnBuscar As Button
     Friend WithEvents btnGuardar As Button
+    Friend WithEvents numFijo As MaskedTextBox
+    Friend WithEvents numPorcentaje As MaskedTextBox
+    Friend WithEvents numFeriados As MaskedTextBox
+    Friend WithEvents numLunVie As MaskedTextBox
+    Friend WithEvents dtCese As MaskedTextBox
+    Friend WithEvents Label13 As Label
 End Class

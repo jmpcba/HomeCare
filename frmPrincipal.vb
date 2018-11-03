@@ -38,7 +38,7 @@
         frmPrestacion.Show()
     End Sub
     Private Sub btnFeriados_Click(sender As Object, e As EventArgs) Handles btnFeriados.Click
-        frmFeriados.Show()
+        FrmFeriados.Show()
     End Sub
 
 
@@ -58,7 +58,6 @@
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
 
-    End Sub
+
 End Class

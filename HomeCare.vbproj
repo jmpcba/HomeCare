@@ -186,11 +186,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmFeriados.resx">
+      <DependentUpon>FrmFeriados.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmModulo.resx">
       <DependentUpon>frmModulo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPacientes.resx">
       <DependentUpon>frmPacientes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrestacion.resx">
+      <DependentUpon>frmPrestacion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrestadores.resx">
       <DependentUpon>frmPrestadores.vb</DependentUpon>

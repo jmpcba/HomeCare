@@ -35,15 +35,16 @@ Partial Class frmPacientes
         Me.numAfiliado = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.numDni = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.btnCerrar)
-        Me.Panel1.Controls.Add(Me.btnBuscar)
-        Me.Panel1.Controls.Add(Me.btnGuardar)
+        Me.Panel1.Controls.Add(Me.numDni)
+        Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.txtApellido)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -55,51 +56,51 @@ Partial Class frmPacientes
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Location = New System.Drawing.Point(17, 16)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(766, 419)
-        Me.Panel1.TabIndex = 30
+        Me.Panel1.Size = New System.Drawing.Size(631, 419)
+        Me.Panel1.TabIndex = 0
         '
         'btnCerrar
         '
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnCerrar.Location = New System.Drawing.Point(424, 354)
+        Me.btnCerrar.Location = New System.Drawing.Point(750, 299)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
-        Me.btnCerrar.TabIndex = 6
+        Me.btnCerrar.TabIndex = 42
         Me.btnCerrar.Text = "&CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = False
         '
         'btnBuscar
         '
         Me.btnBuscar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBuscar.Location = New System.Drawing.Point(182, 354)
+        Me.btnBuscar.Location = New System.Drawing.Point(750, 178)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(106, 33)
-        Me.btnBuscar.TabIndex = 4
+        Me.btnBuscar.TabIndex = 40
         Me.btnBuscar.Text = "&BUSCAR"
         Me.btnBuscar.UseVisualStyleBackColor = True
         '
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Location = New System.Drawing.Point(296, 354)
+        Me.btnGuardar.Location = New System.Drawing.Point(750, 237)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
-        Me.btnGuardar.TabIndex = 5
+        Me.btnGuardar.TabIndex = 41
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'txtApellido
         '
-        Me.txtApellido.Location = New System.Drawing.Point(411, 101)
+        Me.txtApellido.Location = New System.Drawing.Point(389, 146)
         Me.txtApellido.Name = "txtApellido"
         Me.txtApellido.Size = New System.Drawing.Size(219, 20)
-        Me.txtApellido.TabIndex = 2
+        Me.txtApellido.TabIndex = 3
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(343, 101)
+        Me.Label3.Location = New System.Drawing.Point(324, 149)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(59, 13)
         Me.Label3.TabIndex = 31
@@ -108,7 +109,7 @@ Partial Class frmPacientes
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(7, 97)
+        Me.Label1.Location = New System.Drawing.Point(6, 149)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(54, 13)
         Me.Label1.TabIndex = 30
@@ -116,22 +117,22 @@ Partial Class frmPacientes
         '
         'txtNombre
         '
-        Me.txtNombre.Location = New System.Drawing.Point(124, 94)
+        Me.txtNombre.Location = New System.Drawing.Point(111, 146)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(197, 20)
-        Me.txtNombre.TabIndex = 1
+        Me.txtNombre.TabIndex = 2
         '
         'txtObSocial
         '
-        Me.txtObSocial.Location = New System.Drawing.Point(124, 159)
+        Me.txtObSocial.Location = New System.Drawing.Point(111, 211)
         Me.txtObSocial.Name = "txtObSocial"
         Me.txtObSocial.Size = New System.Drawing.Size(121, 20)
-        Me.txtObSocial.TabIndex = 3
+        Me.txtObSocial.TabIndex = 4
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(7, 166)
+        Me.Label5.Location = New System.Drawing.Point(6, 218)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(78, 13)
         Me.Label5.TabIndex = 27
@@ -139,7 +140,7 @@ Partial Class frmPacientes
         '
         'numAfiliado
         '
-        Me.numAfiliado.Location = New System.Drawing.Point(124, 46)
+        Me.numAfiliado.Location = New System.Drawing.Point(111, 98)
         Me.numAfiliado.Name = "numAfiliado"
         Me.numAfiliado.Size = New System.Drawing.Size(121, 20)
         Me.numAfiliado.TabIndex = 0
@@ -147,7 +148,7 @@ Partial Class frmPacientes
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(7, 46)
+        Me.Label4.Location = New System.Drawing.Point(6, 98)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(85, 13)
         Me.Label4.TabIndex = 25
@@ -158,18 +159,37 @@ Partial Class frmPacientes
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Red
-        Me.Label2.Location = New System.Drawing.Point(3, 7)
+        Me.Label2.Location = New System.Drawing.Point(3, 17)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(112, 24)
         Me.Label2.TabIndex = 24
         Me.Label2.Text = "PACIENTE"
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(324, 101)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(35, 13)
+        Me.Label6.TabIndex = 32
+        Me.Label6.Text = "D.N.I."
+        '
+        'numDni
+        '
+        Me.numDni.Location = New System.Drawing.Point(389, 98)
+        Me.numDni.Name = "numDni"
+        Me.numDni.Size = New System.Drawing.Size(121, 20)
+        Me.numDni.TabIndex = 1
+        '
         'frmPacientes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(878, 524)
+        Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.btnGuardar)
+        Me.Controls.Add(Me.btnBuscar)
         Me.Name = "frmPacientes"
         Me.Text = "frmPacientes"
         Me.Panel1.ResumeLayout(False)
@@ -191,4 +211,6 @@ Partial Class frmPacientes
     Friend WithEvents numAfiliado As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents numDni As TextBox
+    Friend WithEvents Label6 As Label
 End Class
