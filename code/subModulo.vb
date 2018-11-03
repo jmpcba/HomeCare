@@ -7,14 +7,16 @@
     Private _creoUser As Integer
     Private _fechaCarga As Date
     Private _fechaMod As Date
+    Private _modificado = False
+    Private _user As New Usuario
     Private _subModulos As DataTable
 
-    Public Sub New(_cod As Integer, _desc As String, _Tope As Integer)
+    Public Sub New(_cod As Integer, _desc As String, _tope As Integer)
         Dim user As New Usuario
 
         _codigo = _cod
         _descripcion = _desc
-        _numTope = _Tope
+        _numTope = _tope
         _modifUser = user.dni
         _creoUser = user.dni
         _fechaCarga = Date.Today
@@ -45,9 +47,23 @@
             Return _codigo
         End Get
     End Property
-    Public ReadOnly Property descripcion As String
+    Public Property descripcion As String
+        Set(value As String)
+            _descripcion = value
+            _modificado = True
+        End Set
         Get
             Return _descripcion
+        End Get
+    End Property
+
+    Public Property tope As Integer
+        Set(value As Integer)
+            _numTope = value
+            _modificado = True
+        End Set
+        Get
+            Return _numTope
         End Get
     End Property
     Public ReadOnly Property modifUser As Integer
@@ -65,7 +81,7 @@
             Return _fechaCarga
         End Get
     End Property
-    Public ReadOnly Property fechaMod As Date
+    Public readonly Property fechaMod As Date
         Get
             Return _fechaMod
         End Get
@@ -83,7 +99,13 @@
     Public Sub actualizar()
         Dim db As New DB
         Try
-            db.actualizar(Me)
+            If _modificado Then
+                _modifUser = _user.dni
+                _fechaMod = Date.Today
+                db.actualizar(Me)
+            Else
+                Throw New Exception("No se realizaron modificaciones")
+            End If
         Catch ex As Exception
             Throw
         End Try

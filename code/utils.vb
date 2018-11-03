@@ -53,4 +53,10 @@ Public Class utils
             End Try
         End If
     End Sub
+
+    Public Sub validarTxtNum(_txtBox As TextBox)
+        If Not IsNumeric(_txtBox.Text) Then
+            Throw New Exception("Ingrese un valor numerico")
+        End If
+    End Sub
 End Class
