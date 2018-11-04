@@ -40,8 +40,8 @@ Partial Class frmModulo
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtCodigo = New System.Windows.Forms.MaskedTextBox()
         Me.txtMedico = New System.Windows.Forms.TextBox()
+        Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -199,20 +199,12 @@ Partial Class frmModulo
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel2.Controls.Add(Me.txtMedico)
         Me.Panel2.Controls.Add(Me.txtCodigo)
+        Me.Panel2.Controls.Add(Me.txtMedico)
         Me.Panel2.Location = New System.Drawing.Point(12, 22)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(518, 474)
         Me.Panel2.TabIndex = 123
-        '
-        'txtCodigo
-        '
-        Me.txtCodigo.Location = New System.Drawing.Point(127, 84)
-        Me.txtCodigo.Mask = "000000"
-        Me.txtCodigo.Name = "txtCodigo"
-        Me.txtCodigo.Size = New System.Drawing.Size(100, 20)
-        Me.txtCodigo.TabIndex = 0
         '
         'txtMedico
         '
@@ -220,6 +212,13 @@ Partial Class frmModulo
         Me.txtMedico.Name = "txtMedico"
         Me.txtMedico.Size = New System.Drawing.Size(121, 20)
         Me.txtMedico.TabIndex = 0
+        '
+        'txtCodigo
+        '
+        Me.txtCodigo.Location = New System.Drawing.Point(127, 77)
+        Me.txtCodigo.Name = "txtCodigo"
+        Me.txtCodigo.Size = New System.Drawing.Size(100, 20)
+        Me.txtCodigo.TabIndex = 1
         '
         'frmModulo
         '
@@ -270,6 +269,6 @@ Partial Class frmModulo
     Friend WithEvents Label2 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents txtCodigo As MaskedTextBox
     Friend WithEvents txtMedico As TextBox
+    Friend WithEvents txtCodigo As TextBox
 End Class

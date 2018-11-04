@@ -37,7 +37,11 @@
             End If
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            If ex.Message.Contains("duplicate values in the index") Then
+                MessageBox.Show("Ya existe un Modulo con el mismo codigo")
+            Else
+                MessageBox.Show(ex.Message)
+            End If
         End Try
     End Sub
 
@@ -63,12 +67,12 @@
         End Try
     End Sub
 
-    Private Sub txtCodigo_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles txtCodigo.MaskInputRejected
+    Private Sub txtCodigo_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs)
         MessageBox.Show("Ingrese un Valor numerico de 6 digitos")
     End Sub
 
     Public Sub iniciarControles()
-
+        txtCodigo.Text = ""
         txtCuidador.Text = ""
         txtDescripcion.Text = ""
         txtEnfermeria.Text = ""
@@ -77,19 +81,23 @@
         txtMedico.Text = ""
     End Sub
 
-    Private Sub txtCodigo_Click(sender As Object, e As EventArgs) Handles txtCodigo.Click
+    Private Sub txtCodigo_Click(sender As Object, e As EventArgs)
         txtCodigo.Select(0, 0)
     End Sub
 
     Private Sub txtMedico_TextChanged(sender As Object, e As EventArgs) Handles txtMedico.TextChanged
-        validarTxtBox(txtMedico)
+        Try
+            validarTxtBox(txtMedico)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 
     Private Sub validarTxtBox(_txtBox As TextBox)
         If _txtBox.Text <> "" Then
             If Not IsNumeric(_txtBox.Text) Then
-                MessageBox.Show("Ingrese un valor numerico")
                 _txtBox.Text = ""
+                Throw New Exception("Ingrese un valor numerico")
             End If
         End If
     End Sub
@@ -101,18 +109,59 @@
     End Sub
 
     Private Sub txtEnfermeria_TextChanged(sender As Object, e As EventArgs) Handles txtEnfermeria.TextChanged
-        validarTxtBox(txtEnfermeria)
+        Try
+            validarTxtBox(txtEnfermeria)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 
     Private Sub txtKinesio_TextChanged(sender As Object, e As EventArgs) Handles txtKinesio.TextChanged
-        validarTxtBox(txtKinesio)
+        Try
+            validarTxtBox(txtKinesio)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 
     Private Sub txtFono_TextChanged(sender As Object, e As EventArgs) Handles txtFono.TextChanged
-        validarTxtBox(txtFono)
+        Try
+            validarTxtBox(txtFono)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 
     Private Sub txtCuidador_TextChanged(sender As Object, e As EventArgs) Handles txtCuidador.TextChanged
-        validarTxtBox(txtCuidador)
+        Try
+            validarTxtBox(txtCuidador)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub frmModulo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        btnBuscar.Enabled = False
+    End Sub
+
+    Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
+        Try
+            If txtCodigo.Text <> "" Then
+                btnBuscar.Enabled = True
+            Else
+                btnBuscar.Enabled = False
+            End If
+
+            If Not IsNothing(modu) Then
+                modu = Nothing
+            End If
+
+            validarTxtBox(txtCodigo)
+
+        Catch ex As Exception
+            txtCodigo.Text = ""
+            btnBuscar.Enabled = False
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 End Class
