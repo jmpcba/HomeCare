@@ -36,13 +36,18 @@
         Set(value As Integer)
             Dim r As DataRow()
             r = _subModulos.Select("codigo = " & value)
-            _codigo = value
-            _descripcion = r(0)("descripcion")
-            _modifUser = r(0)("modifico_usuario")
-            _creoUser = r(0)("cargo_usuario")
-            _fechaCarga = r(0)("fecha_carga")
-            _fechaMod = r(0)("fecha_modificacion")
+            If r.Length = 1 Then
+                _codigo = value
+                _descripcion = r(0)("descripcion")
+                _modifUser = r(0)("modifico_usuario")
+                _creoUser = r(0)("cargo_usuario")
+                _fechaCarga = r(0)("fecha")
+                _fechaMod = r(0)("fecha_modificacion")
+            Else
+                Throw New Exception("Codigo Inexistente")
+            End If
         End Set
+
         Get
             Return _codigo
         End Get

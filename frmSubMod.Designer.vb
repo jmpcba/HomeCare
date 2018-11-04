@@ -31,8 +31,9 @@ Partial Class frmSubMod
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.numTope = New System.Windows.Forms.MaskedTextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtTope = New System.Windows.Forms.TextBox()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnGuardar
@@ -117,29 +118,27 @@ Partial Class frmSubMod
         Me.Label1.TabIndex = 115
         Me.Label1.Text = "SUB-MODULOS"
         '
-        'numTope
-        '
-        Me.numTope.Location = New System.Drawing.Point(173, 240)
-        Me.numTope.Mask = "99999"
-        Me.numTope.Name = "numTope"
-        Me.numTope.Size = New System.Drawing.Size(43, 20)
-        Me.numTope.TabIndex = 2
-        Me.numTope.ValidatingType = GetType(Integer)
-        '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.txtTope)
         Me.Panel1.Location = New System.Drawing.Point(12, 12)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(553, 330)
         Me.Panel1.TabIndex = 116
+        '
+        'txtTope
+        '
+        Me.txtTope.Location = New System.Drawing.Point(160, 223)
+        Me.txtTope.Name = "txtTope"
+        Me.txtTope.Size = New System.Drawing.Size(43, 20)
+        Me.txtTope.TabIndex = 0
         '
         'frmSubMod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.numTope)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtCodigo)
         Me.Controls.Add(Me.txtDescripcion)
@@ -152,6 +151,8 @@ Partial Class frmSubMod
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmSubMod"
         Me.Text = "frmSubMod"
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -166,6 +167,6 @@ Partial Class frmSubMod
     Friend WithEvents Label4 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents numTope As MaskedTextBox
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents txtTope As TextBox
 End Class
