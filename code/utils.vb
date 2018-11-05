@@ -54,9 +54,26 @@ Public Class utils
         End If
     End Sub
 
-    Public Sub validarTxtNum(_txtBox As TextBox)
-        If Not IsNumeric(_txtBox.Text) Then
-            Throw New Exception("Ingrese un valor numerico")
+    Public Sub validarNumerico(_txtBox As TextBox)
+        If _txtBox.Text <> "" Then
+            If Not IsNumeric(_txtBox.Text) Then
+                _txtBox.Text = ""
+                Throw New Exception("Debe ingresar un valor numerico")
+            End If
         End If
+    End Sub
+
+    Public Sub iniciarTxtBoxes(_txtboxes As TextBox())
+        For Each t As TextBox In _txtboxes
+            t.Text = ""
+        Next
+    End Sub
+
+    Public Sub validarTxtBoxLleno(_texboxes As TextBox())
+        For Each t As TextBox In _texboxes
+            If t.Text = "" Then
+                Throw New Exception("Complete todos los campos")
+            End If
+        Next
     End Sub
 End Class

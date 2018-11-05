@@ -1,9 +1,12 @@
 ﻿Public Class frmSubMod
     Dim subMod As subModulo
+    Dim ut As New utils
+    Dim txtBoxes As TextBox()
+
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
             If IsNothing(subMod) Then
-                validarControles()
+                ut.validarTxtBoxLleno(txtBoxes)
                 subMod = New subModulo(txtCodigo.Text, txtDescripcion.Text, txtTope.Text)
                 subMod.insertar()
                 MessageBox.Show("Guardado Exitoso")
@@ -16,6 +19,8 @@
                     subMod.tope = txtTope.Text
                 End If
                 subMod.actualizar()
+                ut.iniciarTxtBoxes(txtBoxes)
+                subMod = Nothing
                 MessageBox.Show("Guardado Exitoso")
             End If
         Catch ex As Exception
@@ -56,15 +61,6 @@
         End If
     End Sub
 
-    Private Sub validarNumerico(_txtBox As TextBox)
-        If _txtBox.Text <> "" Then
-            If Not IsNumeric(_txtBox.Text) Then
-                _txtBox.Text = ""
-                Throw New Exception("Debe ingresar un valor numerico")
-            End If
-        End If
-    End Sub
-
     Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
         Try
             If txtCodigo.Text <> "" Then
@@ -72,7 +68,7 @@
             Else
                 btnBuscar.Enabled = False
             End If
-            validarNumerico(txtCodigo)
+            ut.validarNumerico(txtCodigo)
 
             If Not IsNothing(subMod) Then
                 subMod = Nothing
@@ -87,16 +83,16 @@
 
     Private Sub numTope_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs)
         Try
-            validarNumerico(txtDescripcion)
+            ut.validarNumerico(txtDescripcion)
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
 
     End Sub
 
-    Private Sub txtTope_TextChanged(sender As Object, e As EventArgs) Handles txtTope.TextChanged
+    Private Sub txtTope_TextChanged(sender As Object, e As EventArgs)
         Try
-            validarNumerico(txtTope)
+            ut.validarNumerico(txtTope)
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -104,5 +100,18 @@
 
     Private Sub frmSubMod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnBuscar.Enabled = False
+        txtBoxes = {txtCodigo, txtDescripcion, txtTope}
+    End Sub
+
+    Private Sub txtDescripcion_TextChanged(sender As Object, e As EventArgs) Handles txtDescripcion.TextChanged
+
+    End Sub
+
+    Private Sub txtTope_TextChanged_1(sender As Object, e As EventArgs) Handles txtTope.TextChanged
+        Try
+            ut.validarNumerico(txtTope)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 End Class

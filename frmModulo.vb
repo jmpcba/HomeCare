@@ -1,5 +1,9 @@
 ﻿Public Class frmModulo
+    'cambiar validaciones para que usen el objeto ut
     Dim modu As Modulo
+    Dim ut As New utils
+    Dim txtboxes As TextBox()
+
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
         Try
@@ -85,7 +89,7 @@
         txtCodigo.Select(0, 0)
     End Sub
 
-    Private Sub txtMedico_TextChanged(sender As Object, e As EventArgs) Handles txtMedico.TextChanged
+    Private Sub txtMedico_TextChanged(sender As Object, e As EventArgs)
         Try
             validarTxtBox(txtMedico)
         Catch ex As Exception
@@ -142,9 +146,10 @@
 
     Private Sub frmModulo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnBuscar.Enabled = False
+        txtboxes = {} 'llenar con texboxes
     End Sub
 
-    Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
+    Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs)
         Try
             If txtCodigo.Text <> "" Then
                 btnBuscar.Enabled = True
@@ -163,5 +168,9 @@
             btnBuscar.Enabled = False
             MessageBox.Show(ex.Message)
         End Try
+    End Sub
+
+    Private Sub txtCodigo_TextChanged_1(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
+
     End Sub
 End Class
