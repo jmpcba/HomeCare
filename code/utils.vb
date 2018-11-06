@@ -72,8 +72,16 @@ Public Class utils
     Public Sub validarTxtBoxLleno(_texboxes As TextBox())
         For Each t As TextBox In _texboxes
             If t.Text = "" Then
+                t.Focus()
                 Throw New Exception("Complete todos los campos")
             End If
         Next
+    End Sub
+
+    Public Sub validarLargo(_txtBox As TextBox, _largo As Integer)
+        If _txtBox.Text.Length <> _largo Then
+            _txtBox.Focus()
+            Throw New Exception(String.Format("Ingrese un numero de {0} digitos", _largo.ToString))
+        End If
     End Sub
 End Class

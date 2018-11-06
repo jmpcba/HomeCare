@@ -8,11 +8,16 @@
 
         Try
             If IsNothing(modu) Then
-                validarCampos()
+                ut.validarLargo(txtCodigo, 6)
+                ut.validarTxtBoxLleno(txtboxes)
+
                 modu = New Modulo(txtCodigo.Text, txtMedico.Text, txtEnfermeria.Text, txtKinesio.Text, txtFono.Text, txtCuidador.Text)
                 modu.insertar()
                 MessageBox.Show("Guardado Exitoso")
             Else
+                ut.validarLargo(txtCodigo, 6)
+                ut.validarTxtBoxLleno(txtboxes)
+
                 If txtMedico.Text <> modu.topeMedico Then
                     modu.topeMedico = txtMedico.Text
                 End If
@@ -40,7 +45,7 @@
             End If
 
         Catch ex As Exception
-            If ex.Message.Contains("duplicate values in the index") Then
+            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el indice") Then
                 MessageBox.Show("Ya existe un Modulo con el mismo codigo")
             Else
                 MessageBox.Show(ex.Message)

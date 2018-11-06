@@ -6,12 +6,16 @@
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
             If IsNothing(subMod) Then
+                ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtBoxes)
                 subMod = New subModulo(txtCodigo.Text, txtDescripcion.Text, txtTope.Text)
                 subMod.insertar()
                 MessageBox.Show("Guardado Exitoso")
                 iniciarControles()
             Else
+                ut.validarLargo(txtCodigo, 6)
+                ut.validarTxtBoxLleno(txtBoxes)
+
                 If txtDescripcion.Text <> subMod.descripcion Then
                     subMod.descripcion = txtDescripcion.Text
                 End If
@@ -26,7 +30,7 @@
                 iniciarControles()
             End If
         Catch ex As Exception
-            If ex.Message.Contains("duplicate values in the index") Then
+            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el indice") Then
                 MessageBox.Show("Ya existe un Sub Modulo con el mismo codigo")
             Else
                 MessageBox.Show(ex.Message)
@@ -57,10 +61,7 @@
         txtTope.Text = ""
     End Sub
 
-    Private Sub validarControles()
-        If txtCodigo.Text = "" Or txtDescripcion.Text = "" Or txtTope.Text = "" Then
-            Throw New Exception("Ingrese valores para todos los campos")
-        End If
+    Private Sub validarLargoCodigo()
         If txtCodigo.Text.Length <> 6 Then
             Throw New Exception("El codigo debe tener 6 digitos")
         End If
