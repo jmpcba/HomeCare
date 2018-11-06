@@ -69,10 +69,6 @@
         End Try
     End Sub
 
-    Private Sub txtCodigo_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs)
-        MessageBox.Show("Ingrese un Valor numerico de 6 digitos")
-    End Sub
-
     Public Sub iniciarControles()
         txtCodigo.Text = ""
         txtCuidador.Text = ""

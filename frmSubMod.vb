@@ -10,6 +10,7 @@
                 subMod = New subModulo(txtCodigo.Text, txtDescripcion.Text, txtTope.Text)
                 subMod.insertar()
                 MessageBox.Show("Guardado Exitoso")
+                iniciarControles()
             Else
                 If txtDescripcion.Text <> subMod.descripcion Then
                     subMod.descripcion = txtDescripcion.Text
@@ -22,6 +23,7 @@
                 ut.iniciarTxtBoxes(txtBoxes)
                 subMod = Nothing
                 MessageBox.Show("Guardado Exitoso")
+                iniciarControles()
             End If
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Then
@@ -58,6 +60,9 @@
     Private Sub validarControles()
         If txtCodigo.Text = "" Or txtDescripcion.Text = "" Or txtTope.Text = "" Then
             Throw New Exception("Ingrese valores para todos los campos")
+        End If
+        If txtCodigo.Text.Length <> 6 Then
+            Throw New Exception("El codigo debe tener 6 digitos")
         End If
     End Sub
 
