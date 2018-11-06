@@ -44,8 +44,6 @@
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         My.Settings.Item("HomeCareConnectionString") = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)
-
-
     End Sub
 
     Private Sub BaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -56,6 +54,11 @@
             MessageBox.Show("ERROR: " & ex.Message)
         End Try
 
+    End Sub
+
+    Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
+        ' Me.Close()
+        End
     End Sub
 
 

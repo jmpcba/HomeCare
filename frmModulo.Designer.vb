@@ -214,7 +214,7 @@ Partial Class frmModulo
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Location = New System.Drawing.Point(12, 21)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(512, 460)
+        Me.Panel1.Size = New System.Drawing.Size(574, 460)
         Me.Panel1.TabIndex = 123
         '
         'frmModulo

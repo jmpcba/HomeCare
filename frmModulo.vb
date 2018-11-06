@@ -11,10 +11,7 @@
                 validarCampos()
                 modu = New Modulo(txtCodigo.Text, txtMedico.Text, txtEnfermeria.Text, txtKinesio.Text, txtFono.Text, txtCuidador.Text)
                 modu.insertar()
-                iniciarControles()
                 MessageBox.Show("Guardado Exitoso")
-                txtCodigo.Text = ""
-
             Else
                 If txtMedico.Text <> modu.topeMedico Then
                     modu.topeMedico = txtMedico.Text
@@ -37,6 +34,8 @@
                 End If
 
                 modu.actualizar()
+                ut.iniciarTxtBoxes(txtboxes)
+                modu = Nothing
                 MessageBox.Show("Guardado Exitoso")
             End If
 
@@ -51,7 +50,6 @@
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Me.Close()
-
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -59,15 +57,15 @@
             modu = New Modulo
             modu.codigo = txtCodigo.Text
             txtCuidador.Text = modu.topeCuidador
-            'txtDescripcion.Text=
+            ' txtDescripcion.Text = modu.descripcion
             txtEnfermeria.Text = modu.topeEnfermeria
             txtFono.Text = modu.topeFono
             txtKinesio.Text = modu.topeKinesio
             txtMedico.Text = modu.topeMedico
         Catch ex As Exception
             MessageBox.Show(ex.Message)
-            iniciarControles()
             modu = Nothing
+            iniciarControles()
         End Try
     End Sub
 
@@ -89,32 +87,30 @@
         txtCodigo.Select(0, 0)
     End Sub
 
+    Private Sub validarCampos()
+        If (txtCodigo.Text = "" Or txtDescripcion.Text = "") Then
+            Throw New Exception("Complete los campos necesarios")
+        End If
+        If (txtMedico.Text = "" And txtEnfermeria.Text = "" And txtKinesio.Text = "" And txtFono.Text = "" And txtCuidador.Text = "") Then
+            Throw New Exception("Debe cargar algún tope")
+        End If
+        If txtCodigo.Text.Length <> 6 Then
+            Throw New Exception("El codigo debe tener 6 digitos")
+        End If
+    End Sub
+
     Private Sub txtMedico_TextChanged(sender As Object, e As EventArgs)
         Try
-            validarTxtBox(txtMedico)
+            ut.validarNumerico(txtMedico)
+
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
     End Sub
 
-    Private Sub validarTxtBox(_txtBox As TextBox)
-        If _txtBox.Text <> "" Then
-            If Not IsNumeric(_txtBox.Text) Then
-                _txtBox.Text = ""
-                Throw New Exception("Ingrese un valor numerico")
-            End If
-        End If
-    End Sub
-
-    Private Sub validarCampos()
-        If txtCodigo.Text = "" Or txtDescripcion.Text = "" Or txtMedico.Text = "" Or txtEnfermeria.Text = "" Or txtKinesio.Text = "" Or txtFono.Text = "" Or txtCuidador.Text = "" Then
-            Throw New Exception("Complete todos los campos")
-        End If
-    End Sub
-
     Private Sub txtEnfermeria_TextChanged(sender As Object, e As EventArgs) Handles txtEnfermeria.TextChanged
         Try
-            validarTxtBox(txtEnfermeria)
+            ut.validarNumerico(txtEnfermeria)
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -122,7 +118,7 @@
 
     Private Sub txtKinesio_TextChanged(sender As Object, e As EventArgs) Handles txtKinesio.TextChanged
         Try
-            validarTxtBox(txtKinesio)
+            ut.validarNumerico(txtKinesio)
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -130,7 +126,7 @@
 
     Private Sub txtFono_TextChanged(sender As Object, e As EventArgs) Handles txtFono.TextChanged
         Try
-            validarTxtBox(txtFono)
+            ut.validarNumerico(txtFono)
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -138,7 +134,7 @@
 
     Private Sub txtCuidador_TextChanged(sender As Object, e As EventArgs) Handles txtCuidador.TextChanged
         Try
-            validarTxtBox(txtCuidador)
+            ut.validarNumerico(txtCuidador)
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -146,10 +142,10 @@
 
     Private Sub frmModulo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnBuscar.Enabled = False
-        txtboxes = {} 'llenar con texboxes
+        txtboxes = {txtCodigo, txtDescripcion, txtMedico, txtEnfermeria, txtKinesio, txtFono, txtCuidador}
     End Sub
 
-    Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs)
+   Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
         Try
             If txtCodigo.Text <> "" Then
                 btnBuscar.Enabled = True
@@ -161,7 +157,7 @@
                 modu = Nothing
             End If
 
-            validarTxtBox(txtCodigo)
+            ut.validarNumerico(txtCodigo)
 
         Catch ex As Exception
             txtCodigo.Text = ""
@@ -170,7 +166,4 @@
         End Try
     End Sub
 
-    Private Sub txtCodigo_TextChanged_1(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
-
-    End Sub
 End Class
