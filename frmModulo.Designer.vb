@@ -39,10 +39,9 @@ Partial Class frmModulo
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtMedico = New System.Windows.Forms.TextBox()
         Me.txtCodigo = New System.Windows.Forms.TextBox()
-        Me.Panel2.SuspendLayout()
+        Me.txtMedico = New System.Windows.Forms.TextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.SuspendLayout()
         '
         'btnCerrar
@@ -52,7 +51,7 @@ Partial Class frmModulo
         Me.btnCerrar.Location = New System.Drawing.Point(687, 258)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
-        Me.btnCerrar.TabIndex = 7
+        Me.btnCerrar.TabIndex = 43
         Me.btnCerrar.Text = "&CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = False
         '
@@ -62,7 +61,7 @@ Partial Class frmModulo
         Me.btnGuardar.Location = New System.Drawing.Point(687, 182)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
-        Me.btnGuardar.TabIndex = 6
+        Me.btnGuardar.TabIndex = 42
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
@@ -72,7 +71,7 @@ Partial Class frmModulo
         Me.btnBuscar.Location = New System.Drawing.Point(687, 104)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(106, 33)
-        Me.btnBuscar.TabIndex = 5
+        Me.btnBuscar.TabIndex = 41
         Me.btnBuscar.Text = "&BUSCAR"
         Me.btnBuscar.UseVisualStyleBackColor = True
         '
@@ -81,7 +80,7 @@ Partial Class frmModulo
         Me.txtEnfermeria.Location = New System.Drawing.Point(239, 294)
         Me.txtEnfermeria.Name = "txtEnfermeria"
         Me.txtEnfermeria.Size = New System.Drawing.Size(121, 20)
-        Me.txtEnfermeria.TabIndex = 1
+        Me.txtEnfermeria.TabIndex = 3
         '
         'Label3
         '
@@ -97,14 +96,14 @@ Partial Class frmModulo
         Me.txtKinesio.Location = New System.Drawing.Point(239, 331)
         Me.txtKinesio.Name = "txtKinesio"
         Me.txtKinesio.Size = New System.Drawing.Size(121, 20)
-        Me.txtKinesio.TabIndex = 2
+        Me.txtKinesio.TabIndex = 4
         '
         'txtFono
         '
         Me.txtFono.Location = New System.Drawing.Point(239, 365)
         Me.txtFono.Name = "txtFono"
         Me.txtFono.Size = New System.Drawing.Size(121, 20)
-        Me.txtFono.TabIndex = 3
+        Me.txtFono.TabIndex = 5
         '
         'Label4
         '
@@ -120,7 +119,7 @@ Partial Class frmModulo
         Me.txtCuidador.Location = New System.Drawing.Point(239, 401)
         Me.txtCuidador.Name = "txtCuidador"
         Me.txtCuidador.Size = New System.Drawing.Size(121, 20)
-        Me.txtCuidador.TabIndex = 4
+        Me.txtCuidador.TabIndex = 6
         '
         'Label5
         '
@@ -196,35 +195,35 @@ Partial Class frmModulo
         Me.Label9.TabIndex = 122
         Me.Label9.Text = "TOPES   MENSUALES"
         '
-        'Panel2
+        'txtCodigo
         '
-        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel2.Controls.Add(Me.txtCodigo)
-        Me.Panel2.Controls.Add(Me.txtMedico)
-        Me.Panel2.Location = New System.Drawing.Point(12, 22)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(518, 474)
-        Me.Panel2.TabIndex = 123
+        Me.txtCodigo.Location = New System.Drawing.Point(140, 104)
+        Me.txtCodigo.Name = "txtCodigo"
+        Me.txtCodigo.Size = New System.Drawing.Size(121, 20)
+        Me.txtCodigo.TabIndex = 0
         '
         'txtMedico
         '
-        Me.txtMedico.Location = New System.Drawing.Point(226, 235)
+        Me.txtMedico.Location = New System.Drawing.Point(239, 255)
         Me.txtMedico.Name = "txtMedico"
         Me.txtMedico.Size = New System.Drawing.Size(121, 20)
-        Me.txtMedico.TabIndex = 0
+        Me.txtMedico.TabIndex = 2
         '
-        'txtCodigo
+        'Panel1
         '
-        Me.txtCodigo.Location = New System.Drawing.Point(127, 77)
-        Me.txtCodigo.Name = "txtCodigo"
-        Me.txtCodigo.Size = New System.Drawing.Size(100, 20)
-        Me.txtCodigo.TabIndex = 1
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Location = New System.Drawing.Point(12, 21)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(574, 460)
+        Me.Panel1.TabIndex = 123
         '
         'frmModulo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(914, 542)
+        Me.Controls.Add(Me.txtMedico)
+        Me.Controls.Add(Me.txtCodigo)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.txtDescripcion)
         Me.Controls.Add(Me.Label8)
@@ -242,11 +241,9 @@ Partial Class frmModulo
         Me.Controls.Add(Me.btnBuscar)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.btnCerrar)
-        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel1)
         Me.Name = "frmModulo"
-        Me.Text = "frmPrestadores"
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.Text = "frmModulos"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -268,7 +265,7 @@ Partial Class frmModulo
     Friend WithEvents Label8 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents txtMedico As TextBox
     Friend WithEvents txtCodigo As TextBox
+    Friend WithEvents txtMedico As TextBox
+    Friend WithEvents Panel1 As Panel
 End Class
