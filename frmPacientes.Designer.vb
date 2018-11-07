@@ -23,9 +23,8 @@ Partial Class frmPacientes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.btnBuscar = New System.Windows.Forms.Button()
-        Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.numDni = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.txtApellido = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -35,14 +34,19 @@ Partial Class frmPacientes
         Me.numAfiliado = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.numDni = New System.Windows.Forms.TextBox()
+        Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.btnBuscar = New System.Windows.Forms.Button()
+        Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtLocalidad = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.txtLocalidad)
+        Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.numDni)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.txtApellido)
@@ -56,8 +60,99 @@ Partial Class frmPacientes
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Location = New System.Drawing.Point(17, 16)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(631, 419)
+        Me.Panel1.Size = New System.Drawing.Size(667, 366)
         Me.Panel1.TabIndex = 0
+        '
+        'numDni
+        '
+        Me.numDni.Location = New System.Drawing.Point(389, 98)
+        Me.numDni.Name = "numDni"
+        Me.numDni.Size = New System.Drawing.Size(121, 20)
+        Me.numDni.TabIndex = 1
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(314, 101)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(35, 13)
+        Me.Label6.TabIndex = 32
+        Me.Label6.Text = "D.N.I."
+        '
+        'txtApellido
+        '
+        Me.txtApellido.Location = New System.Drawing.Point(389, 178)
+        Me.txtApellido.Name = "txtApellido"
+        Me.txtApellido.Size = New System.Drawing.Size(219, 20)
+        Me.txtApellido.TabIndex = 3
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(314, 181)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(59, 13)
+        Me.Label3.TabIndex = 31
+        Me.Label3.Text = "APELLIDO"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(6, 181)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(54, 13)
+        Me.Label1.TabIndex = 30
+        Me.Label1.Text = "NOMBRE"
+        '
+        'txtNombre
+        '
+        Me.txtNombre.Location = New System.Drawing.Point(97, 178)
+        Me.txtNombre.Name = "txtNombre"
+        Me.txtNombre.Size = New System.Drawing.Size(197, 20)
+        Me.txtNombre.TabIndex = 2
+        '
+        'txtObSocial
+        '
+        Me.txtObSocial.Location = New System.Drawing.Point(97, 249)
+        Me.txtObSocial.Name = "txtObSocial"
+        Me.txtObSocial.Size = New System.Drawing.Size(121, 20)
+        Me.txtObSocial.TabIndex = 4
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(6, 256)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(78, 13)
+        Me.Label5.TabIndex = 27
+        Me.Label5.Text = "OBRA SOCIAL"
+        '
+        'numAfiliado
+        '
+        Me.numAfiliado.Location = New System.Drawing.Point(97, 95)
+        Me.numAfiliado.Name = "numAfiliado"
+        Me.numAfiliado.Size = New System.Drawing.Size(121, 20)
+        Me.numAfiliado.TabIndex = 0
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(6, 98)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(85, 13)
+        Me.Label4.TabIndex = 25
+        Me.Label4.Text = "NRO. AFILIADO"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Red
+        Me.Label2.Location = New System.Drawing.Point(3, 33)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(112, 24)
+        Me.Label2.TabIndex = 24
+        Me.Label2.Text = "PACIENTE"
         '
         'btnCerrar
         '
@@ -90,96 +185,21 @@ Partial Class frmPacientes
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
-        'txtApellido
+        'Label7
         '
-        Me.txtApellido.Location = New System.Drawing.Point(389, 146)
-        Me.txtApellido.Name = "txtApellido"
-        Me.txtApellido.Size = New System.Drawing.Size(219, 20)
-        Me.txtApellido.TabIndex = 3
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(314, 252)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(67, 13)
+        Me.Label7.TabIndex = 33
+        Me.Label7.Text = "LOCALIDAD"
         '
-        'Label3
+        'txtLocalidad
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(324, 149)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(59, 13)
-        Me.Label3.TabIndex = 31
-        Me.Label3.Text = "APELLIDO"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 149)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(54, 13)
-        Me.Label1.TabIndex = 30
-        Me.Label1.Text = "NOMBRE"
-        '
-        'txtNombre
-        '
-        Me.txtNombre.Location = New System.Drawing.Point(111, 146)
-        Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(197, 20)
-        Me.txtNombre.TabIndex = 2
-        '
-        'txtObSocial
-        '
-        Me.txtObSocial.Location = New System.Drawing.Point(111, 211)
-        Me.txtObSocial.Name = "txtObSocial"
-        Me.txtObSocial.Size = New System.Drawing.Size(121, 20)
-        Me.txtObSocial.TabIndex = 4
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 218)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(78, 13)
-        Me.Label5.TabIndex = 27
-        Me.Label5.Text = "OBRA SOCIAL"
-        '
-        'numAfiliado
-        '
-        Me.numAfiliado.Location = New System.Drawing.Point(111, 98)
-        Me.numAfiliado.Name = "numAfiliado"
-        Me.numAfiliado.Size = New System.Drawing.Size(121, 20)
-        Me.numAfiliado.TabIndex = 0
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 98)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(85, 13)
-        Me.Label4.TabIndex = 25
-        Me.Label4.Text = "NRO. AFILIADO"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Red
-        Me.Label2.Location = New System.Drawing.Point(3, 17)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(112, 24)
-        Me.Label2.TabIndex = 24
-        Me.Label2.Text = "PACIENTE"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(324, 101)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(35, 13)
-        Me.Label6.TabIndex = 32
-        Me.Label6.Text = "D.N.I."
-        '
-        'numDni
-        '
-        Me.numDni.Location = New System.Drawing.Point(389, 98)
-        Me.numDni.Name = "numDni"
-        Me.numDni.Size = New System.Drawing.Size(121, 20)
-        Me.numDni.TabIndex = 1
+        Me.txtLocalidad.Location = New System.Drawing.Point(389, 249)
+        Me.txtLocalidad.Name = "txtLocalidad"
+        Me.txtLocalidad.Size = New System.Drawing.Size(219, 20)
+        Me.txtLocalidad.TabIndex = 5
         '
         'frmPacientes
         '
@@ -213,4 +233,6 @@ Partial Class frmPacientes
     Friend WithEvents Label2 As Label
     Friend WithEvents numDni As TextBox
     Friend WithEvents Label6 As Label
+    Friend WithEvents txtLocalidad As TextBox
+    Friend WithEvents Label7 As Label
 End Class
