@@ -1,6 +1,6 @@
 ﻿Public Class Paciente
 
-    Private _pacientes As DataTable
+    Private _paciente As DataTable
     Private _user As Usuario
 
     Private _dni As Integer
@@ -18,7 +18,7 @@
     Public Sub New()
         Dim db = New DB()
         Try
-            _pacientes = db.getTable(DB.tablas.pacientes)
+            _paciente = db.getTable(DB.tablas.pacientes)
         Catch ex As Exception
             Throw
         End Try
@@ -51,7 +51,7 @@
     Public Property afiliado As Integer
         Set(value As Integer)
             Dim r As DataRow()
-            r = _pacientes.Select("afiliado=" & value)
+            r = _paciente.Select("afiliado=" & value)
             _afiliado = r(0)("afiliado")
             _dni = r(0)("dni")
             _nombre = r(0)("nombre")
@@ -105,4 +105,28 @@
 
     End Property
 
+    Public Sub insertar()
+        Try
+            Dim db = New DB
+            db.insertar(Me)
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+    Public Sub actualizar()
+        Dim db = New DB
+        Try
+            If _modificado Then
+                _fechaMod = Date.Today
+                _modifUser = _user.dni
+                db.actualizar(Me)
+            Else
+                Throw New Exception("No se realizaron modificaciones")
+            End If
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
 End Class

@@ -61,12 +61,6 @@
         txtTope.Text = ""
     End Sub
 
-    Private Sub validarLargoCodigo()
-        If txtCodigo.Text.Length <> 6 Then
-            Throw New Exception("El codigo debe tener 6 digitos")
-        End If
-    End Sub
-
     Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
         Try
             If txtCodigo.Text <> "" Then

@@ -173,6 +173,14 @@ Public Class DB
 
     End Sub
 
+    Friend Sub insertar(_paciente As Paciente)
+
+    End Sub
+
+    Friend Sub insertar(_prestador As Prestador)
+
+    End Sub
+
     Friend Sub insertar(_subMod As subModulo)
         Dim query = String.Format("INSERT INTO SUBMODULO (CODIGO, DESCRIPCION, CARGO_USUARIO, FECHA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ({0}, '{1}', {2}, #{3}#, {4}, #{5}#)", _subMod.codigo, _subMod.descripcion, _subMod.creoUser, _subMod.fechaCarga.ToShortDateString, _subMod.modifUser, _subMod.fechaMod.ToShortDateString)
 
@@ -205,6 +213,16 @@ Public Class DB
         End Try
     End Sub
 
+    Friend Sub actualizar(_paciente As Paciente)
+
+    End Sub
+
+    Friend Sub actualizar(_prestador As Prestador)
+
+    End Sub
+    Friend Sub actualizar(_prestacion As Prestacion)
+
+    End Sub
     Friend Sub actualizar(_subMod As subModulo)
         Dim query = String.Format("UPDATE SUBMODULO SET DESCRIPCION='{0}', MODIFICO_USUARIO={1}, FECHA_MODIFICACION=#{2}# WHERE CODIGO = {3}", _subMod.descripcion, _subMod.modifUser, _subMod.fechaMod.ToShortDateString, _subMod.codigo)
 

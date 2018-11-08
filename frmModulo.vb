@@ -14,6 +14,7 @@
                 modu = New Modulo(txtCodigo.Text, txtMedico.Text, txtEnfermeria.Text, txtKinesio.Text, txtFono.Text, txtCuidador.Text)
                 modu.insertar()
                 MessageBox.Show("Guardado Exitoso")
+                ut.iniciarTxtBoxes(txtboxes)
             Else
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtboxes)
