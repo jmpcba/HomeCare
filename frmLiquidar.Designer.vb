@@ -28,9 +28,9 @@ Partial Class frmLiquidar
         Me.gridLiqui = New System.Windows.Forms.DataGridView()
         Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
         Me.HomeCareDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.comboMeses = New System.Windows.Forms.ComboBox()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         CType(Me.gridLiqui, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -75,14 +75,6 @@ Partial Class frmLiquidar
         Me.HomeCareDataSetBindingSource.DataSource = Me.HomeCareDataSet
         Me.HomeCareDataSetBindingSource.Position = 0
         '
-        'comboMeses
-        '
-        Me.comboMeses.FormattingEnabled = True
-        Me.comboMeses.Location = New System.Drawing.Point(175, 87)
-        Me.comboMeses.Name = "comboMeses"
-        Me.comboMeses.Size = New System.Drawing.Size(136, 21)
-        Me.comboMeses.TabIndex = 0
-        '
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -105,14 +97,22 @@ Partial Class frmLiquidar
         Me.btnCerrar.Text = "&CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = False
         '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.CustomFormat = "MMM/YYYY"
+        Me.DateTimePicker1.Location = New System.Drawing.Point(145, 84)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker1.TabIndex = 110
+        '
         'frmLiquidar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(937, 501)
+        Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.btnCerrar)
-        Me.Controls.Add(Me.comboMeses)
         Me.Controls.Add(Me.gridLiqui)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label1)
@@ -131,7 +131,7 @@ Partial Class frmLiquidar
     Friend WithEvents gridLiqui As DataGridView
     Friend WithEvents HomeCareDataSet As HomeCareDataSet
     Friend WithEvents HomeCareDataSetBindingSource As BindingSource
-    Friend WithEvents comboMeses As ComboBox
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnCerrar As Button
+    Friend WithEvents DateTimePicker1 As DateTimePicker
 End Class

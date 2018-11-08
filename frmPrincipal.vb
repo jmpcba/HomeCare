@@ -13,7 +13,7 @@
         frmVerificar.Show()
     End Sub
     Private Sub btnNvaLiq_Click(sender As Object, e As EventArgs) Handles btnNvaLiq.Click
-        frmNvaLiq.Show()
+        frmLiquidacion.Show()
     End Sub
     Private Sub btnCierreLiq_Click(sender As Object, e As EventArgs) Handles btnCierreLiq.Click
         frmCierreLiq.Show()
