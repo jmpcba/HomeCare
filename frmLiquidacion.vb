@@ -217,4 +217,17 @@
         bs.Filter = Nothing
         dgPaciente.DataSource = bs
     End Sub
+
+    Private Sub tabMedico_Click(sender As Object, e As EventArgs) Handles tabMedico.Click
+
+    End Sub
+
+    Private Sub dgPrestador_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgPrestador.CellDoubleClick
+        Dim r As DataGridViewRow
+        r = dgPrestador.Rows(e.RowIndex)
+        Dim frmDetalle As New frmLiquidacionDetalle(r.Cells("CUIT").Value, dtPrestador.Value)
+
+        frmDetalle.Show()
+
+    End Sub
 End Class

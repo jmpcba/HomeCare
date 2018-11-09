@@ -38,7 +38,7 @@ Public Class frmPracticas
 
             statusBar("CARGA INICIAL", False)
 
-            DTFecha.CustomFormat = " MMMM - yyyy"
+            DTFecha.CustomFormat = "MMMM - yyyy"
             lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
 
             ut = New utils
