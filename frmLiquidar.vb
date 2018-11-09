@@ -24,6 +24,9 @@
 
             If dt.Rows.Count <> 0 Then
                 .Columns.Insert(0, chkclm)
+                btnGuardar.Enabled = True
+            Else
+                btnGuardar.Enabled = False
             End If
 
             .DataSource = dt
@@ -40,6 +43,7 @@
     End Sub
 
     Private Sub frmLiquidar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        btnGuardar.Enabled = False
         grilla()
         Me.WindowState = FormWindowState.Maximized
     End Sub
@@ -71,6 +75,14 @@
 
         For Each r As DataGridViewRow In gridLiqui.Rows
             r.Cells(0).Value = sel
+        Next
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        For Each r As DataGridViewRow In gridLiqui.Rows
+            If r.Cells(0).Value Then
+
+            End If
         Next
     End Sub
 End Class
