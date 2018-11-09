@@ -30,7 +30,7 @@
                 iniciarControles()
             End If
         Catch ex As Exception
-            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el indice") Then
+            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
                 MessageBox.Show("Ya existe un Sub Modulo con el mismo codigo")
             Else
                 MessageBox.Show(ex.Message)
@@ -59,12 +59,6 @@
         txtCodigo.Text = ""
         txtDescripcion.Text = ""
         txtTope.Text = ""
-    End Sub
-
-    Private Sub validarLargoCodigo()
-        If txtCodigo.Text.Length <> 6 Then
-            Throw New Exception("El codigo debe tener 6 digitos")
-        End If
     End Sub
 
     Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged

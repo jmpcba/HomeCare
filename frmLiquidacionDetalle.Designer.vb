@@ -22,63 +22,50 @@ Partial Class frmLiquidacionDetalle
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.grDetalleLiquidacion = New System.Windows.Forms.DataGridView()
-        Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        CType(Me.grDetalleLiquidacion, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dgDetalle = New System.Windows.Forms.DataGridView()
+        Me.lblDetalle = New System.Windows.Forms.Label()
+        CType(Me.dgDetalle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'grDetalleLiquidacion
+        'dgDetalle
         '
-        Me.grDetalleLiquidacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grDetalleLiquidacion.Location = New System.Drawing.Point(12, 58)
-        Me.grDetalleLiquidacion.Name = "grDetalleLiquidacion"
-        Me.grDetalleLiquidacion.Size = New System.Drawing.Size(676, 406)
-        Me.grDetalleLiquidacion.TabIndex = 0
+        Me.dgDetalle.AllowUserToAddRows = False
+        Me.dgDetalle.AllowUserToDeleteRows = False
+        Me.dgDetalle.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgDetalle.Location = New System.Drawing.Point(13, 36)
+        Me.dgDetalle.Name = "dgDetalle"
+        Me.dgDetalle.Size = New System.Drawing.Size(766, 429)
+        Me.dgDetalle.TabIndex = 0
         '
-        'btnCerrar
+        'lblDetalle
         '
-        Me.btnCerrar.Location = New System.Drawing.Point(613, 12)
-        Me.btnCerrar.Name = "btnCerrar"
-        Me.btnCerrar.Size = New System.Drawing.Size(75, 23)
-        Me.btnCerrar.TabIndex = 1
-        Me.btnCerrar.Text = "&CERRAR"
-        Me.btnCerrar.UseVisualStyleBackColor = True
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(77, 14)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 2
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(337, 15)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox2.TabIndex = 3
+        Me.lblDetalle.AutoSize = True
+        Me.lblDetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDetalle.ForeColor = System.Drawing.Color.Red
+        Me.lblDetalle.Location = New System.Drawing.Point(12, 9)
+        Me.lblDetalle.Name = "lblDetalle"
+        Me.lblDetalle.Size = New System.Drawing.Size(101, 24)
+        Me.lblDetalle.TabIndex = 105
+        Me.lblDetalle.Text = "DETALLE"
         '
         'frmLiquidacionDetalle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(700, 476)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.btnCerrar)
-        Me.Controls.Add(Me.grDetalleLiquidacion)
+        Me.ClientSize = New System.Drawing.Size(791, 477)
+        Me.Controls.Add(Me.lblDetalle)
+        Me.Controls.Add(Me.dgDetalle)
         Me.Name = "frmLiquidacionDetalle"
         Me.Text = "frmLiquidacionDetalle"
-        CType(Me.grDetalleLiquidacion, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgDetalle, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents grDetalleLiquidacion As DataGridView
-    Friend WithEvents btnCerrar As Button
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents dgDetalle As DataGridView
+    Friend WithEvents lblDetalle As Label
 End Class

@@ -14,6 +14,7 @@
                 modu = New Modulo(txtCodigo.Text, txtMedico.Text, txtEnfermeria.Text, txtKinesio.Text, txtFono.Text, txtCuidador.Text)
                 modu.insertar()
                 MessageBox.Show("Guardado Exitoso")
+                ut.iniciarTxtBoxes(txtboxes)
             Else
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtboxes)
@@ -45,7 +46,7 @@
             End If
 
         Catch ex As Exception
-            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el indice") Then
+            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
                 MessageBox.Show("Ya existe un Modulo con el mismo codigo")
             Else
                 MessageBox.Show(ex.Message)
