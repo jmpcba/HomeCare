@@ -79,6 +79,28 @@ Public Class DB
 
     End Function
 
+    Friend Function liquidacion(cuit As String, _fecha As Date) As DataTable
+        Dim desde As String
+        Dim hasta As String
+
+        desde = String.Format("1/{0}/{1}", _fecha.Month, _fecha.Year)
+        hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandText = "QUERY_DETALLES"
+        cmd.Parameters.AddWithValue("P_CUIT", cuit)
+        cmd.Parameters.AddWithValue("DESDE", desde)
+        cmd.Parameters.AddWithValue("HASTA", hasta)
+
+        Try
+            da.Fill(ds, "LIQUIDACION")
+            Return ds.Tables("LIQUIDACION")
+        Catch ex As Exception
+            Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        End Try
+
+    End Function
+
     Friend Sub eliminar(_visita As Practica)
         Try
             'Dim query = "DELETE FROM VISITAS WHERE ID=" & _visita.id

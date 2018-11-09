@@ -103,6 +103,12 @@
     <Compile Include="frmInformes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmLiquidacionDetalle.Designer.vb">
+      <DependentUpon>frmLiquidacionDetalle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLiquidacionDetalle.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmLiquidar.Designer.vb">
       <DependentUpon>frmLiquidar.vb</DependentUpon>
     </Compile>
@@ -194,6 +200,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLiquidacionDetalle.resx">
+      <DependentUpon>frmLiquidacionDetalle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLiquidar.resx">
       <DependentUpon>frmLiquidar.vb</DependentUpon>
