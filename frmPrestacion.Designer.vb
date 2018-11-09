@@ -25,7 +25,7 @@ Partial Class frmPrestacion
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtDescri = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.numACod = New System.Windows.Forms.TextBox()
+        Me.numPresCod = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
@@ -60,12 +60,12 @@ Partial Class frmPrestacion
         Me.Label6.TabIndex = 36
         Me.Label6.Text = "DESCRIPCION"
         '
-        'numACod
+        'numPresCod
         '
-        Me.numACod.Location = New System.Drawing.Point(184, 156)
-        Me.numACod.Name = "numACod"
-        Me.numACod.Size = New System.Drawing.Size(121, 20)
-        Me.numACod.TabIndex = 0
+        Me.numPresCod.Location = New System.Drawing.Point(184, 156)
+        Me.numPresCod.Name = "numPresCod"
+        Me.numPresCod.Size = New System.Drawing.Size(121, 20)
+        Me.numPresCod.TabIndex = 0
         '
         'Label4
         '
@@ -125,7 +125,7 @@ Partial Class frmPrestacion
         Me.Controls.Add(Me.btnBuscar)
         Me.Controls.Add(Me.txtDescri)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.numACod)
+        Me.Controls.Add(Me.numPresCod)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel1)
@@ -139,7 +139,7 @@ Partial Class frmPrestacion
     Friend WithEvents Label2 As Label
     Friend WithEvents txtDescri As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents numACod As TextBox
+    Friend WithEvents numPresCod As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents btnCerrar As Button
     Friend WithEvents btnGuardar As Button

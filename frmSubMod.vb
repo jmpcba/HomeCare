@@ -38,10 +38,6 @@
         End Try
     End Sub
 
-    Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
-        Me.Close()
-    End Sub
-
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Try
             subMod = New subModulo
@@ -81,15 +77,6 @@
         End Try
     End Sub
 
-    Private Sub numTope_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs)
-        Try
-            ut.validarNumerico(txtDescripcion)
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-
-    End Sub
-
     Private Sub txtTope_TextChanged(sender As Object, e As EventArgs)
         Try
             ut.validarNumerico(txtTope)
@@ -114,4 +101,9 @@
             MessageBox.Show(ex.Message)
         End Try
     End Sub
+
+    Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
+        Me.Close()
+    End Sub
+
 End Class

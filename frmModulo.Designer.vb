@@ -243,7 +243,7 @@ Partial Class frmModulo
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmModulo"
-        Me.Text = "frmModulos"
+        Me.Text = "frmModulo"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

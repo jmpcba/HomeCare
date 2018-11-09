@@ -23,6 +23,8 @@ Partial Class frmPacientes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtLocalidad = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.numDni = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtApellido = New System.Windows.Forms.TextBox()
@@ -37,8 +39,6 @@ Partial Class frmPacientes
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtLocalidad = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -62,6 +62,22 @@ Partial Class frmPacientes
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(667, 366)
         Me.Panel1.TabIndex = 0
+        '
+        'txtLocalidad
+        '
+        Me.txtLocalidad.Location = New System.Drawing.Point(389, 249)
+        Me.txtLocalidad.Name = "txtLocalidad"
+        Me.txtLocalidad.Size = New System.Drawing.Size(219, 20)
+        Me.txtLocalidad.TabIndex = 5
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(314, 252)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(67, 13)
+        Me.Label7.TabIndex = 33
+        Me.Label7.Text = "LOCALIDAD"
         '
         'numDni
         '
@@ -184,22 +200,6 @@ Partial Class frmPacientes
         Me.btnGuardar.TabIndex = 41
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(314, 252)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(67, 13)
-        Me.Label7.TabIndex = 33
-        Me.Label7.Text = "LOCALIDAD"
-        '
-        'txtLocalidad
-        '
-        Me.txtLocalidad.Location = New System.Drawing.Point(389, 249)
-        Me.txtLocalidad.Name = "txtLocalidad"
-        Me.txtLocalidad.Size = New System.Drawing.Size(219, 20)
-        Me.txtLocalidad.TabIndex = 5
         '
         'frmPacientes
         '
