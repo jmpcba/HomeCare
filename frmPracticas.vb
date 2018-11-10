@@ -153,7 +153,7 @@ Public Class frmPracticas
                             err = True
                             r.DefaultCellStyle.BackColor = Color.Red
                             r.DefaultCellStyle.ForeColor = Color.Black
-                            If ex.Message.Contains("duplicate values in the index") Then
+                            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
                                 r.Cells("RESULTADO CARGA").Value = "Ya existe una practica igual para este dia"
                             Else
                                 r.Cells("RESULTADO CARGA").Value = ex.Message
@@ -174,7 +174,11 @@ Public Class frmPracticas
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
         Finally
-            dgFechas.Columns("RESULTADO CARGA").ReadOnly = True
+            With dgFechas
+                .Columns("RESULTADO CARGA").ReadOnly = True
+                .AutoResizeColumns()
+                .AutoResizeRows()
+            End With
 
         End Try
     End Sub

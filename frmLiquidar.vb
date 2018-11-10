@@ -10,6 +10,8 @@
         Dim dt As New DataTable
         dt = db.getLiquidacion(mes, DB.tiposLiquidacion.medico)
 
+        dt.Columns.Add("RESULTADO CARGA")
+
 
         Dim chkclm As New DataGridViewCheckBoxColumn
 
@@ -25,11 +27,14 @@
             If dt.Rows.Count <> 0 Then
                 .Columns.Insert(0, chkclm)
                 btnGuardar.Enabled = True
+                btnSelec.Enabled = True
             Else
                 btnGuardar.Enabled = False
+                btnSelec.Enabled = False
             End If
 
             .DataSource = dt
+            .Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
             .AutoResizeColumns()
             .AutoResizeRows()
         End With
@@ -79,10 +84,39 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        For Each r As DataGridViewRow In gridLiqui.Rows
-            If r.Cells(0).Value Then
+        Dim mes As New Date(dtMes.Value.Year, dtMes.Value.Month, Date.DaysInMonth(dtMes.Value.Year, dtMes.Value.Month))
 
-            End If
-        Next
+        Try
+            gridLiqui.Columns("RESULTADO CARGA").ReadOnly = False
+
+            For Each r As DataGridViewRow In gridLiqui.Rows
+                If r.Cells(0).Value Then
+                    Try
+                        Dim liq = New Liquidacion(r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value)
+                        liq.liquidar()
+                        gridLiqui.Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.Green
+                        r.Cells("RESULTADO CARGA").Value = "Cargado"
+                        r.DefaultCellStyle.BackColor = Color.LightGreen
+                        r.Cells("ESTADO").Value = "CERRADA"
+                    Catch ex As Exception
+                        r.DefaultCellStyle.BackColor = Color.Red
+
+                        If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+                            r.Cells("RESULTADO CARGA").Value = "Esta liquidacion ya esta cerrada"
+                        Else
+                            r.Cells("RESULTADO CARGA").Value = ex.Message
+                        End If
+                    End Try
+                End If
+            Next
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            With gridLiqui
+                .Columns("RESULTADO CARGA").ReadOnly = True
+                .AutoResizeColumns()
+                .AutoResizeRows()
+            End With
+        End Try
     End Sub
 End Class

@@ -7,8 +7,16 @@
     Private _hsFeriado As Decimal
     Private _importeFeriado As Decimal
     Private _importeNormal As Decimal
+    Private _montoFijo As Decimal
+    Private _modifUser As Integer
+    Private _creoUser As Integer
+    Private _fechaCarga As Date
+    Private _fechaMod As Date
+    Private _modificado = False
+    Private _user As Usuario
 
-    Public Sub New(_cuit As String, _localidad As String, _especialidad As String, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal)
+    Public Sub New(_cuit As String, _localidad As String, _especialidad As String, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal, _montoFijo As Decimal)
+        _user = New Usuario
         Me._cuit = _cuit
         Me._localidad = _localidad
         Me._especialidad = _especialidad
@@ -17,11 +25,16 @@
         Me._hsFeriado = _hsFeriado
         Me._importeFeriado = _importeFeriado
         Me._importeNormal = _importeNormal
+        Me._montoFijo = _montoFijo
+        _modifUser = _user.dni
+        _creoUser = _user.dni
+        _fechaCarga = Date.Today
+        _fechaMod = Date.Today
     End Sub
 
     Public Property cuit As String
         Set(value As String)
-            Me._cuit = value
+            _cuit = value
         End Set
         Get
             Return _cuit
@@ -90,8 +103,56 @@
         End Get
     End Property
 
+    Public Property montoFijo As Decimal
+        Set(value As Decimal)
+            _montoFijo = value
+        End Set
+        Get
+            Return _montoFijo
+        End Get
+    End Property
+
+    Public ReadOnly Property modifUser As Integer
+        Get
+            Return _modifUser
+        End Get
+    End Property
+    Public ReadOnly Property creoUser As Integer
+        Get
+            Return _creoUser
+        End Get
+    End Property
+    Public ReadOnly Property fechaCarga As Date
+        Get
+            Return _fechaCarga
+        End Get
+    End Property
+    Public ReadOnly Property fechaMod As Date
+        Get
+            Return _fechaMod
+        End Get
+    End Property
+
     Public Sub insertar()
-        Dim db As New DB
-        db.insertar(Me)
+        Try
+            Dim db As New DB
+            db.insertar(Me)
+        Catch ex As Exception
+            Throw
+        End Try
+
+    End Sub
+
+    Friend Sub liquidar()
+        Try
+            insertar()
+            notificar()
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+    Private Sub notificar()
+        'enviar mail al prestador
     End Sub
 End Class
