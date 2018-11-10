@@ -94,7 +94,6 @@
                     Try
                         Dim liq = New Liquidacion(r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value)
                         liq.liquidar()
-                        gridLiqui.Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.Green
                         r.Cells("RESULTADO CARGA").Value = "Cargado"
                         r.DefaultCellStyle.BackColor = Color.LightGreen
                         r.Cells("ESTADO").Value = "CERRADA"

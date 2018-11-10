@@ -40,13 +40,18 @@ Partial Class frmPrincipal
         Me.btnFeriados = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
+        Me.ConfiguracionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.MenuStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnVisita
         '
-        Me.btnVisita.Location = New System.Drawing.Point(39, 73)
+        Me.btnVisita.Location = New System.Drawing.Point(39, 116)
         Me.btnVisita.Name = "btnVisita"
         Me.btnVisita.Size = New System.Drawing.Size(260, 53)
         Me.btnVisita.TabIndex = 0
@@ -55,7 +60,7 @@ Partial Class frmPrincipal
         '
         'btnReporte
         '
-        Me.btnReporte.Location = New System.Drawing.Point(39, 132)
+        Me.btnReporte.Location = New System.Drawing.Point(39, 175)
         Me.btnReporte.Name = "btnReporte"
         Me.btnReporte.Size = New System.Drawing.Size(260, 53)
         Me.btnReporte.TabIndex = 1
@@ -64,7 +69,7 @@ Partial Class frmPrincipal
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 24)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(881, 24)
         Me.MenuStrip1.TabIndex = 2
@@ -72,7 +77,7 @@ Partial Class frmPrincipal
         '
         'btnInformes
         '
-        Me.btnInformes.Location = New System.Drawing.Point(39, 191)
+        Me.btnInformes.Location = New System.Drawing.Point(39, 234)
         Me.btnInformes.Name = "btnInformes"
         Me.btnInformes.Size = New System.Drawing.Size(260, 53)
         Me.btnInformes.TabIndex = 2
@@ -81,7 +86,7 @@ Partial Class frmPrincipal
         '
         'btnPacientes
         '
-        Me.btnPacientes.Location = New System.Drawing.Point(402, 132)
+        Me.btnPacientes.Location = New System.Drawing.Point(402, 175)
         Me.btnPacientes.Name = "btnPacientes"
         Me.btnPacientes.Size = New System.Drawing.Size(260, 53)
         Me.btnPacientes.TabIndex = 11
@@ -90,7 +95,7 @@ Partial Class frmPrincipal
         '
         'btnVerificar
         '
-        Me.btnVerificar.Location = New System.Drawing.Point(39, 250)
+        Me.btnVerificar.Location = New System.Drawing.Point(39, 293)
         Me.btnVerificar.Name = "btnVerificar"
         Me.btnVerificar.Size = New System.Drawing.Size(260, 53)
         Me.btnVerificar.TabIndex = 3
@@ -99,7 +104,7 @@ Partial Class frmPrincipal
         '
         'btnModulo
         '
-        Me.btnModulo.Location = New System.Drawing.Point(402, 191)
+        Me.btnModulo.Location = New System.Drawing.Point(402, 234)
         Me.btnModulo.Name = "btnModulo"
         Me.btnModulo.Size = New System.Drawing.Size(260, 53)
         Me.btnModulo.TabIndex = 12
@@ -108,7 +113,7 @@ Partial Class frmPrincipal
         '
         'btnNvaLiq
         '
-        Me.btnNvaLiq.Location = New System.Drawing.Point(39, 309)
+        Me.btnNvaLiq.Location = New System.Drawing.Point(39, 352)
         Me.btnNvaLiq.Name = "btnNvaLiq"
         Me.btnNvaLiq.Size = New System.Drawing.Size(260, 53)
         Me.btnNvaLiq.TabIndex = 4
@@ -119,7 +124,7 @@ Partial Class frmPrincipal
         '
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnCerrar.Location = New System.Drawing.Point(745, 73)
+        Me.btnCerrar.Location = New System.Drawing.Point(745, 164)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 20
@@ -128,7 +133,7 @@ Partial Class frmPrincipal
         '
         'btnCierreLiq
         '
-        Me.btnCierreLiq.Location = New System.Drawing.Point(39, 377)
+        Me.btnCierreLiq.Location = New System.Drawing.Point(39, 420)
         Me.btnCierreLiq.Name = "btnCierreLiq"
         Me.btnCierreLiq.Size = New System.Drawing.Size(260, 53)
         Me.btnCierreLiq.TabIndex = 5
@@ -139,7 +144,7 @@ Partial Class frmPrincipal
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(12, 27)
+        Me.Panel1.Location = New System.Drawing.Point(12, 70)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(330, 450)
         Me.Panel1.TabIndex = 103
@@ -157,7 +162,7 @@ Partial Class frmPrincipal
         '
         'btnSubMod
         '
-        Me.btnSubMod.Location = New System.Drawing.Point(402, 250)
+        Me.btnSubMod.Location = New System.Drawing.Point(402, 293)
         Me.btnSubMod.Name = "btnSubMod"
         Me.btnSubMod.Size = New System.Drawing.Size(260, 53)
         Me.btnSubMod.TabIndex = 13
@@ -166,7 +171,7 @@ Partial Class frmPrincipal
         '
         'btnPrestadores
         '
-        Me.btnPrestadores.Location = New System.Drawing.Point(402, 73)
+        Me.btnPrestadores.Location = New System.Drawing.Point(402, 116)
         Me.btnPrestadores.Name = "btnPrestadores"
         Me.btnPrestadores.Size = New System.Drawing.Size(260, 53)
         Me.btnPrestadores.TabIndex = 10
@@ -175,7 +180,7 @@ Partial Class frmPrincipal
         '
         'btnPrestacion
         '
-        Me.btnPrestacion.Location = New System.Drawing.Point(402, 309)
+        Me.btnPrestacion.Location = New System.Drawing.Point(402, 352)
         Me.btnPrestacion.Name = "btnPrestacion"
         Me.btnPrestacion.Size = New System.Drawing.Size(260, 53)
         Me.btnPrestacion.TabIndex = 14
@@ -184,7 +189,7 @@ Partial Class frmPrincipal
         '
         'btnFeriados
         '
-        Me.btnFeriados.Location = New System.Drawing.Point(402, 377)
+        Me.btnFeriados.Location = New System.Drawing.Point(402, 420)
         Me.btnFeriados.Name = "btnFeriados"
         Me.btnFeriados.Size = New System.Drawing.Size(260, 53)
         Me.btnFeriados.TabIndex = 15
@@ -195,7 +200,7 @@ Partial Class frmPrincipal
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Location = New System.Drawing.Point(381, 27)
+        Me.Panel2.Location = New System.Drawing.Point(381, 70)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(330, 450)
         Me.Panel2.TabIndex = 104
@@ -211,11 +216,39 @@ Partial Class frmPrincipal
         Me.Label2.TabIndex = 104
         Me.Label2.Text = "MANTENIMIENTO"
         '
+        'MenuStrip2
+        '
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfiguracionToolStripMenuItem})
+        Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip2.Name = "MenuStrip2"
+        Me.MenuStrip2.Size = New System.Drawing.Size(881, 24)
+        Me.MenuStrip2.TabIndex = 105
+        Me.MenuStrip2.Text = "MenuStrip2"
+        '
+        'ConfiguracionToolStripMenuItem
+        '
+        Me.ConfiguracionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseDeDatosToolStripMenuItem, Me.MailToolStripMenuItem})
+        Me.ConfiguracionToolStripMenuItem.Name = "ConfiguracionToolStripMenuItem"
+        Me.ConfiguracionToolStripMenuItem.Size = New System.Drawing.Size(95, 20)
+        Me.ConfiguracionToolStripMenuItem.Text = "&Configuracion"
+        '
+        'BaseDeDatosToolStripMenuItem
+        '
+        Me.BaseDeDatosToolStripMenuItem.Name = "BaseDeDatosToolStripMenuItem"
+        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BaseDeDatosToolStripMenuItem.Text = "&Base de Datos"
+        '
+        'MailToolStripMenuItem
+        '
+        Me.MailToolStripMenuItem.Name = "MailToolStripMenuItem"
+        Me.MailToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MailToolStripMenuItem.Text = "&Mail"
+        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(881, 489)
+        Me.ClientSize = New System.Drawing.Size(881, 580)
         Me.Controls.Add(Me.btnFeriados)
         Me.Controls.Add(Me.btnPrestacion)
         Me.Controls.Add(Me.btnPrestadores)
@@ -230,6 +263,7 @@ Partial Class frmPrincipal
         Me.Controls.Add(Me.btnInformes)
         Me.Controls.Add(Me.btnVisita)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.Controls.Add(Me.MenuStrip2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.MainMenuStrip = Me.MenuStrip1
@@ -239,6 +273,8 @@ Partial Class frmPrincipal
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.MenuStrip2.ResumeLayout(False)
+        Me.MenuStrip2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -262,4 +298,8 @@ Partial Class frmPrincipal
     Friend WithEvents btnFeriados As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label2 As Label
+    Friend WithEvents MenuStrip2 As MenuStrip
+    Friend WithEvents ConfiguracionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BaseDeDatosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MailToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -77,6 +77,7 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="code\DB.vb" />
     <Compile Include="code\Liquidacion.vb" />
+    <Compile Include="code\mail.vb" />
     <Compile Include="code\Modulo.vb" />
     <Compile Include="code\Prestador.vb" />
     <Compile Include="code\Paciente.vb" />
@@ -157,6 +158,12 @@
     <Compile Include="frmReporte.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSetMail.Designer.vb">
+      <DependentUpon>frmSetMail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetMail.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSubMod.Designer.vb">
       <DependentUpon>frmSubMod.vb</DependentUpon>
     </Compile>
@@ -227,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPracticas.resx">
       <DependentUpon>frmPracticas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetMail.resx">
+      <DependentUpon>frmSetMail.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSubMod.resx">
       <DependentUpon>frmSubMod.vb</DependentUpon>

@@ -153,6 +153,11 @@
     End Sub
 
     Private Sub notificar()
-        'enviar mail al prestador
+        Try
+            Dim mail As New Mail
+            mail.send(Me)
+        Catch ex As Exception
+            Throw
+        End Try
     End Sub
 End Class
