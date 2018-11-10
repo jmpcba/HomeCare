@@ -8,7 +8,7 @@
         Dim db As New DB()
         Dim mes = dtMes.Value
         Dim dt As New DataTable
-        dt = db.liquidacion(mes, DB.liquidaciones.medico)
+        dt = db.getLiquidacion(mes, DB.tiposLiquidacion.medico)
 
 
         Dim chkclm As New DataGridViewCheckBoxColumn
