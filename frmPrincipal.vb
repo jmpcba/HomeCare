@@ -2,7 +2,6 @@
     Private Sub btnVisita_Click(sender As Object, e As EventArgs) Handles btnVisita.Click
         frmPracticas.Show()
     End Sub
-
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
         frmReporte.Show()
     End Sub
@@ -18,10 +17,6 @@
     Private Sub btnCierreLiq_Click(sender As Object, e As EventArgs) Handles btnCierreLiq.Click
         frmCierreLiq.Show()
     End Sub
-
-
-
-
     Private Sub btnPrestadores_Click(sender As Object, e As EventArgs) Handles btnPrestadores.Click
         frmPrestadores.Show()
     End Sub
@@ -53,14 +48,18 @@
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
         End Try
-
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
-        ' Me.Close()
+        Me.Close()
         End
     End Sub
 
+    Private Sub BaseDeDatosToolStripMenuItem_Click_1(sender As Object, e As EventArgs)
 
+    End Sub
 
+    Private Sub MailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MailToolStripMenuItem.Click
+
+    End Sub
 End Class

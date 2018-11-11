@@ -10,7 +10,7 @@
         Me.WindowState = FormWindowState.Maximized
 
         Try
-            dgDetalle.DataSource = db.liquidacion(cuit, fecha)
+            dgDetalle.DataSource = db.getLiquidacion(cuit, fecha)
             dgDetalle.AutoResizeColumns()
             dgDetalle.AutoResizeRows()
             Me.Text = "DETALLE PRESTADOR " & cuit

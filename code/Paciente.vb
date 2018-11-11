@@ -3,8 +3,8 @@
     Private _paciente As DataTable
     Private _user As Usuario
 
-    Private _dni As Integer
-    Private _afiliado As Integer
+    Private _dni As String
+    Private _afiliado As String
     Private _nombre As String
     Private _apellido As String
     Private _obraSocial As String
@@ -24,7 +24,7 @@
         End Try
     End Sub
 
-    Public Sub New(_afiliado As Integer, _dni As Integer, _nombre As String, _apellido As String, _obrasocial As String, _localidad As String)
+    Public Sub New(_afiliado As String, _dni As String, _nombre As String, _apellido As String, _obrasocial As String, _localidad As String)
         _user = New Usuario
         Me._dni = _dni
         Me._afiliado = _afiliado
@@ -38,8 +38,8 @@
         Me._fechaMod = Date.Today
     End Sub
 
-    Public Property dni As Integer
-        Set(value As Integer)
+    Public Property dni As String
+        Set(value As String)
             _dni = value
             _modificado = True
         End Set
@@ -48,8 +48,8 @@
         End Get
     End Property
 
-    Public Property afiliado As Integer
-        Set(value As Integer)
+    Public Property afiliado As String
+        Set(value As String)
             Dim r As DataRow()
             r = _paciente.Select("afiliado=" & value)
             _afiliado = r(0)("afiliado")
@@ -129,4 +129,5 @@
             Throw
         End Try
     End Sub
+
 End Class

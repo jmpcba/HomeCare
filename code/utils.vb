@@ -3,6 +3,8 @@ Public Class utils
 
     Dim db As DB
     Dim feriados As DataTable
+    Private liquidaciones As DataTable
+    Private cargoLiq As Boolean = False
 
     Public Sub New()
         feriados = New DataTable()
@@ -84,4 +86,28 @@ Public Class utils
             Throw New Exception(String.Format("Ingrese un numero de {0} digitos", _largo.ToString))
         End If
     End Sub
+
+    Public Function validarLiquidacion(_cuit As String, _fecha As Date) As Boolean
+        db = New DB
+        'valida si ya existe una liquidacion cerrada para el cuit
+        'DEVUELVE TRUE SI EXISTE UNA LIQUIDACION CERRADA PARA ESTE MES Y MEDICO
+        If IsNothing(liquidaciones) Then
+            liquidaciones = New DataTable
+        End If
+
+        Try
+            If Not cargoLiq Then
+                liquidaciones = db.getLiquidacionesCerradas(_fecha)
+                cargoLiq = True
+            End If
+
+            If liquidaciones.Select(String.Format("CUIT='{0}'", _cuit)).Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
 End Class

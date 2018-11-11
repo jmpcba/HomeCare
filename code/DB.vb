@@ -19,7 +19,7 @@ Public Class DB
         feriados
     End Enum
 
-    Public Enum liquidaciones
+    Public Enum tiposLiquidacion
         detalle
         medico
         paciente
@@ -50,19 +50,23 @@ Public Class DB
         End Try
     End Function
 
-    Friend Function liquidacion(_fecha As Date, _liq As liquidaciones) As DataTable
+    Friend Function getLiquidacion(_fecha As Date, _liq As tiposLiquidacion) As DataTable
         Dim desde As String
         Dim hasta As String
+        Dim dt As New DataTable
+        Dim ut As New utils
 
         desde = String.Format("1/{0}/{1}", _fecha.Month, _fecha.Year)
         hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
 
         cmd.CommandType = CommandType.StoredProcedure
-        If _liq = liquidaciones.detalle Then
+        If _liq = tiposLiquidacion.detalle Then
             cmd.CommandText = "QUERY_DETALLES"
-        ElseIf _liq = liquidaciones.medico Then
+
+        ElseIf _liq = tiposLiquidacion.medico Then
             cmd.CommandText = "QUERY_MEDICOS"
-        ElseIf _liq = liquidaciones.paciente Then
+
+        ElseIf _liq = tiposLiquidacion.paciente Then
             cmd.CommandText = "QUERY_PACIENTES"
             cmd.Parameters.AddWithValue("P_CUIT", desde)
         End If
@@ -71,15 +75,37 @@ Public Class DB
         cmd.Parameters.AddWithValue("HASTA", hasta)
 
         Try
-            da.Fill(ds, "LIQUIDACION")
-            Return ds.Tables("LIQUIDACION")
+            'LLENAR EL DETALLE
+            da.Fill(ds, "QUERY")
+            ds.Tables("QUERY").Columns.Add("ESTADO")
+            If _liq = tiposLiquidacion.medico Then
+                If ds.Tables("QUERY").Rows.Count > 0 Then
+                    'CONTROLAR SI EXITEN LIQUIDACIONES PARA ESE MEDICO
+                    Dim liquidacionesCerradas As New DataTable
+                    liquidacionesCerradas = getLiquidacionesCerradas(_fecha)
+
+                    For Each r As DataRow In ds.Tables("QUERY").Rows
+                        Dim cuit = r("CUIT")
+
+                        If ut.validarLiquidacion(cuit, _fecha) Then
+                            r("ESTADO") = "CERRADA"
+                        Else
+                            r("ESTADO") = "PENDIENTE"
+                        End If
+                    Next
+                End If
+            End If
+
+
+            Return ds.Tables("QUERY")
+
         Catch ex As Exception
             Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
         End Try
 
     End Function
 
-    Friend Function liquidacion(cuit As String, _fecha As Date) As DataTable
+    Friend Function getLiquidacion(cuit As String, _fecha As Date) As DataTable
         Dim desde As String
         Dim hasta As String
 
@@ -181,6 +207,23 @@ Public Class DB
     Friend Sub insertar(_prestador As Prestador)
 
     End Sub
+
+    Friend Sub insertar(_liq As Liquidacion)
+        Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#)", _liq.cuit, _liq.localidad, _liq.especialidad, _liq.mes.ToShortDateString, _liq.hsNormales, _liq.hsFeriado, _liq.importeNormal, _liq.importeFeriado, _liq.montoFijo, _liq.creoUser, _liq.modifUser, _liq.fechaCarga.ToShortDateString, _liq.fechaMod.ToShortDateString)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
 
     Friend Sub insertar(_subMod As subModulo)
         Dim query = String.Format("INSERT INTO SUBMODULO (CODIGO, DESCRIPCION, CARGO_USUARIO, FECHA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ({0}, '{1}', {2}, #{3}#, {4}, #{5}#)", _subMod.codigo, _subMod.descripcion, _subMod.creoUser, _subMod.fechaCarga.ToShortDateString, _subMod.modifUser, _subMod.fechaMod.ToShortDateString)
@@ -284,6 +327,20 @@ Public Class DB
             Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
         End Try
 
+    End Function
+
+    Public Function getLiquidacionesCerradas(_fecha As Date) As DataTable
+        Dim hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("SELECT * FROM LIQUIDACION WHERE MES=#{0}#", hasta)
+
+        Try
+            da.Fill(ds, "LIQ_CERRADAS")
+            Return ds.Tables("LIQ_CERRADAS")
+        Catch ex As Exception
+            Throw
+        End Try
     End Function
 
 End Class
