@@ -14,7 +14,7 @@ Public Class Practica
     Public modifUser As Integer
     Public fechaCarga As Date
     Public fechaMod As Date
-    Dim util As utils
+    Dim util As New utils
 
 
     Public Sub New()
@@ -23,7 +23,6 @@ Public Class Practica
 
 
     Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _prestacion As Prestacion, _fecha As Date, _horas As Decimal, _observaciones As String)
-        util = New utils()
 
         prestador = _prestador
         paciente = _paciente
@@ -56,6 +55,7 @@ Public Class Practica
         Try
             Dim db = New DB()
             db.insertar(Me)
+
         Catch ex As Exception
             Throw
         End Try

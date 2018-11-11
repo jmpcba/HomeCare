@@ -102,7 +102,7 @@ Partial Class frmPracticas
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCerrar.Location = New System.Drawing.Point(889, 592)
+        Me.btnCerrar.Location = New System.Drawing.Point(993, 592)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 8
@@ -114,14 +114,14 @@ Partial Class frmPracticas
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsLbl})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 638)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1051, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1155, 22)
         Me.StatusStrip1.TabIndex = 3
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'tsLbl
         '
         Me.tsLbl.Name = "tsLbl"
-        Me.tsLbl.Size = New System.Drawing.Size(121, 17)
+        Me.tsLbl.Size = New System.Drawing.Size(120, 17)
         Me.tsLbl.Text = "ToolStripStatusLabel1"
         '
         'Label1
@@ -284,7 +284,7 @@ Partial Class frmPracticas
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Location = New System.Drawing.Point(777, 592)
+        Me.btnGuardar.Location = New System.Drawing.Point(881, 592)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
         Me.btnGuardar.TabIndex = 7
@@ -505,7 +505,7 @@ Partial Class frmPracticas
         Me.dgFechas.Name = "dgFechas"
         Me.dgFechas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgFechas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.dgFechas.Size = New System.Drawing.Size(355, 504)
+        Me.dgFechas.Size = New System.Drawing.Size(455, 504)
         Me.dgFechas.TabIndex = 6
         '
         'lblMes
@@ -521,7 +521,7 @@ Partial Class frmPracticas
         '
         'btnLimpiarGrilla
         '
-        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(427, 267)
+        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(527, 268)
         Me.btnLimpiarGrilla.Name = "btnLimpiarGrilla"
         Me.btnLimpiarGrilla.Size = New System.Drawing.Size(75, 23)
         Me.btnLimpiarGrilla.TabIndex = 15
@@ -532,7 +532,7 @@ Partial Class frmPracticas
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(393, 55)
+        Me.Label18.Location = New System.Drawing.Point(493, 56)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(121, 20)
         Me.Label18.TabIndex = 19
@@ -542,7 +542,7 @@ Partial Class frmPracticas
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(393, 125)
+        Me.Label19.Location = New System.Drawing.Point(493, 126)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(124, 20)
         Me.Label19.TabIndex = 20
@@ -552,7 +552,7 @@ Partial Class frmPracticas
         '
         Me.lblHoras.AutoSize = True
         Me.lblHoras.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHoras.Location = New System.Drawing.Point(459, 90)
+        Me.lblHoras.Location = New System.Drawing.Point(559, 91)
         Me.lblHoras.Name = "lblHoras"
         Me.lblHoras.Size = New System.Drawing.Size(16, 17)
         Me.lblHoras.TabIndex = 21
@@ -562,7 +562,7 @@ Partial Class frmPracticas
         '
         Me.lblMonto.AutoSize = True
         Me.lblMonto.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMonto.Location = New System.Drawing.Point(459, 160)
+        Me.lblMonto.Location = New System.Drawing.Point(559, 161)
         Me.lblMonto.Name = "lblMonto"
         Me.lblMonto.Size = New System.Drawing.Size(16, 17)
         Me.lblMonto.TabIndex = 22
@@ -584,7 +584,7 @@ Partial Class frmPracticas
         Me.Panel4.Controls.Add(Me.dgFechas)
         Me.Panel4.Location = New System.Drawing.Point(524, 24)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(515, 562)
+        Me.Panel4.Size = New System.Drawing.Size(619, 562)
         Me.Panel4.TabIndex = 30
         '
         'Label14
@@ -604,7 +604,7 @@ Partial Class frmPracticas
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CancelButton = Me.btnCerrar
-        Me.ClientSize = New System.Drawing.Size(1051, 660)
+        Me.ClientSize = New System.Drawing.Size(1155, 660)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.txtAfiliado)
         Me.Controls.Add(Me.Label11)

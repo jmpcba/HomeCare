@@ -103,6 +103,7 @@ Public Class frmPracticas
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Dim err = False
         Dim carga = False
+        ut = New utils
         Try
             dgFechas.Columns("RESULTADO CARGA").ReadOnly = False
 
@@ -127,48 +128,51 @@ Public Class frmPracticas
                 CBPrestacion.Focus()
             Else
 
-                Dim practicas = New List(Of Practica)
-                Dim obs = txtObservaciones.Text
-                For Each r As DataGridViewRow In dgFechas.Rows
-                    Dim horas As Integer
-                    Dim dia As Integer
-
-                    If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
-                        r.DefaultCellStyle.BackColor = Color.LightGray
-                        Continue For
-                    Else
-                        horas = r.Cells("HORAS").Value
-                        dia = r.Cells("DIA_H").Value
-
-                        Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
-                        Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, prest, fec, horas, obs)
-
-                        Try
-                            practica.insertar()
-                            r.DefaultCellStyle.BackColor = Color.LightGreen
-                            r.Cells("RESULTADO CARGA").Value = "Cargado"
-                            carga = True
-
-                        Catch ex As Exception
-                            err = True
-                            r.DefaultCellStyle.BackColor = Color.Red
-                            r.DefaultCellStyle.ForeColor = Color.Black
-                            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                                r.Cells("RESULTADO CARGA").Value = "Ya existe una practica igual para este dia"
-                            Else
-                                r.Cells("RESULTADO CARGA").Value = ex.Message
-                            End If
-                        End Try
-                    End If
-                Next
-                If err Then
-                    MessageBox.Show("Ocurrieron Errores durante la carga")
-                ElseIf carga Then
-                    MessageBox.Show("Datos Cargados exitosamente")
+                If ut.validarLiquidacion(cbMedico.SelectedValue, DTFecha.Value) Then
+                    Throw New Exception("LIQUIDACION CERRADA PARA ESTE PRESTADOR - MES")
                 Else
-                    MessageBox.Show("No se cargaron horas para ningun dia")
+                    Dim obs = txtObservaciones.Text
+                    For Each r As DataGridViewRow In dgFechas.Rows
+                        Dim horas As Integer
+                        Dim dia As Integer
+
+                        If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
+                            r.DefaultCellStyle.BackColor = Color.LightGray
+                            Continue For
+                        Else
+                            horas = r.Cells("HORAS").Value
+                            dia = r.Cells("DIA_H").Value
+
+                            Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
+                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, prest, fec, horas, obs)
+
+                            Try
+                                practica.insertar()
+                                r.DefaultCellStyle.BackColor = Color.LightGreen
+                                r.Cells("RESULTADO CARGA").Value = "Cargado"
+                                carga = True
+
+                            Catch ex As Exception
+                                err = True
+                                r.DefaultCellStyle.BackColor = Color.Red
+                                r.DefaultCellStyle.ForeColor = Color.Black
+                                If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+                                    r.Cells("RESULTADO CARGA").Value = "Ya existe una practica igual para este dia"
+                                Else
+                                    r.Cells("RESULTADO CARGA").Value = ex.Message
+                                End If
+                            End Try
+                        End If
+                    Next
+                    If err Then
+                        MessageBox.Show("Ocurrieron Errores durante la carga")
+                    ElseIf carga Then
+                        MessageBox.Show("Datos Cargados exitosamente")
+                    Else
+                        MessageBox.Show("No se cargaron horas para ningun dia")
+                    End If
+                    statusBar("TERMINADO", False)
                 End If
-                statusBar("TERMINADO", False)
             End If
 
         Catch ex As Exception

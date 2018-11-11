@@ -54,6 +54,7 @@ Public Class DB
         Dim desde As String
         Dim hasta As String
         Dim dt As New DataTable
+        Dim ut As New utils
 
         desde = String.Format("1/{0}/{1}", _fecha.Month, _fecha.Year)
         hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
@@ -79,15 +80,14 @@ Public Class DB
             ds.Tables("QUERY").Columns.Add("ESTADO")
             If _liq = tiposLiquidacion.medico Then
                 If ds.Tables("QUERY").Rows.Count > 0 Then
-                    'CONTORLAR SI EXITEN LIQUIDACIONES PARA ESE MEDICO
-                    cmd.CommandType = CommandType.Text
-                    cmd.CommandText = String.Format("SELECT * FROM LIQUIDACION WHERE MES=#{0}#", hasta)
-
-                    da.Fill(ds, "LIQ")
+                    'CONTROLAR SI EXITEN LIQUIDACIONES PARA ESE MEDICO
+                    Dim liquidacionesCerradas As New DataTable
+                    liquidacionesCerradas = getLiquidacionesCerradas(_fecha)
 
                     For Each r As DataRow In ds.Tables("QUERY").Rows
                         Dim cuit = r("CUIT")
-                        If ds.Tables("LIQ").Select(String.Format("CUIT='{0}'", cuit)).Count > 0 Then
+
+                        If ut.validarLiquidacion(cuit, _fecha) Then
                             r("ESTADO") = "CERRADA"
                         Else
                             r("ESTADO") = "PENDIENTE"
@@ -327,6 +327,20 @@ Public Class DB
             Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
         End Try
 
+    End Function
+
+    Public Function getLiquidacionesCerradas(_fecha As Date) As DataTable
+        Dim hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("SELECT * FROM LIQUIDACION WHERE MES=#{0}#", hasta)
+
+        Try
+            da.Fill(ds, "LIQ_CERRADAS")
+            Return ds.Tables("LIQ_CERRADAS")
+        Catch ex As Exception
+            Throw
+        End Try
     End Function
 
 End Class
