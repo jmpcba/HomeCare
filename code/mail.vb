@@ -32,7 +32,7 @@ Public Class Mail
             mail = mail.Replace("[MONTO_FIJO]", _liq.montoFijo)
 
             mm.From = New MailAddress("homecarePrueba@gmail.com")
-            mm.Subject = "Liquidacion HomaCare " & MonthName(_liq.mes.Month)
+            mm.Subject = "Liquidacion HomeCare " & MonthName(_liq.mes.Month)
             mm.IsBodyHtml = True
             mm.Body = mail
             mm.To.Add(New MailAddress("jmpcba@gmail.com"))

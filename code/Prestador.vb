@@ -134,7 +134,7 @@
             _modificado = True
         End Set
         Get
-            Return montoNormal
+            Return _montoLV
         End Get
     End Property
 
@@ -144,7 +144,7 @@
             _modificado = True
         End Set
         Get
-            Return montoFeriado
+            Return _montoFer
         End Get
     End Property
 
@@ -154,7 +154,7 @@
             _modificado = True
         End Set
         Get
-            Return montoFijo
+            Return _montoFijo
         End Get
     End Property
 
@@ -164,7 +164,7 @@
             _modificado = True
         End Set
         Get
-            Return porcentaje
+            Return _porcentaje
         End Get
     End Property
 
@@ -174,7 +174,7 @@
             _modificado = True
         End Set
         Get
-            Return fechaCese
+            Return _fechaCese
         End Get
     End Property
 

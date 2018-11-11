@@ -39,7 +39,7 @@
                 _descripcion = r(0)("descripcion")
                 _modifUser = r(0)("modifico_usuario")
                 _creoUser = r(0)("cargo_usuario")
-                _fechaCarga = r(0)("fecha")
+                _fechaCarga = r(0)("fecha_CARGA")
                 _fechaMod = r(0)("fecha_modificacion")
             Else
                 Throw New Exception("Codigo Inexistente")

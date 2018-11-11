@@ -192,25 +192,26 @@ Public Class frmPracticas
         End If
     End Sub
 
-    Private Sub btnEliminarVisita_Click(sender As Object, e As EventArgs)
-        Dim index As Integer
-        Dim r As DataGridViewRow
-        Dim idVisita As Integer
-        Dim visita As Practica
+    'DEPRECADO
+    'Private Sub btnEliminarVisita_Click(sender As Object, e As EventArgs)
+    '    Dim index As Integer
+    '    Dim r As DataGridViewRow
+    '    Dim idVisita As Integer
+    '    Dim visita As Practica
 
-        If dgFechas.SelectedRows.Count = 0 Then
-            statusBar("SELECCIONE UNA VISITA EN LA GRILLA", True)
-        Else
-            If MsgBox("DESEA ELIMINAR ESTA VISITA?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                r = dgFechas.Rows(index)
-                idVisita = r.Cells(0).Value
-                visita = New Practica()
-                visita.eliminar(idVisita)
-                'Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
-            End If
-        End If
+    '    If dgFechas.SelectedRows.Count = 0 Then
+    '        statusBar("SELECCIONE UNA VISITA EN LA GRILLA", True)
+    '    Else
+    '        If MsgBox("DESEA ELIMINAR ESTA VISITA?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+    '            r = dgFechas.Rows(index)
+    '            idVisita = r.Cells(0).Value
+    '            visita = New Practica()
+    '            visita.eliminar(idVisita)
+    '            'Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
+    '        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub DTFecha_ValueChanged(sender As Object, e As EventArgs) Handles DTFecha.ValueChanged
         If edicion Then
@@ -315,28 +316,30 @@ Public Class frmPracticas
                 End If
             End If
 
+            'hay una columna oculta
+            If e.ColumnIndex = 3 Then
+                For Each r As DataGridViewRow In dgFechas.Rows
 
-            For Each r As DataGridViewRow In dgFechas.Rows
-
-                If r.Cells(0).Value = True Then
-                    r.Cells("HORAS").Value = val
-                    r.Cells(0).Value = False
-                End If
-
-                If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
-                    Continue For
-                Else
-                    Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-
-                    If ut.esFindeOFeriado(fecha) Then
-                        monto += med.montoFeriado * r.Cells("HORAS").Value
-                    Else
-                        monto += med.montoNormal * r.Cells("HORAS").Value
+                    If r.Cells(0).Value = True Then
+                        r.Cells("HORAS").Value = val
+                        r.Cells(0).Value = False
                     End If
 
-                    horas += r.Cells("HORAS").Value
-                End If
-            Next
+                    If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
+                        Continue For
+                    Else
+                        Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
+
+                        If ut.esFindeOFeriado(fecha) Then
+                            monto += med.montoFeriado * r.Cells("HORAS").Value
+                        Else
+                            monto += med.montoNormal * r.Cells("HORAS").Value
+                        End If
+
+                        horas += r.Cells("HORAS").Value
+                    End If
+                Next
+            End If
 
             lblHoras.Text = horas
             lblMonto.Text = monto
