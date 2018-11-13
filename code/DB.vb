@@ -201,7 +201,22 @@ Public Class DB
     End Sub
 
     Friend Sub insertar(_paciente As Paciente)
+        'MODIFICAR SQL
+        Dim query = String.Format("INSERT INTO PACIENTES (AFILIADO, DNI, NOMBRE, APELLIDO, LOCALIDAD, OBRA_SOCIAL, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
+                        VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', #{8}#, #{9}#)",
+                                  _paciente.afiliado, _paciente.dni, _paciente.nombre, _paciente.apellido, _paciente.localidad, _paciente.obrasocial, _paciente.creoUser, _paciente.modifUser, _paciente.fechaCarga.ToShortDateString, _paciente.fechaMod.ToShortDateString)
 
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
     End Sub
 
     Friend Sub insertar(_prestador As Prestador)

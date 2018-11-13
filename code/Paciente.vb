@@ -3,14 +3,14 @@
     Private _paciente As DataTable
     Private _user As Usuario
 
-    Private _dni As String
     Private _afiliado As String
+    Private _dni As String
     Private _nombre As String
     Private _apellido As String
-    Private _obraSocial As String
     Private _localidad As String
-    Private _modifUser As Integer
-    Private _creoUser As Integer
+    Private _obraSocial As String
+    Private _creoUser As String
+    Private _modifUser As String
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
@@ -103,6 +103,27 @@
             Return _localidad
         End Get
 
+    End Property
+
+    Public ReadOnly Property modifUser As Integer
+        Get
+            Return _modifUser
+        End Get
+    End Property
+    Public ReadOnly Property creoUser As Integer
+        Get
+            Return _creoUser
+        End Get
+    End Property
+    Public ReadOnly Property fechaCarga As Date
+        Get
+            Return _fechaCarga
+        End Get
+    End Property
+    Public ReadOnly Property fechaMod As Date
+        Get
+            Return _fechaMod
+        End Get
     End Property
 
     Public Sub insertar()

@@ -74,7 +74,8 @@ Public Class frmPracticas
             Try
 
                 txtMat.Text = med.cuit
-                txtLocalidad.Text = med.especialidad
+                txtLocalidad.Text = med.localidad
+                txtEspecialidad.Text = med.especialidad
                 statusBar("MEDICO CARGADO", False)
             Catch ex As Exception
                 MessageBox.Show("ERROR: " & ex.Message)
@@ -105,7 +106,7 @@ Public Class frmPracticas
         Dim carga = False
         ut = New utils
         Try
-            dgFechas.Columns("RESULTADO CARGA").ReadOnly = False
+            dgFechas.Columns("RESULTADO").ReadOnly = False
 
             If cbPaciente.SelectedIndex = -1 Then
                 statusBar("SELECCIONE UN PACIENTE", True)
@@ -149,7 +150,7 @@ Public Class frmPracticas
                             Try
                                 practica.insertar()
                                 r.DefaultCellStyle.BackColor = Color.LightGreen
-                                r.Cells("RESULTADO CARGA").Value = "Cargado"
+                                r.Cells("RESULTADO").Value = "Cargado"
                                 carga = True
 
                             Catch ex As Exception
@@ -157,9 +158,9 @@ Public Class frmPracticas
                                 r.DefaultCellStyle.BackColor = Color.Red
                                 r.DefaultCellStyle.ForeColor = Color.Black
                                 If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                                    r.Cells("RESULTADO CARGA").Value = "Ya existe una practica igual para este dia"
+                                    r.Cells("RESULTADO").Value = "Ya existe una practica igual para este dia"
                                 Else
-                                    r.Cells("RESULTADO CARGA").Value = ex.Message
+                                    r.Cells("RESULTADO").Value = ex.Message
                                 End If
                             End Try
                         End If
@@ -179,7 +180,7 @@ Public Class frmPracticas
             MessageBox.Show("ERROR: " & ex.Message)
         Finally
             With dgFechas
-                .Columns("RESULTADO CARGA").ReadOnly = True
+                .Columns("RESULTADO").ReadOnly = True
                 .AutoResizeColumns()
                 .AutoResizeRows()
             End With
@@ -245,7 +246,7 @@ Public Class frmPracticas
         dt.Columns.Add("DIA")
         dt.Columns.Add("DIA_H")
         dt.Columns.Add("HORAS")
-        dt.Columns.Add("RESULTADO CARGA")
+        dt.Columns.Add("RESULTADO")
 
         For i = 0 To days - 1
             Dim r = dt.NewRow
@@ -268,13 +269,13 @@ Public Class frmPracticas
             .Columns("DIA").DefaultCellStyle.BackColor = Color.LightGray
             .Columns("DIA").DefaultCellStyle.Font = New Font("arial", 8)
 
-            .Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
-            .Columns("RESULTADO CARGA").DefaultCellStyle.Font = New Font("arial", 8)
+            .Columns("RESULTADO").DefaultCellStyle.BackColor = Color.LightGray
+            .Columns("RESULTADO").DefaultCellStyle.Font = New Font("arial", 8)
 
             .Columns("HORAS").DefaultCellStyle.Font = New Font("arial", 8)
 
             .Columns("DIA").ReadOnly = True
-            .Columns("RESULTADO CARGA").ReadOnly = True
+            .Columns("RESULTADO").ReadOnly = True
 
             .Columns.Insert(0, chkclm)
 
@@ -388,7 +389,7 @@ Public Class frmPracticas
 
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+    Private Sub txtLocalidad_TextChanged(sender As Object, e As EventArgs) Handles txtLocalidad.TextChanged
 
     End Sub
 End Class
