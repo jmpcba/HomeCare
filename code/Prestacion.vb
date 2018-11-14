@@ -4,21 +4,22 @@
 
     Private _codigo As Integer
     Private _descripcion As String
-    Private _creoUser As Integer
-    Private _modifUser As Integer
+    Private _creoUser As String
+    Private _modifUser As String
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
 
     Public Sub New(_cod As Integer, _desc As String)
-        Dim user As New Usuario
+        ' Dim user As New Usuario
+        _user = New Usuario
 
-        _codigo = _cod
-        _descripcion = _desc
-        _modifUser = user.dni
-        _creoUser = user.dni
-        _fechaCarga = Date.Today
-        _fechaMod = Date.Today
+        Me._codigo = _cod
+        Me._descripcion = _desc
+        Me._modifUser = _user.dni
+        Me._creoUser = _user.dni
+        Me._fechaCarga = Date.Today
+        Me._fechaMod = Date.Today
     End Sub
 
     Public Sub New()

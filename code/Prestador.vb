@@ -6,7 +6,7 @@
     Private _cuit As String
     Private _nombre As String
     Private _apellido As String
-    Private _mail As String
+    Private _email As String
     Private _especialidad As String
     Private _localidad As String
     Private _montoLV As Decimal
@@ -14,8 +14,8 @@
     Private _montoFijo As Decimal
     Private _porcentaje As Decimal
     Private _fechaCese As Date
-    Private _modifUser As Integer
-    Private _creoUser As Integer
+    Private _creoUser As String
+    Private _modifUser As String
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
@@ -28,7 +28,7 @@
             _cuit = r(0)("cuit")
             _nombre = r(0)("nombre")
             _apellido = r(0)("apellido")
-            _mail = r(0)("email")
+            _email = r(0)("email")
             _especialidad = r(0)("especialidad")
             _localidad = r(0)("localidad")
             _montoLV = r(0)("monto_semana")
@@ -55,13 +55,13 @@
         End Try
     End Sub
 
-    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _mail As String, _especialidad As String, _localidad As String, _montoLV As Integer, _montoFer As Integer, _montoFijo As Integer, _porcentaje As Integer, _fechaCese As Date)
+    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _mail As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _porcentaje As Decimal, _fechaCese As Date)
         Try
             _user = New Usuario
             Me._cuit = _cuit
             Me._nombre = _nombre
             Me._apellido = _apellido
-            Me._mail = _mail
+            Me._email = _email
             Me._especialidad = _especialidad
             Me._localidad = _localidad
             Me._montoLV = _montoLV
@@ -118,18 +118,18 @@
         End Get
     End Property
 
-    Public Property mail As String
+    Public Property email As String
         Set(value As String)
-            _mail = value
+            _email = value
             _modificado = True
         End Set
         Get
-            Return _mail
+            Return _email
         End Get
     End Property
 
-    Public Property montoNormal As Integer
-        Set(value As Integer)
+    Public Property montoNormal As Decimal
+        Set(value As Decimal)
             _montoLV = value
             _modificado = True
         End Set
@@ -138,8 +138,8 @@
         End Get
     End Property
 
-    Public Property montoFeriado As Integer
-        Set(value As Integer)
+    Public Property montoFeriado As Decimal
+        Set(value As Decimal)
             _montoFer = value
             _modificado = True
         End Set
@@ -148,8 +148,8 @@
         End Get
     End Property
 
-    Public Property montoFijo As Integer
-        Set(value As Integer)
+    Public Property montoFijo As Decimal
+        Set(value As Decimal)
             _montoFijo = value
             _modificado = True
         End Set
@@ -158,8 +158,8 @@
         End Get
     End Property
 
-    Public Property porcentaje As Integer
-        Set(value As Integer)
+    Public Property porcentaje As Decimal
+        Set(value As Decimal)
             _porcentaje = value
             _modificado = True
         End Set
@@ -177,6 +177,27 @@
             Return _fechaCese
         End Get
     End Property
+    Public ReadOnly Property modifUser As Integer
+        Get
+            Return _modifUser
+        End Get
+    End Property
+    Public ReadOnly Property creoUser As Integer
+        Get
+            Return _creoUser
+        End Get
+    End Property
+    Public ReadOnly Property fechaCarga As Date
+        Get
+            Return _fechaCarga
+        End Get
+    End Property
+    Public ReadOnly Property fechaMod As Date
+        Get
+            Return _fechaMod
+        End Get
+    End Property
+
 
     Public Sub insertar()
         Try

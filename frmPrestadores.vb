@@ -21,8 +21,8 @@
                 If txtApellido.Text <> prestadores.apellido Then
                     prestadores.apellido = txtApellido.Text
                 End If
-                If txtEmail.Text <> prestadores.mail Then
-                    prestadores.mail = txtEmail.Text
+                If txtEmail.Text <> prestadores.email Then
+                    prestadores.email = txtEmail.Text
                 End If
                 If txtEspecialidad.Text <> prestadores.especialidad Then
                     prestadores.especialidad = txtEspecialidad.Text
@@ -63,16 +63,16 @@
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Try
             prestadores = New Prestador
-            prestadores.nombre = txtNombre.Text
-            prestadores.apellido = txtApellido.Text
-            prestadores.mail = txtEmail.Text
-            prestadores.especialidad = txtEspecialidad.Text
-            prestadores.localidad = txtLocalidad.Text
-            prestadores.montoNormal = numLunVie.Text
-            prestadores.montoFeriado = numFeriados.Text
-            prestadores.porcentaje = numPorcentaje.Text
-            prestadores.montoFijo = numFijo.Text
-            prestadores.fechaCese = dtCese.Text
+            txtNombre.Text = prestadores.nombre
+            txtApellido.Text = prestadores.apellido
+            txtEmail.Text = prestadores.email
+            txtEspecialidad.Text = prestadores.especialidad
+            txtLocalidad.Text = prestadores.localidad
+            numLunVie.Text = prestadores.montoFijo
+            numFeriados.Text = prestadores.montoFeriado
+            numPorcentaje.Text = prestadores.porcentaje
+            numFijo.Text = prestadores.montoFijo
+            dtCese.Text = prestadores.fechaCese
         Catch ex As Exception
             MessageBox.Show(ex.Message)
             prestadores = Nothing

@@ -40,7 +40,7 @@
             End If
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                MessageBox.Show("Ya existe un Sub Modulo con el mismo codigo")
+                MessageBox.Show("Ya existe un paciente con el mismo numero")
             Else
                 MessageBox.Show(ex.Message)
             End If
@@ -51,11 +51,11 @@
         Try
             pacientes = New Paciente
             pacientes.afiliado = numAfiliado.Text
-            pacientes.dni = numDni.Text
-            pacientes.nombre = txtNombre.Text
-            pacientes.apellido = txtApellido.Text
-            pacientes.obrasocial = txtObSocial.Text
-            pacientes.localidad = txtLocalidad.Text
+            numDni.Text = pacientes.dni
+            txtNombre.Text = pacientes.nombre
+            txtApellido.Text = pacientes.apellido
+            txtObSocial.Text = pacientes.obrasocial
+            txtLocalidad.Text = pacientes.localidad
         Catch ex As Exception
             MessageBox.Show(ex.Message)
             pacientes = Nothing
@@ -72,7 +72,7 @@
         txtLocalidad.Text = ""
     End Sub
 
-    Private Sub txtAfiliado_TextChanged(sender As Object, e As EventArgs) Handles numAfiliado.TextChanged
+   Private Sub txtAfiliado_TextChanged(sender As Object, e As EventArgs) Handles numAfiliado.TextChanged
         Try
             If numAfiliado.Text <> "" Then
                 btnBuscar.Enabled = True
