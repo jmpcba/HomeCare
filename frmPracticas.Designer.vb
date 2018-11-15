@@ -29,7 +29,6 @@ Partial Class frmPracticas
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.cbMedico = New System.Windows.Forms.ComboBox()
         Me.PRESTADORESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.HomeCareDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
@@ -57,6 +56,7 @@ Partial Class frmPracticas
         Me.PRESTACIONESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTACIONESTableAdapter()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cbMedico = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtEspecialidad = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -123,7 +123,7 @@ Partial Class frmPracticas
         'tsLbl
         '
         Me.tsLbl.Name = "tsLbl"
-        Me.tsLbl.Size = New System.Drawing.Size(121, 17)
+        Me.tsLbl.Size = New System.Drawing.Size(120, 17)
         Me.tsLbl.Text = "ToolStripStatusLabel1"
         '
         'Label1
@@ -156,18 +156,6 @@ Partial Class frmPracticas
         Me.Label3.Size = New System.Drawing.Size(201, 13)
         Me.Label3.TabIndex = 7
         Me.Label3.Text = "NOMBRE Y APELLIDO/ESPECIALIDAD"
-        '
-        'cbMedico
-        '
-        Me.cbMedico.DataSource = Me.PRESTADORESBindingSource
-        Me.cbMedico.DisplayMember = "APELLIDO"
-        Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbMedico.FormattingEnabled = True
-        Me.cbMedico.Location = New System.Drawing.Point(209, 45)
-        Me.cbMedico.Name = "cbMedico"
-        Me.cbMedico.Size = New System.Drawing.Size(292, 21)
-        Me.cbMedico.TabIndex = 1
-        Me.cbMedico.ValueMember = "CUIT"
         '
         'PRESTADORESBindingSource
         '
@@ -377,11 +365,11 @@ Partial Class frmPracticas
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.cbMedico)
         Me.Panel2.Controls.Add(Me.Label16)
         Me.Panel2.Controls.Add(Me.txtEspecialidad)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.cbMedico)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.txtMat)
@@ -390,6 +378,15 @@ Partial Class frmPracticas
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(506, 149)
         Me.Panel2.TabIndex = 28
+        '
+        'cbMedico
+        '
+        Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbMedico.FormattingEnabled = True
+        Me.cbMedico.Location = New System.Drawing.Point(209, 40)
+        Me.cbMedico.Name = "cbMedico"
+        Me.cbMedico.Size = New System.Drawing.Size(278, 21)
+        Me.cbMedico.TabIndex = 27
         '
         'Label16
         '
@@ -669,7 +666,6 @@ Partial Class frmPracticas
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents cbMedico As ComboBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents txtMat As TextBox
@@ -722,4 +718,5 @@ Partial Class frmPracticas
     Friend WithEvents lblMes As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents txtEspecialidad As TextBox
+    Friend WithEvents cbMedico As ComboBox
 End Class

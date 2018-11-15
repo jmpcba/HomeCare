@@ -2,7 +2,7 @@
 
     Private _user As Usuario
     Private _prestadores As DataTable
-
+    Private _clave As String
     Private _cuit As String
     Private _nombre As String
     Private _apellido As String
@@ -20,36 +20,18 @@
     Private _fechaMod As Date
     Private _modificado = False
 
-    Public Property cuit As String
-            Set(value As String)
-            Dim r As DataRow()
-            r = _prestadores.Select("CUIT = '" & value.ToString & "'")
-
-            _cuit = r(0)("cuit")
-            _nombre = r(0)("nombre")
-            _apellido = r(0)("apellido")
-            _email = r(0)("email")
-            _especialidad = r(0)("especialidad")
-            _localidad = r(0)("localidad")
-            _montoLV = r(0)("monto_semana")
-            _montoFer = r(0)("monto_feriado")
-            _montoFijo = r(0)("monto_fijo")
-            _porcentaje = r(0)("porcentaje")
-            '    _fechaCese = r(0)("fecha_cese")
-            _modifUser = r(0)("modifico_usuario")
-            _creoUser = r(0)("cargo_usuario")
-            _fechaCarga = r(0)("fecha_carga")
-            _fechaMod = r(0)("fecha_modificacion")
-        End Set
-        Get
-            Return _cuit
-        End Get
-    End Property
-
     Public Sub New()
         Dim db = New DB()
         Try
             _prestadores = db.getTable(DB.tablas.prestadores)
+            _prestadores.Columns.Add("COMBO")
+            For Each r As DataRow In _prestadores.Rows
+                Dim nombre = r("nombre")
+                Dim apellido = r("apellido")
+                Dim especialidad = r("especialidad")
+                Dim localidad = r("localidad")
+                r("COMBO") = String.Format("{0} {1} - {2} - {3}", apellido, nombre, localidad, especialidad)
+            Next
         Catch ex As Exception
             Throw
         End Try
@@ -77,6 +59,44 @@
             Throw
         End Try
     End Sub
+
+    Public Property clave As String
+        Set(value As String)
+            Dim r As DataRow()
+            r = _prestadores.Select("CLAVE = '" & value.ToString & "'")
+            _clave = value
+            _cuit = r(0)("cuit")
+            _nombre = r(0)("nombre")
+            _apellido = r(0)("apellido")
+            _email = r(0)("email")
+            _especialidad = r(0)("especialidad")
+            _localidad = r(0)("localidad")
+            _montoLV = r(0)("monto_semana")
+            _montoFer = r(0)("monto_feriado")
+            _montoFijo = r(0)("monto_fijo")
+            _porcentaje = r(0)("porcentaje")
+            If Not IsDBNull(r(0)("fecha_cese")) Then
+                _fechaCese = r(0)("fecha_cese")
+            End If
+
+            _modifUser = r(0)("modifico_usuario")
+            _creoUser = r(0)("cargo_usuario")
+            _fechaCarga = r(0)("fecha_carga")
+            _fechaMod = r(0)("fecha_modificacion")
+        End Set
+        Get
+            Return _clave
+        End Get
+    End Property
+
+    Public Property cuit As String
+        Set(value As String)
+            _cuit = value
+        End Set
+        Get
+            Return _cuit
+        End Get
+    End Property
 
     Public Property nombre As String
         Set(value As String)
@@ -224,4 +244,12 @@
         End Try
     End Sub
 
+    Public Sub llenarcombo(_combo As ComboBox)
+
+        _combo.DataSource = _prestadores
+        _combo.DisplayMember = "combo"
+        _combo.ValueMember = "clave"
+        _combo.SelectedIndex = -1
+
+    End Sub
 End Class

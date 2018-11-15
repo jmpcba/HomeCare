@@ -7,29 +7,20 @@ Public Class frmPracticas
     Dim med As Prestador
     Dim prest As Prestacion
     Dim modu As Modulo
+    Dim subModu As subModulo
     Dim index As Integer
     Dim edicion As Boolean = False
     Dim cellVal
     Dim selectedRows As DataGridViewSelectedRowCollection
     Dim ut As utils
     Private Sub visitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.SUBMODULO' Puede moverla o quitarla según sea necesario.
-        Me.SUBMODULOTableAdapter.Fill(Me.HomeCareDataSet.SUBMODULO)
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.MODULO' Puede moverla o quitarla según sea necesario.
-        Me.MODULOTableAdapter.Fill(Me.HomeCareDataSet.MODULO)
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PRESTADORES' Puede moverla o quitarla según sea necesario.
-        Me.PRESTADORESTableAdapter.Fill(Me.HomeCareDataSet.PRESTADORES)
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PACIENTES' Puede moverla o quitarla según sea necesario.
-        Me.PACIENTESTableAdapter.Fill(Me.HomeCareDataSet.PACIENTES)
-
-        Me.PRESTACIONESTableAdapter.Fill(Me.HomeCareDataSet.PRESTACIONES)
 
         Me.WindowState = FormWindowState.Maximized
 
         Try
 
 
-            cbMedico.SelectedIndex = -1
+            'cbMedico.SelectedIndex = -1
             CBPrestacion.SelectedIndex = -1
             cbPaciente.SelectedIndex = -1
             cbModulo.SelectedIndex = -1
@@ -45,7 +36,15 @@ Public Class frmPracticas
             pac = New Paciente()
             prest = New Prestacion()
             med = New Prestador()
+            subModu = New subModulo
             modu = New Modulo()
+
+
+            pac.llenarcombo(cbPaciente)
+            med.llenarcombo(cbMedico)
+            modu.llenarcombo(cbModulo)
+            subModu.llenarcombo(cbSubModulo)
+            prest.llenarcombo(CBPrestacion)
 
             cargarGrilla()
 
@@ -55,7 +54,7 @@ Public Class frmPracticas
 
     End Sub
 
-    Private Sub CBPrestacion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBPrestacion.SelectedIndexChanged
+    Private Sub CBPrestacion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBPrestacion.SelectionChangeCommitted
         If CBPrestacion.SelectedIndex <> -1 Then
             Try
                 prest.codigo = CBPrestacion.SelectedValue
@@ -66,33 +65,16 @@ Public Class frmPracticas
         End If
     End Sub
 
-    Private Sub cbMedico_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMedico.SelectedIndexChanged
-
-        If cbMedico.SelectedIndex <> -1 Then
-
-            med.cuit = cbMedico.SelectedValue.ToString
-            Try
-
-                txtMat.Text = med.cuit
-                txtLocalidad.Text = med.localidad
-                txtEspecialidad.Text = med.especialidad
-                statusBar("MEDICO CARGADO", False)
-            Catch ex As Exception
-                MessageBox.Show("ERROR: " & ex.Message)
-            End Try
-        End If
-    End Sub
-
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Me.Close()
     End Sub
 
-    Private Sub cbPaciente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaciente.SelectedIndexChanged
+    Private Sub cbPaciente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaciente.SelectionChangeCommitted
         If cbPaciente.SelectedIndex <> -1 Then
             Try
                 pac.afiliado = cbPaciente.SelectedValue
                 txtAfiliado.Text = pac.afiliado
-                txtBeneficio.Text = pac.obraSocial
+                txtBeneficio.Text = pac.obrasocial
                 statusBar("PACIENTE CARGADO", False)
 
             Catch ex As Exception
@@ -196,27 +178,6 @@ Public Class frmPracticas
             tsLbl.ForeColor = Color.Black
         End If
     End Sub
-
-    'DEPRECADO
-    'Private Sub btnEliminarVisita_Click(sender As Object, e As EventArgs)
-    '    Dim index As Integer
-    '    Dim r As DataGridViewRow
-    '    Dim idVisita As Integer
-    '    Dim visita As Practica
-
-    '    If dgFechas.SelectedRows.Count = 0 Then
-    '        statusBar("SELECCIONE UNA VISITA EN LA GRILLA", True)
-    '    Else
-    '        If MsgBox("DESEA ELIMINAR ESTA VISITA?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-    '            r = dgFechas.Rows(index)
-    '            idVisita = r.Cells(0).Value
-    '            visita = New Practica()
-    '            visita.eliminar(idVisita)
-    '            'Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
-    '        End If
-    '    End If
-
-    'End Sub
 
     Private Sub DTFecha_ValueChanged(sender As Object, e As EventArgs) Handles DTFecha.ValueChanged
         If edicion Then
@@ -382,7 +343,7 @@ Public Class frmPracticas
         End If
     End Sub
 
-    Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectedIndexChanged
+    Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectionChangeCommitted
         If cbModulo.SelectedIndex <> -1 Then
             modu.codigo = cbModulo.SelectedValue
         End If
@@ -390,6 +351,25 @@ Public Class frmPracticas
     End Sub
 
     Private Sub txtLocalidad_TextChanged(sender As Object, e As EventArgs) Handles txtLocalidad.TextChanged
+
+    End Sub
+
+    Private Sub cbMedico_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMedico.SelectionChangeCommitted
+        If cbMedico.SelectedIndex <> -1 Then
+
+            med.clave = cbMedico.SelectedValue.ToString
+            Try
+                txtMat.Text = med.cuit
+                txtLocalidad.Text = med.localidad
+                txtEspecialidad.Text = med.especialidad
+                statusBar("MEDICO CARGADO", False)
+            Catch ex As Exception
+                MessageBox.Show("ERROR: " & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub cbSubModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSubModulo.SelectionChangeCommitted
 
     End Sub
 End Class
