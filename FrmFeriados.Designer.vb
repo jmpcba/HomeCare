@@ -28,10 +28,10 @@ Partial Class FrmFeriados
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.DtCalendario = New System.Windows.Forms.DateTimePicker()
-        Me.txtDescripciion = New System.Windows.Forms.TextBox()
         Me.dgFechas = New System.Windows.Forms.DataGridView()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.DtCalendario = New System.Windows.Forms.DateTimePicker()
+        Me.txtDescripciion = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -41,9 +41,9 @@ Partial Class FrmFeriados
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(75, 111)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(30, 13)
+        Me.Label8.Size = New System.Drawing.Size(75, 13)
         Me.Label8.TabIndex = 19
-        Me.Label8.Text = "MES"
+        Me.Label8.Text = "DIA FERIADO"
         '
         'btnCerrar
         '
@@ -99,20 +99,6 @@ Partial Class FrmFeriados
         Me.Panel1.Size = New System.Drawing.Size(697, 519)
         Me.Panel1.TabIndex = 44
         '
-        'DtCalendario
-        '
-        Me.DtCalendario.Location = New System.Drawing.Point(30, 130)
-        Me.DtCalendario.Name = "DtCalendario"
-        Me.DtCalendario.Size = New System.Drawing.Size(200, 20)
-        Me.DtCalendario.TabIndex = 0
-        '
-        'txtDescripciion
-        '
-        Me.txtDescripciion.Location = New System.Drawing.Point(30, 261)
-        Me.txtDescripciion.Name = "txtDescripciion"
-        Me.txtDescripciion.Size = New System.Drawing.Size(243, 20)
-        Me.txtDescripciion.TabIndex = 1
-        '
         'dgFechas
         '
         Me.dgFechas.AllowUserToAddRows = False
@@ -137,6 +123,20 @@ Partial Class FrmFeriados
         Me.Label2.Size = New System.Drawing.Size(80, 13)
         Me.Label2.TabIndex = 20
         Me.Label2.Text = "DESCRIPCION"
+        '
+        'DtCalendario
+        '
+        Me.DtCalendario.Location = New System.Drawing.Point(30, 130)
+        Me.DtCalendario.Name = "DtCalendario"
+        Me.DtCalendario.Size = New System.Drawing.Size(200, 20)
+        Me.DtCalendario.TabIndex = 0
+        '
+        'txtDescripciion
+        '
+        Me.txtDescripciion.Location = New System.Drawing.Point(30, 261)
+        Me.txtDescripciion.Name = "txtDescripciion"
+        Me.txtDescripciion.Size = New System.Drawing.Size(243, 20)
+        Me.txtDescripciion.TabIndex = 1
         '
         'FrmFeriados
         '

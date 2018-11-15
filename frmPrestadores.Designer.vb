@@ -23,6 +23,13 @@ Partial Class frmPrestadores
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.chbCese = New System.Windows.Forms.CheckBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.dtCese = New System.Windows.Forms.DateTimePicker()
+        Me.numFeriados = New System.Windows.Forms.TextBox()
+        Me.numPorcentaje = New System.Windows.Forms.TextBox()
+        Me.numFijo = New System.Windows.Forms.TextBox()
+        Me.numLunVie = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -45,17 +52,14 @@ Partial Class frmPrestadores
         Me.BtnCerrar = New System.Windows.Forms.Button()
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
-        Me.numLunVie = New System.Windows.Forms.TextBox()
-        Me.numFijo = New System.Windows.Forms.TextBox()
-        Me.numPorcentaje = New System.Windows.Forms.TextBox()
-        Me.numFeriados = New System.Windows.Forms.TextBox()
-        Me.dtCese = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.chbCese)
+        Me.Panel1.Controls.Add(Me.Label14)
         Me.Panel1.Controls.Add(Me.dtCese)
         Me.Panel1.Controls.Add(Me.numFeriados)
         Me.Panel1.Controls.Add(Me.numPorcentaje)
@@ -85,10 +89,64 @@ Partial Class frmPrestadores
         Me.Panel1.Size = New System.Drawing.Size(611, 437)
         Me.Panel1.TabIndex = 3
         '
+        'chbCese
+        '
+        Me.chbCese.AutoSize = True
+        Me.chbCese.Location = New System.Drawing.Point(54, 397)
+        Me.chbCese.Name = "chbCese"
+        Me.chbCese.Size = New System.Drawing.Size(36, 17)
+        Me.chbCese.TabIndex = 49
+        Me.chbCese.Text = "SI"
+        Me.chbCese.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(7, 378)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(116, 13)
+        Me.Label14.TabIndex = 48
+        Me.Label14.Text = "DESEA DAR DE BAJA"
+        '
+        'dtCese
+        '
+        Me.dtCese.Location = New System.Drawing.Point(386, 390)
+        Me.dtCese.Name = "dtCese"
+        Me.dtCese.Size = New System.Drawing.Size(200, 20)
+        Me.dtCese.TabIndex = 47
+        '
+        'numFeriados
+        '
+        Me.numFeriados.Location = New System.Drawing.Point(202, 346)
+        Me.numFeriados.Name = "numFeriados"
+        Me.numFeriados.Size = New System.Drawing.Size(68, 20)
+        Me.numFeriados.TabIndex = 7
+        '
+        'numPorcentaje
+        '
+        Me.numPorcentaje.Location = New System.Drawing.Point(315, 346)
+        Me.numPorcentaje.Name = "numPorcentaje"
+        Me.numPorcentaje.Size = New System.Drawing.Size(68, 20)
+        Me.numPorcentaje.TabIndex = 8
+        '
+        'numFijo
+        '
+        Me.numFijo.Location = New System.Drawing.Point(460, 346)
+        Me.numFijo.Name = "numFijo"
+        Me.numFijo.Size = New System.Drawing.Size(68, 20)
+        Me.numFijo.TabIndex = 9
+        '
+        'numLunVie
+        '
+        Me.numLunVie.Location = New System.Drawing.Point(70, 346)
+        Me.numLunVie.Name = "numLunVie"
+        Me.numLunVie.Size = New System.Drawing.Size(68, 20)
+        Me.numLunVie.TabIndex = 6
+        '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(31, 396)
+        Me.Label13.Location = New System.Drawing.Point(199, 397)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(165, 13)
         Me.Label13.TabIndex = 46
@@ -277,41 +335,6 @@ Partial Class frmPrestadores
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
-        'numLunVie
-        '
-        Me.numLunVie.Location = New System.Drawing.Point(70, 346)
-        Me.numLunVie.Name = "numLunVie"
-        Me.numLunVie.Size = New System.Drawing.Size(68, 20)
-        Me.numLunVie.TabIndex = 6
-        '
-        'numFijo
-        '
-        Me.numFijo.Location = New System.Drawing.Point(460, 346)
-        Me.numFijo.Name = "numFijo"
-        Me.numFijo.Size = New System.Drawing.Size(68, 20)
-        Me.numFijo.TabIndex = 9
-        '
-        'numPorcentaje
-        '
-        Me.numPorcentaje.Location = New System.Drawing.Point(315, 346)
-        Me.numPorcentaje.Name = "numPorcentaje"
-        Me.numPorcentaje.Size = New System.Drawing.Size(68, 20)
-        Me.numPorcentaje.TabIndex = 8
-        '
-        'numFeriados
-        '
-        Me.numFeriados.Location = New System.Drawing.Point(202, 346)
-        Me.numFeriados.Name = "numFeriados"
-        Me.numFeriados.Size = New System.Drawing.Size(68, 20)
-        Me.numFeriados.TabIndex = 7
-        '
-        'dtCese
-        '
-        Me.dtCese.Location = New System.Drawing.Point(220, 393)
-        Me.dtCese.Name = "dtCese"
-        Me.dtCese.Size = New System.Drawing.Size(105, 20)
-        Me.dtCese.TabIndex = 10
-        '
         'frmPrestadores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -355,5 +378,7 @@ Partial Class frmPrestadores
     Friend WithEvents numPorcentaje As TextBox
     Friend WithEvents numFijo As TextBox
     Friend WithEvents numLunVie As TextBox
-    Friend WithEvents dtCese As TextBox
+    Friend WithEvents chbCese As CheckBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents dtCese As DateTimePicker
 End Class

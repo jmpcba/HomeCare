@@ -37,9 +37,9 @@
         End Try
     End Sub
 
-    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _mail As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _porcentaje As Decimal, _fechaCese As Date)
-        Try
-            _user = New Usuario
+    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _porcentaje As Decimal, _fechaCese As Date)
+        '  Try
+        _user = New Usuario
             Me._cuit = _cuit
             Me._nombre = _nombre
             Me._apellido = _apellido
@@ -55,9 +55,9 @@
             Me._creoUser = _user.dni
             Me._fechaCarga = Date.Today
             Me._fechaMod = Date.Today
-        Catch ex As Exception
-            Throw
-        End Try
+        '  Catch ex As Exception
+        '  Throw
+        '  End Try
     End Sub
 
     Public Property clave As String
