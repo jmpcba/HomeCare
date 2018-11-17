@@ -35,6 +35,7 @@
 
             .DataSource = dt
             .Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
+            .Columns("ID_PREST").Visible = False
             .AutoResizeColumns()
             .AutoResizeRows()
         End With
@@ -61,9 +62,9 @@
         Dim r As DataGridViewRow
         If e.ColumnIndex <> 0 Then
             r = gridLiqui.Rows(e.RowIndex)
-            Dim cuit = r.Cells("CUIT").Value
+            Dim idPrest = r.Cells("ID_PREST").Value
             Dim fecha = dtMes.Value
-            Dim frm As New frmLiquidacionDetalle(cuit, fecha, Me)
+            Dim frm As New frmLiquidacionDetalle(idPrest, fecha, Me)
             frm.ShowDialog()
         End If
 

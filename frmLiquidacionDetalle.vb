@@ -4,7 +4,7 @@
     Dim dt As New DataTable
     Dim frmParent As frmLiquidar
 
-    Public Sub New(cuit As String, fecha As Date, ByRef _parent As frmLiquidar)
+    Public Sub New(_id As Integer, fecha As Date, ByRef _parent As frmLiquidar)
 
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
@@ -13,12 +13,12 @@
         Me.WindowState = FormWindowState.Maximized
         frmParent = _parent
         Try
-            dt = db.getLiquidacion(cuit, fecha)
+            dt = db.getLiquidacion(_id, fecha)
             dgDetalle.DataSource = dt
             dgDetalle.AutoResizeColumns()
             dgDetalle.AutoResizeRows()
-            Me.Text = "DETALLE PRESTADOR " & cuit
-            lblDetalle.Text = "DETALLE PRESTADOR " & cuit
+            Me.Text = "DETALLE PRESTADOR " & _id
+            lblDetalle.Text = "DETALLE PRESTADOR " & _id
             dgDetalle.ClearSelection()
             dgDetalle.Columns("id").Visible = False
 

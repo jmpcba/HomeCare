@@ -64,11 +64,12 @@ Public Class DB
             cmd.CommandText = "QUERY_DETALLES"
 
         ElseIf _liq = tiposLiquidacion.medico Then
-            cmd.CommandText = "QUERY_MEDICOS"
+            cmd.CommandText = "QUERY_SUMATORIA_MEDICOS"
 
         ElseIf _liq = tiposLiquidacion.paciente Then
-            cmd.CommandText = "QUERY_PACIENTES"
-            cmd.Parameters.AddWithValue("P_CUIT", desde)
+            'DEPRECADOS - USA GETLIQUIDACION(CUIT, FECHA)
+            'cmd.CommandText = "QUERY_PACIENTES"
+            'cmd.Parameters.AddWithValue("P_CUIT", desde)
         End If
 
         cmd.Parameters.AddWithValue("DESDE", desde)
@@ -119,7 +120,7 @@ Public Class DB
         End Try
     End Sub
 
-    Friend Function getLiquidacion(cuit As String, _fecha As Date) As DataTable
+    Friend Function getLiquidacion(_id As Integer, _fecha As Date) As DataTable
         Dim desde As String
         Dim hasta As String
 
@@ -128,7 +129,7 @@ Public Class DB
 
         cmd.CommandType = CommandType.StoredProcedure
         cmd.CommandText = "QUERY_DETALLES"
-        cmd.Parameters.AddWithValue("P_CUIT", cuit)
+        cmd.Parameters.AddWithValue("P_ID", _id)
         cmd.Parameters.AddWithValue("DESDE", desde)
         cmd.Parameters.AddWithValue("HASTA", hasta)
 
