@@ -138,4 +138,11 @@
         Me.Close()
     End Sub
 
+    Private Sub chbCese_CheckedChanged(sender As Object, e As EventArgs) Handles chbCese.CheckedChanged
+        If chbCese.Checked = True Then
+            dtCese.Enabled = True
+        Else
+            dtCese.Enabled = False
+        End If
+    End Sub
 End Class

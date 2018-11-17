@@ -1,10 +1,10 @@
 ﻿Public Class frmLiquidar
     Dim sel As Boolean = False
     Private Sub dtMes_ValueChanged(sender As Object, e As EventArgs) Handles dtMes.ValueChanged
-        grilla()
+        llenargrilla()
     End Sub
 
-    Public Sub grilla()
+    Public Sub llenarGrilla()
         Dim db As New DB()
         Dim mes = dtMes.Value
         Dim dt As New DataTable
@@ -49,7 +49,7 @@
 
     Private Sub frmLiquidar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnGuardar.Enabled = False
-        grilla()
+        llenargrilla()
         Me.WindowState = FormWindowState.Maximized
     End Sub
 
@@ -63,8 +63,8 @@
             r = gridLiqui.Rows(e.RowIndex)
             Dim cuit = r.Cells("CUIT").Value
             Dim fecha = dtMes.Value
-            Dim frm As New frmLiquidacionDetalle(cuit, fecha)
-            frm.Show()
+            Dim frm As New frmLiquidacionDetalle(cuit, fecha, Me)
+            frm.ShowDialog()
         End If
 
     End Sub

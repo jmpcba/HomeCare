@@ -19,16 +19,6 @@ Public Class frmPracticas
 
         Try
 
-
-            'cbMedico.SelectedIndex = -1
-            CBPrestacion.SelectedIndex = -1
-            cbPaciente.SelectedIndex = -1
-            cbModulo.SelectedIndex = -1
-            cbSubModulo.SelectedIndex = -1
-            CBPrestacion.SelectedIndex = -1
-
-            statusBar("CARGA INICIAL", False)
-
             DTFecha.CustomFormat = "MMMM - yyyy"
             lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
 
@@ -46,10 +36,19 @@ Public Class frmPracticas
             subModu.llenarcombo(cbSubModulo)
             prest.llenarcombo(CBPrestacion)
 
+            txtAfiliado.Text = ""
+            txtBeneficio.Text = ""
+            txtEspecialidad.Text = ""
+            txtLocalidad.Text = ""
+            txtMat.Text = ""
+            txtObservaciones.Text = ""
+            lblHoras.Text = ""
+            lblMonto.Text = ""
+
             cargarGrilla()
 
         Catch ex As Exception
-            MessageBox.Show("ERROR: " & ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
 
     End Sub
@@ -58,9 +57,9 @@ Public Class frmPracticas
         If CBPrestacion.SelectedIndex <> -1 Then
             Try
                 prest.codigo = CBPrestacion.SelectedValue
-                statusBar("PRESTACION CARGADA", False)
+
             Catch ex As Exception
-                MessageBox.Show("ERROR: " & ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End Try
         End If
     End Sub
@@ -75,10 +74,9 @@ Public Class frmPracticas
                 pac.afiliado = cbPaciente.SelectedValue
                 txtAfiliado.Text = pac.afiliado
                 txtBeneficio.Text = pac.obrasocial
-                statusBar("PACIENTE CARGADO", False)
 
             Catch ex As Exception
-                MessageBox.Show("ERROR: " & ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End Try
         End If
     End Sub
@@ -91,23 +89,23 @@ Public Class frmPracticas
             dgFechas.Columns("RESULTADO").ReadOnly = False
 
             If cbPaciente.SelectedIndex = -1 Then
-                statusBar("SELECCIONE UN PACIENTE", True)
+                ut.mensaje("SELECCIONE UN PACIENTE", utils.mensajes.err)
                 cbPaciente.Focus()
 
             ElseIf cbMedico.SelectedIndex = -1 Then
-                statusBar("SELECCIONE UN PRESTADOR", True)
+                ut.mensaje("SELECCIONE UN PRESTADOR", utils.mensajes.err)
                 cbMedico.Focus()
 
             ElseIf cbModulo.SelectedIndex = -1 Then
-                statusBar("SELECCIONE UN MODULO", True)
+                ut.mensaje("SELECCIONE UN MODULO", utils.mensajes.err)
                 cbModulo.Focus()
 
             ElseIf cbSubModulo.SelectedIndex = -1 Then
-                statusBar("SELECCIONE UN SUB-MODULO", True)
+                ut.mensaje("SELECCIONE UN SUB-MODULO", utils.mensajes.err)
                 cbSubModulo.Focus()
 
             ElseIf CBPrestacion.SelectedIndex = -1 Then
-                statusBar("SELECCIONE UNA PRESTACION", True)
+                ut.mensaje("SELECCIONE UNA PRESTACION", utils.mensajes.err)
                 CBPrestacion.Focus()
             Else
 
@@ -148,18 +146,17 @@ Public Class frmPracticas
                         End If
                     Next
                     If err Then
-                        MessageBox.Show("Ocurrieron Errores durante la carga")
+                        ut.mensaje("Ocurrieron Errores durante la carga", utils.mensajes.err)
                     ElseIf carga Then
-                        MessageBox.Show("Datos Cargados exitosamente")
+                        ut.mensaje("Datos Cargados exitosamente", utils.mensajes.info)
                     Else
-                        MessageBox.Show("No se cargaron horas para ningun dia")
+                        ut.mensaje("No se cargaron horas para ningun dia", utils.mensajes.err)
                     End If
-                    statusBar("TERMINADO", False)
                 End If
             End If
 
         Catch ex As Exception
-            MessageBox.Show("ERROR: " & ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
             With dgFechas
                 .Columns("RESULTADO").ReadOnly = True
@@ -168,15 +165,6 @@ Public Class frmPracticas
             End With
 
         End Try
-    End Sub
-
-    Public Sub statusBar(_msg As String, _error As Boolean)
-        tsLbl.Text = _msg
-        If _error Then
-            tsLbl.ForeColor = Color.Red
-        Else
-            tsLbl.ForeColor = Color.Black
-        End If
     End Sub
 
     Private Sub DTFecha_ValueChanged(sender As Object, e As EventArgs) Handles DTFecha.ValueChanged
@@ -265,19 +253,19 @@ Public Class frmPracticas
         End If
 
         If IsNothing(med.cuit) Then
-            MessageBox.Show("Seleccione un Prestador")
+            ut.mensaje("Seleccione un Prestador", utils.mensajes.err)
             dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
         ElseIf IsNothing(modu.codigo) Then
-            MessageBox.Show("Seleccione un Modulo")
+            ut.mensaje("Seleccione un Modulo", utils.mensajes.err)
             dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
         Else
             If Not IsDBNull(val) Then
                 edicion = True
                 If Not IsNumeric(val) Then
-                    MessageBox.Show("Debe ingresar un valor numerico")
+                    ut.mensaje("Debe ingresar un valor numerico", utils.mensajes.err)
                     dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
                 ElseIf val > 24 Then
-                    MessageBox.Show("No puede ingresar mas de 24hs en un dia")
+                    ut.mensaje("No puede ingresar mas de 24hs en un dia", utils.mensajes.err)
                     dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
                 End If
             End If
@@ -357,14 +345,13 @@ Public Class frmPracticas
     Private Sub cbMedico_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMedico.SelectionChangeCommitted
         If cbMedico.SelectedIndex <> -1 Then
 
-            med.clave = cbMedico.SelectedValue.ToString
+            med.id = cbMedico.SelectedValue.ToString
             Try
                 txtMat.Text = med.cuit
                 txtLocalidad.Text = med.localidad
                 txtEspecialidad.Text = med.especialidad
-                statusBar("MEDICO CARGADO", False)
             Catch ex As Exception
-                MessageBox.Show("ERROR: " & ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End Try
         End If
     End Sub

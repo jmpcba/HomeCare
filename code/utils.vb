@@ -10,6 +10,13 @@ Public Class utils
         feriados = New DataTable()
     End Sub
 
+    Public Enum mensajes
+        err
+        info
+        aviso
+        preg
+    End Enum
+
     Public Function esFindeOFeriado(_fecha As Date) As Boolean
         'devuelve true si _fecha es fin de semana
 
@@ -109,5 +116,34 @@ Public Class utils
         Catch ex As Exception
             Throw
         End Try
+    End Function
+
+    Public Function mensaje(_msg As String, _tipo As mensajes)
+        Dim icono As New MessageBoxIcon
+        Dim btn As New MessageBoxButtons
+        Dim titulo As String = ""
+        Dim resultado As New MsgBoxResult
+
+        btn = MessageBoxButtons.OK
+
+        If _tipo = mensajes.err Then
+            icono = MessageBoxIcon.Exclamation
+            titulo = "Error"
+        ElseIf _tipo = mensajes.info Then
+            titulo = "Aviso"
+            icono = MessageBoxIcon.Information
+        ElseIf _tipo = mensajes.preg Then
+            titulo = "Confirme"
+            icono = MessageBoxIcon.Question
+            btn = MessageBoxButtons.YesNo
+        End If
+
+        resultado = MessageBox.Show(_msg,
+            titulo,
+            btn,
+            icono,
+            MessageBoxDefaultButton.Button1)
+
+        Return resultado
     End Function
 End Class

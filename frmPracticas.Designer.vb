@@ -24,8 +24,6 @@ Partial Class frmPracticas
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.tsLbl = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -81,7 +79,6 @@ Partial Class frmPracticas
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.lblMes = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.StatusStrip1.SuspendLayout()
         CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -110,21 +107,6 @@ Partial Class frmPracticas
         Me.btnCerrar.TabIndex = 9
         Me.btnCerrar.Text = "&CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = False
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsLbl})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 638)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1155, 22)
-        Me.StatusStrip1.TabIndex = 3
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'tsLbl
-        '
-        Me.tsLbl.Name = "tsLbl"
-        Me.tsLbl.Size = New System.Drawing.Size(120, 17)
-        Me.tsLbl.Text = "ToolStripStatusLabel1"
         '
         'Label1
         '
@@ -423,7 +405,7 @@ Partial Class frmPracticas
         Me.Panel3.Controls.Add(Me.DTFecha)
         Me.Panel3.Location = New System.Drawing.Point(12, 293)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(506, 332)
+        Me.Panel3.Size = New System.Drawing.Size(506, 355)
         Me.Panel3.TabIndex = 29
         '
         'Label15
@@ -629,14 +611,11 @@ Partial Class frmPracticas
         Me.Controls.Add(Me.txtAfiliado)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel4)
         Me.Name = "frmPracticas"
         Me.Text = "Ingresar Visitas Paciente"
-        Me.StatusStrip1.ResumeLayout(False)
-        Me.StatusStrip1.PerformLayout()
         CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
@@ -662,7 +641,6 @@ Partial Class frmPracticas
     End Sub
 
     Friend WithEvents btnCerrar As Button
-    Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
@@ -714,7 +692,6 @@ Partial Class frmPracticas
     Friend WithEvents lblMonto As Label
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label14 As Label
-    Friend WithEvents tsLbl As ToolStripStatusLabel
     Friend WithEvents lblMes As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents txtEspecialidad As TextBox
