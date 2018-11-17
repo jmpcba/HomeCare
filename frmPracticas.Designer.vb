@@ -22,17 +22,11 @@ Partial Class frmPracticas
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.btnCerrar = New System.Windows.Forms.Button()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.tsLbl = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbMedico = New System.Windows.Forms.ComboBox()
-        Me.PRESTADORESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.HomeCareDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtMat = New System.Windows.Forms.TextBox()
@@ -42,19 +36,13 @@ Partial Class frmPracticas
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.CBPrestacion = New System.Windows.Forms.ComboBox()
-        Me.PRESTACIONESBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PRESTACIONESBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PRESTACIONESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.txtBeneficio = New System.Windows.Forms.TextBox()
         Me.txtAfiliado = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPaciente = New System.Windows.Forms.ComboBox()
-        Me.PACIENTESBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PACIENTESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.PRESTACIONESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTACIONESTableAdapter()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -63,15 +51,9 @@ Partial Class frmPracticas
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtObservaciones = New System.Windows.Forms.TextBox()
         Me.cbSubModulo = New System.Windows.Forms.ComboBox()
-        Me.SUBMODULOBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label13 = New System.Windows.Forms.Label()
         Me.cbModulo = New System.Windows.Forms.ComboBox()
-        Me.MODULOBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.PACIENTESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PACIENTESTableAdapter()
-        Me.PRESTADORESTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRESTADORESTableAdapter()
-        Me.MODULOTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.MODULOTableAdapter()
-        Me.SUBMODULOTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.SUBMODULOTableAdapter()
         Me.dgFechas = New System.Windows.Forms.DataGridView()
         Me.btnLimpiarGrilla = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -81,20 +63,9 @@ Partial Class frmPracticas
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.lblMes = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.StatusStrip1.SuspendLayout()
-        CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PRESTACIONESBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        CType(Me.SUBMODULOBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MODULOBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
@@ -110,21 +81,6 @@ Partial Class frmPracticas
         Me.btnCerrar.TabIndex = 9
         Me.btnCerrar.Text = "&CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = False
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsLbl})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 638)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1155, 22)
-        Me.StatusStrip1.TabIndex = 3
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'tsLbl
-        '
-        Me.tsLbl.Name = "tsLbl"
-        Me.tsLbl.Size = New System.Drawing.Size(121, 17)
-        Me.tsLbl.Text = "ToolStripStatusLabel1"
         '
         'Label1
         '
@@ -159,30 +115,12 @@ Partial Class frmPracticas
         '
         'cbMedico
         '
-        Me.cbMedico.DataSource = Me.PRESTADORESBindingSource
-        Me.cbMedico.DisplayMember = "APELLIDO"
         Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMedico.FormattingEnabled = True
         Me.cbMedico.Location = New System.Drawing.Point(209, 45)
         Me.cbMedico.Name = "cbMedico"
         Me.cbMedico.Size = New System.Drawing.Size(292, 21)
         Me.cbMedico.TabIndex = 1
-        Me.cbMedico.ValueMember = "CUIT"
-        '
-        'PRESTADORESBindingSource
-        '
-        Me.PRESTADORESBindingSource.DataMember = "PRESTADORES"
-        Me.PRESTADORESBindingSource.DataSource = Me.HomeCareDataSetBindingSource
-        '
-        'HomeCareDataSetBindingSource
-        '
-        Me.HomeCareDataSetBindingSource.DataSource = Me.HomeCareDataSet
-        Me.HomeCareDataSetBindingSource.Position = 0
-        '
-        'HomeCareDataSet
-        '
-        Me.HomeCareDataSet.DataSetName = "HomeCareDataSet"
-        Me.HomeCareDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Label4
         '
@@ -258,30 +196,12 @@ Partial Class frmPracticas
         '
         'CBPrestacion
         '
-        Me.CBPrestacion.DataSource = Me.PRESTACIONESBindingSource2
-        Me.CBPrestacion.DisplayMember = "DESCRIPCION"
         Me.CBPrestacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CBPrestacion.FormattingEnabled = True
         Me.CBPrestacion.Location = New System.Drawing.Point(100, 100)
         Me.CBPrestacion.Name = "CBPrestacion"
         Me.CBPrestacion.Size = New System.Drawing.Size(346, 21)
         Me.CBPrestacion.TabIndex = 4
-        Me.CBPrestacion.ValueMember = "CODIGO"
-        '
-        'PRESTACIONESBindingSource2
-        '
-        Me.PRESTACIONESBindingSource2.DataMember = "PRESTACIONES"
-        Me.PRESTACIONESBindingSource2.DataSource = Me.HomeCareDataSetBindingSource
-        '
-        'PRESTACIONESBindingSource1
-        '
-        Me.PRESTACIONESBindingSource1.DataMember = "PRESTACIONES"
-        Me.PRESTACIONESBindingSource1.DataSource = Me.HomeCareDataSetBindingSource
-        '
-        'PRESTACIONESBindingSource
-        '
-        Me.PRESTACIONESBindingSource.DataMember = "PRESTACIONES"
-        Me.PRESTACIONESBindingSource.DataSource = Me.HomeCareDataSetBindingSource
         '
         'btnGuardar
         '
@@ -329,25 +249,12 @@ Partial Class frmPracticas
         '
         'cbPaciente
         '
-        Me.cbPaciente.DataSource = Me.PACIENTESBindingSource1
-        Me.cbPaciente.DisplayMember = "APELLIDO"
         Me.cbPaciente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPaciente.FormattingEnabled = True
         Me.cbPaciente.Location = New System.Drawing.Point(127, 42)
         Me.cbPaciente.Name = "cbPaciente"
         Me.cbPaciente.Size = New System.Drawing.Size(267, 21)
         Me.cbPaciente.TabIndex = 0
-        Me.cbPaciente.ValueMember = "AFILIADO"
-        '
-        'PACIENTESBindingSource1
-        '
-        Me.PACIENTESBindingSource1.DataMember = "PACIENTES"
-        Me.PACIENTESBindingSource1.DataSource = Me.HomeCareDataSetBindingSource
-        '
-        'PACIENTESBindingSource
-        '
-        Me.PACIENTESBindingSource.DataMember = "PACIENTES"
-        Me.PACIENTESBindingSource.DataSource = Me.HomeCareDataSetBindingSource
         '
         'Label11
         '
@@ -357,10 +264,6 @@ Partial Class frmPracticas
         Me.Label11.Size = New System.Drawing.Size(119, 13)
         Me.Label11.TabIndex = 21
         Me.Label11.Text = "NOMBRE Y APELLIDO"
-        '
-        'PRESTACIONESTableAdapter
-        '
-        Me.PRESTACIONESTableAdapter.ClearBeforeFill = True
         '
         'Panel1
         '
@@ -448,20 +351,12 @@ Partial Class frmPracticas
         '
         'cbSubModulo
         '
-        Me.cbSubModulo.DataSource = Me.SUBMODULOBindingSource
-        Me.cbSubModulo.DisplayMember = "DESCRIPCION"
         Me.cbSubModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSubModulo.FormattingEnabled = True
         Me.cbSubModulo.Location = New System.Drawing.Point(100, 70)
         Me.cbSubModulo.Name = "cbSubModulo"
         Me.cbSubModulo.Size = New System.Drawing.Size(346, 21)
         Me.cbSubModulo.TabIndex = 3
-        Me.cbSubModulo.ValueMember = "CODIGO"
-        '
-        'SUBMODULOBindingSource
-        '
-        Me.SUBMODULOBindingSource.DataMember = "SUBMODULO"
-        Me.SUBMODULOBindingSource.DataSource = Me.HomeCareDataSetBindingSource
         '
         'Label13
         '
@@ -474,20 +369,12 @@ Partial Class frmPracticas
         '
         'cbModulo
         '
-        Me.cbModulo.DataSource = Me.MODULOBindingSource
-        Me.cbModulo.DisplayMember = "CODIGO"
         Me.cbModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbModulo.FormattingEnabled = True
         Me.cbModulo.Location = New System.Drawing.Point(100, 40)
         Me.cbModulo.Name = "cbModulo"
         Me.cbModulo.Size = New System.Drawing.Size(346, 21)
         Me.cbModulo.TabIndex = 2
-        Me.cbModulo.ValueMember = "CODIGO"
-        '
-        'MODULOBindingSource
-        '
-        Me.MODULOBindingSource.DataMember = "MODULO"
-        Me.MODULOBindingSource.DataSource = Me.HomeCareDataSetBindingSource
         '
         'Label12
         '
@@ -497,22 +384,6 @@ Partial Class frmPracticas
         Me.Label12.Size = New System.Drawing.Size(54, 13)
         Me.Label12.TabIndex = 19
         Me.Label12.Text = "MODULO"
-        '
-        'PACIENTESTableAdapter
-        '
-        Me.PACIENTESTableAdapter.ClearBeforeFill = True
-        '
-        'PRESTADORESTableAdapter
-        '
-        Me.PRESTADORESTableAdapter.ClearBeforeFill = True
-        '
-        'MODULOTableAdapter
-        '
-        Me.MODULOTableAdapter.ClearBeforeFill = True
-        '
-        'SUBMODULOTableAdapter
-        '
-        Me.SUBMODULOTableAdapter.ClearBeforeFill = True
         '
         'dgFechas
         '
@@ -632,30 +503,17 @@ Partial Class frmPracticas
         Me.Controls.Add(Me.txtAfiliado)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel4)
         Me.Name = "frmPracticas"
         Me.Text = "Ingresar Visitas Paciente"
-        Me.StatusStrip1.ResumeLayout(False)
-        Me.StatusStrip1.PerformLayout()
-        CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PRESTACIONESBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        CType(Me.SUBMODULOBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MODULOBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
@@ -665,7 +523,6 @@ Partial Class frmPracticas
     End Sub
 
     Friend WithEvents btnCerrar As Button
-    Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
@@ -686,11 +543,6 @@ Partial Class frmPracticas
     Friend WithEvents Label10 As Label
     Friend WithEvents cbPaciente As ComboBox
     Friend WithEvents Label11 As Label
-    Friend WithEvents HomeCareDataSetBindingSource As BindingSource
-    Friend WithEvents HomeCareDataSet As HomeCareDataSet
-    Friend WithEvents PACIENTESBindingSource As BindingSource
-    Friend WithEvents PRESTACIONESBindingSource As BindingSource
-    Friend WithEvents PRESTACIONESTableAdapter As HomeCareDataSetTableAdapters.PRESTACIONESTableAdapter
     Friend WithEvents Panel3 As Panel
     Friend WithEvents cbSubModulo As ComboBox
     Friend WithEvents Label13 As Label
@@ -698,18 +550,8 @@ Partial Class frmPracticas
     Friend WithEvents Label12 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents PACIENTESBindingSource1 As BindingSource
-    Friend WithEvents PACIENTESTableAdapter As HomeCareDataSetTableAdapters.PACIENTESTableAdapter
-    Friend WithEvents PRESTACIONESBindingSource1 As BindingSource
-    Friend WithEvents PRESTADORESBindingSource As BindingSource
-    Friend WithEvents PRESTADORESTableAdapter As HomeCareDataSetTableAdapters.PRESTADORESTableAdapter
     Friend WithEvents Label15 As Label
     Friend WithEvents txtObservaciones As TextBox
-    Friend WithEvents MODULOBindingSource As BindingSource
-    Friend WithEvents MODULOTableAdapter As HomeCareDataSetTableAdapters.MODULOTableAdapter
-    Friend WithEvents SUBMODULOBindingSource As BindingSource
-    Friend WithEvents SUBMODULOTableAdapter As HomeCareDataSetTableAdapters.SUBMODULOTableAdapter
-    Friend WithEvents PRESTACIONESBindingSource2 As BindingSource
     Friend WithEvents dgFechas As DataGridView
     Friend WithEvents btnLimpiarGrilla As Button
     Friend WithEvents Label18 As Label
@@ -718,7 +560,6 @@ Partial Class frmPracticas
     Friend WithEvents lblMonto As Label
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label14 As Label
-    Friend WithEvents tsLbl As ToolStripStatusLabel
     Friend WithEvents lblMes As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents txtEspecialidad As TextBox
