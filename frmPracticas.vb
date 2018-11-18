@@ -241,6 +241,10 @@ Public Class frmPracticas
                 r.DefaultCellStyle.ForeColor = Color.Red
             End If
         Next
+
+        dgFechas.AutoResizeColumns()
+        dgFechas.AutoResizeRows()
+
     End Sub
 
     Private Sub dgFechas_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgFechas.CellEndEdit

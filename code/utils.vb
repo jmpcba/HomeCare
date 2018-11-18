@@ -94,7 +94,7 @@ Public Class utils
         End If
     End Sub
 
-    Public Function validarLiquidacion(_cuit As String, _fecha As Date) As Boolean
+    Public Function validarLiquidacion(_id As String, _fecha As Date) As Boolean
         db = New DB
         'valida si ya existe una liquidacion cerrada para el cuit
         'DEVUELVE TRUE SI EXISTE UNA LIQUIDACION CERRADA PARA ESTE MES Y MEDICO
@@ -108,7 +108,7 @@ Public Class utils
                 cargoLiq = True
             End If
 
-            If liquidaciones.Select(String.Format("CUIT='{0}'", _cuit)).Count > 0 Then
+            If liquidaciones.Select(String.Format("ID_PREST='{0}'", _id)).Count > 0 Then
                 Return True
             Else
                 Return False
