@@ -64,11 +64,12 @@ Public Class DB
             cmd.CommandText = "QUERY_DETALLES"
 
         ElseIf _liq = tiposLiquidacion.medico Then
-            cmd.CommandText = "QUERY_MEDICOS"
+            cmd.CommandText = "QUERY_SUMATORIA_MEDICOS"
 
         ElseIf _liq = tiposLiquidacion.paciente Then
-            cmd.CommandText = "QUERY_PACIENTES"
-            cmd.Parameters.AddWithValue("P_CUIT", desde)
+            'DEPRECADOS - USA GETLIQUIDACION(CUIT, FECHA)
+            'cmd.CommandText = "QUERY_PACIENTES"
+            'cmd.Parameters.AddWithValue("P_CUIT", desde)
         End If
 
         cmd.Parameters.AddWithValue("DESDE", desde)
@@ -105,7 +106,21 @@ Public Class DB
 
     End Function
 
-    Friend Function getLiquidacion(cuit As String, _fecha As Date) As DataTable
+    Friend Sub eliminarLiquidacion(_id As Integer)
+        Try
+            Dim query = "DELETE FROM PRACTICAS WHERE ID=" & _id
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+    Friend Function getLiquidacion(_id As Integer, _fecha As Date) As DataTable
         Dim desde As String
         Dim hasta As String
 
@@ -113,8 +128,8 @@ Public Class DB
         hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
 
         cmd.CommandType = CommandType.StoredProcedure
-        cmd.CommandText = "QUERY_DETALLES"
-        cmd.Parameters.AddWithValue("P_CUIT", cuit)
+        cmd.CommandText = "QUERY_DETALLE_MEDICO"
+        cmd.Parameters.AddWithValue("P_ID", _id)
         cmd.Parameters.AddWithValue("DESDE", desde)
         cmd.Parameters.AddWithValue("HASTA", hasta)
 
@@ -176,13 +191,13 @@ Public Class DB
 
     End Function
 
-    Friend Sub insertar(_visita As Practica)
+    Friend Sub insertar(_practica As Practica)
         Try
-            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, COD_PRESTACION, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', {1}, {2}, {3}, {4}, {5}, {6}, '{7}', '{8}', '{9}', {10}, '{11}', {12}, '{13}' )",
-                                      _visita.prestador.cuit, _visita.paciente.afiliado, _visita.modulo, _visita.subModulo,
-                                      _visita.prestacion.codigo, _visita.hsSemana, _visita.hsFeriado, _visita.fecha.ToShortDateString,
-                                      DateTime.Today.ToShortDateString, _visita.observaciones, _visita.creoUser,
-                                      _visita.fechaCarga.ToShortDateString, _visita.modifUser, _visita.fechaMod.ToShortDateString)
+            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, COD_PRESTACION, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', {1}, {2}, {3}, {4}, {5}, {6}, '{7}', '{8}', '{9}', {10}, '{11}', {12}, '{13}', {14} )",
+                                      _practica.prestador.cuit, _practica.paciente.afiliado, _practica.modulo, _practica.subModulo,
+                                      _practica.prestacion.codigo, _practica.hsSemana, _practica.hsFeriado, _practica.fecha.ToShortDateString,
+                                      DateTime.Today.ToShortDateString, _practica.observaciones, _practica.creoUser,
+                                      _practica.fechaCarga.ToShortDateString, _practica.modifUser, _practica.fechaMod.ToShortDateString, _practica.prestador.id)
 
             cmd.CommandType = CommandType.Text
             cmd.CommandText = query
@@ -197,11 +212,25 @@ Public Class DB
     End Sub
 
     Friend Sub insertar(_prestacion As Prestacion)
+        Dim query = String.Format("INSERT INTO PRESTACIONES (CODIGO, DESCRIPCION, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
+                        VALUES ({0}, '{1}', '{2}', '{3}', #{4}#, #{5}#)",
+                                  _prestacion.codigo, _prestacion.descripcion, _prestacion.creoUser, _prestacion.modifUser, _prestacion.fechaCarga.ToShortDateString, _prestacion.fechaMod.ToShortDateString)
 
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
     End Sub
 
     Friend Sub insertar(_paciente As Paciente)
-        'MODIFICAR SQL
+
         Dim query = String.Format("INSERT INTO PACIENTES (AFILIADO, DNI, NOMBRE, APELLIDO, LOCALIDAD, OBRA_SOCIAL, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
                         VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', #{8}#, #{9}#)",
                                   _paciente.afiliado, _paciente.dni, _paciente.nombre, _paciente.apellido, _paciente.localidad, _paciente.obrasocial, _paciente.creoUser, _paciente.modifUser, _paciente.fechaCarga.ToShortDateString, _paciente.fechaMod.ToShortDateString)
@@ -220,11 +249,24 @@ Public Class DB
     End Sub
 
     Friend Sub insertar(_prestador As Prestador)
+        Dim query = String.Format("INSERT INTO PRESTADORES (CUIT, APELLIDO, NOMBRE, EMAIL, ESPECIALIDAD, LOCALIDAD, MONTO_SEMANA, MONTO_FERIADO, MONTO_FIJO, PORCENTAJE, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}, {9}, '{10}', '{11}', #{12}#, #{13}#)", _prestador.cuit, _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.creoUser, _prestador.modifUser, _prestador.fechaCarga.ToShortDateString, _prestador.fechaMod.ToShortDateString)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
 
     End Sub
 
     Friend Sub insertar(_liq As Liquidacion)
-        Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#)", _liq.cuit, _liq.localidad, _liq.especialidad, _liq.mes.ToShortDateString, _liq.hsNormales, _liq.hsFeriado, _liq.importeNormal, _liq.importeFeriado, _liq.montoFijo, _liq.creoUser, _liq.modifUser, _liq.fechaCarga.ToShortDateString, _liq.fechaMod.ToShortDateString)
+        Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#, {13})", _liq.cuit, _liq.localidad, _liq.especialidad, _liq.mes.ToShortDateString, _liq.hsNormales, _liq.hsFeriado, _liq.importeNormal, _liq.importeFeriado, _liq.montoFijo, _liq.creoUser, _liq.modifUser, _liq.fechaCarga.ToShortDateString, _liq.fechaMod.ToShortDateString, _liq.prestador)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -271,6 +313,21 @@ Public Class DB
             cnn.Close()
         End Try
     End Sub
+    Friend Sub insertar(_feriado As Feriado)
+        Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES (#{0}#, '{1}', {2}, #{3}#, {4}, #{5}#)", _feriado.fecha.ToShortDateString, _feriado.descripcion, _feriado.creoUser, _feriado.fechaCarga.ToShortDateString, _feriado.modifUser, _feriado.fechaMod.ToShortDateString)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
 
     Friend Sub actualizar(_paciente As Paciente)
 
@@ -280,6 +337,9 @@ Public Class DB
 
     End Sub
     Friend Sub actualizar(_prestacion As Prestacion)
+
+    End Sub
+    Friend Sub actualizar(_feriado As Feriado)
 
     End Sub
     Friend Sub actualizar(_subMod As subModulo)

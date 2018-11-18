@@ -19,7 +19,16 @@
         Dim db = New DB()
         Try
             _pacientes = db.getTable(DB.tablas.pacientes)
+            _pacientes.Columns.Add("COMBO")
 
+            For Each r As DataRow In _pacientes.Rows
+                Dim nom As String
+                Dim ape As String
+                nom = r("nombre")
+                ape = r("apellido")
+
+                r("COMBO") = String.Format("{0} {1}", ape, nom)
+            Next
         Catch ex As Exception
             Throw
         End Try
@@ -52,13 +61,21 @@
     Public Property afiliado As String
         Set(value As String)
             Dim r As DataRow()
+
             r = _pacientes.Select("afiliado=" & value)
-            _afiliado = r(0)("afiliado")
-            _dni = r(0)("dni")
-            _nombre = r(0)("nombre")
-            _apellido = r(0)("apellido")
-            _obraSocial = r(0)("obra_social")
-            _localidad = r(0)("localidad")
+
+            If r.Length = 1 Then
+
+                _afiliado = r(0)("afiliado")
+                _dni = r(0)("dni")
+                _nombre = r(0)("nombre")
+                _apellido = r(0)("apellido")
+                _obraSocial = r(0)("obra_social")
+                _localidad = r(0)("localidad")
+            Else
+                Throw New Exception("Codigo Inexistente")
+            End If
+
         End Set
         Get
             Return _afiliado
@@ -152,4 +169,11 @@
         End Try
     End Sub
 
+    Public Sub llenarcombo(_combo As ComboBox)
+        _combo.DataSource = _pacientes
+        _combo.DisplayMember = "combo"
+        _combo.ValueMember = "afiliado"
+        _combo.SelectedIndex = -1
+
+    End Sub
 End Class

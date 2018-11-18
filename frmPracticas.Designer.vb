@@ -26,7 +26,9 @@ Partial Class frmPracticas
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.cbMedico = New System.Windows.Forms.ComboBox()
+        Me.PRESTADORESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.HomeCareDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtMat = New System.Windows.Forms.TextBox()
@@ -45,6 +47,7 @@ Partial Class frmPracticas
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cbMedico = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtEspecialidad = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -63,6 +66,14 @@ Partial Class frmPracticas
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.lblMes = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
+        CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PRESTACIONESBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -113,14 +124,20 @@ Partial Class frmPracticas
         Me.Label3.TabIndex = 7
         Me.Label3.Text = "NOMBRE Y APELLIDO/ESPECIALIDAD"
         '
-        'cbMedico
+        'PRESTADORESBindingSource
         '
-        Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbMedico.FormattingEnabled = True
-        Me.cbMedico.Location = New System.Drawing.Point(209, 45)
-        Me.cbMedico.Name = "cbMedico"
-        Me.cbMedico.Size = New System.Drawing.Size(292, 21)
-        Me.cbMedico.TabIndex = 1
+        Me.PRESTADORESBindingSource.DataMember = "PRESTADORES"
+        Me.PRESTADORESBindingSource.DataSource = Me.HomeCareDataSetBindingSource
+        '
+        'HomeCareDataSetBindingSource
+        '
+        Me.HomeCareDataSetBindingSource.DataSource = Me.HomeCareDataSet
+        Me.HomeCareDataSetBindingSource.Position = 0
+        '
+        'HomeCareDataSet
+        '
+        Me.HomeCareDataSet.DataSetName = "HomeCareDataSet"
+        Me.HomeCareDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Label4
         '
@@ -280,11 +297,11 @@ Partial Class frmPracticas
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.cbMedico)
         Me.Panel2.Controls.Add(Me.Label16)
         Me.Panel2.Controls.Add(Me.txtEspecialidad)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.cbMedico)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.txtMat)
@@ -293,6 +310,15 @@ Partial Class frmPracticas
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(506, 149)
         Me.Panel2.TabIndex = 28
+        '
+        'cbMedico
+        '
+        Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbMedico.FormattingEnabled = True
+        Me.cbMedico.Location = New System.Drawing.Point(209, 40)
+        Me.cbMedico.Name = "cbMedico"
+        Me.cbMedico.Size = New System.Drawing.Size(278, 21)
+        Me.cbMedico.TabIndex = 27
         '
         'Label16
         '
@@ -329,7 +355,7 @@ Partial Class frmPracticas
         Me.Panel3.Controls.Add(Me.DTFecha)
         Me.Panel3.Location = New System.Drawing.Point(12, 293)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(506, 332)
+        Me.Panel3.Size = New System.Drawing.Size(506, 355)
         Me.Panel3.TabIndex = 29
         '
         'Label15
@@ -508,6 +534,14 @@ Partial Class frmPracticas
         Me.Controls.Add(Me.Panel4)
         Me.Name = "frmPracticas"
         Me.Text = "Ingresar Visitas Paciente"
+        CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PRESTACIONESBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -526,7 +560,6 @@ Partial Class frmPracticas
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents cbMedico As ComboBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents txtMat As TextBox
@@ -563,4 +596,5 @@ Partial Class frmPracticas
     Friend WithEvents lblMes As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents txtEspecialidad As TextBox
+    Friend WithEvents cbMedico As ComboBox
 End Class

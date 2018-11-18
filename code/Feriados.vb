@@ -1,8 +1,9 @@
-﻿Public Class Prestacion
-    Private _prestaciones As DataTable
+﻿Public Class Feriado
+
+    Private _feriado As DataTable
     Private _user As Usuario
 
-    Private _codigo As Integer
+    Private _fecha As Date
     Private _descripcion As String
     Private _creoUser As String
     Private _modifUser As String
@@ -10,53 +11,24 @@
     Private _fechaMod As Date
     Private _modificado = False
 
-    Public Sub New(_cod As Integer, _desc As String)
-        ' Dim user As New Usuario
-        _user = New Usuario
-
-        Me._codigo = _cod
-        Me._descripcion = _desc
-        Me._modifUser = _user.dni
-        Me._creoUser = _user.dni
-        Me._fechaCarga = Date.Today
-        Me._fechaMod = Date.Today
-    End Sub
-
     Public Sub New()
         Dim db = New DB()
         Try
-            _prestaciones = db.getTable(DB.tablas.prestaciones)
+            _feriado = db.getTable(DB.tablas.feriados)
+
         Catch ex As Exception
             Throw
         End Try
     End Sub
 
-    Public Property codigo As Integer
-        Set(value As Integer)
-            Dim r As DataRow()
-            r = _prestaciones.Select("codigo = " & value)
-            If r.Length = 1 Then
-                _codigo = value
-                _descripcion = r(0)("descripcion")
-                _modifUser = r(0)("modifico_usuario")
-                _creoUser = r(0)("cargo_usuario")
-                _fechaCarga = r(0)("fecha_CARGA")
-                _fechaMod = r(0)("fecha_modificacion")
-            Else
-                Throw New Exception("Codigo Inexistente")
-            End If
-        End Set
-
-        Get
-            Return _codigo
-        End Get
-    End Property
-
-    Friend Sub llenarcombo(_combo As ComboBox)
-        _combo.DataSource = _prestaciones
-        _combo.DisplayMember = "descripcion"
-        _combo.ValueMember = "codigo"
-        _combo.SelectedIndex = -1
+    Public Sub New(_fecha As Date, _descripcion As String)
+        _user = New Usuario
+        Me._fecha = _fecha
+        Me._descripcion = _descripcion
+        Me._modifUser = _user.dni
+        Me._creoUser = _user.dni
+        Me._fechaCarga = Date.Today
+        Me._fechaMod = Date.Today
     End Sub
 
     Public Property descripcion As String
@@ -68,6 +40,18 @@
             Return _descripcion
         End Get
     End Property
+
+    Public Property fecha As Date
+        Set(value As Date)
+            Dim r As DataRow()
+            r = _feriado.Select("fecha=" & value)
+            _descripcion = r(0)("descripcion")
+        End Set
+        Get
+            Return _fecha
+        End Get
+    End Property
+
     Public ReadOnly Property modifUser As Integer
         Get
             Return _modifUser
@@ -90,8 +74,8 @@
     End Property
 
     Public Sub insertar()
-        Dim db As New DB
         Try
+            Dim db = New DB
             db.insertar(Me)
         Catch ex As Exception
             Throw
@@ -99,17 +83,19 @@
     End Sub
 
     Public Sub actualizar()
-        Dim db As New DB
+        Dim db = New DB
         Try
             If _modificado Then
-                _modifUser = _user.dni
                 _fechaMod = Date.Today
+                _modifUser = _user.dni
                 db.actualizar(Me)
             Else
                 Throw New Exception("No se realizaron modificaciones")
             End If
+
         Catch ex As Exception
             Throw
         End Try
     End Sub
+
 End Class

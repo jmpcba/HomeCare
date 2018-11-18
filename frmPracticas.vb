@@ -7,36 +7,17 @@ Public Class frmPracticas
     Dim med As Prestador
     Dim prest As Prestacion
     Dim modu As Modulo
+    Dim subModu As subModulo
     Dim index As Integer
     Dim edicion As Boolean = False
     Dim cellVal
     Dim selectedRows As DataGridViewSelectedRowCollection
     Dim ut As utils
     Private Sub visitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.SUBMODULO' Puede moverla o quitarla según sea necesario.
-        Me.SUBMODULOTableAdapter.Fill(Me.HomeCareDataSet.SUBMODULO)
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.MODULO' Puede moverla o quitarla según sea necesario.
-        Me.MODULOTableAdapter.Fill(Me.HomeCareDataSet.MODULO)
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PRESTADORES' Puede moverla o quitarla según sea necesario.
-        Me.PRESTADORESTableAdapter.Fill(Me.HomeCareDataSet.PRESTADORES)
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PACIENTES' Puede moverla o quitarla según sea necesario.
-        Me.PACIENTESTableAdapter.Fill(Me.HomeCareDataSet.PACIENTES)
-
-        Me.PRESTACIONESTableAdapter.Fill(Me.HomeCareDataSet.PRESTACIONES)
 
         Me.WindowState = FormWindowState.Maximized
 
         Try
-
-
-            cbMedico.SelectedIndex = -1
-            CBPrestacion.SelectedIndex = -1
-            cbPaciente.SelectedIndex = -1
-            cbModulo.SelectedIndex = -1
-            cbSubModulo.SelectedIndex = -1
-            CBPrestacion.SelectedIndex = -1
-
-            statusBar("CARGA INICIAL", False)
 
             DTFecha.CustomFormat = "MMMM - yyyy"
             lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
@@ -45,40 +26,40 @@ Public Class frmPracticas
             pac = New Paciente()
             prest = New Prestacion()
             med = New Prestador()
+            subModu = New subModulo
             modu = New Modulo()
+
+
+            pac.llenarcombo(cbPaciente)
+            med.llenarcombo(cbMedico)
+            modu.llenarcombo(cbModulo)
+            subModu.llenarcombo(cbSubModulo)
+            prest.llenarcombo(CBPrestacion)
+
+            txtAfiliado.Text = ""
+            txtBeneficio.Text = ""
+            txtEspecialidad.Text = ""
+            txtLocalidad.Text = ""
+            txtMat.Text = ""
+            txtObservaciones.Text = ""
+            lblHoras.Text = ""
+            lblMonto.Text = ""
 
             cargarGrilla()
 
         Catch ex As Exception
-            MessageBox.Show("ERROR: " & ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
 
     End Sub
 
-    Private Sub CBPrestacion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBPrestacion.SelectedIndexChanged
+    Private Sub CBPrestacion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBPrestacion.SelectionChangeCommitted
         If CBPrestacion.SelectedIndex <> -1 Then
             Try
                 prest.codigo = CBPrestacion.SelectedValue
-                statusBar("PRESTACION CARGADA", False)
+
             Catch ex As Exception
-                MessageBox.Show("ERROR: " & ex.Message)
-            End Try
-        End If
-    End Sub
-
-    Private Sub cbMedico_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMedico.SelectedIndexChanged
-
-        If cbMedico.SelectedIndex <> -1 Then
-
-            med.cuit = cbMedico.SelectedValue.ToString
-            Try
-
-                txtMat.Text = med.cuit
-                txtLocalidad.Text = med.localidad
-                txtEspecialidad.Text = med.especialidad
-                statusBar("MEDICO CARGADO", False)
-            Catch ex As Exception
-                MessageBox.Show("ERROR: " & ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End Try
         End If
     End Sub
@@ -87,16 +68,15 @@ Public Class frmPracticas
         Me.Close()
     End Sub
 
-    Private Sub cbPaciente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaciente.SelectedIndexChanged
+    Private Sub cbPaciente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaciente.SelectionChangeCommitted
         If cbPaciente.SelectedIndex <> -1 Then
             Try
                 pac.afiliado = cbPaciente.SelectedValue
                 txtAfiliado.Text = pac.afiliado
-                txtBeneficio.Text = pac.obraSocial
-                statusBar("PACIENTE CARGADO", False)
+                txtBeneficio.Text = pac.obrasocial
 
             Catch ex As Exception
-                MessageBox.Show("ERROR: " & ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End Try
         End If
     End Sub
@@ -109,23 +89,23 @@ Public Class frmPracticas
             dgFechas.Columns("RESULTADO").ReadOnly = False
 
             If cbPaciente.SelectedIndex = -1 Then
-                statusBar("SELECCIONE UN PACIENTE", True)
+                ut.mensaje("SELECCIONE UN PACIENTE", utils.mensajes.err)
                 cbPaciente.Focus()
 
             ElseIf cbMedico.SelectedIndex = -1 Then
-                statusBar("SELECCIONE UN PRESTADOR", True)
+                ut.mensaje("SELECCIONE UN PRESTADOR", utils.mensajes.err)
                 cbMedico.Focus()
 
             ElseIf cbModulo.SelectedIndex = -1 Then
-                statusBar("SELECCIONE UN MODULO", True)
+                ut.mensaje("SELECCIONE UN MODULO", utils.mensajes.err)
                 cbModulo.Focus()
 
             ElseIf cbSubModulo.SelectedIndex = -1 Then
-                statusBar("SELECCIONE UN SUB-MODULO", True)
+                ut.mensaje("SELECCIONE UN SUB-MODULO", utils.mensajes.err)
                 cbSubModulo.Focus()
 
             ElseIf CBPrestacion.SelectedIndex = -1 Then
-                statusBar("SELECCIONE UNA PRESTACION", True)
+                ut.mensaje("SELECCIONE UNA PRESTACION", utils.mensajes.err)
                 CBPrestacion.Focus()
             Else
 
@@ -166,18 +146,17 @@ Public Class frmPracticas
                         End If
                     Next
                     If err Then
-                        MessageBox.Show("Ocurrieron Errores durante la carga")
+                        ut.mensaje("Ocurrieron Errores durante la carga", utils.mensajes.err)
                     ElseIf carga Then
-                        MessageBox.Show("Datos Cargados exitosamente")
+                        ut.mensaje("Datos Cargados exitosamente", utils.mensajes.info)
                     Else
-                        MessageBox.Show("No se cargaron horas para ningun dia")
+                        ut.mensaje("No se cargaron horas para ningun dia", utils.mensajes.err)
                     End If
-                    statusBar("TERMINADO", False)
                 End If
             End If
 
         Catch ex As Exception
-            MessageBox.Show("ERROR: " & ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
             With dgFechas
                 .Columns("RESULTADO").ReadOnly = True
@@ -187,36 +166,6 @@ Public Class frmPracticas
 
         End Try
     End Sub
-
-    Public Sub statusBar(_msg As String, _error As Boolean)
-        tsLbl.Text = _msg
-        If _error Then
-            tsLbl.ForeColor = Color.Red
-        Else
-            tsLbl.ForeColor = Color.Black
-        End If
-    End Sub
-
-    'DEPRECADO
-    'Private Sub btnEliminarVisita_Click(sender As Object, e As EventArgs)
-    '    Dim index As Integer
-    '    Dim r As DataGridViewRow
-    '    Dim idVisita As Integer
-    '    Dim visita As Practica
-
-    '    If dgFechas.SelectedRows.Count = 0 Then
-    '        statusBar("SELECCIONE UNA VISITA EN LA GRILLA", True)
-    '    Else
-    '        If MsgBox("DESEA ELIMINAR ESTA VISITA?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-    '            r = dgFechas.Rows(index)
-    '            idVisita = r.Cells(0).Value
-    '            visita = New Practica()
-    '            visita.eliminar(idVisita)
-    '            'Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
-    '        End If
-    '    End If
-
-    'End Sub
 
     Private Sub DTFecha_ValueChanged(sender As Object, e As EventArgs) Handles DTFecha.ValueChanged
         If edicion Then
@@ -304,19 +253,19 @@ Public Class frmPracticas
         End If
 
         If IsNothing(med.cuit) Then
-            MessageBox.Show("Seleccione un Prestador")
+            ut.mensaje("Seleccione un Prestador", utils.mensajes.err)
             dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
         ElseIf IsNothing(modu.codigo) Then
-            MessageBox.Show("Seleccione un Modulo")
+            ut.mensaje("Seleccione un Modulo", utils.mensajes.err)
             dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
         Else
             If Not IsDBNull(val) Then
                 edicion = True
                 If Not IsNumeric(val) Then
-                    MessageBox.Show("Debe ingresar un valor numerico")
+                    ut.mensaje("Debe ingresar un valor numerico", utils.mensajes.err)
                     dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
                 ElseIf val > 24 Then
-                    MessageBox.Show("No puede ingresar mas de 24hs en un dia")
+                    ut.mensaje("No puede ingresar mas de 24hs en un dia", utils.mensajes.err)
                     dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
                 End If
             End If
@@ -382,7 +331,7 @@ Public Class frmPracticas
         End If
     End Sub
 
-    Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectedIndexChanged
+    Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectionChangeCommitted
         If cbModulo.SelectedIndex <> -1 Then
             modu.codigo = cbModulo.SelectedValue
         End If
@@ -390,6 +339,24 @@ Public Class frmPracticas
     End Sub
 
     Private Sub txtLocalidad_TextChanged(sender As Object, e As EventArgs) Handles txtLocalidad.TextChanged
+
+    End Sub
+
+    Private Sub cbMedico_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMedico.SelectionChangeCommitted
+        If cbMedico.SelectedIndex <> -1 Then
+
+            med.id = cbMedico.SelectedValue.ToString
+            Try
+                txtMat.Text = med.cuit
+                txtLocalidad.Text = med.localidad
+                txtEspecialidad.Text = med.especialidad
+            Catch ex As Exception
+                ut.mensaje(ex.Message, utils.mensajes.err)
+            End Try
+        End If
+    End Sub
+
+    Private Sub cbSubModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSubModulo.SelectionChangeCommitted
 
     End Sub
 End Class

@@ -68,6 +68,7 @@ Partial Class frmLiquidar
         Me.gridLiqui.Location = New System.Drawing.Point(16, 124)
         Me.gridLiqui.MultiSelect = False
         Me.gridLiqui.Name = "gridLiqui"
+        Me.gridLiqui.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.gridLiqui.Size = New System.Drawing.Size(909, 349)
         Me.gridLiqui.TabIndex = 1
         '
