@@ -16,11 +16,9 @@ Public Class Mail
     End Sub
 
     Public Sub send(_liq As Liquidacion)
-        'Dim filePath As String = My.Application.Info.DirectoryPath & "\mailTemplate.html"
-        Dim filePath As String = "C:\Users\jmpcb\Documents\GitHub\HomeCare\code\mailTemplate.html"
+
         Try
-            Dim sr As New System.IO.StreamReader(filePath)
-            Dim mail As String = sr.ReadToEnd
+            Dim mail As String = My.Resources.mailTemplate
             Dim mm As MailMessage = New MailMessage()
 
             mail = mail.Replace("[MES]", MonthName(_liq.mes.Month))
@@ -38,9 +36,8 @@ Public Class Mail
             mm.To.Add(New MailAddress("jmpcba@gmail.com"))
             client.Send(mm)
         Catch ex As Exception
-            Throw
+            Throw New Exception("Error enviando mail: " & ex.Message)
         End Try
-
     End Sub
 
 

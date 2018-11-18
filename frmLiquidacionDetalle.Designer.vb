@@ -24,6 +24,7 @@ Partial Class frmLiquidacionDetalle
     Private Sub InitializeComponent()
         Me.dgDetalle = New System.Windows.Forms.DataGridView()
         Me.lblDetalle = New System.Windows.Forms.Label()
+        Me.btnEliminar = New System.Windows.Forms.Button()
         CType(Me.dgDetalle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -35,9 +36,12 @@ Partial Class frmLiquidacionDetalle
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgDetalle.Location = New System.Drawing.Point(13, 36)
+        Me.dgDetalle.Location = New System.Drawing.Point(13, 41)
+        Me.dgDetalle.MultiSelect = False
         Me.dgDetalle.Name = "dgDetalle"
-        Me.dgDetalle.Size = New System.Drawing.Size(766, 429)
+        Me.dgDetalle.ReadOnly = True
+        Me.dgDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgDetalle.Size = New System.Drawing.Size(766, 424)
         Me.dgDetalle.TabIndex = 0
         '
         'lblDetalle
@@ -51,11 +55,22 @@ Partial Class frmLiquidacionDetalle
         Me.lblDetalle.TabIndex = 105
         Me.lblDetalle.Text = "DETALLE"
         '
+        'btnEliminar
+        '
+        Me.btnEliminar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEliminar.Location = New System.Drawing.Point(704, 12)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Size = New System.Drawing.Size(75, 23)
+        Me.btnEliminar.TabIndex = 106
+        Me.btnEliminar.Text = "&ELIMINAR"
+        Me.btnEliminar.UseVisualStyleBackColor = True
+        '
         'frmLiquidacionDetalle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(791, 477)
+        Me.Controls.Add(Me.btnEliminar)
         Me.Controls.Add(Me.lblDetalle)
         Me.Controls.Add(Me.dgDetalle)
         Me.Name = "frmLiquidacionDetalle"
@@ -68,4 +83,5 @@ Partial Class frmLiquidacionDetalle
 
     Friend WithEvents dgDetalle As DataGridView
     Friend WithEvents lblDetalle As Label
+    Friend WithEvents btnEliminar As Button
 End Class

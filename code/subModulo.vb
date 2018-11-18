@@ -52,6 +52,14 @@
             Return _codigo
         End Get
     End Property
+
+    Friend Sub llenarcombo(_combo As ComboBox)
+        _combo.DataSource = _subModulos
+        _combo.DisplayMember = "descripcion"
+        _combo.ValueMember = "codigo"
+        _combo.SelectedIndex = -1
+    End Sub
+
     Public Property descripcion As String
         Set(value As String)
             _descripcion = value

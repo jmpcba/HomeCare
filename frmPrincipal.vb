@@ -1,52 +1,52 @@
 ﻿Public Class frmPrincipal
+    Dim ut As New utils
     Private Sub btnVisita_Click(sender As Object, e As EventArgs) Handles btnVisita.Click
-        frmPracticas.Show()
+        frmPracticas.ShowDialog()
     End Sub
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
-        frmReporte.Show()
+        frmReporte.ShowDialog()
     End Sub
     Private Sub btnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
-        frmInformes.Show()
+        frmInformes.ShowDialog()
     End Sub
     Private Sub btnVerificar_Click(sender As Object, e As EventArgs) Handles btnVerificar.Click
-        frmVerificar.Show()
+        frmVerificar.ShowDialog()
     End Sub
     Private Sub btnNvaLiq_Click(sender As Object, e As EventArgs) Handles btnNvaLiq.Click
-        frmLiquidar.Show()
+        frmLiquidar.ShowDialog()
     End Sub
     Private Sub btnCierreLiq_Click(sender As Object, e As EventArgs) Handles btnCierreLiq.Click
-        frmCierreLiq.Show()
+        frmCierreLiq.ShowDialog()
     End Sub
     Private Sub btnPrestadores_Click(sender As Object, e As EventArgs) Handles btnPrestadores.Click
-        frmPrestadores.Show()
+        frmPrestadores.ShowDialog()
     End Sub
     Private Sub btnPacientes_Click(sender As Object, e As EventArgs) Handles btnPacientes.Click
-        frmPacientes.Show()
+        frmPacientes.ShowDialog()
     End Sub
     Private Sub btnModulo_Click(sender As Object, e As EventArgs) Handles btnModulo.Click
-        frmModulo.Show()
+        frmModulo.ShowDialog()
     End Sub
     Private Sub btnSubMod_Click(sender As Object, e As EventArgs) Handles btnSubMod.Click
-        frmSubMod.Show()
+        frmSubMod.ShowDialog()
     End Sub
     Private Sub btnPrestacion_Click(sender As Object, e As EventArgs) Handles btnPrestacion.Click
-        frmPrestacion.Show()
+        frmPrestacion.ShowDialog()
     End Sub
     Private Sub btnFeriados_Click(sender As Object, e As EventArgs) Handles btnFeriados.Click
-        FrmFeriados.Show()
+        FrmFeriados.ShowDialog()
     End Sub
-
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         My.Settings.Item("HomeCareConnectionString") = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)
     End Sub
 
-    Private Sub BaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs)
+    Private Sub BaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BaseDeDatosToolStripMenuItem.Click
         Try
-            Dim ut = New utils
+
             ut.setDB()
         Catch ex As Exception
-            MessageBox.Show("ERROR: " & ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 

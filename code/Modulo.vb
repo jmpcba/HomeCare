@@ -62,6 +62,13 @@
         End Get
     End Property
 
+    Friend Sub llenarcombo(_combo As ComboBox)
+        _combo.DataSource = _modulos
+        _combo.DisplayMember = "codigo"
+        _combo.ValueMember = "codigo"
+        _combo.SelectedIndex = -1
+    End Sub
+
     Public ReadOnly Property tope(_tipo As String) As Integer
         Get
             If _tipo = "MEDICO" Then

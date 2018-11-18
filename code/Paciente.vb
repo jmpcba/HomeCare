@@ -1,16 +1,16 @@
 ﻿Public Class Paciente
 
-    Private _paciente As DataTable
+    Private _pacientes As DataTable
     Private _user As Usuario
 
-    Private _dni As String
     Private _afiliado As String
+    Private _dni As String
     Private _nombre As String
     Private _apellido As String
-    Private _obraSocial As String
     Private _localidad As String
-    Private _modifUser As Integer
-    Private _creoUser As Integer
+    Private _obraSocial As String
+    Private _creoUser As String
+    Private _modifUser As String
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
@@ -18,7 +18,17 @@
     Public Sub New()
         Dim db = New DB()
         Try
-            _paciente = db.getTable(DB.tablas.pacientes)
+            _pacientes = db.getTable(DB.tablas.pacientes)
+            _pacientes.Columns.Add("COMBO")
+
+            For Each r As DataRow In _pacientes.Rows
+                Dim nom As String
+                Dim ape As String
+                nom = r("nombre")
+                ape = r("apellido")
+
+                r("COMBO") = String.Format("{0} {1}", ape, nom)
+            Next
         Catch ex As Exception
             Throw
         End Try
@@ -51,13 +61,21 @@
     Public Property afiliado As String
         Set(value As String)
             Dim r As DataRow()
-            r = _paciente.Select("afiliado=" & value)
-            _afiliado = r(0)("afiliado")
-            _dni = r(0)("dni")
-            _nombre = r(0)("nombre")
-            _apellido = r(0)("apellido")
-            _obraSocial = r(0)("obra_social")
-            _localidad = r(0)("localidad")
+
+            r = _pacientes.Select("afiliado=" & value)
+
+            If r.Length = 1 Then
+
+                _afiliado = r(0)("afiliado")
+                _dni = r(0)("dni")
+                _nombre = r(0)("nombre")
+                _apellido = r(0)("apellido")
+                _obraSocial = r(0)("obra_social")
+                _localidad = r(0)("localidad")
+            Else
+                Throw New Exception("Codigo Inexistente")
+            End If
+
         End Set
         Get
             Return _afiliado
@@ -105,6 +123,27 @@
 
     End Property
 
+    Public ReadOnly Property modifUser As Integer
+        Get
+            Return _modifUser
+        End Get
+    End Property
+    Public ReadOnly Property creoUser As Integer
+        Get
+            Return _creoUser
+        End Get
+    End Property
+    Public ReadOnly Property fechaCarga As Date
+        Get
+            Return _fechaCarga
+        End Get
+    End Property
+    Public ReadOnly Property fechaMod As Date
+        Get
+            Return _fechaMod
+        End Get
+    End Property
+
     Public Sub insertar()
         Try
             Dim db = New DB
@@ -130,4 +169,11 @@
         End Try
     End Sub
 
+    Public Sub llenarcombo(_combo As ComboBox)
+        _combo.DataSource = _pacientes
+        _combo.DisplayMember = "combo"
+        _combo.ValueMember = "afiliado"
+        _combo.SelectedIndex = -1
+
+    End Sub
 End Class

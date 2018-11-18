@@ -23,13 +23,16 @@ Partial Class FrmFeriados
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.dtFeriado = New System.Windows.Forms.DateTimePicker()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dgFechas = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.dgFechas = New System.Windows.Forms.DataGridView()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.DtCalendario = New System.Windows.Forms.DateTimePicker()
+        Me.txtDescripciion = New System.Windows.Forms.TextBox()
+        Me.Panel1.SuspendLayout()
         CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -38,47 +41,38 @@ Partial Class FrmFeriados
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(75, 111)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(30, 13)
+        Me.Label8.Size = New System.Drawing.Size(75, 13)
         Me.Label8.TabIndex = 19
-        Me.Label8.Text = "MES"
-        '
-        'dtFeriado
-        '
-        Me.dtFeriado.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtFeriado.Location = New System.Drawing.Point(78, 157)
-        Me.dtFeriado.Name = "dtFeriado"
-        Me.dtFeriado.ShowUpDown = True
-        Me.dtFeriado.Size = New System.Drawing.Size(165, 20)
-        Me.dtFeriado.TabIndex = 0
+        Me.Label8.Text = "DIA FERIADO"
         '
         'btnCerrar
         '
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnCerrar.Location = New System.Drawing.Point(743, 348)
+        Me.btnCerrar.Location = New System.Drawing.Point(743, 261)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
-        Me.btnCerrar.TabIndex = 42
+        Me.btnCerrar.TabIndex = 52
         Me.btnCerrar.Text = "&CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = False
         '
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Location = New System.Drawing.Point(743, 286)
+        Me.btnGuardar.Location = New System.Drawing.Point(743, 196)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
-        Me.btnGuardar.TabIndex = 41
+        Me.btnGuardar.TabIndex = 51
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'btnBuscar
         '
         Me.btnBuscar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBuscar.Location = New System.Drawing.Point(743, 227)
+        Me.btnBuscar.Location = New System.Drawing.Point(743, 130)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(106, 33)
-        Me.btnBuscar.TabIndex = 40
+        Me.btnBuscar.TabIndex = 50
         Me.btnBuscar.Text = "&BUSCAR"
         Me.btnBuscar.UseVisualStyleBackColor = True
         '
@@ -93,6 +87,18 @@ Partial Class FrmFeriados
         Me.Label1.TabIndex = 43
         Me.Label1.Text = "CARGA  DE  FERIADOS"
         '
+        'Panel1
+        '
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.dgFechas)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.DtCalendario)
+        Me.Panel1.Controls.Add(Me.txtDescripciion)
+        Me.Panel1.Location = New System.Drawing.Point(23, 12)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(697, 519)
+        Me.Panel1.TabIndex = 44
+        '
         'dgFechas
         '
         Me.dgFechas.AllowUserToAddRows = False
@@ -101,36 +107,52 @@ Partial Class FrmFeriados
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.dgFechas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgFechas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgFechas.Location = New System.Drawing.Point(331, 37)
+        Me.dgFechas.Location = New System.Drawing.Point(306, 3)
         Me.dgFechas.Name = "dgFechas"
+        Me.dgFechas.ReadOnly = True
         Me.dgFechas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgFechas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.dgFechas.Size = New System.Drawing.Size(355, 488)
-        Me.dgFechas.TabIndex = 1
+        Me.dgFechas.Size = New System.Drawing.Size(375, 504)
+        Me.dgFechas.TabIndex = 2
         '
-        'Panel1
+        'Label2
         '
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Location = New System.Drawing.Point(23, 12)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(697, 519)
-        Me.Panel1.TabIndex = 44
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(51, 223)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(80, 13)
+        Me.Label2.TabIndex = 20
+        Me.Label2.Text = "DESCRIPCION"
+        '
+        'DtCalendario
+        '
+        Me.DtCalendario.Location = New System.Drawing.Point(30, 130)
+        Me.DtCalendario.Name = "DtCalendario"
+        Me.DtCalendario.Size = New System.Drawing.Size(200, 20)
+        Me.DtCalendario.TabIndex = 0
+        '
+        'txtDescripciion
+        '
+        Me.txtDescripciion.Location = New System.Drawing.Point(30, 261)
+        Me.txtDescripciion.Name = "txtDescripciion"
+        Me.txtDescripciion.Size = New System.Drawing.Size(243, 20)
+        Me.txtDescripciion.TabIndex = 1
         '
         'FrmFeriados
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(934, 537)
-        Me.Controls.Add(Me.dgFechas)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.btnBuscar)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.dtFeriado)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "FrmFeriados"
         Me.Text = "FrmFeriados"
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -138,11 +160,13 @@ Partial Class FrmFeriados
     End Sub
 
     Friend WithEvents Label8 As Label
-    Friend WithEvents dtFeriado As DateTimePicker
     Friend WithEvents btnCerrar As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnBuscar As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents dgFechas As DataGridView
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents txtDescripciion As TextBox
+    Friend WithEvents DtCalendario As DateTimePicker
+    Friend WithEvents dgFechas As DataGridView
+    Friend WithEvents Label2 As Label
 End Class

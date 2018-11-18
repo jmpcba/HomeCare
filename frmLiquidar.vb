@@ -1,10 +1,10 @@
 ﻿Public Class frmLiquidar
     Dim sel As Boolean = False
     Private Sub dtMes_ValueChanged(sender As Object, e As EventArgs) Handles dtMes.ValueChanged
-        grilla()
+        llenargrilla()
     End Sub
 
-    Public Sub grilla()
+    Public Sub llenarGrilla()
         Dim db As New DB()
         Dim mes = dtMes.Value
         Dim dt As New DataTable
@@ -35,6 +35,7 @@
 
             .DataSource = dt
             .Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
+            .Columns("ID_PREST").Visible = False
             .AutoResizeColumns()
             .AutoResizeRows()
         End With
@@ -49,7 +50,7 @@
 
     Private Sub frmLiquidar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnGuardar.Enabled = False
-        grilla()
+        llenargrilla()
         Me.WindowState = FormWindowState.Maximized
     End Sub
 
@@ -61,10 +62,10 @@
         Dim r As DataGridViewRow
         If e.ColumnIndex <> 0 Then
             r = gridLiqui.Rows(e.RowIndex)
-            Dim cuit = r.Cells("CUIT").Value
+            Dim idPrest = r.Cells("ID_PREST").Value
             Dim fecha = dtMes.Value
-            Dim frm As New frmLiquidacionDetalle(cuit, fecha)
-            frm.Show()
+            Dim frm As New frmLiquidacionDetalle(idPrest, fecha, Me)
+            frm.ShowDialog()
         End If
 
     End Sub
@@ -87,12 +88,13 @@
         Dim mes As New Date(dtMes.Value.Year, dtMes.Value.Month, Date.DaysInMonth(dtMes.Value.Year, dtMes.Value.Month))
 
         Try
+            btnGuardar.Enabled = False
             gridLiqui.Columns("RESULTADO CARGA").ReadOnly = False
 
             For Each r As DataGridViewRow In gridLiqui.Rows
                 If r.Cells(0).Value Then
                     Try
-                        Dim liq = New Liquidacion(r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value)
+                        Dim liq = New Liquidacion(r.Cells("ID_PREST").Value, r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value)
                         liq.liquidar()
                         r.Cells("RESULTADO CARGA").Value = "Cargado"
                         r.DefaultCellStyle.BackColor = Color.LightGreen
@@ -116,6 +118,7 @@
                 .AutoResizeColumns()
                 .AutoResizeRows()
             End With
+            btnGuardar.Enabled = True
         End Try
     End Sub
 End Class
