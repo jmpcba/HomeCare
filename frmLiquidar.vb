@@ -93,7 +93,7 @@
             For Each r As DataGridViewRow In gridLiqui.Rows
                 If r.Cells(0).Value Then
                     Try
-                        Dim liq = New Liquidacion(r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value)
+                        Dim liq = New Liquidacion(r.Cells("ID_PREST").Value, r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value)
                         liq.liquidar()
                         r.Cells("RESULTADO CARGA").Value = "Cargado"
                         r.DefaultCellStyle.BackColor = Color.LightGreen

@@ -128,7 +128,7 @@ Public Class DB
         hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
 
         cmd.CommandType = CommandType.StoredProcedure
-        cmd.CommandText = "QUERY_DETALLES"
+        cmd.CommandText = "QUERY_DETALLE_MEDICO"
         cmd.Parameters.AddWithValue("P_ID", _id)
         cmd.Parameters.AddWithValue("DESDE", desde)
         cmd.Parameters.AddWithValue("HASTA", hasta)
@@ -266,7 +266,7 @@ Public Class DB
     End Sub
 
     Friend Sub insertar(_liq As Liquidacion)
-        Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#)", _liq.cuit, _liq.localidad, _liq.especialidad, _liq.mes.ToShortDateString, _liq.hsNormales, _liq.hsFeriado, _liq.importeNormal, _liq.importeFeriado, _liq.montoFijo, _liq.creoUser, _liq.modifUser, _liq.fechaCarga.ToShortDateString, _liq.fechaMod.ToShortDateString)
+        Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#, {13})", _liq.cuit, _liq.localidad, _liq.especialidad, _liq.mes.ToShortDateString, _liq.hsNormales, _liq.hsFeriado, _liq.importeNormal, _liq.importeFeriado, _liq.montoFijo, _liq.creoUser, _liq.modifUser, _liq.fechaCarga.ToShortDateString, _liq.fechaMod.ToShortDateString, _liq.prestador)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query

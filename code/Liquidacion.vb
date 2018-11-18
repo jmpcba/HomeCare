@@ -1,4 +1,5 @@
 ﻿Public Class Liquidacion
+    Private _idPrestador As Integer
     Private _cuit As String
     Private _localidad As String
     Private _especialidad As String
@@ -15,8 +16,10 @@
     Private _modificado = False
     Private _user As Usuario
 
-    Public Sub New(_cuit As String, _localidad As String, _especialidad As String, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal, _montoFijo As Decimal)
+    Public Sub New(_idPrestador As Integer, _cuit As String, _localidad As String, _especialidad As String, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal, _montoFijo As Decimal)
         _user = New Usuario
+
+        Me._idPrestador = _idPrestador
         Me._cuit = _cuit
         Me._localidad = _localidad
         Me._especialidad = _especialidad
@@ -130,6 +133,12 @@
     Public ReadOnly Property fechaMod As Date
         Get
             Return _fechaMod
+        End Get
+    End Property
+
+    Public ReadOnly Property prestador As Integer
+        Get
+            Return _idPrestador
         End Get
     End Property
 
