@@ -49,7 +49,7 @@
                 _topeKinesio = r(0)("kinesiologia")
                 _topeFono = r(0)("fonoaudiologia")
                 _topeCuidador = r(0)("cuidador")
-                _topeNutricionista = r(0)("nutricionista")
+                _topeNutricionista = r(0)("nutricion")
                 _user = New Usuario
                 _modifUser = r(0)("modifico_usuario")
                 _creoUser = r(0)("cargo_usuario")
@@ -83,7 +83,7 @@
                 Return _topeFono
             ElseIf _tipo = "CUIDADOR" Then
                 Return _topeCuidador
-            ElseIf _tipo = "NUTRICIONISTA" Then
+            ElseIf _tipo = "NUTRICION" Then
                 Return _topeNutricionista
             Else
                 Return 0
