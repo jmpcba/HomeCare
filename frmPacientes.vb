@@ -11,7 +11,7 @@
                 ut.validarLargo(numAfiliado, 12)
                 pacientes = New Paciente(numAfiliado.Text, numDni.Text, txtNombre.Text, txtApellido.Text, txtObSocial.Text, txtLocalidad.Text)
                 pacientes.insertar()
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
             Else
                 ut.validarTxtBoxLleno(txtBoxes)
@@ -36,13 +36,13 @@
                 pacientes.actualizar()
                 ut.iniciarTxtBoxes(txtBoxes)
                 pacientes = Nothing
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
             End If
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                MessageBox.Show("Ya existe un paciente con el mismo numero")
+                ut.mensaje("Ya existe un paciente con el mismo numero", utils.mensajes.err)
             Else
-                MessageBox.Show(ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End If
         End Try
     End Sub
@@ -57,7 +57,7 @@
             txtObSocial.Text = pacientes.obrasocial
             txtLocalidad.Text = pacientes.localidad
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
             pacientes = Nothing
             iniciarControles()
         End Try
@@ -87,7 +87,7 @@
         Catch ex As Exception
             numAfiliado.Text = ""
             btnBuscar.Enabled = False
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 

@@ -31,7 +31,7 @@ Partial Class FrmFeriados
         Me.dgFechas = New System.Windows.Forms.DataGridView()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.DtCalendario = New System.Windows.Forms.DateTimePicker()
-        Me.txtDescripciion = New System.Windows.Forms.TextBox()
+        Me.txtDescripcion = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.dgFechas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -93,7 +93,7 @@ Partial Class FrmFeriados
         Me.Panel1.Controls.Add(Me.dgFechas)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.DtCalendario)
-        Me.Panel1.Controls.Add(Me.txtDescripciion)
+        Me.Panel1.Controls.Add(Me.txtDescripcion)
         Me.Panel1.Location = New System.Drawing.Point(23, 12)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(697, 519)
@@ -133,10 +133,10 @@ Partial Class FrmFeriados
         '
         'txtDescripciion
         '
-        Me.txtDescripciion.Location = New System.Drawing.Point(30, 261)
-        Me.txtDescripciion.Name = "txtDescripciion"
-        Me.txtDescripciion.Size = New System.Drawing.Size(243, 20)
-        Me.txtDescripciion.TabIndex = 1
+        Me.txtDescripcion.Location = New System.Drawing.Point(30, 261)
+        Me.txtDescripcion.Name = "txtDescripciion"
+        Me.txtDescripcion.Size = New System.Drawing.Size(243, 20)
+        Me.txtDescripcion.TabIndex = 1
         '
         'FrmFeriados
         '
@@ -165,7 +165,7 @@ Partial Class FrmFeriados
     Friend WithEvents btnBuscar As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents txtDescripciion As TextBox
+    Friend WithEvents txtDescripcion As TextBox
     Friend WithEvents DtCalendario As DateTimePicker
     Friend WithEvents dgFechas As DataGridView
     Friend WithEvents Label2 As Label

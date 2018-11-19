@@ -42,14 +42,14 @@
                 modu.actualizar()
                 ut.iniciarTxtBoxes(txtboxes)
                 modu = Nothing
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
             End If
 
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                MessageBox.Show("Ya existe un Modulo con el mismo codigo")
+                ut.mensaje("Ya existe un Modulo con el mismo codigo", utils.mensajes.err)
             Else
-                MessageBox.Show(ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End If
         End Try
     End Sub
@@ -65,7 +65,7 @@
             txtKinesio.Text = modu.topeKinesio
             txtMedico.Text = modu.topeMedico
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
             modu = Nothing
             iniciarControles()
         End Try
@@ -110,7 +110,7 @@
         Try
             ut.validarNumerico(txtEnfermeria)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -118,7 +118,7 @@
         Try
             ut.validarNumerico(txtKinesio)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -126,7 +126,7 @@
         Try
             ut.validarNumerico(txtFono)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -134,7 +134,7 @@
         Try
             ut.validarNumerico(txtCuidador)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -160,7 +160,7 @@
         Catch ex As Exception
             txtCodigo.Text = ""
             btnBuscar.Enabled = False
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 

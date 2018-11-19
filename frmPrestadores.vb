@@ -10,7 +10,7 @@
                 ut.validarLargo(txtCuit, 11)
                 prestadores = New Prestador(txtCuit.Text, txtNombre.Text, txtApellido.Text, txtEmail.Text, txtEspecialidad.Text, txtLocalidad.Text, numLunVie.Text, numFeriados.Text, numFijo.Text, numPorcentaje.Text, dtCese.Text)
                 prestadores.insertar()
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
             Else
                 ut.validarTxtBoxLleno(txtBoxes)
@@ -49,13 +49,13 @@
                 prestadores.actualizar()
                 ut.iniciarTxtBoxes(txtBoxes)
                 prestadores = Nothing
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
             End If
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                MessageBox.Show("Ya existe un Prestador con el mismo cuit/especialidad/localidad")
+                ut.mensaje("Ya existe un Prestador con el mismo cuit/especialidad/localidad", utils.mensajes.err)
             Else
-                MessageBox.Show(ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End If
         End Try
     End Sub
@@ -74,7 +74,7 @@
             numFijo.Text = prestadores.montoFijo
             dtCese.Text = prestadores.fechaCese
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
             prestadores = Nothing
             iniciarControles()
         End Try
@@ -109,7 +109,7 @@
         Catch ex As Exception
             txtCuit.Text = ""
             btnBuscar.Enabled = False
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -124,7 +124,7 @@
         Catch ex As Exception
             chbCese.Text = ""
             dtCese.Enabled = False
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
