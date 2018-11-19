@@ -42,6 +42,7 @@ Partial Class frmModulo
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.txtMedico = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnCerrar
@@ -68,7 +69,7 @@ Partial Class frmModulo
         'btnBuscar
         '
         Me.btnBuscar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBuscar.Location = New System.Drawing.Point(687, 104)
+        Me.btnBuscar.Location = New System.Drawing.Point(687, 56)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(106, 33)
         Me.btnBuscar.TabIndex = 41
@@ -217,11 +218,22 @@ Partial Class frmModulo
         Me.Panel1.Size = New System.Drawing.Size(574, 460)
         Me.Panel1.TabIndex = 123
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLimpiar.Location = New System.Drawing.Point(687, 117)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(106, 33)
+        Me.btnLimpiar.TabIndex = 124
+        Me.btnLimpiar.Text = "&LIMPIAR"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'frmModulo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(914, 542)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.txtMedico)
         Me.Controls.Add(Me.txtCodigo)
         Me.Controls.Add(Me.Label9)
@@ -268,4 +280,5 @@ Partial Class frmModulo
     Friend WithEvents txtCodigo As TextBox
     Friend WithEvents txtMedico As TextBox
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents btnLimpiar As Button
 End Class

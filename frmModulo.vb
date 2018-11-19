@@ -56,14 +56,8 @@
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Try
-            modu = New Modulo
-            modu.codigo = txtCodigo.Text
-            txtCuidador.Text = modu.topeCuidador
-            ' txtDescripcion.Text = modu.descripcion
-            txtEnfermeria.Text = modu.topeEnfermeria
-            txtFono.Text = modu.topeFono
-            txtKinesio.Text = modu.topeKinesio
-            txtMedico.Text = modu.topeMedico
+            Dim frmBuscar As New frmBuscar(Me)
+            frmBuscar.ShowDialog()
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
             modu = Nothing
@@ -139,7 +133,7 @@
     End Sub
 
     Private Sub frmModulo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        btnBuscar.Enabled = False
+        'btnBuscar.Enabled = False
         txtboxes = {txtCodigo, txtDescripcion, txtMedico, txtEnfermeria, txtKinesio, txtFono, txtCuidador}
     End Sub
 
@@ -168,4 +162,22 @@
         Me.Close()
     End Sub
 
+    Public Sub resultadoBusqueda(ByRef _modulo As Modulo)
+        txtCodigo.ReadOnly = True
+        txtCodigo.Text = _modulo.codigo
+        txtCuidador.Text = _modulo.topeCuidador
+        ' txtDescripcion.Text = _modulo.descripcion
+        txtEnfermeria.Text = _modulo.topeEnfermeria
+        txtFono.Text = _modulo.topeFono
+        txtKinesio.Text = _modulo.topeKinesio
+        txtMedico.Text = _modulo.topeMedico
+        modu = _modulo
+
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        txtCodigo.ReadOnly = False
+        iniciarControles()
+        modu = Nothing
+    End Sub
 End Class
