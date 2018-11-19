@@ -98,7 +98,7 @@ Partial Class frmPracticas
         '
         'btnCerrar
         '
-        Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCerrar.Location = New System.Drawing.Point(419, 374)
@@ -255,7 +255,7 @@ Partial Class frmPracticas
         '
         'btnGuardar
         '
-        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnGuardar.Location = New System.Drawing.Point(419, 315)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
@@ -339,9 +339,9 @@ Partial Class frmPracticas
         Me.Panel1.Controls.Add(Me.cbPaciente)
         Me.Panel1.Controls.Add(Me.txtBeneficio)
         Me.Panel1.Controls.Add(Me.Label9)
-        Me.Panel1.Location = New System.Drawing.Point(12, 24)
+        Me.Panel1.Location = New System.Drawing.Point(12, 13)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(506, 108)
+        Me.Panel1.Size = New System.Drawing.Size(506, 119)
         Me.Panel1.TabIndex = 27
         '
         'Panel2
@@ -368,7 +368,7 @@ Partial Class frmPracticas
         Me.cbMedico.Location = New System.Drawing.Point(209, 40)
         Me.cbMedico.Name = "cbMedico"
         Me.cbMedico.Size = New System.Drawing.Size(278, 21)
-        Me.cbMedico.TabIndex = 27
+        Me.cbMedico.TabIndex = 1
         '
         'Label16
         '
@@ -615,7 +615,7 @@ Partial Class frmPracticas
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel4)
         Me.Name = "frmPracticas"
-        Me.Text = "Ingresar Visitas Paciente"
+        Me.Text = "INGRESAR PRACTICAS"
         CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()

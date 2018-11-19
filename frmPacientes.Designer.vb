@@ -39,6 +39,7 @@ Partial Class frmPacientes
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -184,7 +185,7 @@ Partial Class frmPacientes
         'btnBuscar
         '
         Me.btnBuscar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBuscar.Location = New System.Drawing.Point(750, 178)
+        Me.btnBuscar.Location = New System.Drawing.Point(750, 118)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(106, 33)
         Me.btnBuscar.TabIndex = 40
@@ -201,11 +202,22 @@ Partial Class frmPacientes
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLimpiar.Location = New System.Drawing.Point(750, 178)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(106, 33)
+        Me.btnLimpiar.TabIndex = 43
+        Me.btnLimpiar.Text = "&LIMPIAR"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'frmPacientes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(878, 524)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnGuardar)
@@ -235,4 +247,5 @@ Partial Class frmPacientes
     Friend WithEvents Label6 As Label
     Friend WithEvents txtLocalidad As TextBox
     Friend WithEvents Label7 As Label
+    Friend WithEvents btnLimpiar As Button
 End Class

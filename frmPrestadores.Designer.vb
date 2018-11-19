@@ -52,6 +52,7 @@ Partial Class frmPrestadores
         Me.BtnCerrar = New System.Windows.Forms.Button()
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -308,7 +309,7 @@ Partial Class frmPrestadores
         '
         Me.BtnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnCerrar.Location = New System.Drawing.Point(667, 262)
+        Me.BtnCerrar.Location = New System.Drawing.Point(667, 259)
         Me.BtnCerrar.Name = "BtnCerrar"
         Me.BtnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.BtnCerrar.TabIndex = 202
@@ -318,7 +319,7 @@ Partial Class frmPrestadores
         'btnBuscar
         '
         Me.btnBuscar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBuscar.Location = New System.Drawing.Point(667, 126)
+        Me.btnBuscar.Location = New System.Drawing.Point(667, 70)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(106, 33)
         Me.btnBuscar.TabIndex = 200
@@ -328,24 +329,35 @@ Partial Class frmPrestadores
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Location = New System.Drawing.Point(667, 195)
+        Me.btnGuardar.Location = New System.Drawing.Point(667, 196)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
         Me.btnGuardar.TabIndex = 201
         Me.btnGuardar.Text = "&GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLimpiar.Location = New System.Drawing.Point(667, 133)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(106, 33)
+        Me.btnLimpiar.TabIndex = 203
+        Me.btnLimpiar.Text = "&LIMPIAR"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'frmPrestadores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 497)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnBuscar)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.BtnCerrar)
         Me.Name = "frmPrestadores"
-        Me.Text = "frmPrestadores"
+        Me.Text = "ADMINISTRAR PRESTADORES"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -381,4 +393,5 @@ Partial Class frmPrestadores
     Friend WithEvents chbCese As CheckBox
     Friend WithEvents Label14 As Label
     Friend WithEvents dtCese As DateTimePicker
+    Friend WithEvents btnLimpiar As Button
 End Class

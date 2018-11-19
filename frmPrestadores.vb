@@ -1,54 +1,58 @@
 ﻿Public Class frmPrestadores
-    Dim prestadores As Prestador
+    Dim prest As Prestador
     Dim ut As New utils
     Dim txtBoxes As TextBox()
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
-            If IsNothing(prestadores) Then
+            If IsNothing(prest) Then
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarLargo(txtCuit, 11)
-                prestadores = New Prestador(txtCuit.Text, txtNombre.Text, txtApellido.Text, txtEmail.Text, txtEspecialidad.Text, txtLocalidad.Text, numLunVie.Text, numFeriados.Text, numFijo.Text, numPorcentaje.Text, dtCese.Text)
-                prestadores.insertar()
+                prest = New Prestador(txtCuit.Text, txtNombre.Text, txtApellido.Text, txtEmail.Text, txtEspecialidad.Text, txtLocalidad.Text, numLunVie.Text, numFeriados.Text, numFijo.Text, numPorcentaje.Text, dtCese.Text)
+                prest.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
-                iniciarControles()
+                ut.iniciarTxtBoxes(txtBoxes)
             Else
                 ut.validarTxtBoxLleno(txtBoxes)
-                ut.validarLargo(txtCuit, 11)
-                If txtNombre.Text <> prestadores.nombre Then
-                    prestadores.nombre = txtNombre.Text
+                'ut.validarLargo(txtCuit, 11)
+                If txtNombre.Text <> prest.nombre Then
+                    prest.nombre = txtNombre.Text
                 End If
-                If txtApellido.Text <> prestadores.apellido Then
-                    prestadores.apellido = txtApellido.Text
+                If txtApellido.Text <> prest.apellido Then
+                    prest.apellido = txtApellido.Text
                 End If
-                If txtEmail.Text <> prestadores.email Then
-                    prestadores.email = txtEmail.Text
+                If txtEmail.Text <> prest.email Then
+                    prest.email = txtEmail.Text
                 End If
-                If txtEspecialidad.Text <> prestadores.especialidad Then
-                    prestadores.especialidad = txtEspecialidad.Text
+                If txtEspecialidad.Text <> prest.especialidad Then
+                    prest.especialidad = txtEspecialidad.Text
                 End If
-                If txtLocalidad.Text <> prestadores.localidad Then
-                    prestadores.localidad = txtLocalidad.Text
+                If txtLocalidad.Text <> prest.localidad Then
+                    prest.localidad = txtLocalidad.Text
                 End If
-                If numLunVie.Text <> prestadores.montoNormal Then
-                    prestadores.montoNormal = numLunVie.Text
+                If numLunVie.Text <> prest.montoNormal Then
+                    prest.montoNormal = numLunVie.Text
                 End If
-                If numFeriados.Text <> prestadores.montoFeriado Then
-                    prestadores.montoFeriado = numFeriados.Text
+                If numFeriados.Text <> prest.montoFeriado Then
+                    prest.montoFeriado = numFeriados.Text
                 End If
-                If numPorcentaje.Text <> prestadores.porcentaje Then
-                    prestadores.porcentaje = numPorcentaje.Text
+                If numPorcentaje.Text <> prest.porcentaje Then
+                    prest.porcentaje = numPorcentaje.Text
                 End If
-                If numFijo.Text <> prestadores.montoFijo Then
-                    prestadores.montoFijo = numFijo.Text
-                End If
-                If dtCese.Text <> prestadores.fechaCese Then
-                    prestadores.fechaCese = dtCese.Text
+                If numFijo.Text <> prest.montoFijo Then
+                    prest.montoFijo = numFijo.Text
                 End If
 
-                prestadores.actualizar()
-                ut.iniciarTxtBoxes(txtBoxes)
-                prestadores = Nothing
+                If chbCese.Checked Then
+                    If dtCese.Value.ToShortDateString <> prest.fechaCese Then
+                        prest.fechaCese = dtCese.Text
+                    End If
+                End If
+
+
+                prest.actualizar()
+                iniciarControles()
+                prest = Nothing
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
             End If
         Catch ex As Exception
@@ -60,50 +64,30 @@
         End Try
     End Sub
 
+    Private Sub iniciarControles()
+        txtCuit.ReadOnly = False
+        ut.iniciarTxtBoxes(txtBoxes)
+    End Sub
+
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
+
         Try
-            prestadores = New Prestador
-            txtNombre.Text = prestadores.nombre
-            txtApellido.Text = prestadores.apellido
-            txtEmail.Text = prestadores.email
-            txtEspecialidad.Text = prestadores.especialidad
-            txtLocalidad.Text = prestadores.localidad
-            numLunVie.Text = prestadores.montoFijo
-            numFeriados.Text = prestadores.montoFeriado
-            numPorcentaje.Text = prestadores.porcentaje
-            numFijo.Text = prestadores.montoFijo
-            dtCese.Text = prestadores.fechaCese
+            Dim frmBuscar As New frmBuscar(Me)
+            frmBuscar.ShowDialog()
+
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
-            prestadores = Nothing
+            prest = Nothing
             iniciarControles()
         End Try
     End Sub
 
-    Private Sub iniciarControles()
-        txtCuit.Text = ""
-        txtNombre.Text = ""
-        txtApellido.Text = ""
-        txtEmail.Text = ""
-        txtEspecialidad.Text = ""
-        txtLocalidad.Text = ""
-        numLunVie.Text = ""
-        numFeriados.Text = ""
-        numPorcentaje.Text = ""
-        numFijo.Text = ""
-        dtCese.Text = ""
-    End Sub
-
     Private Sub txtCuit_TextChanged(sender As Object, e As EventArgs) Handles txtCuit.TextChanged
         Try
-            If txtCuit.Text <> "" Then
-                btnBuscar.Enabled = True
-            Else
-                btnBuscar.Enabled = False
-            End If
-            ut.validarNumerico(txtCuit)
-            If Not IsNothing(prestadores) Then
-                prestadores = Nothing
+
+            'ut.validarNumerico(txtCuit)
+            If Not IsNothing(prest) Then
+                prest = Nothing
             End If
 
         Catch ex As Exception
@@ -129,12 +113,13 @@
     End Sub
 
     Private Sub frmprestadores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        btnBuscar.Enabled = False
         dtCese.Enabled = False
         txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtEspecialidad, txtLocalidad, numLunVie, numFeriados, numFijo, numPorcentaje}
+        iniciarControles()
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles BtnCerrar.Click
+        prest = Nothing
         Me.Close()
     End Sub
 
@@ -144,5 +129,27 @@
         Else
             dtCese.Enabled = False
         End If
+    End Sub
+
+    Public Sub resultadoBusqueda(ByRef _prestador As Prestador)
+        txtCuit.ReadOnly = True
+        txtCuit.Text = _prestador.cuit
+        txtNombre.Text = _prestador.nombre
+        txtApellido.Text = _prestador.apellido
+        txtEmail.Text = _prestador.email
+        txtEspecialidad.Text = _prestador.especialidad
+        txtLocalidad.Text = _prestador.localidad
+        numLunVie.Text = _prestador.montoFijo
+        numFeriados.Text = _prestador.montoFeriado
+        numPorcentaje.Text = _prestador.porcentaje
+        numFijo.Text = _prestador.montoFijo
+        dtCese.Text = _prestador.fechaCese
+        prest = _prestador
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        prest = Nothing
+        txtCuit.ReadOnly = False
+        ut.iniciarTxtBoxes(txtBoxes)
     End Sub
 End Class

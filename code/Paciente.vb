@@ -151,6 +151,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property pacientes As DataTable
+        Get
+            Return _pacientes
+        End Get
+    End Property
+
     Public Sub insertar()
         Try
             Dim db = New DB
