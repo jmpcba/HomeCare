@@ -32,13 +32,14 @@
                 Dim localidad = r("localidad")
                 r("COMBO") = String.Format("{0} {1} - {2} - {3}", apellido, nombre, localidad, especialidad)
             Next
+            _prestadores.DefaultView.Sort = "COMBO"
         Catch ex As Exception
             Throw
         End Try
     End Sub
 
     Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _porcentaje As Decimal, _fechaCese As Date)
-        '  Try
+
         _user = New Usuario
         Me._cuit = _cuit
         Me._nombre = _nombre
@@ -55,9 +56,7 @@
         Me._creoUser = _user.dni
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
-        '  Catch ex As Exception
-        '  Throw
-        '  End Try
+
     End Sub
 
     Public Property id As String
@@ -70,24 +69,29 @@
                 _cuit = r(0)("cuit")
                 _nombre = r(0)("nombre")
                 _apellido = r(0)("apellido")
-                _email = r(0)("email")
-                _especialidad = r(0)("especialidad")
-                _localidad = r(0)("localidad")
-                _montoLV = r(0)("monto_semana")
-                _montoFer = r(0)("monto_feriado")
-                _montoFijo = r(0)("monto_fijo")
-                _porcentaje = r(0)("porcentaje")
-
-                If Not IsDBNull(r(0)("fecha_cese")) Then
-                    _fechaCese = r(0)("fecha_cese")
+                If IsDBNull(r(0)("email")) Then
+                    _email = ""
+                Else
+                    _email = r(0)("email")
                 End If
 
-                _modifUser = r(0)("modifico_usuario")
-                _creoUser = r(0)("cargo_usuario")
-                _fechaCarga = r(0)("fecha_carga")
-                _fechaMod = r(0)("fecha_modificacion")
-            Else
-                Throw New Exception("No se encontro el prestador")
+                _especialidad = r(0)("especialidad")
+                    _localidad = r(0)("localidad")
+                    _montoLV = r(0)("monto_semana")
+                    _montoFer = r(0)("monto_feriado")
+                    _montoFijo = r(0)("monto_fijo")
+                    _porcentaje = r(0)("porcentaje")
+
+                    If Not IsDBNull(r(0)("fecha_cese")) Then
+                        _fechaCese = r(0)("fecha_cese")
+                    End If
+
+                    _modifUser = r(0)("modifico_usuario")
+                    _creoUser = r(0)("cargo_usuario")
+                    _fechaCarga = r(0)("fecha_carga")
+                    _fechaMod = r(0)("fecha_modificacion")
+                Else
+                    Throw New Exception("No se encontro el prestador")
             End If
 
         End Set

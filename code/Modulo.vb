@@ -45,7 +45,7 @@
                 _codigo = r(0)("codigo")
                 _topeMedico = r(0)("medico")
                 _topeEnfermeria = r(0)("enfermeria")
-                _topeKinesio = r(0)("kinesio")
+                _topeKinesio = r(0)("kinesiologia")
                 _topeFono = r(0)("fono")
                 _topeCuidador = r(0)("cuidador")
                 _user = New Usuario
