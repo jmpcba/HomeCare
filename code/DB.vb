@@ -193,7 +193,7 @@ Public Class DB
 
     Friend Sub insertar(_practica As Practica)
         Try
-            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, COD_PRESTACION, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', {1}, {2}, {3}, {4}, {5}, {6}, '{7}', '{8}', '{9}', {10}, '{11}', {12}, '{13}', {14} )",
+            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, COD_PRESTACION, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14} )",
                                       _practica.prestador.cuit, _practica.paciente.afiliado, _practica.modulo, _practica.subModulo,
                                       _practica.prestacion.codigo, _practica.hsSemana, _practica.hsFeriado, _practica.fecha.ToShortDateString,
                                       DateTime.Today.ToShortDateString, _practica.observaciones, _practica.creoUser,
