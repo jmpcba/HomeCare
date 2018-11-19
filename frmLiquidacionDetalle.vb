@@ -2,9 +2,11 @@
     Dim ut As New utils
     Dim db As New DB
     Dim dt As New DataTable
+    Dim fecha As Date
+    Dim idPrestador As Integer
     Dim frmParent As frmLiquidar
 
-    Public Sub New(_id As Integer, fecha As Date, ByRef _parent As frmLiquidar)
+    Public Sub New(_idPrest As Integer, _fecha As Date, ByRef _parent As frmLiquidar)
 
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
@@ -13,14 +15,16 @@
         Me.WindowState = FormWindowState.Maximized
         frmParent = _parent
         Try
-            dt = db.getLiquidacion(_id, fecha)
+            dt = db.getLiquidacion(_idPrest, _fecha)
             dgDetalle.DataSource = dt
             dgDetalle.AutoResizeColumns()
             dgDetalle.AutoResizeRows()
-            Me.Text = "DETALLE PRESTADOR " & _id
-            lblDetalle.Text = "DETALLE PRESTADOR " & _id
+            Me.Text = "DETALLE PRESTADOR " & _idPrest
+            lblDetalle.Text = "DETALLE PRESTADOR " & _idPrest
             dgDetalle.ClearSelection()
             dgDetalle.Columns("id").Visible = False
+            fecha = _fecha
+            idPrestador = _idPrest
 
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
@@ -41,7 +45,11 @@
             Dim id = r.Cells("id").Value
             Dim rIndex = dgDetalle.CurrentRow.Index
             Try
-                db.eliminarLiquidacion(id)
+                If ut.validarLiquidacion(idPrestador, fecha) Then
+                    Throw New Exception("LIQUIDACION CERRADA - NO SE PUEDE ELIMINAR")
+                Else
+                    db.eliminarLiquidacion(id)
+                End If
 
                 dt.Rows(rIndex).Delete()
                 dgDetalle.DataSource = dt
