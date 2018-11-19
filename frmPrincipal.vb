@@ -1,7 +1,7 @@
 ﻿Public Class frmPrincipal
     Dim ut As New utils
     Private Sub btnVisita_Click(sender As Object, e As EventArgs) Handles btnVisita.Click
-        frmPracticas.ShowDialog()
+        frmPracticas.Show()
     End Sub
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
         frmReporte.ShowDialog()

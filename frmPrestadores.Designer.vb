@@ -357,7 +357,7 @@ Partial Class frmPrestadores
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.BtnCerrar)
         Me.Name = "frmPrestadores"
-        Me.Text = "frmPrestadores"
+        Me.Text = "ADMINISTRAR PRESTADORES"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)

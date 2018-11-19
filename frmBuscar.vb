@@ -40,6 +40,10 @@
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR MODULO"
             End If
+
+            dgBuscar.AutoResizeColumns()
+            dgBuscar.AutoResizeRows()
+
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
@@ -55,6 +59,8 @@
                 obj.id = r.Cells("ID").Value
             ElseIf frmParent.GetType.Name = "frmPacientes" Then
                 obj.afiliado = r.Cells("AFILIADO").Value
+            ElseIf frmParent.GetType.Name = "frmModulo" Then
+                obj.codigo = r.Cells("codigo").Value
             End If
 
             frmParent.resultadoBusqueda(obj)
