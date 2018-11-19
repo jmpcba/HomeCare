@@ -86,6 +86,7 @@ Public Class frmPracticas
         Dim carga = False
         ut = New utils
         Try
+            btnGuardar.Enabled = False
             dgFechas.Columns("RESULTADO").ReadOnly = False
 
             If cbPaciente.SelectedIndex = -1 Then
@@ -158,6 +159,7 @@ Public Class frmPracticas
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
+            btnGuardar.Enabled = True
             With dgFechas
                 .Columns("RESULTADO").ReadOnly = True
                 .AutoResizeColumns()
@@ -241,6 +243,10 @@ Public Class frmPracticas
                 r.DefaultCellStyle.ForeColor = Color.Red
             End If
         Next
+
+        dgFechas.AutoResizeColumns()
+        dgFechas.AutoResizeRows()
+
     End Sub
 
     Private Sub dgFechas_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgFechas.CellEndEdit

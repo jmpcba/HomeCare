@@ -88,6 +88,7 @@
         Dim mes As New Date(dtMes.Value.Year, dtMes.Value.Month, Date.DaysInMonth(dtMes.Value.Year, dtMes.Value.Month))
 
         Try
+            btnGuardar.Enabled = False
             gridLiqui.Columns("RESULTADO CARGA").ReadOnly = False
 
             For Each r As DataGridViewRow In gridLiqui.Rows
@@ -117,6 +118,7 @@
                 .AutoResizeColumns()
                 .AutoResizeRows()
             End With
+            btnGuardar.Enabled = True
         End Try
     End Sub
 End Class

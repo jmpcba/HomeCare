@@ -86,9 +86,9 @@ Public Class DB
                     liquidacionesCerradas = getLiquidacionesCerradas(_fecha)
 
                     For Each r As DataRow In ds.Tables("QUERY").Rows
-                        Dim cuit = r("CUIT")
+                        Dim id = r("ID_PREST")
 
-                        If ut.validarLiquidacion(cuit, _fecha) Then
+                        If ut.validarLiquidacion(id, _fecha) Then
                             r("ESTADO") = "CERRADA"
                         Else
                             r("ESTADO") = "PENDIENTE"
