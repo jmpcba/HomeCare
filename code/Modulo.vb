@@ -5,6 +5,7 @@
     Private _topeKinesio As Integer
     Private _topeFono As Integer
     Private _topeCuidador As Integer
+    Private _topeNutricionista As Integer
     Private _modifUser As Integer
     Private _creoUser As Integer
     Private _fechaCarga As Date
@@ -46,8 +47,9 @@
                 _topeMedico = r(0)("medico")
                 _topeEnfermeria = r(0)("enfermeria")
                 _topeKinesio = r(0)("kinesiologia")
-                _topeFono = r(0)("fono")
+                _topeFono = r(0)("fonoaudiologia")
                 _topeCuidador = r(0)("cuidador")
+                _topeNutricionista = r(0)("nutricionista")
                 _user = New Usuario
                 _modifUser = r(0)("modifico_usuario")
                 _creoUser = r(0)("cargo_usuario")
@@ -81,6 +83,8 @@
                 Return _topeFono
             ElseIf _tipo = "CUIDADOR" Then
                 Return _topeCuidador
+            ElseIf _tipo = "NUTRICIONISTA" Then
+                Return _topeNutricionista
             Else
                 Return 0
             End If
