@@ -20,7 +20,7 @@
             dgDetalle.AutoResizeColumns()
             dgDetalle.AutoResizeRows()
             Me.Text = "DETALLE PRESTADOR " & _idPrest
-            lblDetalle.Text = "DETALLE PRESTADOR " & _idPrest
+            lblDetalle.Text = "DETALLE PRESTADOR"
             dgDetalle.ClearSelection()
             dgDetalle.Columns("id").Visible = False
             fecha = _fecha
