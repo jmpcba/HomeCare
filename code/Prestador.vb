@@ -21,6 +21,7 @@
     Private _modificado = False
 
     Public Sub New()
+        _user = New Usuario
         Dim db = New DB()
         Try
             _prestadores = db.getTable(DB.tablas.prestadores)
@@ -76,22 +77,22 @@
                 End If
 
                 _especialidad = r(0)("especialidad")
-                    _localidad = r(0)("localidad")
-                    _montoLV = r(0)("monto_semana")
-                    _montoFer = r(0)("monto_feriado")
-                    _montoFijo = r(0)("monto_fijo")
-                    _porcentaje = r(0)("porcentaje")
+                _localidad = r(0)("localidad")
+                _montoLV = r(0)("monto_semana")
+                _montoFer = r(0)("monto_feriado")
+                _montoFijo = r(0)("monto_fijo")
+                _porcentaje = r(0)("porcentaje")
 
-                    If Not IsDBNull(r(0)("fecha_cese")) Then
-                        _fechaCese = r(0)("fecha_cese")
-                    End If
+                If Not IsDBNull(r(0)("fecha_cese")) Then
+                    _fechaCese = r(0)("fecha_cese")
+                End If
 
-                    _modifUser = r(0)("modifico_usuario")
-                    _creoUser = r(0)("cargo_usuario")
-                    _fechaCarga = r(0)("fecha_carga")
-                    _fechaMod = r(0)("fecha_modificacion")
-                Else
-                    Throw New Exception("No se encontro el prestador")
+                _modifUser = r(0)("modifico_usuario")
+                _creoUser = r(0)("cargo_usuario")
+                _fechaCarga = r(0)("fecha_carga")
+                _fechaMod = r(0)("fecha_modificacion")
+            Else
+                Throw New Exception("No se encontro el prestador")
             End If
 
         End Set
@@ -229,6 +230,11 @@
         End Get
     End Property
 
+    Public ReadOnly Property prestadores As DataTable
+        Get
+            Return _prestadores
+        End Get
+    End Property
 
     Public Sub insertar()
         Try
