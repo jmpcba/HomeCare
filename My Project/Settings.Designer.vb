@@ -54,17 +54,6 @@ Namespace My
             End Get
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=""C:\Users\Manuel\Google Drive\Homec"& _ 
-            "are.accdb""")>  _
-        Public ReadOnly Property HomeCareConnectionString() As String
-            Get
-                Return CType(Me("HomeCareConnectionString"),String)
-            End Get
-        End Property
-        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
@@ -75,6 +64,16 @@ Namespace My
             Set
                 Me("DBPath") = value
             End Set
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=""C:\Users\jmpcb\Google Drive\homeCa"& _ 
+            "re.accdb""")>  _
+        Public ReadOnly Property HomeCareConnectionString() As String
+            Get
+                Return CType(Me("HomeCareConnectionString"),String)
+            End Get
         End Property
     End Class
 End Namespace

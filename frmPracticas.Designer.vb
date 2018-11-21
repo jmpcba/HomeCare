@@ -26,9 +26,6 @@ Partial Class frmPracticas
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.PRESTADORESBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.HomeCareDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtMat = New System.Windows.Forms.TextBox()
@@ -66,14 +63,6 @@ Partial Class frmPracticas
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.lblMes = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PRESTACIONESBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -124,20 +113,6 @@ Partial Class frmPracticas
         Me.Label3.TabIndex = 7
         Me.Label3.Text = "NOMBRE Y APELLIDO/ESPECIALIDAD"
         '
-        'PRESTADORESBindingSource
-        '
-        Me.PRESTADORESBindingSource.DataMember = "PRESTADORES"
-        Me.PRESTADORESBindingSource.DataSource = Me.HomeCareDataSetBindingSource
-        '
-        'HomeCareDataSetBindingSource
-        '
-        Me.HomeCareDataSetBindingSource.DataSource = Me.HomeCareDataSet
-        Me.HomeCareDataSetBindingSource.Position = 0
-        '
-        'HomeCareDataSet
-        '
-        Me.HomeCareDataSet.DataSetName = "HomeCareDataSet"
-        Me.HomeCareDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Label4
         '
@@ -534,14 +509,6 @@ Partial Class frmPracticas
         Me.Controls.Add(Me.Panel4)
         Me.Name = "frmPracticas"
         Me.Text = "INGRESAR PRACTICAS"
-        CType(Me.PRESTADORESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PRESTACIONESBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PRESTACIONESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PRESTACIONESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PACIENTESBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PACIENTESBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
