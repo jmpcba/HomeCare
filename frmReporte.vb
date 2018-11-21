@@ -1,9 +1,6 @@
 ﻿Public Class frmReporte
     Private Sub frmReporte_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.PRACTICAS' Puede moverla o quitarla según sea necesario.
-        Me.PRACTICASTableAdapter.Fill(Me.HomeCareDataSet.PRACTICAS)
-        'TODO: esta línea de código carga datos en la tabla 'HomeCareDataSet.VISITAS' Puede moverla o quitarla según sea necesario.
-        'Me.VISITASTableAdapter.Fill(Me.HomeCareDataSet.VISITAS)
+
 
     End Sub
 

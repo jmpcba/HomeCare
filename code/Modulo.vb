@@ -1,5 +1,5 @@
 ﻿Public Class Modulo
-    Private _codigo As Integer
+    Private _codigo As String
     Private _topeMedico As Integer
     Private _topeEnfermeria As Integer
     Private _topeKinesio As Integer
@@ -23,7 +23,7 @@
         End Try
     End Sub
 
-    Public Sub New(_cod As Integer, _topeMedico As Integer, _topeEnfer As Integer, _topeKine As Integer, _topeFon As Integer, _topeCuid As Integer)
+    Public Sub New(_cod As String, _topeMedico As Integer, _topeEnfer As Integer, _topeKine As Integer, _topeFon As Integer, _topeCuid As Integer)
         _user = New Usuario
         Me._codigo = _cod
         Me._topeMedico = _topeMedico
@@ -37,9 +37,13 @@
         Me._fechaMod = Date.Today
     End Sub
 
-
-    Public Property codigo As Integer
-        Set(value As Integer)
+    Public ReadOnly Property modulos As DataTable
+        Get
+            Return _modulos
+        End Get
+    End Property
+    Public Property codigo As String
+        Set(value As String)
             Dim r As DataRow()
             r = _modulos.Select("codigo=" & value)
             If r.Length = 1 Then

@@ -1,6 +1,6 @@
 ﻿Public Class subModulo
 
-    Private _codigo As Integer
+    Private _codigo As String
     Private _descripcion As String
     Private _numTope As Integer
     Private _modifUser As Integer
@@ -11,7 +11,7 @@
     Private _user As New Usuario
     Private _subModulos As DataTable
 
-    Public Sub New(_cod As Integer, _desc As String, _tope As Integer)
+    Public Sub New(_cod As String, _desc As String, _tope As Integer)
         Dim user As New Usuario
 
         _codigo = _cod
@@ -32,8 +32,8 @@
         End Try
     End Sub
 
-    Public Property codigo As Integer
-        Set(value As Integer)
+    Public Property codigo As String
+        Set(value As String)
             Dim r As DataRow()
             r = _subModulos.Select("codigo = " & value)
             If r.Length = 1 Then

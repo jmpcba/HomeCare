@@ -1,50 +1,55 @@
 ﻿Public Class frmLiquidar
     Dim sel As Boolean = False
+    Dim ut As New utils
     Private Sub dtMes_ValueChanged(sender As Object, e As EventArgs) Handles dtMes.ValueChanged
-        llenargrilla()
+        llenarGrilla()
     End Sub
 
     Public Sub llenarGrilla()
-        Dim db As New DB()
-        Dim mes = dtMes.Value
-        Dim dt As New DataTable
-        dt = db.getLiquidacion(mes, DB.tiposLiquidacion.medico)
+        Try
+            Dim db As New DB()
+            Dim mes = dtMes.Value
+            Dim dt As New DataTable
+            dt = db.getLiquidacion(mes, DB.tiposLiquidacion.medico)
 
-        dt.Columns.Add("RESULTADO CARGA")
+            dt.Columns.Add("RESULTADO CARGA")
 
 
-        Dim chkclm As New DataGridViewCheckBoxColumn
+            Dim chkclm As New DataGridViewCheckBoxColumn
 
-        With chkclm
-            .HeaderText = ""
-            .Name = ""
-            .ReadOnly = False
-        End With
+            With chkclm
+                .HeaderText = ""
+                .Name = ""
+                .ReadOnly = False
+            End With
 
-        With gridLiqui
-            .Columns.Clear()
+            With gridLiqui
+                .Columns.Clear()
 
-            If dt.Rows.Count <> 0 Then
-                .Columns.Insert(0, chkclm)
-                btnGuardar.Enabled = True
-                btnSelec.Enabled = True
-            Else
-                btnGuardar.Enabled = False
-                btnSelec.Enabled = False
-            End If
+                If dt.Rows.Count <> 0 Then
+                    .Columns.Insert(0, chkclm)
+                    btnGuardar.Enabled = True
+                    btnSelec.Enabled = True
+                Else
+                    btnGuardar.Enabled = False
+                    btnSelec.Enabled = False
+                End If
 
-            .DataSource = dt
-            .Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
-            .Columns("ID_PREST").Visible = False
-            .AutoResizeColumns()
-            .AutoResizeRows()
-        End With
+                .DataSource = dt
+                .Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
+                .Columns("ID_PREST").Visible = False
+                .AutoResizeColumns()
+                .AutoResizeRows()
+            End With
 
-        For Each c As DataGridViewColumn In gridLiqui.Columns
-            If c.Index <> 0 Then
-                c.ReadOnly = True
-            End If
-        Next
+            For Each c As DataGridViewColumn In gridLiqui.Columns
+                If c.Index <> 0 Then
+                    c.ReadOnly = True
+                End If
+            Next
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
 
     End Sub
 
@@ -111,7 +116,7 @@
                 End If
             Next
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
             With gridLiqui
                 .Columns("RESULTADO CARGA").ReadOnly = True

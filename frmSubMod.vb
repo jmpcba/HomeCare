@@ -10,7 +10,7 @@
                 ut.validarTxtBoxLleno(txtBoxes)
                 subMod = New subModulo(txtCodigo.Text, txtDescripcion.Text, txtTope.Text)
                 subMod.insertar()
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
             Else
                 ut.validarLargo(txtCodigo, 6)
@@ -26,14 +26,14 @@
                 subMod.actualizar()
                 ut.iniciarTxtBoxes(txtBoxes)
                 subMod = Nothing
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
             End If
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                MessageBox.Show("Ya existe un Sub Modulo con el mismo codigo")
+                ut.mensaje("Ya existe un Sub Modulo con el mismo codigo", utils.mensajes.err)
             Else
-                MessageBox.Show(ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End If
         End Try
     End Sub
@@ -45,7 +45,7 @@
             txtDescripcion.Text = subMod.descripcion
             txtTope.Text = subMod.tope
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
             subMod = Nothing
             iniciarControles()
         End Try
@@ -73,7 +73,7 @@
         Catch ex As Exception
             txtCodigo.Text = ""
             btnBuscar.Enabled = False
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -81,7 +81,7 @@
         Try
             ut.validarNumerico(txtTope)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -98,12 +98,11 @@
         Try
             ut.validarNumerico(txtTope)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Me.Close()
     End Sub
-
 End Class
