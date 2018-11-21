@@ -2,7 +2,7 @@
 Public Class Practica
     Public prestador As Prestador
     Public paciente As Paciente
-    Public prestacion As Prestacion
+    'Public prestacion As Prestacion
     Public modulo As Integer
     Public subModulo As Integer
     Public hsSemana As Decimal
@@ -22,11 +22,10 @@ Public Class Practica
     End Sub
 
 
-    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _prestacion As Prestacion, _fecha As Date, _horas As Decimal, _observaciones As String)
+    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horas As Decimal, _observaciones As String)
 
         prestador = _prestador
         paciente = _paciente
-        prestacion = _prestacion
         modulo = _modulo
         subModulo = _subModulo
         fecha = _fecha
