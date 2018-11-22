@@ -43,6 +43,7 @@
 
             dgBuscar.AutoResizeColumns()
             dgBuscar.AutoResizeRows()
+            txtFiltro.Focus()
 
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
@@ -73,5 +74,9 @@
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
         dt.DefaultView.RowFilter = String.Format("{0} LIKE '%{1}%'", filtro, txtFiltro.Text.Trim)
         dgBuscar.Refresh()
+    End Sub
+
+    Private Sub frmBuscar_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        txtFiltro.Focus()
     End Sub
 End Class

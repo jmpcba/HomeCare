@@ -33,7 +33,8 @@ Public Class Mail
             mm.Subject = "Liquidacion HomeCare " & MonthName(_liq.mes.Month)
             mm.IsBodyHtml = True
             mm.Body = mail
-            mm.To.Add(New MailAddress("jmpcba@gmail.com"))
+            'mm.To.Add(New MailAddress("jmpcba@gmail.com"))
+            mm.To.Add(New MailAddress(_liq.prestador.email))
             client.Send(mm)
         Catch ex As Exception
             Throw New Exception("Error enviando mail: " & ex.Message)

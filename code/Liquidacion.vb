@@ -1,5 +1,5 @@
 ﻿Public Class Liquidacion
-    Private _idPrestador As Integer
+    Private _prestador As Prestador
     Private _cuit As String
     Private _localidad As String
     Private _especialidad As String
@@ -16,10 +16,10 @@
     Private _modificado = False
     Private _user As Usuario
 
-    Public Sub New(_idPrestador As Integer, _cuit As String, _localidad As String, _especialidad As String, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal, _montoFijo As Decimal)
+    Public Sub New(_prestador As Prestador, _cuit As String, _localidad As String, _especialidad As String, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal, _montoFijo As Decimal)
         _user = New Usuario
 
-        Me._idPrestador = _idPrestador
+        Me._prestador = _prestador
         Me._cuit = _cuit
         Me._localidad = _localidad
         Me._especialidad = _especialidad
@@ -136,9 +136,15 @@
         End Get
     End Property
 
-    Public ReadOnly Property prestador As Integer
+    Public ReadOnly Property idPrestador As Integer
         Get
-            Return _idPrestador
+            Return _prestador.id
+        End Get
+    End Property
+
+    Public ReadOnly Property prestador As Prestador
+        Get
+            Return _prestador
         End Get
     End Property
 
@@ -154,6 +160,9 @@
 
     Friend Sub liquidar()
         Try
+            If _prestador.email = "" Or IsDBNull(_prestador.email) Then
+                Throw New Exception("No hay un mail configurado para este prestador." & vbCrLf & "Ingrese un mail en la seccion ADMINISTRAR PRESTADORES")
+            End If
             insertar()
             notificar()
         Catch ex As Exception

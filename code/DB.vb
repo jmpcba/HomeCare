@@ -193,7 +193,7 @@ Public Class DB
 
     Friend Sub insertar(_practica As Practica)
         Try
-            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}')",
+            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}')",
                                       _practica.prestador.cuit, _practica.paciente.afiliado, _practica.modulo, _practica.subModulo,
                                       _practica.hsSemana, _practica.hsFeriado, _practica.fecha.ToShortDateString,
                                       DateTime.Today.ToShortDateString, _practica.observaciones, _practica.creoUser,
@@ -266,7 +266,7 @@ Public Class DB
     End Sub
 
     Friend Sub insertar(_liq As Liquidacion)
-        Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#, {13})", _liq.cuit, _liq.localidad, _liq.especialidad, _liq.mes.ToShortDateString, _liq.hsNormales, _liq.hsFeriado, _liq.importeNormal, _liq.importeFeriado, _liq.montoFijo, _liq.creoUser, _liq.modifUser, _liq.fechaCarga.ToShortDateString, _liq.fechaMod.ToShortDateString, _liq.prestador)
+        Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#, {13})", _liq.cuit, _liq.localidad, _liq.especialidad, _liq.mes.ToShortDateString, _liq.hsNormales, _liq.hsFeriado, _liq.importeNormal, _liq.importeFeriado, _liq.montoFijo, _liq.creoUser, _liq.modifUser, _liq.fechaCarga.ToShortDateString, _liq.fechaMod.ToShortDateString, _liq.idPrestador)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -334,7 +334,19 @@ Public Class DB
     End Sub
 
     Friend Sub actualizar(_prestador As Prestador)
+        Dim query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}' WHERE ID={11}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.id)
 
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
     End Sub
     Friend Sub actualizar(_prestacion As Prestacion)
 

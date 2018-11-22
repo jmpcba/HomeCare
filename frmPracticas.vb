@@ -25,7 +25,6 @@ Public Class frmPracticas
 
             ut = New utils
             pac = New Paciente()
-            prest = New Prestacion()
             med = New Prestador()
             subModu = New subModulo
             modu = New Modulo()
@@ -128,7 +127,7 @@ Public Class frmPracticas
                             dia = r.Cells("DIA_H").Value
 
                             Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
-                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, prest, fec, horas, obs)
+                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horas, obs)
 
                             Try
                                 practica.insertar()
