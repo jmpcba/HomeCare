@@ -32,9 +32,7 @@ Partial Class frmPracticas
         Me.txtLocalidad = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.DTFecha = New System.Windows.Forms.DateTimePicker()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.CBPrestacion = New System.Windows.Forms.ComboBox()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.txtBeneficio = New System.Windows.Forms.TextBox()
         Me.txtAfiliado = New System.Windows.Forms.TextBox()
@@ -61,6 +59,7 @@ Partial Class frmPracticas
         Me.lblHoras = New System.Windows.Forms.Label()
         Me.lblMonto = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnSelec = New System.Windows.Forms.Button()
         Me.lblMes = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
@@ -109,10 +108,9 @@ Partial Class frmPracticas
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(2, 48)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(201, 13)
+        Me.Label3.Size = New System.Drawing.Size(136, 13)
         Me.Label3.TabIndex = 7
-        Me.Label3.Text = "NOMBRE Y APELLIDO/ESPECIALIDAD"
-        '
+        Me.Label3.Text = "NOMBRE/ESPECIALIDAD"
         '
         'Label4
         '
@@ -168,15 +166,6 @@ Partial Class frmPracticas
         Me.DTFecha.Size = New System.Drawing.Size(165, 20)
         Me.DTFecha.TabIndex = 5
         '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(4, 106)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(76, 13)
-        Me.Label7.TabIndex = 16
-        Me.Label7.Text = "PRESTACION"
-        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -185,15 +174,6 @@ Partial Class frmPracticas
         Me.Label8.Size = New System.Drawing.Size(42, 13)
         Me.Label8.TabIndex = 17
         Me.Label8.Text = "FECHA"
-        '
-        'CBPrestacion
-        '
-        Me.CBPrestacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CBPrestacion.FormattingEnabled = True
-        Me.CBPrestacion.Location = New System.Drawing.Point(100, 100)
-        Me.CBPrestacion.Name = "CBPrestacion"
-        Me.CBPrestacion.Size = New System.Drawing.Size(346, 21)
-        Me.CBPrestacion.TabIndex = 4
         '
         'btnGuardar
         '
@@ -266,7 +246,7 @@ Partial Class frmPracticas
         Me.Panel1.Controls.Add(Me.Label9)
         Me.Panel1.Location = New System.Drawing.Point(12, 13)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(506, 119)
+        Me.Panel1.Size = New System.Drawing.Size(556, 119)
         Me.Panel1.TabIndex = 27
         '
         'Panel2
@@ -283,16 +263,16 @@ Partial Class frmPracticas
         Me.Panel2.Controls.Add(Me.txtLocalidad)
         Me.Panel2.Location = New System.Drawing.Point(12, 138)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(506, 149)
+        Me.Panel2.Size = New System.Drawing.Size(556, 149)
         Me.Panel2.TabIndex = 28
         '
         'cbMedico
         '
         Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMedico.FormattingEnabled = True
-        Me.cbMedico.Location = New System.Drawing.Point(209, 40)
+        Me.cbMedico.Location = New System.Drawing.Point(144, 40)
         Me.cbMedico.Name = "cbMedico"
-        Me.cbMedico.Size = New System.Drawing.Size(278, 21)
+        Me.cbMedico.Size = New System.Drawing.Size(407, 21)
         Me.cbMedico.TabIndex = 1
         '
         'Label16
@@ -324,13 +304,11 @@ Partial Class frmPracticas
         Me.Panel3.Controls.Add(Me.cbModulo)
         Me.Panel3.Controls.Add(Me.Label12)
         Me.Panel3.Controls.Add(Me.Label6)
-        Me.Panel3.Controls.Add(Me.CBPrestacion)
-        Me.Panel3.Controls.Add(Me.Label7)
         Me.Panel3.Controls.Add(Me.Label8)
         Me.Panel3.Controls.Add(Me.DTFecha)
         Me.Panel3.Location = New System.Drawing.Point(12, 293)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(506, 355)
+        Me.Panel3.Size = New System.Drawing.Size(556, 355)
         Me.Panel3.TabIndex = 29
         '
         'Label15
@@ -456,6 +434,7 @@ Partial Class frmPracticas
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.btnSelec)
         Me.Panel4.Controls.Add(Me.lblMes)
         Me.Panel4.Controls.Add(Me.Label14)
         Me.Panel4.Controls.Add(Me.lblMonto)
@@ -466,17 +445,26 @@ Partial Class frmPracticas
         Me.Panel4.Controls.Add(Me.Label18)
         Me.Panel4.Controls.Add(Me.btnLimpiarGrilla)
         Me.Panel4.Controls.Add(Me.dgFechas)
-        Me.Panel4.Location = New System.Drawing.Point(524, 12)
+        Me.Panel4.Location = New System.Drawing.Point(574, 12)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(590, 671)
+        Me.Panel4.Size = New System.Drawing.Size(589, 671)
         Me.Panel4.TabIndex = 30
+        '
+        'btnSelec
+        '
+        Me.btnSelec.Location = New System.Drawing.Point(20, 0)
+        Me.btnSelec.Name = "btnSelec"
+        Me.btnSelec.Size = New System.Drawing.Size(52, 23)
+        Me.btnSelec.TabIndex = 112
+        Me.btnSelec.Text = "Todos"
+        Me.btnSelec.UseVisualStyleBackColor = True
         '
         'lblMes
         '
         Me.lblMes.AutoSize = True
         Me.lblMes.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMes.ForeColor = System.Drawing.Color.Red
-        Me.lblMes.Location = New System.Drawing.Point(248, -1)
+        Me.lblMes.Location = New System.Drawing.Point(364, 0)
         Me.lblMes.Name = "lblMes"
         Me.lblMes.Size = New System.Drawing.Size(54, 24)
         Me.lblMes.TabIndex = 24
@@ -487,7 +475,7 @@ Partial Class frmPracticas
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.Red
-        Me.Label14.Location = New System.Drawing.Point(28, 0)
+        Me.Label14.Location = New System.Drawing.Point(144, 0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(214, 24)
         Me.Label14.TabIndex = 23
@@ -499,7 +487,7 @@ Partial Class frmPracticas
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CancelButton = Me.btnCerrar
-        Me.ClientSize = New System.Drawing.Size(1155, 660)
+        Me.ClientSize = New System.Drawing.Size(1204, 660)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.txtAfiliado)
         Me.Controls.Add(Me.Label11)
@@ -533,9 +521,7 @@ Partial Class frmPracticas
     Friend WithEvents txtLocalidad As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents DTFecha As DateTimePicker
-    Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents CBPrestacion As ComboBox
     Friend WithEvents btnGuardar As Button
     Friend WithEvents txtBeneficio As TextBox
     Friend WithEvents txtAfiliado As TextBox
@@ -564,4 +550,5 @@ Partial Class frmPracticas
     Friend WithEvents Label16 As Label
     Friend WithEvents txtEspecialidad As TextBox
     Friend WithEvents cbMedico As ComboBox
+    Friend WithEvents btnSelec As Button
 End Class

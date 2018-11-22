@@ -10,6 +10,7 @@ Public Class frmPracticas
     Dim subModu As subModulo
     Dim index As Integer
     Dim edicion As Boolean = False
+    Dim sel As Boolean = False
     Dim cellVal
     Dim selectedRows As DataGridViewSelectedRowCollection
     Dim ut As utils
@@ -33,7 +34,7 @@ Public Class frmPracticas
             med.llenarcombo(cbMedico)
             modu.llenarcombo(cbModulo)
             subModu.llenarcombo(cbSubModulo)
-            prest.llenarcombo(CBPrestacion)
+            ' prest.llenarcombo(CBPrestacion)
 
             txtAfiliado.Text = ""
             txtBeneficio.Text = ""
@@ -54,16 +55,16 @@ Public Class frmPracticas
 
     End Sub
 
-    Private Sub CBPrestacion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBPrestacion.SelectionChangeCommitted
-        If CBPrestacion.SelectedIndex <> -1 Then
-            Try
-                prest.codigo = CBPrestacion.SelectedValue
-
-            Catch ex As Exception
-                ut.mensaje(ex.Message, utils.mensajes.err)
-            End Try
-        End If
-    End Sub
+    '  Private Sub CBPrestacion_SelectedIndexChanged(sender As Object, e As EventArgs)
+    '  If CBPrestacion.SelectedIndex <> -1 Then
+    ' Try
+    '            prest.codigo = CBPrestacion.SelectedValue
+    '
+    'Catch ex As Exception
+    '            ut.mensaje(ex.Message, utils.mensajes.err)
+    ' End Try
+    ' End If
+    ' End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Me.Close()
@@ -106,9 +107,9 @@ Public Class frmPracticas
                 ut.mensaje("SELECCIONE UN SUB-MODULO", utils.mensajes.err)
                 cbSubModulo.Focus()
 
-            ElseIf CBPrestacion.SelectedIndex = -1 Then
-                ut.mensaje("SELECCIONE UNA PRESTACION", utils.mensajes.err)
-                CBPrestacion.Focus()
+                ' ElseIf CBPrestacion.SelectedIndex = -1 Then
+                '     ut.mensaje("SELECCIONE UNA PRESTACION", utils.mensajes.err)
+                '     CBPrestacion.Focus()
             Else
 
                 If ut.validarLiquidacion(cbMedico.SelectedValue, DTFecha.Value) Then
@@ -168,6 +169,19 @@ Public Class frmPracticas
             End With
 
         End Try
+    End Sub
+    Private Sub btnSelec_Click(sender As Object, e As EventArgs) Handles btnSelec.Click
+        sel = Not sel
+
+        If sel Then
+            btnSelec.Text = "Des-sel"
+        Else
+            btnSelec.Text = "Todos"
+        End If
+
+        For Each r As DataGridViewRow In dgFechas.Rows
+            r.Cells(0).Value = sel
+        Next
     End Sub
 
     Private Sub DTFecha_ValueChanged(sender As Object, e As EventArgs) Handles DTFecha.ValueChanged
