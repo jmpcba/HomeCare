@@ -118,6 +118,12 @@
     <Compile Include="frmCierreLiq.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmEmail.Designer.vb">
+      <DependentUpon>frmEmail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmail.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmFeriados.Designer.vb">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
     </Compile>
@@ -233,6 +239,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmBuscar.resx">
       <DependentUpon>frmBuscar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmail.resx">
+      <DependentUpon>frmEmail.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>

@@ -47,6 +47,7 @@
                 If c.Index <> 0 Then
                     c.ReadOnly = True
                 End If
+
             Next
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)

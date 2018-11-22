@@ -299,7 +299,7 @@ Public Class DB
     End Sub
 
     Friend Sub insertar(_mod As Modulo)
-        Dim query = String.Format("INSERT INTO MODULO VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6}, #{7}#, {8}, #{9}#)", _mod.codigo, _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.creoUser, _mod.fechaCarga.ToShortDateString, _mod.modifUser, _mod.fechaMod.ToShortDateString)
+        Dim query = String.Format("INSERT INTO MODULO (CODIGO, MEDICO, ENFERMERIA, KINESIOLOGIA, FONOAUDIOLOGIA, CUIDADOR, NUTRICION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', {1}, {2}, {3}, {4}, {5}, {6}, {7}, #{8}#, {9}, #{10}#)", _mod.codigo, _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.topeNutricionista, _mod.creoUser, _mod.fechaCarga.ToShortDateString, _mod.modifUser, _mod.fechaMod.ToShortDateString)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query

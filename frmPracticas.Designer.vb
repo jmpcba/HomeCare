@@ -89,7 +89,7 @@ Partial Class frmPracticas
         Me.Label1.Location = New System.Drawing.Point(13, 32)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(112, 24)
-        Me.Label1.TabIndex = 5
+        Me.Label1.TabIndex = 1
         Me.Label1.Text = "PACIENTE"
         '
         'Label2
@@ -199,7 +199,7 @@ Partial Class frmPracticas
         Me.txtAfiliado.Name = "txtAfiliado"
         Me.txtAfiliado.ReadOnly = True
         Me.txtAfiliado.Size = New System.Drawing.Size(121, 20)
-        Me.txtAfiliado.TabIndex = 25
+        Me.txtAfiliado.TabIndex = 2
         '
         'Label9
         '
@@ -226,7 +226,7 @@ Partial Class frmPracticas
         Me.cbPaciente.Location = New System.Drawing.Point(127, 42)
         Me.cbPaciente.Name = "cbPaciente"
         Me.cbPaciente.Size = New System.Drawing.Size(267, 21)
-        Me.cbPaciente.TabIndex = 0
+        Me.cbPaciente.TabIndex = 1
         '
         'Label11
         '

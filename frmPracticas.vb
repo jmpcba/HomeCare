@@ -5,7 +5,7 @@ Imports System.Collections.Specialized
 Public Class frmPracticas
     Dim pac As Paciente
     Dim med As Prestador
-    Dim prest As Prestacion
+    ' Dim prest As Prestacion
     Dim modu As Modulo
     Dim subModu As subModulo
     Dim index As Integer
@@ -25,6 +25,7 @@ Public Class frmPracticas
 
             ut = New utils
             pac = New Paciente()
+            ' prest = New Prestacion()
             med = New Prestador()
             subModu = New subModulo
             modu = New Modulo()

@@ -89,7 +89,7 @@ Partial Class frmLiquidar
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
         Me.btnGuardar.TabIndex = 40
-        Me.btnGuardar.Text = "&GUARDAR"
+        Me.btnGuardar.Text = "&ENVIAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
         'btnCerrar
