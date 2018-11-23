@@ -30,7 +30,6 @@ Partial Class frmEmail
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtTexto = New System.Windows.Forms.TextBox()
         Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.BtnCerrar = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -40,6 +39,7 @@ Partial Class frmEmail
         '
         Me.txtPass.Location = New System.Drawing.Point(221, 140)
         Me.txtPass.Name = "txtPass"
+        Me.txtPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPass.Size = New System.Drawing.Size(213, 20)
         Me.txtPass.TabIndex = 1
         '
@@ -59,9 +59,9 @@ Partial Class frmEmail
         Me.Label2.ForeColor = System.Drawing.Color.Red
         Me.Label2.Location = New System.Drawing.Point(22, 25)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(219, 24)
+        Me.Label2.Size = New System.Drawing.Size(260, 24)
         Me.Label2.TabIndex = 38
-        Me.Label2.Text = "TEXTO PARA EMAILs"
+        Me.Label2.Text = "CONFIGURACION EMAILS"
         '
         'txtEmail
         '
@@ -106,16 +106,6 @@ Partial Class frmEmail
         Me.btnLimpiar.Text = "&LIMPIAR"
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
-        'btnBuscar
-        '
-        Me.btnBuscar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBuscar.Location = New System.Drawing.Point(871, 112)
-        Me.btnBuscar.Name = "btnBuscar"
-        Me.btnBuscar.Size = New System.Drawing.Size(106, 33)
-        Me.btnBuscar.TabIndex = 100
-        Me.btnBuscar.Text = "&BUSCAR"
-        Me.btnBuscar.UseVisualStyleBackColor = True
-        '
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -151,7 +141,6 @@ Partial Class frmEmail
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1015, 450)
         Me.Controls.Add(Me.btnLimpiar)
-        Me.Controls.Add(Me.btnBuscar)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.BtnCerrar)
         Me.Controls.Add(Me.txtTexto)
@@ -177,7 +166,6 @@ Partial Class frmEmail
     Friend WithEvents Label3 As Label
     Friend WithEvents txtTexto As TextBox
     Friend WithEvents btnLimpiar As Button
-    Friend WithEvents btnBuscar As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents BtnCerrar As Button
     Friend WithEvents Panel1 As Panel

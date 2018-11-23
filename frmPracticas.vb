@@ -106,10 +106,6 @@ Public Class frmPracticas
             ElseIf cbSubModulo.SelectedIndex = -1 Then
                 ut.mensaje("SELECCIONE UN SUB-MODULO", utils.mensajes.err)
                 cbSubModulo.Focus()
-
-                ' ElseIf CBPrestacion.SelectedIndex = -1 Then
-                '     ut.mensaje("SELECCIONE UNA PRESTACION", utils.mensajes.err)
-                '     CBPrestacion.Focus()
             Else
 
                 If ut.validarLiquidacion(cbMedico.SelectedValue, DTFecha.Value) Then
@@ -268,16 +264,14 @@ Public Class frmPracticas
         Dim horas As Integer = 0
         Dim monto As Decimal = 0
 
-        If IsDBNull(val) Then
-            Exit Sub
-        End If
-
         If IsNothing(med.cuit) Then
             ut.mensaje("Seleccione un Prestador", utils.mensajes.err)
             dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+            cbMedico.Focus()
         ElseIf IsNothing(modu.codigo) Then
             ut.mensaje("Seleccione un Modulo", utils.mensajes.err)
             dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+            cbModulo.Focus()
         Else
             If Not IsDBNull(val) Then
                 edicion = True
@@ -290,7 +284,7 @@ Public Class frmPracticas
                 End If
             End If
 
-            'hay una columna oculta
+            'SI SE MODIFICO LA COLUMNA HORAS (ES 3 PORQUE hay una columna oculta)
             If e.ColumnIndex = 3 Then
                 For Each r As DataGridViewRow In dgFechas.Rows
 
@@ -303,14 +297,19 @@ Public Class frmPracticas
                         Continue For
                     Else
                         Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-
+                        Dim hs = r.Cells("HORAS").Value
                         If ut.esFindeOFeriado(fecha) Then
-                            monto += med.montoFeriado * r.Cells("HORAS").Value
+                            If med.montoFeriado = 0 Then
+                                ut.mensaje("Este prestador no trabaja fines de semana o feriados", utils.mensajes.err)
+                                hs = 0
+                                r.Cells("HORAS").Value = Nothing
+                            Else
+                                monto += med.montoFeriado * r.Cells("HORAS").Value
+                            End If
                         Else
                             monto += med.montoNormal * r.Cells("HORAS").Value
                         End If
-
-                        horas += r.Cells("HORAS").Value
+                        horas += hs
                     End If
                 Next
             End If
@@ -335,21 +334,6 @@ Public Class frmPracticas
             lblMonto.Text = 0
         End If
     End Sub
-
-    'Private Sub dgFechas_SelectionChanged(sender As Object, e As EventArgs) Handles dgFechas.SelectionChanged
-    '    selectedRows = dgFechas.SelectedRows
-
-    '    If dgFechas.SelectedRows.Count > 1 Then
-    '        Dim valor = dgFechas.SelectedRows(0).Cells("horas").Value
-
-    '        If Not IsDBNull(valor) Then
-    '            For Each r As DataGridViewRow In dgFechas.SelectedRows
-    '                r.Cells("horas") = valor
-    '            Next
-    '        End If
-
-    '    End If
-    'End Sub
 
     Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectionChangeCommitted
         If cbModulo.SelectedIndex <> -1 Then

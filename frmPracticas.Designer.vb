@@ -86,7 +86,7 @@ Partial Class frmPracticas
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(13, 32)
+        Me.Label1.Location = New System.Drawing.Point(13, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(112, 24)
         Me.Label1.TabIndex = 1
@@ -195,7 +195,7 @@ Partial Class frmPracticas
         '
         'txtAfiliado
         '
-        Me.txtAfiliado.Location = New System.Drawing.Point(113, 101)
+        Me.txtAfiliado.Location = New System.Drawing.Point(100, 77)
         Me.txtAfiliado.Name = "txtAfiliado"
         Me.txtAfiliado.ReadOnly = True
         Me.txtAfiliado.Size = New System.Drawing.Size(121, 20)
@@ -204,7 +204,7 @@ Partial Class frmPracticas
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(227, 79)
+        Me.Label9.Location = New System.Drawing.Point(227, 81)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(78, 13)
         Me.Label9.TabIndex = 24
@@ -213,7 +213,7 @@ Partial Class frmPracticas
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(3, 80)
+        Me.Label10.Location = New System.Drawing.Point(3, 81)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(70, 13)
         Me.Label10.TabIndex = 23
@@ -231,7 +231,7 @@ Partial Class frmPracticas
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(15, 67)
+        Me.Label11.Location = New System.Drawing.Point(2, 45)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(119, 13)
         Me.Label11.TabIndex = 21
@@ -241,6 +241,8 @@ Partial Class frmPracticas
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.Label11)
+        Me.Panel1.Controls.Add(Me.txtAfiliado)
         Me.Panel1.Controls.Add(Me.cbPaciente)
         Me.Panel1.Controls.Add(Me.txtBeneficio)
         Me.Panel1.Controls.Add(Me.Label9)
@@ -452,7 +454,7 @@ Partial Class frmPracticas
         '
         'btnSelec
         '
-        Me.btnSelec.Location = New System.Drawing.Point(20, 0)
+        Me.btnSelec.Location = New System.Drawing.Point(32, 1)
         Me.btnSelec.Name = "btnSelec"
         Me.btnSelec.Size = New System.Drawing.Size(52, 23)
         Me.btnSelec.TabIndex = 112
@@ -489,8 +491,6 @@ Partial Class frmPracticas
         Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(1204, 660)
         Me.Controls.Add(Me.Panel3)
-        Me.Controls.Add(Me.txtAfiliado)
-        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)

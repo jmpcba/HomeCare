@@ -60,6 +60,6 @@
     End Sub
 
     Private Sub MailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MailToolStripMenuItem.Click
-
+        frmEmail.ShowDialog()
     End Sub
 End Class

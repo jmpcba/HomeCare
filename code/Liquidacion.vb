@@ -84,7 +84,7 @@
             _hsFeriado = value
         End Set
         Get
-            Return _importeFeriado
+            Return _hsFeriado
         End Get
     End Property
 
