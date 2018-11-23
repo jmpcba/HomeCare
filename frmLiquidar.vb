@@ -103,7 +103,7 @@
                     Try
                         Dim prest = New Prestador
                         prest.id = r.Cells("ID_PREST").Value
-                        Dim liq = New Liquidacion(prest, r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value)
+                        Dim liq = New Liquidacion(prest, r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value, txtobservaciones.text)
                         liq.liquidar()
                         r.Cells("RESULTADO CARGA").Value = "Cargado"
                         r.DefaultCellStyle.BackColor = Color.LightGreen

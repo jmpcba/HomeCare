@@ -10,8 +10,6 @@ Public Class Mail
         client.EnableSsl = True
         client.Host = "smtp.gmail.com"
         client.Port = 587
-        'NetworkCred.UserName = "jmpcba@gmail.com"
-        'NetworkCred.Password = "Newuser1!"
 
         NetworkCred.UserName = db.getEmail
         NetworkCred.Password = db.getEmailPass
@@ -33,12 +31,12 @@ Public Class Mail
             mail = mail.Replace("[MONTO_LAV]", _liq.importeNormal)
             mail = mail.Replace("[MONTO_FER]", _liq.importeFeriado)
             mail = mail.Replace("[MONTO_FIJO]", _liq.montoFijo)
+            mail = mail.Replace("[OBS]", _liq.observaciones)
 
             mm.From = New MailAddress("homecarePrueba@gmail.com")
             mm.Subject = "Liquidacion HomeCare " & MonthName(_liq.mes.Month)
             mm.IsBodyHtml = True
             mm.Body = mail
-            'mm.To.Add(New MailAddress("jmpcba@gmail.com"))
             mm.To.Add(New MailAddress(_liq.prestador.email))
             client.Send(mm)
         Catch ex As Exception

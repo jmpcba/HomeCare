@@ -14,9 +14,10 @@
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
+    Private _observaciones As String
     Private _user As Usuario
 
-    Public Sub New(_prestador As Prestador, _cuit As String, _localidad As String, _especialidad As String, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal, _montoFijo As Decimal)
+    Public Sub New(_prestador As Prestador, _cuit As String, _localidad As String, _especialidad As String, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal, _montoFijo As Decimal, _observaciones As String)
         _user = New Usuario
 
         Me._prestador = _prestador
@@ -29,6 +30,7 @@
         Me._importeFeriado = _importeFeriado
         Me._importeNormal = _importeNormal
         Me._montoFijo = _montoFijo
+        Me._observaciones = _observaciones
         _modifUser = _user.dni
         _creoUser = _user.dni
         _fechaCarga = Date.Today
@@ -145,6 +147,12 @@
     Public ReadOnly Property prestador As Prestador
         Get
             Return _prestador
+        End Get
+    End Property
+
+    Public ReadOnly Property observaciones As String
+        Get
+            Return _observaciones
         End Get
     End Property
 

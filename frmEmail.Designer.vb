@@ -27,8 +27,6 @@ Partial Class frmEmail
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtTexto = New System.Windows.Forms.TextBox()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.BtnCerrar = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -39,7 +37,7 @@ Partial Class frmEmail
         Me.txtPass.Location = New System.Drawing.Point(221, 140)
         Me.txtPass.Name = "txtPass"
         Me.txtPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPass.Size = New System.Drawing.Size(213, 20)
+        Me.txtPass.Size = New System.Drawing.Size(358, 20)
         Me.txtPass.TabIndex = 1
         '
         'Label7
@@ -78,27 +76,9 @@ Partial Class frmEmail
         Me.Label1.TabIndex = 41
         Me.Label1.Text = "PASSWORD"
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(137, 278)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(43, 13)
-        Me.Label3.TabIndex = 42
-        Me.Label3.Text = "TEXTO"
-        '
-        'txtTexto
-        '
-        Me.txtTexto.Location = New System.Drawing.Point(221, 234)
-        Me.txtTexto.Multiline = True
-        Me.txtTexto.Name = "txtTexto"
-        Me.txtTexto.Size = New System.Drawing.Size(413, 117)
-        Me.txtTexto.TabIndex = 2
-        '
         'btnGuardar
         '
-        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Location = New System.Drawing.Point(871, 238)
+        Me.btnGuardar.Location = New System.Drawing.Point(700, 12)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
         Me.btnGuardar.TabIndex = 102
@@ -107,9 +87,8 @@ Partial Class frmEmail
         '
         'BtnCerrar
         '
-        Me.BtnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnCerrar.Location = New System.Drawing.Point(871, 301)
+        Me.BtnCerrar.Location = New System.Drawing.Point(700, 74)
         Me.BtnCerrar.Name = "BtnCerrar"
         Me.BtnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.BtnCerrar.TabIndex = 103
@@ -121,18 +100,16 @@ Partial Class frmEmail
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Location = New System.Drawing.Point(12, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(745, 399)
+        Me.Panel1.Size = New System.Drawing.Size(668, 199)
         Me.Panel1.TabIndex = 104
         '
         'frmEmail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1015, 450)
+        Me.ClientSize = New System.Drawing.Size(831, 244)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.BtnCerrar)
-        Me.Controls.Add(Me.txtTexto)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtEmail)
         Me.Controls.Add(Me.Label2)
@@ -151,8 +128,6 @@ Partial Class frmEmail
     Friend WithEvents Label2 As Label
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents txtTexto As TextBox
     Friend WithEvents btnGuardar As Button
     Friend WithEvents BtnCerrar As Button
     Friend WithEvents Panel1 As Panel
