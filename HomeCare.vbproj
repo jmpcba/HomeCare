@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="code\DB.vb" />
+    <Compile Include="code\encriptador.vb" />
     <Compile Include="code\Feriados.vb" />
     <Compile Include="code\Liquidacion.vb" />
     <Compile Include="code\mail.vb" />

@@ -430,4 +430,112 @@ Public Class DB
         End Try
     End Function
 
+    Public Function getEmail() As String
+        Dim resultado As String
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = "SELECT MAIL FROM CONFIG"
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            resultado = cmd.ExecuteScalar()
+            Return resultado
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Function
+
+    Public Function getEmailPass() As String
+        Dim resultado As String
+        Dim encPass As String
+        Dim encriptador As New Encriptador("JMPSistemas")
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = "SELECT MAIL_PASS FROM CONFIG"
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            encPass = cmd.ExecuteScalar()
+            resultado = encriptador.DecryptData(encPass)
+            Return resultado
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Function
+
+    Public Function getEmailObs() As String
+        Dim resultado As String
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = "SELECT MAIL_TEXTO FROM CONFIG"
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            resultado = cmd.ExecuteScalar()
+
+            Return resultado
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Function
+
+
+    Public Sub actualizarMail(_mail As String)
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("UPDATE CONFIG SET MAIL='{0}'", _mail)
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            cmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
+    Public Sub actualizarMailPass(_pass As String)
+        Dim encriptador As New Encriptador("JMPSistemas")
+        Dim encPass = encriptador.EncryptData(_pass)
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("UPDATE CONFIG SET MAIL_PASS='{0}'", encPass)
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            cmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
+    Public Sub actuaizarMailObs(_obs As String)
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("UPDATE CONFIG SET MAIL_TEXTO='{0}'", _obs)
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            cmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
 End Class

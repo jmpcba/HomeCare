@@ -6,11 +6,16 @@ Public Class Mail
     Dim NetworkCred As NetworkCredential = New System.Net.NetworkCredential()
 
     Public Sub New()
+        Dim db As New DB
         client.EnableSsl = True
         client.Host = "smtp.gmail.com"
         client.Port = 587
-        NetworkCred.UserName = "jmpcba@gmail.com"
-        NetworkCred.Password = "Newuser1!"
+        'NetworkCred.UserName = "jmpcba@gmail.com"
+        'NetworkCred.Password = "Newuser1!"
+
+        NetworkCred.UserName = db.getEmail
+        NetworkCred.Password = db.getEmailPass
+
         client.UseDefaultCredentials = True
         client.Credentials = NetworkCred
     End Sub

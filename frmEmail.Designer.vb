@@ -29,7 +29,6 @@ Partial Class frmEmail
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtTexto = New System.Windows.Forms.TextBox()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.BtnCerrar = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -96,16 +95,6 @@ Partial Class frmEmail
         Me.txtTexto.Size = New System.Drawing.Size(413, 117)
         Me.txtTexto.TabIndex = 2
         '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnLimpiar.Location = New System.Drawing.Point(871, 175)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(106, 33)
-        Me.btnLimpiar.TabIndex = 101
-        Me.btnLimpiar.Text = "&LIMPIAR"
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -140,7 +129,6 @@ Partial Class frmEmail
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1015, 450)
-        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.BtnCerrar)
         Me.Controls.Add(Me.txtTexto)
@@ -165,7 +153,6 @@ Partial Class frmEmail
     Friend WithEvents Label1 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents txtTexto As TextBox
-    Friend WithEvents btnLimpiar As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents BtnCerrar As Button
     Friend WithEvents Panel1 As Panel
