@@ -330,7 +330,19 @@ Public Class DB
     End Sub
 
     Friend Sub actualizar(_paciente As Paciente)
+        Dim query = String.Format("UPDATE PACIENTE SET DNI='{0}', NOMBRE='{1}', APELLIDO='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION=#{6}#) WHERE ID={7}",
+                _paciente.dni, _paciente.nombre, _paciente.apellido, _paciente.localidad, _paciente.obrasocial, _paciente.modifUser, _paciente.fechaMod.ToShortDateString, _paciente.afiliado)
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
 
+        Try
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
     End Sub
 
     Friend Sub actualizar(_prestador As Prestador)
@@ -347,9 +359,6 @@ Public Class DB
         Finally
             cnn.Close()
         End Try
-    End Sub
-    Friend Sub actualizar(_prestacion As Prestacion)
-
     End Sub
     Friend Sub actualizar(_feriado As Feriado)
 
@@ -386,6 +395,9 @@ Public Class DB
         End Try
     End Sub
 
+    Friend Sub ACTUALIZAR(_prestacion As Prestacion)
+
+    End Sub
     Public Function getTable(_tabla As tablas)
         Dim query = "SELECT * FROM " & _tabla.ToString()
 

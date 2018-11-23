@@ -17,8 +17,8 @@
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarLargo(numDni, 8)
                 ut.validarLargo(numAfiliado, 12)
-                If txtObSocial.Text <> pac.obrasocial Then
-                    pac.obrasocial = txtObSocial.Text
+                If numDni.Text <> pac.dni Then
+                    pac.dni = numDni.Text
                 End If
                 If txtNombre.Text <> pac.nombre Then
                     pac.nombre = txtNombre.Text
@@ -32,7 +32,6 @@
                 If txtLocalidad.Text <> pac.localidad Then
                     pac.localidad = txtLocalidad.Text
                 End If
-
                 pac.actualizar()
                 iniciarControles()
                 pac = Nothing

@@ -127,8 +127,10 @@ Partial Class frmPrestadores
         '
         Me.numPorcentaje.Location = New System.Drawing.Point(334, 346)
         Me.numPorcentaje.Name = "numPorcentaje"
+        Me.numPorcentaje.ReadOnly = True
         Me.numPorcentaje.Size = New System.Drawing.Size(68, 20)
-        Me.numPorcentaje.TabIndex = 8
+        Me.numPorcentaje.TabIndex = 203
+        Me.numPorcentaje.Text = "0"
         '
         'numFijo
         '

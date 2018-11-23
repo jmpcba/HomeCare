@@ -67,6 +67,7 @@
     Private Sub iniciarControles()
         txtCuit.ReadOnly = False
         ut.iniciarTxtBoxes(txtBoxes)
+        numPorcentaje.Text = "0"
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
