@@ -40,12 +40,14 @@
                 .Columns("ID_PREST").Visible = False
                 .AutoResizeColumns()
                 .AutoResizeRows()
+                .ClearSelection()
             End With
 
             For Each c As DataGridViewColumn In gridLiqui.Columns
                 If c.Index <> 0 Then
                     c.ReadOnly = True
                 End If
+
             Next
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
@@ -55,8 +57,8 @@
 
     Private Sub frmLiquidar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnGuardar.Enabled = False
-        llenargrilla()
         Me.WindowState = FormWindowState.Maximized
+        llenarGrilla()
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
@@ -99,7 +101,9 @@
             For Each r As DataGridViewRow In gridLiqui.Rows
                 If r.Cells(0).Value Then
                     Try
-                        Dim liq = New Liquidacion(r.Cells("ID_PREST").Value, r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value)
+                        Dim prest = New Prestador
+                        prest.id = r.Cells("ID_PREST").Value
+                        Dim liq = New Liquidacion(prest, r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value, txtobservaciones.text)
                         liq.liquidar()
                         r.Cells("RESULTADO CARGA").Value = "Cargado"
                         r.DefaultCellStyle.BackColor = Color.LightGreen
@@ -122,8 +126,13 @@
                 .Columns("RESULTADO CARGA").ReadOnly = True
                 .AutoResizeColumns()
                 .AutoResizeRows()
+                .ClearSelection()
             End With
             btnGuardar.Enabled = True
         End Try
+    End Sub
+
+    Private Sub frmLiquidar_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        gridLiqui.ClearSelection()
     End Sub
 End Class

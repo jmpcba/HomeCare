@@ -8,6 +8,8 @@ Public Class DB
     Private da As OleDbDataAdapter
     Private ds As DataSet
     Private conStr As String = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)
+    Private ut As New utils
+    Private hacerBackup As Boolean = True
 
     Public Enum tablas
         prestadores
@@ -192,26 +194,32 @@ Public Class DB
     End Function
 
     Friend Sub insertar(_practica As Practica)
+
         Try
-            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, COD_PRESTACION, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, {6}, '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14} )",
+            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}')",
                                       _practica.prestador.cuit, _practica.paciente.afiliado, _practica.modulo, _practica.subModulo,
-                                      _practica.prestacion.codigo, _practica.hsSemana, _practica.hsFeriado, _practica.fecha.ToShortDateString,
+                                      _practica.hsSemana, _practica.hsFeriado, _practica.fecha.ToShortDateString,
                                       DateTime.Today.ToShortDateString, _practica.observaciones, _practica.creoUser,
                                       _practica.fechaCarga.ToShortDateString, _practica.modifUser, _practica.fechaMod.ToShortDateString, _practica.prestador.id)
 
             cmd.CommandType = CommandType.Text
             cmd.CommandText = query
 
+            ut.backupDBTemp()
+
             cnn.Open()
             cmd.ExecuteNonQuery()
         Catch ex As Exception
+            hacerBackup = False
             Throw
         Finally
             cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
 
     Friend Sub insertar(_prestacion As Prestacion)
+
         Dim query = String.Format("INSERT INTO PRESTACIONES (CODIGO, DESCRIPCION, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
                         VALUES ({0}, '{1}', '{2}', '{3}', #{4}#, #{5}#)",
                                   _prestacion.codigo, _prestacion.descripcion, _prestacion.creoUser, _prestacion.modifUser, _prestacion.fechaCarga.ToShortDateString, _prestacion.fechaMod.ToShortDateString)
@@ -220,12 +228,16 @@ Public Class DB
         cmd.CommandText = query
 
         Try
+            ut.backupDBTemp()
+
             cnn.Open()
             cmd.ExecuteNonQuery()
         Catch ex As Exception
+            hacerBackup = False
             Throw
         Finally
             cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
 
@@ -239,93 +251,122 @@ Public Class DB
         cmd.CommandText = query
 
         Try
+            ut.backupDBTemp()
+
             cnn.Open()
             cmd.ExecuteNonQuery()
         Catch ex As Exception
+            hacerBackup = False
             Throw
         Finally
             cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
 
     Friend Sub insertar(_prestador As Prestador)
+
         Dim query = String.Format("INSERT INTO PRESTADORES (CUIT, APELLIDO, NOMBRE, EMAIL, ESPECIALIDAD, LOCALIDAD, MONTO_SEMANA, MONTO_FERIADO, MONTO_FIJO, PORCENTAJE, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}, {9}, '{10}', '{11}', #{12}#, #{13}#)", _prestador.cuit, _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.creoUser, _prestador.modifUser, _prestador.fechaCarga.ToShortDateString, _prestador.fechaMod.ToShortDateString)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
 
         Try
+            ut.backupDBTemp()
+
             cnn.Open()
             cmd.ExecuteNonQuery()
         Catch ex As Exception
+            hacerBackup = False
             Throw
         Finally
             cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
         End Try
 
     End Sub
 
     Friend Sub insertar(_liq As Liquidacion)
-        Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#, {13})", _liq.cuit, _liq.localidad, _liq.especialidad, _liq.mes.ToShortDateString, _liq.hsNormales, _liq.hsFeriado, _liq.importeNormal, _liq.importeFeriado, _liq.montoFijo, _liq.creoUser, _liq.modifUser, _liq.fechaCarga.ToShortDateString, _liq.fechaMod.ToShortDateString, _liq.prestador)
+
+        Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#, {13})", _liq.cuit, _liq.localidad, _liq.especialidad, _liq.mes.ToShortDateString, _liq.hsNormales, _liq.hsFeriado, _liq.importeNormal, _liq.importeFeriado, _liq.montoFijo, _liq.creoUser, _liq.modifUser, _liq.fechaCarga.ToShortDateString, _liq.fechaMod.ToShortDateString, _liq.idPrestador)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
 
         Try
+            ut.backupDBTemp()
+
             cnn.Open()
             cmd.ExecuteNonQuery()
         Catch ex As Exception
+            hacerBackup = False
             Throw
         Finally
             cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
 
 
     Friend Sub insertar(_subMod As subModulo)
+
         Dim query = String.Format("INSERT INTO SUBMODULO (CODIGO, DESCRIPCION, CARGO_USUARIO, FECHA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ({0}, '{1}', {2}, #{3}#, {4}, #{5}#)", _subMod.codigo, _subMod.descripcion, _subMod.creoUser, _subMod.fechaCarga.ToShortDateString, _subMod.modifUser, _subMod.fechaMod.ToShortDateString)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
 
         Try
+            ut.backupDBTemp()
+
             cnn.Open()
             cmd.ExecuteNonQuery()
         Catch ex As Exception
+            hacerBackup = False
             Throw
         Finally
             cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
 
     Friend Sub insertar(_mod As Modulo)
-        Dim query = String.Format("INSERT INTO MODULO VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6}, #{7}#, {8}, #{9}#)", _mod.codigo, _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.creoUser, _mod.fechaCarga.ToShortDateString, _mod.modifUser, _mod.fechaMod.ToShortDateString)
+
+        Dim query = String.Format("INSERT INTO MODULO (CODIGO, MEDICO, ENFERMERIA, KINESIOLOGIA, FONOAUDIOLOGIA, CUIDADOR, NUTRICION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', {1}, {2}, {3}, {4}, {5}, {6}, {7}, #{8}#, {9}, #{10}#)", _mod.codigo, _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.topeNutricionista, _mod.creoUser, _mod.fechaCarga.ToShortDateString, _mod.modifUser, _mod.fechaMod.ToShortDateString)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
 
         Try
+            ut.backupDBTemp()
+
             cnn.Open()
             cmd.ExecuteNonQuery()
         Catch ex As Exception
+            hacerBackup = False
             Throw
         Finally
             cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
     Friend Sub insertar(_feriado As Feriado)
+
         Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES (#{0}#, '{1}', {2}, #{3}#, {4}, #{5}#)", _feriado.fecha.ToShortDateString, _feriado.descripcion, _feriado.creoUser, _feriado.fechaCarga.ToShortDateString, _feriado.modifUser, _feriado.fechaMod.ToShortDateString)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
 
         Try
+            ut.backupDBTemp()
+
             cnn.Open()
             cmd.ExecuteNonQuery()
         Catch ex As Exception
+            hacerBackup = False
             Throw
         Finally
             cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
 
@@ -335,6 +376,24 @@ Public Class DB
 
     Friend Sub actualizar(_prestador As Prestador)
 
+        Dim query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}' WHERE ID={11}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.id)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            ut.backupDBTemp()
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            hacerBackup = False
+            Throw
+        Finally
+            cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
+        End Try
+
     End Sub
     Friend Sub actualizar(_prestacion As Prestacion)
 
@@ -343,38 +402,49 @@ Public Class DB
 
     End Sub
     Friend Sub actualizar(_subMod As subModulo)
+
         Dim query = String.Format("UPDATE SUBMODULO SET DESCRIPCION='{0}', MODIFICO_USUARIO={1}, FECHA_MODIFICACION=#{2}# WHERE CODIGO = {3}", _subMod.descripcion, _subMod.modifUser, _subMod.fechaMod.ToShortDateString, _subMod.codigo)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
 
         Try
+            ut.backupDBTemp()
+
             cnn.Open()
             cmd.ExecuteNonQuery()
         Catch ex As Exception
+            hacerBackup = False
             Throw
         Finally
             cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
 
     Friend Sub actualizar(_mod As Modulo)
+
         Dim query = String.Format("UPDATE MODULO SET MEDICO={0}, ENFERMERIA={1}, KINESIO={2}, FONO={3}, CUIDADOR={4}, MODIFICO_USUARIO={5}, FECHA_MODIFICACION=#{6}# WHERE CODIGO={7}", _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.modifUser, _mod.fechaMod.ToShortDateString, _mod.codigo)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
 
         Try
+            ut.backupDBTemp()
+
             cnn.Open()
             cmd.ExecuteNonQuery()
         Catch ex As Exception
+            hacerBackup = False
             Throw
         Finally
             cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
 
     Public Function getTable(_tabla As tablas)
+
         Dim query = "SELECT * FROM " & _tabla.ToString()
 
         cmd.CommandType = CommandType.Text
@@ -418,4 +488,111 @@ Public Class DB
         End Try
     End Function
 
+    Public Function getEmail() As String
+        Dim resultado As String
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = "SELECT MAIL FROM CONFIG"
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            resultado = cmd.ExecuteScalar()
+            Return resultado
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Function
+
+    Public Function getEmailPass() As String
+        Dim resultado As String
+        Dim encPass As String
+        Dim encriptador As New Encriptador("JMPSistemas")
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = "SELECT MAIL_PASS FROM CONFIG"
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            encPass = cmd.ExecuteScalar()
+            resultado = encriptador.DecryptData(encPass)
+            Return resultado
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Function
+
+    Public Function getEmailObs() As String
+        Dim resultado As String
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = "SELECT MAIL_TEXTO FROM CONFIG"
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            resultado = cmd.ExecuteScalar()
+
+            Return resultado
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Function
+
+
+    Public Sub actualizarMail(_mail As String)
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("UPDATE CONFIG SET MAIL='{0}'", _mail)
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            cmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
+    Public Sub actualizarMailPass(_pass As String)
+        Dim encriptador As New Encriptador("JMPSistemas")
+        Dim encPass = encriptador.EncryptData(_pass)
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("UPDATE CONFIG SET MAIL_PASS='{0}'", encPass)
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            cmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
+    Public Sub actuaizarMailObs(_obs As String)
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("UPDATE CONFIG SET MAIL_TEXTO='{0}'", _obs)
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            cmd.ExecuteNonQuery()
+
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
 End Class

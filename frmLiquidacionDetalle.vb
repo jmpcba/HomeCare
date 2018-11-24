@@ -46,6 +46,8 @@
             Dim rIndex = dgDetalle.CurrentRow.Index
             Try
                 If ut.validarLiquidacion(idPrestador, fecha) Then
+                    btnEliminar.Enabled = False
+                    dgDetalle.ClearSelection()
                     Throw New Exception("LIQUIDACION CERRADA - NO SE PUEDE ELIMINAR")
                 Else
                     db.eliminarLiquidacion(id)
@@ -71,5 +73,9 @@
 
     Private Sub frmLiquidacionDetalle_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         frmParent.llenarGrilla()
+    End Sub
+
+    Private Sub frmLiquidacionDetalle_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        dgDetalle.ClearSelection()
     End Sub
 End Class

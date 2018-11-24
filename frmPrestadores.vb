@@ -139,7 +139,7 @@
         txtEmail.Text = _prestador.email
         txtEspecialidad.Text = _prestador.especialidad
         txtLocalidad.Text = _prestador.localidad
-        numLunVie.Text = _prestador.montoFijo
+        numLunVie.Text = _prestador.montoNormal
         numFeriados.Text = _prestador.montoFeriado
         numPorcentaje.Text = _prestador.porcentaje
         numFijo.Text = _prestador.montoFijo

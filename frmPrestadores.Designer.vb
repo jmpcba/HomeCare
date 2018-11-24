@@ -125,7 +125,7 @@ Partial Class frmPrestadores
         '
         'numPorcentaje
         '
-        Me.numPorcentaje.Location = New System.Drawing.Point(315, 346)
+        Me.numPorcentaje.Location = New System.Drawing.Point(334, 346)
         Me.numPorcentaje.Name = "numPorcentaje"
         Me.numPorcentaje.Size = New System.Drawing.Size(68, 20)
         Me.numPorcentaje.TabIndex = 8
@@ -165,7 +165,7 @@ Partial Class frmPrestadores
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(312, 309)
+        Me.Label11.Location = New System.Drawing.Point(331, 309)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(78, 13)
         Me.Label11.TabIndex = 44
@@ -176,9 +176,9 @@ Partial Class frmPrestadores
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(199, 309)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(61, 13)
+        Me.Label10.Size = New System.Drawing.Size(90, 13)
         Me.Label10.TabIndex = 43
-        Me.Label10.Text = "FERIADOS"
+        Me.Label10.Text = "SAB DOM Y FER"
         '
         'Label9
         '
@@ -240,7 +240,7 @@ Partial Class frmPrestadores
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(343, 101)
+        Me.Label3.Location = New System.Drawing.Point(323, 104)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(59, 13)
         Me.Label3.TabIndex = 31

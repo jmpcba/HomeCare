@@ -5,11 +5,12 @@ Imports System.Collections.Specialized
 Public Class frmPracticas
     Dim pac As Paciente
     Dim med As Prestador
-    Dim prest As Prestacion
+    ' Dim prest As Prestacion
     Dim modu As Modulo
     Dim subModu As subModulo
     Dim index As Integer
     Dim edicion As Boolean = False
+    Dim sel As Boolean = False
     Dim cellVal
     Dim selectedRows As DataGridViewSelectedRowCollection
     Dim ut As utils
@@ -24,7 +25,7 @@ Public Class frmPracticas
 
             ut = New utils
             pac = New Paciente()
-            prest = New Prestacion()
+            ' prest = New Prestacion()
             med = New Prestador()
             subModu = New subModulo
             modu = New Modulo()
@@ -33,7 +34,7 @@ Public Class frmPracticas
             med.llenarcombo(cbMedico)
             modu.llenarcombo(cbModulo)
             subModu.llenarcombo(cbSubModulo)
-            prest.llenarcombo(CBPrestacion)
+            ' prest.llenarcombo(CBPrestacion)
 
             txtAfiliado.Text = ""
             txtBeneficio.Text = ""
@@ -54,16 +55,16 @@ Public Class frmPracticas
 
     End Sub
 
-    Private Sub CBPrestacion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBPrestacion.SelectionChangeCommitted
-        If CBPrestacion.SelectedIndex <> -1 Then
-            Try
-                prest.codigo = CBPrestacion.SelectedValue
-
-            Catch ex As Exception
-                ut.mensaje(ex.Message, utils.mensajes.err)
-            End Try
-        End If
-    End Sub
+    '  Private Sub CBPrestacion_SelectedIndexChanged(sender As Object, e As EventArgs)
+    '  If CBPrestacion.SelectedIndex <> -1 Then
+    ' Try
+    '            prest.codigo = CBPrestacion.SelectedValue
+    '
+    'Catch ex As Exception
+    '            ut.mensaje(ex.Message, utils.mensajes.err)
+    ' End Try
+    ' End If
+    ' End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Me.Close()
@@ -105,10 +106,6 @@ Public Class frmPracticas
             ElseIf cbSubModulo.SelectedIndex = -1 Then
                 ut.mensaje("SELECCIONE UN SUB-MODULO", utils.mensajes.err)
                 cbSubModulo.Focus()
-
-            ElseIf CBPrestacion.SelectedIndex = -1 Then
-                ut.mensaje("SELECCIONE UNA PRESTACION", utils.mensajes.err)
-                CBPrestacion.Focus()
             Else
 
                 If ut.validarLiquidacion(cbMedico.SelectedValue, DTFecha.Value) Then
@@ -127,7 +124,7 @@ Public Class frmPracticas
                             dia = r.Cells("DIA_H").Value
 
                             Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
-                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, prest, fec, horas, obs)
+                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horas, obs)
 
                             Try
                                 practica.insertar()
@@ -168,6 +165,19 @@ Public Class frmPracticas
             End With
 
         End Try
+    End Sub
+    Private Sub btnSelec_Click(sender As Object, e As EventArgs) Handles btnSelec.Click
+        sel = Not sel
+
+        If sel Then
+            btnSelec.Text = "Des-sel"
+        Else
+            btnSelec.Text = "Todos"
+        End If
+
+        For Each r As DataGridViewRow In dgFechas.Rows
+            r.Cells(0).Value = sel
+        Next
     End Sub
 
     Private Sub DTFecha_ValueChanged(sender As Object, e As EventArgs) Handles DTFecha.ValueChanged
@@ -254,16 +264,14 @@ Public Class frmPracticas
         Dim horas As Integer = 0
         Dim monto As Decimal = 0
 
-        If IsDBNull(val) Then
-            Exit Sub
-        End If
-
         If IsNothing(med.cuit) Then
             ut.mensaje("Seleccione un Prestador", utils.mensajes.err)
             dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+            cbMedico.Focus()
         ElseIf IsNothing(modu.codigo) Then
             ut.mensaje("Seleccione un Modulo", utils.mensajes.err)
             dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+            cbModulo.Focus()
         Else
             If Not IsDBNull(val) Then
                 edicion = True
@@ -276,7 +284,7 @@ Public Class frmPracticas
                 End If
             End If
 
-            'hay una columna oculta
+            'SI SE MODIFICO LA COLUMNA HORAS (ES 3 PORQUE hay una columna oculta)
             If e.ColumnIndex = 3 Then
                 For Each r As DataGridViewRow In dgFechas.Rows
 
@@ -289,14 +297,19 @@ Public Class frmPracticas
                         Continue For
                     Else
                         Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-
+                        Dim hs = r.Cells("HORAS").Value
                         If ut.esFindeOFeriado(fecha) Then
-                            monto += med.montoFeriado * r.Cells("HORAS").Value
+                            If med.montoFeriado = 0 Then
+                                ut.mensaje("Este prestador no trabaja fines de semana o feriados", utils.mensajes.err)
+                                hs = 0
+                                r.Cells("HORAS").Value = Nothing
+                            Else
+                                monto += med.montoFeriado * r.Cells("HORAS").Value
+                            End If
                         Else
                             monto += med.montoNormal * r.Cells("HORAS").Value
                         End If
-
-                        horas += r.Cells("HORAS").Value
+                        horas += hs
                     End If
                 Next
             End If
@@ -321,21 +334,6 @@ Public Class frmPracticas
             lblMonto.Text = 0
         End If
     End Sub
-
-    'Private Sub dgFechas_SelectionChanged(sender As Object, e As EventArgs) Handles dgFechas.SelectionChanged
-    '    selectedRows = dgFechas.SelectedRows
-
-    '    If dgFechas.SelectedRows.Count > 1 Then
-    '        Dim valor = dgFechas.SelectedRows(0).Cells("horas").Value
-
-    '        If Not IsDBNull(valor) Then
-    '            For Each r As DataGridViewRow In dgFechas.SelectedRows
-    '                r.Cells("horas") = valor
-    '            Next
-    '        End If
-
-    '    End If
-    'End Sub
 
     Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectionChangeCommitted
         If cbModulo.SelectedIndex <> -1 Then
