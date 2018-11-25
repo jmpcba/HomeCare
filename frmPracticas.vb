@@ -18,7 +18,7 @@ Public Class frmPracticas
         Me.WindowState = FormWindowState.Maximized
 
         Try
-
+            dgFechas.Columns.Clear()
             DTFecha.CustomFormat = "MMMM - yyyy"
             lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
 
@@ -28,7 +28,6 @@ Public Class frmPracticas
             med = New Prestador()
             subModu = New subModulo
             modu = New Modulo()
-
 
             pac.llenarcombo(cbPaciente)
             med.llenarcombo(cbMedico)
@@ -44,8 +43,10 @@ Public Class frmPracticas
             txtObservaciones.Text = ""
             lblHoras.Text = ""
             lblMonto.Text = ""
-
             cargarGrilla()
+
+            dgFechas.AutoResizeColumns()
+            dgFechas.AutoResizeRows()
 
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
@@ -86,6 +87,7 @@ Public Class frmPracticas
         Dim carga = False
         ut = New utils
         Try
+            btnGuardar.Enabled = False
             dgFechas.Columns("RESULTADO").ReadOnly = False
 
             If cbPaciente.SelectedIndex = -1 Then
@@ -158,6 +160,7 @@ Public Class frmPracticas
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
+            btnGuardar.Enabled = True
             With dgFechas
                 .Columns("RESULTADO").ReadOnly = True
                 .AutoResizeColumns()
@@ -169,7 +172,7 @@ Public Class frmPracticas
 
     Private Sub DTFecha_ValueChanged(sender As Object, e As EventArgs) Handles DTFecha.ValueChanged
         If edicion Then
-            If MsgBox("Se perderan los datos que ya cargo" & vbCrLf & "Desea continuar?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            If ut.mensaje("Se perderan los datos que ya cargo" & vbCrLf & "Desea continuar?", utils.mensajes.preg) = MsgBoxResult.Yes Then
                 cargarGrilla()
                 lblMes.Text = MonthName(DTFecha.Value.Month)
                 edicion = False
@@ -190,7 +193,9 @@ Public Class frmPracticas
         Dim days = DaysInMonth(year, month)
         Dim dt As New DataTable()
 
+        dt.Clear()
         dgFechas.DataSource = Nothing
+        dgFechas.Refresh()
 
         dt.Columns.Add("DIA")
         dt.Columns.Add("DIA_H")
@@ -241,9 +246,6 @@ Public Class frmPracticas
                 r.DefaultCellStyle.ForeColor = Color.Red
             End If
         Next
-
-        dgFechas.AutoResizeColumns()
-        dgFechas.AutoResizeRows()
 
     End Sub
 
@@ -311,7 +313,7 @@ Public Class frmPracticas
     End Sub
 
     Private Sub btnLimpiarGrilla_Click(sender As Object, e As EventArgs) Handles btnLimpiarGrilla.Click
-        If MsgBox("Se perderan los datos que ya cargo" & vbCrLf & "Desea continuar?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+        If ut.mensaje("Se perderan los datos que ya cargo" & vbCrLf & "Desea continuar?", utils.mensajes.preg) = MsgBoxResult.Yes Then
             cargarGrilla()
             lblMes.Text = MonthName(DTFecha.Value.Month)
             edicion = False
@@ -320,20 +322,20 @@ Public Class frmPracticas
         End If
     End Sub
 
-    Private Sub dgFechas_SelectionChanged(sender As Object, e As EventArgs) Handles dgFechas.SelectionChanged
-        selectedRows = dgFechas.SelectedRows
+    'Private Sub dgFechas_SelectionChanged(sender As Object, e As EventArgs) Handles dgFechas.SelectionChanged
+    '    selectedRows = dgFechas.SelectedRows
 
-        If dgFechas.SelectedRows.Count > 1 Then
-            Dim valor = dgFechas.SelectedRows(0).Cells("horas").Value
+    '    If dgFechas.SelectedRows.Count > 1 Then
+    '        Dim valor = dgFechas.SelectedRows(0).Cells("horas").Value
 
-            If Not IsDBNull(valor) Then
-                For Each r As DataGridViewRow In dgFechas.SelectedRows
-                    r.Cells("horas") = valor
-                Next
-            End If
+    '        If Not IsDBNull(valor) Then
+    '            For Each r As DataGridViewRow In dgFechas.SelectedRows
+    '                r.Cells("horas") = valor
+    '            Next
+    '        End If
 
-        End If
-    End Sub
+    '    End If
+    'End Sub
 
     Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectionChangeCommitted
         If cbModulo.SelectedIndex <> -1 Then
@@ -358,9 +360,5 @@ Public Class frmPracticas
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End Try
         End If
-    End Sub
-
-    Private Sub cbSubModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSubModulo.SelectionChangeCommitted
-
     End Sub
 End Class

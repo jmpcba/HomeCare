@@ -29,6 +29,9 @@
 
                 r("COMBO") = String.Format("{0} {1}", ape, nom)
             Next
+
+            _pacientes.DefaultView.Sort = "COMBO"
+
         Catch ex As Exception
             Throw
         End Try
@@ -62,7 +65,7 @@
         Set(value As String)
             Dim r As DataRow()
 
-            r = _pacientes.Select("afiliado=" & value)
+            r = _pacientes.Select("afiliado='" & value & "'")
 
             If r.Length = 1 Then
 
@@ -70,7 +73,11 @@
                 _dni = r(0)("dni")
                 _nombre = r(0)("nombre")
                 _apellido = r(0)("apellido")
-                _obraSocial = r(0)("obra_social")
+                If IsDBNull(r(0)("obra_social")) Then
+                    _obraSocial = ""
+                Else
+                    _obraSocial = r(0)("obra_social")
+                End If
                 _localidad = r(0)("localidad")
             Else
                 Throw New Exception("Codigo Inexistente")
@@ -141,6 +148,12 @@
     Public ReadOnly Property fechaMod As Date
         Get
             Return _fechaMod
+        End Get
+    End Property
+
+    Public ReadOnly Property pacientes As DataTable
+        Get
+            Return _pacientes
         End Get
     End Property
 

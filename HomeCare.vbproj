@@ -102,6 +102,12 @@
     <Compile Include="code\subModulo.vb" />
     <Compile Include="code\Usuario.vb" />
     <Compile Include="code\utils.vb" />
+    <Compile Include="frmBuscar.Designer.vb">
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCierreLiq.Designer.vb">
       <DependentUpon>frmCierreLiq.vb</DependentUpon>
     </Compile>
@@ -221,6 +227,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmBuscar.resx">
+      <DependentUpon>frmBuscar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
     </EmbeddedResource>

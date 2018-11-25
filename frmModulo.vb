@@ -42,30 +42,24 @@
                 modu.actualizar()
                 ut.iniciarTxtBoxes(txtboxes)
                 modu = Nothing
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
             End If
 
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                MessageBox.Show("Ya existe un Modulo con el mismo codigo")
+                ut.mensaje("Ya existe un Modulo con el mismo codigo", utils.mensajes.err)
             Else
-                MessageBox.Show(ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End If
         End Try
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Try
-            modu = New Modulo
-            modu.codigo = txtCodigo.Text
-            txtCuidador.Text = modu.topeCuidador
-            ' txtDescripcion.Text = modu.descripcion
-            txtEnfermeria.Text = modu.topeEnfermeria
-            txtFono.Text = modu.topeFono
-            txtKinesio.Text = modu.topeKinesio
-            txtMedico.Text = modu.topeMedico
+            Dim frmBuscar As New frmBuscar(Me)
+            frmBuscar.ShowDialog()
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
             modu = Nothing
             iniciarControles()
         End Try
@@ -110,7 +104,7 @@
         Try
             ut.validarNumerico(txtEnfermeria)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -118,7 +112,7 @@
         Try
             ut.validarNumerico(txtKinesio)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -126,7 +120,7 @@
         Try
             ut.validarNumerico(txtFono)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -134,12 +128,12 @@
         Try
             ut.validarNumerico(txtCuidador)
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
     Private Sub frmModulo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        btnBuscar.Enabled = False
+        'btnBuscar.Enabled = False
         txtboxes = {txtCodigo, txtDescripcion, txtMedico, txtEnfermeria, txtKinesio, txtFono, txtCuidador}
     End Sub
 
@@ -160,7 +154,7 @@
         Catch ex As Exception
             txtCodigo.Text = ""
             btnBuscar.Enabled = False
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
@@ -168,4 +162,22 @@
         Me.Close()
     End Sub
 
+    Public Sub resultadoBusqueda(ByRef _modulo As Modulo)
+        txtCodigo.ReadOnly = True
+        txtCodigo.Text = _modulo.codigo
+        txtCuidador.Text = _modulo.topeCuidador
+        ' txtDescripcion.Text = _modulo.descripcion
+        txtEnfermeria.Text = _modulo.topeEnfermeria
+        txtFono.Text = _modulo.topeFono
+        txtKinesio.Text = _modulo.topeKinesio
+        txtMedico.Text = _modulo.topeMedico
+        modu = _modulo
+
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        txtCodigo.ReadOnly = False
+        iniciarControles()
+        modu = Nothing
+    End Sub
 End Class

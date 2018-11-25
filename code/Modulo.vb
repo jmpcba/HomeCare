@@ -1,10 +1,11 @@
 ﻿Public Class Modulo
-    Private _codigo As Integer
+    Private _codigo As String
     Private _topeMedico As Integer
     Private _topeEnfermeria As Integer
     Private _topeKinesio As Integer
     Private _topeFono As Integer
     Private _topeCuidador As Integer
+    Private _topeNutricionista As Integer
     Private _modifUser As Integer
     Private _creoUser As Integer
     Private _fechaCarga As Date
@@ -22,7 +23,7 @@
         End Try
     End Sub
 
-    Public Sub New(_cod As Integer, _topeMedico As Integer, _topeEnfer As Integer, _topeKine As Integer, _topeFon As Integer, _topeCuid As Integer)
+    Public Sub New(_cod As String, _topeMedico As Integer, _topeEnfer As Integer, _topeKine As Integer, _topeFon As Integer, _topeCuid As Integer)
         _user = New Usuario
         Me._codigo = _cod
         Me._topeMedico = _topeMedico
@@ -36,18 +37,23 @@
         Me._fechaMod = Date.Today
     End Sub
 
-
-    Public Property codigo As Integer
-        Set(value As Integer)
+    Public ReadOnly Property modulos As DataTable
+        Get
+            Return _modulos
+        End Get
+    End Property
+    Public Property codigo As String
+        Set(value As String)
             Dim r As DataRow()
             r = _modulos.Select("codigo=" & value)
             If r.Length = 1 Then
                 _codigo = r(0)("codigo")
                 _topeMedico = r(0)("medico")
                 _topeEnfermeria = r(0)("enfermeria")
-                _topeKinesio = r(0)("kinesio")
-                _topeFono = r(0)("fono")
+                _topeKinesio = r(0)("kinesiologia")
+                _topeFono = r(0)("fonoaudiologia")
                 _topeCuidador = r(0)("cuidador")
+                _topeNutricionista = r(0)("nutricion")
                 _user = New Usuario
                 _modifUser = r(0)("modifico_usuario")
                 _creoUser = r(0)("cargo_usuario")
@@ -81,6 +87,8 @@
                 Return _topeFono
             ElseIf _tipo = "CUIDADOR" Then
                 Return _topeCuidador
+            ElseIf _tipo = "NUTRICION" Then
+                Return _topeNutricionista
             Else
                 Return 0
             End If

@@ -1,102 +1,103 @@
 ﻿Public Class frmPacientes
-    Dim pacientes As Paciente
+    Dim pac As Paciente
     Dim ut As New utils
     Dim txtBoxes As TextBox()
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
-            If IsNothing(pacientes) Then
+            If IsNothing(pac) Then
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarLargo(numDni, 8)
                 ut.validarLargo(numAfiliado, 12)
-                pacientes = New Paciente(numAfiliado.Text, numDni.Text, txtNombre.Text, txtApellido.Text, txtObSocial.Text, txtLocalidad.Text)
-                pacientes.insertar()
-                MessageBox.Show("Guardado Exitoso")
+                pac = New Paciente(numAfiliado.Text, numDni.Text, txtNombre.Text, txtApellido.Text, txtObSocial.Text, txtLocalidad.Text)
+                pac.insertar()
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
             Else
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarLargo(numDni, 8)
                 ut.validarLargo(numAfiliado, 12)
-                If txtObSocial.Text <> pacientes.obrasocial Then
-                    pacientes.obrasocial = txtObSocial.Text
+                If txtObSocial.Text <> pac.obrasocial Then
+                    pac.obrasocial = txtObSocial.Text
                 End If
-                If txtNombre.Text <> pacientes.nombre Then
-                    pacientes.nombre = txtNombre.Text
+                If txtNombre.Text <> pac.nombre Then
+                    pac.nombre = txtNombre.Text
                 End If
-                If txtApellido.Text <> pacientes.apellido Then
-                    pacientes.apellido = txtApellido.Text
+                If txtApellido.Text <> pac.apellido Then
+                    pac.apellido = txtApellido.Text
                 End If
-                If txtObSocial.Text <> pacientes.obrasocial Then
-                    pacientes.obrasocial = txtObSocial.Text
+                If txtObSocial.Text <> pac.obrasocial Then
+                    pac.obrasocial = txtObSocial.Text
                 End If
-                If txtLocalidad.Text <> pacientes.localidad Then
-                    pacientes.localidad = txtLocalidad.Text
+                If txtLocalidad.Text <> pac.localidad Then
+                    pac.localidad = txtLocalidad.Text
                 End If
 
-                pacientes.actualizar()
-                ut.iniciarTxtBoxes(txtBoxes)
-                pacientes = Nothing
-                MessageBox.Show("Guardado Exitoso")
+                pac.actualizar()
+                iniciarControles()
+                pac = Nothing
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
             End If
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                MessageBox.Show("Ya existe un paciente con el mismo numero")
+                ut.mensaje("Ya existe un paciente con el mismo numero", utils.mensajes.err)
             Else
-                MessageBox.Show(ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End If
-        End Try
-    End Sub
-
-    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        Try
-            pacientes = New Paciente
-            pacientes.afiliado = numAfiliado.Text
-            numDni.Text = pacientes.dni
-            txtNombre.Text = pacientes.nombre
-            txtApellido.Text = pacientes.apellido
-            txtObSocial.Text = pacientes.obrasocial
-            txtLocalidad.Text = pacientes.localidad
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-            pacientes = Nothing
-            iniciarControles()
         End Try
     End Sub
 
     Private Sub iniciarControles()
-        numAfiliado.Text = ""
-        numDni.Text = ""
-        txtNombre.Text = ""
-        txtApellido.Text = ""
-        txtObSocial.Text = ""
-        txtLocalidad.Text = ""
+        ut.iniciarTxtBoxes(txtBoxes)
+        txtApellido.ReadOnly = False
     End Sub
 
-   Private Sub txtAfiliado_TextChanged(sender As Object, e As EventArgs) Handles numAfiliado.TextChanged
+    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Try
-            If numAfiliado.Text <> "" Then
-                btnBuscar.Enabled = True
-            Else
-                btnBuscar.Enabled = False
-            End If
+            Dim frmBuscar As New frmBuscar(Me)
+            frmBuscar.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            pac = Nothing
+            iniciarControles()
+        End Try
+    End Sub
+
+    Private Sub txtAfiliado_TextChanged(sender As Object, e As EventArgs) Handles numAfiliado.TextChanged
+        Try
             ut.validarNumerico(numAfiliado)
-            If Not IsNothing(pacientes) Then
-                pacientes = Nothing
+            If Not IsNothing(pac) Then
+                pac = Nothing
             End If
 
         Catch ex As Exception
             numAfiliado.Text = ""
             btnBuscar.Enabled = False
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
     Private Sub frmPacientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        btnBuscar.Enabled = False
         txtBoxes = {numAfiliado, numDni, txtNombre, txtApellido, txtObSocial, txtLocalidad}
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Me.Close()
+    End Sub
+
+    Public Sub resultadoBusqueda(ByRef _paciente As Paciente)
+        numAfiliado.ReadOnly = True
+        numAfiliado.Text = _paciente.afiliado
+        numDni.Text = _paciente.dni
+        txtNombre.Text = _paciente.nombre
+        txtApellido.Text = _paciente.apellido
+        txtObSocial.Text = _paciente.obrasocial
+        txtLocalidad.Text = _paciente.localidad
+        pac = _paciente
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        pac = Nothing
+        iniciarControles()
     End Sub
 End Class

@@ -10,7 +10,7 @@
                 ut.validarTxtBoxLleno(txtBoxes)
                 prestacion = New Prestacion(numPresCod.Text, txtDescri.Text)
                 prestacion.insertar()
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
             Else
                 ut.validarLargo(numPresCod, 6)
@@ -23,14 +23,14 @@
                 prestacion.actualizar()
                 ut.iniciarTxtBoxes(txtBoxes)
                 prestacion = Nothing
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
             End If
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                MessageBox.Show("Ya existe un Sub Modulo con el mismo codigo")
+                ut.mensaje("Ya existe un Sub Modulo con el mismo codigo", utils.mensajes.err)
             Else
-                MessageBox.Show(ex.Message)
+                ut.mensaje(ex.Message, utils.mensajes.err)
             End If
         End Try
     End Sub
@@ -41,7 +41,7 @@
             prestacion.codigo = numPresCod.Text
             txtDescri.Text = prestacion.descripcion
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
             prestacion = Nothing
             iniciarControles()
         End Try
@@ -68,7 +68,7 @@
         Catch ex As Exception
             numPresCod.Text = ""
             btnBuscar.Enabled = False
-            MessageBox.Show(ex.Message)
+            ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
 
