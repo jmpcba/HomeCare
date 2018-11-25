@@ -19,6 +19,7 @@ Public Class DB
         modulo
         subModulo
         feriados
+        especialidades
     End Enum
 
     Public Enum tiposLiquidacion
@@ -415,7 +416,24 @@ Public Class DB
     End Sub
 
     Friend Sub actualizar(_paciente As Paciente)
+        Dim query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION='{6}' WHERE AFILIADO='{7}'",
+                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.modifUser, _paciente.fechaMod, _paciente.afiliado)
 
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            ut.backupDBTemp()
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            hacerBackup = False
+            Throw
+        Finally
+            cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
+        End Try
     End Sub
 
     Friend Sub actualizar(_prestador As Prestador)

@@ -48,7 +48,11 @@
             db.InsertarFeriado(DtCalendario.Value, txtDescripcion.Text.ToUpper)
             cargarGrilla()
         Catch ex As Exception
-            ut.mensaje(ex.Message, utils.mensajes.err)
+            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+                ut.mensaje("Ya un feriado para esa fecha", utils.mensajes.err)
+            Else
+                ut.mensaje(ex.Message, utils.mensajes.err)
+            End If
         Finally
             btnGuardar.Enabled = True
         End Try

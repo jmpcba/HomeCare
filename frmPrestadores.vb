@@ -5,13 +5,19 @@
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
+            If cbEspecialidad.SelectedIndex = -1 Then
+                Throw New Exception("SELECCIONE UNA ESPECIALIDAD")
+            End If
             If IsNothing(prest) Then
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarLargo(txtCuit, 11)
-                prest = New Prestador(txtCuit.Text, txtNombre.Text, txtApellido.Text, txtEmail.Text, txtEspecialidad.Text, txtLocalidad.Text, numLunVie.Text, numFeriados.Text, numFijo.Text, numPorcentaje.Text, dtCese.Text)
+                Dim cuit = txtCuit.Text.ToString
+                cuit = cuit.Insert(2, "-")
+                cuit = cuit.Insert(cuit.Length - 1, "-")
+                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text, txtEmail.Text, cbEspecialidad.SelectedValue, txtLocalidad.Text, numLunVie.Text, numFeriados.Text, numFijo.Text, numPorcentaje.Text, dtCese.Text)
                 prest.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
-                ut.iniciarTxtBoxes(txtBoxes)
+
             Else
                 ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(txtCuit, 11)
@@ -24,8 +30,8 @@
                 If txtEmail.Text <> prest.email Then
                     prest.email = txtEmail.Text
                 End If
-                If txtEspecialidad.Text <> prest.especialidad Then
-                    prest.especialidad = txtEspecialidad.Text
+                If cbEspecialidad.SelectedValue <> prest.especialidad Then
+                    prest.especialidad = cbEspecialidad.SelectedValue
                 End If
                 If txtLocalidad.Text <> prest.localidad Then
                     prest.localidad = txtLocalidad.Text
@@ -49,10 +55,8 @@
                     End If
                 End If
 
-
                 prest.actualizar()
-                iniciarControles()
-                prest = Nothing
+
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
             End If
         Catch ex As Exception
@@ -61,6 +65,10 @@
             Else
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End If
+        Finally
+            iniciarControles()
+            prest = Nothing
+            cbEspecialidad.SelectedIndex = -1
         End Try
     End Sub
 
@@ -113,9 +121,13 @@
     End Sub
 
     Private Sub frmprestadores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim esp As New especialidad
+        esp.llenarcombo(cbEspecialidad)
         dtCese.Enabled = False
-        txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtEspecialidad, txtLocalidad, numLunVie, numFeriados, numFijo, numPorcentaje}
+        txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, numLunVie, numFeriados, numFijo}
         iniciarControles()
+        numPorcentaje.Text = 0
+        numPorcentaje.ReadOnly = True
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles BtnCerrar.Click
@@ -137,7 +149,7 @@
         txtNombre.Text = _prestador.nombre
         txtApellido.Text = _prestador.apellido
         txtEmail.Text = _prestador.email
-        txtEspecialidad.Text = _prestador.especialidad
+        cbEspecialidad.SelectedValue = _prestador.especialidad
         txtLocalidad.Text = _prestador.localidad
         numLunVie.Text = _prestador.montoNormal
         numFeriados.Text = _prestador.montoFeriado

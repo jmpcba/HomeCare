@@ -59,6 +59,8 @@
 
             Catch ex As Exception
                 ut.mensaje(ex.Message, utils.mensajes.err)
+            Finally
+                dgDetalle.ClearSelection()
             End Try
         End If
     End Sub
