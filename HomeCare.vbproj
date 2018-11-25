@@ -11,8 +11,11 @@
     <AssemblyName>HomeCare</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <HockeyAppResourceId>4e2356dbeb8646eda739409af6cad784</HockeyAppResourceId>
     <PublishUrl>publicar\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,12 +28,11 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
@@ -61,6 +63,12 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>homecare.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -73,7 +81,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -91,6 +98,8 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="code\DB.vb" />
+    <Compile Include="code\encriptador.vb" />
+    <Compile Include="code\especialidad.vb" />
     <Compile Include="code\Feriados.vb" />
     <Compile Include="code\Liquidacion.vb" />
     <Compile Include="code\mail.vb" />
@@ -112,6 +121,12 @@
       <DependentUpon>frmCierreLiq.vb</DependentUpon>
     </Compile>
     <Compile Include="frmCierreLiq.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmail.Designer.vb">
+      <DependentUpon>frmEmail.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmail.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmFeriados.Designer.vb">
@@ -180,12 +195,6 @@
     <Compile Include="frmReporte.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSetMail.Designer.vb">
-      <DependentUpon>frmSetMail.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmSetMail.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmSubMod.Designer.vb">
       <DependentUpon>frmSubMod.vb</DependentUpon>
     </Compile>
@@ -230,6 +239,9 @@
     <EmbeddedResource Include="frmBuscar.resx">
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmEmail.resx">
+      <DependentUpon>frmEmail.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
     </EmbeddedResource>
@@ -260,9 +272,6 @@
     <EmbeddedResource Include="frmPracticas.resx">
       <DependentUpon>frmPracticas.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSetMail.resx">
-      <DependentUpon>frmSetMail.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmSubMod.resx">
       <DependentUpon>frmSubMod.vb</DependentUpon>
     </EmbeddedResource>
@@ -285,6 +294,7 @@
     <None Include="HomeCareDataSet.xss">
       <DependentUpon>HomeCareDataSet.xsd</DependentUpon>
     </None>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -294,7 +304,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="code\mailTemplate.html" />
@@ -310,6 +322,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="homecare.ico" />
+    <Content Include="logo_homecare_dAH_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

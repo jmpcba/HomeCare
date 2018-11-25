@@ -9,7 +9,7 @@
     Private Sub btnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
         frmInformes.ShowDialog()
     End Sub
-    Private Sub btnVerificar_Click(sender As Object, e As EventArgs) Handles btnVerificar.Click
+    Private Sub btnVerificar_Click(sender As Object, e As EventArgs) 
         frmVerificar.ShowDialog()
     End Sub
     Private Sub btnNvaLiq_Click(sender As Object, e As EventArgs) Handles btnNvaLiq.Click
@@ -30,7 +30,7 @@
     Private Sub btnSubMod_Click(sender As Object, e As EventArgs) Handles btnSubMod.Click
         frmSubMod.ShowDialog()
     End Sub
-    Private Sub btnPrestacion_Click(sender As Object, e As EventArgs) Handles btnPrestacion.Click
+    Private Sub btnPrestacion_Click(sender As Object, e As EventArgs) 
         frmPrestacion.ShowDialog()
     End Sub
     Private Sub btnFeriados_Click(sender As Object, e As EventArgs) Handles btnFeriados.Click
@@ -60,6 +60,6 @@
     End Sub
 
     Private Sub MailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MailToolStripMenuItem.Click
-
+        frmEmail.ShowDialog()
     End Sub
 End Class

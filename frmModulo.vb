@@ -11,7 +11,7 @@
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtboxes)
 
-                modu = New Modulo(txtCodigo.Text, txtMedico.Text, txtEnfermeria.Text, txtKinesio.Text, txtFono.Text, txtCuidador.Text)
+                modu = New Modulo(txtCodigo.Text, txtMedico.Text, txtEnfermeria.Text, txtKinesio.Text, txtFono.Text, txtCuidador.Text, txtNutricion.Text)
                 modu.insertar()
                 MessageBox.Show("Guardado Exitoso")
                 ut.iniciarTxtBoxes(txtboxes)
@@ -68,7 +68,7 @@
     Public Sub iniciarControles()
         txtCodigo.Text = ""
         txtCuidador.Text = ""
-        txtDescripcion.Text = ""
+        '   txtDescripcion.Text = ""
         txtEnfermeria.Text = ""
         txtFono.Text = ""
         txtKinesio.Text = ""
@@ -80,9 +80,9 @@
     End Sub
 
     Private Sub validarCampos()
-        If (txtCodigo.Text = "" Or txtDescripcion.Text = "") Then
-            Throw New Exception("Complete los campos necesarios")
-        End If
+        '   If (txtCodigo.Text = "" Or txtDescripcion.Text = "") Then
+        '   Throw New Exception("Complete los campos necesarios")
+        '   End If
         If (txtMedico.Text = "" And txtEnfermeria.Text = "" And txtKinesio.Text = "" And txtFono.Text = "" And txtCuidador.Text = "") Then
             Throw New Exception("Debe cargar algún tope")
         End If
@@ -134,7 +134,7 @@
 
     Private Sub frmModulo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'btnBuscar.Enabled = False
-        txtboxes = {txtCodigo, txtDescripcion, txtMedico, txtEnfermeria, txtKinesio, txtFono, txtCuidador}
+        txtboxes = {txtCodigo, txtMedico, txtEnfermeria, txtKinesio, txtFono, txtCuidador}
     End Sub
 
     Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged

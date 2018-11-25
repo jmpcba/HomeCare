@@ -146,4 +146,92 @@ Public Class utils
 
         Return resultado
     End Function
+
+    Public Sub backupDBTemp()
+        If My.Settings.DBPath = "" Then
+            Throw New Exception("La ruta a la base de datos no ha sido configurada aun")
+        Else
+            Try
+                Dim dir = Path.GetDirectoryName(My.Settings.DBPath)
+                Dim bckpDir = Path.Combine(dir, "BCKP")
+
+                'CREAR DIR BCKP SI NO EXISTE
+                If Not Directory.Exists(bckpDir) Then
+                    Directory.CreateDirectory(bckpDir)
+                End If
+
+                'COPIAR ARCHIVO
+                Dim bckpfile = Path.Combine(bckpDir, "homeCare_temp.accdb")
+                FileCopy(My.Settings.DBPath, bckpfile)
+
+
+            Catch ex As Exception
+                Throw New Exception("No se pudo guardar una copia de la DB, sin embargo la operacion continuara:" & vbCrLf & vbCrLf & "Descripcion:" & vbCrLf & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Public Sub backUpDBFinal(_copiar As Boolean)
+
+        Dim dir = Path.GetDirectoryName(My.Settings.DBPath)
+        Dim bckpDir = Path.Combine(dir, "BCKP")
+        Dim tempBckFile = Path.Combine(bckpDir, "homeCare_temp.accdb")
+
+        If My.Settings.DBPath = "" Then
+            Throw New Exception("La ruta a la base de datos no ha sido configurada aun")
+        ElseIf _copiar Then
+
+            Try
+
+                'CREAR DIR BCKP SI NO EXISTE
+                If Not Directory.Exists(bckpDir) Then
+                    Directory.CreateDirectory(bckpDir)
+                End If
+
+                'COPIAR ARCHIVO
+                Dim bckpfile = Path.Combine(bckpDir, String.Format("homeCare_{0}_{1}.accdb", Today.ToString("ddMMMyy"), Now.Hour.ToString))
+                FileCopy(tempBckFile, bckpfile)
+                'ELIMINAR TEMPORAL
+                File.Delete(tempBckFile)
+
+                Dim dirInfo As New DirectoryInfo(bckpDir)
+                Dim archivos() = dirInfo.GetFileSystemInfos
+
+                'SI HAY MAS DE 8 BACKUPS ELIMINA EL MAS VIEJO
+                If archivos.Length > 8 Then
+
+                    'INICIO LA VARIABLE CON LA FECHA MAXIMA DEL SISTEMA PARA QUE EL PRIMER IF SIEMPRE LE ASIGNE UNA FECHA
+                    Dim menorEscitura As Date = Date.MaxValue
+                    Dim archivoMasViejo As FileSystemInfo
+
+                    For Each a In archivos
+                        Dim ultEscritura = a.LastWriteTimeUtc
+                        If ultEscritura < menorEscitura Then
+                            menorEscitura = ultEscritura
+                            archivoMasViejo = a
+                        End If
+                    Next
+
+                    archivoMasViejo.Delete()
+
+                End If
+
+            Catch ex As Exception
+                Throw New Exception("No se pudo guardar una copia de la DB, sin embargo la operacion continuara:" & vbCrLf & vbCrLf & "Descripcion:" & vbCrLf & ex.Message)
+            End Try
+        Else
+            Try
+                File.Delete(tempBckFile)
+            Catch ex As Exception
+                'SI NO PUEDE BORRAR EL ARCHIVO TEMPORAL NO HACE NADA
+            End Try
+
+        End If
+    End Sub
+
+    Public Sub validarMail(_mail As String)
+        If Not _mail.Contains("@") Or Not _mail.Contains(".com") Then
+            Throw New Exception("El mail debe seguir el formato alguien@algo.com")
+        End If
+    End Sub
 End Class

@@ -23,7 +23,7 @@
         End Try
     End Sub
 
-    Public Sub New(_cod As String, _topeMedico As Integer, _topeEnfer As Integer, _topeKine As Integer, _topeFon As Integer, _topeCuid As Integer)
+    Public Sub New(_cod As String, _topeMedico As Integer, _topeEnfer As Integer, _topeKine As Integer, _topeFon As Integer, _topeCuid As Integer, _topeNutri As Integer)
         _user = New Usuario
         Me._codigo = _cod
         Me._topeMedico = _topeMedico
@@ -31,6 +31,7 @@
         Me._topeKinesio = _topeKine
         Me._topeFono = _topeFon
         Me._topeCuidador = _topeCuid
+        Me._topeNutricionista = _topeNutri
         Me._modifUser = _user.dni
         Me._creoUser = _user.dni
         Me._fechaCarga = Date.Today
@@ -138,6 +139,16 @@
         End Set
         Get
             Return _topeCuidador
+        End Get
+    End Property
+
+    Public Property topeNutricionista As Integer
+        Set(value As Integer)
+            _topeNutricionista = value
+            _modificado = True
+        End Set
+        Get
+            Return _topeNutricionista
         End Get
     End Property
 
