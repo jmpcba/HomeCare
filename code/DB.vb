@@ -52,6 +52,50 @@ Public Class DB
         End Try
     End Function
 
+    Friend Sub InsertarFeriado(_fecha As Date, _desc As String)
+        Try
+            Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
+                                      _fecha.ToShortDateString, _desc, "29188989", Today.ToShortDateString, "29188989", Today.ToShortDateString)
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            ut.backupDBTemp()
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            hacerBackup = False
+            Throw
+        Finally
+            cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
+        End Try
+    End Sub
+
+    Friend Sub eliminarFeriado(_fecha As Date)
+        Try
+
+            Dim desde = _fecha.AddDays(-1)
+            Dim hasta = _fecha.AddDays(1)
+            Dim query = String.Format("DELETE FROM FERIADOS WHERE FECHA > #{0}# AND FECHA < #{1}#", desde.ToShortDateString, hasta.ToShortDateString)
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            ut.backupDBTemp()
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            hacerBackup = False
+            Throw
+        Finally
+            cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
+        End Try
+    End Sub
+
     Friend Function getLiquidacion(_fecha As Date, _liq As tiposLiquidacion) As DataTable
         Dim desde As String
         Dim hasta As String
@@ -108,7 +152,7 @@ Public Class DB
 
     End Function
 
-    Friend Sub eliminarLiquidacion(_id As Integer)
+    Friend Sub eliminarPractica(_id As Integer)
         Try
             Dim query = "DELETE FROM PRACTICAS WHERE ID=" & _id
 
@@ -461,7 +505,7 @@ Public Class DB
 
     Public Function feriado(_fecha As Date) As DataTable
         Dim query = String.Format("SELECT * FROM feriados where fecha > 1/1/{0}", _fecha.Year.ToString)
-
+        Dim ds As New DataSet
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
 

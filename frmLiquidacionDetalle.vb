@@ -50,7 +50,7 @@
                     dgDetalle.ClearSelection()
                     Throw New Exception("LIQUIDACION CERRADA - NO SE PUEDE ELIMINAR")
                 Else
-                    db.eliminarLiquidacion(id)
+                    db.eliminarPractica(id)
                 End If
 
                 dt.Rows(rIndex).Delete()

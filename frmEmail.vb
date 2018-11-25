@@ -26,10 +26,15 @@
 
     Private Sub frmPacientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtBoxes = {txtEmail, txtPass}
+        Try
+            txtEmail.Text = db.getEmail
+            txtPass.Text = db.getEmailPass
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
     End Sub
 
-    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) 
-
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs)
         iniciarControles()
     End Sub
 

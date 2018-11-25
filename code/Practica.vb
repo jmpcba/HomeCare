@@ -16,12 +16,6 @@ Public Class Practica
     Public fechaMod As Date
     Dim util As New utils
 
-
-    Public Sub New()
-        'CONSTRUCTOR VACIO PARA PODER USAR EL METODO ELIMINAR(_ID)
-    End Sub
-
-
     Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horas As Decimal, _observaciones As String)
 
         prestador = _prestador
@@ -55,24 +49,6 @@ Public Class Practica
             Dim db = New DB()
             db.insertar(Me)
 
-        Catch ex As Exception
-            Throw
-        End Try
-    End Sub
-
-    Public Sub eliminar()
-        Try
-            Dim db = New DB()
-            db.eliminar(Me)
-        Catch ex As Exception
-            Throw
-        End Try
-    End Sub
-
-    Public Sub eliminar(_id As Integer)
-        Try
-            Dim db = New DB()
-            db.eliminar(Me, _id)
         Catch ex As Exception
             Throw
         End Try
