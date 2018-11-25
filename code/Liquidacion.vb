@@ -178,7 +178,7 @@
         End Try
     End Sub
 
-    Private Sub notificar()
+    Public Sub notificar()
         Try
             Dim mail As New Mail
             mail.send(Me)

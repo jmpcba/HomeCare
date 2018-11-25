@@ -9,40 +9,40 @@
                 ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(numDni, 8)
                 ut.validarLargo(numAfiliado, 12)
-                pac = New Paciente(numAfiliado.Text, numDni.Text, txtNombre.Text, txtApellido.Text, txtObSocial.Text, txtLocalidad.Text)
+                pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim)
                 pac.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
-
+                iniciarControles()
             Else
                 ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(numDni, 8)
                 ut.validarLargo(numAfiliado, 12)
-                If txtObSocial.Text <> pac.obrasocial Then
-                    pac.obrasocial = txtObSocial.Text
+                If txtObSocial.Text.Trim <> pac.obrasocial Then
+                    pac.obrasocial = txtObSocial.Text.Trim
                 End If
 
-                If txtNombre.Text <> pac.nombre Then
-                    pac.nombre = txtNombre.Text
+                If txtNombre.Text.Trim <> pac.nombre Then
+                    pac.nombre = txtNombre.Text.Trim
                 End If
 
-                If txtApellido.Text <> pac.apellido Then
-                    pac.apellido = txtApellido.Text
+                If txtApellido.Text.Trim <> pac.apellido Then
+                    pac.apellido = txtApellido.Text.Trim
                 End If
 
-                If txtObSocial.Text <> pac.obrasocial Then
-                    pac.obrasocial = txtObSocial.Text
+                If txtObSocial.Text.Trim <> pac.obrasocial Then
+                    pac.obrasocial = txtObSocial.Text.Trim
                 End If
 
-                If txtLocalidad.Text <> pac.localidad Then
-                    pac.localidad = txtLocalidad.Text
+                If txtLocalidad.Text.Trim <> pac.localidad Then
+                    pac.localidad = txtLocalidad.Text.Trim
                 End If
 
-                If numDni.Text <> pac.dni Then
-                    pac.dni = numDni.Text
+                If numDni.Text.Trim <> pac.dni Then
+                    pac.dni = numDni.Text.Trim
                 End If
 
                 pac.actualizar()
-
+                iniciarControles()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
             End If
         Catch ex As Exception
@@ -53,7 +53,7 @@
             End If
         Finally
             pac = Nothing
-            iniciarControles()
+
         End Try
     End Sub
 

@@ -94,42 +94,55 @@
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Dim mes As New Date(dtMes.Value.Year, dtMes.Value.Month, Date.DaysInMonth(dtMes.Value.Year, dtMes.Value.Month))
 
-        Try
-            btnGuardar.Enabled = False
-            gridLiqui.Columns("RESULTADO CARGA").ReadOnly = False
+        If ut.mensaje("Desea cerrar las liquidaciones seleccionadas?", utils.mensajes.preg) = MsgBoxResult.Yes Then
+            Try
+                btnGuardar.Enabled = False
+                gridLiqui.Columns("RESULTADO CARGA").ReadOnly = False
 
-            For Each r As DataGridViewRow In gridLiqui.Rows
-                If r.Cells(0).Value Then
-                    Try
-                        Dim prest = New Prestador
-                        prest.id = r.Cells("ID_PREST").Value
-                        Dim liq = New Liquidacion(prest, r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value, txtobservaciones.text)
-                        liq.liquidar()
-                        r.Cells("RESULTADO CARGA").Value = "Cargado"
-                        r.DefaultCellStyle.BackColor = Color.LightGreen
-                        r.Cells("ESTADO").Value = "CERRADA"
-                    Catch ex As Exception
-                        r.DefaultCellStyle.BackColor = Color.Red
+                For Each r As DataGridViewRow In gridLiqui.Rows
+                    If r.Cells(0).Value Then
+                        Try
+                            Dim prest = New Prestador
+                            prest.id = r.Cells("ID_PREST").Value
+                            Dim liq = New Liquidacion(prest, r.Cells("CUIT").Value, r.Cells("LOCALIDAD").Value, r.Cells("ESPECIALIDAD").Value, mes, r.Cells("HORAS LAV").Value, r.Cells("HORAS FERIADO").Value, r.Cells("TOTAL LAV").Value, r.Cells("TOTAL FERIADO").Value, r.Cells("MONTO FIJO").Value, txtObservaciones.Text)
 
-                        If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                            r.Cells("RESULTADO CARGA").Value = "Esta liquidacion ya esta cerrada"
-                        Else
-                            r.Cells("RESULTADO CARGA").Value = ex.Message
-                        End If
-                    End Try
-                End If
-            Next
-        Catch ex As Exception
-            ut.mensaje(ex.Message, utils.mensajes.err)
-        Finally
-            With gridLiqui
-                .Columns("RESULTADO CARGA").ReadOnly = True
-                .AutoResizeColumns()
-                .AutoResizeRows()
-                .ClearSelection()
-            End With
-            btnGuardar.Enabled = True
-        End Try
+                            If r.Cells("ESTADO").Value = "CERRADA" Then
+                                Dim msg = String.Format("La liquidacion para el prestador {0} en el mes de {1} ya esta cerrada" & vbCrLf & vbCrLf & "Desea reenviar el mail de notificacion? ", prest.apellido, MonthName(dtMes.Value.Month).ToUpper)
+                                If ut.mensaje(msg, utils.mensajes.preg) = MsgBoxResult.Yes Then
+                                    liq.notificar()
+                                    r.Cells("RESULTADO CARGA").Value = "Mail Re-enviado"
+                                    r.DefaultCellStyle.BackColor = Color.LightGreen
+                                End If
+                            Else
+                                liq.liquidar()
+                                r.Cells("RESULTADO CARGA").Value = "Liquidacion Cerrada"
+                                r.DefaultCellStyle.BackColor = Color.LightGreen
+                                r.Cells("ESTADO").Value = "CERRADA"
+                            End If
+
+                        Catch ex As Exception
+                            r.DefaultCellStyle.BackColor = Color.Red
+
+                            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+                                r.Cells("RESULTADO CARGA").Value = "Esta liquidacion ya esta cerrada"
+                            Else
+                                r.Cells("RESULTADO CARGA").Value = ex.Message
+                            End If
+                        End Try
+                    End If
+                Next
+            Catch ex As Exception
+                ut.mensaje(ex.Message, utils.mensajes.err)
+            Finally
+                With gridLiqui
+                    .Columns("RESULTADO CARGA").ReadOnly = True
+                    .AutoResizeColumns()
+                    .AutoResizeRows()
+                    .ClearSelection()
+                End With
+                btnGuardar.Enabled = True
+            End Try
+        End If
     End Sub
 
     Private Sub frmLiquidar_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown

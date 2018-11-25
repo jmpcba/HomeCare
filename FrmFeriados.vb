@@ -34,6 +34,7 @@
                 Refresh()
                 .DataSource = dt
                 .AutoResizeColumns()
+                .AutoResizeRows()
             End With
 
         Catch ex As Exception
@@ -49,7 +50,7 @@
             cargarGrilla()
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                ut.mensaje("Ya un feriado para esa fecha", utils.mensajes.err)
+                ut.mensaje("Ya existe un feriado para esa fecha", utils.mensajes.err)
             Else
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End If

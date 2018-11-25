@@ -11,42 +11,45 @@
             If IsNothing(prest) Then
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarLargo(txtCuit, 11)
+                ut.validarMail(txtEmail.Text.Trim)
                 Dim cuit = txtCuit.Text.ToString
                 cuit = cuit.Insert(2, "-")
                 cuit = cuit.Insert(cuit.Length - 1, "-")
-                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text, txtEmail.Text, cbEspecialidad.SelectedValue, txtLocalidad.Text, numLunVie.Text, numFeriados.Text, numFijo.Text, numPorcentaje.Text, dtCese.Text)
+                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, numLunVie.Text.Trim, numFeriados.Text.Trim, numFijo.Text.Trim, numPorcentaje.Text.Trim, dtCese.Text)
                 prest.insertar()
+                iniciarControles()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
 
             Else
                 ut.validarTxtBoxLleno(txtBoxes)
+                ut.validarMail(txtEmail.Text.Trim)
                 'ut.validarLargo(txtCuit, 11)
-                If txtNombre.Text <> prest.nombre Then
-                    prest.nombre = txtNombre.Text
+                If txtNombre.Text.Trim <> prest.nombre Then
+                    prest.nombre = txtNombre.Text.Trim
                 End If
-                If txtApellido.Text <> prest.apellido Then
-                    prest.apellido = txtApellido.Text
+                If txtApellido.Text.Trim <> prest.apellido Then
+                    prest.apellido = txtApellido.Text.Trim
                 End If
-                If txtEmail.Text <> prest.email Then
-                    prest.email = txtEmail.Text
+                If txtEmail.Text.Trim <> prest.email Then
+                    prest.email = txtEmail.Text.Trim
                 End If
                 If cbEspecialidad.SelectedValue <> prest.especialidad Then
                     prest.especialidad = cbEspecialidad.SelectedValue
                 End If
-                If txtLocalidad.Text <> prest.localidad Then
-                    prest.localidad = txtLocalidad.Text
+                If txtLocalidad.Text.Trim <> prest.localidad Then
+                    prest.localidad = txtLocalidad.Text.Trim
                 End If
-                If numLunVie.Text <> prest.montoNormal Then
-                    prest.montoNormal = numLunVie.Text
+                If numLunVie.Text.Trim <> prest.montoNormal Then
+                    prest.montoNormal = numLunVie.Text.Trim
                 End If
-                If numFeriados.Text <> prest.montoFeriado Then
-                    prest.montoFeriado = numFeriados.Text
+                If numFeriados.Text.Trim <> prest.montoFeriado Then
+                    prest.montoFeriado = numFeriados.Text.Trim
                 End If
-                If numPorcentaje.Text <> prest.porcentaje Then
-                    prest.porcentaje = numPorcentaje.Text
+                If numPorcentaje.Text.Trim <> prest.porcentaje Then
+                    prest.porcentaje = numPorcentaje.Text.Trim
                 End If
-                If numFijo.Text <> prest.montoFijo Then
-                    prest.montoFijo = numFijo.Text
+                If numFijo.Text.Trim <> prest.montoFijo Then
+                    prest.montoFijo = numFijo.Text.Trim
                 End If
 
                 If chbCese.Checked Then
@@ -56,7 +59,7 @@
                 End If
 
                 prest.actualizar()
-
+                iniciarControles()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
             End If
         Catch ex As Exception
@@ -66,14 +69,13 @@
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End If
         Finally
-            iniciarControles()
             prest = Nothing
-            cbEspecialidad.SelectedIndex = -1
         End Try
     End Sub
 
     Private Sub iniciarControles()
         txtCuit.ReadOnly = False
+        cbEspecialidad.SelectedIndex = -1
         ut.iniciarTxtBoxes(txtBoxes)
     End Sub
 
