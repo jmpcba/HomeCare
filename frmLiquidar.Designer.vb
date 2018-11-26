@@ -32,6 +32,8 @@ Partial Class frmLiquidar
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.dtMes = New System.Windows.Forms.DateTimePicker()
         Me.btnSelec = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtObservaciones = New System.Windows.Forms.TextBox()
         CType(Me.gridLiqui, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,7 +53,7 @@ Partial Class frmLiquidar
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(179, 90)
+        Me.Label8.Location = New System.Drawing.Point(161, 87)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(30, 13)
         Me.Label8.TabIndex = 109
@@ -85,7 +87,7 @@ Partial Class frmLiquidar
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Location = New System.Drawing.Point(707, 67)
+        Me.btnGuardar.Location = New System.Drawing.Point(707, 70)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
         Me.btnGuardar.TabIndex = 40
@@ -97,7 +99,7 @@ Partial Class frmLiquidar
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCerrar.Location = New System.Drawing.Point(819, 67)
+        Me.btnCerrar.Location = New System.Drawing.Point(819, 70)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 41
@@ -108,25 +110,46 @@ Partial Class frmLiquidar
         '
         Me.dtMes.CustomFormat = " MMMM - yyyy"
         Me.dtMes.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtMes.Location = New System.Drawing.Point(215, 84)
+        Me.dtMes.Location = New System.Drawing.Point(197, 83)
         Me.dtMes.Name = "dtMes"
         Me.dtMes.Size = New System.Drawing.Size(200, 20)
         Me.dtMes.TabIndex = 110
         '
         'btnSelec
         '
-        Me.btnSelec.Location = New System.Drawing.Point(16, 84)
+        Me.btnSelec.Location = New System.Drawing.Point(16, 82)
         Me.btnSelec.Name = "btnSelec"
         Me.btnSelec.Size = New System.Drawing.Size(135, 23)
         Me.btnSelec.TabIndex = 111
         Me.btnSelec.Text = "Seleccionar Todos"
         Me.btnSelec.UseVisualStyleBackColor = True
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(403, 87)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(98, 13)
+        Me.Label2.TabIndex = 112
+        Me.Label2.Text = "OBSERVACIONES"
+        '
+        'txtObservaciones
+        '
+        Me.txtObservaciones.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtObservaciones.Location = New System.Drawing.Point(507, 83)
+        Me.txtObservaciones.Name = "txtObservaciones"
+        Me.txtObservaciones.Size = New System.Drawing.Size(194, 20)
+        Me.txtObservaciones.TabIndex = 113
+        '
         'frmLiquidar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(937, 501)
+        Me.Controls.Add(Me.txtObservaciones)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnSelec)
         Me.Controls.Add(Me.dtMes)
         Me.Controls.Add(Me.btnGuardar)
@@ -153,4 +176,6 @@ Partial Class frmLiquidar
     Friend WithEvents btnCerrar As Button
     Friend WithEvents dtMes As DateTimePicker
     Friend WithEvents btnSelec As Button
+    Friend WithEvents Label2 As Label
+    Friend WithEvents txtObservaciones As TextBox
 End Class

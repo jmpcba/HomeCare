@@ -1,8 +1,7 @@
 ﻿Public Class Paciente
 
     Private _pacientes As DataTable
-    Private _user As Usuario
-
+    Private _user As New Usuario
     Private _afiliado As String
     Private _dni As String
     Private _nombre As String

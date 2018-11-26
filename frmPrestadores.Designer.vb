@@ -23,6 +23,7 @@ Partial Class frmPrestadores
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cbEspecialidad = New System.Windows.Forms.ComboBox()
         Me.chbCese = New System.Windows.Forms.CheckBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.dtCese = New System.Windows.Forms.DateTimePicker()
@@ -44,7 +45,6 @@ Partial Class frmPrestadores
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtNombre = New System.Windows.Forms.TextBox()
-        Me.txtEspecialidad = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtCuit = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -59,6 +59,7 @@ Partial Class frmPrestadores
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.cbEspecialidad)
         Me.Panel1.Controls.Add(Me.chbCese)
         Me.Panel1.Controls.Add(Me.Label14)
         Me.Panel1.Controls.Add(Me.dtCese)
@@ -80,7 +81,6 @@ Partial Class frmPrestadores
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.txtNombre)
-        Me.Panel1.Controls.Add(Me.txtEspecialidad)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.txtCuit)
         Me.Panel1.Controls.Add(Me.Label4)
@@ -89,6 +89,15 @@ Partial Class frmPrestadores
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(611, 437)
         Me.Panel1.TabIndex = 3
+        '
+        'cbEspecialidad
+        '
+        Me.cbEspecialidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbEspecialidad.FormattingEnabled = True
+        Me.cbEspecialidad.Location = New System.Drawing.Point(124, 162)
+        Me.cbEspecialidad.Name = "cbEspecialidad"
+        Me.cbEspecialidad.Size = New System.Drawing.Size(164, 21)
+        Me.cbEspecialidad.TabIndex = 3
         '
         'chbCese
         '
@@ -129,7 +138,7 @@ Partial Class frmPrestadores
         Me.numPorcentaje.Name = "numPorcentaje"
         Me.numPorcentaje.ReadOnly = True
         Me.numPorcentaje.Size = New System.Drawing.Size(68, 20)
-        Me.numPorcentaje.TabIndex = 203
+        Me.numPorcentaje.TabIndex = 8
         Me.numPorcentaje.Text = "0"
         '
         'numFijo
@@ -202,7 +211,7 @@ Partial Class frmPrestadores
         '
         'txtEmail
         '
-        Me.txtEmail.Location = New System.Drawing.Point(124, 220)
+        Me.txtEmail.Location = New System.Drawing.Point(124, 223)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.Size = New System.Drawing.Size(358, 20)
         Me.txtEmail.TabIndex = 5
@@ -218,7 +227,7 @@ Partial Class frmPrestadores
         '
         'txtLocalidad
         '
-        Me.txtLocalidad.Location = New System.Drawing.Point(411, 156)
+        Me.txtLocalidad.Location = New System.Drawing.Point(411, 162)
         Me.txtLocalidad.Name = "txtLocalidad"
         Me.txtLocalidad.Size = New System.Drawing.Size(188, 20)
         Me.txtLocalidad.TabIndex = 4
@@ -226,7 +235,7 @@ Partial Class frmPrestadores
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(323, 159)
+        Me.Label6.Location = New System.Drawing.Point(323, 166)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(67, 13)
         Me.Label6.TabIndex = 33
@@ -234,7 +243,7 @@ Partial Class frmPrestadores
         '
         'txtApellido
         '
-        Me.txtApellido.Location = New System.Drawing.Point(411, 101)
+        Me.txtApellido.Location = New System.Drawing.Point(411, 93)
         Me.txtApellido.Name = "txtApellido"
         Me.txtApellido.Size = New System.Drawing.Size(188, 20)
         Me.txtApellido.TabIndex = 2
@@ -242,7 +251,7 @@ Partial Class frmPrestadores
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(323, 104)
+        Me.Label3.Location = New System.Drawing.Point(323, 97)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(59, 13)
         Me.Label3.TabIndex = 31
@@ -259,17 +268,10 @@ Partial Class frmPrestadores
         '
         'txtNombre
         '
-        Me.txtNombre.Location = New System.Drawing.Point(124, 94)
+        Me.txtNombre.Location = New System.Drawing.Point(124, 93)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(164, 20)
         Me.txtNombre.TabIndex = 1
-        '
-        'txtEspecialidad
-        '
-        Me.txtEspecialidad.Location = New System.Drawing.Point(124, 159)
-        Me.txtEspecialidad.Name = "txtEspecialidad"
-        Me.txtEspecialidad.Size = New System.Drawing.Size(121, 20)
-        Me.txtEspecialidad.TabIndex = 3
         '
         'Label5
         '
@@ -282,7 +284,7 @@ Partial Class frmPrestadores
         '
         'txtCuit
         '
-        Me.txtCuit.Location = New System.Drawing.Point(124, 46)
+        Me.txtCuit.Location = New System.Drawing.Point(124, 42)
         Me.txtCuit.Name = "txtCuit"
         Me.txtCuit.Size = New System.Drawing.Size(121, 20)
         Me.txtCuit.TabIndex = 0
@@ -352,6 +354,7 @@ Partial Class frmPrestadores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.BtnCerrar
         Me.ClientSize = New System.Drawing.Size(800, 497)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.Panel1)
@@ -376,7 +379,6 @@ Partial Class frmPrestadores
     Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents txtNombre As TextBox
-    Friend WithEvents txtEspecialidad As TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label10 As Label
@@ -396,4 +398,5 @@ Partial Class frmPrestadores
     Friend WithEvents Label14 As Label
     Friend WithEvents dtCese As DateTimePicker
     Friend WithEvents btnLimpiar As Button
+    Friend WithEvents cbEspecialidad As ComboBox
 End Class

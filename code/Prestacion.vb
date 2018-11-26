@@ -11,7 +11,6 @@
     Private _modificado = False
 
     Public Sub New(_cod As Integer, _desc As String)
-        ' Dim user As New Usuario
         _user = New Usuario
 
         Me._codigo = _cod

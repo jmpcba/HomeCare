@@ -49,7 +49,7 @@ Partial Class frmPrincipal
         '
         'btnVisita
         '
-        Me.btnVisita.Location = New System.Drawing.Point(39, 116)
+        Me.btnVisita.Location = New System.Drawing.Point(26, 45)
         Me.btnVisita.Name = "btnVisita"
         Me.btnVisita.Size = New System.Drawing.Size(260, 53)
         Me.btnVisita.TabIndex = 0
@@ -59,7 +59,7 @@ Partial Class frmPrincipal
         'btnReporte
         '
         Me.btnReporte.Enabled = False
-        Me.btnReporte.Location = New System.Drawing.Point(39, 175)
+        Me.btnReporte.Location = New System.Drawing.Point(26, 104)
         Me.btnReporte.Name = "btnReporte"
         Me.btnReporte.Size = New System.Drawing.Size(260, 53)
         Me.btnReporte.TabIndex = 1
@@ -77,7 +77,7 @@ Partial Class frmPrincipal
         'btnInformes
         '
         Me.btnInformes.Enabled = False
-        Me.btnInformes.Location = New System.Drawing.Point(39, 234)
+        Me.btnInformes.Location = New System.Drawing.Point(26, 163)
         Me.btnInformes.Name = "btnInformes"
         Me.btnInformes.Size = New System.Drawing.Size(260, 53)
         Me.btnInformes.TabIndex = 2
@@ -86,7 +86,7 @@ Partial Class frmPrincipal
         '
         'btnPacientes
         '
-        Me.btnPacientes.Location = New System.Drawing.Point(402, 175)
+        Me.btnPacientes.Location = New System.Drawing.Point(20, 104)
         Me.btnPacientes.Name = "btnPacientes"
         Me.btnPacientes.Size = New System.Drawing.Size(260, 53)
         Me.btnPacientes.TabIndex = 11
@@ -95,7 +95,7 @@ Partial Class frmPrincipal
         '
         'btnModulo
         '
-        Me.btnModulo.Location = New System.Drawing.Point(402, 234)
+        Me.btnModulo.Location = New System.Drawing.Point(20, 163)
         Me.btnModulo.Name = "btnModulo"
         Me.btnModulo.Size = New System.Drawing.Size(260, 53)
         Me.btnModulo.TabIndex = 12
@@ -104,7 +104,7 @@ Partial Class frmPrincipal
         '
         'btnNvaLiq
         '
-        Me.btnNvaLiq.Location = New System.Drawing.Point(26, 234)
+        Me.btnNvaLiq.Location = New System.Drawing.Point(26, 222)
         Me.btnNvaLiq.Name = "btnNvaLiq"
         Me.btnNvaLiq.Size = New System.Drawing.Size(260, 53)
         Me.btnNvaLiq.TabIndex = 4
@@ -115,7 +115,7 @@ Partial Class frmPrincipal
         '
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnCerrar.Location = New System.Drawing.Point(745, 164)
+        Me.btnCerrar.Location = New System.Drawing.Point(751, 70)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 20
@@ -125,7 +125,7 @@ Partial Class frmPrincipal
         'btnCierreLiq
         '
         Me.btnCierreLiq.Enabled = False
-        Me.btnCierreLiq.Location = New System.Drawing.Point(26, 293)
+        Me.btnCierreLiq.Location = New System.Drawing.Point(26, 281)
         Me.btnCierreLiq.Name = "btnCierreLiq"
         Me.btnCierreLiq.Size = New System.Drawing.Size(260, 53)
         Me.btnCierreLiq.TabIndex = 5
@@ -136,11 +136,14 @@ Partial Class frmPrincipal
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.btnReporte)
+        Me.Panel1.Controls.Add(Me.btnVisita)
         Me.Panel1.Controls.Add(Me.btnNvaLiq)
         Me.Panel1.Controls.Add(Me.btnCierreLiq)
+        Me.Panel1.Controls.Add(Me.btnInformes)
         Me.Panel1.Location = New System.Drawing.Point(12, 70)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(330, 450)
+        Me.Panel1.Size = New System.Drawing.Size(330, 359)
         Me.Panel1.TabIndex = 103
         '
         'Label1
@@ -156,7 +159,7 @@ Partial Class frmPrincipal
         '
         'btnSubMod
         '
-        Me.btnSubMod.Location = New System.Drawing.Point(402, 293)
+        Me.btnSubMod.Location = New System.Drawing.Point(20, 222)
         Me.btnSubMod.Name = "btnSubMod"
         Me.btnSubMod.Size = New System.Drawing.Size(260, 53)
         Me.btnSubMod.TabIndex = 13
@@ -174,7 +177,7 @@ Partial Class frmPrincipal
         '
         'btnFeriados
         '
-        Me.btnFeriados.Location = New System.Drawing.Point(20, 290)
+        Me.btnFeriados.Location = New System.Drawing.Point(20, 281)
         Me.btnFeriados.Name = "btnFeriados"
         Me.btnFeriados.Size = New System.Drawing.Size(260, 53)
         Me.btnFeriados.TabIndex = 15
@@ -185,10 +188,13 @@ Partial Class frmPrincipal
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.btnFeriados)
+        Me.Panel2.Controls.Add(Me.btnSubMod)
         Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Controls.Add(Me.btnModulo)
+        Me.Panel2.Controls.Add(Me.btnPacientes)
         Me.Panel2.Location = New System.Drawing.Point(381, 70)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(330, 450)
+        Me.Panel2.Size = New System.Drawing.Size(330, 359)
         Me.Panel2.TabIndex = 104
         '
         'Label2
@@ -234,15 +240,9 @@ Partial Class frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(881, 580)
+        Me.ClientSize = New System.Drawing.Size(881, 471)
         Me.Controls.Add(Me.btnPrestadores)
-        Me.Controls.Add(Me.btnSubMod)
-        Me.Controls.Add(Me.btnReporte)
         Me.Controls.Add(Me.btnCerrar)
-        Me.Controls.Add(Me.btnModulo)
-        Me.Controls.Add(Me.btnPacientes)
-        Me.Controls.Add(Me.btnInformes)
-        Me.Controls.Add(Me.btnVisita)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.MenuStrip2)
         Me.Controls.Add(Me.Panel1)

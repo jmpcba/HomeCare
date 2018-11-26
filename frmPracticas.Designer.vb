@@ -74,7 +74,7 @@ Partial Class frmPracticas
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCerrar.Location = New System.Drawing.Point(419, 374)
+        Me.btnCerrar.Location = New System.Drawing.Point(424, 372)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 9
@@ -132,7 +132,7 @@ Partial Class frmPracticas
         '
         'txtMat
         '
-        Me.txtMat.Location = New System.Drawing.Point(54, 73)
+        Me.txtMat.Location = New System.Drawing.Point(54, 76)
         Me.txtMat.Name = "txtMat"
         Me.txtMat.ReadOnly = True
         Me.txtMat.Size = New System.Drawing.Size(121, 20)
@@ -140,7 +140,7 @@ Partial Class frmPracticas
         '
         'txtLocalidad
         '
-        Me.txtLocalidad.Location = New System.Drawing.Point(284, 73)
+        Me.txtLocalidad.Location = New System.Drawing.Point(284, 76)
         Me.txtLocalidad.Name = "txtLocalidad"
         Me.txtLocalidad.ReadOnly = True
         Me.txtLocalidad.Size = New System.Drawing.Size(203, 20)
@@ -178,7 +178,7 @@ Partial Class frmPracticas
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Location = New System.Drawing.Point(419, 315)
+        Me.btnGuardar.Location = New System.Drawing.Point(424, 326)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
         Me.btnGuardar.TabIndex = 8
@@ -280,7 +280,7 @@ Partial Class frmPracticas
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(181, 106)
+        Me.Label16.Location = New System.Drawing.Point(189, 106)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(84, 13)
         Me.Label16.TabIndex = 14
@@ -288,7 +288,7 @@ Partial Class frmPracticas
         '
         'txtEspecialidad
         '
-        Me.txtEspecialidad.Location = New System.Drawing.Point(284, 104)
+        Me.txtEspecialidad.Location = New System.Drawing.Point(284, 102)
         Me.txtEspecialidad.Name = "txtEspecialidad"
         Me.txtEspecialidad.ReadOnly = True
         Me.txtEspecialidad.Size = New System.Drawing.Size(203, 20)
@@ -375,17 +375,19 @@ Partial Class frmPracticas
         Me.dgFechas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgFechas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgFechas.Location = New System.Drawing.Point(32, 26)
+        Me.dgFechas.MultiSelect = False
         Me.dgFechas.Name = "dgFechas"
         Me.dgFechas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgFechas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.dgFechas.Size = New System.Drawing.Size(386, 621)
+        Me.dgFechas.Size = New System.Drawing.Size(386, 605)
         Me.dgFechas.TabIndex = 6
         '
         'btnLimpiarGrilla
         '
-        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(448, 227)
+        Me.btnLimpiarGrilla.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(424, 280)
         Me.btnLimpiarGrilla.Name = "btnLimpiarGrilla"
-        Me.btnLimpiarGrilla.Size = New System.Drawing.Size(75, 23)
+        Me.btnLimpiarGrilla.Size = New System.Drawing.Size(106, 33)
         Me.btnLimpiarGrilla.TabIndex = 15
         Me.btnLimpiarGrilla.Text = "&LIMPIAR"
         Me.btnLimpiarGrilla.UseVisualStyleBackColor = True
@@ -449,7 +451,7 @@ Partial Class frmPracticas
         Me.Panel4.Controls.Add(Me.dgFechas)
         Me.Panel4.Location = New System.Drawing.Point(574, 12)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(589, 671)
+        Me.Panel4.Size = New System.Drawing.Size(637, 636)
         Me.Panel4.TabIndex = 30
         '
         'btnSelec
@@ -458,7 +460,7 @@ Partial Class frmPracticas
         Me.btnSelec.Name = "btnSelec"
         Me.btnSelec.Size = New System.Drawing.Size(52, 23)
         Me.btnSelec.TabIndex = 112
-        Me.btnSelec.Text = "Todos"
+        Me.btnSelec.Text = "&Todos"
         Me.btnSelec.UseVisualStyleBackColor = True
         '
         'lblMes
@@ -489,7 +491,7 @@ Partial Class frmPracticas
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CancelButton = Me.btnCerrar
-        Me.ClientSize = New System.Drawing.Size(1204, 660)
+        Me.ClientSize = New System.Drawing.Size(1252, 660)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Panel1)

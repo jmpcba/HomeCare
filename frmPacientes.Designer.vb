@@ -66,7 +66,7 @@ Partial Class frmPacientes
         '
         'txtLocalidad
         '
-        Me.txtLocalidad.Location = New System.Drawing.Point(389, 249)
+        Me.txtLocalidad.Location = New System.Drawing.Point(389, 252)
         Me.txtLocalidad.Name = "txtLocalidad"
         Me.txtLocalidad.Size = New System.Drawing.Size(219, 20)
         Me.txtLocalidad.TabIndex = 5
@@ -74,7 +74,7 @@ Partial Class frmPacientes
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(314, 252)
+        Me.Label7.Location = New System.Drawing.Point(314, 256)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(67, 13)
         Me.Label7.TabIndex = 33
@@ -82,7 +82,7 @@ Partial Class frmPacientes
         '
         'numDni
         '
-        Me.numDni.Location = New System.Drawing.Point(389, 98)
+        Me.numDni.Location = New System.Drawing.Point(389, 94)
         Me.numDni.Name = "numDni"
         Me.numDni.Size = New System.Drawing.Size(121, 20)
         Me.numDni.TabIndex = 1
@@ -90,7 +90,7 @@ Partial Class frmPacientes
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(314, 101)
+        Me.Label6.Location = New System.Drawing.Point(314, 98)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(35, 13)
         Me.Label6.TabIndex = 32
@@ -98,7 +98,7 @@ Partial Class frmPacientes
         '
         'txtApellido
         '
-        Me.txtApellido.Location = New System.Drawing.Point(389, 178)
+        Me.txtApellido.Location = New System.Drawing.Point(389, 177)
         Me.txtApellido.Name = "txtApellido"
         Me.txtApellido.Size = New System.Drawing.Size(219, 20)
         Me.txtApellido.TabIndex = 3
@@ -123,14 +123,14 @@ Partial Class frmPacientes
         '
         'txtNombre
         '
-        Me.txtNombre.Location = New System.Drawing.Point(97, 178)
+        Me.txtNombre.Location = New System.Drawing.Point(97, 177)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(197, 20)
         Me.txtNombre.TabIndex = 2
         '
         'txtObSocial
         '
-        Me.txtObSocial.Location = New System.Drawing.Point(97, 249)
+        Me.txtObSocial.Location = New System.Drawing.Point(97, 252)
         Me.txtObSocial.Name = "txtObSocial"
         Me.txtObSocial.Size = New System.Drawing.Size(121, 20)
         Me.txtObSocial.TabIndex = 4
@@ -146,7 +146,7 @@ Partial Class frmPacientes
         '
         'numAfiliado
         '
-        Me.numAfiliado.Location = New System.Drawing.Point(97, 95)
+        Me.numAfiliado.Location = New System.Drawing.Point(97, 94)
         Me.numAfiliado.Name = "numAfiliado"
         Me.numAfiliado.Size = New System.Drawing.Size(121, 20)
         Me.numAfiliado.TabIndex = 0
@@ -216,6 +216,7 @@ Partial Class frmPacientes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(878, 524)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCerrar)

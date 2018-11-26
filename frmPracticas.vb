@@ -55,17 +55,6 @@ Public Class frmPracticas
 
     End Sub
 
-    '  Private Sub CBPrestacion_SelectedIndexChanged(sender As Object, e As EventArgs)
-    '  If CBPrestacion.SelectedIndex <> -1 Then
-    ' Try
-    '            prest.codigo = CBPrestacion.SelectedValue
-    '
-    'Catch ex As Exception
-    '            ut.mensaje(ex.Message, utils.mensajes.err)
-    ' End Try
-    ' End If
-    ' End Sub
-
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Me.Close()
     End Sub
