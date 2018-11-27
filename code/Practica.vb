@@ -16,6 +16,11 @@ Public Class Practica
     Public fechaMod As Date
     Dim util As New utils
 
+    Public Sub New()
+        'CONTRSUCTOR VACIO PARA USAR GETPRACTICAS
+    End Sub
+
+
     Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horas As Decimal, _observaciones As String)
 
         prestador = _prestador
@@ -53,4 +58,13 @@ Public Class Practica
             Throw
         End Try
     End Sub
+
+    Public Function getPracticas(_mes As Date) As DataTable
+        Dim db As New DB
+        Try
+            Return db.getPracticas(_mes)
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
 End Class

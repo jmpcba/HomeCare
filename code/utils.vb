@@ -1,4 +1,6 @@
 ﻿Imports System.IO
+Imports Microsoft.Office.Interop
+
 Public Class utils
 
     Dim db As DB
@@ -233,5 +235,65 @@ Public Class utils
         If Not _mail.Contains("@") Or Not _mail.Contains(".com") Then
             Throw New Exception("El mail debe seguir el formato alguien@algo.com")
         End If
+    End Sub
+
+    Public Sub exportarExcel(ByVal _dt As DataTable)
+
+        Dim _excel As New Excel.Application
+        Dim wBook As Excel.Workbook
+        Dim wSheet As Excel.Worksheet
+        Dim saveFile As New SaveFileDialog
+        Dim path As String
+
+        saveFile.Filter = "Documento Excel (*.xlsx)|*.xlsx"
+
+        Try
+            If saveFile.ShowDialog = DialogResult.OK Then
+                path = saveFile.FileName
+                wBook = _excel.Workbooks.Add()
+                wSheet = wBook.ActiveSheet()
+
+                Dim dc As System.Data.DataColumn
+                Dim dr As System.Data.DataRow
+                Dim colIndex As Integer = 0
+                Dim rowIndex As Integer = 0
+
+                For Each dc In _dt.Columns
+                    colIndex = colIndex + 1
+                    wSheet.Cells(1, colIndex) = dc.ColumnName
+                Next
+
+                For Each dr In _dt.Rows
+                    rowIndex = rowIndex + 1
+                    colIndex = 0
+                    For Each dc In _dt.Columns
+                        colIndex = colIndex + 1
+                        wSheet.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
+                    Next
+                Next
+                wSheet.Columns.AutoFit()
+                wBook.SaveAs(path)
+
+                ReleaseObject(wSheet)
+                wBook.Close(False)
+                ReleaseObject(wBook)
+                _excel.Quit()
+                ReleaseObject(_excel)
+                GC.Collect()
+
+                mensaje("Archivo exportado!", mensajes.info)
+            End If
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+    Private Sub ReleaseObject(ByVal o As Object)
+        Try
+            While (System.Runtime.InteropServices.Marshal.ReleaseComObject(o) > 0)
+            End While
+        Catch
+        Finally
+            o = Nothing
+        End Try
     End Sub
 End Class

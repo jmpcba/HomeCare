@@ -78,17 +78,17 @@
 
     Public ReadOnly Property tope(_tipo As String) As Integer
         Get
-            If _tipo = "MEDICO" Then
+            If _tipo.ToUpper.Contains("MEDICO") Then
                 Return _topeMedico
-            ElseIf _tipo = "ENFERMERIA" Then
+            ElseIf _tipo.ToUpper.Contains("ENF") Then
                 Return _topeEnfermeria
-            ElseIf _tipo = "KINESIO" Then
+            ElseIf _tipo.ToUpper.Contains("KINES") Then
                 Return _topeKinesio
-            ElseIf _tipo = "FONO" Then
+            ElseIf _tipo.ToUpper.Contains("FONOAUDIOLOGIA") Then
                 Return _topeFono
-            ElseIf _tipo = "CUIDADOR" Then
+            ElseIf _tipo.ToUpper.Contains("CD") Then
                 Return _topeCuidador
-            ElseIf _tipo = "NUTRICION" Then
+            ElseIf _tipo.ToUpper.Contains("NUTRICION") Then
                 Return _topeNutricionista
             Else
                 Return 0

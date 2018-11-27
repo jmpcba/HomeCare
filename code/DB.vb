@@ -74,6 +74,27 @@ Public Class DB
         End Try
     End Sub
 
+    Friend Function getPracticas(_fecha As Date) As DataTable
+        Dim desde As Date
+        Dim hasta As Date
+
+        desde = New Date(_fecha.Year, _fecha.Month, 1)
+        hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
+
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandText = "QUERY_DETALLE_PRACTICAS"
+
+        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
+        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
+
+        Try
+            da.Fill(ds, "PRACTICAS")
+            Return ds.Tables("PRACTICAS")
+        Catch ex As Exception
+            Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        End Try
+    End Function
+
     Friend Sub eliminarFeriado(_fecha As Date)
         Try
 
@@ -98,13 +119,13 @@ Public Class DB
     End Sub
 
     Friend Function getLiquidacion(_fecha As Date, _liq As tiposLiquidacion) As DataTable
-        Dim desde As String
-        Dim hasta As String
+        Dim desde As Date
+        Dim hasta As Date
         Dim dt As New DataTable
         Dim ut As New utils
 
-        desde = String.Format("1/{0}/{1}", _fecha.Month, _fecha.Year)
-        hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+        desde = New Date(_fecha.Year, _fecha.Month, 1)
+        hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
         cmd.CommandType = CommandType.StoredProcedure
         If _liq = tiposLiquidacion.detalle Then
@@ -119,8 +140,8 @@ Public Class DB
             'cmd.Parameters.AddWithValue("P_CUIT", desde)
         End If
 
-        cmd.Parameters.AddWithValue("DESDE", desde)
-        cmd.Parameters.AddWithValue("HASTA", hasta)
+        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
+        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
 
         Try
             'LLENAR EL DETALLE
@@ -168,17 +189,17 @@ Public Class DB
     End Sub
 
     Friend Function getLiquidacion(_id As Integer, _fecha As Date) As DataTable
-        Dim desde As String
-        Dim hasta As String
+        Dim desde As Date
+        Dim hasta As Date
 
-        desde = String.Format("1/{0}/{1}", _fecha.Month, _fecha.Year)
-        hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+        desde = New Date(_fecha.Year, _fecha.Month, 1)
+        hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
         cmd.CommandType = CommandType.StoredProcedure
         cmd.CommandText = "QUERY_DETALLE_MEDICO"
         cmd.Parameters.AddWithValue("P_ID", _id)
-        cmd.Parameters.AddWithValue("DESDE", desde)
-        cmd.Parameters.AddWithValue("HASTA", hasta)
+        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
+        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
 
         Try
             da.Fill(ds, "LIQUIDACION")
@@ -537,10 +558,11 @@ Public Class DB
     End Function
 
     Public Function getLiquidacionesCerradas(_fecha As Date) As DataTable
-        Dim hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+        Dim hasta As Date
+        hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
         cmd.CommandType = CommandType.Text
-        cmd.CommandText = String.Format("SELECT * FROM LIQUIDACION WHERE MES=#{0}#", hasta)
+        cmd.CommandText = String.Format("SELECT * FROM LIQUIDACION WHERE MES=#{0}#", hasta.ToShortDateString)
 
         Try
             da.Fill(ds, "LIQ_CERRADAS")
