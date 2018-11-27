@@ -39,6 +39,13 @@
                 filtro = "codigo"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR MODULO"
+            ElseIf frmParent.GetType.Name = "frmSubMod" Then
+                obj = New subModulo()
+                dt = obj.subModulos
+                dgBuscar.DataSource = dt
+                filtro = "codigo"
+                lblFiltro.Text = filtro
+                Me.Text = "BUSCAR SUB-MODULO"
             End If
 
             dgBuscar.AutoResizeColumns()
@@ -61,6 +68,8 @@
             ElseIf frmParent.GetType.Name = "frmPacientes" Then
                 obj.afiliado = r.Cells("AFILIADO").Value
             ElseIf frmParent.GetType.Name = "frmModulo" Then
+                obj.codigo = r.Cells("codigo").Value
+            ElseIf frmParent.GetType.Name = "frmSubMod" Then
                 obj.codigo = r.Cells("codigo").Value
             End If
 

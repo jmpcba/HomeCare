@@ -8,7 +8,7 @@
             If IsNothing(subMod) Then
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtBoxes)
-                subMod = New subModulo(txtCodigo.Text, txtDescripcion.Text, txtTope.Text)
+                subMod = New subModulo(txtCodigo.Text, txtDescripcion.Text)
                 subMod.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
@@ -20,9 +20,9 @@
                     subMod.descripcion = txtDescripcion.Text
                 End If
 
-                If txtTope.Text <> subMod.tope Then
-                    subMod.tope = txtTope.Text
-                End If
+                '  If txtTope.Text <> subMod.tope Then
+                '  subMod.tope = txtTope.Text
+                '  End If
                 subMod.actualizar()
                 ut.iniciarTxtBoxes(txtBoxes)
                 subMod = Nothing
@@ -40,10 +40,8 @@
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Try
-            subMod = New subModulo
-            subMod.codigo = txtCodigo.Text
-            txtDescripcion.Text = subMod.descripcion
-            txtTope.Text = subMod.tope
+            Dim frmBuscar As New frmBuscar(Me)
+            frmBuscar.ShowDialog()
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
             subMod = Nothing
@@ -54,7 +52,7 @@
     Private Sub iniciarControles()
         txtCodigo.Text = ""
         txtDescripcion.Text = ""
-        txtTope.Text = ""
+        '  txtTope.Text = ""
     End Sub
 
     Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
@@ -77,29 +75,34 @@
         End Try
     End Sub
 
-    Private Sub txtTope_TextChanged(sender As Object, e As EventArgs)
-        Try
-            ut.validarNumerico(txtTope)
-        Catch ex As Exception
-            ut.mensaje(ex.Message, utils.mensajes.err)
-        End Try
-    End Sub
+    ' Private Sub txtTope_TextChanged(sender As Object, e As EventArgs)
+    ' Try
+    '         ut.validarNumerico(txtTope)
+    ' Catch ex As Exception
+    '         ut.mensaje(ex.Message, utils.mensajes.err)
+    ' End Try
+    ' End Sub
 
     Private Sub frmSubMod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        btnBuscar.Enabled = False
-        txtBoxes = {txtCodigo, txtDescripcion, txtTope}
+        '  btnBuscar.Enabled = False
+        txtBoxes = {txtCodigo, txtDescripcion}
     End Sub
 
     Private Sub txtDescripcion_TextChanged(sender As Object, e As EventArgs) Handles txtDescripcion.TextChanged
 
     End Sub
 
-    Private Sub txtTope_TextChanged_1(sender As Object, e As EventArgs) Handles txtTope.TextChanged
-        Try
-            ut.validarNumerico(txtTope)
-        Catch ex As Exception
-            ut.mensaje(ex.Message, utils.mensajes.err)
-        End Try
+    Public Sub resultadoBusqueda(ByRef _submod As subModulo)
+        txtCodigo.ReadOnly = True
+        txtCodigo.Text = _submod.codigo
+        txtDescripcion.Text = _submod.descripcion
+        subMod = _submod
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        txtCodigo.ReadOnly = False
+        iniciarControles()
+        subMod = Nothing
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
