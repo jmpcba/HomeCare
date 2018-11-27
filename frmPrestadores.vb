@@ -10,7 +10,7 @@
             End If
             If IsNothing(prest) Then
                 ut.validarTxtBoxLleno(txtBoxes)
-                ut.validarLargo(txtCuit, 11)
+                ' ut.validarLargo(txtCuit, 11)
                 ut.validarMail(txtEmail.Text.Trim)
                 Dim cuit = txtCuit.Text.ToString
                 cuit = cuit.Insert(2, "-")
