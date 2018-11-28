@@ -11,12 +11,11 @@
     Private _user As New Usuario
     Private _subModulos As DataTable
 
-    Public Sub New(_cod As String, _desc As String, _tope As Integer)
+    Public Sub New(_cod As String, _desc As String)
         Dim user As New Usuario
-
+        _user = New Usuario
         _codigo = _cod
         _descripcion = _desc
-        _numTope = _tope
         _modifUser = user.dni
         _creoUser = user.dni
         _fechaCarga = Date.Today
@@ -60,6 +59,11 @@
         End Get
     End Property
 
+    Public ReadOnly Property subModulos As DataTable
+        Get
+            Return _subModulos
+        End Get
+    End Property
     Friend Sub llenarcombo(_combo As ComboBox)
         _combo.DataSource = _subModulos
         _combo.DisplayMember = "combo"

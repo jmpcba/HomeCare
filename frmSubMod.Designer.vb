@@ -28,19 +28,18 @@ Partial Class frmSubMod
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtTope = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(648, 162)
+        Me.btnGuardar.Location = New System.Drawing.Point(648, 205)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 36)
-        Me.btnGuardar.TabIndex = 11
+        Me.btnGuardar.TabIndex = 12
         Me.btnGuardar.Text = "GUARDAR"
         Me.btnGuardar.UseVisualStyleBackColor = True
         '
@@ -51,7 +50,7 @@ Partial Class frmSubMod
         Me.btnCerrar.Location = New System.Drawing.Point(648, 269)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
-        Me.btnCerrar.TabIndex = 12
+        Me.btnCerrar.TabIndex = 13
         Me.btnCerrar.Text = "&CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = False
         '
@@ -76,7 +75,7 @@ Partial Class frmSubMod
         '
         Me.txtDescripcion.Location = New System.Drawing.Point(173, 172)
         Me.txtDescripcion.Name = "txtDescripcion"
-        Me.txtDescripcion.Size = New System.Drawing.Size(291, 20)
+        Me.txtDescripcion.Size = New System.Drawing.Size(369, 20)
         Me.txtDescripcion.TabIndex = 1
         '
         'Label3
@@ -87,15 +86,6 @@ Partial Class frmSubMod
         Me.Label3.Size = New System.Drawing.Size(49, 13)
         Me.Label3.TabIndex = 114
         Me.Label3.Text = "CODIGO"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(76, 243)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(91, 13)
-        Me.Label4.TabIndex = 112
-        Me.Label4.Text = "TOPE MENSUAL"
         '
         'Label2
         '
@@ -117,13 +107,6 @@ Partial Class frmSubMod
         Me.Label1.TabIndex = 115
         Me.Label1.Text = "SUB-MODULOS"
         '
-        'txtTope
-        '
-        Me.txtTope.Location = New System.Drawing.Point(173, 240)
-        Me.txtTope.Name = "txtTope"
-        Me.txtTope.Size = New System.Drawing.Size(57, 20)
-        Me.txtTope.TabIndex = 2
-        '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -132,24 +115,33 @@ Partial Class frmSubMod
         Me.Panel1.Size = New System.Drawing.Size(566, 443)
         Me.Panel1.TabIndex = 124
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLimpiar.Location = New System.Drawing.Point(648, 142)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(106, 33)
+        Me.btnLimpiar.TabIndex = 11
+        Me.btnLimpiar.Text = "&LIMPIAR"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'frmSubMod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 530)
-        Me.Controls.Add(Me.txtTope)
+        Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtCodigo)
         Me.Controls.Add(Me.txtDescripcion)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnBuscar)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmSubMod"
-        Me.Text = "frmSubMod"
+        Me.Text = "Administrar Sub Modulos"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -161,9 +153,8 @@ Partial Class frmSubMod
     Friend WithEvents txtCodigo As TextBox
     Friend WithEvents txtDescripcion As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label4 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtTope As TextBox
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents btnLimpiar As Button
 End Class

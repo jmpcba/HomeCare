@@ -1,5 +1,4 @@
 ﻿Public Class frmModulo
-    'cambiar validaciones para que usen el objeto ut
     Dim modu As Modulo
     Dim ut As New utils
     Dim txtboxes As TextBox()

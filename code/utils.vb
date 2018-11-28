@@ -240,16 +240,19 @@ Public Class utils
     Public Sub exportarExcel(ByVal _dt As DataTable)
 
         Dim _excel As New Excel.Application
-        Dim wBook As Excel.Workbook
-        Dim wSheet As Excel.Worksheet
         Dim saveFile As New SaveFileDialog
         Dim path As String
 
         saveFile.Filter = "Documento Excel (*.xlsx)|*.xlsx"
+        Dim wBook As Excel.Workbook
+        Dim wSheet As Excel.Worksheet
 
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
         Try
             If saveFile.ShowDialog = DialogResult.OK Then
                 path = saveFile.FileName
+
                 wBook = _excel.Workbooks.Add()
                 wSheet = wBook.ActiveSheet()
 
@@ -285,6 +288,8 @@ Public Class utils
             End If
         Catch ex As Exception
             Throw
+        Finally
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
         End Try
     End Sub
     Private Sub ReleaseObject(ByVal o As Object)
