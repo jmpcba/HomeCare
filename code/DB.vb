@@ -483,7 +483,7 @@ Public Class DB
     End Sub
     Friend Sub actualizar(_subMod As subModulo)
 
-        Dim query = String.Format("UPDATE SUBMODULO SET DESCRIPCION='{0}', MODIFICO_USUARIO='{1}', FECHA_MODIFICACION=#{2}# WHERE CODIGO= {3}", _subMod.descripcion, _subMod.modifUser, _subMod.fechaMod.ToShortDateString, _subMod.codigo)
+        Dim query = String.Format("UPDATE SUBMODULO SET DESCRIPCION='{0}', MODIFICO_USUARIO='{1}', FECHA_MODIFICACION=#{2}# WHERE CODIGO= '{3}'", _subMod.descripcion, _subMod.modifUser, _subMod.fechaMod.ToShortDateString, _subMod.codigo)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
