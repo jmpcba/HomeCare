@@ -27,6 +27,13 @@
         Dim db = New DB()
         Try
             _subModulos = db.getTable(DB.tablas.subModulo)
+            _subModulos.Columns.Add("COMBO")
+            For Each r As DataRow In _subModulos.Rows
+                Dim codigo = r("codigo")
+                Dim descripcion = r("descripcion")
+                r("COMBO") = String.Format("{0} - {1}", codigo, descripcion)
+            Next
+            _subModulos.DefaultView.Sort = "COMBO"
         Catch ex As Exception
             Throw
         End Try
@@ -55,7 +62,7 @@
 
     Friend Sub llenarcombo(_combo As ComboBox)
         _combo.DataSource = _subModulos
-        _combo.DisplayMember = "descripcion"
+        _combo.DisplayMember = "combo"
         _combo.ValueMember = "codigo"
         _combo.SelectedIndex = -1
     End Sub

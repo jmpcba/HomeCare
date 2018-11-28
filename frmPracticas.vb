@@ -147,6 +147,7 @@ Public Class frmPracticas
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
             btnGuardar.Enabled = True
+            iniciarControles()
             With dgFechas
                 .Columns("RESULTADO").ReadOnly = True
                 .AutoResizeColumns()
@@ -322,6 +323,33 @@ Public Class frmPracticas
             lblHoras.Text = 0
             lblMonto.Text = 0
         End If
+    End Sub
+    Private Sub iniciarControles()
+
+        dgFechas.Columns.Clear()
+        DTFecha.CustomFormat = "MMMM - yyyy"
+        lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
+        cbModulo.SelectedIndex = -1
+        cbSubModulo.SelectedIndex = -1
+        cbMedico.SelectedIndex = -1
+        cbPaciente.SelectedIndex = -1
+        txtAfiliado.Text = ""
+        txtBeneficio.Text = ""
+        txtEspecialidad.Text = ""
+        txtLocalidad.Text = ""
+        txtMat.Text = ""
+        txtObservaciones.Text = ""
+        lblHoras.Text = ""
+        lblMonto.Text = ""
+        cargarGrilla()
+        lblMes.Text = MonthName(DTFecha.Value.Month)
+        edicion = False
+        lblHoras.Text = 0
+        lblMonto.Text = 0
+
+        dgFechas.AutoResizeColumns()
+        dgFechas.AutoResizeRows()
+
     End Sub
 
     Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectionChangeCommitted
