@@ -1,2 +1,0 @@
-C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\bin\x86\Debug\HomeCare.exe.config
-C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\x86\Debug\HomeCare.vbproj.ResolveComReference.cache

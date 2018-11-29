@@ -70,6 +70,7 @@
                 _cuit = r(0)("cuit")
                 _nombre = r(0)("nombre")
                 _apellido = r(0)("apellido")
+
                 If IsDBNull(r(0)("email")) Then
                     _email = ""
                 Else
@@ -78,8 +79,16 @@
 
                 _especialidad = r(0)("especialidad")
                 _localidad = r(0)("localidad")
-                _montoLV = r(0)("monto_semana")
-                _montoFer = r(0)("monto_feriado")
+
+                If especialidad.Contains("CD") Or especialidad.Contains("ENF") Then
+                    _montoLV = r(0)("monto_semana")
+                    _montoFer = _montoLV
+
+                Else
+                    _montoLV = r(0)("monto_semana")
+                    _montoFer = r(0)("monto_feriado")
+                End If
+
                 _montoFijo = r(0)("monto_fijo")
                 _porcentaje = r(0)("porcentaje")
 
