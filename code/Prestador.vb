@@ -80,7 +80,7 @@
                 _especialidad = r(0)("especialidad")
                 _localidad = r(0)("localidad")
 
-                If especialidad.Contains("CD") Or especialidad.Contains("ENF") Then
+                If (especialidad.Contains("CD") Or especialidad.Contains("ENF")) And r(0)("monto_feriado") = 0 Then
                     _montoLV = r(0)("monto_semana")
                     _montoFer = _montoLV
 

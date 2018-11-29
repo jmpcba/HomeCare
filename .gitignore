@@ -33,3 +33,5 @@ obj/x86/Debug/
 obj/x86/Release/
 
 bin/x86/Release/
+
+packages/Microsoft\.Office\.Interop\.Excel\.dll
