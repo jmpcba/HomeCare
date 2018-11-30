@@ -15,7 +15,7 @@
                 Dim cuit = txtCuit.Text.ToString
                 cuit = cuit.Insert(2, "-")
                 cuit = cuit.Insert(cuit.Length - 1, "-")
-                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, numLunVie.Text.Trim, numFeriados.Text.Trim, numFijo.Text.Trim, numPorcentaje.Text.Trim, dtCese.Text)
+                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, numLunVie.Text.Trim, numFeriados.Text.Trim, numFijo.Text.Trim, numPorcentaje.Text.Trim, dtCese.Text, txtServicio.Text)
                 prest.insertar()
                 iniciarControles()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
@@ -38,6 +38,9 @@
                 End If
                 If txtLocalidad.Text.Trim <> prest.localidad Then
                     prest.localidad = txtLocalidad.Text.Trim
+                End If
+                If txtServicio.Text.Trim <> prest.obraSocial Then
+                    prest.obraSocial = txtServicio.Text.Trim
                 End If
                 If numLunVie.Text.Trim <> prest.montoNormal Then
                     prest.montoNormal = numLunVie.Text.Trim
@@ -64,7 +67,7 @@
             End If
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                ut.mensaje("Ya existe un Prestador con el mismo cuit/especialidad/localidad", utils.mensajes.err)
+                ut.mensaje("Ya existe un Prestador con el mismo cuit/especialidad/localidad/servicio", utils.mensajes.err)
             Else
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End If
@@ -127,7 +130,7 @@
         Dim esp As New especialidad
         esp.llenarcombo(cbEspecialidad)
         dtCese.Enabled = False
-        txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, numLunVie, numFeriados, numFijo}
+        txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo}
         iniciarControles()
         numPorcentaje.Text = 0
         numPorcentaje.ReadOnly = True
@@ -158,6 +161,7 @@
         numFeriados.Text = _prestador.montoFeriado
         numPorcentaje.Text = _prestador.porcentaje
         numFijo.Text = _prestador.montoFijo
+        txtServicio.Text = _prestador.obraSocial
         dtCese.Text = _prestador.fechaCese
         prest = _prestador
     End Sub
