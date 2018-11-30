@@ -88,6 +88,7 @@ Partial Class frmEmail
         'BtnCerrar
         '
         Me.BtnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BtnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.BtnCerrar.Location = New System.Drawing.Point(700, 74)
         Me.BtnCerrar.Name = "BtnCerrar"
         Me.BtnCerrar.Size = New System.Drawing.Size(106, 33)
@@ -107,6 +108,7 @@ Partial Class frmEmail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.BtnCerrar
         Me.ClientSize = New System.Drawing.Size(831, 244)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.BtnCerrar)

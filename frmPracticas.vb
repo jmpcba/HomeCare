@@ -371,6 +371,7 @@ Public Class frmPracticas
                 txtMat.Text = med.cuit
                 txtLocalidad.Text = med.localidad
                 txtEspecialidad.Text = med.especialidad
+                txtServicio.Text = med.obraSocial
             Catch ex As Exception
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End Try

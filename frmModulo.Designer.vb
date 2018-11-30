@@ -40,9 +40,9 @@ Partial Class frmModulo
         Me.txtCodigo = New System.Windows.Forms.TextBox()
         Me.txtMedico = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtNutricion = New System.Windows.Forms.TextBox()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -50,6 +50,7 @@ Partial Class frmModulo
         '
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCerrar.Location = New System.Drawing.Point(687, 258)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
@@ -216,16 +217,6 @@ Partial Class frmModulo
         Me.Panel1.Size = New System.Drawing.Size(574, 460)
         Me.Panel1.TabIndex = 123
         '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnLimpiar.Location = New System.Drawing.Point(687, 117)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(106, 33)
-        Me.btnLimpiar.TabIndex = 131
-        Me.btnLimpiar.Text = "&LIMPIAR"
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -242,10 +233,21 @@ Partial Class frmModulo
         Me.txtNutricion.Size = New System.Drawing.Size(121, 20)
         Me.txtNutricion.TabIndex = 7
         '
+        'btnLimpiar
+        '
+        Me.btnLimpiar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLimpiar.Location = New System.Drawing.Point(687, 117)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(106, 33)
+        Me.btnLimpiar.TabIndex = 131
+        Me.btnLimpiar.Text = "&LIMPIAR"
+        Me.btnLimpiar.UseVisualStyleBackColor = True
+        '
         'frmModulo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(914, 542)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.txtCodigo)

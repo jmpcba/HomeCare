@@ -19,6 +19,7 @@
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
+    Private _obraSocial As String
 
     Public Sub New()
         _user = New Usuario
@@ -79,18 +80,34 @@
 
                 _especialidad = r(0)("especialidad")
                 _localidad = r(0)("localidad")
+                _obraSocial = r(0)("servicio")
 
-                If (especialidad.Contains("CD") Or especialidad.Contains("ENF")) And r(0)("monto_feriado") = 0 Then
+                Dim montoFeriado As Decimal
+                If IsDBNull(r(0)("monto_feriado")) Then
+                    montoFeriado = 0
+                Else
+                    montoFeriado = r(0)("monto_feriado")
+                End If
+
+                If (especialidad.Contains("CD") Or especialidad.Contains("ENF")) And montoFeriado = 0 Then
                     _montoLV = r(0)("monto_semana")
                     _montoFer = _montoLV
-
                 Else
                     _montoLV = r(0)("monto_semana")
                     _montoFer = r(0)("monto_feriado")
                 End If
 
-                _montoFijo = r(0)("monto_fijo")
-                _porcentaje = r(0)("porcentaje")
+                If IsDBNull(r(0)("monto_fijo")) Then
+                    _montoFijo = 0
+                Else
+                    _montoFijo = r(0)("monto_fijo")
+                End If
+
+                If IsDBNull(r(0)("porcentaje")) Then
+                    _porcentaje = 0
+                Else
+                    _porcentaje = r(0)("porcentaje")
+                End If
 
                 If Not IsDBNull(r(0)("fecha_cese")) Then
                     _fechaCese = r(0)("fecha_cese")
@@ -242,6 +259,12 @@
     Public ReadOnly Property prestadores As DataTable
         Get
             Return _prestadores
+        End Get
+    End Property
+
+    Public ReadOnly Property obraSocial As String
+        Get
+            Return _obraSocial
         End Get
     End Property
 
