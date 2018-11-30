@@ -32,7 +32,8 @@
                 Dim apellido = r("apellido")
                 Dim especialidad = r("especialidad")
                 Dim localidad = r("localidad")
-                r("COMBO") = String.Format("{0} {1} - {2} - {3}", apellido, nombre, localidad, especialidad)
+                Dim servicio = r("servicio")
+                r("COMBO") = String.Format("{0} {1} - {2} - {3} - {4}", apellido, nombre, localidad, especialidad, servicio)
             Next
             _prestadores.DefaultView.Sort = "COMBO"
         Catch ex As Exception
@@ -40,7 +41,7 @@
         End Try
     End Sub
 
-    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _porcentaje As Decimal, _fechaCese As Date)
+    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _porcentaje As Decimal, _fechaCese As Date, _obraSocial As String)
 
         _user = New Usuario
         Me._cuit = _cuit
@@ -49,6 +50,7 @@
         Me._email = _email
         Me._especialidad = _especialidad
         Me._localidad = _localidad
+        Me._obraSocial = _obraSocial
         Me._montoLV = _montoLV
         Me._montoFer = _montoFer
         Me._montoFijo = _montoFijo
@@ -80,8 +82,11 @@
 
                 _especialidad = r(0)("especialidad")
                 _localidad = r(0)("localidad")
-                _obraSocial = r(0)("servicio")
-
+                If IsDBNull(r(0)("servicio")) Then
+                    _obraSocial = ""
+                Else
+                    _obraSocial = r(0)("servicio")
+                End If
                 Dim montoFeriado As Decimal
                 If IsDBNull(r(0)("monto_feriado")) Then
                     montoFeriado = 0
@@ -186,6 +191,16 @@
         End Get
     End Property
 
+    Public Property obraSocial As String
+        Set(value As String)
+            _obraSocial = value
+            _modificado = True
+        End Set
+        Get
+            Return _obraSocial
+        End Get
+    End Property
+
     Public Property montoNormal As Decimal
         Set(value As Decimal)
             _montoLV = value
@@ -259,12 +274,6 @@
     Public ReadOnly Property prestadores As DataTable
         Get
             Return _prestadores
-        End Get
-    End Property
-
-    Public ReadOnly Property obraSocial As String
-        Get
-            Return _obraSocial
         End Get
     End Property
 
