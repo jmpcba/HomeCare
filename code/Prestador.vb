@@ -82,23 +82,18 @@
 
                 _especialidad = r(0)("especialidad")
                 _localidad = r(0)("localidad")
+
                 If IsDBNull(r(0)("servicio")) Then
                     _obraSocial = ""
                 Else
                     _obraSocial = r(0)("servicio")
                 End If
-                Dim montoFeriado As Decimal
-                If IsDBNull(r(0)("monto_feriado")) Then
-                    montoFeriado = 0
-                Else
-                    montoFeriado = r(0)("monto_feriado")
-                End If
 
-                If (especialidad.Contains("CD") Or especialidad.Contains("ENF")) And montoFeriado = 0 Then
-                    _montoLV = r(0)("monto_semana")
-                    _montoFer = _montoLV
+                _montoLV = r(0)("monto_semana")
+
+                If IsDBNull(r(0)("monto_feriado")) Then
+                    _montoFer = 0
                 Else
-                    _montoLV = r(0)("monto_semana")
                     _montoFer = r(0)("monto_feriado")
                 End If
 

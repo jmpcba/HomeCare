@@ -108,7 +108,7 @@ Partial Class frmPracticas
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(124, 48)
+        Me.Label3.Location = New System.Drawing.Point(147, 48)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(256, 13)
         Me.Label3.TabIndex = 7
@@ -189,7 +189,7 @@ Partial Class frmPracticas
         '
         'txtBeneficio
         '
-        Me.txtBeneficio.Location = New System.Drawing.Point(311, 77)
+        Me.txtBeneficio.Location = New System.Drawing.Point(338, 74)
         Me.txtBeneficio.Name = "txtBeneficio"
         Me.txtBeneficio.ReadOnly = True
         Me.txtBeneficio.Size = New System.Drawing.Size(149, 20)
@@ -197,7 +197,7 @@ Partial Class frmPracticas
         '
         'txtAfiliado
         '
-        Me.txtAfiliado.Location = New System.Drawing.Point(100, 77)
+        Me.txtAfiliado.Location = New System.Drawing.Point(127, 74)
         Me.txtAfiliado.Name = "txtAfiliado"
         Me.txtAfiliado.ReadOnly = True
         Me.txtAfiliado.Size = New System.Drawing.Size(121, 20)
@@ -206,7 +206,7 @@ Partial Class frmPracticas
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(227, 81)
+        Me.Label9.Location = New System.Drawing.Point(254, 78)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(78, 13)
         Me.Label9.TabIndex = 24
@@ -215,7 +215,7 @@ Partial Class frmPracticas
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(3, 81)
+        Me.Label10.Location = New System.Drawing.Point(4, 81)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(70, 13)
         Me.Label10.TabIndex = 23
@@ -227,13 +227,13 @@ Partial Class frmPracticas
         Me.cbPaciente.FormattingEnabled = True
         Me.cbPaciente.Location = New System.Drawing.Point(127, 42)
         Me.cbPaciente.Name = "cbPaciente"
-        Me.cbPaciente.Size = New System.Drawing.Size(267, 21)
+        Me.cbPaciente.Size = New System.Drawing.Size(360, 21)
         Me.cbPaciente.TabIndex = 1
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(2, 45)
+        Me.Label11.Location = New System.Drawing.Point(4, 45)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(119, 13)
         Me.Label11.TabIndex = 21
@@ -293,9 +293,9 @@ Partial Class frmPracticas
         '
         Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMedico.FormattingEnabled = True
-        Me.cbMedico.Location = New System.Drawing.Point(-1, 70)
+        Me.cbMedico.Location = New System.Drawing.Point(7, 70)
         Me.cbMedico.Name = "cbMedico"
-        Me.cbMedico.Size = New System.Drawing.Size(544, 21)
+        Me.cbMedico.Size = New System.Drawing.Size(536, 21)
         Me.cbMedico.TabIndex = 1
         '
         'Label16
