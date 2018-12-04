@@ -232,7 +232,8 @@ Public Class utils
     End Sub
 
     Public Sub validarMail(_mail As String)
-        If Not _mail.Contains("@") Or Not _mail.Contains(".com") Then
+        If _mail.Contains("@") And (_mail.Contains(".COM") Or _mail.Contains(".com")) Then
+            Else
             Throw New Exception("El mail debe seguir el formato alguien@algo.com")
         End If
     End Sub

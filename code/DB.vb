@@ -98,9 +98,10 @@ Public Class DB
     Friend Sub eliminarFeriado(_fecha As Date)
         Try
 
-            Dim desde = _fecha.AddDays(-1)
-            Dim hasta = _fecha.AddDays(1)
-            Dim query = String.Format("DELETE FROM FERIADOS WHERE FECHA > #{0}# AND FECHA < #{1}#", desde.ToShortDateString, hasta.ToShortDateString)
+            Dim desde = _fecha.AddDays(0)
+            '   Dim hasta = _fecha.AddDays(1)
+            '   Dim query = String.Format("DELETE FROM FERIADOS WHERE FECHA > #{0}# AND FECHA < #{1}#", desde.ToShortDateString, hasta.ToShortDateString)
+            Dim query = String.Format("DELETE FERIADOS.* FROM FERIADOS WHERE FECHA = #{0}#", desde.ToShortDateString)
 
             cmd.CommandType = CommandType.Text
             cmd.CommandText = query
@@ -504,7 +505,7 @@ Public Class DB
 
     Friend Sub actualizar(_mod As Modulo)
 
-        Dim query = String.Format("UPDATE MODULO SET MEDICO={0}, ENFERMERIA={1}, KINESIO={2}, FONO={3}, CUIDADOR={4}, MODIFICO_USUARIO={5}, FECHA_MODIFICACION=#{6}# WHERE CODIGO={7}", _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.modifUser, _mod.fechaMod.ToShortDateString, _mod.codigo)
+        Dim query = String.Format("UPDATE MODULO SET MEDICO='{0}', ENFERMERIA='{1}', KINESIOLOGIA='{2}', FONOAUDIOLOGIA='{3}', CUIDADOR='{4}', NUTRICION='{5}', MODIFICO_USUARIO='{6}', FECHA_MODIFICACION=#{7}# WHERE CODIGO='{8}'", _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.topeNutricionista, _mod.modifUser, _mod.fechaMod.ToShortDateString, _mod.codigo)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query

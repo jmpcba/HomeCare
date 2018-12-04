@@ -23,6 +23,8 @@ Partial Class frmPrestadores
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtServicio = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.cbEspecialidad = New System.Windows.Forms.ComboBox()
         Me.chbCese = New System.Windows.Forms.CheckBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -53,8 +55,6 @@ Partial Class frmPrestadores
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.txtServicio = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -94,13 +94,29 @@ Partial Class frmPrestadores
         Me.Panel1.Size = New System.Drawing.Size(611, 437)
         Me.Panel1.TabIndex = 0
         '
+        'txtServicio
+        '
+        Me.txtServicio.Location = New System.Drawing.Point(97, 201)
+        Me.txtServicio.Name = "txtServicio"
+        Me.txtServicio.Size = New System.Drawing.Size(164, 20)
+        Me.txtServicio.TabIndex = 5
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(7, 214)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(57, 13)
+        Me.Label15.TabIndex = 50
+        Me.Label15.Text = "SERVICIO"
+        '
         'cbEspecialidad
         '
         Me.cbEspecialidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbEspecialidad.FormattingEnabled = True
-        Me.cbEspecialidad.Location = New System.Drawing.Point(124, 154)
+        Me.cbEspecialidad.Location = New System.Drawing.Point(97, 154)
         Me.cbEspecialidad.Name = "cbEspecialidad"
-        Me.cbEspecialidad.Size = New System.Drawing.Size(164, 21)
+        Me.cbEspecialidad.Size = New System.Drawing.Size(220, 21)
         Me.cbEspecialidad.TabIndex = 3
         '
         'chbCese
@@ -142,7 +158,7 @@ Partial Class frmPrestadores
         Me.numPorcentaje.Name = "numPorcentaje"
         Me.numPorcentaje.ReadOnly = True
         Me.numPorcentaje.Size = New System.Drawing.Size(68, 20)
-        Me.numPorcentaje.TabIndex = 8
+        Me.numPorcentaje.TabIndex = 800
         Me.numPorcentaje.Text = "0"
         '
         'numFijo
@@ -215,7 +231,7 @@ Partial Class frmPrestadores
         '
         'txtEmail
         '
-        Me.txtEmail.Location = New System.Drawing.Point(124, 244)
+        Me.txtEmail.Location = New System.Drawing.Point(97, 244)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.Size = New System.Drawing.Size(358, 20)
         Me.txtEmail.TabIndex = 5
@@ -231,9 +247,9 @@ Partial Class frmPrestadores
         '
         'txtLocalidad
         '
-        Me.txtLocalidad.Location = New System.Drawing.Point(411, 155)
+        Me.txtLocalidad.Location = New System.Drawing.Point(396, 155)
         Me.txtLocalidad.Name = "txtLocalidad"
-        Me.txtLocalidad.Size = New System.Drawing.Size(188, 20)
+        Me.txtLocalidad.Size = New System.Drawing.Size(203, 20)
         Me.txtLocalidad.TabIndex = 4
         '
         'Label6
@@ -247,9 +263,9 @@ Partial Class frmPrestadores
         '
         'txtApellido
         '
-        Me.txtApellido.Location = New System.Drawing.Point(411, 93)
+        Me.txtApellido.Location = New System.Drawing.Point(396, 93)
         Me.txtApellido.Name = "txtApellido"
-        Me.txtApellido.Size = New System.Drawing.Size(188, 20)
+        Me.txtApellido.Size = New System.Drawing.Size(203, 20)
         Me.txtApellido.TabIndex = 2
         '
         'Label3
@@ -272,9 +288,9 @@ Partial Class frmPrestadores
         '
         'txtNombre
         '
-        Me.txtNombre.Location = New System.Drawing.Point(124, 93)
+        Me.txtNombre.Location = New System.Drawing.Point(97, 93)
         Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(164, 20)
+        Me.txtNombre.Size = New System.Drawing.Size(220, 20)
         Me.txtNombre.TabIndex = 1
         '
         'Label5
@@ -288,7 +304,7 @@ Partial Class frmPrestadores
         '
         'txtCuit
         '
-        Me.txtCuit.Location = New System.Drawing.Point(124, 42)
+        Me.txtCuit.Location = New System.Drawing.Point(97, 43)
         Me.txtCuit.Name = "txtCuit"
         Me.txtCuit.Size = New System.Drawing.Size(121, 20)
         Me.txtCuit.TabIndex = 0
@@ -355,22 +371,6 @@ Partial Class frmPrestadores
         Me.btnLimpiar.Text = "&LIMPIAR"
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(7, 214)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(57, 13)
-        Me.Label15.TabIndex = 50
-        Me.Label15.Text = "SERVICIO"
-        '
-        'txtServicio
-        '
-        Me.txtServicio.Location = New System.Drawing.Point(124, 207)
-        Me.txtServicio.Name = "txtServicio"
-        Me.txtServicio.Size = New System.Drawing.Size(164, 20)
-        Me.txtServicio.TabIndex = 5
-        '
         'frmPrestadores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -383,7 +383,7 @@ Partial Class frmPrestadores
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.BtnCerrar)
         Me.Name = "frmPrestadores"
-        Me.Text = "<"
+        Me.Text = "Administrar Profesionales"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)

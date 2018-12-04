@@ -62,8 +62,8 @@
                 End If
 
                 prest.actualizar()
-                iniciarControles()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
+                iniciarControles()
             End If
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then

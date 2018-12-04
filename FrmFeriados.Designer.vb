@@ -152,7 +152,7 @@ Partial Class FrmFeriados
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "FrmFeriados"
-        Me.Text = "FrmFeriados"
+        Me.Text = "Administrar Feriados"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.dgFeriados, System.ComponentModel.ISupportInitialize).EndInit()

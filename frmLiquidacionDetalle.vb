@@ -94,4 +94,8 @@
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
+
+    Private Sub btnCerrar_Click(sender As Object, e As EventArgs)
+        Me.Close()
+    End Sub
 End Class

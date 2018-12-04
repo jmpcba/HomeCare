@@ -338,6 +338,7 @@ Public Class frmPracticas
         txtEspecialidad.Text = ""
         txtLocalidad.Text = ""
         txtMat.Text = ""
+        txtServicio.Text = ""
         txtObservaciones.Text = ""
         lblHoras.Text = ""
         lblMonto.Text = ""

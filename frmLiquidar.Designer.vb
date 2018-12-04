@@ -152,27 +152,28 @@ Partial Class frmLiquidar
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportarToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(937, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(937, 29)
         Me.MenuStrip1.TabIndex = 114
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'ExportarToolStripMenuItem
         '
         Me.ExportarToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ResumenDePrestadoresToolStripMenuItem, Me.TodasLasPracticasToolStripMenuItem})
+        Me.ExportarToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ExportarToolStripMenuItem.Name = "ExportarToolStripMenuItem"
-        Me.ExportarToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
+        Me.ExportarToolStripMenuItem.Size = New System.Drawing.Size(80, 25)
         Me.ExportarToolStripMenuItem.Text = "&Exportar"
         '
         'ResumenDePrestadoresToolStripMenuItem
         '
         Me.ResumenDePrestadoresToolStripMenuItem.Name = "ResumenDePrestadoresToolStripMenuItem"
-        Me.ResumenDePrestadoresToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ResumenDePrestadoresToolStripMenuItem.Size = New System.Drawing.Size(273, 26)
         Me.ResumenDePrestadoresToolStripMenuItem.Text = "&Resumen De Prestadores"
         '
         'TodasLasPracticasToolStripMenuItem
         '
         Me.TodasLasPracticasToolStripMenuItem.Name = "TodasLasPracticasToolStripMenuItem"
-        Me.TodasLasPracticasToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.TodasLasPracticasToolStripMenuItem.Size = New System.Drawing.Size(273, 26)
         Me.TodasLasPracticasToolStripMenuItem.Text = "&Todas Las Practicas Del Mes"
         '
         'frmLiquidar
