@@ -56,7 +56,7 @@ Public Class DB
     Friend Sub InsertarFeriado(_fecha As Date, _desc As String)
         Try
             Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
-                                      _fecha.ToShortDateString, _desc, "29188989", Today.ToShortDateString, "29188989", Today.ToShortDateString)
+                                      _fecha.Date.ToShortDateString, _desc, "29188989", Today.ToShortDateString, "29188989", Today.ToShortDateString)
 
             cmd.CommandType = CommandType.Text
             cmd.CommandText = query
@@ -98,13 +98,10 @@ Public Class DB
     Friend Sub eliminarFeriado(_fecha As Date)
         Try
 
-            Dim desde = _fecha.AddDays(0)
-            '   Dim hasta = _fecha.AddDays(1)
-            '   Dim query = String.Format("DELETE FROM FERIADOS WHERE FECHA > #{0}# AND FECHA < #{1}#", desde.ToShortDateString, hasta.ToShortDateString)
-            Dim query = String.Format("DELETE FERIADOS.* FROM FERIADOS WHERE FECHA = #{0}#", desde.ToShortDateString)
-
-            cmd.CommandType = CommandType.Text
-            cmd.CommandText = query
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.CommandText = "DELETE_FERIADO"
+            cmd.Parameters.Clear()
+            cmd.Parameters.AddWithValue("FECHA_IN", _fecha.Date)
 
             ut.backupDBTemp()
 
