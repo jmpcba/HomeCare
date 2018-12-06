@@ -71,6 +71,9 @@
             Else
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End If
+            If ex.Message.Contains("No se realizaron modificaciones") Then
+                iniciarControles()
+            End If
         Finally
             prest = Nothing
         End Try

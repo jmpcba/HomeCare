@@ -8,16 +8,14 @@
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
-    Private _user As New Usuario
     Private _subModulos As DataTable
 
     Public Sub New(_cod As String, _desc As String)
-        Dim user As New Usuario
-        _user = New Usuario
+
         _codigo = _cod
         _descripcion = _desc
-        _modifUser = user.dni
-        _creoUser = user.dni
+        _modifUser = My.Settings.dni
+        _creoUser = My.Settings.dni
         _fechaCarga = Date.Today
         _fechaMod = Date.Today
     End Sub
@@ -124,7 +122,7 @@
         Dim db As New DB
         Try
             If _modificado Then
-                _modifUser = _user.dni
+                _modifUser = My.Settings.dni
                 _fechaMod = Date.Today
                 db.actualizar(Me)
             Else

@@ -12,7 +12,6 @@
     Private _fechaMod As Date
     Private _modificado = False
     Private _modulos As DataTable
-    Private _user As Usuario
 
     Public Sub New()
         Dim db = New DB()
@@ -24,7 +23,7 @@
     End Sub
 
     Public Sub New(_cod As String, _topeMedico As Integer, _topeEnfer As Integer, _topeKine As Integer, _topeFon As Integer, _topeCuid As Integer, _topeNutri As Integer)
-        _user = New Usuario
+
         Me._codigo = _cod
         Me._topeMedico = _topeMedico
         Me._topeEnfermeria = _topeEnfer
@@ -32,8 +31,8 @@
         Me._topeFono = _topeFon
         Me._topeCuidador = _topeCuid
         Me._topeNutricionista = _topeNutri
-        Me._modifUser = _user.dni
-        Me._creoUser = _user.dni
+        Me._modifUser = My.Settings.dni
+        Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
     End Sub
@@ -55,7 +54,6 @@
                 _topeFono = r(0)("fonoaudiologia")
                 _topeCuidador = r(0)("cuidador")
                 _topeNutricionista = r(0)("nutricion")
-                _user = New Usuario
                 _modifUser = r(0)("modifico_usuario")
                 _creoUser = r(0)("cargo_usuario")
                 _fechaCarga = r(0)("fecha_carga")
@@ -157,7 +155,7 @@
         Try
             If _modificado Then
                 _fechaMod = Date.Today
-                _modifUser = _user.dni
+                _modifUser = My.Settings.dni
                 db.actualizar(Me)
             Else
                 Throw New Exception("No se realizaron modificaciones")

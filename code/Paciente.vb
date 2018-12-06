@@ -1,7 +1,7 @@
 ﻿Public Class Paciente
 
     Private _pacientes As DataTable
-    Private _user As New Usuario
+
     Private _afiliado As String
     Private _dni As String
     Private _nombre As String
@@ -37,15 +37,14 @@
     End Sub
 
     Public Sub New(_afiliado As String, _dni As String, _nombre As String, _apellido As String, _obrasocial As String, _localidad As String)
-        _user = New Usuario
         Me._dni = _dni
         Me._afiliado = _afiliado
         Me._nombre = _nombre
         Me._apellido = _apellido
         Me._obraSocial = _obrasocial
         Me._localidad = _localidad
-        Me._modifUser = _user.dni
-        Me._creoUser = _user.dni
+        Me._modifUser = My.Settings.dni
+        Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
     End Sub
@@ -170,7 +169,7 @@
         Try
             If _modificado Then
                 _fechaMod = Date.Today
-                _modifUser = _user.dni
+                _modifUser = My.Settings.dni
                 db.actualizar(Me)
             Else
                 Throw New Exception("No se realizaron modificaciones")

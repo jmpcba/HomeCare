@@ -20,6 +20,7 @@ Public Class DB
         subModulo
         feriados
         especialidades
+        usuarios
     End Enum
 
     Public Enum tiposLiquidacion
@@ -56,7 +57,7 @@ Public Class DB
     Friend Sub InsertarFeriado(_fecha As Date, _desc As String)
         Try
             Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
-                                      _fecha.Date.ToShortDateString, _desc, "29188989", Today.ToShortDateString, "29188989", Today.ToShortDateString)
+                                      _fecha.Date.ToShortDateString, _desc, My.Settings.dni, Today.ToShortDateString, My.Settings.dni, Today.ToShortDateString)
 
             cmd.CommandType = CommandType.Text
             cmd.CommandText = query
@@ -257,6 +258,23 @@ Public Class DB
 
     End Function
 
+    Public Function getUsuario(_dni As String) As String
+        Dim resultado As String
+        cmd.CommandText = String.Format("SELECT PASS FROM USUARIOS WHERE DNI = '{0}'", _dni)
+        cmd.CommandType = CommandType.Text
+
+        Try
+            cnn.Open()
+            cmd.ExecuteScalar()
+            resultado = cmd.ExecuteScalar()
+
+            Return resultado
+        Catch ex As Exception
+            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
+        End Try
+
+    End Function
+
     Friend Sub insertar(_practica As Practica)
 
         Try
@@ -433,6 +451,30 @@ Public Class DB
             ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
+    Friend Sub insertar(_usuario As Usuario)
+
+        Try
+            ' Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}')",
+            ' _practica.prestador.cuit, _practica.paciente.afiliado, _practica.modulo, _practica.subModulo,
+            ' _practica.hsSemana, _practica.hsFeriado, _practica.fecha.ToShortDateString,
+            ' DateTime.Today.ToShortDateString, _practica.observaciones, _practica.creoUser,
+            ' _practica.fechaCarga.ToShortDateString, _practica.modifUser, _practica.fechaMod.ToShortDateString, _practica.prestador.id)
+
+            cmd.CommandType = CommandType.Text
+            '  cmd.CommandText = query
+
+            ut.backupDBTemp()
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            hacerBackup = False
+            Throw
+        Finally
+            cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
+        End Try
+    End Sub
 
     Friend Sub actualizar(_paciente As Paciente)
         Dim query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION='{6}' WHERE AFILIADO='{7}'",
@@ -524,6 +566,28 @@ Public Class DB
     Friend Sub ACTUALIZAR(_prestacion As Prestacion)
 
     End Sub
+
+    Friend Sub actualizar(_usuario As Usuario)
+
+        ' Dim query = String.Format("UPDATE MODULO SET MEDICO='{0}', ENFERMERIA='{1}', KINESIOLOGIA='{2}', FONOAUDIOLOGIA='{3}', CUIDADOR='{4}', NUTRICION='{5}', MODIFICO_USUARIO='{6}', FECHA_MODIFICACION=#{7}# WHERE CODIGO='{8}'", _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.topeNutricionista, _mod.modifUser, _mod.fechaMod.ToShortDateString, _mod.codigo)
+
+        cmd.CommandType = CommandType.Text
+        '  cmd.CommandText = query
+
+        Try
+            ut.backupDBTemp()
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            hacerBackup = False
+            Throw
+        Finally
+            cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
+        End Try
+    End Sub
+
     Public Function getTable(_tabla As tablas)
 
         Dim query = "SELECT * FROM " & _tabla.ToString()

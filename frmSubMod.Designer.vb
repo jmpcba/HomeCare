@@ -71,6 +71,7 @@ Partial Class frmSubMod
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(100, 20)
         Me.txtCodigo.TabIndex = 0
+        Me.txtCodigo.Text = "<"
         '
         'txtDescripcion
         '

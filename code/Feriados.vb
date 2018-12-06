@@ -1,8 +1,6 @@
 ﻿Public Class Feriado
 
     Private _feriado As DataTable
-    Private _user As Usuario
-
     Private _fecha As Date
     Private _descripcion As String
     Private _creoUser As String
@@ -22,11 +20,10 @@
     End Sub
 
     Public Sub New(_fecha As Date, _descripcion As String)
-        _user = New Usuario
         Me._fecha = _fecha
         Me._descripcion = _descripcion
-        Me._modifUser = _user.dni
-        Me._creoUser = _user.dni
+        Me._modifUser = My.Settings.dni
+        Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
     End Sub
@@ -87,7 +84,7 @@
         Try
             If _modificado Then
                 _fechaMod = Date.Today
-                _modifUser = _user.dni
+                _modifUser = My.Settings.dni
                 db.actualizar(Me)
             Else
                 Throw New Exception("No se realizaron modificaciones")

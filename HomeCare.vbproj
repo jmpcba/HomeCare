@@ -167,6 +167,12 @@
     <Compile Include="frmInformes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmIngresar.Designer.vb">
+      <DependentUpon>frmIngresar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmIngresar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmLiquidacionDetalle.Designer.vb">
       <DependentUpon>frmLiquidacionDetalle.vb</DependentUpon>
     </Compile>
@@ -227,6 +233,12 @@
     <Compile Include="frmSubMod.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmUsuarios.Designer.vb">
+      <DependentUpon>frmUsuarios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsuarios.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmVerificar.Designer.vb">
       <DependentUpon>frmVerificar.vb</DependentUpon>
     </Compile>
@@ -271,6 +283,9 @@
     <EmbeddedResource Include="FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmIngresar.resx">
+      <DependentUpon>frmIngresar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLiquidacionDetalle.resx">
       <DependentUpon>frmLiquidacionDetalle.vb</DependentUpon>
     </EmbeddedResource>
@@ -300,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSubMod.resx">
       <DependentUpon>frmSubMod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsuarios.resx">
+      <DependentUpon>frmUsuarios.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>

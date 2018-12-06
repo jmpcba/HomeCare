@@ -31,8 +31,8 @@ Public Class Practica
         fecha_registrado = Date.Today.Date
         observaciones = _observaciones
         calcularHoras(_horas)
-        creoUser = 29188989
-        modifUser = 29188989
+        creoUser = My.Settings.dni
+        modifUser = My.Settings.dni
         fechaCarga = Today.ToShortDateString
         fechaMod = Today.ToShortDateString
 

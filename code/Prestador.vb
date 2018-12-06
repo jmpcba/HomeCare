@@ -1,6 +1,5 @@
 ﻿Public Class Prestador
 
-    Private _user As Usuario
     Private _prestadores As DataTable
     Private _id As String
     Private _cuit As String
@@ -22,7 +21,6 @@
     Private _obraSocial As String
 
     Public Sub New()
-        _user = New Usuario
         Dim db = New DB()
         Try
             _prestadores = db.getTable(DB.tablas.prestadores)
@@ -43,7 +41,6 @@
 
     Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _porcentaje As Decimal, _fechaCese As Date, _obraSocial As String)
 
-        _user = New Usuario
         Me._cuit = _cuit
         Me._nombre = _nombre
         Me._apellido = _apellido
@@ -56,8 +53,8 @@
         Me._montoFijo = _montoFijo
         Me._porcentaje = _porcentaje
         Me._fechaCese = _fechaCese
-        Me._modifUser = _user.dni
-        Me._creoUser = _user.dni
+        Me._modifUser = My.Settings.dni
+        Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
 
@@ -286,7 +283,7 @@
         Try
             If _modificado Then
                 _fechaMod = Date.Today
-                _modifUser = _user.dni
+                _modifUser = My.Settings.dni
                 db.actualizar(Me)
             Else
                 Throw New Exception("No se realizaron modificaciones")
