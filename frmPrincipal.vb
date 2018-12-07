@@ -51,7 +51,7 @@
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
-        Me.Close()
+        Application.Exit()
         End
     End Sub
 

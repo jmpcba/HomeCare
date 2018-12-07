@@ -258,17 +258,13 @@ Public Class DB
 
     End Function
 
-    Public Function getUsuario(_dni As String) As String
-        Dim resultado As String
-        cmd.CommandText = String.Format("SELECT PASS FROM USUARIOS WHERE DNI = '{0}'", _dni)
+    Public Function getUsuario(_dni As String) As DataTable
+        cmd.CommandText = String.Format("SELECT * FROM USUARIOS WHERE DNI = '{0}'", _dni)
         cmd.CommandType = CommandType.Text
 
         Try
-            cnn.Open()
-            cmd.ExecuteScalar()
-            resultado = cmd.ExecuteScalar()
-
-            Return resultado
+            da.Fill(ds, "PACIENTES")
+            Return ds.Tables("PACIENTES")
         Catch ex As Exception
             Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
         End Try

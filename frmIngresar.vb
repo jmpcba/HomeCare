@@ -6,28 +6,28 @@
 
         Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
-            Try
-                ut.validarTxtBoxLleno(txtBoxes)
-                ut.validarNumerico(numDni)
-                ut.validarLargo(numDni, 8)
+        Try
+            ut.validarTxtBoxLleno(txtBoxes)
+            ut.validarNumerico(numDni)
+            ut.validarLargo(numDni, 8)
 
-                Dim pass = usuario.getUsuario(numDni.Text)
+            usuario.dni = numDni.Text.Trim
 
-            If pass = Nothing Or txtPassw.Text <> pass Then
-                ut.mensaje("USUARIO O PASSWORD ERRONEA", utils.mensajes.err)
+            If txtPassw.Text.Trim <> usuario.pass Then
                 numDni.Focus()
-            Else
-                My.Settings.dni = numDni.Text
-                My.Settings.nivel = "0"
-                frmPrincipal.ShowDialog()
+                Throw New Exception("Contraseña invalida")
             End If
 
+            My.Settings.dni = usuario.dni
+            My.Settings.nivel = usuario.nivel
+            Me.Hide()
+            frmPrincipal.ShowDialog()
+
         Catch ex As Exception
-
-                ut.mensaje(ex.Message, utils.mensajes.err)
-            End Try
-
-        End Sub
+            numDni.Focus()
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+    End Sub
 
         Private Sub iniciarControles()
             ut.iniciarTxtBoxes(txtBoxes)

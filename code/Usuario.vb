@@ -1,6 +1,6 @@
 ﻿Public Class Usuario
 
-    Private _usuario As DataTable
+    Private _usuarios As DataTable
     Private _dni As String
     Private _apellido As String
     Private _nombre As String
@@ -15,8 +15,7 @@
     Public Sub New()
         Dim db = New DB()
         Try
-            _usuario = db.getTable(DB.tablas.usuarios)
-
+            _usuarios = db.getTable(DB.tablas.usuarios)
         Catch ex As Exception
             Throw
         End Try
@@ -34,7 +33,7 @@
         Me._fechaMod = Date.Today
     End Sub
 
-    Public Function getUsuario(_dni As String)
+    Public Function getUsuario(_dni As String) As DataTable
         Dim db As New DB
         Try
             Return db.getUsuario(_dni)
@@ -45,9 +44,23 @@
 
     Public Property dni As String
         Set(value As String)
-            _dni = value
-            _modificado = True
+            Dim r As DataRow()
+            r = _usuarios.Select("dni = " & value)
+            If r.Length = 1 Then
+                _dni = value
+                _apellido = r(0)("apellido")
+                _nombre = r(0)("nombre")
+                _nivel = r(0)("nivel")
+                pass = r(0)("pass")
+                _creoUser = r(0)("cargo_usuario")
+                _modifUser = r(0)("modifico_usuario")
+                _fechaCarga = r(0)("fecha_carga")
+                _fechaMod = r(0)("fecha_modificacion")
+            Else
+                Throw New Exception("DNI Inexistente")
+            End If
         End Set
+
         Get
             Return _dni
         End Get

@@ -73,14 +73,15 @@ Partial Class frmIngresar
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(225, 233)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(197, 13)
+        Me.Label3.Size = New System.Drawing.Size(199, 13)
         Me.Label3.TabIndex = 44
-        Me.Label3.Text = "distingue entre mayusculas y minusculas"
+        Me.Label3.Text = "Distingue entre mayusculas y minusculas"
         '
         'txtPassw
         '
         Me.txtPassw.Location = New System.Drawing.Point(249, 200)
         Me.txtPassw.Name = "txtPassw"
+        Me.txtPassw.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassw.Size = New System.Drawing.Size(121, 20)
         Me.txtPassw.TabIndex = 43
         '
@@ -122,8 +123,10 @@ Partial Class frmIngresar
         '
         'frmIngresar
         '
+        Me.AcceptButton = Me.btnGuardar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.BtnCerrar
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.BtnCerrar)
