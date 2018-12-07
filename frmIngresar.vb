@@ -22,6 +22,7 @@
             My.Settings.nivel = usuario.nivel
             Me.Hide()
             frmPrincipal.ShowDialog()
+            Me.Close()
 
         Catch ex As Exception
             numDni.Focus()
