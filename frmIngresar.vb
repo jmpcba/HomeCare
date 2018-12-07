@@ -1,10 +1,10 @@
 ﻿Public Class frmIngresar
     Dim usuario As New Usuario
     Dim ut As New utils
-        Dim txtBoxes As TextBox()
-        Dim db As New DB
+    Dim txtBoxes As TextBox()
+    Dim db As New DB
 
-        Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
         Try
             ut.validarTxtBoxLleno(txtBoxes)

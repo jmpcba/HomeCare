@@ -36,12 +36,21 @@
     Private Sub btnFeriados_Click(sender As Object, e As EventArgs) Handles btnFeriados.Click
         FrmFeriados.ShowDialog()
     End Sub
+    Private Sub btnUsuarios_Click(sender As Object, e As EventArgs) Handles btnUsuarios.Click
+        frmUsuarios.ShowDialog()
+    End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         My.Settings.Item("HomeCareConnectionString") = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)
 
         If My.Settings.nivel > 0 Then
             MenuStrip2.Enabled = False
+        End If
+
+        If My.Settings.nivel > 0 Then
+            btnUsuarios.Visible = False
+        Else
+            btnUsuarios.Visible = True
         End If
     End Sub
 

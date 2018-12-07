@@ -450,14 +450,12 @@ Public Class DB
     Friend Sub insertar(_usuario As Usuario)
 
         Try
-            ' Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}')",
-            ' _practica.prestador.cuit, _practica.paciente.afiliado, _practica.modulo, _practica.subModulo,
-            ' _practica.hsSemana, _practica.hsFeriado, _practica.fecha.ToShortDateString,
-            ' DateTime.Today.ToShortDateString, _practica.observaciones, _practica.creoUser,
-            ' _practica.fechaCarga.ToShortDateString, _practica.modifUser, _practica.fechaMod.ToShortDateString, _practica.prestador.id)
+            Dim query = String.Format("INSERT INTO USUARIOS (DNI, APELLIDO, NOMBRE, NIVEL, PASS, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', {3}, '{4}', '{5}', '{6}', '{7}', '{8}')",
+                                      _usuario.dni, _usuario.apellido, _usuario.nombre, _usuario.nivel, _usuario.pass, _usuario.creoUser, _usuario.fechaCarga.ToShortDateString, _usuario.modifUser, _usuario.fechaMod.ToShortDateString)
+
 
             cmd.CommandType = CommandType.Text
-            '  cmd.CommandText = query
+            cmd.CommandText = query
 
             ut.backupDBTemp()
 
@@ -565,10 +563,10 @@ Public Class DB
 
     Friend Sub actualizar(_usuario As Usuario)
 
-        ' Dim query = String.Format("UPDATE MODULO SET MEDICO='{0}', ENFERMERIA='{1}', KINESIOLOGIA='{2}', FONOAUDIOLOGIA='{3}', CUIDADOR='{4}', NUTRICION='{5}', MODIFICO_USUARIO='{6}', FECHA_MODIFICACION=#{7}# WHERE CODIGO='{8}'", _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.topeNutricionista, _mod.modifUser, _mod.fechaMod.ToShortDateString, _mod.codigo)
+        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', NIVEL={2}, PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, _usuario.pass, _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
 
         cmd.CommandType = CommandType.Text
-        '  cmd.CommandText = query
+        cmd.CommandText = query
 
         Try
             ut.backupDBTemp()

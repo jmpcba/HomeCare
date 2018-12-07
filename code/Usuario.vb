@@ -136,6 +136,12 @@
         End Try
     End Sub
 
+    Public ReadOnly Property usuarios As DataTable
+        Get
+            Return _usuarios
+        End Get
+    End Property
+
     Public Sub actualizar()
         Dim db = New DB
         Try

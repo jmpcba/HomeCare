@@ -46,6 +46,13 @@
                 filtro = "codigo"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR SUB-MODULO"
+            ElseIf frmParent.GetType.Name = "frmUsuarios" Then
+                obj = New Usuario()
+                dt = obj.usuarios
+                dgBuscar.DataSource = dt
+                filtro = "DNI"
+                lblFiltro.Text = filtro
+                Me.Text = "BUSCAR USUARIOS"
             End If
 
             dgBuscar.AutoResizeColumns()
@@ -71,6 +78,8 @@
                 obj.codigo = r.Cells("codigo").Value
             ElseIf frmParent.GetType.Name = "frmSubMod" Then
                 obj.codigo = r.Cells("codigo").Value
+            ElseIf frmParent.GetType.Name = "frmUsuarios" Then
+                obj.dni = r.Cells("dni").Value
             End If
 
             frmParent.resultadoBusqueda(obj)
