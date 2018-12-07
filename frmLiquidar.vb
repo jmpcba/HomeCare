@@ -60,6 +60,11 @@
         btnGuardar.Enabled = False
         Me.WindowState = FormWindowState.Maximized
         llenarGrilla()
+        If My.Settings.nivel > 1 Then
+            btnGuardar.Visible = False
+        Else
+            btnGuardar.Visible = True
+        End If
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
