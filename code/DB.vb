@@ -563,7 +563,7 @@ Public Class DB
 
     Friend Sub actualizar(_usuario As Usuario)
 
-        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', NIVEL={2}, PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, _usuario.pass, _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
+        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, _usuario.pass, _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -648,7 +648,7 @@ Public Class DB
     Public Function getEmailPass() As String
         Dim resultado As String
         Dim encPass As String
-        Dim encriptador As New Encriptador("JMPSistemas")
+        Dim encriptador As New Encriptador()
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = "SELECT MAIL_PASS FROM CONFIG"
@@ -703,7 +703,7 @@ Public Class DB
     End Sub
 
     Public Sub actualizarMailPass(_pass As String)
-        Dim encriptador As New Encriptador("JMPSistemas")
+        Dim encriptador As New Encriptador()
         Dim encPass = encriptador.EncryptData(_pass)
         cmd.CommandType = CommandType.Text
         cmd.CommandText = String.Format("UPDATE CONFIG SET MAIL_PASS='{0}'", encPass)

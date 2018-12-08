@@ -11,6 +11,7 @@
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
+    Private ut As New utils
 
     Public Sub New()
         Dim db = New DB()
@@ -22,10 +23,11 @@
     End Sub
 
     Public Sub New(_dni As String, _nombre As String, _apellido As String, _pass As String, _nivel As String)
+        Dim encriptador As New Encriptador()
         Me._dni = _dni
         Me._nombre = _nombre
         Me._apellido = _apellido
-        Me._pass = _pass
+        Me._pass = encriptador.EncryptData(_pass)
         Me._nivel = _nivel
         Me._modifUser = My.Settings.dni
         Me._creoUser = My.Settings.dni
@@ -44,6 +46,7 @@
 
     Public Property dni As String
         Set(value As String)
+            Dim encriptador As New Encriptador()
             Dim r As DataRow()
             r = _usuarios.Select("dni = " & value)
             If r.Length = 1 Then
@@ -51,7 +54,7 @@
                 _apellido = r(0)("apellido")
                 _nombre = r(0)("nombre")
                 _nivel = r(0)("nivel")
-                pass = r(0)("pass")
+                _pass = encriptador.DecryptData(r(0)("pass"))
                 _creoUser = r(0)("cargo_usuario")
                 _modifUser = r(0)("modifico_usuario")
                 _fechaCarga = r(0)("fecha_carga")
@@ -68,9 +71,11 @@
 
     Public Property pass As String
         Set(value As String)
-            _pass = value
+            Dim enc As New Encriptador()
+            _pass = enc.EncryptData(value)
             _modificado = True
         End Set
+
         Get
             Return _pass
         End Get

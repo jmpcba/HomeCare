@@ -27,18 +27,18 @@ Partial Class frmUsuarios
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtPassw = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.txtApellido = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtNombre = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtNivel = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtPassw = New System.Windows.Forms.TextBox()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnBuscar = New System.Windows.Forms.Button()
+        Me.cbNivel = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -81,7 +81,7 @@ Partial Class frmUsuarios
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.txtNivel)
+        Me.Panel1.Controls.Add(Me.cbNivel)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.txtApellido)
         Me.Panel1.Controls.Add(Me.Label4)
@@ -98,21 +98,14 @@ Partial Class frmUsuarios
         Me.Panel1.Size = New System.Drawing.Size(733, 446)
         Me.Panel1.TabIndex = 0
         '
-        'Label3
+        'Label7
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(224, 295)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(197, 13)
-        Me.Label3.TabIndex = 44
-        Me.Label3.Text = "distingue entre mayusculas y minusculas"
-        '
-        'txtPassw
-        '
-        Me.txtPassw.Location = New System.Drawing.Point(259, 263)
-        Me.txtPassw.Name = "txtPassw"
-        Me.txtPassw.Size = New System.Drawing.Size(121, 20)
-        Me.txtPassw.TabIndex = 3
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(106, 343)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(38, 13)
+        Me.Label7.TabIndex = 49
+        Me.Label7.Text = "NIVEL"
         '
         'txtApellido
         '
@@ -146,21 +139,22 @@ Partial Class frmUsuarios
         Me.txtNombre.Size = New System.Drawing.Size(197, 20)
         Me.txtNombre.TabIndex = 1
         '
-        'Label7
+        'Label3
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(106, 343)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(38, 13)
-        Me.Label7.TabIndex = 49
-        Me.Label7.Text = "NIVEL"
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(224, 295)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(197, 13)
+        Me.Label3.TabIndex = 44
+        Me.Label3.Text = "distingue entre mayusculas y minusculas"
         '
-        'txtNivel
+        'txtPassw
         '
-        Me.txtNivel.Location = New System.Drawing.Point(259, 340)
-        Me.txtNivel.Name = "txtNivel"
-        Me.txtNivel.Size = New System.Drawing.Size(121, 20)
-        Me.txtNivel.TabIndex = 4
+        Me.txtPassw.Location = New System.Drawing.Point(259, 263)
+        Me.txtPassw.Name = "txtPassw"
+        Me.txtPassw.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPassw.Size = New System.Drawing.Size(121, 20)
+        Me.txtPassw.TabIndex = 3
         '
         'btnLimpiar
         '
@@ -204,10 +198,22 @@ Partial Class frmUsuarios
         Me.btnBuscar.Text = "&BUSCAR"
         Me.btnBuscar.UseVisualStyleBackColor = True
         '
+        'cbNivel
+        '
+        Me.cbNivel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbNivel.FormattingEnabled = True
+        Me.cbNivel.Items.AddRange(New Object() {"0", "1", "2"})
+        Me.cbNivel.Location = New System.Drawing.Point(259, 339)
+        Me.cbNivel.Name = "cbNivel"
+        Me.cbNivel.Size = New System.Drawing.Size(121, 21)
+        Me.cbNivel.TabIndex = 50
+        '
         'frmUsuarios
         '
+        Me.AcceptButton = Me.btnGuardar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(993, 507)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnCerrar)
@@ -229,7 +235,6 @@ Partial Class frmUsuarios
     Friend WithEvents Panel1 As Panel
     Friend WithEvents txtPassw As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents txtNivel As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents txtApellido As TextBox
     Friend WithEvents Label4 As Label
@@ -239,4 +244,5 @@ Partial Class frmUsuarios
     Friend WithEvents btnCerrar As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnBuscar As Button
+    Friend WithEvents cbNivel As ComboBox
 End Class

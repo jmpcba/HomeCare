@@ -6,19 +6,20 @@
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
+        If cbNivel.SelectedIndex = -1 Then
+            Throw New Exception("Seleccione un valor para NIVEL")
+        End If
+
         Try
             If IsNothing(user) Then
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarLargo(numDni, 8)
-                If txtNivel.Text.Trim <> "0" And txtNivel.Text.Trim <> "1" And txtNivel.Text.Trim <> "2" Then
-                    Throw New Exception("NIVEL SOLO PUEDE SER 0 1 o 2")
-                    txtNivel.Focus()
-                End If
-                user = New Usuario(numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtPassw.Text.Trim, txtNivel.Text.Trim)
+                user = New Usuario(numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtPassw.Text.Trim, cbNivel.SelectedItem)
                 user.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
             Else
+                Dim enc As New Encriptador()
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarNumerico(numDni)
                 ut.validarLargo(numDni, 8)
@@ -32,13 +33,10 @@
                 If txtPassw.Text.Trim <> user.pass Then
                     user.pass = txtPassw.Text.Trim
                 End If
-                If txtNivel.Text.Trim <> user.nivel Then
-                    user.nivel = txtNivel.Text.Trim
+                If cbNivel.SelectedItem <> user.nivel Then
+                    user.nivel = cbNivel.SelectedItem
                 End If
-                If txtNivel.Text.Trim <> "0" And txtNivel.Text.Trim <> "1" And txtNivel.Text.Trim <> "2" Then
-                    Throw New Exception("NIVEL SOLO PUEDE SER 0 1 o 2")
-                    txtNivel.Focus()
-                End If
+
                 user.actualizar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
@@ -72,28 +70,31 @@
         End Try
     End Sub
 
-    Public Sub resultadoBusqueda(ByRef _usuarios As Usuario)
+    Public Sub resultadoBusqueda(ByRef _usuario As Usuario)
         numDni.ReadOnly = True
-        numDni.Text = _usuarios.dni
-        txtNombre.Text = _usuarios.nombre
-        txtApellido.Text = _usuarios.apellido
-        txtPassw.Text = _usuarios.pass
-        txtNivel.Text = _usuarios.nivel
-        user = _usuarios
+        numDni.Text = _usuario.dni
+        txtNombre.Text = _usuario.nombre
+        txtApellido.Text = _usuario.apellido
+        txtPassw.Text = _usuario.pass
+        cbNivel.SelectedItem = _usuario.nivel
+        cbNivel.Enabled = False
+        user = _usuario
     End Sub
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
         user = Nothing
+        iniciarControles()
+    End Sub
+
+    Private Sub iniciarControles()
+        cbNivel.Enabled = True
+        cbNivel.SelectedIndex = -1
         numDni.ReadOnly = False
         ut.iniciarTxtBoxes(txtBoxes)
     End Sub
 
-    Private Sub iniciarControles()
-        ut.iniciarTxtBoxes(txtBoxes)
-    End Sub
-
     Private Sub frmusuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtBoxes = {numDni, txtNombre, txtApellido, txtPassw, txtNivel}
+        txtBoxes = {numDni, txtNombre, txtApellido, txtPassw}
     End Sub
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs)
         Me.Close()
