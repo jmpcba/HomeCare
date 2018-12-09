@@ -56,6 +56,8 @@
             End If
         Finally
             btnGuardar.Enabled = True
+            txtDescripcion.Text = ""
+
         End Try
     End Sub
 
@@ -72,6 +74,7 @@
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
             dgFeriados.ClearSelection()
+            txtDescripcion.Text = ""
         End Try
     End Sub
 

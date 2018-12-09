@@ -8,17 +8,14 @@
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
-    Private _user As New Usuario
     Private _subModulos As DataTable
 
-    Public Sub New(_cod As String, _desc As String, _tope As Integer)
-        Dim user As New Usuario
+    Public Sub New(_cod As String, _desc As String)
 
         _codigo = _cod
         _descripcion = _desc
-        _numTope = _tope
-        _modifUser = user.dni
-        _creoUser = user.dni
+        _modifUser = My.Settings.dni
+        _creoUser = My.Settings.dni
         _fechaCarga = Date.Today
         _fechaMod = Date.Today
     End Sub
@@ -27,6 +24,13 @@
         Dim db = New DB()
         Try
             _subModulos = db.getTable(DB.tablas.subModulo)
+            _subModulos.Columns.Add("COMBO")
+            For Each r As DataRow In _subModulos.Rows
+                Dim codigo = r("codigo")
+                Dim descripcion = r("descripcion")
+                r("COMBO") = String.Format("{0} - {1}", codigo, descripcion)
+            Next
+            _subModulos.DefaultView.Sort = "COMBO"
         Catch ex As Exception
             Throw
         End Try
@@ -53,9 +57,14 @@
         End Get
     End Property
 
+    Public ReadOnly Property subModulos As DataTable
+        Get
+            Return _subModulos
+        End Get
+    End Property
     Friend Sub llenarcombo(_combo As ComboBox)
         _combo.DataSource = _subModulos
-        _combo.DisplayMember = "descripcion"
+        _combo.DisplayMember = "combo"
         _combo.ValueMember = "codigo"
         _combo.SelectedIndex = -1
     End Sub
@@ -113,7 +122,7 @@
         Dim db As New DB
         Try
             If _modificado Then
-                _modifUser = _user.dni
+                _modifUser = My.Settings.dni
                 _fechaMod = Date.Today
                 db.actualizar(Me)
             Else

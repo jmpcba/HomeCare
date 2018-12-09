@@ -42,6 +42,7 @@ Partial Class frmPrincipal
         Me.ConfiguracionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnUsuarios = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
@@ -115,7 +116,7 @@ Partial Class frmPrincipal
         '
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnCerrar.Location = New System.Drawing.Point(751, 70)
+        Me.btnCerrar.Location = New System.Drawing.Point(749, 124)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 20
@@ -143,7 +144,7 @@ Partial Class frmPrincipal
         Me.Panel1.Controls.Add(Me.btnInformes)
         Me.Panel1.Location = New System.Drawing.Point(12, 70)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(330, 359)
+        Me.Panel1.Size = New System.Drawing.Size(330, 407)
         Me.Panel1.TabIndex = 103
         '
         'Label1
@@ -187,6 +188,7 @@ Partial Class frmPrincipal
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.btnUsuarios)
         Me.Panel2.Controls.Add(Me.btnFeriados)
         Me.Panel2.Controls.Add(Me.btnSubMod)
         Me.Panel2.Controls.Add(Me.Label2)
@@ -194,7 +196,7 @@ Partial Class frmPrincipal
         Me.Panel2.Controls.Add(Me.btnPacientes)
         Me.Panel2.Location = New System.Drawing.Point(381, 70)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(330, 359)
+        Me.Panel2.Size = New System.Drawing.Size(330, 407)
         Me.Panel2.TabIndex = 104
         '
         'Label2
@@ -236,11 +238,20 @@ Partial Class frmPrincipal
         Me.MailToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
         Me.MailToolStripMenuItem.Text = "&Mail"
         '
+        'btnUsuarios
+        '
+        Me.btnUsuarios.Location = New System.Drawing.Point(20, 340)
+        Me.btnUsuarios.Name = "btnUsuarios"
+        Me.btnUsuarios.Size = New System.Drawing.Size(260, 53)
+        Me.btnUsuarios.TabIndex = 105
+        Me.btnUsuarios.Text = "ADMINISTRAR USUARIOS"
+        Me.btnUsuarios.UseVisualStyleBackColor = True
+        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(881, 471)
+        Me.ClientSize = New System.Drawing.Size(881, 489)
         Me.Controls.Add(Me.btnPrestadores)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.MenuStrip1)
@@ -281,4 +292,5 @@ Partial Class frmPrincipal
     Friend WithEvents ConfiguracionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BaseDeDatosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MailToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents btnUsuarios As Button
 End Class

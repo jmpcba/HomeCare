@@ -1,6 +1,7 @@
 ﻿Public Class frmLiquidar
     Dim sel As Boolean = False
     Dim ut As New utils
+    Dim dt As New DataTable
     Private Sub dtMes_ValueChanged(sender As Object, e As EventArgs) Handles dtMes.ValueChanged
         llenarGrilla()
     End Sub
@@ -9,7 +10,7 @@
         Try
             Dim db As New DB()
             Dim mes = dtMes.Value
-            Dim dt As New DataTable
+
             dt = db.getLiquidacion(mes, DB.tiposLiquidacion.medico)
 
             dt.Columns.Add("RESULTADO CARGA")
@@ -59,6 +60,11 @@
         btnGuardar.Enabled = False
         Me.WindowState = FormWindowState.Maximized
         llenarGrilla()
+        If My.Settings.nivel > 1 Then
+            btnGuardar.Visible = False
+        Else
+            btnGuardar.Visible = True
+        End If
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
@@ -147,5 +153,22 @@
 
     Private Sub frmLiquidar_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         gridLiqui.ClearSelection()
+    End Sub
+
+    Private Sub ResumenDePrestadoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResumenDePrestadoresToolStripMenuItem.Click
+        Try
+            ut.exportarExcel(dt)
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+    End Sub
+
+    Private Sub TodasLasPracticasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TodasLasPracticasToolStripMenuItem.Click
+        Try
+            Dim practicas = New Practica
+            ut.exportarExcel(practicas.getPracticas(dtMes.Value))
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
     End Sub
 End Class

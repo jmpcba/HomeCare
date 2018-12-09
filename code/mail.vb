@@ -32,6 +32,8 @@ Public Class Mail
             mail = mail.Replace("[MONTO_FER]", _liq.importeFeriado)
             mail = mail.Replace("[MONTO_FIJO]", _liq.montoFijo)
             mail = mail.Replace("[OBS]", _liq.observaciones)
+            mail = mail.Replace("[APELLIDO]", _liq.prestador.apellido.ToUpper)
+            mail = mail.Replace("[NOMBRE]", _liq.prestador.nombre.ToUpper)
 
             mm.From = New MailAddress("homecarePrueba@gmail.com")
             mm.Subject = "Liquidacion HomeCare " & MonthName(_liq.mes.Month)

@@ -1,5 +1,4 @@
 ﻿Public Class frmModulo
-    'cambiar validaciones para que usen el objeto ut
     Dim modu As Modulo
     Dim ut As New utils
     Dim txtboxes As TextBox()
@@ -15,6 +14,7 @@
                 modu.insertar()
                 MessageBox.Show("Guardado Exitoso")
                 ut.iniciarTxtBoxes(txtboxes)
+                txtCodigo.ReadOnly = False
             Else
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtboxes)
@@ -35,14 +35,15 @@
                     modu.topeFono = txtFono.Text
                 End If
 
-                If txtCuidador.Text <> modu.topeCuidador Then
-                    modu.topeCuidador = txtCuidador.Text
+                If txtNutricion.Text <> modu.topeNutricionista Then
+                    modu.topeNutricionista = txtNutricion.Text
                 End If
 
                 modu.actualizar()
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 ut.iniciarTxtBoxes(txtboxes)
                 modu = Nothing
-                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
+                txtCodigo.ReadOnly = False
             End If
 
         Catch ex As Exception
@@ -50,6 +51,9 @@
                 ut.mensaje("Ya existe un Modulo con el mismo codigo", utils.mensajes.err)
             Else
                 ut.mensaje(ex.Message, utils.mensajes.err)
+            End If
+            If ex.Message.Contains("No se realizaron modificaciones") Then
+                iniciarControles()
             End If
         End Try
     End Sub
@@ -73,6 +77,7 @@
         txtFono.Text = ""
         txtKinesio.Text = ""
         txtMedico.Text = ""
+        txtNutricion.Text = ""
     End Sub
 
     Private Sub txtCodigo_Click(sender As Object, e As EventArgs)
@@ -83,7 +88,7 @@
         '   If (txtCodigo.Text = "" Or txtDescripcion.Text = "") Then
         '   Throw New Exception("Complete los campos necesarios")
         '   End If
-        If (txtMedico.Text = "" And txtEnfermeria.Text = "" And txtKinesio.Text = "" And txtFono.Text = "" And txtCuidador.Text = "") Then
+        If (txtMedico.Text = "" And txtEnfermeria.Text = "" And txtKinesio.Text = "" And txtFono.Text = "" And txtCuidador.Text = "" And txtNutricion.Text = "") Then
             Throw New Exception("Debe cargar algún tope")
         End If
         If txtCodigo.Text.Length <> 6 Then
@@ -132,18 +137,26 @@
         End Try
     End Sub
 
+    Private Sub txtNutricion_TextChanged(sender As Object, e As EventArgs) Handles txtNutricion.TextChanged
+        Try
+            ut.validarNumerico(txtNutricion)
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+    End Sub
+
     Private Sub frmModulo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'btnBuscar.Enabled = False
-        txtboxes = {txtCodigo, txtMedico, txtEnfermeria, txtKinesio, txtFono, txtCuidador}
+        txtboxes = {txtCodigo, txtMedico, txtEnfermeria, txtKinesio, txtFono, txtCuidador, txtNutricion}
     End Sub
 
     Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
         Try
-            If txtCodigo.Text <> "" Then
-                btnBuscar.Enabled = True
-            Else
-                btnBuscar.Enabled = False
-            End If
+            '  If txtCodigo.Text <> "" Then
+            '  btnBuscar.Enabled = True
+            '  Else
+            '  btnBuscar.Enabled = False
+            '  End If
 
             If Not IsNothing(modu) Then
                 modu = Nothing
@@ -171,6 +184,7 @@
         txtFono.Text = _modulo.topeFono
         txtKinesio.Text = _modulo.topeKinesio
         txtMedico.Text = _modulo.topeMedico
+        txtNutricion.Text = _modulo.topeNutricionista
         modu = _modulo
 
     End Sub

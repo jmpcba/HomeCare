@@ -105,11 +105,11 @@ Public Class frmPracticas
                         Dim horas As Integer
                         Dim dia As Integer
 
-                        If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
+                        If IsDBNull(r.Cells("PRACTICAS-HS").Value) OrElse r.Cells("PRACTICAS-HS").Value = 0 OrElse r.Cells("PRACTICAS-HS").Value = "" Then
                             r.DefaultCellStyle.BackColor = Color.LightGray
                             Continue For
                         Else
-                            horas = r.Cells("HORAS").Value
+                            horas = r.Cells("PRACTICAS-HS").Value
                             dia = r.Cells("DIA_H").Value
 
                             Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
@@ -147,6 +147,7 @@ Public Class frmPracticas
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
             btnGuardar.Enabled = True
+            iniciarControles()
             With dgFechas
                 .Columns("RESULTADO").ReadOnly = True
                 .AutoResizeColumns()
@@ -198,7 +199,7 @@ Public Class frmPracticas
 
         dt.Columns.Add("DIA")
         dt.Columns.Add("DIA_H")
-        dt.Columns.Add("HORAS")
+        dt.Columns.Add("PRACTICAS-HS")
         dt.Columns.Add("RESULTADO")
 
         For i = 0 To days - 1
@@ -225,7 +226,7 @@ Public Class frmPracticas
             .Columns("RESULTADO").DefaultCellStyle.BackColor = Color.LightGray
             .Columns("RESULTADO").DefaultCellStyle.Font = New Font("arial", 8)
 
-            .Columns("HORAS").DefaultCellStyle.Font = New Font("arial", 8)
+            .Columns("PRACTICAS-HS").DefaultCellStyle.Font = New Font("arial", 8)
 
             .Columns("DIA").ReadOnly = True
             .Columns("RESULTADO").ReadOnly = True
@@ -249,27 +250,27 @@ Public Class frmPracticas
     End Sub
 
     Private Sub dgFechas_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgFechas.CellEndEdit
-        Dim val = dgFechas.Rows(e.RowIndex).Cells("HORAS").Value
+        Dim val = dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value
         Dim horas As Integer = 0
         Dim monto As Decimal = 0
 
         If IsNothing(med.cuit) Then
             ut.mensaje("Seleccione un Prestador", utils.mensajes.err)
-            dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+            dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
             cbMedico.Focus()
         ElseIf IsNothing(modu.codigo) Then
             ut.mensaje("Seleccione un Modulo", utils.mensajes.err)
-            dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+            dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
             cbModulo.Focus()
         Else
             If Not IsDBNull(val) Then
                 edicion = True
                 If Not IsNumeric(val) Then
                     ut.mensaje("Debe ingresar un valor numerico", utils.mensajes.err)
-                    dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+                    dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
                 ElseIf val > 24 Then
                     ut.mensaje("No puede ingresar mas de 24hs en un dia", utils.mensajes.err)
-                    dgFechas.Rows(e.RowIndex).Cells("HORAS").Value = Nothing
+                    dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
                 End If
             End If
 
@@ -278,25 +279,25 @@ Public Class frmPracticas
                 For Each r As DataGridViewRow In dgFechas.Rows
 
                     If r.Cells(0).Value = True Then
-                        r.Cells("HORAS").Value = val
+                        r.Cells("PRACTICAS-HS").Value = val
                         r.Cells(0).Value = False
                     End If
 
-                    If IsDBNull(r.Cells("HORAS").Value) OrElse r.Cells("HORAS").Value = 0 OrElse r.Cells("HORAS").Value = "" Then
+                    If IsDBNull(r.Cells("PRACTICAS-HS").Value) OrElse r.Cells("PRACTICAS-HS").Value = 0 OrElse r.Cells("PRACTICAS-HS").Value = "" Then
                         Continue For
                     Else
                         Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-                        Dim hs = r.Cells("HORAS").Value
+                        Dim hs = r.Cells("PRACTICAS-HS").Value
                         If ut.esFindeOFeriado(fecha) Then
                             If med.montoFeriado = 0 Then
                                 ut.mensaje("Este prestador no trabaja fines de semana o feriados", utils.mensajes.err)
                                 hs = 0
-                                r.Cells("HORAS").Value = Nothing
+                                r.Cells("PRACTICAS-HS").Value = Nothing
                             Else
-                                monto += med.montoFeriado * r.Cells("HORAS").Value
+                                monto += med.montoFeriado * r.Cells("PRACTICAS-HS").Value
                             End If
                         Else
-                            monto += med.montoNormal * r.Cells("HORAS").Value
+                            monto += med.montoNormal * r.Cells("PRACTICAS-HS").Value
                         End If
                         horas += hs
                     End If
@@ -323,6 +324,34 @@ Public Class frmPracticas
             lblMonto.Text = 0
         End If
     End Sub
+    Private Sub iniciarControles()
+
+        dgFechas.Columns.Clear()
+        DTFecha.CustomFormat = "MMMM - yyyy"
+        lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
+        cbModulo.SelectedIndex = -1
+        cbSubModulo.SelectedIndex = -1
+        cbMedico.SelectedIndex = -1
+        cbPaciente.SelectedIndex = -1
+        txtAfiliado.Text = ""
+        txtBeneficio.Text = ""
+        txtEspecialidad.Text = ""
+        txtLocalidad.Text = ""
+        txtMat.Text = ""
+        txtServicio.Text = ""
+        txtObservaciones.Text = ""
+        lblHoras.Text = ""
+        lblMonto.Text = ""
+        cargarGrilla()
+        lblMes.Text = MonthName(DTFecha.Value.Month)
+        edicion = False
+        lblHoras.Text = 0
+        lblMonto.Text = 0
+
+        dgFechas.AutoResizeColumns()
+        dgFechas.AutoResizeRows()
+
+    End Sub
 
     Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectionChangeCommitted
         If cbModulo.SelectedIndex <> -1 Then
@@ -343,6 +372,7 @@ Public Class frmPracticas
                 txtMat.Text = med.cuit
                 txtLocalidad.Text = med.localidad
                 txtEspecialidad.Text = med.especialidad
+                txtServicio.Text = med.obraSocial
             Catch ex As Exception
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End Try

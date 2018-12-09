@@ -20,6 +20,7 @@ Public Class DB
         subModulo
         feriados
         especialidades
+        usuarios
     End Enum
 
     Public Enum tiposLiquidacion
@@ -56,7 +57,7 @@ Public Class DB
     Friend Sub InsertarFeriado(_fecha As Date, _desc As String)
         Try
             Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
-                                      _fecha.ToShortDateString, _desc, "29188989", Today.ToShortDateString, "29188989", Today.ToShortDateString)
+                                      _fecha.Date.ToShortDateString, _desc, My.Settings.dni, Today.ToShortDateString, My.Settings.dni, Today.ToShortDateString)
 
             cmd.CommandType = CommandType.Text
             cmd.CommandText = query
@@ -74,15 +75,34 @@ Public Class DB
         End Try
     End Sub
 
+    Friend Function getPracticas(_fecha As Date) As DataTable
+        Dim desde As Date
+        Dim hasta As Date
+
+        desde = New Date(_fecha.Year, _fecha.Month, 1)
+        hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
+
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandText = "QUERY_DETALLE_PRACTICAS"
+
+        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
+        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
+
+        Try
+            da.Fill(ds, "PRACTICAS")
+            Return ds.Tables("PRACTICAS")
+        Catch ex As Exception
+            Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        End Try
+    End Function
+
     Friend Sub eliminarFeriado(_fecha As Date)
         Try
 
-            Dim desde = _fecha.AddDays(-1)
-            Dim hasta = _fecha.AddDays(1)
-            Dim query = String.Format("DELETE FROM FERIADOS WHERE FECHA > #{0}# AND FECHA < #{1}#", desde.ToShortDateString, hasta.ToShortDateString)
-
-            cmd.CommandType = CommandType.Text
-            cmd.CommandText = query
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.CommandText = "DELETE_FERIADO"
+            cmd.Parameters.Clear()
+            cmd.Parameters.AddWithValue("FECHA_IN", _fecha.Date)
 
             ut.backupDBTemp()
 
@@ -98,13 +118,13 @@ Public Class DB
     End Sub
 
     Friend Function getLiquidacion(_fecha As Date, _liq As tiposLiquidacion) As DataTable
-        Dim desde As String
-        Dim hasta As String
+        Dim desde As Date
+        Dim hasta As Date
         Dim dt As New DataTable
         Dim ut As New utils
 
-        desde = String.Format("1/{0}/{1}", _fecha.Month, _fecha.Year)
-        hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+        desde = New Date(_fecha.Year, _fecha.Month, 1)
+        hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
         cmd.CommandType = CommandType.StoredProcedure
         If _liq = tiposLiquidacion.detalle Then
@@ -119,8 +139,8 @@ Public Class DB
             'cmd.Parameters.AddWithValue("P_CUIT", desde)
         End If
 
-        cmd.Parameters.AddWithValue("DESDE", desde)
-        cmd.Parameters.AddWithValue("HASTA", hasta)
+        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
+        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
 
         Try
             'LLENAR EL DETALLE
@@ -168,17 +188,17 @@ Public Class DB
     End Sub
 
     Friend Function getLiquidacion(_id As Integer, _fecha As Date) As DataTable
-        Dim desde As String
-        Dim hasta As String
+        Dim desde As Date
+        Dim hasta As Date
 
-        desde = String.Format("1/{0}/{1}", _fecha.Month, _fecha.Year)
-        hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+        desde = New Date(_fecha.Year, _fecha.Month, 1)
+        hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
         cmd.CommandType = CommandType.StoredProcedure
         cmd.CommandText = "QUERY_DETALLE_MEDICO"
         cmd.Parameters.AddWithValue("P_ID", _id)
-        cmd.Parameters.AddWithValue("DESDE", desde)
-        cmd.Parameters.AddWithValue("HASTA", hasta)
+        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
+        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
 
         Try
             da.Fill(ds, "LIQUIDACION")
@@ -228,6 +248,19 @@ Public Class DB
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
+
+        Try
+            da.Fill(ds, "PACIENTES")
+            Return ds.Tables("PACIENTES")
+        Catch ex As Exception
+            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
+        End Try
+
+    End Function
+
+    Public Function getUsuario(_dni As String) As DataTable
+        cmd.CommandText = String.Format("SELECT * FROM USUARIOS WHERE DNI = '{0}'", _dni)
+        cmd.CommandType = CommandType.Text
 
         Try
             da.Fill(ds, "PACIENTES")
@@ -311,7 +344,7 @@ Public Class DB
 
     Friend Sub insertar(_prestador As Prestador)
 
-        Dim query = String.Format("INSERT INTO PRESTADORES (CUIT, APELLIDO, NOMBRE, EMAIL, ESPECIALIDAD, LOCALIDAD, MONTO_SEMANA, MONTO_FERIADO, MONTO_FIJO, PORCENTAJE, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}, {9}, '{10}', '{11}', #{12}#, #{13}#)", _prestador.cuit, _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.creoUser, _prestador.modifUser, _prestador.fechaCarga.ToShortDateString, _prestador.fechaMod.ToShortDateString)
+        Dim query = String.Format("INSERT INTO PRESTADORES (CUIT, APELLIDO, NOMBRE, EMAIL, ESPECIALIDAD, LOCALIDAD, MONTO_SEMANA, MONTO_FERIADO, MONTO_FIJO, PORCENTAJE, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, SERVICIO) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}, {9}, '{10}', '{11}', #{12}#, #{13}#, '{14}')", _prestador.cuit, _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.creoUser, _prestador.modifUser, _prestador.fechaCarga.ToShortDateString, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -414,6 +447,28 @@ Public Class DB
             ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
+    Friend Sub insertar(_usuario As Usuario)
+
+        Try
+            Dim query = String.Format("INSERT INTO USUARIOS (DNI, APELLIDO, NOMBRE, NIVEL, PASS, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', {3}, '{4}', '{5}', '{6}', '{7}', '{8}')",
+                                      _usuario.dni, _usuario.apellido, _usuario.nombre, _usuario.nivel, _usuario.pass, _usuario.creoUser, _usuario.fechaCarga.ToShortDateString, _usuario.modifUser, _usuario.fechaMod.ToShortDateString)
+
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            ut.backupDBTemp()
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            hacerBackup = False
+            Throw
+        Finally
+            cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
+        End Try
+    End Sub
 
     Friend Sub actualizar(_paciente As Paciente)
         Dim query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION='{6}' WHERE AFILIADO='{7}'",
@@ -438,7 +493,7 @@ Public Class DB
 
     Friend Sub actualizar(_prestador As Prestador)
 
-        Dim query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}' WHERE ID={11}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.id)
+        Dim query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}' WHERE ID={12}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.id)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -457,15 +512,12 @@ Public Class DB
         End Try
 
     End Sub
-    Friend Sub actualizar(_prestacion As Prestacion)
-
-    End Sub
     Friend Sub actualizar(_feriado As Feriado)
 
     End Sub
     Friend Sub actualizar(_subMod As subModulo)
 
-        Dim query = String.Format("UPDATE SUBMODULO SET DESCRIPCION='{0}', MODIFICO_USUARIO={1}, FECHA_MODIFICACION=#{2}# WHERE CODIGO = {3}", _subMod.descripcion, _subMod.modifUser, _subMod.fechaMod.ToShortDateString, _subMod.codigo)
+        Dim query = String.Format("UPDATE SUBMODULO SET DESCRIPCION='{0}', MODIFICO_USUARIO='{1}', FECHA_MODIFICACION=#{2}# WHERE CODIGO= '{3}'", _subMod.descripcion, _subMod.modifUser, _subMod.fechaMod.ToShortDateString, _subMod.codigo)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -486,7 +538,32 @@ Public Class DB
 
     Friend Sub actualizar(_mod As Modulo)
 
-        Dim query = String.Format("UPDATE MODULO SET MEDICO={0}, ENFERMERIA={1}, KINESIO={2}, FONO={3}, CUIDADOR={4}, MODIFICO_USUARIO={5}, FECHA_MODIFICACION=#{6}# WHERE CODIGO={7}", _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.modifUser, _mod.fechaMod.ToShortDateString, _mod.codigo)
+        Dim query = String.Format("UPDATE MODULO SET MEDICO='{0}', ENFERMERIA='{1}', KINESIOLOGIA='{2}', FONOAUDIOLOGIA='{3}', CUIDADOR='{4}', NUTRICION='{5}', MODIFICO_USUARIO='{6}', FECHA_MODIFICACION=#{7}# WHERE CODIGO='{8}'", _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.topeNutricionista, _mod.modifUser, _mod.fechaMod.ToShortDateString, _mod.codigo)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            ut.backupDBTemp()
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            hacerBackup = False
+            Throw
+        Finally
+            cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
+        End Try
+    End Sub
+
+    Friend Sub ACTUALIZAR(_prestacion As Prestacion)
+
+    End Sub
+
+    Friend Sub actualizar(_usuario As Usuario)
+
+        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, _usuario.pass, _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -537,10 +614,11 @@ Public Class DB
     End Function
 
     Public Function getLiquidacionesCerradas(_fecha As Date) As DataTable
-        Dim hasta = String.Format("{0}/{1}/{2}", Date.DaysInMonth(_fecha.Year, _fecha.Month), _fecha.Month, _fecha.Year)
+        Dim hasta As Date
+        hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
         cmd.CommandType = CommandType.Text
-        cmd.CommandText = String.Format("SELECT * FROM LIQUIDACION WHERE MES=#{0}#", hasta)
+        cmd.CommandText = String.Format("SELECT * FROM LIQUIDACION WHERE MES=#{0}#", hasta.ToShortDateString)
 
         Try
             da.Fill(ds, "LIQ_CERRADAS")
@@ -570,7 +648,7 @@ Public Class DB
     Public Function getEmailPass() As String
         Dim resultado As String
         Dim encPass As String
-        Dim encriptador As New Encriptador("JMPSistemas")
+        Dim encriptador As New Encriptador()
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = "SELECT MAIL_PASS FROM CONFIG"
@@ -625,7 +703,7 @@ Public Class DB
     End Sub
 
     Public Sub actualizarMailPass(_pass As String)
-        Dim encriptador As New Encriptador("JMPSistemas")
+        Dim encriptador As New Encriptador()
         Dim encPass = encriptador.EncryptData(_pass)
         cmd.CommandType = CommandType.Text
         cmd.CommandText = String.Format("UPDATE CONFIG SET MAIL_PASS='{0}'", encPass)

@@ -42,18 +42,21 @@
                 End If
 
                 pac.actualizar()
-                iniciarControles()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
+                iniciarControles()
             End If
         Catch ex As Exception
+
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
                 ut.mensaje("Ya existe un paciente con el mismo numero", utils.mensajes.err)
             Else
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End If
+            If ex.Message.Contains("No se realizaron modificaciones") Then
+                iniciarControles()
+            End If
         Finally
             pac = Nothing
-
         End Try
     End Sub
 

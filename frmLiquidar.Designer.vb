@@ -34,9 +34,14 @@ Partial Class frmLiquidar
         Me.btnSelec = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtObservaciones = New System.Windows.Forms.TextBox()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ExportarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResumenDePrestadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TodasLasPracticasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.gridLiqui, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -142,6 +147,35 @@ Partial Class frmLiquidar
         Me.txtObservaciones.Size = New System.Drawing.Size(194, 20)
         Me.txtObservaciones.TabIndex = 113
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportarToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(937, 29)
+        Me.MenuStrip1.TabIndex = 114
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'ExportarToolStripMenuItem
+        '
+        Me.ExportarToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ResumenDePrestadoresToolStripMenuItem, Me.TodasLasPracticasToolStripMenuItem})
+        Me.ExportarToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ExportarToolStripMenuItem.Name = "ExportarToolStripMenuItem"
+        Me.ExportarToolStripMenuItem.Size = New System.Drawing.Size(80, 25)
+        Me.ExportarToolStripMenuItem.Text = "&Exportar"
+        '
+        'ResumenDePrestadoresToolStripMenuItem
+        '
+        Me.ResumenDePrestadoresToolStripMenuItem.Name = "ResumenDePrestadoresToolStripMenuItem"
+        Me.ResumenDePrestadoresToolStripMenuItem.Size = New System.Drawing.Size(273, 26)
+        Me.ResumenDePrestadoresToolStripMenuItem.Text = "&Resumen De Prestadores"
+        '
+        'TodasLasPracticasToolStripMenuItem
+        '
+        Me.TodasLasPracticasToolStripMenuItem.Name = "TodasLasPracticasToolStripMenuItem"
+        Me.TodasLasPracticasToolStripMenuItem.Size = New System.Drawing.Size(273, 26)
+        Me.TodasLasPracticasToolStripMenuItem.Text = "&Todas Las Practicas Del Mes"
+        '
         'frmLiquidar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -157,11 +191,15 @@ Partial Class frmLiquidar
         Me.Controls.Add(Me.gridLiqui)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmLiquidar"
         Me.Text = "LIQUIDACION"
         CType(Me.gridLiqui, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -178,4 +216,8 @@ Partial Class frmLiquidar
     Friend WithEvents btnSelec As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents txtObservaciones As TextBox
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents ExportarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ResumenDePrestadoresToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TodasLasPracticasToolStripMenuItem As ToolStripMenuItem
 End Class

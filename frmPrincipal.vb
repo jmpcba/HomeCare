@@ -36,9 +36,22 @@
     Private Sub btnFeriados_Click(sender As Object, e As EventArgs) Handles btnFeriados.Click
         FrmFeriados.ShowDialog()
     End Sub
+    Private Sub btnUsuarios_Click(sender As Object, e As EventArgs) Handles btnUsuarios.Click
+        frmUsuarios.ShowDialog()
+    End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         My.Settings.Item("HomeCareConnectionString") = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)
+
+        If My.Settings.nivel > 0 Then
+            MenuStrip2.Enabled = False
+        End If
+
+        If My.Settings.nivel > 0 Then
+            btnUsuarios.Visible = False
+        Else
+            btnUsuarios.Visible = True
+        End If
     End Sub
 
     Private Sub BaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BaseDeDatosToolStripMenuItem.Click
@@ -51,15 +64,16 @@
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
-        Me.Close()
+        Application.Exit()
         End
     End Sub
 
-    Private Sub BaseDeDatosToolStripMenuItem_Click_1(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub MailToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MailToolStripMenuItem.Click
         frmEmail.ShowDialog()
+    End Sub
+
+    Private Sub frmPrincipal_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        Application.Exit()
     End Sub
 End Class

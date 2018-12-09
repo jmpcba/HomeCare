@@ -1,6 +1,5 @@
 ﻿Public Class Prestador
 
-    Private _user As Usuario
     Private _prestadores As DataTable
     Private _id As String
     Private _cuit As String
@@ -19,9 +18,9 @@
     Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
+    Private _obraSocial As String
 
     Public Sub New()
-        _user = New Usuario
         Dim db = New DB()
         Try
             _prestadores = db.getTable(DB.tablas.prestadores)
@@ -31,7 +30,8 @@
                 Dim apellido = r("apellido")
                 Dim especialidad = r("especialidad")
                 Dim localidad = r("localidad")
-                r("COMBO") = String.Format("{0} {1} - {2} - {3}", apellido, nombre, localidad, especialidad)
+                Dim servicio = r("servicio")
+                r("COMBO") = String.Format("{0} {1} - {2} - {3} - {4}", apellido, nombre, localidad, especialidad, servicio)
             Next
             _prestadores.DefaultView.Sort = "COMBO"
         Catch ex As Exception
@@ -39,22 +39,22 @@
         End Try
     End Sub
 
-    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _porcentaje As Decimal, _fechaCese As Date)
+    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _porcentaje As Decimal, _fechaCese As Date, _obraSocial As String)
 
-        _user = New Usuario
         Me._cuit = _cuit
         Me._nombre = _nombre
         Me._apellido = _apellido
         Me._email = _email
         Me._especialidad = _especialidad
         Me._localidad = _localidad
+        Me._obraSocial = _obraSocial
         Me._montoLV = _montoLV
         Me._montoFer = _montoFer
         Me._montoFijo = _montoFijo
         Me._porcentaje = _porcentaje
         Me._fechaCese = _fechaCese
-        Me._modifUser = _user.dni
-        Me._creoUser = _user.dni
+        Me._modifUser = My.Settings.dni
+        Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
 
@@ -70,6 +70,7 @@
                 _cuit = r(0)("cuit")
                 _nombre = r(0)("nombre")
                 _apellido = r(0)("apellido")
+
                 If IsDBNull(r(0)("email")) Then
                     _email = ""
                 Else
@@ -78,10 +79,32 @@
 
                 _especialidad = r(0)("especialidad")
                 _localidad = r(0)("localidad")
+
+                If IsDBNull(r(0)("servicio")) Then
+                    _obraSocial = ""
+                Else
+                    _obraSocial = r(0)("servicio")
+                End If
+
                 _montoLV = r(0)("monto_semana")
-                _montoFer = r(0)("monto_feriado")
-                _montoFijo = r(0)("monto_fijo")
-                _porcentaje = r(0)("porcentaje")
+
+                If IsDBNull(r(0)("monto_feriado")) Then
+                    _montoFer = 0
+                Else
+                    _montoFer = r(0)("monto_feriado")
+                End If
+
+                If IsDBNull(r(0)("monto_fijo")) Then
+                    _montoFijo = 0
+                Else
+                    _montoFijo = r(0)("monto_fijo")
+                End If
+
+                If IsDBNull(r(0)("porcentaje")) Then
+                    _porcentaje = 0
+                Else
+                    _porcentaje = r(0)("porcentaje")
+                End If
 
                 If Not IsDBNull(r(0)("fecha_cese")) Then
                     _fechaCese = r(0)("fecha_cese")
@@ -157,6 +180,16 @@
         End Set
         Get
             Return _email
+        End Get
+    End Property
+
+    Public Property obraSocial As String
+        Set(value As String)
+            _obraSocial = value
+            _modificado = True
+        End Set
+        Get
+            Return _obraSocial
         End Get
     End Property
 
@@ -250,7 +283,7 @@
         Try
             If _modificado Then
                 _fechaMod = Date.Today
-                _modifUser = _user.dni
+                _modifUser = My.Settings.dni
                 db.actualizar(Me)
             Else
                 Throw New Exception("No se realizaron modificaciones")

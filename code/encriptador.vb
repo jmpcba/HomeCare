@@ -2,7 +2,8 @@
 Public NotInheritable Class Encriptador
     Private TripleDes As New TripleDESCryptoServiceProvider
 
-    Sub New(ByVal key As String)
+    Sub New()
+        Dim key As String = "JMPSistemas"
         ' Initialize the crypto provider.
         TripleDes.Key = TruncateHash(key, TripleDes.KeySize \ 8)
         TripleDes.IV = TruncateHash("", TripleDes.BlockSize \ 8)

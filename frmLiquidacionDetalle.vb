@@ -26,6 +26,12 @@
             fecha = _fecha
             idPrestador = _idPrest
 
+            If dt.Rows.Count > 0 Then
+                ToolStripMenuItemDetalle.Enabled = True
+            Else
+                ToolStripMenuItemDetalle.Enabled = False
+            End If
+
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
@@ -33,6 +39,11 @@
 
     Private Sub frmLiquidacionDetalle_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnEliminar.Enabled = False
+        If My.Settings.nivel > 1 Then
+            btnEliminar.Visible = False
+        Else
+            btnEliminar.Visible = True
+        End If
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
@@ -79,5 +90,17 @@
 
     Private Sub frmLiquidacionDetalle_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         dgDetalle.ClearSelection()
+    End Sub
+
+    Private Sub DetallePrestadorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDetalle.Click
+        Try
+            ut.exportarExcel(dt)
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+    End Sub
+
+    Private Sub btnCerrar_Click(sender As Object, e As EventArgs)
+        Me.Close()
     End Sub
 End Class
