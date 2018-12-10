@@ -147,12 +147,17 @@ Public Class frmPracticas
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
             btnGuardar.Enabled = True
-            iniciarControles()
-            With dgFechas
-                .Columns("RESULTADO").ReadOnly = True
-                .AutoResizeColumns()
-                .AutoResizeRows()
-            End With
+
+            ' If ex.Message.Contains("Datos Cargados exitosamente") Then
+            If carga Then
+                iniciarControles()
+                With dgFechas
+                    .Columns("RESULTADO").ReadOnly = True
+                    .AutoResizeColumns()
+                    .AutoResizeRows()
+                End With
+            End If
+
 
         End Try
     End Sub

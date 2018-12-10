@@ -563,7 +563,7 @@ Public Class DB
 
     Friend Sub actualizar(_usuario As Usuario)
 
-        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, _usuario.pass, _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
+        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', NIVEL={2}, PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, _usuario.pass, _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
