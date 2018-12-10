@@ -27,7 +27,7 @@
         Me._dni = _dni
         Me._nombre = _nombre
         Me._apellido = _apellido
-        Me._pass = encriptador.EncryptData(_pass)
+        Me._pass = _pass
         Me._nivel = _nivel
         Me._modifUser = My.Settings.dni
         Me._creoUser = My.Settings.dni
@@ -71,8 +71,7 @@
 
     Public Property pass As String
         Set(value As String)
-            Dim enc As New Encriptador()
-            _pass = enc.EncryptData(value)
+            _pass = value
             _modificado = True
         End Set
 

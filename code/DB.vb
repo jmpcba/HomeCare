@@ -448,10 +448,10 @@ Public Class DB
         End Try
     End Sub
     Friend Sub insertar(_usuario As Usuario)
-
+        Dim enc As New Encriptador()
         Try
             Dim query = String.Format("INSERT INTO USUARIOS (DNI, APELLIDO, NOMBRE, NIVEL, PASS, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', {3}, '{4}', '{5}', '{6}', '{7}', '{8}')",
-                                      _usuario.dni, _usuario.apellido, _usuario.nombre, _usuario.nivel, _usuario.pass, _usuario.creoUser, _usuario.fechaCarga.ToShortDateString, _usuario.modifUser, _usuario.fechaMod.ToShortDateString)
+                                      _usuario.dni, _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.EncryptData(_usuario.pass), _usuario.creoUser, _usuario.fechaCarga.ToShortDateString, _usuario.modifUser, _usuario.fechaMod.ToShortDateString)
 
 
             cmd.CommandType = CommandType.Text
@@ -562,8 +562,8 @@ Public Class DB
     End Sub
 
     Friend Sub actualizar(_usuario As Usuario)
-
-        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', NIVEL={2}, PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, _usuario.pass, _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
+        Dim enc As New Encriptador()
+        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', NIVEL={2}, PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.EncryptData(_usuario.pass), _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
