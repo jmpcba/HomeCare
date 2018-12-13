@@ -277,11 +277,17 @@
     <EmbeddedResource Include="frmBuscar.resx">
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCierreLiq.resx">
+      <DependentUpon>frmCierreLiq.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEmail.resx">
       <DependentUpon>frmEmail.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInformes.resx">
+      <DependentUpon>frmInformes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmIngresar.resx">
       <DependentUpon>frmIngresar.vb</DependentUpon>
@@ -294,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmModulo.resx">
       <DependentUpon>frmModulo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNvaLiq.resx">
+      <DependentUpon>frmNvaLiq.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPacientes.resx">
       <DependentUpon>frmPacientes.vb</DependentUpon>
@@ -318,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmUsuarios.resx">
       <DependentUpon>frmUsuarios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVerificar.resx">
+      <DependentUpon>frmVerificar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>

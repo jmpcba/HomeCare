@@ -383,4 +383,8 @@ Public Class frmPracticas
             End Try
         End If
     End Sub
+
+    Private Sub frmPracticas_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        frmPrincipal.Show()
+    End Sub
 End Class

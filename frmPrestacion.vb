@@ -85,4 +85,7 @@
         Me.Close()
     End Sub
 
+    Private Sub frmPrestacion_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        frmPrincipal.Show()
+    End Sub
 End Class

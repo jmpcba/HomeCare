@@ -272,7 +272,18 @@
     Public Sub insertar()
         Try
             Dim db = New DB
-            db.insertar(Me)
+            Dim ut As New utils
+            Dim r As DataRow()
+            _prestadores = db.getTable(DB.tablas.prestadores)
+            r = _prestadores.Select("CUIT = '" & Me.cuit.ToString & "'")
+
+            If r.Length > 0 Then
+                If ut.mensaje("Ya existe un prestador con este CUIT" & vbCrLf & "Desea continuar?", utils.mensajes.preg) = MsgBoxResult.Yes Then
+                    db.insertar(Me)
+                End If
+            Else
+                db.insertar(Me)
+            End If
         Catch ex As Exception
             Throw
         End Try

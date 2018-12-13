@@ -194,4 +194,8 @@
         iniciarControles()
         modu = Nothing
     End Sub
+
+    Private Sub frmModulo_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        frmPrincipal.Show()
+    End Sub
 End Class

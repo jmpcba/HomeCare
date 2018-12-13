@@ -1,42 +1,55 @@
 ﻿Public Class frmPrincipal
     Dim ut As New utils
     Private Sub btnVisita_Click(sender As Object, e As EventArgs) Handles btnVisita.Click
+        Me.Hide()
         frmPracticas.Show()
     End Sub
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
+        Me.Hide()
         frmReporte.ShowDialog()
     End Sub
     Private Sub btnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
+        Me.Hide()
         frmInformes.ShowDialog()
     End Sub
-    Private Sub btnVerificar_Click(sender As Object, e As EventArgs) 
+    Private Sub btnVerificar_Click(sender As Object, e As EventArgs)
+        Me.Hide()
         frmVerificar.ShowDialog()
     End Sub
     Private Sub btnNvaLiq_Click(sender As Object, e As EventArgs) Handles btnNvaLiq.Click
+        Me.Hide()
         frmLiquidar.ShowDialog()
     End Sub
     Private Sub btnCierreLiq_Click(sender As Object, e As EventArgs) Handles btnCierreLiq.Click
+        Me.Hide()
         frmCierreLiq.ShowDialog()
     End Sub
     Private Sub btnPrestadores_Click(sender As Object, e As EventArgs) Handles btnPrestadores.Click
+        Me.Hide()
         frmPrestadores.ShowDialog()
     End Sub
     Private Sub btnPacientes_Click(sender As Object, e As EventArgs) Handles btnPacientes.Click
+        Me.Hide()
         frmPacientes.ShowDialog()
     End Sub
     Private Sub btnModulo_Click(sender As Object, e As EventArgs) Handles btnModulo.Click
+        Me.Hide()
         frmModulo.ShowDialog()
     End Sub
     Private Sub btnSubMod_Click(sender As Object, e As EventArgs) Handles btnSubMod.Click
+        Me.Hide()
         frmSubMod.ShowDialog()
     End Sub
-    Private Sub btnPrestacion_Click(sender As Object, e As EventArgs) 
+    Private Sub btnPrestacion_Click(sender As Object, e As EventArgs)
+        Me.Hide()
         frmPrestacion.ShowDialog()
     End Sub
     Private Sub btnFeriados_Click(sender As Object, e As EventArgs) Handles btnFeriados.Click
+        Me.Hide()
         FrmFeriados.ShowDialog()
     End Sub
     Private Sub btnUsuarios_Click(sender As Object, e As EventArgs) Handles btnUsuarios.Click
+        Me.Hide()
         frmUsuarios.ShowDialog()
     End Sub
 

@@ -24,11 +24,6 @@ Partial Class frmReporte
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.dtFiltro = New System.Windows.Forms.DateTimePicker()
-        Me.btnActualizar = New System.Windows.Forms.Button()
-        Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
-        Me.PRACTICASBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PRACTICASTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRACTICASTableAdapter()
         Me.CUITDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AFILIADODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SUBMODULODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -43,9 +38,14 @@ Partial Class frmReporte
         Me.FECHACARGADataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MODIFICOUSUARIODataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FECHAMODIFICACIONDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PRACTICASBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
+        Me.dtFiltro = New System.Windows.Forms.DateTimePicker()
+        Me.btnActualizar = New System.Windows.Forms.Button()
+        Me.PRACTICASTableAdapter = New HomeCare.HomeCareDataSetTableAdapters.PRACTICASTableAdapter()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PRACTICASBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -58,36 +58,6 @@ Partial Class frmReporte
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(643, 391)
         Me.DataGridView1.TabIndex = 0
-        '
-        'dtFiltro
-        '
-        Me.dtFiltro.Location = New System.Drawing.Point(374, 38)
-        Me.dtFiltro.Name = "dtFiltro"
-        Me.dtFiltro.Size = New System.Drawing.Size(200, 20)
-        Me.dtFiltro.TabIndex = 1
-        '
-        'btnActualizar
-        '
-        Me.btnActualizar.Location = New System.Drawing.Point(580, 38)
-        Me.btnActualizar.Name = "btnActualizar"
-        Me.btnActualizar.Size = New System.Drawing.Size(75, 23)
-        Me.btnActualizar.TabIndex = 2
-        Me.btnActualizar.Text = "Filtrar"
-        Me.btnActualizar.UseVisualStyleBackColor = True
-        '
-        'HomeCareDataSet
-        '
-        Me.HomeCareDataSet.DataSetName = "HomeCareDataSet"
-        Me.HomeCareDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'PRACTICASBindingSource
-        '
-        Me.PRACTICASBindingSource.DataMember = "PRACTICAS"
-        Me.PRACTICASBindingSource.DataSource = Me.HomeCareDataSet
-        '
-        'PRACTICASTableAdapter
-        '
-        Me.PRACTICASTableAdapter.ClearBeforeFill = True
         '
         'CUITDataGridViewTextBoxColumn
         '
@@ -173,6 +143,36 @@ Partial Class frmReporte
         Me.FECHAMODIFICACIONDataGridViewTextBoxColumn.HeaderText = "FECHA_MODIFICACION"
         Me.FECHAMODIFICACIONDataGridViewTextBoxColumn.Name = "FECHAMODIFICACIONDataGridViewTextBoxColumn"
         '
+        'PRACTICASBindingSource
+        '
+        Me.PRACTICASBindingSource.DataMember = "PRACTICAS"
+        Me.PRACTICASBindingSource.DataSource = Me.HomeCareDataSet
+        '
+        'HomeCareDataSet
+        '
+        Me.HomeCareDataSet.DataSetName = "HomeCareDataSet"
+        Me.HomeCareDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'dtFiltro
+        '
+        Me.dtFiltro.Location = New System.Drawing.Point(374, 38)
+        Me.dtFiltro.Name = "dtFiltro"
+        Me.dtFiltro.Size = New System.Drawing.Size(200, 20)
+        Me.dtFiltro.TabIndex = 1
+        '
+        'btnActualizar
+        '
+        Me.btnActualizar.Location = New System.Drawing.Point(580, 38)
+        Me.btnActualizar.Name = "btnActualizar"
+        Me.btnActualizar.Size = New System.Drawing.Size(75, 23)
+        Me.btnActualizar.TabIndex = 2
+        Me.btnActualizar.Text = "Filtrar"
+        Me.btnActualizar.UseVisualStyleBackColor = True
+        '
+        'PRACTICASTableAdapter
+        '
+        Me.PRACTICASTableAdapter.ClearBeforeFill = True
+        '
         'frmReporte
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -184,8 +184,8 @@ Partial Class frmReporte
         Me.Name = "frmReporte"
         Me.Text = "frmReporte"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PRACTICASBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

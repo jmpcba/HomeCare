@@ -99,4 +99,8 @@
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
+
+    Private Sub frmUsuarios_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        frmPrincipal.Show()
+    End Sub
 End Class
