@@ -1,8 +1,8 @@
 ﻿Public Class frmIngresar
-    Dim usuario As New Usuario
-    Dim ut As New utils
+    Dim usuario As Usuario
+    Dim ut As utils
     Dim txtBoxes As TextBox()
-    Dim db As New DB
+    Dim db As DB
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
@@ -33,10 +33,26 @@
             ut.iniciarTxtBoxes(txtBoxes)
         End Sub
 
-        Private Sub frmusuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            txtBoxes = {numDni, txtPassw}
-        End Sub
-        Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles BtnCerrar.Click
+    Private Sub frmusuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Try
+            ut = New utils
+            If My.Settings.DBPath = "" Then
+                ut.mensaje("Seleccione la ubicacion de la base de datos", utils.mensajes.err)
+                ut.setDB()
+                ut.mensaje("Base de datos configurada con exito - Reinicie la aplicacion", utils.mensajes.info)
+                Me.Close()
+            Else
+                usuario = New Usuario()
+                db = New DB
+                txtBoxes = {numDni, txtPassw}
+            End If
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+
+    End Sub
+    Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles BtnCerrar.Click
             Me.Close()
         End Sub
     End Class
