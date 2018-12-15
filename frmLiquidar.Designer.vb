@@ -167,13 +167,13 @@ Partial Class frmLiquidar
         'ResumenDePrestadoresToolStripMenuItem
         '
         Me.ResumenDePrestadoresToolStripMenuItem.Name = "ResumenDePrestadoresToolStripMenuItem"
-        Me.ResumenDePrestadoresToolStripMenuItem.Size = New System.Drawing.Size(273, 26)
+        Me.ResumenDePrestadoresToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
         Me.ResumenDePrestadoresToolStripMenuItem.Text = "&Resumen De Prestadores"
         '
         'TodasLasPracticasToolStripMenuItem
         '
         Me.TodasLasPracticasToolStripMenuItem.Name = "TodasLasPracticasToolStripMenuItem"
-        Me.TodasLasPracticasToolStripMenuItem.Size = New System.Drawing.Size(273, 26)
+        Me.TodasLasPracticasToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
         Me.TodasLasPracticasToolStripMenuItem.Text = "&Todas Las Practicas Del Mes"
         '
         'frmLiquidar

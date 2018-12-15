@@ -27,6 +27,7 @@ Partial Class frmUsuarios
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cbNivel = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtApellido = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -38,7 +39,6 @@ Partial Class frmUsuarios
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnBuscar = New System.Windows.Forms.Button()
-        Me.cbNivel = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -97,6 +97,16 @@ Partial Class frmUsuarios
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(733, 446)
         Me.Panel1.TabIndex = 0
+        '
+        'cbNivel
+        '
+        Me.cbNivel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbNivel.FormattingEnabled = True
+        Me.cbNivel.Items.AddRange(New Object() {"0", "1", "2"})
+        Me.cbNivel.Location = New System.Drawing.Point(259, 339)
+        Me.cbNivel.Name = "cbNivel"
+        Me.cbNivel.Size = New System.Drawing.Size(121, 21)
+        Me.cbNivel.TabIndex = 50
         '
         'Label7
         '
@@ -197,16 +207,6 @@ Partial Class frmUsuarios
         Me.btnBuscar.TabIndex = 51
         Me.btnBuscar.Text = "&BUSCAR"
         Me.btnBuscar.UseVisualStyleBackColor = True
-        '
-        'cbNivel
-        '
-        Me.cbNivel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbNivel.FormattingEnabled = True
-        Me.cbNivel.Items.AddRange(New Object() {"0", "1", "2"})
-        Me.cbNivel.Location = New System.Drawing.Point(259, 339)
-        Me.cbNivel.Name = "cbNivel"
-        Me.cbNivel.Size = New System.Drawing.Size(121, 21)
-        Me.cbNivel.TabIndex = 50
         '
         'frmUsuarios
         '

@@ -119,7 +119,7 @@ Partial Class frmEmail
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmEmail"
-        Me.Text = "<"
+        Me.Text = "Configurar Mail"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

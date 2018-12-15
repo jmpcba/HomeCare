@@ -89,4 +89,8 @@
     Private Sub FrmFeriados_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         dgFeriados.ClearSelection()
     End Sub
+
+    Private Sub FrmFeriados_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        frmPrincipal.Show()
+    End Sub
 End Class

@@ -104,7 +104,7 @@ Partial Class frmPrestadores
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(7, 214)
+        Me.Label15.Location = New System.Drawing.Point(7, 205)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(57, 13)
         Me.Label15.TabIndex = 50

@@ -147,12 +147,17 @@ Public Class frmPracticas
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
             btnGuardar.Enabled = True
-            iniciarControles()
-            With dgFechas
-                .Columns("RESULTADO").ReadOnly = True
-                .AutoResizeColumns()
-                .AutoResizeRows()
-            End With
+
+            ' If ex.Message.Contains("Datos Cargados exitosamente") Then
+            If carga Then
+                iniciarControles()
+                With dgFechas
+                    .Columns("RESULTADO").ReadOnly = True
+                    .AutoResizeColumns()
+                    .AutoResizeRows()
+                End With
+            End If
+
 
         End Try
     End Sub
@@ -377,5 +382,9 @@ Public Class frmPracticas
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End Try
         End If
+    End Sub
+
+    Private Sub frmPracticas_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        frmPrincipal.Show()
     End Sub
 End Class

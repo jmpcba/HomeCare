@@ -12,4 +12,8 @@
         DataGridView1.DataSource = db.getVisitas(fec)
 
     End Sub
+
+    Private Sub frmReporte_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        frmPrincipal.Show()
+    End Sub
 End Class

@@ -171,4 +171,8 @@
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
     End Sub
+
+    Private Sub frmLiquidar_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        frmPrincipal.Show()
+    End Sub
 End Class

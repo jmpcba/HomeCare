@@ -77,7 +77,7 @@
         txtApellido.Text = _usuario.apellido
         txtPassw.Text = _usuario.pass
         cbNivel.SelectedItem = _usuario.nivel
-        cbNivel.Enabled = False
+        cbNivel.Enabled = True
         user = _usuario
     End Sub
 
@@ -98,5 +98,9 @@
     End Sub
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs)
         Me.Close()
+    End Sub
+
+    Private Sub frmUsuarios_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        frmPrincipal.Show()
     End Sub
 End Class
