@@ -17,8 +17,8 @@
                 cuit = cuit.Insert(cuit.Length - 1, "-")
                 prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, numLunVie.Text.Trim, numFeriados.Text.Trim, numFijo.Text.Trim, numPorcentaje.Text.Trim, dtCese.Text, txtServicio.Text)
                 prest.insertar()
-                iniciarControles()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
+                iniciarControles()
 
             Else
                 ut.validarTxtBoxLleno(txtBoxes)

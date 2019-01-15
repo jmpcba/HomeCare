@@ -160,6 +160,10 @@ Public Class frmPracticas
                     .AutoResizeColumns()
                     .AutoResizeRows()
                 End With
+                ' pac = Nothing
+                ' med = Nothing
+                ' modu = Nothing
+                ' subModu = Nothing
             End If
 
 
