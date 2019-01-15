@@ -223,7 +223,8 @@ Partial Class frmPracticas
         '
         'cbPaciente
         '
-        Me.cbPaciente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbPaciente.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cbPaciente.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbPaciente.FormattingEnabled = True
         Me.cbPaciente.Location = New System.Drawing.Point(127, 42)
         Me.cbPaciente.Name = "cbPaciente"
@@ -291,7 +292,8 @@ Partial Class frmPracticas
         '
         'cbMedico
         '
-        Me.cbMedico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbMedico.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cbMedico.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbMedico.FormattingEnabled = True
         Me.cbMedico.Location = New System.Drawing.Point(7, 70)
         Me.cbMedico.Name = "cbMedico"

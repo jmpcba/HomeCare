@@ -14,18 +14,18 @@ Public Class frmPracticas
     Dim cellVal
     Dim selectedRows As DataGridViewSelectedRowCollection
     Dim ut As utils
+    Dim carga As Boolean
     Private Sub visitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        ut = New utils
         Me.WindowState = FormWindowState.Maximized
-
+        carga = True
         Try
             dgFechas.Columns.Clear()
+            DTFecha.Value = DateTime.Today.AddMonths(-1)
             DTFecha.CustomFormat = "MMMM - yyyy"
             lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
 
-            ut = New utils
             pac = New Paciente()
-            ' prest = New Prestacion()
             med = New Prestador()
             subModu = New subModulo
             modu = New Modulo()
@@ -34,7 +34,6 @@ Public Class frmPracticas
             med.llenarcombo(cbMedico)
             modu.llenarcombo(cbModulo)
             subModu.llenarcombo(cbSubModulo)
-            ' prest.llenarcombo(CBPrestacion)
 
             txtAfiliado.Text = ""
             txtBeneficio.Text = ""
@@ -51,7 +50,10 @@ Public Class frmPracticas
 
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
+        Finally
+            carga = False
         End Try
+
 
     End Sub
 
@@ -59,16 +61,18 @@ Public Class frmPracticas
         Me.Close()
     End Sub
 
-    Private Sub cbPaciente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaciente.SelectionChangeCommitted
-        If cbPaciente.SelectedIndex <> -1 Then
-            Try
-                pac.afiliado = cbPaciente.SelectedValue
-                txtAfiliado.Text = pac.afiliado
-                txtBeneficio.Text = pac.obrasocial
+    Private Sub cbPaciente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaciente.SelectedIndexChanged
+        If Not carga Then
+            If cbPaciente.SelectedIndex <> -1 Then
+                Try
+                    pac.afiliado = cbPaciente.SelectedValue
+                    txtAfiliado.Text = pac.afiliado
+                    txtBeneficio.Text = pac.obrasocial
 
-            Catch ex As Exception
-                ut.mensaje(ex.Message, utils.mensajes.err)
-            End Try
+                Catch ex As Exception
+                    ut.mensaje(ex.Message, utils.mensajes.err)
+                End Try
+            End If
         End If
     End Sub
 
@@ -373,18 +377,20 @@ Public Class frmPracticas
 
     End Sub
 
-    Private Sub cbMedico_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMedico.SelectionChangeCommitted
-        If cbMedico.SelectedIndex <> -1 Then
+    Private Sub cbMedico_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMedico.SelectedValueChanged
+        If Not carga Then
+            If cbMedico.SelectedIndex <> -1 Then
 
-            med.id = cbMedico.SelectedValue.ToString
-            Try
-                txtMat.Text = med.cuit
-                txtLocalidad.Text = med.localidad
-                txtEspecialidad.Text = med.especialidad
-                txtServicio.Text = med.obraSocial
-            Catch ex As Exception
-                ut.mensaje(ex.Message, utils.mensajes.err)
-            End Try
+                med.id = cbMedico.SelectedValue.ToString
+                Try
+                    txtMat.Text = med.cuit
+                    txtLocalidad.Text = med.localidad
+                    txtEspecialidad.Text = med.especialidad
+                    txtServicio.Text = med.obraSocial
+                Catch ex As Exception
+                    ut.mensaje(ex.Message, utils.mensajes.err)
+                End Try
+            End If
         End If
     End Sub
 

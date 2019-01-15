@@ -59,6 +59,7 @@
     Private Sub frmLiquidar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnGuardar.Enabled = False
         Me.WindowState = FormWindowState.Maximized
+        dtMes.Value = Today.AddMonths(-1)
         llenarGrilla()
         If My.Settings.nivel > 1 Then
             btnGuardar.Visible = False
