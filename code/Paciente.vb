@@ -185,6 +185,5 @@
         _combo.DisplayMember = "combo"
         _combo.ValueMember = "afiliado"
         _combo.SelectedIndex = -1
-
     End Sub
 End Class

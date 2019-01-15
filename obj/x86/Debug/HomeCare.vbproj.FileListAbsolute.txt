@@ -26,3 +26,7 @@ C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\x86\Debug\HomeCare.pdb
 C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\x86\Debug\HomeCare.vbprojResolveAssemblyReference.cache
 C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\x86\Debug\HomeCare.frmIngresar.resources
 C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\x86\Debug\HomeCare.frmUsuarios.resources
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\x86\Debug\HomeCare.frmCierreLiq.resources
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\x86\Debug\HomeCare.frmInformes.resources
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\x86\Debug\HomeCare.frmNvaLiq.resources
+C:\Users\Manuel\Documents\GitHub\HomeCare\HomeCare\obj\x86\Debug\HomeCare.frmVerificar.resources
