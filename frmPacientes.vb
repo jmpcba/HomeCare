@@ -8,6 +8,11 @@
             If IsNothing(pac) Then
                 ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(numDni, 8)
+                If txtObSocial.Text = "PAMI" Then
+                    ut.validarLargo(numAfiliado, 12)
+                Else
+                    ut.validarLargo(numAfiliado, 8)
+                End If
                 ut.validarLargo(numAfiliado, 12)
                 pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim)
                 pac.insertar()
@@ -16,7 +21,12 @@
             Else
                 ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(numDni, 8)
-                ut.validarLargo(numAfiliado, 12)
+                If txtObSocial.Text = "PAMI" Then
+                    ut.validarLargo(numAfiliado, 12)
+                Else
+                    ut.validarLargo(numAfiliado, 8)
+                End If
+
                 If txtObSocial.Text.Trim <> pac.obrasocial Then
                     pac.obrasocial = txtObSocial.Text.Trim
                 End If
@@ -62,6 +72,8 @@
 
     Private Sub iniciarControles()
         ut.iniciarTxtBoxes(txtBoxes)
+        txtObSocial.Text = "DASPU"
+        txtLocalidad.Text = "CORDOBA"
         numAfiliado.ReadOnly = False
     End Sub
 
@@ -92,6 +104,8 @@
 
     Private Sub frmPacientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtBoxes = {numAfiliado, numDni, txtNombre, txtApellido, txtObSocial, txtLocalidad}
+        txtObSocial.Text = "DASPU"
+        txtLocalidad.Text = "CORDOBA"
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
