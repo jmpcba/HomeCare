@@ -184,6 +184,8 @@ Public Class DB
             cmd.ExecuteNonQuery()
         Catch ex As Exception
             Throw
+        Finally
+            cnn.Close()
         End Try
     End Sub
 

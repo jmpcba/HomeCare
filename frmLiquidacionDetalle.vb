@@ -39,7 +39,7 @@
 
     Private Sub frmLiquidacionDetalle_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnEliminar.Enabled = False
-        If My.Settings.nivel > 1 Then
+        If My.Settings.nivel > 2 Then
             btnEliminar.Visible = False
         Else
             btnEliminar.Visible = True
