@@ -64,7 +64,8 @@
                     db.eliminarPractica(id)
                 End If
 
-                dt.Rows(rIndex).Delete()
+                dt.Clear()
+                dt = db.getLiquidacion(idPrestador, fecha)
                 dgDetalle.DataSource = dt
                 btnEliminar.Enabled = False
 
@@ -72,6 +73,7 @@
                 ut.mensaje(ex.Message, utils.mensajes.err)
             Finally
                 dgDetalle.ClearSelection()
+                dgDetalle.Refresh()
             End Try
         End If
     End Sub
