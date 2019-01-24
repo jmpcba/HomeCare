@@ -13,13 +13,15 @@
                 ' ut.validarLargo(txtCuit, 11)
                 ut.validarMail(txtEmail.Text.Trim)
                 Dim cuit = txtCuit.Text.ToString
-                cuit = cuit.Insert(2, "-")
-                cuit = cuit.Insert(cuit.Length - 1, "-")
+                If cuit.Length > 1 Then
+                    cuit = cuit.Insert(2, "-")
+                    cuit = cuit.Insert(cuit.Length - 1, "-")
+                End If
                 prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, numLunVie.Text.Trim, numFeriados.Text.Trim, numFijo.Text.Trim, numPorcentaje.Text.Trim, dtCese.Text, txtServicio.Text)
                 prest.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
-
+                prest = Nothing
             Else
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarMail(txtEmail.Text.Trim)
@@ -64,6 +66,7 @@
                 prest.actualizar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
+                prest = Nothing
             End If
         Catch ex As Exception
             If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
@@ -71,11 +74,10 @@
             Else
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End If
+
             If ex.Message.Contains("No se realizaron modificaciones") Then
                 iniciarControles()
             End If
-        Finally
-            prest = Nothing
         End Try
     End Sub
 

@@ -335,6 +335,8 @@ Public Class frmPracticas
             edicion = False
             lblHoras.Text = 0
             lblMonto.Text = 0
+            lblMonto.ForeColor = Color.Black
+            lblHoras.ForeColor = Color.Black
         End If
     End Sub
     Private Sub iniciarControles()
@@ -387,6 +389,8 @@ Public Class frmPracticas
                     txtLocalidad.Text = med.localidad
                     txtEspecialidad.Text = med.especialidad
                     txtServicio.Text = med.obraSocial
+                    lblPrecioFeriado.Text = med.montoFeriado
+                    lblPrecioLaV.Text = med.montoNormal
                 Catch ex As Exception
                     ut.mensaje(ex.Message, utils.mensajes.err)
                 End Try

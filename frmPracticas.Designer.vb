@@ -64,6 +64,10 @@ Partial Class frmPracticas
         Me.btnSelec = New System.Windows.Forms.Button()
         Me.lblMes = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.lblPrecioFeriado = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.lblPrecioLaV = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -76,7 +80,7 @@ Partial Class frmPracticas
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCerrar.Location = New System.Drawing.Point(424, 372)
+        Me.btnCerrar.Location = New System.Drawing.Point(424, 435)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 9
@@ -180,7 +184,7 @@ Partial Class frmPracticas
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Location = New System.Drawing.Point(424, 326)
+        Me.btnGuardar.Location = New System.Drawing.Point(424, 389)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(106, 33)
         Me.btnGuardar.TabIndex = 8
@@ -408,7 +412,7 @@ Partial Class frmPracticas
         'btnLimpiarGrilla
         '
         Me.btnLimpiarGrilla.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(424, 280)
+        Me.btnLimpiarGrilla.Location = New System.Drawing.Point(424, 343)
         Me.btnLimpiarGrilla.Name = "btnLimpiarGrilla"
         Me.btnLimpiarGrilla.Size = New System.Drawing.Size(106, 33)
         Me.btnLimpiarGrilla.TabIndex = 15
@@ -419,7 +423,7 @@ Partial Class frmPracticas
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(444, 55)
+        Me.Label18.Location = New System.Drawing.Point(427, 147)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(154, 20)
         Me.Label18.TabIndex = 19
@@ -429,7 +433,7 @@ Partial Class frmPracticas
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(444, 125)
+        Me.Label19.Location = New System.Drawing.Point(427, 217)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(124, 20)
         Me.Label19.TabIndex = 20
@@ -439,7 +443,7 @@ Partial Class frmPracticas
         '
         Me.lblHoras.AutoSize = True
         Me.lblHoras.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHoras.Location = New System.Drawing.Point(494, 87)
+        Me.lblHoras.Location = New System.Drawing.Point(477, 179)
         Me.lblHoras.Name = "lblHoras"
         Me.lblHoras.Size = New System.Drawing.Size(16, 17)
         Me.lblHoras.TabIndex = 21
@@ -449,7 +453,7 @@ Partial Class frmPracticas
         '
         Me.lblMonto.AutoSize = True
         Me.lblMonto.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMonto.Location = New System.Drawing.Point(494, 158)
+        Me.lblMonto.Location = New System.Drawing.Point(477, 250)
         Me.lblMonto.Name = "lblMonto"
         Me.lblMonto.Size = New System.Drawing.Size(16, 17)
         Me.lblMonto.TabIndex = 22
@@ -461,6 +465,10 @@ Partial Class frmPracticas
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.lblPrecioLaV)
+        Me.Panel4.Controls.Add(Me.Label21)
+        Me.Panel4.Controls.Add(Me.lblPrecioFeriado)
+        Me.Panel4.Controls.Add(Me.Label20)
         Me.Panel4.Controls.Add(Me.btnSelec)
         Me.Panel4.Controls.Add(Me.lblMes)
         Me.Panel4.Controls.Add(Me.Label14)
@@ -507,6 +515,46 @@ Partial Class frmPracticas
         Me.Label14.Size = New System.Drawing.Size(214, 24)
         Me.Label14.TabIndex = 23
         Me.Label14.Text = "PRACTICAS / HORAS"
+        '
+        'lblPrecioFeriado
+        '
+        Me.lblPrecioFeriado.AutoSize = True
+        Me.lblPrecioFeriado.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPrecioFeriado.Location = New System.Drawing.Point(477, 115)
+        Me.lblPrecioFeriado.Name = "lblPrecioFeriado"
+        Me.lblPrecioFeriado.Size = New System.Drawing.Size(16, 17)
+        Me.lblPrecioFeriado.TabIndex = 114
+        Me.lblPrecioFeriado.Text = "0"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(427, 82)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(147, 20)
+        Me.Label20.TabIndex = 113
+        Me.Label20.Text = "PRECIO FERIADO"
+        '
+        'lblPrecioLaV
+        '
+        Me.lblPrecioLaV.AutoSize = True
+        Me.lblPrecioLaV.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPrecioLaV.Location = New System.Drawing.Point(477, 59)
+        Me.lblPrecioLaV.Name = "lblPrecioLaV"
+        Me.lblPrecioLaV.Size = New System.Drawing.Size(16, 17)
+        Me.lblPrecioLaV.TabIndex = 116
+        Me.lblPrecioLaV.Text = "0"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(427, 26)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(103, 20)
+        Me.Label21.TabIndex = 115
+        Me.Label21.Text = "PRECIO LaV"
         '
         'frmPracticas
         '
@@ -578,4 +626,8 @@ Partial Class frmPracticas
     Friend WithEvents btnSelec As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents txtServicio As TextBox
+    Friend WithEvents lblPrecioLaV As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents lblPrecioFeriado As Label
+    Friend WithEvents Label20 As Label
 End Class
