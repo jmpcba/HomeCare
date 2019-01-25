@@ -38,6 +38,8 @@ Partial Class frmLiquidar
         Me.ExportarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumenDePrestadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TodasLasPracticasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtFiltro = New System.Windows.Forms.TextBox()
         CType(Me.gridLiqui, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,11 +74,11 @@ Partial Class frmLiquidar
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridLiqui.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridLiqui.Location = New System.Drawing.Point(16, 124)
+        Me.gridLiqui.Location = New System.Drawing.Point(16, 140)
         Me.gridLiqui.MultiSelect = False
         Me.gridLiqui.Name = "gridLiqui"
         Me.gridLiqui.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridLiqui.Size = New System.Drawing.Size(909, 349)
+        Me.gridLiqui.Size = New System.Drawing.Size(909, 333)
         Me.gridLiqui.TabIndex = 1
         '
         'HomeCareDataSet
@@ -176,12 +178,30 @@ Partial Class frmLiquidar
         Me.TodasLasPracticasToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
         Me.TodasLasPracticasToolStripMenuItem.Text = "&Todas Las Practicas Del Mes"
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(146, 115)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(45, 13)
+        Me.Label3.TabIndex = 115
+        Me.Label3.Text = "FILTRO"
+        '
+        'txtFiltro
+        '
+        Me.txtFiltro.Location = New System.Drawing.Point(197, 111)
+        Me.txtFiltro.Name = "txtFiltro"
+        Me.txtFiltro.Size = New System.Drawing.Size(200, 20)
+        Me.txtFiltro.TabIndex = 116
+        '
         'frmLiquidar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(937, 501)
+        Me.Controls.Add(Me.txtFiltro)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtObservaciones)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnSelec)
@@ -220,4 +240,6 @@ Partial Class frmLiquidar
     Friend WithEvents ExportarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ResumenDePrestadoresToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TodasLasPracticasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtFiltro As TextBox
 End Class

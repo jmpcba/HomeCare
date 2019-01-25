@@ -211,55 +211,6 @@ Public Class DB
 
     End Function
 
-    Friend Sub eliminar(_visita As Practica)
-        Try
-            'Dim query = "DELETE FROM VISITAS WHERE ID=" & _visita.id
-
-            cmd.CommandType = CommandType.Text
-            'cmd.CommandText = query
-
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            Throw
-        Finally
-            cnn.Close()
-        End Try
-    End Sub
-
-    Friend Sub eliminar(_visita As Practica, _id As Integer)
-        'REVISAR MAS ADELANTE POR AHORA EL OBJETO VISITA SE USA SOLO PARA QUE SE SEPA QUE ESTOY ELIMINANDO UNA VISITA
-        'SE ELIMINA LA VISITA _id
-        Try
-            Dim query = "DELETE FROM VISITAS WHERE ID=" & _id
-
-            cmd.CommandType = CommandType.Text
-            cmd.CommandText = query
-
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            Throw
-        Finally
-            cnn.Close()
-        End Try
-    End Sub
-
-    Public Function getPaciente(_dni As Object) As DataTable
-        Dim query = "SELECT * FROM PACIENTES where dni = " & _dni
-
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
-
-        Try
-            da.Fill(ds, "PACIENTES")
-            Return ds.Tables("PACIENTES")
-        Catch ex As Exception
-            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
-        End Try
-
-    End Function
-
     Public Function getUsuario(_dni As String) As DataTable
         cmd.CommandText = String.Format("SELECT * FROM USUARIOS WHERE DNI = '{0}'", _dni)
         cmd.CommandType = CommandType.Text

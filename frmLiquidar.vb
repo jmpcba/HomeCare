@@ -176,4 +176,9 @@
     Private Sub frmLiquidar_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         frmPrincipal.Show()
     End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
+        dt.DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] LIKE '%{0}%'", txtFiltro.Text.Trim)
+        gridLiqui.Refresh()
+    End Sub
 End Class
