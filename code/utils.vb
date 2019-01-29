@@ -80,6 +80,18 @@ Public Class utils
         Next
     End Sub
 
+    Public Sub activarTxtBoxes(_txtboxes As TextBox())
+        For Each t As TextBox In _txtboxes
+            t.Enabled = True
+        Next
+    End Sub
+
+    Public Sub desactivarTxtBoxes(_txtboxes As TextBox())
+        For Each t As TextBox In _txtboxes
+            t.Enabled = False
+        Next
+    End Sub
+
     Public Sub validarTxtBoxLleno(_texboxes As TextBox())
         For Each t As TextBox In _texboxes
             If t.Text = "" Then

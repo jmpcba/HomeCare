@@ -173,6 +173,22 @@ Public Class DB
 
     End Function
 
+    Friend Sub reactivarPrestador(_id As String)
+        Try
+            Dim query = "UPDATE PRESTADORES SET FECHA_CESE=NULL WHERE ID=" & _id
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
     Friend Sub eliminarPractica(_id As Integer)
         Try
             Dim query = "DELETE FROM PRACTICAS WHERE ID=" & _id
@@ -189,6 +205,27 @@ Public Class DB
         End Try
     End Sub
 
+    Friend Sub eliminarPractica(_ids As List(Of Integer))
+        Try
+            Dim query = "DELETE FROM PRACTICAS WHERE ID IN ("
+            For Each id In _ids
+                query += id.ToString & ","
+            Next
+            'remueve la ultima coma
+            query = query.Substring(0, query.Length - 1)
+            query += ")"
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
     Friend Function getLiquidacion(_id As Integer, _fecha As Date) As DataTable
         Dim desde As Date
         Dim hasta As Date
@@ -446,7 +483,14 @@ Public Class DB
 
     Friend Sub actualizar(_prestador As Prestador)
 
-        Dim query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}' WHERE ID={12}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.id)
+        Dim query As String
+
+        If _prestador.fechaCese = Date.MinValue Then
+            query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}' WHERE ID={12}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.id)
+        Else
+            query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}', FECHA_CESE=#{12}# WHERE ID={13}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.fechaCese.ToShortDateString, _prestador.id)
+        End If
+
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query

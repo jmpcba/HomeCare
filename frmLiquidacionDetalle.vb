@@ -41,8 +41,8 @@
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        Dim ids As New List(Of Integer())
-        Dim filasError As New List(Of Integer)
+        Dim ids As New List(Of Integer)
+        Dim idsError As New List(Of Integer)
 
         dgDetalle.ClearSelection()
 
@@ -50,38 +50,27 @@
             If r.Cells(0).Value Then
                 Dim id = r.Cells("id").Value
                 Dim rIndex = r.Index
-                Dim clave As Integer()
-                clave = {id, rIndex}
 
                 r.DefaultCellStyle.BackColor = Color.LightGreen
-                ids.Add(clave)
+                ids.Add(id)
             End If
         Next
 
         If ut.mensaje("Desea eliminar las practicas seleccionadas?", utils.mensajes.preg) = MsgBoxResult.Yes Then
-            For Each c As Integer() In ids
-                Try
-                    If ut.validarLiquidacion(idPrestador, fecha) Then
-                        Throw New Exception("LIQUIDACION CERRADA - NO SE PUEDE ELIMINAR")
-                    Else
-                        db.eliminarPractica(c(0))
-                    End If
-                Catch ex As Exception
-                    ut.mensaje(ex.Message, utils.mensajes.err)
-                    filasError.Add(c(1))
-                End Try
-            Next
 
-            llenarGrilla()
+            Try
+                If ut.validarLiquidacion(idPrestador, fecha) Then
+                    Throw New Exception("LIQUIDACION CERRADA - NO SE PUEDE ELIMINAR")
+                Else
+                    db.eliminarPractica(ids)
+                    llenarGrilla()
+                    dgDetalle.Refresh()
 
-            If filasError.Count > 0 Then
-                For Each i As Integer In filasError
-                    dgDetalle.Rows(i).DefaultCellStyle.ForeColor = Color.Red
-                Next
-            End If
+                End If
 
-            dgDetalle.Refresh()
-
+            Catch ex As Exception
+                ut.mensaje(ex.Message, utils.mensajes.err)
+            End Try
         End If
     End Sub
 

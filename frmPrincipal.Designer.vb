@@ -37,12 +37,13 @@ Partial Class frmPrincipal
         Me.btnPrestadores = New System.Windows.Forms.Button()
         Me.btnFeriados = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnUsuarios = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.ConfiguracionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnUsuarios = New System.Windows.Forms.Button()
+        Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
@@ -199,6 +200,15 @@ Partial Class frmPrincipal
         Me.Panel2.Size = New System.Drawing.Size(330, 407)
         Me.Panel2.TabIndex = 104
         '
+        'btnUsuarios
+        '
+        Me.btnUsuarios.Location = New System.Drawing.Point(20, 340)
+        Me.btnUsuarios.Name = "btnUsuarios"
+        Me.btnUsuarios.Size = New System.Drawing.Size(260, 53)
+        Me.btnUsuarios.TabIndex = 105
+        Me.btnUsuarios.Text = "ADMINISTRAR USUARIOS"
+        Me.btnUsuarios.UseVisualStyleBackColor = True
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -212,7 +222,7 @@ Partial Class frmPrincipal
         '
         'MenuStrip2
         '
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfiguracionToolStripMenuItem})
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConfiguracionToolStripMenuItem, Me.InfoToolStripMenuItem})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
         Me.MenuStrip2.Size = New System.Drawing.Size(881, 24)
@@ -229,23 +239,20 @@ Partial Class frmPrincipal
         'BaseDeDatosToolStripMenuItem
         '
         Me.BaseDeDatosToolStripMenuItem.Name = "BaseDeDatosToolStripMenuItem"
-        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.BaseDeDatosToolStripMenuItem.Text = "&Base de Datos"
         '
         'MailToolStripMenuItem
         '
         Me.MailToolStripMenuItem.Name = "MailToolStripMenuItem"
-        Me.MailToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.MailToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.MailToolStripMenuItem.Text = "&Mail"
         '
-        'btnUsuarios
+        'InfoToolStripMenuItem
         '
-        Me.btnUsuarios.Location = New System.Drawing.Point(20, 340)
-        Me.btnUsuarios.Name = "btnUsuarios"
-        Me.btnUsuarios.Size = New System.Drawing.Size(260, 53)
-        Me.btnUsuarios.TabIndex = 105
-        Me.btnUsuarios.Text = "ADMINISTRAR USUARIOS"
-        Me.btnUsuarios.UseVisualStyleBackColor = True
+        Me.InfoToolStripMenuItem.Name = "InfoToolStripMenuItem"
+        Me.InfoToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
+        Me.InfoToolStripMenuItem.Text = "&Info"
         '
         'frmPrincipal
         '
@@ -293,4 +300,5 @@ Partial Class frmPrincipal
     Friend WithEvents BaseDeDatosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MailToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents btnUsuarios As Button
+    Friend WithEvents InfoToolStripMenuItem As ToolStripMenuItem
 End Class

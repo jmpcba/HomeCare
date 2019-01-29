@@ -126,6 +126,7 @@
     <Compile Include="code\DB.vb" />
     <Compile Include="code\encriptador.vb" />
     <Compile Include="code\especialidad.vb" />
+    <Compile Include="code\exceptions\ExcepcionDeSystema.vb" />
     <Compile Include="code\Feriados.vb" />
     <Compile Include="code\Liquidacion.vb" />
     <Compile Include="code\mail.vb" />
@@ -257,6 +258,12 @@
       <DependentUpon>frmPracticas.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmInfo.Designer.vb">
+      <DependentUpon>frmInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -330,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmVerificar.resx">
       <DependentUpon>frmVerificar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInfo.resx">
+      <DependentUpon>frmInfo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>

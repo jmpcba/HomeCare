@@ -58,8 +58,14 @@
                 End If
 
                 If chbCese.Checked Then
+
                     If dtCese.Value.ToShortDateString <> prest.fechaCese Then
                         prest.fechaCese = dtCese.Text
+                    End If
+                Else
+                    If prest.fechaCese <> Date.MinValue Then
+                        prest.fechaCese = Date.MinValue
+                        prest.reactivar()
                     End If
                 End If
 
@@ -85,7 +91,9 @@
         txtCuit.ReadOnly = False
         cbEspecialidad.SelectedIndex = -1
         ut.iniciarTxtBoxes(txtBoxes)
+        ut.activarTxtBoxes(txtBoxes)
         numPorcentaje.Text = "0"
+        chbCese.Enabled = False
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -149,9 +157,12 @@
     Private Sub chbCese_CheckedChanged(sender As Object, e As EventArgs) Handles chbCese.CheckedChanged
         If chbCese.Checked = True Then
             dtCese.Enabled = True
+            ut.desactivarTxtBoxes(txtBoxes)
         Else
             dtCese.Enabled = False
+            ut.activarTxtBoxes(txtBoxes)
         End If
+
     End Sub
 
     Public Sub resultadoBusqueda(ByRef _prestador As Prestador)
@@ -168,7 +179,12 @@
         numFijo.Text = _prestador.montoFijo
         txtServicio.Text = _prestador.obraSocial
         dtCese.Text = _prestador.fechaCese
+        If _prestador.fechaCese <> Date.MinValue Then
+            chbCese.Checked = True
+            ut.desactivarTxtBoxes(txtBoxes)
+        End If
         prest = _prestador
+        chbCese.Enabled = True
     End Sub
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click

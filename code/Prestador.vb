@@ -19,6 +19,7 @@
     Private _fechaMod As Date
     Private _modificado = False
     Private _obraSocial As String
+    Private _estado As Integer
 
     Public Sub New()
         Dim db = New DB()
@@ -123,6 +124,15 @@
             Return _id
         End Get
     End Property
+
+    Friend Sub reactivar()
+        Try
+            Dim db As New DB
+            db.reactivarPrestador(id)
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
 
     Public Property cuit As String
         Set(value As String)
@@ -269,6 +279,15 @@
         End Get
     End Property
 
+    Public Property estado As Integer
+        Set(value As Integer)
+            _estado = value
+        End Set
+        Get
+            Return _estado
+        End Get
+    End Property
+
     Public Sub insertar()
         Try
             Dim db = New DB
@@ -306,8 +325,10 @@
     End Sub
 
     Public Sub llenarcombo(_combo As ComboBox)
-
-        _combo.DataSource = _prestadores
+        Dim DV = New DataView(_prestadores)
+        DV.RowFilter = "FECHA_CESE IS NULL"
+        DV.Sort = "APELLIDO ASC"
+        _combo.DataSource = DV
         _combo.DisplayMember = "combo"
         _combo.ValueMember = "id"
         _combo.SelectedIndex = -1
