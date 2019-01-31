@@ -199,7 +199,7 @@ Public Class utils
                     Dim dir = Path.GetDirectoryName(My.Settings.DBPath)
                     bckpDir = Path.Combine(dir, "BCKP")
                 Else
-                    bckpDir = My.Settings.DBBackupPath
+                    bckpDir = Path.Combine(My.Settings.DBBackupPath, "BCKP")
                 End If
 
                 'CREAR DIR BCKP SI NO EXISTE
@@ -226,7 +226,7 @@ Public Class utils
             Dim dir = Path.GetDirectoryName(My.Settings.DBPath)
             bckpDir = Path.Combine(dir, "BCKP")
         Else
-            bckpDir = My.Settings.DBBackupPath
+            bckpDir = Path.Combine(My.Settings.DBBackupPath, "BCKP")
         End If
 
         tempBckFile = Path.Combine(bckpDir, "homeCare_temp.accdb")
