@@ -132,4 +132,9 @@
             End If
         End With
     End Sub
+
+    Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
+        dt.DefaultView.RowFilter = String.Format("[APELLIDO PACIENTE] LIKE '%{0}%'", txtFiltro.Text.Trim)
+        dgDetalle.Refresh()
+    End Sub
 End Class

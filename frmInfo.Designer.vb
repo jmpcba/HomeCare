@@ -29,6 +29,8 @@ Partial Class frmInfo
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblMod = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblBckup = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -43,7 +45,7 @@ Partial Class frmInfo
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 193)
+        Me.Label2.Location = New System.Drawing.Point(13, 230)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(87, 13)
         Me.Label2.TabIndex = 1
@@ -52,7 +54,7 @@ Partial Class frmInfo
         'lblUsuario
         '
         Me.lblUsuario.AutoSize = True
-        Me.lblUsuario.Location = New System.Drawing.Point(136, 193)
+        Me.lblUsuario.Location = New System.Drawing.Point(136, 230)
         Me.lblUsuario.Name = "lblUsuario"
         Me.lblUsuario.Size = New System.Drawing.Size(39, 13)
         Me.lblUsuario.TabIndex = 2
@@ -79,7 +81,7 @@ Partial Class frmInfo
         'lblMod
         '
         Me.lblMod.AutoSize = True
-        Me.lblMod.Location = New System.Drawing.Point(136, 131)
+        Me.lblMod.Location = New System.Drawing.Point(136, 168)
         Me.lblMod.Name = "lblMod"
         Me.lblMod.Size = New System.Drawing.Size(39, 13)
         Me.lblMod.TabIndex = 6
@@ -88,17 +90,38 @@ Partial Class frmInfo
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(13, 131)
+        Me.Label5.Location = New System.Drawing.Point(13, 168)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(120, 13)
         Me.Label5.TabIndex = 5
         Me.Label5.Text = "Ultima Modificacion DB:"
         '
+        'lblBckup
+        '
+        Me.lblBckup.AutoSize = True
+        Me.lblBckup.Location = New System.Drawing.Point(136, 115)
+        Me.lblBckup.Name = "lblBckup"
+        Me.lblBckup.Size = New System.Drawing.Size(39, 13)
+        Me.lblBckup.TabIndex = 8
+        Me.lblBckup.Text = "Label3"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(13, 115)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(91, 13)
+        Me.Label6.TabIndex = 7
+        Me.Label6.Text = "Carpeta backups:"
+        '
         'frmInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(479, 261)
+        Me.Controls.Add(Me.lblBckup)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.lblMod)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label3)
@@ -120,4 +143,6 @@ Partial Class frmInfo
     Friend WithEvents Label3 As Label
     Friend WithEvents lblMod As Label
     Friend WithEvents Label5 As Label
+    Friend WithEvents lblBckup As Label
+    Friend WithEvents Label6 As Label
 End Class

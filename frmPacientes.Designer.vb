@@ -27,10 +27,10 @@ Partial Class frmPacientes
         Me.Label7 = New System.Windows.Forms.Label()
         Me.numDni = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtApellido = New System.Windows.Forms.TextBox()
+        Me.txtNombre = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtNombre = New System.Windows.Forms.TextBox()
+        Me.txtApellido = New System.Windows.Forms.TextBox()
         Me.txtObSocial = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.numAfiliado = New System.Windows.Forms.TextBox()
@@ -50,10 +50,10 @@ Partial Class frmPacientes
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.numDni)
         Me.Panel1.Controls.Add(Me.Label6)
-        Me.Panel1.Controls.Add(Me.txtApellido)
+        Me.Panel1.Controls.Add(Me.txtNombre)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.txtNombre)
+        Me.Panel1.Controls.Add(Me.txtApellido)
         Me.Panel1.Controls.Add(Me.txtObSocial)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.numAfiliado)
@@ -96,37 +96,37 @@ Partial Class frmPacientes
         Me.Label6.TabIndex = 32
         Me.Label6.Text = "D.N.I."
         '
-        'txtApellido
+        'txtNombre
         '
-        Me.txtApellido.Location = New System.Drawing.Point(389, 177)
-        Me.txtApellido.Name = "txtApellido"
-        Me.txtApellido.Size = New System.Drawing.Size(219, 20)
-        Me.txtApellido.TabIndex = 3
+        Me.txtNombre.Location = New System.Drawing.Point(389, 177)
+        Me.txtNombre.Name = "txtNombre"
+        Me.txtNombre.Size = New System.Drawing.Size(219, 20)
+        Me.txtNombre.TabIndex = 3
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(314, 181)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(59, 13)
+        Me.Label3.Size = New System.Drawing.Size(54, 13)
         Me.Label3.TabIndex = 31
-        Me.Label3.Text = "APELLIDO"
+        Me.Label3.Text = "NOMBRE"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(6, 181)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(54, 13)
+        Me.Label1.Size = New System.Drawing.Size(59, 13)
         Me.Label1.TabIndex = 30
-        Me.Label1.Text = "NOMBRE"
+        Me.Label1.Text = "APELLIDO"
         '
-        'txtNombre
+        'txtApellido
         '
-        Me.txtNombre.Location = New System.Drawing.Point(97, 177)
-        Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(197, 20)
-        Me.txtNombre.TabIndex = 2
+        Me.txtApellido.Location = New System.Drawing.Point(97, 177)
+        Me.txtApellido.Name = "txtApellido"
+        Me.txtApellido.Size = New System.Drawing.Size(197, 20)
+        Me.txtApellido.TabIndex = 2
         '
         'txtObSocial
         '
@@ -236,10 +236,10 @@ Partial Class frmPacientes
     Friend WithEvents btnCerrar As Button
     Friend WithEvents btnBuscar As Button
     Friend WithEvents btnGuardar As Button
-    Friend WithEvents txtApellido As TextBox
+    Friend WithEvents txtNombre As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtNombre As TextBox
+    Friend WithEvents txtApellido As TextBox
     Friend WithEvents txtObSocial As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents numAfiliado As TextBox

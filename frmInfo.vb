@@ -4,5 +4,6 @@ Public Class frmInfo
         lblDB.Text = My.Settings.DBPath.ToString
         lblUsuario.Text = My.Settings.nivel
         lblMod.Text = File.GetLastWriteTime(My.Settings.DBPath).ToString
+        lblBckup.Text = My.Settings.DBBackupPath.ToString
     End Sub
 End Class

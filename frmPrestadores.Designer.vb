@@ -263,15 +263,15 @@ Partial Class frmPrestadores
         '
         'txtApellido
         '
-        Me.txtApellido.Location = New System.Drawing.Point(396, 93)
+        Me.txtApellido.Location = New System.Drawing.Point(97, 89)
         Me.txtApellido.Name = "txtApellido"
         Me.txtApellido.Size = New System.Drawing.Size(203, 20)
-        Me.txtApellido.TabIndex = 2
+        Me.txtApellido.TabIndex = 1
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(323, 97)
+        Me.Label3.Location = New System.Drawing.Point(31, 93)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(59, 13)
         Me.Label3.TabIndex = 31
@@ -280,7 +280,7 @@ Partial Class frmPrestadores
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(7, 97)
+        Me.Label1.Location = New System.Drawing.Point(319, 93)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(54, 13)
         Me.Label1.TabIndex = 30
@@ -288,10 +288,10 @@ Partial Class frmPrestadores
         '
         'txtNombre
         '
-        Me.txtNombre.Location = New System.Drawing.Point(97, 93)
+        Me.txtNombre.Location = New System.Drawing.Point(379, 89)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(220, 20)
-        Me.txtNombre.TabIndex = 1
+        Me.txtNombre.TabIndex = 2
         '
         'Label5
         '

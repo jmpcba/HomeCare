@@ -38,7 +38,7 @@ Public Class frmPracticas
             txtAfiliado.Text = ""
             txtBeneficio.Text = ""
             txtEspecialidad.Text = ""
-            txtLocalidad.Text = ""
+            txtLocalidadPrest.Text = ""
             txtMat.Text = ""
             txtObservaciones.Text = ""
             lblHoras.Text = ""
@@ -66,8 +66,10 @@ Public Class frmPracticas
             If cbPaciente.SelectedIndex <> -1 Then
                 Try
                     pac.afiliado = cbPaciente.SelectedValue
+                    lblPaciente.Text = String.Format("{0} {1}", pac.apellido, pac.nombre)
                     txtAfiliado.Text = pac.afiliado
                     txtBeneficio.Text = pac.obrasocial
+                    txtLocalidadPac.Text = pac.localidad
 
                 Catch ex As Exception
                     ut.mensaje(ex.Message, utils.mensajes.err)
@@ -351,7 +353,7 @@ Public Class frmPracticas
         txtAfiliado.Text = ""
         txtBeneficio.Text = ""
         txtEspecialidad.Text = ""
-        txtLocalidad.Text = ""
+        txtLocalidadPrest.Text = ""
         txtMat.Text = ""
         txtServicio.Text = ""
         txtObservaciones.Text = ""
@@ -375,30 +377,51 @@ Public Class frmPracticas
 
     End Sub
 
-    Private Sub txtLocalidad_TextChanged(sender As Object, e As EventArgs) Handles txtLocalidad.TextChanged
+    Private Sub txtLocalidad_TextChanged(sender As Object, e As EventArgs) Handles txtLocalidadPrest.TextChanged
 
     End Sub
 
-    Private Sub cbMedico_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMedico.SelectedValueChanged
+    'Private Sub cbMedico_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMedico.SelectedValueChanged
+    '    If Not carga Then
+    '        If cbMedico.SelectedIndex <> -1 Then
+
+    '            med.id = cbMedico.SelectedValue.ToString
+    '            Try
+    '                txtMat.Text = med.cuit
+    '                txtLocalidadPrest.Text = med.localidad
+    '                txtEspecialidad.Text = med.especialidad
+    '                txtServicio.Text = med.obraSocial
+    '                lblPrecioFeriado.Text = med.montoFeriado
+    '                lblPrecioLaV.Text = med.montoNormal
+    '            Catch ex As Exception
+    '                ut.mensaje(ex.Message, utils.mensajes.err)
+    '            End Try
+    '        End If
+    '    End If
+    'End Sub
+
+    Private Sub frmPracticas_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        frmPrincipal.Show()
+    End Sub
+
+    Private Sub cbMedico_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbMedico.SelectedIndexChanged
         If Not carga Then
             If cbMedico.SelectedIndex <> -1 Then
 
                 med.id = cbMedico.SelectedValue.ToString
                 Try
+                    lblMed.Text = String.Format("{0} {1}", med.apellido, med.nombre)
                     txtMat.Text = med.cuit
-                    txtLocalidad.Text = med.localidad
+                    txtLocalidadPrest.Text = med.localidad
                     txtEspecialidad.Text = med.especialidad
                     txtServicio.Text = med.obraSocial
                     lblPrecioFeriado.Text = med.montoFeriado
                     lblPrecioLaV.Text = med.montoNormal
+                    txtOS.Text = med.obraSocial
                 Catch ex As Exception
                     ut.mensaje(ex.Message, utils.mensajes.err)
                 End Try
             End If
         End If
-    End Sub
-
-    Private Sub frmPracticas_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        frmPrincipal.Show()
     End Sub
 End Class

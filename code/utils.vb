@@ -65,6 +65,22 @@ Public Class utils
         End If
     End Sub
 
+    Public Sub setBackupPath()
+        Dim frmFolder = New FolderBrowserDialog
+
+        frmFolder.ShowNewFolderButton = True
+
+        If frmFolder.ShowDialog = DialogResult.OK Then
+            Try
+                Dim path = frmFolder.SelectedPath
+                My.Settings.DBBackupPath = path
+                My.Settings.Save()
+            Catch ex As Exception
+                Throw
+            End Try
+        End If
+    End Sub
+
     Public Sub validarNumerico(_txtBox As TextBox)
         If _txtBox.Text <> "" Then
             If Not IsNumeric(_txtBox.Text) Then
@@ -72,6 +88,17 @@ Public Class utils
                 Throw New Exception("Debe ingresar un valor numerico")
             End If
         End If
+    End Sub
+
+    Public Sub validarNumerico(_txtBox As TextBox())
+        For Each t As TextBox In _txtBox
+            If t.Text <> "" Then
+                If t.Text.Contains(".") Or Not IsNumeric(t.Text) Then
+                    t.Focus()
+                    Throw New Exception("Debe ingresar un valor numerico" & vbCrLf & "Utilice comas para separar decimales")
+                End If
+            End If
+        Next
     End Sub
 
     Public Sub iniciarTxtBoxes(_txtboxes As TextBox())
@@ -162,12 +189,18 @@ Public Class utils
     End Function
 
     Public Sub backupDBTemp()
+        Dim bckpDir As String
+
         If My.Settings.DBPath = "" Then
             Throw New Exception("La ruta a la base de datos no ha sido configurada aun")
         Else
             Try
-                Dim dir = Path.GetDirectoryName(My.Settings.DBPath)
-                Dim bckpDir = Path.Combine(dir, "BCKP")
+                If My.Settings.DBBackupPath = "" Then
+                    Dim dir = Path.GetDirectoryName(My.Settings.DBPath)
+                    bckpDir = Path.Combine(dir, "BCKP")
+                Else
+                    bckpDir = My.Settings.DBBackupPath
+                End If
 
                 'CREAR DIR BCKP SI NO EXISTE
                 If Not Directory.Exists(bckpDir) Then
@@ -186,10 +219,17 @@ Public Class utils
     End Sub
 
     Public Sub backUpDBFinal(_copiar As Boolean)
+        Dim bckpDir As String
+        Dim tempBckFile As String
 
-        Dim dir = Path.GetDirectoryName(My.Settings.DBPath)
-        Dim bckpDir = Path.Combine(dir, "BCKP")
-        Dim tempBckFile = Path.Combine(bckpDir, "homeCare_temp.accdb")
+        If My.Settings.DBBackupPath = "" Then
+            Dim dir = Path.GetDirectoryName(My.Settings.DBPath)
+            bckpDir = Path.Combine(dir, "BCKP")
+        Else
+            bckpDir = My.Settings.DBBackupPath
+        End If
+
+        tempBckFile = Path.Combine(bckpDir, "homeCare_temp.accdb")
 
         If My.Settings.DBPath = "" Then
             Throw New Exception("La ruta a la base de datos no ha sido configurada aun")
@@ -314,4 +354,14 @@ Public Class utils
             o = Nothing
         End Try
     End Sub
+
+    Public Sub habilitarBoton(_txtboxes As TextBox(), _btn As Button)
+        _btn.Enabled = False
+        For Each t In _txtboxes
+            If t.Text <> "" Then
+                _btn.Enabled = True
+            End If
+        Next
+    End Sub
+
 End Class

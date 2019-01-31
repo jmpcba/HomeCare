@@ -6,7 +6,7 @@
     End Sub
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
         Me.Hide()
-        frmReporte.ShowDialog()
+        frmPracticasPaciente.ShowDialog()
     End Sub
     Private Sub btnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
         Me.Hide()
@@ -67,15 +67,6 @@
         End If
     End Sub
 
-    Private Sub BaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BaseDeDatosToolStripMenuItem.Click
-        Try
-
-            ut.setDB()
-        Catch ex As Exception
-            ut.mensaje(ex.Message, utils.mensajes.err)
-        End Try
-    End Sub
-
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Application.Exit()
         End
@@ -92,5 +83,21 @@
 
     Private Sub InfoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InfoToolStripMenuItem.Click
         frmInfo.Show()
+    End Sub
+
+    Private Sub UbicacionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UbicacionToolStripMenuItem.Click
+        Try
+            ut.setDB()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+    End Sub
+
+    Private Sub CopiasDeSeguridadToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CopiasDeSeguridadToolStripMenuItem1.Click
+        Try
+            ut.setBackupPath()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
     End Sub
 End Class

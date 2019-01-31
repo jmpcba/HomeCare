@@ -4,28 +4,51 @@
     Dim txtBoxes As TextBox()
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        Try
-            If cbEspecialidad.SelectedIndex = -1 Then
-                Throw New Exception("SELECCIONE UNA ESPECIALIDAD")
-            End If
-            If IsNothing(prest) Then
+
+        Dim montoLaV As Decimal
+        Dim montoFeriado As Decimal
+        Dim montoFijo As Decimal
+
+        montoLaV = numLunVie.Text.Trim
+        montoFeriado = numFeriados.Text.Trim
+        montoFijo = numFijo.Text.Trim
+
+        If cbEspecialidad.SelectedIndex = -1 Then
+            Throw New Exception("SELECCIONE UNA ESPECIALIDAD")
+        End If
+        If IsNothing(prest) Then
+            Try
                 ut.validarTxtBoxLleno(txtBoxes)
                 ' ut.validarLargo(txtCuit, 11)
                 ut.validarMail(txtEmail.Text.Trim)
+                ut.validarNumerico({numFijo, numLunVie, numFeriados})
                 Dim cuit = txtCuit.Text.ToString
                 If cuit.Length > 1 Then
                     cuit = cuit.Insert(2, "-")
                     cuit = cuit.Insert(cuit.Length - 1, "-")
                 End If
-                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, numLunVie.Text.Trim, numFeriados.Text.Trim, numFijo.Text.Trim, numPorcentaje.Text.Trim, dtCese.Text, txtServicio.Text)
+                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, montoLaV, montoFeriado, montoFijo, numPorcentaje.Text.Trim, dtCese.Text, txtServicio.Text)
                 prest.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
+
+            Catch ex As Exception
+                If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+                    ut.mensaje("Ya existe un Prestador con el mismo cuit/especialidad/localidad/servicio", utils.mensajes.err)
+                Else
+                    ut.mensaje(ex.Message, utils.mensajes.err)
+                End If
+            Finally
                 prest = Nothing
-            Else
+            End Try
+
+        Else
+            Try
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarMail(txtEmail.Text.Trim)
                 'ut.validarLargo(txtCuit, 11)
+                ut.validarNumerico({numFijo, numLunVie, numFeriados})
+
                 If txtNombre.Text.Trim <> prest.nombre Then
                     prest.nombre = txtNombre.Text.Trim
                 End If
@@ -44,17 +67,17 @@
                 If txtServicio.Text.Trim <> prest.obraSocial Then
                     prest.obraSocial = txtServicio.Text.Trim
                 End If
-                If numLunVie.Text.Trim <> prest.montoNormal Then
-                    prest.montoNormal = numLunVie.Text.Trim
+                If montoLaV <> prest.montoNormal Then
+                    prest.montoNormal = montoLaV
                 End If
-                If numFeriados.Text.Trim <> prest.montoFeriado Then
-                    prest.montoFeriado = numFeriados.Text.Trim
+                If montoFeriado <> prest.montoFeriado Then
+                    prest.montoFeriado = montoFeriado
                 End If
                 If numPorcentaje.Text.Trim <> prest.porcentaje Then
                     prest.porcentaje = numPorcentaje.Text.Trim
                 End If
-                If numFijo.Text.Trim <> prest.montoFijo Then
-                    prest.montoFijo = numFijo.Text.Trim
+                If montoFijo <> prest.montoFijo Then
+                    prest.montoFijo = montoFijo
                 End If
 
                 If chbCese.Checked Then
@@ -73,18 +96,14 @@
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
                 prest = Nothing
-            End If
-        Catch ex As Exception
-            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                ut.mensaje("Ya existe un Prestador con el mismo cuit/especialidad/localidad/servicio", utils.mensajes.err)
-            Else
+            Catch ex As Exception
                 ut.mensaje(ex.Message, utils.mensajes.err)
-            End If
 
-            If ex.Message.Contains("No se realizaron modificaciones") Then
-                iniciarControles()
-            End If
-        End Try
+                If ex.Message.Contains("No se realizaron modificaciones") Then
+                    iniciarControles()
+                End If
+            End Try
+        End If
     End Sub
 
     Private Sub iniciarControles()
@@ -110,6 +129,7 @@
     End Sub
 
     Private Sub txtCuit_TextChanged(sender As Object, e As EventArgs) Handles txtCuit.TextChanged
+        ut.habilitarBoton(txtBoxes, btnGuardar)
         Try
 
             'ut.validarNumerico(txtCuit)
@@ -147,6 +167,7 @@
         iniciarControles()
         numPorcentaje.Text = 0
         numPorcentaje.ReadOnly = True
+        ut.habilitarBoton(txtBoxes, btnGuardar)
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles BtnCerrar.Click
@@ -185,6 +206,8 @@
         End If
         prest = _prestador
         chbCese.Enabled = True
+        btnGuardar.Enabled = True
+
     End Sub
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
@@ -195,5 +218,37 @@
 
     Private Sub frmPrestadores_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         frmPrincipal.Show()
+    End Sub
+
+    Private Sub txtApellido_TextChanged(sender As Object, e As EventArgs) Handles txtApellido.TextChanged
+        ut.habilitarBoton(txtBoxes, btnGuardar)
+    End Sub
+
+    Private Sub txtNombre_TextChanged(sender As Object, e As EventArgs) Handles txtNombre.TextChanged
+        ut.habilitarBoton(txtBoxes, btnGuardar)
+    End Sub
+
+    Private Sub txtLocalidad_TextChanged(sender As Object, e As EventArgs) Handles txtLocalidad.TextChanged
+        ut.habilitarBoton(txtBoxes, btnGuardar)
+    End Sub
+
+    Private Sub txtServicio_TextChanged(sender As Object, e As EventArgs) Handles txtServicio.TextChanged
+        ut.habilitarBoton(txtBoxes, btnGuardar)
+    End Sub
+
+    Private Sub txtEmail_TextChanged(sender As Object, e As EventArgs) Handles txtEmail.TextChanged
+        ut.habilitarBoton(txtBoxes, btnGuardar)
+    End Sub
+
+    Private Sub numLunVie_TextChanged(sender As Object, e As EventArgs) Handles numLunVie.TextChanged
+        ut.habilitarBoton(txtBoxes, btnGuardar)
+    End Sub
+
+    Private Sub numFeriados_TextChanged(sender As Object, e As EventArgs) Handles numFeriados.TextChanged
+        ut.habilitarBoton(txtBoxes, btnGuardar)
+    End Sub
+
+    Private Sub numFijo_TextChanged(sender As Object, e As EventArgs) Handles numFijo.TextChanged
+        ut.habilitarBoton(txtBoxes, btnGuardar)
     End Sub
 End Class

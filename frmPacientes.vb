@@ -14,7 +14,7 @@
                     ut.validarLargo(numAfiliado, 8)
                 End If
                 ut.validarLargo(numAfiliado, 12)
-                pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim)
+                pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtApellido.Text.Trim, txtNombre.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim)
                 pac.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
@@ -31,12 +31,12 @@
                     pac.obrasocial = txtObSocial.Text.Trim
                 End If
 
-                If txtNombre.Text.Trim <> pac.nombre Then
-                    pac.nombre = txtNombre.Text.Trim
+                If txtApellido.Text.Trim <> pac.nombre Then
+                    pac.nombre = txtApellido.Text.Trim
                 End If
 
-                If txtApellido.Text.Trim <> pac.apellido Then
-                    pac.apellido = txtApellido.Text.Trim
+                If txtNombre.Text.Trim <> pac.apellido Then
+                    pac.apellido = txtNombre.Text.Trim
                 End If
 
                 If txtObSocial.Text.Trim <> pac.obrasocial Then
@@ -103,7 +103,7 @@
     End Sub
 
     Private Sub frmPacientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtBoxes = {numAfiliado, numDni, txtNombre, txtApellido, txtObSocial, txtLocalidad}
+        txtBoxes = {numAfiliado, numDni, txtApellido, txtNombre, txtObSocial, txtLocalidad}
         txtObSocial.Text = "DASPU"
         txtLocalidad.Text = "CORDOBA"
     End Sub
@@ -116,8 +116,8 @@
         numAfiliado.ReadOnly = True
         numAfiliado.Text = _paciente.afiliado
         numDni.Text = _paciente.dni
-        txtNombre.Text = _paciente.nombre
-        txtApellido.Text = _paciente.apellido
+        txtApellido.Text = _paciente.nombre
+        txtNombre.Text = _paciente.apellido
         txtObSocial.Text = _paciente.obrasocial
         txtLocalidad.Text = _paciente.localidad
         pac = _paciente

@@ -1,6 +1,7 @@
 ﻿Imports System.Data
 Imports System.Data.OleDb
 Imports HomeCare
+Imports System.Globalization
 
 Public Class DB
     Private cnn As OleDbConnection
@@ -134,9 +135,7 @@ Public Class DB
             cmd.CommandText = "QUERY_SUMATORIA_MEDICOS"
 
         ElseIf _liq = tiposLiquidacion.paciente Then
-            'DEPRECADOS - USA GETLIQUIDACION(CUIT, FECHA)
-            'cmd.CommandText = "QUERY_PACIENTES"
-            'cmd.Parameters.AddWithValue("P_CUIT", desde)
+            cmd.CommandText = "QUERY_SUMATORIA_PACIENTE"
         End If
 
         cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
@@ -235,6 +234,8 @@ Public Class DB
 
         cmd.CommandType = CommandType.StoredProcedure
         cmd.CommandText = "QUERY_DETALLE_MEDICO"
+
+        cmd.Parameters.Clear()
         cmd.Parameters.AddWithValue("P_ID", _id)
         cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
         cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
@@ -245,7 +246,29 @@ Public Class DB
         Catch ex As Exception
             Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
         End Try
+    End Function
 
+    Friend Function getPracticasPaciente(_id As String, _fecha As Date) As DataTable
+        Dim desde As Date
+        Dim hasta As Date
+
+        desde = New Date(_fecha.Year, _fecha.Month, 1)
+        hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
+
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandText = "QUERY_DETALLE_PACIENTE"
+
+        cmd.Parameters.Clear()
+        cmd.Parameters.AddWithValue("P_ID", _id)
+        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
+        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
+
+        Try
+            da.Fill(ds, "PRACTICAS")
+            Return ds.Tables("PRACTICAS")
+        Catch ex As Exception
+            Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        End Try
     End Function
 
     Public Function getUsuario(_dni As String) As DataTable
@@ -333,6 +356,8 @@ Public Class DB
     End Sub
 
     Friend Sub insertar(_prestador As Prestador)
+        'Dim cult = New CultureInfo("en-US")
+
 
         Dim query = String.Format("INSERT INTO PRESTADORES (CUIT, APELLIDO, NOMBRE, EMAIL, ESPECIALIDAD, LOCALIDAD, MONTO_SEMANA, MONTO_FERIADO, MONTO_FIJO, PORCENTAJE, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, SERVICIO) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}, {9}, '{10}', '{11}', #{12}#, #{13}#, '{14}')", _prestador.cuit, _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.creoUser, _prestador.modifUser, _prestador.fechaCarga.ToShortDateString, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial)
 
@@ -355,6 +380,8 @@ Public Class DB
     End Sub
 
     Friend Sub insertar(_liq As Liquidacion)
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
 
         Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, ID_PREST) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#, {13})", _liq.cuit, _liq.localidad, _liq.especialidad, _liq.mes.ToShortDateString, _liq.hsNormales, _liq.hsFeriado, _liq.importeNormal, _liq.importeFeriado, _liq.montoFijo, _liq.creoUser, _liq.modifUser, _liq.fechaCarga.ToShortDateString, _liq.fechaMod.ToShortDateString, _liq.idPrestador)
 
@@ -371,6 +398,7 @@ Public Class DB
             Throw
         Finally
             cnn.Close()
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
             ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
@@ -485,6 +513,9 @@ Public Class DB
 
         Dim query As String
 
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+
         If _prestador.fechaCese = Date.MinValue Then
             query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}' WHERE ID={12}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.porcentaje, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.id)
         Else
@@ -506,6 +537,7 @@ Public Class DB
         Finally
             cnn.Close()
             ut.backUpDBFinal(hacerBackup)
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
         End Try
 
     End Sub

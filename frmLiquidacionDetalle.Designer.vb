@@ -29,6 +29,8 @@ Partial Class frmLiquidacionDetalle
         Me.ExportarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDetalle = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCerrar = New System.Windows.Forms.Button()
+        Me.txtFiltro = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.dgDetalle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -105,12 +107,32 @@ Partial Class frmLiquidacionDetalle
         Me.btnCerrar.Text = "&CERRAR"
         Me.btnCerrar.UseVisualStyleBackColor = False
         '
+        'txtFiltro
+        '
+        Me.txtFiltro.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtFiltro.Location = New System.Drawing.Point(385, 42)
+        Me.txtFiltro.Name = "txtFiltro"
+        Me.txtFiltro.Size = New System.Drawing.Size(160, 20)
+        Me.txtFiltro.TabIndex = 110
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(246, 46)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(115, 13)
+        Me.Label1.TabIndex = 111
+        Me.Label1.Text = "APELLIDO PACIENTE"
+        '
         'frmLiquidacionDetalle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(791, 477)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.txtFiltro)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.btnEliminar)
         Me.Controls.Add(Me.lblDetalle)
@@ -134,4 +156,6 @@ Partial Class frmLiquidacionDetalle
     Friend WithEvents ExportarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItemDetalle As ToolStripMenuItem
     Friend WithEvents btnCerrar As Button
+    Friend WithEvents txtFiltro As TextBox
+    Friend WithEvents Label1 As Label
 End Class

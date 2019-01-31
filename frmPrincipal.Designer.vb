@@ -42,6 +42,8 @@ Partial Class frmPrincipal
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.ConfiguracionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UbicacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiasDeSeguridadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
@@ -60,12 +62,11 @@ Partial Class frmPrincipal
         '
         'btnReporte
         '
-        Me.btnReporte.Enabled = False
         Me.btnReporte.Location = New System.Drawing.Point(26, 104)
         Me.btnReporte.Name = "btnReporte"
         Me.btnReporte.Size = New System.Drawing.Size(260, 53)
         Me.btnReporte.TabIndex = 1
-        Me.btnReporte.Text = "HISTORIAL PRACTICAS"
+        Me.btnReporte.Text = "PRACTICAS POR PACIENTE"
         Me.btnReporte.UseVisualStyleBackColor = True
         '
         'MenuStrip1
@@ -238,9 +239,22 @@ Partial Class frmPrincipal
         '
         'BaseDeDatosToolStripMenuItem
         '
+        Me.BaseDeDatosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UbicacionToolStripMenuItem, Me.CopiasDeSeguridadToolStripMenuItem1})
         Me.BaseDeDatosToolStripMenuItem.Name = "BaseDeDatosToolStripMenuItem"
         Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.BaseDeDatosToolStripMenuItem.Text = "&Base de Datos"
+        '
+        'UbicacionToolStripMenuItem
+        '
+        Me.UbicacionToolStripMenuItem.Name = "UbicacionToolStripMenuItem"
+        Me.UbicacionToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.UbicacionToolStripMenuItem.Text = "&Ubicacion"
+        '
+        'CopiasDeSeguridadToolStripMenuItem1
+        '
+        Me.CopiasDeSeguridadToolStripMenuItem1.Name = "CopiasDeSeguridadToolStripMenuItem1"
+        Me.CopiasDeSeguridadToolStripMenuItem1.Size = New System.Drawing.Size(181, 22)
+        Me.CopiasDeSeguridadToolStripMenuItem1.Text = "&Copias de seguridad"
         '
         'MailToolStripMenuItem
         '
@@ -301,4 +315,6 @@ Partial Class frmPrincipal
     Friend WithEvents MailToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents btnUsuarios As Button
     Friend WithEvents InfoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UbicacionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CopiasDeSeguridadToolStripMenuItem1 As ToolStripMenuItem
 End Class
