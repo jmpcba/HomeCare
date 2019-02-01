@@ -156,9 +156,8 @@ Partial Class frmPrestadores
         '
         Me.numPorcentaje.Location = New System.Drawing.Point(334, 346)
         Me.numPorcentaje.Name = "numPorcentaje"
-        Me.numPorcentaje.ReadOnly = True
         Me.numPorcentaje.Size = New System.Drawing.Size(68, 20)
-        Me.numPorcentaje.TabIndex = 800
+        Me.numPorcentaje.TabIndex = 8
         Me.numPorcentaje.Text = "0"
         '
         'numFijo
@@ -198,9 +197,9 @@ Partial Class frmPrestadores
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(331, 309)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(78, 13)
+        Me.Label11.Size = New System.Drawing.Size(77, 13)
         Me.Label11.TabIndex = 44
-        Me.Label11.Text = "PORCENTAJE"
+        Me.Label11.Text = "DIFERENCIAL"
         '
         'Label10
         '

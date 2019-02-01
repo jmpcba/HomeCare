@@ -166,7 +166,7 @@
         txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo}
         iniciarControles()
         numPorcentaje.Text = 0
-        numPorcentaje.ReadOnly = True
+        numPorcentaje.ReadOnly = False
         ut.habilitarBoton(txtBoxes, btnGuardar)
     End Sub
 
