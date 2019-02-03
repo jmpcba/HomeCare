@@ -12,6 +12,7 @@
                 subMod.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
+                subMod = Nothing
             Else
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtBoxes)

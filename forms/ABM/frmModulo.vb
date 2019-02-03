@@ -15,6 +15,7 @@
                 MessageBox.Show("Guardado Exitoso")
                 ut.iniciarTxtBoxes(txtboxes)
                 txtCodigo.ReadOnly = False
+                modu = Nothing
             Else
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtboxes)
