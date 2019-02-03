@@ -7,6 +7,7 @@ Public Class Practica
     Public subModulo As Integer
     Public hsSemana As Decimal
     Public hsFeriado As Decimal
+    Public hsDif As Decimal
     Public fecha As Date
     Public fecha_registrado As Date
     Public observaciones As String
@@ -21,7 +22,7 @@ Public Class Practica
     End Sub
 
 
-    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horas As Decimal, _observaciones As String)
+    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horas As Decimal, _horasDif As Decimal, _observaciones As String)
 
         prestador = _prestador
         paciente = _paciente
@@ -35,7 +36,7 @@ Public Class Practica
         modifUser = My.Settings.dni
         fechaCarga = Today.ToShortDateString
         fechaMod = Today.ToShortDateString
-
+        hsDif = _horasDif
     End Sub
 
 

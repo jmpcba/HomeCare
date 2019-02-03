@@ -11,7 +11,7 @@
     Private _montoLV As Decimal
     Private _montoFer As Decimal
     Private _montoFijo As Decimal
-    Private _porcentaje As Decimal
+    Private _montoDiferencial As Decimal
     Private _fechaCese As Date
     Private _creoUser As String
     Private _modifUser As String
@@ -40,7 +40,7 @@
         End Try
     End Sub
 
-    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _porcentaje As Decimal, _fechaCese As Date, _obraSocial As String)
+    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _diferencial As Decimal, _fechaCese As Date, _obraSocial As String)
 
         Me._cuit = _cuit
         Me._nombre = _nombre
@@ -52,7 +52,7 @@
         Me._montoLV = _montoLV
         Me._montoFer = _montoFer
         Me._montoFijo = _montoFijo
-        Me._porcentaje = _porcentaje
+        Me._montoDiferencial = _diferencial
         Me._fechaCese = _fechaCese
         Me._modifUser = My.Settings.dni
         Me._creoUser = My.Settings.dni
@@ -102,9 +102,9 @@
                 End If
 
                 If IsDBNull(r(0)("porcentaje")) Then
-                    _porcentaje = 0
+                    _montoDiferencial = 0
                 Else
-                    _porcentaje = r(0)("porcentaje")
+                    _montoDiferencial = r(0)("porcentaje")
                 End If
 
                 If Not IsDBNull(r(0)("fecha_cese")) Then
@@ -233,13 +233,13 @@
         End Get
     End Property
 
-    Public Property porcentaje As Decimal
+    Public Property montoDiferencial As Decimal
         Set(value As Decimal)
-            _porcentaje = value
+            _montoDiferencial = value
             _modificado = True
         End Set
         Get
-            Return _porcentaje
+            Return _montoDiferencial
         End Get
     End Property
 

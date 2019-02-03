@@ -138,28 +138,28 @@
     <Compile Include="code\subModulo.vb" />
     <Compile Include="code\Usuario.vb" />
     <Compile Include="code\utils.vb" />
-    <Compile Include="frmBuscar.Designer.vb">
+    <Compile Include="forms\ABM\frmBuscar.Designer.vb">
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmBuscar.vb">
+    <Compile Include="forms\ABM\frmBuscar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCierreLiq.Designer.vb">
+    <Compile Include="forms\liquidacion\frmCierreLiq.Designer.vb">
       <DependentUpon>frmCierreLiq.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmCierreLiq.vb">
+    <Compile Include="forms\liquidacion\frmCierreLiq.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEmail.Designer.vb">
+    <Compile Include="forms\config\frmEmail.Designer.vb">
       <DependentUpon>frmEmail.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEmail.vb">
+    <Compile Include="forms\config\frmEmail.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmFeriados.Designer.vb">
+    <Compile Include="forms\ABM\FrmFeriados.Designer.vb">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmFeriados.vb">
+    <Compile Include="forms\ABM\FrmFeriados.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmInformes.Designer.vb">
@@ -168,64 +168,64 @@
     <Compile Include="frmInformes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmIngresar.Designer.vb">
+    <Compile Include="forms\principal\frmIngresar.Designer.vb">
       <DependentUpon>frmIngresar.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmIngresar.vb">
+    <Compile Include="forms\principal\frmIngresar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLiquidacionDetalle.Designer.vb">
+    <Compile Include="forms\liquidacion\frmLiquidacionDetalle.Designer.vb">
       <DependentUpon>frmLiquidacionDetalle.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmLiquidacionDetalle.vb">
+    <Compile Include="forms\liquidacion\frmLiquidacionDetalle.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLiquidar.Designer.vb">
+    <Compile Include="forms\liquidacion\frmLiquidar.Designer.vb">
       <DependentUpon>frmLiquidar.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmLiquidar.vb">
+    <Compile Include="forms\liquidacion\frmLiquidar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmModulo.Designer.vb">
+    <Compile Include="forms\ABM\frmModulo.Designer.vb">
       <DependentUpon>frmModulo.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmModulo.vb">
+    <Compile Include="forms\ABM\frmModulo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNvaLiq.Designer.vb">
+    <Compile Include="forms\liquidacion\frmNvaLiq.Designer.vb">
       <DependentUpon>frmNvaLiq.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmNvaLiq.vb">
+    <Compile Include="forms\liquidacion\frmNvaLiq.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPacientes.Designer.vb">
+    <Compile Include="forms\ABM\frmPacientes.Designer.vb">
       <DependentUpon>frmPacientes.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPacientes.vb">
+    <Compile Include="forms\ABM\frmPacientes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPracticaPacienteDetalle.Designer.vb">
+    <Compile Include="forms\liquidacion\frmPracticaPacienteDetalle.Designer.vb">
       <DependentUpon>frmPracticaPacienteDetalle.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPracticaPacienteDetalle.vb">
+    <Compile Include="forms\liquidacion\frmPracticaPacienteDetalle.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPrestacion.Designer.vb">
+    <Compile Include="forms\ABM\frmPrestacion.Designer.vb">
       <DependentUpon>frmPrestacion.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPrestacion.vb">
+    <Compile Include="forms\ABM\frmPrestacion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPrestadores.Designer.vb">
+    <Compile Include="forms\ABM\frmPrestadores.Designer.vb">
       <DependentUpon>frmPrestadores.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPrestadores.vb">
+    <Compile Include="forms\ABM\frmPrestadores.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPrincipal.Designer.vb">
+    <Compile Include="forms\principal\frmPrincipal.Designer.vb">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPrincipal.vb">
+    <Compile Include="forms\principal\frmPrincipal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmReporte.Designer.vb">
@@ -234,16 +234,16 @@
     <Compile Include="frmReporte.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSubMod.Designer.vb">
+    <Compile Include="forms\ABM\frmSubMod.Designer.vb">
       <DependentUpon>frmSubMod.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmSubMod.vb">
+    <Compile Include="forms\ABM\frmSubMod.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUsuarios.Designer.vb">
+    <Compile Include="forms\ABM\frmUsuarios.Designer.vb">
       <DependentUpon>frmUsuarios.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmUsuarios.vb">
+    <Compile Include="forms\ABM\frmUsuarios.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmVerificar.Designer.vb">
@@ -257,17 +257,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HomeCareDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="frmPracticas.vb">
+    <Compile Include="forms\liquidacion\frmPracticas.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPracticas.Designer.vb">
+    <Compile Include="forms\liquidacion\frmPracticas.Designer.vb">
       <DependentUpon>frmPracticas.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmInfo.Designer.vb">
+    <Compile Include="forms\config\frmInfo.Designer.vb">
       <DependentUpon>frmInfo.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmInfo.vb">
+    <Compile Include="forms\config\frmInfo.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -285,75 +285,75 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="frmPracticasPaciente.Designer.vb">
+    <Compile Include="forms\liquidacion\frmPracticasPaciente.Designer.vb">
       <DependentUpon>frmPracticasPaciente.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPracticasPaciente.vb">
+    <Compile Include="forms\liquidacion\frmPracticasPaciente.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmBuscar.resx">
+    <EmbeddedResource Include="forms\ABM\frmBuscar.resx">
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCierreLiq.resx">
+    <EmbeddedResource Include="forms\liquidacion\frmCierreLiq.resx">
       <DependentUpon>frmCierreLiq.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEmail.resx">
+    <EmbeddedResource Include="forms\config\frmEmail.resx">
       <DependentUpon>frmEmail.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmFeriados.resx">
+    <EmbeddedResource Include="forms\ABM\FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInformes.resx">
       <DependentUpon>frmInformes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmIngresar.resx">
+    <EmbeddedResource Include="forms\principal\frmIngresar.resx">
       <DependentUpon>frmIngresar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLiquidacionDetalle.resx">
+    <EmbeddedResource Include="forms\liquidacion\frmLiquidacionDetalle.resx">
       <DependentUpon>frmLiquidacionDetalle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLiquidar.resx">
+    <EmbeddedResource Include="forms\liquidacion\frmLiquidar.resx">
       <DependentUpon>frmLiquidar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmModulo.resx">
+    <EmbeddedResource Include="forms\ABM\frmModulo.resx">
       <DependentUpon>frmModulo.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNvaLiq.resx">
+    <EmbeddedResource Include="forms\liquidacion\frmNvaLiq.resx">
       <DependentUpon>frmNvaLiq.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPacientes.resx">
+    <EmbeddedResource Include="forms\ABM\frmPacientes.resx">
       <DependentUpon>frmPacientes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPracticaPacienteDetalle.resx">
+    <EmbeddedResource Include="forms\liquidacion\frmPracticaPacienteDetalle.resx">
       <DependentUpon>frmPracticaPacienteDetalle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPrestacion.resx">
+    <EmbeddedResource Include="forms\ABM\frmPrestacion.resx">
       <DependentUpon>frmPrestacion.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPrestadores.resx">
+    <EmbeddedResource Include="forms\ABM\frmPrestadores.resx">
       <DependentUpon>frmPrestadores.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPrincipal.resx">
+    <EmbeddedResource Include="forms\principal\frmPrincipal.resx">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReporte.resx">
       <DependentUpon>frmReporte.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPracticas.resx">
+    <EmbeddedResource Include="forms\liquidacion\frmPracticas.resx">
       <DependentUpon>frmPracticas.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSubMod.resx">
+    <EmbeddedResource Include="forms\ABM\frmSubMod.resx">
       <DependentUpon>frmSubMod.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUsuarios.resx">
+    <EmbeddedResource Include="forms\ABM\frmUsuarios.resx">
       <DependentUpon>frmUsuarios.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVerificar.resx">
       <DependentUpon>frmVerificar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmInfo.resx">
+    <EmbeddedResource Include="forms\config\frmInfo.resx">
       <DependentUpon>frmInfo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -362,7 +362,7 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPracticasPaciente.resx">
+    <EmbeddedResource Include="forms\liquidacion\frmPracticasPaciente.resx">
       <DependentUpon>frmPracticasPaciente.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

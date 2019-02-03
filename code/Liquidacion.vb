@@ -1,14 +1,13 @@
 ﻿Public Class Liquidacion
     Private _prestador As Prestador
-    Private _cuit As String
-    Private _localidad As String
-    Private _especialidad As String
     Private _mes As Date
     Private _hsNormales As Decimal
     Private _hsFeriado As Decimal
+    Private _hsDiferencial As Decimal
     Private _importeFeriado As Decimal
     Private _importeNormal As Decimal
     Private _montoFijo As Decimal
+    Private _importeDiferencial As Decimal
     Private _modifUser As Integer
     Private _creoUser As Integer
     Private _fechaCarga As Date
@@ -17,17 +16,16 @@
     Private _observaciones As String
 
 
-    Public Sub New(_prestador As Prestador, _cuit As String, _localidad As String, _especialidad As String, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal, _montoFijo As Decimal, _observaciones As String)
+    Public Sub New(_prestador As Prestador, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _hsDiferencial As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal, _importeDiferencial As Decimal, _montoFijo As Decimal, _observaciones As String)
 
         Me._prestador = _prestador
-        Me._cuit = _cuit
-        Me._localidad = _localidad
-        Me._especialidad = _especialidad
         Me._mes = _mes
         Me._hsNormales = _hsNormales
         Me._hsFeriado = _hsFeriado
+        Me._hsDiferencial = _hsDiferencial
         Me._importeFeriado = _importeFeriado
         Me._importeNormal = _importeNormal
+        Me._importeDiferencial = _importeDiferencial
         Me._montoFijo = _montoFijo
         Me._observaciones = _observaciones
         _modifUser = My.Settings.dni
@@ -36,32 +34,6 @@
         _fechaMod = Date.Today
     End Sub
 
-    Public Property cuit As String
-        Set(value As String)
-            _cuit = value
-        End Set
-        Get
-            Return _cuit
-        End Get
-    End Property
-
-    Public Property localidad As String
-        Set(value As String)
-            _localidad = value
-        End Set
-        Get
-            Return _localidad
-        End Get
-    End Property
-
-    Public Property especialidad As String
-        Set(value As String)
-            _especialidad = value
-        End Set
-        Get
-            Return _especialidad
-        End Get
-    End Property
     Public Property mes As Date
         Set(value As Date)
             _mes = value
@@ -155,6 +127,24 @@
         End Get
     End Property
 
+    Public Property importeDiferencial As Decimal
+        Set(value As Decimal)
+            _importeDiferencial = value
+        End Set
+        Get
+            Return _importeDiferencial
+        End Get
+    End Property
+
+    Public Property hsDiferencial As Decimal
+        Set(value As Decimal)
+            _hsDiferencial = value
+        End Set
+        Get
+            Return _hsDiferencial
+        End Get
+    End Property
+
     Public Sub insertar()
         Try
             Dim db As New DB
@@ -162,7 +152,6 @@
         Catch ex As Exception
             Throw
         End Try
-
     End Sub
 
     Friend Sub liquidar()
