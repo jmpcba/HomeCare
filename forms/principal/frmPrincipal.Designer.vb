@@ -44,6 +44,9 @@ Partial Class frmPrincipal
         Me.BaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UbicacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopiasDeSeguridadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UbicacionDeCopiasDeSeguridadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarBaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RestaurarBaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
@@ -247,14 +250,33 @@ Partial Class frmPrincipal
         'UbicacionToolStripMenuItem
         '
         Me.UbicacionToolStripMenuItem.Name = "UbicacionToolStripMenuItem"
-        Me.UbicacionToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
-        Me.UbicacionToolStripMenuItem.Text = "&Ubicacion"
+        Me.UbicacionToolStripMenuItem.Size = New System.Drawing.Size(244, 22)
+        Me.UbicacionToolStripMenuItem.Text = "&Ubicacion archivo base de datos"
         '
         'CopiasDeSeguridadToolStripMenuItem1
         '
+        Me.CopiasDeSeguridadToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UbicacionDeCopiasDeSeguridadToolStripMenuItem, Me.CopiarBaseDeDatosToolStripMenuItem, Me.RestaurarBaseDeDatosToolStripMenuItem})
         Me.CopiasDeSeguridadToolStripMenuItem1.Name = "CopiasDeSeguridadToolStripMenuItem1"
-        Me.CopiasDeSeguridadToolStripMenuItem1.Size = New System.Drawing.Size(181, 22)
+        Me.CopiasDeSeguridadToolStripMenuItem1.Size = New System.Drawing.Size(244, 22)
         Me.CopiasDeSeguridadToolStripMenuItem1.Text = "&Copias de seguridad"
+        '
+        'UbicacionDeCopiasDeSeguridadToolStripMenuItem
+        '
+        Me.UbicacionDeCopiasDeSeguridadToolStripMenuItem.Name = "UbicacionDeCopiasDeSeguridadToolStripMenuItem"
+        Me.UbicacionDeCopiasDeSeguridadToolStripMenuItem.Size = New System.Drawing.Size(289, 22)
+        Me.UbicacionDeCopiasDeSeguridadToolStripMenuItem.Text = "Definir &Ubicacion de copias de seguridad"
+        '
+        'CopiarBaseDeDatosToolStripMenuItem
+        '
+        Me.CopiarBaseDeDatosToolStripMenuItem.Name = "CopiarBaseDeDatosToolStripMenuItem"
+        Me.CopiarBaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(289, 22)
+        Me.CopiarBaseDeDatosToolStripMenuItem.Text = "&Copiar base de datos"
+        '
+        'RestaurarBaseDeDatosToolStripMenuItem
+        '
+        Me.RestaurarBaseDeDatosToolStripMenuItem.Name = "RestaurarBaseDeDatosToolStripMenuItem"
+        Me.RestaurarBaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(289, 22)
+        Me.RestaurarBaseDeDatosToolStripMenuItem.Text = "&Restaurar Base de datos"
         '
         'MailToolStripMenuItem
         '
@@ -317,4 +339,7 @@ Partial Class frmPrincipal
     Friend WithEvents InfoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UbicacionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CopiasDeSeguridadToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents UbicacionDeCopiasDeSeguridadToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CopiarBaseDeDatosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RestaurarBaseDeDatosToolStripMenuItem As ToolStripMenuItem
 End Class

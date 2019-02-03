@@ -52,6 +52,7 @@ Public Class utils
 
         frmArchivo.InitialDirectory = "C:\"
         frmArchivo.RestoreDirectory = True
+        frmArchivo.Filter = "Base de datos access (*.accdb)|*accdb|Todos los archivos (*.*)|*.*"
 
         If frmArchivo.ShowDialog = DialogResult.OK Then
             Try
@@ -364,4 +365,48 @@ Public Class utils
         Next
     End Sub
 
+    Public Sub copiarDB()
+        Dim frmFolder = New FolderBrowserDialog
+        Dim fileName = Path.GetFileName(My.Settings.DBPath)
+
+        frmFolder.ShowNewFolderButton = True
+
+        If frmFolder.ShowDialog = DialogResult.OK Then
+            Try
+                Dim p = frmFolder.SelectedPath
+                Dim copyPath = Path.Combine(p, fileName)
+
+                If Path.GetFullPath(Path.GetDirectoryName(My.Settings.DBPath)) = p Then
+                    Throw New ExcepcionDeSistema("No se puede guardar una copia aqui" & vbCrLf & vbCrLf & "Seleccione otra carpeta")
+                End If
+
+                File.Copy(My.Settings.DBPath, copyPath)
+                mensaje("Archivo copiado", mensajes.info)
+
+            Catch ex As Exception
+                Throw
+            End Try
+        End If
+    End Sub
+    Public Sub restaurarDB()
+        Dim frmArchivo = New OpenFileDialog
+
+        frmArchivo.InitialDirectory = "C:\"
+        frmArchivo.RestoreDirectory = True
+        frmArchivo.Filter = "Base de datos access (*.accdb)|*accdb|Todos los archivos (*.*)|*.*"
+
+        If frmArchivo.ShowDialog = DialogResult.OK Then
+            Try
+                Dim p = Path.GetFullPath(frmArchivo.FileName)
+                Dim bckFileName = Path.GetFileName(My.Settings.DBPath)
+                bckFileName = bckFileName.Insert(bckFileName.IndexOf(".accdb"), "_copia_usuario_" & Now.ToString("yyyy-MM-dd_HHmm"))
+                'copia del archivo actual
+                File.Copy(My.Settings.DBPath, Path.Combine(My.Settings.DBBackupPath, bckFileName), True)
+                File.Copy(frmArchivo.FileName, My.Settings.DBPath, True)
+                mensaje("Archivo restaurado", mensajes.info)
+            Catch ex As Exception
+                Throw
+            End Try
+        End If
+    End Sub
 End Class

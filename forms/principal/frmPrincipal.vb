@@ -93,9 +93,31 @@
         End Try
     End Sub
 
-    Private Sub CopiasDeSeguridadToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CopiasDeSeguridadToolStripMenuItem1.Click
+    Private Sub UbicacionDeCopiasDeSeguridadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UbicacionDeCopiasDeSeguridadToolStripMenuItem.Click
         Try
             ut.setBackupPath()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+    End Sub
+
+    Private Sub CopiarBaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopiarBaseDeDatosToolStripMenuItem.Click
+        Try
+            If ut.mensaje("Desea crear una copiar de su base de datos?" & vbCrLf & "En el paso siguiente debera elegir una carpeta donde guardar la copia", utils.mensajes.preg) = MsgBoxResult.Yes Then
+                ut.copiarDB()
+            End If
+
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+    End Sub
+
+    Private Sub RestaurarBaseDeDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestaurarBaseDeDatosToolStripMenuItem.Click
+        Try
+            If ut.mensaje("Se reemplazara la base de datos con una version anterior?" & vbCrLf & "En el paso siguiente debera elegir un archivo de base de datos" & vbCrLf & "Desea continuar?", utils.mensajes.preg) = MsgBoxResult.Yes Then
+                ut.restaurarDB()
+            End If
+
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
