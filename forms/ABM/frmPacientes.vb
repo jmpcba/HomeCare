@@ -72,7 +72,7 @@
 
     Private Sub iniciarControles()
         ut.iniciarTxtBoxes(txtBoxes)
-        txtObSocial.Text = "DASPU"
+        txtObSocial.Text = "PAMI"
         txtLocalidad.Text = "CORDOBA"
         numAfiliado.ReadOnly = False
     End Sub
@@ -104,8 +104,7 @@
 
     Private Sub frmPacientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtBoxes = {numAfiliado, numDni, txtApellido, txtNombre, txtObSocial, txtLocalidad}
-        txtObSocial.Text = "DASPU"
-        txtLocalidad.Text = "CORDOBA"
+        iniciarControles()
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
