@@ -20,6 +20,7 @@
     Private _modificado = False
     Private _obraSocial As String
     Private _estado As Integer
+    Private _comentario As String
 
     Public Sub New()
         Dim db = New DB()
@@ -40,7 +41,7 @@
         End Try
     End Sub
 
-    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _diferencial As Decimal, _fechaCese As Date, _obraSocial As String)
+    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _diferencial As Decimal, _fechaCese As Date, _obraSocial As String, _comentario As String)
 
         Me._cuit = _cuit
         Me._nombre = _nombre
@@ -54,6 +55,7 @@
         Me._montoFijo = _montoFijo
         Me._montoDiferencial = _diferencial
         Me._fechaCese = _fechaCese
+        Me._comentario = _comentario
         Me._modifUser = My.Settings.dni
         Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
@@ -110,6 +112,7 @@
                 If Not IsDBNull(r(0)("fecha_cese")) Then
                     _fechaCese = r(0)("fecha_cese")
                 End If
+                _comentario = r(0)("comentario")
 
                 _modifUser = r(0)("modifico_usuario")
                 _creoUser = r(0)("cargo_usuario")
@@ -252,6 +255,17 @@
             Return _fechaCese
         End Get
     End Property
+
+    Public Property comentario As String
+        Set(value As String)
+            _comentario = value
+            _modificado = True
+        End Set
+        Get
+            Return _comentario
+        End Get
+    End Property
+
     Public ReadOnly Property modifUser As Integer
         Get
             Return _modifUser

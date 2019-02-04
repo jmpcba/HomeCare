@@ -21,7 +21,7 @@
         If IsNothing(prest) Then
             Try
                 ut.validarTxtBoxLleno(txtBoxes)
-                ' ut.validarLargo(txtCuit, 11)
+                'ut.validarLargo(txtCuit, 11)
                 ut.validarMail(txtEmail.Text.Trim)
                 ut.validarNumerico({numFijo, numLunVie, numFeriados})
                 Dim cuit = txtCuit.Text.ToString
@@ -29,7 +29,7 @@
                     cuit = cuit.Insert(2, "-")
                     cuit = cuit.Insert(cuit.Length - 1, "-")
                 End If
-                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, montoLaV, montoFeriado, montoFijo, numDiferencial.Text.Trim, dtCese.Text, txtServicio.Text)
+                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, montoLaV, montoFeriado, montoFijo, numDiferencial.Text.Trim, dtCese.Text, txtServicio.Text, txtComentario.Text)
                 prest.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
@@ -92,6 +92,9 @@
                         prest.fechaCese = Date.MinValue
                         prest.reactivar()
                     End If
+                End If
+                If txtComentario.Text.Trim <> prest.comentario Then
+                    prest.comentario = txtComentario.Text.Trim
                 End If
 
                 prest.actualizar()
@@ -165,7 +168,7 @@
         Dim esp As New especialidad
         esp.llenarcombo(cbEspecialidad)
         dtCese.Enabled = False
-        txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo, numDiferencial}
+        txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo, numDiferencial, txtComentario}
         iniciarControles()
         numDiferencial.Text = 0
         numDiferencial.ReadOnly = False
@@ -206,6 +209,7 @@
             chbCese.Checked = True
             ut.desactivarTxtBoxes(txtBoxes)
         End If
+        txtComentario.Text = _prestador.comentario
         prest = _prestador
         chbCese.Enabled = True
         btnGuardar.Enabled = True
