@@ -25,13 +25,13 @@
 
     Private Sub grPacientes_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles grPacientes.CellDoubleClick
         Dim r As DataGridViewRow
-
-        r = grPacientes.Rows(e.RowIndex)
-        Dim afiliado = r.Cells("AFILIADO").Value
-        Dim fecha = dtMes.Value
-        Dim frm As New frmPracticaPacienteDetalle(afiliado, fecha, Me)
-        frm.ShowDialog()
-
+        If e.RowIndex <> -1 Then
+            r = grPacientes.Rows(e.RowIndex)
+            Dim afiliado = r.Cells("AFILIADO").Value
+            Dim fecha = dtMes.Value
+            Dim frm As New frmPracticaPacienteDetalle(afiliado, fecha, Me)
+            frm.ShowDialog()
+        End If
     End Sub
 
     Private Sub dtMes_ValueChanged(sender As Object, e As EventArgs) Handles dtMes.ValueChanged

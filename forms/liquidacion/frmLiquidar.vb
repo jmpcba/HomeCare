@@ -8,6 +8,7 @@
 
     Public Sub llenarGrilla()
         Try
+            btnGuardar.Enabled = False
             Dim db As New DB()
             Dim mes = dtMes.Value
 
@@ -52,6 +53,8 @@
             Next
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
+        Finally
+            btnGuardar.Enabled = True
         End Try
 
     End Sub
@@ -74,12 +77,15 @@
 
     Private Sub gridLiqui_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridLiqui.CellDoubleClick
         Dim r As DataGridViewRow
-        If e.ColumnIndex <> 0 Then
-            r = gridLiqui.Rows(e.RowIndex)
-            Dim idPrest = r.Cells("ID_PREST").Value
-            Dim fecha = dtMes.Value
-            Dim frm As New frmLiquidacionDetalle(idPrest, fecha, Me)
-            frm.ShowDialog()
+
+        If e.RowIndex <> -1 Then
+            If e.ColumnIndex <> 0 Then
+                r = gridLiqui.Rows(e.RowIndex)
+                Dim idPrest = r.Cells("ID_PREST").Value
+                Dim fecha = dtMes.Value
+                Dim frm As New frmLiquidacionDetalle(idPrest, fecha, Me)
+                frm.ShowDialog()
+            End If
         End If
 
     End Sub
@@ -179,6 +185,6 @@
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
         dt.DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] Like '%{0}%'", txtFiltro.Text.Trim)
-                            gridLiqui.Refresh()
+        gridLiqui.Refresh()
     End Sub
 End Class

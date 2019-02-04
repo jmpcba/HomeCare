@@ -73,6 +73,7 @@ Partial Class frmPracticaPacienteDetalle
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgDetalle.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.dgDetalle.Location = New System.Drawing.Point(14, 49)
         Me.dgDetalle.MultiSelect = False
         Me.dgDetalle.Name = "dgDetalle"

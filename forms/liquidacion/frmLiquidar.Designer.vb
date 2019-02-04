@@ -74,6 +74,7 @@ Partial Class frmLiquidar
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridLiqui.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridLiqui.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
         Me.gridLiqui.Location = New System.Drawing.Point(16, 140)
         Me.gridLiqui.MultiSelect = False
         Me.gridLiqui.Name = "gridLiqui"

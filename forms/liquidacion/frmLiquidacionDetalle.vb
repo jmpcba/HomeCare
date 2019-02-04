@@ -100,10 +100,10 @@
     End Sub
 
     Private Sub dgDetalle_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgDetalle.CellClick
-        Dim sel = dgDetalle.Rows(e.RowIndex).Cells(0).Value
-        sel = Not sel
 
         If e.RowIndex <> -1 Then
+            Dim sel = dgDetalle.Rows(e.RowIndex).Cells(0).Value
+            sel = Not sel
             btnEliminar.Enabled = True
             dgDetalle.Rows(e.RowIndex).Cells(0).Value = sel
         Else
@@ -135,29 +135,37 @@
 
     Private Sub llenarGrilla()
         Dim chkclm As New DataGridViewCheckBoxColumn
-        dgDetalle.DataSource = Nothing
-        dt.Clear()
-        dt = db.getLiquidacion(idPrestador, fecha)
+        Try
+            btnEliminar.Enabled = False
+            dgDetalle.DataSource = Nothing
+            dt.Clear()
+            dt = db.getLiquidacion(idPrestador, fecha)
 
-        With chkclm
-            .HeaderText = ""
-            .Name = ""
-            .ReadOnly = False
-        End With
+            With chkclm
+                .HeaderText = ""
+                .Name = ""
+                .ReadOnly = False
+            End With
 
-        With dgDetalle
-            .Columns.Clear()
-            .DataSource = dt
-            .AutoResizeColumns()
-            .AutoResizeRows()
-            .ClearSelection()
-            .Columns("id").Visible = False
+            With dgDetalle
+                .Columns.Clear()
+                .DataSource = dt
+                .AutoResizeColumns()
+                .AutoResizeRows()
+                .ClearSelection()
+                .Columns("id").Visible = False
 
-            If dt.Rows.Count <> 0 Then
-                .Columns.Insert(0, chkclm)
+                If dt.Rows.Count <> 0 Then
+                    .Columns.Insert(0, chkclm)
+                End If
+            End With
 
-            End If
-        End With
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        Finally
+            btnEliminar.Enabled = True
+        End Try
+
     End Sub
 
     Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged

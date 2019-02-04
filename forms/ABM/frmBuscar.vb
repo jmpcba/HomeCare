@@ -66,27 +66,29 @@
     End Sub
 
     Private Sub dgBuscar_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgBuscar.CellDoubleClick
-        Try
-            Dim r As DataGridViewRow
-            r = dgBuscar.Rows(e.RowIndex)
+        If e.RowIndex <> -1 Then
+            Try
+                Dim r As DataGridViewRow
+                r = dgBuscar.Rows(e.RowIndex)
 
-            If frmParent.GetType.Name = "frmPrestadores" Then
-                obj.id = r.Cells("ID").Value
-            ElseIf frmParent.GetType.Name = "frmPacientes" Then
-                obj.afiliado = r.Cells("AFILIADO").Value
-            ElseIf frmParent.GetType.Name = "frmModulo" Then
-                obj.codigo = r.Cells("codigo").Value
-            ElseIf frmParent.GetType.Name = "frmSubMod" Then
-                obj.codigo = r.Cells("codigo").Value
-            ElseIf frmParent.GetType.Name = "frmUsuarios" Then
-                obj.dni = r.Cells("dni").Value
-            End If
+                If frmParent.GetType.Name = "frmPrestadores" Then
+                    obj.id = r.Cells("ID").Value
+                ElseIf frmParent.GetType.Name = "frmPacientes" Then
+                    obj.afiliado = r.Cells("AFILIADO").Value
+                ElseIf frmParent.GetType.Name = "frmModulo" Then
+                    obj.codigo = r.Cells("codigo").Value
+                ElseIf frmParent.GetType.Name = "frmSubMod" Then
+                    obj.codigo = r.Cells("codigo").Value
+                ElseIf frmParent.GetType.Name = "frmUsuarios" Then
+                    obj.dni = r.Cells("dni").Value
+                End If
 
-            frmParent.resultadoBusqueda(obj)
-            Me.Close()
-        Catch ex As Exception
-            ut.mensaje(ex.Message, utils.mensajes.err)
-        End Try
+                frmParent.resultadoBusqueda(obj)
+                Me.Close()
+            Catch ex As Exception
+                ut.mensaje(ex.Message, utils.mensajes.err)
+            End Try
+        End If
     End Sub
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
