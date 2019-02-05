@@ -165,7 +165,19 @@
 
     Private Sub ResumenDePrestadoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResumenDePrestadoresToolStripMenuItem.Click
         Try
-            ut.exportarExcel(dt)
+            Dim dtExport As New DataTable
+            dtExport = dt
+            dtExport.Columns.Remove("RESULTADO CARGA")
+            dtExport.Columns.Remove("ESTADO")
+            dtExport.Columns.Add("OBSERVACIONES")
+            Dim prest As New Prestador
+
+            For Each r As DataRow In dtExport.Rows
+                prest.id = r("ID_PREST")
+                r("OBSERVACIONES") = prest.observaciones
+            Next
+
+            ut.exportarExcel(dtExport)
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
@@ -187,5 +199,38 @@
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
         dt.DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] Like '%{0}%'", txtFiltro.Text.Trim)
         gridLiqui.Refresh()
+    End Sub
+
+    Private Sub CierreLiquidacionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CierreLiquidacionToolStripMenuItem.Click
+        Dim dtPrestadores As New DataTable("RESUMEN PRESTADORES")
+        Dim dtPracticas As New DataTable("DETALLE PRACTICAS")
+        Dim ds As New DataSet
+
+        Try
+
+            dtPrestadores = dt.Copy
+            dtPrestadores.TableName = "RESUMEN PRESTADORES"
+            dtPrestadores.Columns.Remove("RESULTADO CARGA")
+            dtPrestadores.Columns.Remove("ESTADO")
+            dtPrestadores.Columns.Add("OBSERVACIONES")
+            Dim prest As New Prestador
+
+            For Each r As DataRow In dtPrestadores.Rows
+                prest.id = r("ID_PREST")
+                r("OBSERVACIONES") = prest.observaciones
+            Next
+
+
+            Dim practicas = New Practica
+            dtPracticas = practicas.getPracticas(dtMes.Value).Copy
+
+            ds.Tables.Add(dtPracticas)
+            ds.Tables.Add(dtPrestadores)
+
+            ut.exportarExcel(ds)
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+
     End Sub
 End Class

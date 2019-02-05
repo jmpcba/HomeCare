@@ -20,7 +20,7 @@
     Private _modificado = False
     Private _obraSocial As String
     Private _estado As Integer
-    Private _comentario As String
+    Private _observaciones As String
 
     Public Sub New()
         Dim db = New DB()
@@ -55,7 +55,7 @@
         Me._montoFijo = _montoFijo
         Me._montoDiferencial = _diferencial
         Me._fechaCese = _fechaCese
-        Me._comentario = _comentario
+        Me._observaciones = _comentario
         Me._modifUser = My.Settings.dni
         Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
@@ -112,18 +112,19 @@
                 If Not IsDBNull(r(0)("fecha_cese")) Then
                     _fechaCese = r(0)("fecha_cese")
                 End If
+
                 If IsDBNull(r(0)("comentario")) Then
-                    _comentario = ""
+                    _observaciones = ""
                 Else
-                    _comentario = r(0)("comentario")
+                    _observaciones = r(0)("comentario")
                 End If
 
                 _modifUser = r(0)("modifico_usuario")
-                    _creoUser = r(0)("cargo_usuario")
-                    _fechaCarga = r(0)("fecha_carga")
-                    _fechaMod = r(0)("fecha_modificacion")
-                Else
-                    Throw New Exception("No se encontro el prestador")
+                _creoUser = r(0)("cargo_usuario")
+                _fechaCarga = r(0)("fecha_carga")
+                _fechaMod = r(0)("fecha_modificacion")
+            Else
+                Throw New Exception("No se encontro el prestador")
             End If
 
         End Set
@@ -260,13 +261,13 @@
         End Get
     End Property
 
-    Public Property comentario As String
+    Public Property observaciones As String
         Set(value As String)
-            _comentario = value
+            _observaciones = value
             _modificado = True
         End Set
         Get
-            Return _comentario
+            Return _observaciones
         End Get
     End Property
 
@@ -308,7 +309,7 @@
 
     Public Sub insertar()
         Try
-            _comentario = _comentario.Replace("'", " ")
+            _observaciones = _observaciones.Replace("'", " ")
             Dim db = New DB
             Dim ut As New utils
             Dim r As DataRow()
@@ -331,7 +332,7 @@
         Dim db = New DB
         Try
             If _modificado Then
-                _comentario = _comentario.Replace("'", " ")
+                _observaciones = _observaciones.Replace("'", " ")
                 _fechaMod = Date.Today
                 _modifUser = My.Settings.dni
                 db.actualizar(Me)

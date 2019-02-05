@@ -346,6 +346,75 @@ Public Class utils
             System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
         End Try
     End Sub
+
+    Public Sub exportarExcel(ByVal _ds As DataSet)
+
+        Dim _excel As New Excel.Application
+        Dim saveFile As New SaveFileDialog
+        Dim path As String
+
+        saveFile.Filter = "Documento Excel (*.xlsx)|*.xlsx"
+        Dim wBook As Excel.Workbook
+        Dim wSheet As Excel.Worksheet
+
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+        Try
+            If saveFile.ShowDialog = DialogResult.OK Then
+                path = saveFile.FileName
+
+                wBook = _excel.Workbooks.Add()
+
+
+                For Each dt As DataTable In _ds.Tables
+                    wSheet = wBook.ActiveSheet()
+                    wSheet.Name = dt.TableName
+
+                    Dim dc As System.Data.DataColumn
+                    Dim dr As System.Data.DataRow
+                    Dim colIndex As Integer = 0
+                    Dim rowIndex As Integer = 0
+
+                    For Each dc In dt.Columns
+                        colIndex = colIndex + 1
+                        wSheet.Cells(1, colIndex) = dc.ColumnName
+                    Next
+
+                    For Each dr In dt.Rows
+                        rowIndex = rowIndex + 1
+                        colIndex = 0
+                        For Each dc In dt.Columns
+                            colIndex = colIndex + 1
+                            wSheet.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
+                        Next
+                    Next
+                    wSheet.Columns.AutoFit()
+                    wBook.Sheets.Add()
+                Next
+                For Each ws As Excel.Worksheet In wBook.Sheets
+                    If ws.Name.StartsWith("Sheet") Then
+                        ws.Delete()
+                    End If
+                Next
+                wBook.SaveAs(path)
+
+                ReleaseObject(wSheet)
+                wBook.Close(False)
+                ReleaseObject(wBook)
+                _excel.Quit()
+                ReleaseObject(_excel)
+                GC.Collect()
+
+                mensaje("Archivo exportado!", mensajes.info)
+
+            End If
+        Catch ex As Exception
+            Throw
+        Finally
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
+        End Try
+    End Sub
+
     Private Sub ReleaseObject(ByVal o As Object)
         Try
             While (System.Runtime.InteropServices.Marshal.ReleaseComObject(o) > 0)

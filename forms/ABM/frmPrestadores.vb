@@ -94,8 +94,8 @@
                         prest.reactivar()
                     End If
                 End If
-                If txtComentario.Text.Trim <> prest.comentario Then
-                    prest.comentario = txtComentario.Text.Trim
+                If txtComentario.Text.Trim <> prest.observaciones Then
+                    prest.observaciones = txtComentario.Text.Trim
                 End If
 
                 prest.actualizar()
@@ -212,7 +212,7 @@
             chbCese.Checked = True
             ut.desactivarTxtBoxes(txtBoxes)
         End If
-        txtComentario.Text = _prestador.comentario
+        txtComentario.Text = _prestador.observaciones
         prest = _prestador
         chbCese.Enabled = True
         btnGuardar.Enabled = True

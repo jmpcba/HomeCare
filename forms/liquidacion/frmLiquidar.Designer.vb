@@ -40,6 +40,7 @@ Partial Class frmLiquidar
         Me.TodasLasPracticasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
+        Me.CierreLiquidacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.gridLiqui, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -74,7 +75,7 @@ Partial Class frmLiquidar
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gridLiqui.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridLiqui.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.gridLiqui.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2
         Me.gridLiqui.Location = New System.Drawing.Point(16, 140)
         Me.gridLiqui.MultiSelect = False
         Me.gridLiqui.Name = "gridLiqui"
@@ -161,7 +162,7 @@ Partial Class frmLiquidar
         '
         'ExportarToolStripMenuItem
         '
-        Me.ExportarToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ResumenDePrestadoresToolStripMenuItem, Me.TodasLasPracticasToolStripMenuItem})
+        Me.ExportarToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ResumenDePrestadoresToolStripMenuItem, Me.TodasLasPracticasToolStripMenuItem, Me.CierreLiquidacionToolStripMenuItem})
         Me.ExportarToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ExportarToolStripMenuItem.Name = "ExportarToolStripMenuItem"
         Me.ExportarToolStripMenuItem.Size = New System.Drawing.Size(80, 25)
@@ -194,6 +195,12 @@ Partial Class frmLiquidar
         Me.txtFiltro.Name = "txtFiltro"
         Me.txtFiltro.Size = New System.Drawing.Size(200, 20)
         Me.txtFiltro.TabIndex = 116
+        '
+        'CierreLiquidacionToolStripMenuItem
+        '
+        Me.CierreLiquidacionToolStripMenuItem.Name = "CierreLiquidacionToolStripMenuItem"
+        Me.CierreLiquidacionToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
+        Me.CierreLiquidacionToolStripMenuItem.Text = "Cierre Liquidacion"
         '
         'frmLiquidar
         '
@@ -243,4 +250,5 @@ Partial Class frmLiquidar
     Friend WithEvents TodasLasPracticasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label3 As Label
     Friend WithEvents txtFiltro As TextBox
+    Friend WithEvents CierreLiquidacionToolStripMenuItem As ToolStripMenuItem
 End Class
