@@ -64,6 +64,7 @@
         Me.WindowState = FormWindowState.Maximized
         dtMes.Value = Today.AddMonths(-1)
         llenarGrilla()
+        txtObservaciones.Text = " "
         If My.Settings.nivel > 1 Then
             btnGuardar.Visible = False
         Else

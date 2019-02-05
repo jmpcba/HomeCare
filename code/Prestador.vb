@@ -112,14 +112,18 @@
                 If Not IsDBNull(r(0)("fecha_cese")) Then
                     _fechaCese = r(0)("fecha_cese")
                 End If
-                _comentario = r(0)("comentario")
+                If IsDBNull(r(0)("comentario")) Then
+                    _comentario = ""
+                Else
+                    _comentario = r(0)("comentario")
+                End If
 
                 _modifUser = r(0)("modifico_usuario")
-                _creoUser = r(0)("cargo_usuario")
-                _fechaCarga = r(0)("fecha_carga")
-                _fechaMod = r(0)("fecha_modificacion")
-            Else
-                Throw New Exception("No se encontro el prestador")
+                    _creoUser = r(0)("cargo_usuario")
+                    _fechaCarga = r(0)("fecha_carga")
+                    _fechaMod = r(0)("fecha_modificacion")
+                Else
+                    Throw New Exception("No se encontro el prestador")
             End If
 
         End Set
@@ -304,6 +308,7 @@
 
     Public Sub insertar()
         Try
+            _comentario = _comentario.Replace("'", " ")
             Dim db = New DB
             Dim ut As New utils
             Dim r As DataRow()
@@ -326,6 +331,7 @@
         Dim db = New DB
         Try
             If _modificado Then
+                _comentario = _comentario.Replace("'", " ")
                 _fechaMod = Date.Today
                 _modifUser = My.Settings.dni
                 db.actualizar(Me)

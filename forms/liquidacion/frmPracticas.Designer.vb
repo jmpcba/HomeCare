@@ -702,7 +702,7 @@ Partial Class frmPracticas
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmPracticas"
-        Me.Text = "INGRESAR PRACTICAS"
+        Me.Text = "Administrar Practicas"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)

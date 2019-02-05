@@ -52,6 +52,7 @@ Public Class Practica
 
     Public Sub insertar()
         Try
+            observaciones = observaciones.Replace("'", " ")
             Dim db = New DB()
             db.insertar(Me)
 

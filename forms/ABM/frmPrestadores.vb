@@ -2,6 +2,7 @@
     Dim prest As Prestador
     Dim ut As New utils
     Dim txtBoxes As TextBox()
+    Dim txtBoxesDA As TextBox()
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
@@ -118,6 +119,7 @@
         ut.activarTxtBoxes(txtBoxes)
         numDiferencial.Text = "0"
         chbCese.Enabled = False
+        txtComentario.Text = ""
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -168,10 +170,9 @@
         Dim esp As New especialidad
         esp.llenarcombo(cbEspecialidad)
         dtCese.Enabled = False
-        txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo, numDiferencial, txtComentario}
+        txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo, numDiferencial}
         iniciarControles()
-        numDiferencial.Text = 0
-        numDiferencial.ReadOnly = False
+        'numDiferencial.ReadOnly = False
         ut.habilitarBoton(txtBoxes, btnGuardar)
     End Sub
 
@@ -183,10 +184,12 @@
     Private Sub chbCese_CheckedChanged(sender As Object, e As EventArgs) Handles chbCese.CheckedChanged
         If chbCese.Checked = True Then
             dtCese.Enabled = True
-            ut.desactivarTxtBoxes(txtBoxes)
+            txtBoxesDA = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo, numDiferencial, txtComentario}
+            ut.desactivarTxtBoxes(txtBoxesDA)
         Else
             dtCese.Enabled = False
-            ut.activarTxtBoxes(txtBoxes)
+            txtBoxesDA = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo, numDiferencial, txtComentario}
+            ut.activarTxtBoxes(txtBoxesDA)
         End If
 
     End Sub

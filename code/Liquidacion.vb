@@ -147,6 +147,7 @@
 
     Public Sub insertar()
         Try
+            _observaciones = _observaciones.Replace("'", " ")
             Dim db As New DB
             db.insertar(Me)
         Catch ex As Exception

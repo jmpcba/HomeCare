@@ -23,6 +23,8 @@ Partial Class frmPrestadores
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.txtServicio = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.cbEspecialidad = New System.Windows.Forms.ComboBox()
@@ -55,8 +57,6 @@ Partial Class frmPrestadores
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.txtComentario = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -95,8 +95,26 @@ Partial Class frmPrestadores
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Location = New System.Drawing.Point(4, 1)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(611, 492)
+        Me.Panel1.Size = New System.Drawing.Size(643, 492)
         Me.Panel1.TabIndex = 0
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(7, 193)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(98, 13)
+        Me.Label16.TabIndex = 52
+        Me.Label16.Text = "OBSERVACIONES"
+        '
+        'txtComentario
+        '
+        Me.txtComentario.Location = New System.Drawing.Point(111, 190)
+        Me.txtComentario.MaxLength = 255
+        Me.txtComentario.Multiline = True
+        Me.txtComentario.Name = "txtComentario"
+        Me.txtComentario.Size = New System.Drawing.Size(413, 92)
+        Me.txtComentario.TabIndex = 6
         '
         'txtServicio
         '
@@ -266,7 +284,7 @@ Partial Class frmPrestadores
         '
         'txtApellido
         '
-        Me.txtApellido.Location = New System.Drawing.Point(70, 75)
+        Me.txtApellido.Location = New System.Drawing.Point(97, 76)
         Me.txtApellido.Name = "txtApellido"
         Me.txtApellido.Size = New System.Drawing.Size(203, 20)
         Me.txtApellido.TabIndex = 1
@@ -283,7 +301,7 @@ Partial Class frmPrestadores
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(292, 79)
+        Me.Label1.Location = New System.Drawing.Point(323, 79)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(54, 13)
         Me.Label1.TabIndex = 30
@@ -291,7 +309,7 @@ Partial Class frmPrestadores
         '
         'txtNombre
         '
-        Me.txtNombre.Location = New System.Drawing.Point(352, 75)
+        Me.txtNombre.Location = New System.Drawing.Point(396, 72)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(220, 20)
         Me.txtNombre.TabIndex = 2
@@ -373,23 +391,6 @@ Partial Class frmPrestadores
         Me.btnLimpiar.TabIndex = 201
         Me.btnLimpiar.Text = "&LIMPIAR"
         Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'txtComentario
-        '
-        Me.txtComentario.Location = New System.Drawing.Point(97, 190)
-        Me.txtComentario.Multiline = True
-        Me.txtComentario.Name = "txtComentario"
-        Me.txtComentario.Size = New System.Drawing.Size(413, 92)
-        Me.txtComentario.TabIndex = 51
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(7, 193)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(79, 13)
-        Me.Label16.TabIndex = 52
-        Me.Label16.Text = "COMENTARIO"
         '
         'frmPrestadores
         '
