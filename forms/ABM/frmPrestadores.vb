@@ -11,20 +11,19 @@
         Dim montoFijo As Decimal
         Dim montoDiferencial As Decimal
 
-        montoLaV = numLunVie.Text.Trim
-        montoFeriado = numFeriados.Text.Trim
-        montoFijo = numFijo.Text.Trim
-        montoDiferencial = numDiferencial.Text.Trim
-
-        If cbEspecialidad.SelectedIndex = -1 Then
-            Throw New Exception("SELECCIONE UNA ESPECIALIDAD")
-        End If
         If IsNothing(prest) Then
             Try
                 ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(txtCuit, 11)
                 ut.validarMail(txtEmail.Text.Trim)
                 ut.validarNumerico({numFijo, numLunVie, numFeriados})
+                If cbEspecialidad.SelectedIndex = -1 Then
+                    Throw New Exception("SELECCIONE UNA ESPECIALIDAD")
+                End If
+                montoLaV = numLunVie.Text.Trim
+                montoFeriado = numFeriados.Text.Trim
+                montoFijo = numFijo.Text.Trim
+                montoDiferencial = numDiferencial.Text.Trim
                 Dim cuit = txtCuit.Text.ToString
                 If cuit.Length > 1 Then
                     cuit = cuit.Insert(2, "-")
@@ -51,6 +50,10 @@
                 ut.validarMail(txtEmail.Text.Trim)
                 'ut.validarLargo(txtCuit, 11)
                 ut.validarNumerico({numFijo, numLunVie, numFeriados})
+                montoLaV = numLunVie.Text.Trim
+                montoFeriado = numFeriados.Text.Trim
+                montoFijo = numFijo.Text.Trim
+                montoDiferencial = numDiferencial.Text.Trim
 
                 If txtNombre.Text.Trim <> prest.nombre Then
                     prest.nombre = txtNombre.Text.Trim
@@ -119,6 +122,7 @@
         ut.activarTxtBoxes(txtBoxes)
         numDiferencial.Text = "0"
         chbCese.Enabled = False
+        chbCese.Checked = False
         txtComentario.Text = ""
     End Sub
 
@@ -208,6 +212,7 @@
         numFijo.Text = _prestador.montoFijo
         txtServicio.Text = _prestador.obraSocial
         dtCese.Text = _prestador.fechaCese
+        chbCese.Checked = False
         If _prestador.fechaCese <> Date.MinValue Then
             chbCese.Checked = True
             ut.desactivarTxtBoxes(txtBoxes)

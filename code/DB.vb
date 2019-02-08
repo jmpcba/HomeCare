@@ -188,6 +188,22 @@ Public Class DB
         End Try
     End Sub
 
+    Friend Sub reactivarPaciente(_afiliado As String)
+        Try
+            Dim query = "UPDATE PACIENTES SET FECHA_BAJA=NULL WHERE AFILIADO='" & _afiliado & "'"
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
     Friend Sub eliminarPractica(_id As Integer)
         Try
             Dim query = "DELETE FROM PRACTICAS WHERE ID=" & _id
@@ -344,6 +360,7 @@ Public Class DB
         Dim query = String.Format("INSERT INTO PACIENTES (AFILIADO, DNI, NOMBRE, APELLIDO, LOCALIDAD, OBRA_SOCIAL, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
                         VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', #{8}#, #{9}#)",
                                   _paciente.afiliado, _paciente.dni, _paciente.nombre, _paciente.apellido, _paciente.localidad, _paciente.obrasocial, _paciente.creoUser, _paciente.modifUser, _paciente.fechaCarga.ToShortDateString, _paciente.fechaMod.ToShortDateString)
+
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -511,8 +528,18 @@ Public Class DB
     End Sub
 
     Friend Sub actualizar(_paciente As Paciente)
-        Dim query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION='{6}' WHERE AFILIADO='{7}'",
+
+        Dim query As String
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+
+        If _paciente.fechaBaja = Date.MinValue Then
+            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION='{6}' WHERE AFILIADO='{7}'",
                                     _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.modifUser, _paciente.fechaMod, _paciente.afiliado)
+        Else
+            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION='{6}', FECHA_BAJA=#{7}# WHERE AFILIADO='{8}'",
+                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.modifUser, _paciente.fechaMod, _paciente.fechaBaja.ToShortDateString, _paciente.afiliado)
+        End If
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -528,6 +555,7 @@ Public Class DB
         Finally
             cnn.Close()
             ut.backUpDBFinal(hacerBackup)
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
         End Try
     End Sub
 

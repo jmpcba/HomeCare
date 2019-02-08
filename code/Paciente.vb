@@ -8,6 +8,7 @@
     Private _apellido As String
     Private _localidad As String
     Private _obraSocial As String
+    Private _fechaBaja As Date
     Private _creoUser As String
     Private _modifUser As String
     Private _fechaCarga As Date
@@ -36,13 +37,14 @@
         End Try
     End Sub
 
-    Public Sub New(_afiliado As String, _dni As String, _nombre As String, _apellido As String, _obrasocial As String, _localidad As String)
+    Public Sub New(_afiliado As String, _dni As String, _nombre As String, _apellido As String, _obrasocial As String, _localidad As String, _fechaBaja As Date)
         Me._dni = _dni
         Me._afiliado = _afiliado
         Me._nombre = _nombre
         Me._apellido = _apellido
         Me._obraSocial = _obrasocial
         Me._localidad = _localidad
+        Me._fechaBaja = _fechaBaja
         Me._modifUser = My.Settings.dni
         Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
@@ -77,6 +79,9 @@
                     _obraSocial = r(0)("obra_social")
                 End If
                 _localidad = r(0)("localidad")
+                If Not IsDBNull(r(0)("fecha_baja")) Then
+                    _fechaBaja = r(0)("fecha_baja")
+                End If
             Else
                 Throw New Exception("Codigo Inexistente")
             End If
@@ -128,6 +133,16 @@
 
     End Property
 
+    Public Property fechaBaja As Date
+        Set(value As Date)
+            _fechaBaja = value
+            _modificado = True
+        End Set
+        Get
+            Return _fechaBaja
+        End Get
+    End Property
+
     Public ReadOnly Property modifUser As Integer
         Get
             Return _modifUser
@@ -175,6 +190,15 @@
                 Throw New Exception("No se realizaron modificaciones")
             End If
 
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+    Friend Sub reactivar()
+        Try
+            Dim db As New DB
+            db.reactivarPaciente(afiliado)
         Catch ex As Exception
             Throw
         End Try

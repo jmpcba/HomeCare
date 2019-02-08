@@ -40,12 +40,20 @@ Partial Class frmPacientes
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.chbBaja = New System.Windows.Forms.CheckBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.dtBaja = New System.Windows.Forms.DateTimePicker()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.chbBaja)
+        Me.Panel1.Controls.Add(Me.Label14)
+        Me.Panel1.Controls.Add(Me.dtBaja)
+        Me.Panel1.Controls.Add(Me.Label13)
         Me.Panel1.Controls.Add(Me.txtLocalidad)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.numDni)
@@ -61,7 +69,7 @@ Partial Class frmPacientes
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Location = New System.Drawing.Point(17, 16)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(667, 366)
+        Me.Panel1.Size = New System.Drawing.Size(667, 417)
         Me.Panel1.TabIndex = 0
         '
         'txtLocalidad
@@ -213,6 +221,41 @@ Partial Class frmPacientes
         Me.btnLimpiar.Text = "&LIMPIAR"
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'chbBaja
+        '
+        Me.chbBaja.AutoSize = True
+        Me.chbBaja.Location = New System.Drawing.Point(58, 341)
+        Me.chbBaja.Name = "chbBaja"
+        Me.chbBaja.Size = New System.Drawing.Size(36, 17)
+        Me.chbBaja.TabIndex = 53
+        Me.chbBaja.Text = "SI"
+        Me.chbBaja.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(11, 322)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(116, 13)
+        Me.Label14.TabIndex = 52
+        Me.Label14.Text = "DESEA DAR DE BAJA"
+        '
+        'dtBaja
+        '
+        Me.dtBaja.Location = New System.Drawing.Point(317, 336)
+        Me.dtBaja.Name = "dtBaja"
+        Me.dtBaja.Size = New System.Drawing.Size(200, 20)
+        Me.dtBaja.TabIndex = 51
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(203, 341)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(89, 13)
+        Me.Label13.TabIndex = 50
+        Me.Label13.Text = "FECHA DE BAJA"
+        '
         'frmPacientes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -250,4 +293,8 @@ Partial Class frmPacientes
     Friend WithEvents txtLocalidad As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents btnLimpiar As Button
+    Friend WithEvents chbBaja As CheckBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents dtBaja As DateTimePicker
+    Friend WithEvents Label13 As Label
 End Class
