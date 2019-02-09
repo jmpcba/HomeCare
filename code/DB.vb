@@ -383,7 +383,7 @@ Public Class DB
     Friend Sub insertar(_prestador As Prestador)
         'Dim cult = New CultureInfo("en-US")
 
-        Dim query = String.Format("INSERT INTO PRESTADORES (CUIT, APELLIDO, NOMBRE, EMAIL, ESPECIALIDAD, LOCALIDAD, MONTO_SEMANA, MONTO_FERIADO, MONTO_FIJO, PORCENTAJE, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, SERVICIO, COMENTARIO) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}, {9}, '{10}', '{11}', #{12}#, #{13}#, '{14}', '{15}')", _prestador.cuit, _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.montoDiferencial, _prestador.creoUser, _prestador.modifUser, _prestador.fechaCarga.ToShortDateString, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.observaciones)
+        Dim query = String.Format("INSERT INTO PRESTADORES (CUIT, APELLIDO, NOMBRE, EMAIL, ESPECIALIDAD, LOCALIDAD, MONTO_SEMANA, MONTO_FERIADO, MONTO_FIJO, PORCENTAJE, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, SERVICIO, COMENTARIO, ZONA) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}, {9}, '{10}', '{11}', #{12}#, #{13}#, '{14}', '{15}', {16})", _prestador.cuit, _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.montoDiferencial, _prestador.creoUser, _prestador.modifUser, _prestador.fechaCarga.ToShortDateString, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.observaciones, _prestador.zona)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -509,7 +509,7 @@ Public Class DB
         Dim enc As New Encriptador()
         Try
             Dim query = String.Format("INSERT INTO USUARIOS (DNI, APELLIDO, NOMBRE, NIVEL, PASS, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', {3}, '{4}', '{5}', '{6}', '{7}', '{8}')",
-                                      _usuario.dni, _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.EncryptData(_usuario.pass), _usuario.creoUser, _usuario.fechaCarga.ToShortDateString, _usuario.modifUser, _usuario.fechaMod.ToShortDateString)
+                                      _usuario.dni, _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.encriptar(_usuario.pass), _usuario.creoUser, _usuario.fechaCarga.ToShortDateString, _usuario.modifUser, _usuario.fechaMod.ToShortDateString)
 
 
             cmd.CommandType = CommandType.Text
@@ -531,11 +531,8 @@ Public Class DB
     Friend Sub insertar(_zona As Zona)
 
         Dim enc As New Encriptador()
-        Dim query = String.Format("INSERT INTO ZONAS (ID_ZONA, NOMBRE, EMAIL, PASSWORD, PROPIETARIO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
-                        VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', #{7}#, #{8}#)",
-                                  _zona.idzona, _zona.nombre, _zona.email, enc.EncryptData(_zona.pass), _zona.propietario, _zona.creoUser, _zona.modifUser, _zona.fechaCarga.ToShortDateString, _zona.fechaMod.ToShortDateString)
-
-
+        Dim query = String.Format("INSERT INTO ZONAS (NOMBRE, EMAIL, PASS, PROPIETARIO, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}',#{5}#, '{6}', #{7}#)",
+                                  _zona.nombre, _zona.email, enc.encriptar(_zona.pass), _zona.propietario, _zona.creoUser, _zona.fechaCarga.ToShortDateString, _zona.modifUser, _zona.fechaMod.ToShortDateString)
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
 
@@ -546,7 +543,12 @@ Public Class DB
             cmd.ExecuteNonQuery()
         Catch ex As Exception
             hacerBackup = False
-            Throw
+
+            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+                Throw New ExcepcionDeSistema("Ya existe una zona con este nombre")
+            Else
+                Throw
+            End If
         Finally
             cnn.Close()
             ut.backUpDBFinal(hacerBackup)
@@ -592,9 +594,9 @@ Public Class DB
         System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
 
         If _prestador.fechaCese = Date.MinValue Then
-            query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}', COMENTARIO='{12}' WHERE ID={13}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.montoDiferencial, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.observaciones, _prestador.id)
+            query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}', COMENTARIO='{12}', ZONA={13} WHERE ID={14}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.montoDiferencial, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.observaciones, _prestador.zona, _prestador.id)
         Else
-            query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}', FECHA_CESE=#{12}#, COMENTARIO='{13}' WHERE ID={14}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.montoDiferencial, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.fechaCese.ToShortDateString, _prestador.observaciones, _prestador.id)
+            query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}', FECHA_CESE=#{12}#, COMENTARIO='{13}', ZONA={14} WHERE ID={15}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.montoDiferencial, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.fechaCese.ToShortDateString, _prestador.observaciones, _prestador.zona, _prestador.id)
         End If
 
 
@@ -667,7 +669,7 @@ Public Class DB
 
     Friend Sub actualizar(_usuario As Usuario)
         Dim enc As New Encriptador()
-        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', NIVEL={2}, PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.EncryptData(_usuario.pass), _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
+        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', NIVEL={2}, PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.encriptar(_usuario.pass), _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -687,8 +689,8 @@ Public Class DB
     End Sub
     Friend Sub actualizar(_zona As Zona)
         Dim enc As New Encriptador()
-        Dim query = String.Format("UPDATE ZONAS SET NOMBRE='{0}', EMAIL={1}, PASS='{2}', PROPIETARIO='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE IDZONA='{6}'",
-                                  _zona.nombre, _zona.email, enc.EncryptData(_zona.pass), _zona.propietario, _zona.modifUser, _zona.fechaMod.ToShortDateString, _zona.idzona)
+        Dim query = String.Format("UPDATE ZONAS SET NOMBRE='{0}', EMAIL='{1}', PASS='{2}', PROPIETARIO='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE ID={6}",
+                                  _zona.nombre, _zona.email, enc.encriptar(_zona.pass), _zona.propietario, _zona.modifUser, _zona.fechaMod.ToShortDateString, _zona.idzona)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query
@@ -782,7 +784,7 @@ Public Class DB
             cnn.Open()
             cmd.ExecuteScalar()
             encPass = cmd.ExecuteScalar()
-            resultado = encriptador.DecryptData(encPass)
+            resultado = encriptador.desencriptar(encPass)
             Return resultado
         Catch ex As Exception
             Throw
@@ -829,7 +831,7 @@ Public Class DB
 
     Public Sub actualizarMailPass(_pass As String)
         Dim encriptador As New Encriptador()
-        Dim encPass = encriptador.EncryptData(_pass)
+        Dim encPass = encriptador.encriptar(_pass)
         cmd.CommandType = CommandType.Text
         cmd.CommandText = String.Format("UPDATE CONFIG SET MAIL_PASS='{0}'", encPass)
 

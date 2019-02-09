@@ -21,6 +21,7 @@
     Private _obraSocial As String
     Private _estado As Integer
     Private _observaciones As String
+    Private _zona As Integer
 
     Public Sub New()
         Dim db = New DB()
@@ -41,7 +42,7 @@
         End Try
     End Sub
 
-    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _diferencial As Decimal, _fechaCese As Date, _obraSocial As String, _comentario As String)
+    Public Sub New(_cuit As String, _nombre As String, _apellido As String, _email As String, _especialidad As String, _localidad As String, _montoLV As Decimal, _montoFer As Decimal, _montoFijo As Decimal, _diferencial As Decimal, _fechaCese As Date, _obraSocial As String, _comentario As String, _zona As Integer)
 
         Me._cuit = _cuit
         Me._nombre = _nombre
@@ -60,7 +61,7 @@
         Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
-
+        Me._zona = _zona
     End Sub
 
     Public Property id As String
@@ -117,6 +118,12 @@
                     _observaciones = ""
                 Else
                     _observaciones = r(0)("comentario")
+                End If
+
+                If IsDBNull(r(0)("zona")) Then
+                    _zona = 0
+                Else
+                    _zona = r(0)("zona")
                 End If
 
                 _modifUser = r(0)("modifico_usuario")
@@ -301,9 +308,20 @@
     Public Property estado As Integer
         Set(value As Integer)
             _estado = value
+            _modificado = True
         End Set
         Get
             Return _estado
+        End Get
+    End Property
+
+    Public Property zona As Integer
+        Set(value As Integer)
+            _zona = value
+            _modificado = True
+        End Set
+        Get
+            Return _zona
         End Get
     End Property
 
@@ -353,6 +371,5 @@
         _combo.DisplayMember = "combo"
         _combo.ValueMember = "id"
         _combo.SelectedIndex = -1
-
     End Sub
 End Class

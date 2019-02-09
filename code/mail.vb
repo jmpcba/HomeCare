@@ -11,9 +11,6 @@ Public Class Mail
         client.Host = "smtp.gmail.com"
         client.Port = 587
 
-        NetworkCred.UserName = db.getEmail
-        NetworkCred.Password = db.getEmailPass
-
         client.UseDefaultCredentials = True
         client.Credentials = NetworkCred
     End Sub
@@ -21,6 +18,7 @@ Public Class Mail
     Public Sub send(_liq As Liquidacion)
 
         Try
+            Dim zona As New Zona
             Dim mail As String = My.Resources.mailTemplate
             Dim mm As MailMessage = New MailMessage()
 
@@ -35,7 +33,13 @@ Public Class Mail
             mail = mail.Replace("[APELLIDO]", _liq.prestador.apellido.ToUpper)
             mail = mail.Replace("[NOMBRE]", _liq.prestador.nombre.ToUpper)
 
-            mm.From = New MailAddress("homecarePrueba@gmail.com")
+            zona.idzona = _liq.prestador.zona
+            Dim mailFrom = zona.email
+
+            NetworkCred.UserName = zona.email
+            NetworkCred.Password = zona.pass
+
+            mm.From = New MailAddress(mailFrom)
             mm.Subject = "Liquidacion HomeCare " & MonthName(_liq.mes.Month)
             mm.IsBodyHtml = True
             mm.Body = mail

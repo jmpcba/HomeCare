@@ -155,6 +155,7 @@ Partial Class frmZonas
         '
         'numZona
         '
+        Me.numZona.Enabled = False
         Me.numZona.Location = New System.Drawing.Point(278, 134)
         Me.numZona.Name = "numZona"
         Me.numZona.Size = New System.Drawing.Size(121, 20)
@@ -199,6 +200,7 @@ Partial Class frmZonas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(943, 493)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.txtEmail)

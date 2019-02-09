@@ -54,7 +54,7 @@
                 _apellido = r(0)("apellido")
                 _nombre = r(0)("nombre")
                 _nivel = r(0)("nivel")
-                _pass = encriptador.DecryptData(r(0)("pass"))
+                _pass = encriptador.desencriptar(r(0)("pass"))
                 _creoUser = r(0)("cargo_usuario")
                 _modifUser = r(0)("modifico_usuario")
                 _fechaCarga = r(0)("fecha_carga")

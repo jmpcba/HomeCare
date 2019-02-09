@@ -16,15 +16,14 @@
     Public Sub New()
         Dim db = New DB()
         Try
-            _zonas = db.getTable(DB.tablas.usuarios)
+            _zonas = db.getTable(DB.tablas.zonas)
         Catch ex As Exception
             Throw
         End Try
     End Sub
 
-    Public Sub New(_idzona As String, _nombre As String, _email As String, _pass As String, _propietario As String)
-        Dim encriptador As New Encriptador()
-        Me._idzona = _idzona
+    Public Sub New(_nombre As String, _email As String, _pass As String, _propietario As String)
+
         Me._nombre = _nombre
         Me._email = _email
         Me._pass = _pass
@@ -35,32 +34,23 @@
         Me._fechaMod = Date.Today
     End Sub
 
-    Public Function getUsuario(_idzona As String) As DataTable
-        Dim db As New DB
-        Try
-            Return db.getUsuario(_idzona)
-        Catch ex As Exception
-            Throw
-        End Try
-    End Function
-
     Public Property idzona As String
         Set(value As String)
             Dim encriptador As New Encriptador()
             Dim r As DataRow()
-            r = _zonas.Select("idzona = " & value)
+            r = _zonas.Select("id = " & value)
             If r.Length = 1 Then
                 _idzona = value
                 _nombre = r(0)("nombre")
                 _email = r(0)("email")
-                _pass = encriptador.DecryptData(r(0)("pass"))
+                _pass = encriptador.desencriptar(r(0)("PASS"))
                 _propietario = r(0)("propietario")
                 _creoUser = r(0)("cargo_usuario")
                 _modifUser = r(0)("modifico_usuario")
                 _fechaCarga = r(0)("fecha_carga")
                 _fechaMod = r(0)("fecha_modificacion")
             Else
-                Throw New Exception("DNI Inexistente")
+                Throw New Exception("Zona Inexistente")
             End If
         End Set
 
@@ -153,7 +143,7 @@
                 _modifUser = My.Settings.dni
                 db.actualizar(Me)
             Else
-                Throw New Exception("No se realizaron modificaciones")
+                Throw New ExcepcionDeSistema("No se realizaron modificaciones")
             End If
 
         Catch ex As Exception
@@ -161,6 +151,13 @@
         End Try
     End Sub
 
-
+    Public Sub llenarcombo(_combo As ComboBox)
+        Dim DV = New DataView(_zonas)
+        DV.Sort = "NOMBRE ASC"
+        _combo.DataSource = DV
+        _combo.DisplayMember = "NOMBRE"
+        _combo.ValueMember = "id"
+        _combo.SelectedIndex = -1
+    End Sub
 End Class
 

@@ -57,7 +57,7 @@
                 obj = New Zona()
                 dt = obj.zonas
                 dgBuscar.DataSource = dt
-                filtro = "ID_ZONA"
+                filtro = "ID"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR ZONAS"
             End If
@@ -89,7 +89,7 @@
                 ElseIf frmParent.GetType.Name = "frmUsuarios" Then
                     obj.dni = r.Cells("dni").Value
                 ElseIf frmParent.GetType.Name = "frmZonas" Then
-                    obj.dni = r.Cells("id_zona").Value
+                    obj.idzona = r.Cells("id").Value
                 End If
 
                 frmParent.resultadoBusqueda(obj)
