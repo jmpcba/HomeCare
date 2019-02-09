@@ -134,10 +134,14 @@
         txtObSocial.Text = _paciente.obrasocial
         txtLocalidad.Text = _paciente.localidad
         dtBaja.Text = _paciente.fechaBaja
+
         If _paciente.fechaBaja <> Date.MinValue Then
             chbBaja.Checked = True
             ut.desactivarTxtBoxes(txtBoxes)
+        Else
+            chbBaja.Checked = False
         End If
+
         chbBaja.Enabled = True
         pac = _paciente
         btnGuardar.Enabled = True

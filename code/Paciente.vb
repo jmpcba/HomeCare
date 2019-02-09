@@ -205,7 +205,11 @@
     End Sub
 
     Public Sub llenarcombo(_combo As ComboBox)
-        _combo.DataSource = _pacientes
+        Dim DV = New DataView(_pacientes)
+        DV.RowFilter = "FECHA_BAJA IS NULL"
+        DV.Sort = "APELLIDO ASC"
+
+        _combo.DataSource = DV
         _combo.DisplayMember = "combo"
         _combo.ValueMember = "afiliado"
         _combo.SelectedIndex = -1
