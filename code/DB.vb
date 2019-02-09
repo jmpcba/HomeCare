@@ -22,6 +22,7 @@ Public Class DB
         feriados
         especialidades
         usuarios
+        zonas
     End Enum
 
     Public Enum tiposLiquidacion
@@ -527,6 +528,30 @@ Public Class DB
         End Try
     End Sub
 
+    Friend Sub insertar(_zona As Zona)
+
+        Dim enc As New Encriptador()
+        Dim query = String.Format("INSERT INTO ZONAS (ID_ZONA, NOMBRE, EMAIL, PASSWORD, PROPIETARIO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
+                        VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', #{7}#, #{8}#)",
+                                  _zona.idzona, _zona.nombre, _zona.email, enc.EncryptData(_zona.pass), _zona.propietario, _zona.creoUser, _zona.modifUser, _zona.fechaCarga.ToShortDateString, _zona.fechaMod.ToShortDateString)
+
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            ut.backupDBTemp()
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            hacerBackup = False
+            Throw
+        Finally
+            cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
+        End Try
+    End Sub
     Friend Sub actualizar(_paciente As Paciente)
 
         Dim query As String
@@ -643,6 +668,27 @@ Public Class DB
     Friend Sub actualizar(_usuario As Usuario)
         Dim enc As New Encriptador()
         Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', NIVEL={2}, PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.EncryptData(_usuario.pass), _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
+
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = query
+
+        Try
+            ut.backupDBTemp()
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            hacerBackup = False
+            Throw
+        Finally
+            cnn.Close()
+            ut.backUpDBFinal(hacerBackup)
+        End Try
+    End Sub
+    Friend Sub actualizar(_zona As Zona)
+        Dim enc As New Encriptador()
+        Dim query = String.Format("UPDATE ZONAS SET NOMBRE='{0}', EMAIL={1}, PASS='{2}', PROPIETARIO='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE IDZONA='{6}'",
+                                  _zona.nombre, _zona.email, enc.EncryptData(_zona.pass), _zona.propietario, _zona.modifUser, _zona.fechaMod.ToShortDateString, _zona.idzona)
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = query

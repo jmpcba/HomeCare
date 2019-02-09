@@ -52,6 +52,10 @@
         Me.Hide()
         frmUsuarios.ShowDialog()
     End Sub
+    Private Sub btnZonas_Click(sender As Object, e As EventArgs) Handles btnZonas.Click
+        Me.Hide()
+        frmZonas.ShowDialog()
+    End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         My.Settings.Item("HomeCareConnectionString") = String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source='{0}'", My.Settings.DBPath)

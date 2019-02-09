@@ -53,6 +53,13 @@
                 filtro = "DNI"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR USUARIOS"
+            ElseIf frmParent.GetType.Name = "frmZonas" Then
+                obj = New Zona()
+                dt = obj.zonas
+                dgBuscar.DataSource = dt
+                filtro = "ID_ZONA"
+                lblFiltro.Text = filtro
+                Me.Text = "BUSCAR ZONAS"
             End If
 
             dgBuscar.AutoResizeColumns()
@@ -81,6 +88,8 @@
                     obj.codigo = r.Cells("codigo").Value
                 ElseIf frmParent.GetType.Name = "frmUsuarios" Then
                     obj.dni = r.Cells("dni").Value
+                ElseIf frmParent.GetType.Name = "frmZonas" Then
+                    obj.dni = r.Cells("id_zona").Value
                 End If
 
                 frmParent.resultadoBusqueda(obj)
