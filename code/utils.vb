@@ -103,6 +103,7 @@ Public Class utils
     End Sub
 
     Public Sub iniciarTxtBoxes(_txtboxes As TextBox())
+        activarTxtBoxes(_txtboxes)
         For Each t As TextBox In _txtboxes
             t.Text = ""
         Next
