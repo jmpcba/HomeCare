@@ -20,6 +20,9 @@
                 If cbEspecialidad.SelectedIndex = -1 Then
                     Throw New Exception("SELECCIONE UNA ESPECIALIDAD")
                 End If
+                If cbZona.SelectedIndex = -1 Then
+                    Throw New Exception("SELECCIONE UNA ZONA")
+                End If
                 montoLaV = numLunVie.Text.Trim
                 montoFeriado = numFeriados.Text.Trim
                 montoFijo = numFijo.Text.Trim
@@ -54,6 +57,9 @@
                 montoFeriado = numFeriados.Text.Trim
                 montoFijo = numFijo.Text.Trim
                 montoDiferencial = numDiferencial.Text.Trim
+                If cbZona.SelectedIndex = -1 Then
+                    Throw New Exception("SELECCIONE UNA ZONA")
+                End If
 
                 If txtNombre.Text.Trim <> prest.nombre Then
                     prest.nombre = txtNombre.Text.Trim
