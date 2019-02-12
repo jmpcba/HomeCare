@@ -142,6 +142,8 @@
                             Else
                                 r.Cells("RESULTADO CARGA").Value = ex.Message
                             End If
+                        Finally
+                            r.Cells(0).Value = False
                         End Try
                     End If
                 Next
