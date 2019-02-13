@@ -333,6 +333,42 @@ Public Class DB
         End Try
     End Sub
 
+    Friend Function insertar(_practicas As List(Of Practica)) As List(Of ResultadoCargaPracticas)
+        Dim errores As New List(Of ResultadoCargaPracticas)
+
+        ut.backupDBTemp()
+        cmd.CommandType = CommandType.Text
+        cnn.Open()
+
+        For Each p As Practica In _practicas
+            Try
+                Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST, HS_DIFERENCIAL) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14})",
+                                      p.prestador.cuit, p.paciente.afiliado, p.modulo, p.subModulo,
+                                      p.hsSemana, p.hsFeriado, p.fecha.ToShortDateString,
+                                      DateTime.Today.ToShortDateString, p.observaciones, p.creoUser,
+                                      p.fechaCarga.ToShortDateString, p.modifUser, p.fechaMod.ToShortDateString, p.prestador.id, p.hsDif)
+
+                cmd.CommandText = query
+                cmd.ExecuteNonQuery()
+            Catch ex As Exception
+                Dim msg As String
+
+                If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+                    msg = "Ya existe una practica igual para este dia"
+                Else
+                    msg = ex.Message
+                End If
+
+                errores.Add(New ResultadoCargaPracticas(p.fila, msg))
+            End Try
+        Next
+
+        cnn.Close()
+
+        Return errores
+    End Function
+
+
     Friend Sub insertar(_prestacion As Prestacion)
 
         Dim query = String.Format("INSERT INTO PRESTACIONES (CODIGO, DESCRIPCION, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)

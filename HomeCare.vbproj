@@ -126,7 +126,8 @@
     <Compile Include="code\DB.vb" />
     <Compile Include="code\encriptador.vb" />
     <Compile Include="code\especialidad.vb" />
-    <Compile Include="code\exceptiones\ExcepcionDeSystema.vb" />
+    <Compile Include="code\exceptiones\ExcepcionDeSistema.vb" />
+    <Compile Include="code\exceptiones\ResultadoCargaPracticas.vb" />
     <Compile Include="code\Feriados.vb" />
     <Compile Include="code\Liquidacion.vb" />
     <Compile Include="code\mail.vb" />

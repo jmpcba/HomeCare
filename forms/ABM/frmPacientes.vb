@@ -15,7 +15,7 @@
                     ut.validarLargo(numAfiliado, 8)
                 End If
                 ut.validarLargo(numAfiliado, 12)
-                pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtApellido.Text.Trim, txtNombre.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim, dtBaja.Text.Trim)
+                pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim, dtBaja.Text.Trim)
                 pac.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
