@@ -121,7 +121,7 @@
                 End If
 
                 If IsDBNull(r(0)("zona")) Then
-                    _zona = Nothing
+                    _zona = 1
                 Else
                     _zona = r(0)("zona")
                 End If

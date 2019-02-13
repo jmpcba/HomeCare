@@ -25,16 +25,12 @@ Public Class Mail
 
             mail = mail.Replace("[MES]", MonthName(_liq.mes.Month))
             mail = mail.Replace("[YEAR]", _liq.mes.Year)
-            ' mail = mail.Replace("[HS_LAV]", _liq.hsNormales)
-            ' mail = mail.Replace("[HS_FER]", _liq.hsFeriado)
-            ' mail = mail.Replace("[MONTO_LAV]", _liq.importeNormal)
-            ' mail = mail.Replace("[MONTO_FER]", _liq.importeFeriado)
-            ' mail = mail.Replace("[MONTO_FIJO]", _liq.montoFijo)
             totalFinal = _liq.montoFijo + _liq.importeFeriado + _liq.importeNormal + _liq.importeDiferencial
             mail = mail.Replace("[MONTO_TOTAL]", totalFinal.ToString("F"))
             mail = mail.Replace("[OBS]", _liq.observaciones)
             mail = mail.Replace("[APELLIDO]", _liq.prestador.apellido.ToUpper)
             mail = mail.Replace("[NOMBRE]", _liq.prestador.nombre.ToUpper)
+            mail = mail.Replace("[SERVICIO]", _liq.prestador.obraSocial)
 
             zona.idzona = _liq.prestador.zona
             Dim mailFrom = zona.email

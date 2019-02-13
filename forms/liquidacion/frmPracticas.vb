@@ -401,6 +401,10 @@ Public Class frmPracticas
         txtObservaciones.Text = ""
         lblHoras.Text = ""
         lblMonto.Text = ""
+        txtLocalidadPac.Text = ""
+        txtOS.Text = ""
+        lblMed.Text = ""
+        lblPaciente.Text = ""
         cargarGrilla()
         lblMes.Text = MonthName(DTFecha.Value.Month)
         edicion = False

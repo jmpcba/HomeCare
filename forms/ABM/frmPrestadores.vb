@@ -134,7 +134,7 @@
         chbCese.Enabled = False
         chbCese.Checked = False
         txtComentario.Text = ""
-        cbZona.SelectedIndex = -1
+        cbZona.SelectedValue = 1
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -186,6 +186,7 @@
         Dim zona As New Zona()
 
         zona.llenarcombo(cbZona)
+
         esp.llenarcombo(cbEspecialidad)
         dtCese.Enabled = False
         txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo, numDiferencial}

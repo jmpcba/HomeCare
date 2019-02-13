@@ -161,10 +161,6 @@
                 Throw New Exception("No hay un mail configurado para este prestador." & vbCrLf & "Ingrese un mail en la seccion ADMINISTRAR PRESTADORES")
             End If
 
-            If IsNothing(_prestador.zona) Then
-                Throw New Exception("No hay una zona configurada para este prestador")
-            End If
-
             insertar()
             notificar()
 
