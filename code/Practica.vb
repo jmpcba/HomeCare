@@ -15,6 +15,7 @@ Public Class Practica
     Public modifUser As Integer
     Public fechaCarga As Date
     Public fechaMod As Date
+    Public fila As Integer
     Dim util As New utils
 
     Public Sub New()
@@ -22,7 +23,7 @@ Public Class Practica
     End Sub
 
 
-    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horas As Decimal, _horasDif As Decimal, _observaciones As String)
+    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horas As Decimal, _horasDif As Decimal, _observaciones As String, _fila As Integer)
 
         prestador = _prestador
         paciente = _paciente
@@ -37,6 +38,7 @@ Public Class Practica
         fechaCarga = Today.ToShortDateString
         fechaMod = Today.ToShortDateString
         hsDif = _horasDif
+        fila = _fila
     End Sub
 
 

@@ -90,6 +90,8 @@ Public Class frmPracticas
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Dim err = False
         Dim carga = False
+        Dim practicas As New List(Of Practica)
+
         ut = New utils
         Try
             btnGuardar.Enabled = False
@@ -135,26 +137,31 @@ Public Class frmPracticas
                             End If
 
                             Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
-                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horas, horasDif, obs)
+                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horas, horasDif, obs, r.Index)
 
-                            Try
-                                    practica.insertar()
-                                    r.DefaultCellStyle.BackColor = Color.LightGreen
-                                    r.Cells("RESULTADO").Value = "Cargado"
-                                    carga = True
-
-                                Catch ex As Exception
-                                    err = True
-                                    r.DefaultCellStyle.BackColor = Color.Red
-                                    r.DefaultCellStyle.ForeColor = Color.Black
-                                    If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                                        r.Cells("RESULTADO").Value = "Ya existe una practica igual para este dia"
-                                    Else
-                                        r.Cells("RESULTADO").Value = ex.Message
-                                    End If
-                                End Try
-                            End If
+                            practicas.Add(practica)
+                            r.DefaultCellStyle.BackColor = Color.LightGreen
+                            r.Cells("RESULTADO").Value = "Cargado"
+                            carga = True
+                        End If
                     Next
+
+                    Dim db As New DB
+                    Dim re As New List(Of ResultadoCargaPracticas)
+
+                    If carga Then
+                        re = db.insertar(practicas)
+                    End If
+
+                    If re.Count > 0 Then
+                        err = True
+                        For Each r As ResultadoCargaPracticas In re
+                            dgFechas.Rows(r.filaError).DefaultCellStyle.BackColor = Color.Red
+                            dgFechas.Rows(r.filaError).DefaultCellStyle.ForeColor = Color.Black
+                            dgFechas.Rows(r.filaError).Cells("RESULTADO").Value = r.mensajeError
+                        Next
+                    End If
+
                     If err Then
                         ut.mensaje("Ocurrieron Errores durante la carga", utils.mensajes.err)
                     ElseIf carga Then
@@ -178,8 +185,6 @@ Public Class frmPracticas
                     .AutoResizeRows()
                 End With
             End If
-
-
         End Try
     End Sub
     Private Sub btnSelec_Click(sender As Object, e As EventArgs) Handles btnSelec.Click
