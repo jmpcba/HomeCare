@@ -360,11 +360,11 @@ Public Class DB
                 End If
 
                 errores.Add(New ResultadoCargaPracticas(p.fila, msg))
-
-            Finally
-                cnn.Close()
             End Try
         Next
+
+        cnn.Close()
+
         Return errores
     End Function
 

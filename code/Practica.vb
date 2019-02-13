@@ -23,7 +23,7 @@ Public Class Practica
     End Sub
 
 
-    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horas As Decimal, _horasDif As Decimal, _observaciones As String, _fila As Integer)
+    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horasLaV As Decimal, _horasFer As Decimal, _horasDif As Decimal, _observaciones As String, _fila As Integer)
 
         prestador = _prestador
         paciente = _paciente
@@ -32,24 +32,14 @@ Public Class Practica
         fecha = _fecha
         fecha_registrado = Date.Today.Date
         observaciones = _observaciones
-        calcularHoras(_horas)
+        hsSemana = _horasLaV
+        hsFeriado = _horasFer
+        hsDif = _horasDif
         creoUser = My.Settings.dni
         modifUser = My.Settings.dni
         fechaCarga = Today.ToShortDateString
         fechaMod = Today.ToShortDateString
-        hsDif = _horasDif
         fila = _fila
-    End Sub
-
-
-    Private Sub calcularHoras(_horas As Decimal)
-        If util.esFindeOFeriado(fecha) Then
-            hsFeriado = _horas
-            hsSemana = 0
-        Else
-            hsFeriado = 0
-            hsSemana = _horas
-        End If
     End Sub
 
     Public Sub insertar()

@@ -119,7 +119,10 @@ Public Class frmPracticas
                 Else
                     Dim obs = txtObservaciones.Text
                     For Each r As DataGridViewRow In dgFechas.Rows
+
                         Dim horas As Integer
+                        Dim horasLaV As Integer
+                        Dim horasFer As Integer
                         Dim horasDif As Integer
                         Dim dia As Integer
 
@@ -129,15 +132,23 @@ Public Class frmPracticas
                         Else
                             horas = r.Cells("PRACTICAS-HS").Value
                             dia = r.Cells("DIA_H").Value
+
+                            Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
+
                             If r.Cells(4).Value = "SI" Then
                                 horasDif = horas
                                 horas = 0
+                            ElseIf ut.esFindeOFeriado(fec) Then
+                                horasDif = 0
+                                horasLaV = 0
+                                horasFer = horas
                             Else
                                 horasDif = 0
+                                horasLaV = horas
+                                horasFer = 0
                             End If
 
-                            Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
-                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horas, horasDif, obs, r.Index)
+                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horasLaV, horasFer, horasDif, obs, r.Index)
 
                             practicas.Add(practica)
                             r.DefaultCellStyle.BackColor = Color.LightGreen
