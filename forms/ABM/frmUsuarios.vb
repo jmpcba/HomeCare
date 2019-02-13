@@ -6,12 +6,11 @@
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
-        If cbNivel.SelectedIndex = -1 Then
-            Throw New Exception("Seleccione un valor para NIVEL")
-        End If
-
         Try
             If IsNothing(user) Then
+                If cbNivel.SelectedIndex = -1 Then
+                    Throw New Exception("Seleccione un valor para NIVEL")
+                End If
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarLargo(numDni, 8)
                 user = New Usuario(numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtPassw.Text.Trim, cbNivel.SelectedItem)

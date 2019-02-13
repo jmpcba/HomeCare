@@ -63,7 +63,7 @@ Partial Class frmUsuarios
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Red
-        Me.Label2.Location = New System.Drawing.Point(5, 13)
+        Me.Label2.Location = New System.Drawing.Point(14, 12)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(113, 24)
         Me.Label2.TabIndex = 35

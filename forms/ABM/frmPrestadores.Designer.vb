@@ -57,12 +57,16 @@ Partial Class frmPrestadores
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.cbZona = New System.Windows.Forms.ComboBox()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.Label17)
+        Me.Panel1.Controls.Add(Me.cbZona)
         Me.Panel1.Controls.Add(Me.Label16)
         Me.Panel1.Controls.Add(Me.txtComentario)
         Me.Panel1.Controls.Add(Me.txtServicio)
@@ -120,7 +124,7 @@ Partial Class frmPrestadores
         '
         Me.txtServicio.Location = New System.Drawing.Point(97, 131)
         Me.txtServicio.Name = "txtServicio"
-        Me.txtServicio.Size = New System.Drawing.Size(164, 20)
+        Me.txtServicio.Size = New System.Drawing.Size(203, 20)
         Me.txtServicio.TabIndex = 5
         '
         'Label15
@@ -138,7 +142,7 @@ Partial Class frmPrestadores
         Me.cbEspecialidad.FormattingEnabled = True
         Me.cbEspecialidad.Location = New System.Drawing.Point(97, 101)
         Me.cbEspecialidad.Name = "cbEspecialidad"
-        Me.cbEspecialidad.Size = New System.Drawing.Size(220, 21)
+        Me.cbEspecialidad.Size = New System.Drawing.Size(203, 21)
         Me.cbEspecialidad.TabIndex = 3
         '
         'chbCese
@@ -270,7 +274,7 @@ Partial Class frmPrestadores
         '
         Me.txtLocalidad.Location = New System.Drawing.Point(396, 102)
         Me.txtLocalidad.Name = "txtLocalidad"
-        Me.txtLocalidad.Size = New System.Drawing.Size(203, 20)
+        Me.txtLocalidad.Size = New System.Drawing.Size(220, 20)
         Me.txtLocalidad.TabIndex = 4
         '
         'Label6
@@ -327,7 +331,7 @@ Partial Class frmPrestadores
         '
         Me.txtCuit.Location = New System.Drawing.Point(97, 43)
         Me.txtCuit.Name = "txtCuit"
-        Me.txtCuit.Size = New System.Drawing.Size(121, 20)
+        Me.txtCuit.Size = New System.Drawing.Size(203, 20)
         Me.txtCuit.TabIndex = 0
         '
         'Label4
@@ -392,6 +396,24 @@ Partial Class frmPrestadores
         Me.btnLimpiar.Text = "&LIMPIAR"
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'cbZona
+        '
+        Me.cbZona.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbZona.FormattingEnabled = True
+        Me.cbZona.Location = New System.Drawing.Point(396, 131)
+        Me.cbZona.Name = "cbZona"
+        Me.cbZona.Size = New System.Drawing.Size(220, 21)
+        Me.cbZona.TabIndex = 53
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(323, 135)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(37, 13)
+        Me.Label17.TabIndex = 54
+        Me.Label17.Text = "ZONA"
+        '
         'frmPrestadores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -445,4 +467,6 @@ Partial Class frmPrestadores
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents txtComentario As TextBox
+    Friend WithEvents Label17 As Label
+    Friend WithEvents cbZona As ComboBox
 End Class

@@ -25,7 +25,7 @@ Public NotInheritable Class Encriptador
         Return hash
     End Function
 
-    Public Function EncryptData(
+    Public Function encriptar(
     ByVal plaintext As String) As String
 
         ' Convert the plaintext string to a byte array.
@@ -47,7 +47,7 @@ Public NotInheritable Class Encriptador
         Return Convert.ToBase64String(ms.ToArray)
     End Function
 
-    Public Function DecryptData(
+    Public Function desencriptar(
     ByVal encryptedtext As String) As String
 
         ' Convert the encrypted text string to a byte array.

@@ -129,6 +129,7 @@ Public Class frmPracticas
                             dia = r.Cells("DIA_H").Value
                             If r.Cells(4).Value = "SI" Then
                                 horasDif = horas
+                                horas = 0
                             Else
                                 horasDif = 0
                             End If
@@ -326,21 +327,31 @@ Public Class frmPracticas
                     Else
                         Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
                         Dim hs = r.Cells("PRACTICAS-HS").Value
-                        If ut.esFindeOFeriado(fecha) Then
-                            If med.montoFeriado = 0 Then
-                                ut.mensaje("Este prestador no trabaja fines de semana o feriados", utils.mensajes.err)
+                        If r.Cells(4).Value = "SI" Then
+                            If med.montoDiferencial = 0 Then
+                                ut.mensaje("Este prestador no tiene diferencial", utils.mensajes.err)
                                 hs = 0
                                 r.Cells("PRACTICAS-HS").Value = Nothing
                             Else
-                                monto += med.montoFeriado * r.Cells("PRACTICAS-HS").Value
+                                monto += med.montoDiferencial * r.Cells("PRACTICAS-HS").Value
                             End If
                         Else
-                            monto += med.montoNormal * r.Cells("PRACTICAS-HS").Value
+                                If ut.esFindeOFeriado(fecha) Then
+                                If med.montoFeriado = 0 Then
+                                    ut.mensaje("Este prestador no trabaja fines de semana o feriados", utils.mensajes.err)
+                                    hs = 0
+                                    r.Cells("PRACTICAS-HS").Value = Nothing
+                                Else
+                                    monto += med.montoFeriado * r.Cells("PRACTICAS-HS").Value
+                                End If
+                            Else
+                                monto += med.montoNormal * r.Cells("PRACTICAS-HS").Value
+                            End If
                         End If
 
-                        If r.Cells(4).Value = "SI" Then
-                            monto += med.montoDiferencial * r.Cells("PRACTICAS-HS").Value
-                        End If
+                        ' If r.Cells(4).Value = "SI" Then
+                        ' monto += med.montoDiferencial * r.Cells("PRACTICAS-HS").Value
+                        'End If
                         horas += hs
                     End If
                 Next
@@ -366,6 +377,10 @@ Public Class frmPracticas
             lblMonto.Text = 0
             lblMonto.ForeColor = Color.Black
             lblHoras.ForeColor = Color.Black
+
+            For Each r As DataGridViewRow In dgFechas.Rows
+                r.Cells(4).Value = ""
+            Next
         End If
     End Sub
     Private Sub iniciarControles()
@@ -386,6 +401,10 @@ Public Class frmPracticas
         txtObservaciones.Text = ""
         lblHoras.Text = ""
         lblMonto.Text = ""
+        txtLocalidadPac.Text = ""
+        txtOS.Text = ""
+        lblMed.Text = ""
+        lblPaciente.Text = ""
         cargarGrilla()
         lblMes.Text = MonthName(DTFecha.Value.Month)
         edicion = False
@@ -394,13 +413,6 @@ Public Class frmPracticas
 
         dgFechas.AutoResizeColumns()
         dgFechas.AutoResizeRows()
-
-    End Sub
-
-    Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectionChangeCommitted
-        If cbModulo.SelectedIndex <> -1 Then
-            modu.codigo = cbModulo.SelectedValue
-        End If
 
     End Sub
 
@@ -419,10 +431,10 @@ Public Class frmPracticas
                     txtLocalidadPrest.Text = med.localidad
                     txtEspecialidad.Text = med.especialidad
                     txtServicio.Text = med.obraSocial
-                    lblPrecioFeriado.Text = med.montoFeriado
-                    lblPrecioLaV.Text = med.montoNormal
+                    lblPrecioFeriado.Text = med.montoFeriado.ToString("F")
+                    lblPrecioLaV.Text = med.montoNormal.ToString("F")
                     txtOS.Text = med.obraSocial
-                    lblPrecioDif.Text = med.montoDiferencial
+                    lblPrecioDif.Text = med.montoDiferencial.ToString("F")
                     PracticasPrestadorToolStripMenuItem.Enabled = True
                 Catch ex As Exception
                     ut.mensaje(ex.Message, utils.mensajes.err)
@@ -443,5 +455,13 @@ Public Class frmPracticas
         Dim fecha = DTFecha.Value
         Dim frm As New frmLiquidacionDetalle(med.id, fecha)
         frm.ShowDialog()
+    End Sub
+
+    Private Sub cbModulo_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbModulo.SelectedIndexChanged
+        If Not carga Then
+            If cbModulo.SelectedIndex <> -1 Then
+                modu.codigo = cbModulo.SelectedValue
+            End If
+        End If
     End Sub
 End Class

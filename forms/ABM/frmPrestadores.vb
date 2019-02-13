@@ -20,6 +20,9 @@
                 If cbEspecialidad.SelectedIndex = -1 Then
                     Throw New Exception("SELECCIONE UNA ESPECIALIDAD")
                 End If
+                If cbZona.SelectedIndex = -1 Then
+                    Throw New Exception("SELECCIONE UNA ZONA")
+                End If
                 montoLaV = numLunVie.Text.Trim
                 montoFeriado = numFeriados.Text.Trim
                 montoFijo = numFijo.Text.Trim
@@ -29,7 +32,7 @@
                     cuit = cuit.Insert(2, "-")
                     cuit = cuit.Insert(cuit.Length - 1, "-")
                 End If
-                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, montoLaV, montoFeriado, montoFijo, numDiferencial.Text.Trim, dtCese.Text, txtServicio.Text, txtComentario.Text)
+                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, montoLaV, montoFeriado, montoFijo, numDiferencial.Text.Trim, dtCese.Text.Trim, txtServicio.Text.Trim, txtComentario.Text.Trim, cbZona.SelectedValue)
                 prest.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
@@ -54,6 +57,9 @@
                 montoFeriado = numFeriados.Text.Trim
                 montoFijo = numFijo.Text.Trim
                 montoDiferencial = numDiferencial.Text.Trim
+                If cbZona.SelectedIndex = -1 Then
+                    Throw New Exception("SELECCIONE UNA ZONA")
+                End If
 
                 If txtNombre.Text.Trim <> prest.nombre Then
                     prest.nombre = txtNombre.Text.Trim
@@ -97,8 +103,13 @@
                         prest.reactivar()
                     End If
                 End If
+
                 If txtComentario.Text.Trim <> prest.observaciones Then
                     prest.observaciones = txtComentario.Text.Trim
+                End If
+
+                If cbZona.SelectedValue <> prest.zona Then
+                    prest.zona = cbZona.SelectedValue
                 End If
 
                 prest.actualizar()
@@ -107,7 +118,6 @@
                 prest = Nothing
             Catch ex As Exception
                 ut.mensaje(ex.Message, utils.mensajes.err)
-
                 If ex.Message.Contains("No se realizaron modificaciones") Then
                     iniciarControles()
                 End If
@@ -124,6 +134,7 @@
         chbCese.Enabled = False
         chbCese.Checked = False
         txtComentario.Text = ""
+        cbZona.SelectedValue = 1
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -172,6 +183,10 @@
 
     Private Sub frmprestadores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim esp As New especialidad
+        Dim zona As New Zona()
+
+        zona.llenarcombo(cbZona)
+
         esp.llenarcombo(cbEspecialidad)
         dtCese.Enabled = False
         txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo, numDiferencial}
@@ -213,10 +228,13 @@
         txtServicio.Text = _prestador.obraSocial
         dtCese.Text = _prestador.fechaCese
         chbCese.Checked = False
+        cbZona.SelectedValue = _prestador.zona
+
         If _prestador.fechaCese <> Date.MinValue Then
             chbCese.Checked = True
             ut.desactivarTxtBoxes(txtBoxes)
         End If
+
         txtComentario.Text = _prestador.observaciones
         prest = _prestador
         chbCese.Enabled = True

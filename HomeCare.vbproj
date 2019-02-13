@@ -126,7 +126,7 @@
     <Compile Include="code\DB.vb" />
     <Compile Include="code\encriptador.vb" />
     <Compile Include="code\especialidad.vb" />
-    <Compile Include="code\exceptions\ExcepcionDeSystema.vb" />
+    <Compile Include="code\exceptiones\ExcepcionDeSystema.vb" />
     <Compile Include="code\Feriados.vb" />
     <Compile Include="code\Liquidacion.vb" />
     <Compile Include="code\mail.vb" />
@@ -252,6 +252,12 @@
     <Compile Include="frmVerificar.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="forms\ABM\FrmZonas.Designer.vb">
+      <DependentUpon>FrmZonas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="forms\ABM\FrmZonas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HomeCareDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -291,6 +297,7 @@
     <Compile Include="forms\liquidacion\frmPracticasPaciente.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="code\Zona.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="forms\ABM\frmBuscar.resx">
@@ -355,6 +362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\config\frmInfo.resx">
       <DependentUpon>frmInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\ABM\FrmZonas.resx">
+      <DependentUpon>FrmZonas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>

@@ -5,8 +5,8 @@
     Dim txtBoxesDA As TextBox()
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        Try
-            If IsNothing(pac) Then
+        If IsNothing(pac) Then
+            Try
                 ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(numDni, 8)
                 If txtObSocial.Text = "PAMI" Then
@@ -19,7 +19,18 @@
                 pac.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
-            Else
+            Catch ex As Exception
+                If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+                    ut.mensaje("Ya existe un paciente con el mismo numero", utils.mensajes.err)
+                Else
+                    ut.mensaje(ex.Message, utils.mensajes.err)
+                End If
+            Finally
+                pac = Nothing
+            End Try
+
+        Else
+            Try
                 ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(numDni, 8)
                 If txtObSocial.Text = "PAMI" Then
@@ -65,20 +76,13 @@
                 pac.actualizar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
-            End If
-        Catch ex As Exception
-
-            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                ut.mensaje("Ya existe un paciente con el mismo numero", utils.mensajes.err)
-            Else
+            Catch ex As Exception
+                If ex.Message.Contains("No se realizaron modificaciones") Then
+                    iniciarControles()
+                End If
                 ut.mensaje(ex.Message, utils.mensajes.err)
-            End If
-            If ex.Message.Contains("No se realizaron modificaciones") Then
-                iniciarControles()
-            End If
-        Finally
-            pac = Nothing
-        End Try
+            End Try
+        End If
     End Sub
 
     Private Sub iniciarControles()
