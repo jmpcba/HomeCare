@@ -416,13 +416,6 @@ Public Class frmPracticas
 
     End Sub
 
-    Private Sub cbModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbModulo.SelectionChangeCommitted
-        If cbModulo.SelectedIndex <> -1 Then
-            modu.codigo = cbModulo.SelectedValue
-        End If
-
-    End Sub
-
     Private Sub frmPracticas_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         frmPrincipal.Show()
     End Sub
@@ -462,5 +455,13 @@ Public Class frmPracticas
         Dim fecha = DTFecha.Value
         Dim frm As New frmLiquidacionDetalle(med.id, fecha)
         frm.ShowDialog()
+    End Sub
+
+    Private Sub cbModulo_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbModulo.SelectedIndexChanged
+        If Not carga Then
+            If cbModulo.SelectedIndex <> -1 Then
+                modu.codigo = cbModulo.SelectedValue
+            End If
+        End If
     End Sub
 End Class

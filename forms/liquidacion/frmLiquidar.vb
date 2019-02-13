@@ -118,7 +118,7 @@
                         Try
                             Dim prest = New Prestador
                             prest.id = r.Cells("ID_PREST").Value
-                            Dim liq = New Liquidacion(prest, mes, r.Cells("HS LUN a VIE").Value, r.Cells("HS SAB, DOM y FER").Value, r.Cells("DIFERENCIAL").Value, r.Cells("$ LUN a VIE").Value, r.Cells("$ SAB, DOM y FER").Value, r.Cells("$ DIF").Value, r.Cells("MONTO FIJO").Value, txtObservaciones.Text)
+                            Dim liq = New Liquidacion(prest, mes, r.Cells("HS LUN a VIE").Value, r.Cells("HS SAB DOM y FER").Value, r.Cells("DIFERENCIAL").Value, r.Cells("$ LUN a VIE").Value, r.Cells("$ SAB DOM y FER").Value, r.Cells("$ DIF").Value, r.Cells("MONTO FIJO").Value, txtObservaciones.Text)
 
                             If r.Cells("ESTADO").Value = "CERRADA" Then
                                 Dim msg = String.Format("La liquidacion para el prestador {0} en el mes de {1} ya esta cerrada" & vbCrLf & vbCrLf & "Desea reenviar el mail de notificacion? ", prest.apellido, MonthName(dtMes.Value.Month).ToUpper)
