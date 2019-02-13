@@ -137,7 +137,8 @@ Public Class frmPracticas
 
                             If r.Cells(4).Value = "SI" Then
                                 horasDif = horas
-                                horas = 0
+                                horasLaV = 0
+                                horasFer = 0
                             ElseIf ut.esFindeOFeriado(fec) Then
                                 horasDif = 0
                                 horasLaV = 0
@@ -345,9 +346,10 @@ Public Class frmPracticas
                         Dim hs = r.Cells("PRACTICAS-HS").Value
                         If r.Cells(4).Value = "SI" Then
                             If med.montoDiferencial = 0 Then
-                                ut.mensaje("Este prestador no tiene diferencial", utils.mensajes.err)
+                                ut.mensaje("Este prestador no tiene cargado un monto diferencial", utils.mensajes.err)
                                 hs = 0
                                 r.Cells("PRACTICAS-HS").Value = Nothing
+                                r.Cells(4).Value = "NO"
                             Else
                                 monto += med.montoDiferencial * r.Cells("PRACTICAS-HS").Value
                             End If
