@@ -240,7 +240,7 @@ Partial Class frmPracticas
         '
         'cbPaciente
         '
-        Me.cbPaciente.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cbPaciente.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cbPaciente.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbPaciente.FormattingEnabled = True
         Me.cbPaciente.Location = New System.Drawing.Point(127, 42)

@@ -482,4 +482,26 @@ Public Class frmPracticas
             End If
         End If
     End Sub
+
+    Private Sub cbPaciente_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbPaciente.KeyPress
+        If Not carga Then
+            Dim c = e.KeyChar
+            If Char.IsLetterOrDigit(c) Then
+                If cbPaciente.DroppedDown Then
+                    cbPaciente.DroppedDown = False
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub cbMedico_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbMedico.KeyPress
+        If Not carga Then
+            Dim c = e.KeyChar
+            If Char.IsLetterOrDigit(c) Then
+                If cbMedico.DroppedDown Then
+                    cbMedico.DroppedDown = False
+                End If
+            End If
+        End If
+    End Sub
 End Class
