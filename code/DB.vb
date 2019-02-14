@@ -336,7 +336,12 @@ Public Class DB
     Friend Function insertar(_practicas As List(Of Practica)) As List(Of ResultadoCargaPracticas)
         Dim errores As New List(Of ResultadoCargaPracticas)
 
-        ut.backupDBTemp()
+        Try
+            ut.backupDBTemp()
+        Catch ex As Exception
+
+        End Try
+
         cmd.CommandType = CommandType.Text
         cnn.Open()
 
@@ -363,9 +368,20 @@ Public Class DB
             End Try
         Next
 
+        If errores.Count = _practicas.Count Then
+            hacerBackup = False
+        End If
+
         cnn.Close()
 
+        Try
+            ut.backUpDBFinal(hacerBackup)
+        Catch ex As Exception
+
+        End Try
+
         Return errores
+
     End Function
 
 
