@@ -128,9 +128,13 @@ Public Class DB
         desde = New Date(_fecha.Year, _fecha.Month, 1)
         hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
-        cmd.CommandType = CommandType.StoredProcedure
+        ' cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandType = CommandType.Text
         If _liq = tiposLiquidacion.detalle Then
-            cmd.CommandText = "QUERY_DETALLES"
+            cmd.CommandText = "SELECT PRACTICAS.ID, PRACTICAS.CUIT, PRESTADORES.APELLIDO AS [APELLIDO PRESTADOR], PRESTADORES.NOMBRE AS [NOMBRE PRESTADOR], PRESTADORES.LOCALIDAD, PRESTADORES.ESPECIALIDAD, PRESTADORES.SERVICIO, PRACTICAS.AFILIADO, PACIENTES.APELLIDO AS [APELLIDO PACIENTE], PACIENTES.NOMBRE AS [NOMBRE PACIENTE], PRACTICAS.FECHA_PRACTICA AS [FECHA PRACTICA], MODULO.CODIGO AS MODULO, SUBMODULO.CODIGO AS [CODIGO SUBMODULO], SUBMODULO.DESCRIPCION AS [DESCRIPCION SUBMODULO], PRACTICAS.HS_NORMALES AS [HS LUN a VIE], PRACTICAS.HS_FERIADO AS [HS SAB DOM y FER], PRACTICAS.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]*[MONTO_SEMANA] AS [$ LUN a VIE], [HS_FERIADO]*[MONTO_FERIADO] AS [$ SAB DOM y FER], [HS_DIFERENCIAL]*[PORCENTAJE] AS [$ DIF], PRESTADORES.MONTO_FIJO AS [MONTO FIJO]
+FROM SUBMODULO INNER JOIN (PACIENTES INNER JOIN (MODULO INNER JOIN (PRESTADORES INNER JOIN PRACTICAS ON PRESTADORES.ID = PRACTICAS.ID_PREST) ON MODULO.CODIGO = PRACTICAS.MODULO) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO) ON SUBMODULO.CODIGO = PRACTICAS.SUB_MODULO
+WHERE (((PRACTICAS.FECHA_PRACTICA) Between [DESDE] And [HASTA]));"
+
 
         ElseIf _liq = tiposLiquidacion.medico Then
             cmd.CommandText = "QUERY_SUMATORIA_MEDICOS"
@@ -139,8 +143,8 @@ Public Class DB
             cmd.CommandText = "QUERY_SUMATORIA_PACIENTE"
         End If
 
-        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
-        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
+        ' cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
+        ' cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
 
         Try
             'LLENAR EL DETALLE
