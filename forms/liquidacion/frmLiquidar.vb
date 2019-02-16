@@ -2,8 +2,11 @@
     Dim sel As Boolean = False
     Dim ut As New utils
     Dim dt As New DataTable
+    Dim carga As Boolean = False
     Private Sub dtMes_ValueChanged(sender As Object, e As EventArgs) Handles dtMes.ValueChanged
-        llenarGrilla()
+        If Not carga Then
+            llenarGrilla()
+        End If
     End Sub
 
     Public Sub llenarGrilla()
@@ -11,7 +14,7 @@
             btnGuardar.Enabled = False
             Dim db As New DB()
             Dim mes = dtMes.Value
-
+            Dim columnasEsconder = {"ID_PREST", "ESPECIALIDAD", "LOCALIDAD", "SERVICIO"}
             dt = db.getLiquidacion(mes, DB.tiposLiquidacion.medico)
 
             dt.Columns.Add("RESULTADO CARGA")
@@ -39,7 +42,12 @@
 
                 .DataSource = dt
                 .Columns("RESULTADO CARGA").DefaultCellStyle.BackColor = Color.LightGray
-                .Columns("ID_PREST").Visible = False
+
+                For Each c In columnasEsconder
+                    .Columns(c).Visible = False
+                Next
+
+
                 .AutoResizeColumns()
                 .AutoResizeRows()
                 .ClearSelection()
@@ -60,6 +68,7 @@
     End Sub
 
     Private Sub frmLiquidar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        carga = True
         btnGuardar.Enabled = False
         Me.WindowState = FormWindowState.Maximized
         dtMes.Value = Today.AddMonths(-1)
@@ -70,6 +79,7 @@
         Else
             btnGuardar.Visible = True
         End If
+        carga = False
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click

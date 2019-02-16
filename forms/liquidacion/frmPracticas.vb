@@ -354,11 +354,9 @@ Public Class frmPracticas
                                 monto += med.montoDiferencial * r.Cells("PRACTICAS-HS").Value
                             End If
                         Else
-                                If ut.esFindeOFeriado(fecha) Then
+                            If ut.esFindeOFeriado(fecha) Then
                                 If med.montoFeriado = 0 Then
-                                    ut.mensaje("Este prestador no trabaja fines de semana o feriados", utils.mensajes.err)
-                                    hs = 0
-                                    r.Cells("PRACTICAS-HS").Value = Nothing
+                                    monto += med.montoNormal * r.Cells("PRACTICAS-HS").Value
                                 Else
                                     monto += med.montoFeriado * r.Cells("PRACTICAS-HS").Value
                                 End If
