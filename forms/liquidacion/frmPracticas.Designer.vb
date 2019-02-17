@@ -156,6 +156,7 @@ Partial Class frmPracticas
         Me.txtMat.ReadOnly = True
         Me.txtMat.Size = New System.Drawing.Size(121, 20)
         Me.txtMat.TabIndex = 11
+        Me.txtMat.TabStop = False
         '
         'txtLocalidadPrest
         '
@@ -164,6 +165,7 @@ Partial Class frmPracticas
         Me.txtLocalidadPrest.ReadOnly = True
         Me.txtLocalidadPrest.Size = New System.Drawing.Size(239, 20)
         Me.txtLocalidadPrest.TabIndex = 12
+        Me.txtLocalidadPrest.TabStop = False
         '
         'Label6
         '
@@ -211,6 +213,7 @@ Partial Class frmPracticas
         Me.txtBeneficio.ReadOnly = True
         Me.txtBeneficio.Size = New System.Drawing.Size(149, 20)
         Me.txtBeneficio.TabIndex = 26
+        Me.txtBeneficio.TabStop = False
         '
         'txtAfiliado
         '
@@ -219,6 +222,7 @@ Partial Class frmPracticas
         Me.txtAfiliado.ReadOnly = True
         Me.txtAfiliado.Size = New System.Drawing.Size(121, 20)
         Me.txtAfiliado.TabIndex = 2
+        Me.txtAfiliado.TabStop = False
         '
         'Label9
         '
@@ -291,6 +295,7 @@ Partial Class frmPracticas
         Me.txtLocalidadPac.ReadOnly = True
         Me.txtLocalidadPac.Size = New System.Drawing.Size(121, 20)
         Me.txtLocalidadPac.TabIndex = 28
+        Me.txtLocalidadPac.TabStop = False
         '
         'lblPaciente
         '
@@ -339,6 +344,7 @@ Partial Class frmPracticas
         Me.txtOS.ReadOnly = True
         Me.txtOS.Size = New System.Drawing.Size(121, 20)
         Me.txtOS.TabIndex = 30
+        Me.txtOS.TabStop = False
         '
         'lblMed
         '
@@ -365,6 +371,7 @@ Partial Class frmPracticas
         Me.txtServicio.ReadOnly = True
         Me.txtServicio.Size = New System.Drawing.Size(121, 20)
         Me.txtServicio.TabIndex = 16
+        Me.txtServicio.TabStop = False
         '
         'cbMedico
         '
@@ -392,6 +399,7 @@ Partial Class frmPracticas
         Me.txtEspecialidad.ReadOnly = True
         Me.txtEspecialidad.Size = New System.Drawing.Size(239, 20)
         Me.txtEspecialidad.TabIndex = 13
+        Me.txtEspecialidad.TabStop = False
         '
         'Panel3
         '
