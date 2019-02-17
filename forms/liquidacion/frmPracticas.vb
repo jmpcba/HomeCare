@@ -93,7 +93,9 @@ Public Class frmPracticas
         Dim practicas As New List(Of Practica)
 
         ut = New utils
+
         Try
+            Cursor.Current = Cursors.WaitCursor
             btnGuardar.Enabled = False
             dgFechas.Columns("RESULTADO").ReadOnly = False
 
@@ -193,7 +195,9 @@ Public Class frmPracticas
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
+
             btnGuardar.Enabled = True
+            Cursor.Current = Cursors.Default
 
             If carga Then
                 iniciarControles()

@@ -1,6 +1,6 @@
 ﻿Public Class frmLiquidar
     Dim sel As Boolean = False
-    Dim ut As New utils
+    WithEvents ut As New utils
     Dim dt As New DataTable
     Dim carga As Boolean = False
     Private Sub dtMes_ValueChanged(sender As Object, e As EventArgs) Handles dtMes.ValueChanged
@@ -220,6 +220,12 @@
 
         Try
 
+            gridLiqui.Enabled = False
+            btnCerrar.Enabled = False
+            btnGuardar.Enabled = False
+            btnSelec.Enabled = False
+            btnCerrar.Enabled = False
+
             dtPrestadores = dt.Copy
             dtPrestadores.TableName = "RESUMEN PRESTADORES"
             dtPrestadores.Columns.Remove("RESULTADO CARGA")
@@ -239,10 +245,29 @@
             ds.Tables.Add(dtPracticas)
             ds.Tables.Add(dtPrestadores)
 
+            With pb
+                .Minimum = 0
+                .Maximum = dtPracticas.Rows.Count + dtPrestadores.Rows.Count
+                .Visible = True
+            End With
+
+
             ut.exportarExcel(ds)
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
-        End Try
 
+        Finally
+            gridLiqui.Enabled = True
+            btnCerrar.Enabled = True
+            btnGuardar.Enabled = True
+            btnSelec.Enabled = True
+            btnCerrar.Enabled = True
+            pb.Visible = False
+        End Try
     End Sub
+
+    Private Sub progressBar() Handles ut.cambioBarraDeProgreso
+        pb.Increment(1)
+    End Sub
+
 End Class

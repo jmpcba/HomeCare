@@ -7,6 +7,7 @@ Public Class utils
     Dim feriados As DataTable
     Private liquidaciones As DataTable
     Private cargoLiq As Boolean = False
+    Event cambioBarraDeProgreso()
 
     Public Sub New()
         feriados = New DataTable()
@@ -360,12 +361,13 @@ Public Class utils
 
         Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
         System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+        Dim bp As New frmBarraDeProgreso
+
         Try
             If saveFile.ShowDialog = DialogResult.OK Then
                 path = saveFile.FileName
-
+                Cursor.Current = Cursors.WaitCursor
                 wBook = _excel.Workbooks.Add()
-
 
                 For Each dt As DataTable In _ds.Tables
                     wSheet = wBook.ActiveSheet()
@@ -384,10 +386,12 @@ Public Class utils
                     For Each dr In dt.Rows
                         rowIndex = rowIndex + 1
                         colIndex = 0
+
                         For Each dc In dt.Columns
                             colIndex = colIndex + 1
                             wSheet.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
                         Next
+                        RaiseEvent cambioBarraDeProgreso()
                     Next
                     wSheet.Columns.AutoFit()
                     wBook.Sheets.Add()
@@ -397,6 +401,7 @@ Public Class utils
                         ws.Delete()
                     End If
                 Next
+                Cursor.Current = Cursors.Default
                 wBook.SaveAs(path)
 
                 ReleaseObject(wSheet)
@@ -412,6 +417,7 @@ Public Class utils
         Catch ex As Exception
             Throw
         Finally
+            Cursor.Current = Cursors.Default
             System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
         End Try
     End Sub

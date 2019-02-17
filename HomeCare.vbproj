@@ -163,6 +163,12 @@
     <Compile Include="forms\ABM\FrmFeriados.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="forms\principal\barraDeProgreso.Designer.vb">
+      <DependentUpon>barraDeProgreso.vb</DependentUpon>
+    </Compile>
+    <Compile Include="forms\principal\barraDeProgreso.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmInformes.Designer.vb">
       <DependentUpon>frmInformes.vb</DependentUpon>
     </Compile>
@@ -312,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ABM\FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\principal\barraDeProgreso.resx">
+      <DependentUpon>barraDeProgreso.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInformes.resx">
       <DependentUpon>frmInformes.vb</DependentUpon>
