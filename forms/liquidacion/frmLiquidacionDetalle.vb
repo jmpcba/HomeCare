@@ -20,12 +20,14 @@
             fecha = _fecha
             idPrestador = _idPrest
 
+            llenarGrilla()
+
             If dt.Rows.Count > 0 Then
                 ToolStripMenuItemDetalle.Enabled = True
             Else
                 ToolStripMenuItemDetalle.Enabled = False
             End If
-            llenarGrilla()
+            
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
@@ -124,6 +126,7 @@
     Private Sub DetallePrestadorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDetalle.Click
         Try
             ut.exportarExcel(dt)
+            Focus()
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try

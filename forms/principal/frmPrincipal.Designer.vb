@@ -37,6 +37,7 @@ Partial Class frmPrincipal
         Me.btnPrestadores = New System.Windows.Forms.Button()
         Me.btnFeriados = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.BtnZonas = New System.Windows.Forms.Button()
         Me.btnUsuarios = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
@@ -49,7 +50,6 @@ Partial Class frmPrincipal
         Me.RestaurarBaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BtnZonas = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
@@ -57,7 +57,7 @@ Partial Class frmPrincipal
         '
         'btnVisita
         '
-        Me.btnVisita.Location = New System.Drawing.Point(26, 58)
+        Me.btnVisita.Location = New System.Drawing.Point(26, 45)
         Me.btnVisita.Name = "btnVisita"
         Me.btnVisita.Size = New System.Drawing.Size(260, 53)
         Me.btnVisita.TabIndex = 0
@@ -66,7 +66,7 @@ Partial Class frmPrincipal
         '
         'btnReporte
         '
-        Me.btnReporte.Location = New System.Drawing.Point(26, 127)
+        Me.btnReporte.Location = New System.Drawing.Point(26, 104)
         Me.btnReporte.Name = "btnReporte"
         Me.btnReporte.Size = New System.Drawing.Size(260, 53)
         Me.btnReporte.TabIndex = 1
@@ -84,7 +84,7 @@ Partial Class frmPrincipal
         'btnInformes
         '
         Me.btnInformes.Enabled = False
-        Me.btnInformes.Location = New System.Drawing.Point(26, 202)
+        Me.btnInformes.Location = New System.Drawing.Point(26, 281)
         Me.btnInformes.Name = "btnInformes"
         Me.btnInformes.Size = New System.Drawing.Size(260, 53)
         Me.btnInformes.TabIndex = 2
@@ -111,7 +111,7 @@ Partial Class frmPrincipal
         '
         'btnNvaLiq
         '
-        Me.btnNvaLiq.Location = New System.Drawing.Point(26, 281)
+        Me.btnNvaLiq.Location = New System.Drawing.Point(26, 163)
         Me.btnNvaLiq.Name = "btnNvaLiq"
         Me.btnNvaLiq.Size = New System.Drawing.Size(260, 53)
         Me.btnNvaLiq.TabIndex = 4
@@ -131,12 +131,11 @@ Partial Class frmPrincipal
         '
         'btnCierreLiq
         '
-        Me.btnCierreLiq.Enabled = False
-        Me.btnCierreLiq.Location = New System.Drawing.Point(26, 350)
+        Me.btnCierreLiq.Location = New System.Drawing.Point(26, 222)
         Me.btnCierreLiq.Name = "btnCierreLiq"
         Me.btnCierreLiq.Size = New System.Drawing.Size(260, 53)
         Me.btnCierreLiq.TabIndex = 5
-        Me.btnCierreLiq.Text = "CERRAR LIQUIDACION"
+        Me.btnCierreLiq.Text = "LIQUIDACIONES CERRADAS"
         Me.btnCierreLiq.UseVisualStyleBackColor = True
         '
         'Panel1
@@ -206,6 +205,15 @@ Partial Class frmPrincipal
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(330, 481)
         Me.Panel2.TabIndex = 104
+        '
+        'BtnZonas
+        '
+        Me.BtnZonas.Location = New System.Drawing.Point(20, 399)
+        Me.BtnZonas.Name = "BtnZonas"
+        Me.BtnZonas.Size = New System.Drawing.Size(260, 53)
+        Me.BtnZonas.TabIndex = 106
+        Me.BtnZonas.Text = "ADMINISTRAR ZONAS"
+        Me.BtnZonas.UseVisualStyleBackColor = True
         '
         'btnUsuarios
         '
@@ -292,15 +300,6 @@ Partial Class frmPrincipal
         Me.InfoToolStripMenuItem.Name = "InfoToolStripMenuItem"
         Me.InfoToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
         Me.InfoToolStripMenuItem.Text = "&Info"
-        '
-        'BtnZonas
-        '
-        Me.BtnZonas.Location = New System.Drawing.Point(20, 399)
-        Me.BtnZonas.Name = "BtnZonas"
-        Me.BtnZonas.Size = New System.Drawing.Size(260, 53)
-        Me.BtnZonas.TabIndex = 106
-        Me.BtnZonas.Text = "ADMINISTRAR ZONAS"
-        Me.BtnZonas.UseVisualStyleBackColor = True
         '
         'frmPrincipal
         '
