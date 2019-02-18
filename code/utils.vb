@@ -345,6 +345,7 @@ Public Class utils
                                            finalColLetter, _dt.Rows.Count + 1)
 
                 Ws.Range(excelRange, Type.Missing).Value2 = rawData
+                Ws.Columns.AutoFit()
                 Ws = Nothing
 
 
@@ -481,6 +482,7 @@ Public Class utils
                                            finalColLetter, dt.Rows.Count + 1)
 
                     Ws.Range(excelRange, Type.Missing).Value2 = rawData
+                    Ws.Columns.AutoFit()
                     Ws = Nothing
                 Next
 
