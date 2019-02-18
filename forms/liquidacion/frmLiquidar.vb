@@ -177,6 +177,7 @@
 
     Private Sub ResumenDePrestadoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResumenDePrestadoresToolStripMenuItem.Click
         Try
+            pb.Visible = True
             Dim dtExport As New DataTable
             dtExport = dt
             dtExport.Columns.Remove("RESULTADO CARGA")
@@ -192,15 +193,22 @@
             ut.exportarExcel(dtExport)
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
+        Finally
+            pb.Visible = False
+            Me.Focus()
         End Try
     End Sub
 
     Private Sub TodasLasPracticasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TodasLasPracticasToolStripMenuItem.Click
         Try
+            pb.Visible = True
             Dim practicas = New Practica
             ut.exportarExcel(practicas.getPracticas(dtMes.Value))
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
+        Finally
+            pb.Visible = False
+            Me.Focus()
         End Try
     End Sub
 
@@ -219,13 +227,7 @@
         Dim ds As New DataSet
 
         Try
-
-            gridLiqui.Enabled = False
-            btnCerrar.Enabled = False
-            btnGuardar.Enabled = False
-            btnSelec.Enabled = False
-            btnCerrar.Enabled = False
-
+            pb.Visible = True
             dtPrestadores = dt.Copy
             dtPrestadores.TableName = "RESUMEN PRESTADORES"
             dtPrestadores.Columns.Remove("RESULTADO CARGA")
@@ -242,8 +244,8 @@
             Dim practicas = New Practica
             dtPracticas = practicas.getPracticas(dtMes.Value).Copy
 
-            ds.Tables.Add(dtPracticas)
             ds.Tables.Add(dtPrestadores)
+            ds.Tables.Add(dtPracticas)
 
             With pb
                 .Minimum = 0
@@ -255,14 +257,9 @@
             ut.exportarExcel(ds)
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
-
         Finally
-            gridLiqui.Enabled = True
-            btnCerrar.Enabled = True
-            btnGuardar.Enabled = True
-            btnSelec.Enabled = True
-            btnCerrar.Enabled = True
             pb.Visible = False
+            Me.Focus()
         End Try
     End Sub
 
@@ -270,4 +267,7 @@
         pb.Increment(1)
     End Sub
 
+    Public Sub progresoStatusBar() Handles ut.progresoExportExcel
+        pb.Increment(1)
+    End Sub
 End Class
