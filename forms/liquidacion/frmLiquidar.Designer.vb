@@ -32,7 +32,7 @@ Partial Class frmLiquidar
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.dtMes = New System.Windows.Forms.DateTimePicker()
         Me.btnSelec = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblObservaciones = New System.Windows.Forms.Label()
         Me.txtObservaciones = New System.Windows.Forms.TextBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ExportarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -136,14 +136,14 @@ Partial Class frmLiquidar
         Me.btnSelec.Text = "Seleccionar Todos"
         Me.btnSelec.UseVisualStyleBackColor = True
         '
-        'Label2
+        'lblObservaciones
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(403, 87)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(98, 13)
-        Me.Label2.TabIndex = 112
-        Me.Label2.Text = "OBSERVACIONES"
+        Me.lblObservaciones.AutoSize = True
+        Me.lblObservaciones.Location = New System.Drawing.Point(403, 87)
+        Me.lblObservaciones.Name = "lblObservaciones"
+        Me.lblObservaciones.Size = New System.Drawing.Size(98, 13)
+        Me.lblObservaciones.TabIndex = 112
+        Me.lblObservaciones.Text = "OBSERVACIONES"
         '
         'txtObservaciones
         '
@@ -230,7 +230,7 @@ Partial Class frmLiquidar
         Me.Controls.Add(Me.txtFiltro)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtObservaciones)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lblObservaciones)
         Me.Controls.Add(Me.btnSelec)
         Me.Controls.Add(Me.dtMes)
         Me.Controls.Add(Me.btnGuardar)
@@ -263,7 +263,7 @@ Partial Class frmLiquidar
     Friend WithEvents btnCerrar As Button
     Friend WithEvents dtMes As DateTimePicker
     Friend WithEvents btnSelec As Button
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblObservaciones As Label
     Friend WithEvents txtObservaciones As TextBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ExportarToolStripMenuItem As ToolStripMenuItem
