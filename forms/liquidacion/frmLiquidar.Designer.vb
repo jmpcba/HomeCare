@@ -38,13 +38,16 @@ Partial Class frmLiquidar
         Me.ExportarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumenDePrestadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TodasLasPracticasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CierreLiquidacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
-        Me.CierreLiquidacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.pb = New System.Windows.Forms.ToolStripProgressBar()
         CType(Me.gridLiqui, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -180,6 +183,12 @@ Partial Class frmLiquidar
         Me.TodasLasPracticasToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
         Me.TodasLasPracticasToolStripMenuItem.Text = "&Todas Las Practicas Del Mes"
         '
+        'CierreLiquidacionToolStripMenuItem
+        '
+        Me.CierreLiquidacionToolStripMenuItem.Name = "CierreLiquidacionToolStripMenuItem"
+        Me.CierreLiquidacionToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
+        Me.CierreLiquidacionToolStripMenuItem.Text = "Cierre Liquidacion"
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -196,11 +205,20 @@ Partial Class frmLiquidar
         Me.txtFiltro.Size = New System.Drawing.Size(200, 20)
         Me.txtFiltro.TabIndex = 116
         '
-        'CierreLiquidacionToolStripMenuItem
+        'StatusStrip1
         '
-        Me.CierreLiquidacionToolStripMenuItem.Name = "CierreLiquidacionToolStripMenuItem"
-        Me.CierreLiquidacionToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
-        Me.CierreLiquidacionToolStripMenuItem.Text = "Cierre Liquidacion"
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.pb})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 479)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(937, 22)
+        Me.StatusStrip1.TabIndex = 117
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'pb
+        '
+        Me.pb.Name = "pb"
+        Me.pb.Size = New System.Drawing.Size(100, 16)
+        Me.pb.Visible = False
         '
         'frmLiquidar
         '
@@ -208,6 +226,7 @@ Partial Class frmLiquidar
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(937, 501)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.txtFiltro)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtObservaciones)
@@ -228,6 +247,8 @@ Partial Class frmLiquidar
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -251,4 +272,6 @@ Partial Class frmLiquidar
     Friend WithEvents Label3 As Label
     Friend WithEvents txtFiltro As TextBox
     Friend WithEvents CierreLiquidacionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents pb As ToolStripProgressBar
 End Class
