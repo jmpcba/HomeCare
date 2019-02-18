@@ -23,7 +23,7 @@ Partial Class frmLiquidar
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblTitulo = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.gridLiqui = New System.Windows.Forms.DataGridView()
         Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
@@ -50,16 +50,16 @@ Partial Class frmLiquidar
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblTitulo
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(12, 35)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(139, 24)
-        Me.Label1.TabIndex = 107
-        Me.Label1.Text = "LIQUIDACION"
+        Me.lblTitulo.AutoSize = True
+        Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitulo.ForeColor = System.Drawing.Color.Red
+        Me.lblTitulo.Location = New System.Drawing.Point(12, 35)
+        Me.lblTitulo.Name = "lblTitulo"
+        Me.lblTitulo.Size = New System.Drawing.Size(139, 24)
+        Me.lblTitulo.TabIndex = 107
+        Me.lblTitulo.Text = "LIQUIDACION"
         '
         'Label8
         '
@@ -237,7 +237,7 @@ Partial Class frmLiquidar
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.gridLiqui)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblTitulo)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmLiquidar"
@@ -254,7 +254,7 @@ Partial Class frmLiquidar
 
     End Sub
 
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblTitulo As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents gridLiqui As DataGridView
     Friend WithEvents HomeCareDataSet As HomeCareDataSet

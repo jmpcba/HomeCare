@@ -15,12 +15,19 @@
         InitializeComponent()
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+        Dim titulo As String
         tipo = _tipo
 
         If tipo = liquidaciones.cerradas Then
+            titulo = "LIQUIDACIONES CERRADAS"
             txtObservaciones.Visible = False
             lblObservaciones.Visible = False
+        ElseIf tipo = liquidaciones.abiertas Then
+            titulo = "LIQUIDACIONES PENDIENTES"
+
         End If
+        Me.Text = titulo
+        lblTitulo.Text = titulo
 
     End Sub
     Private Sub dtMes_ValueChanged(sender As Object, e As EventArgs) Handles dtMes.ValueChanged
