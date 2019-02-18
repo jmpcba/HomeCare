@@ -244,8 +244,8 @@
             Dim practicas = New Practica
             dtPracticas = practicas.getPracticas(dtMes.Value).Copy
 
-            ds.Tables.Add(dtPracticas)
             ds.Tables.Add(dtPrestadores)
+            ds.Tables.Add(dtPracticas)
 
             ut.exportarExcel(ds)
         Catch ex As Exception
