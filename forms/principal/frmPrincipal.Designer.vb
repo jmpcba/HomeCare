@@ -83,12 +83,11 @@ Partial Class frmPrincipal
         '
         'btnInformes
         '
-        Me.btnInformes.Enabled = False
         Me.btnInformes.Location = New System.Drawing.Point(26, 281)
         Me.btnInformes.Name = "btnInformes"
         Me.btnInformes.Size = New System.Drawing.Size(260, 53)
         Me.btnInformes.TabIndex = 2
-        Me.btnInformes.Text = "INFORMES"
+        Me.btnInformes.Text = "INFORME ANUAL"
         Me.btnInformes.UseVisualStyleBackColor = True
         '
         'btnPacientes

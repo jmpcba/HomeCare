@@ -77,7 +77,7 @@
 
                 Dim chkclm As New DataGridViewCheckBoxColumn
                 columnasEsconder = {"ID_PREST"}
-                dt = db.getLiquidacion(mes, DB.tiposLiquidacion.liquidacionCerrada)
+                dt = db.getLiquidacion(mes, DB.tiposLiquidacion.cerrada)
                 dt.Columns.Add("RESULTADO CARGA")
                 With chkclm
                     .HeaderText = ""
