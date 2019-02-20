@@ -346,6 +346,26 @@ Public Class utils
 
                 Ws.Range(excelRange, Type.Missing).Value2 = rawData
                 Ws.Columns.AutoFit()
+
+                Dim contador = 0
+                For Each c As DataColumn In _dt.Columns
+                    contador += 1
+
+                    If c.ColumnName.ToUpper.Contains("FECHA") Then
+                        Dim letraCol = columnaExcel(contador)
+                        Dim rango As String
+                        rango = letraCol & ":" & letraCol
+                        Ws.Columns(rango).numberformat = "dd-mmm-yy"
+                    End If
+
+                    If c.ColumnName.ToUpper.Contains("AFILIADO") Then
+                        Dim letraCol = columnaExcel(contador)
+                        Dim rango As String
+                        rango = letraCol & ":" & letraCol
+                        Ws.Columns(rango).numberformat = "0"
+                    End If
+                Next
+
                 Ws = Nothing
 
 
@@ -483,6 +503,25 @@ Public Class utils
 
                     Ws.Range(excelRange, Type.Missing).Value2 = rawData
                     Ws.Columns.AutoFit()
+
+                    Dim contador = 0
+                    For Each c As DataColumn In dt.Columns
+                        contador += 1
+
+                        If c.ColumnName.ToUpper.Contains("FECHA") Then
+                            Dim letraCol = columnaExcel(contador)
+                            Dim rango As String
+                            rango = letraCol & ":" & letraCol
+                            Ws.Columns(rango).numberformat = "dd-mmm-yy"
+                        End If
+
+                        If c.ColumnName.ToUpper.Contains("AFILIADO") Then
+                            Dim letraCol = columnaExcel(contador)
+                            Dim rango As String
+                            rango = letraCol & ":" & letraCol
+                            Ws.Columns(rango).numberformat = "0"
+                        End If
+                    Next
                     Ws = Nothing
                 Next
 

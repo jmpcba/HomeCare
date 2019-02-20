@@ -10,7 +10,7 @@
     End Sub
     Private Sub btnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
         Me.Hide()
-        frmInformes.ShowDialog()
+        frmReporte.ShowDialog()
     End Sub
     Private Sub btnVerificar_Click(sender As Object, e As EventArgs)
         Me.Hide()
