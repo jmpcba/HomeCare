@@ -23,6 +23,10 @@ Partial Class frmPacientes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.chbBaja = New System.Windows.Forms.CheckBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.dtBaja = New System.Windows.Forms.DateTimePicker()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.txtLocalidad = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.numDni = New System.Windows.Forms.TextBox()
@@ -40,16 +44,24 @@ Partial Class frmPacientes
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.chbBaja = New System.Windows.Forms.CheckBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.dtBaja = New System.Windows.Forms.DateTimePicker()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtObservacionPac = New System.Windows.Forms.TextBox()
+        Me.cbModulo = New System.Windows.Forms.ComboBox()
+        Me.cbSubModulo = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.cbSubModulo)
+        Me.Panel1.Controls.Add(Me.cbModulo)
+        Me.Panel1.Controls.Add(Me.txtObservacionPac)
+        Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.Label9)
+        Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.chbBaja)
         Me.Panel1.Controls.Add(Me.Label14)
         Me.Panel1.Controls.Add(Me.dtBaja)
@@ -69,20 +81,55 @@ Partial Class frmPacientes
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Location = New System.Drawing.Point(17, 16)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(667, 417)
-        Me.Panel1.TabIndex = 0
+        Me.Panel1.Size = New System.Drawing.Size(667, 496)
+        Me.Panel1.TabIndex = 1
+        '
+        'chbBaja
+        '
+        Me.chbBaja.AutoSize = True
+        Me.chbBaja.Location = New System.Drawing.Point(60, 450)
+        Me.chbBaja.Name = "chbBaja"
+        Me.chbBaja.Size = New System.Drawing.Size(36, 17)
+        Me.chbBaja.TabIndex = 9
+        Me.chbBaja.Text = "SI"
+        Me.chbBaja.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(13, 431)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(116, 13)
+        Me.Label14.TabIndex = 52
+        Me.Label14.Text = "DESEA DAR DE BAJA"
+        '
+        'dtBaja
+        '
+        Me.dtBaja.Location = New System.Drawing.Point(319, 445)
+        Me.dtBaja.Name = "dtBaja"
+        Me.dtBaja.Size = New System.Drawing.Size(200, 20)
+        Me.dtBaja.TabIndex = 10
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(205, 450)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(89, 13)
+        Me.Label13.TabIndex = 50
+        Me.Label13.Text = "FECHA DE BAJA"
         '
         'txtLocalidad
         '
-        Me.txtLocalidad.Location = New System.Drawing.Point(389, 252)
+        Me.txtLocalidad.Location = New System.Drawing.Point(389, 233)
         Me.txtLocalidad.Name = "txtLocalidad"
-        Me.txtLocalidad.Size = New System.Drawing.Size(219, 20)
+        Me.txtLocalidad.Size = New System.Drawing.Size(241, 20)
         Me.txtLocalidad.TabIndex = 5
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(314, 256)
+        Me.Label7.Location = New System.Drawing.Point(314, 236)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(67, 13)
         Me.Label7.TabIndex = 33
@@ -106,7 +153,7 @@ Partial Class frmPacientes
         '
         'txtNombre
         '
-        Me.txtNombre.Location = New System.Drawing.Point(389, 177)
+        Me.txtNombre.Location = New System.Drawing.Point(389, 161)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(219, 20)
         Me.txtNombre.TabIndex = 3
@@ -114,7 +161,7 @@ Partial Class frmPacientes
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(314, 181)
+        Me.Label3.Location = New System.Drawing.Point(314, 165)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(54, 13)
         Me.Label3.TabIndex = 31
@@ -123,7 +170,7 @@ Partial Class frmPacientes
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 181)
+        Me.Label1.Location = New System.Drawing.Point(6, 165)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(59, 13)
         Me.Label1.TabIndex = 30
@@ -131,14 +178,14 @@ Partial Class frmPacientes
         '
         'txtApellido
         '
-        Me.txtApellido.Location = New System.Drawing.Point(97, 177)
+        Me.txtApellido.Location = New System.Drawing.Point(97, 161)
         Me.txtApellido.Name = "txtApellido"
         Me.txtApellido.Size = New System.Drawing.Size(197, 20)
         Me.txtApellido.TabIndex = 2
         '
         'txtObSocial
         '
-        Me.txtObSocial.Location = New System.Drawing.Point(97, 252)
+        Me.txtObSocial.Location = New System.Drawing.Point(97, 233)
         Me.txtObSocial.Name = "txtObSocial"
         Me.txtObSocial.Size = New System.Drawing.Size(121, 20)
         Me.txtObSocial.TabIndex = 4
@@ -146,7 +193,7 @@ Partial Class frmPacientes
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 256)
+        Me.Label5.Location = New System.Drawing.Point(3, 230)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(78, 13)
         Me.Label5.TabIndex = 27
@@ -221,40 +268,58 @@ Partial Class frmPacientes
         Me.btnLimpiar.Text = "&LIMPIAR"
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
-        'chbBaja
+        'Label8
         '
-        Me.chbBaja.AutoSize = True
-        Me.chbBaja.Location = New System.Drawing.Point(58, 341)
-        Me.chbBaja.Name = "chbBaja"
-        Me.chbBaja.Size = New System.Drawing.Size(36, 17)
-        Me.chbBaja.TabIndex = 53
-        Me.chbBaja.Text = "SI"
-        Me.chbBaja.UseVisualStyleBackColor = True
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(6, 325)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(57, 13)
+        Me.Label8.TabIndex = 54
+        Me.Label8.Text = "SUB-MOD"
         '
-        'Label14
+        'Label9
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(11, 322)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(116, 13)
-        Me.Label14.TabIndex = 52
-        Me.Label14.Text = "DESEA DAR DE BAJA"
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(6, 282)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(54, 13)
+        Me.Label9.TabIndex = 55
+        Me.Label9.Text = "MODULO"
         '
-        'dtBaja
+        'Label10
         '
-        Me.dtBaja.Location = New System.Drawing.Point(317, 336)
-        Me.dtBaja.Name = "dtBaja"
-        Me.dtBaja.Size = New System.Drawing.Size(200, 20)
-        Me.dtBaja.TabIndex = 51
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(6, 373)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(84, 13)
+        Me.Label10.TabIndex = 56
+        Me.Label10.Text = "OBSERVACION"
         '
-        'Label13
+        'txtObservacionPac
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(203, 341)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(89, 13)
-        Me.Label13.TabIndex = 50
-        Me.Label13.Text = "FECHA DE BAJA"
+        Me.txtObservacionPac.Location = New System.Drawing.Point(97, 370)
+        Me.txtObservacionPac.Multiline = True
+        Me.txtObservacionPac.Name = "txtObservacionPac"
+        Me.txtObservacionPac.Size = New System.Drawing.Size(526, 44)
+        Me.txtObservacionPac.TabIndex = 8
+        '
+        'cbModulo
+        '
+        Me.cbModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbModulo.FormattingEnabled = True
+        Me.cbModulo.Location = New System.Drawing.Point(97, 282)
+        Me.cbModulo.Name = "cbModulo"
+        Me.cbModulo.Size = New System.Drawing.Size(346, 21)
+        Me.cbModulo.TabIndex = 6
+        '
+        'cbSubModulo
+        '
+        Me.cbSubModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSubModulo.FormattingEnabled = True
+        Me.cbSubModulo.Location = New System.Drawing.Point(97, 325)
+        Me.cbSubModulo.Name = "cbSubModulo"
+        Me.cbSubModulo.Size = New System.Drawing.Size(346, 21)
+        Me.cbSubModulo.TabIndex = 7
         '
         'frmPacientes
         '
@@ -268,7 +333,7 @@ Partial Class frmPacientes
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.btnBuscar)
         Me.Name = "frmPacientes"
-        Me.Text = "frmPacientes"
+        Me.Text = "Administrar Pacientes"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -297,4 +362,10 @@ Partial Class frmPacientes
     Friend WithEvents Label14 As Label
     Friend WithEvents dtBaja As DateTimePicker
     Friend WithEvents Label13 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents txtObservacionPac As TextBox
+    Friend WithEvents cbModulo As ComboBox
+    Friend WithEvents cbSubModulo As ComboBox
 End Class

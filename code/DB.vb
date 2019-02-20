@@ -393,9 +393,9 @@ Public Class DB
 
     Friend Sub insertar(_paciente As Paciente)
 
-        Dim query = String.Format("INSERT INTO PACIENTES (AFILIADO, DNI, NOMBRE, APELLIDO, LOCALIDAD, OBRA_SOCIAL, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
-                        VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', #{8}#, #{9}#)",
-                                  _paciente.afiliado, _paciente.dni, _paciente.nombre, _paciente.apellido, _paciente.localidad, _paciente.obrasocial, _paciente.creoUser, _paciente.modifUser, _paciente.fechaCarga.ToShortDateString, _paciente.fechaMod.ToShortDateString)
+        Dim query = String.Format("INSERT INTO PACIENTES (AFILIADO, DNI, NOMBRE, APELLIDO, LOCALIDAD, OBRA_SOCIAL, OBSERVACION, MODULO, SUBMOD, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
+                        VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}','{10}',#{11}#, #{12}#)",
+                                  _paciente.afiliado, _paciente.dni, _paciente.nombre, _paciente.apellido, _paciente.localidad, _paciente.obrasocial, _paciente.observaciones, _paciente.modulo, _paciente.subModulo, _paciente.creoUser, _paciente.modifUser, _paciente.fechaCarga.ToShortDateString, _paciente.fechaMod.ToShortDateString)
 
 
         cmd.CommandType = CommandType.Text
@@ -602,11 +602,11 @@ Public Class DB
         System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
 
         If _paciente.fechaBaja = Date.MinValue Then
-            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION='{6}' WHERE AFILIADO='{7}'",
-                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.modifUser, _paciente.fechaMod, _paciente.afiliado)
+            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}',  OBSERVACION='{5}', MODULO='{6}', SUBMOD='{7}', MODIFICO_USUARIO='{8}', FECHA_MODIFICACION='{9}' WHERE AFILIADO='{10}'",
+                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.observaciones, _paciente.modulo, _paciente.subModulo, _paciente.modifUser, _paciente.fechaMod, _paciente.afiliado)
         Else
-            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION='{6}', FECHA_BAJA=#{7}# WHERE AFILIADO='{8}'",
-                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.modifUser, _paciente.fechaMod, _paciente.fechaBaja.ToShortDateString, _paciente.afiliado)
+            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}',  OBSERVACION='{5}', MODULO='{6}', SUBMOD='{7}', MODIFICO_USUARIO='{8}', FECHA_MODIFICACION='{9}', FECHA_BAJA=#{10}# WHERE AFILIADO='{11}'",
+                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.observaciones, _paciente.modulo, _paciente.subModulo, _paciente.modifUser, _paciente.fechaMod, _paciente.fechaBaja.ToShortDateString, _paciente.afiliado)
         End If
 
         cmd.CommandType = CommandType.Text

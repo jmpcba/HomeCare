@@ -55,7 +55,7 @@ Partial Class frmPracticas
         Me.txtEspecialidad = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.txtObservaciones = New System.Windows.Forms.TextBox()
+        Me.txtObservacionPac = New System.Windows.Forms.TextBox()
         Me.cbSubModulo = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.cbModulo = New System.Windows.Forms.ComboBox()
@@ -80,6 +80,11 @@ Partial Class frmPracticas
         Me.VerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PracticasPacienteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PracticasPrestadorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.txtObservacionPre = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.txtObservaciones = New System.Windows.Forms.TextBox()
+        Me.Label26 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -125,7 +130,7 @@ Partial Class frmPracticas
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(147, 48)
+        Me.Label3.Location = New System.Drawing.Point(120, 42)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(256, 13)
         Me.Label3.TabIndex = 7
@@ -134,7 +139,7 @@ Partial Class frmPracticas
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(3, 111)
+        Me.Label4.Location = New System.Drawing.Point(4, 176)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(32, 13)
         Me.Label4.TabIndex = 9
@@ -143,7 +148,7 @@ Partial Class frmPracticas
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(214, 111)
+        Me.Label5.Location = New System.Drawing.Point(215, 176)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(67, 13)
         Me.Label5.TabIndex = 10
@@ -151,7 +156,7 @@ Partial Class frmPracticas
         '
         'txtMat
         '
-        Me.txtMat.Location = New System.Drawing.Point(87, 107)
+        Me.txtMat.Location = New System.Drawing.Point(88, 172)
         Me.txtMat.Name = "txtMat"
         Me.txtMat.ReadOnly = True
         Me.txtMat.Size = New System.Drawing.Size(121, 20)
@@ -159,7 +164,7 @@ Partial Class frmPracticas
         '
         'txtLocalidadPrest
         '
-        Me.txtLocalidadPrest.Location = New System.Drawing.Point(304, 107)
+        Me.txtLocalidadPrest.Location = New System.Drawing.Point(305, 172)
         Me.txtLocalidadPrest.Name = "txtLocalidadPrest"
         Me.txtLocalidadPrest.ReadOnly = True
         Me.txtLocalidadPrest.Size = New System.Drawing.Size(239, 20)
@@ -206,7 +211,7 @@ Partial Class frmPracticas
         '
         'txtBeneficio
         '
-        Me.txtBeneficio.Location = New System.Drawing.Point(338, 74)
+        Me.txtBeneficio.Location = New System.Drawing.Point(338, 131)
         Me.txtBeneficio.Name = "txtBeneficio"
         Me.txtBeneficio.ReadOnly = True
         Me.txtBeneficio.Size = New System.Drawing.Size(149, 20)
@@ -214,7 +219,7 @@ Partial Class frmPracticas
         '
         'txtAfiliado
         '
-        Me.txtAfiliado.Location = New System.Drawing.Point(127, 74)
+        Me.txtAfiliado.Location = New System.Drawing.Point(130, 154)
         Me.txtAfiliado.Name = "txtAfiliado"
         Me.txtAfiliado.ReadOnly = True
         Me.txtAfiliado.Size = New System.Drawing.Size(121, 20)
@@ -223,7 +228,7 @@ Partial Class frmPracticas
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(254, 78)
+        Me.Label9.Location = New System.Drawing.Point(257, 158)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(78, 13)
         Me.Label9.TabIndex = 24
@@ -232,7 +237,7 @@ Partial Class frmPracticas
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(3, 81)
+        Me.Label10.Location = New System.Drawing.Point(6, 161)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(70, 13)
         Me.Label10.TabIndex = 23
@@ -260,8 +265,10 @@ Partial Class frmPracticas
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.Label25)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.Label23)
+        Me.Panel1.Controls.Add(Me.txtObservacionPac)
         Me.Panel1.Controls.Add(Me.txtLocalidadPac)
         Me.Panel1.Controls.Add(Me.lblPaciente)
         Me.Panel1.Controls.Add(Me.Label10)
@@ -272,13 +279,13 @@ Partial Class frmPracticas
         Me.Panel1.Controls.Add(Me.Label9)
         Me.Panel1.Location = New System.Drawing.Point(12, 23)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(556, 135)
+        Me.Panel1.Size = New System.Drawing.Size(556, 225)
         Me.Panel1.TabIndex = 27
         '
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(3, 114)
+        Me.Label23.Location = New System.Drawing.Point(6, 194)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(67, 13)
         Me.Label23.TabIndex = 29
@@ -286,7 +293,7 @@ Partial Class frmPracticas
         '
         'txtLocalidadPac
         '
-        Me.txtLocalidadPac.Location = New System.Drawing.Point(127, 107)
+        Me.txtLocalidadPac.Location = New System.Drawing.Point(130, 187)
         Me.txtLocalidadPac.Name = "txtLocalidadPac"
         Me.txtLocalidadPac.ReadOnly = True
         Me.txtLocalidadPac.Size = New System.Drawing.Size(121, 20)
@@ -304,6 +311,8 @@ Partial Class frmPracticas
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.Label17)
+        Me.Panel2.Controls.Add(Me.txtObservacionPre)
         Me.Panel2.Controls.Add(Me.Label22)
         Me.Panel2.Controls.Add(Me.txtOS)
         Me.Panel2.Controls.Add(Me.lblMed)
@@ -318,15 +327,15 @@ Partial Class frmPracticas
         Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.txtMat)
         Me.Panel2.Controls.Add(Me.txtLocalidadPrest)
-        Me.Panel2.Location = New System.Drawing.Point(12, 164)
+        Me.Panel2.Location = New System.Drawing.Point(12, 254)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(556, 207)
+        Me.Panel2.Size = New System.Drawing.Size(556, 265)
         Me.Panel2.TabIndex = 28
         '
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(3, 174)
+        Me.Label22.Location = New System.Drawing.Point(4, 239)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(78, 13)
         Me.Label22.TabIndex = 29
@@ -334,7 +343,7 @@ Partial Class frmPracticas
         '
         'txtOS
         '
-        Me.txtOS.Location = New System.Drawing.Point(87, 171)
+        Me.txtOS.Location = New System.Drawing.Point(88, 236)
         Me.txtOS.Name = "txtOS"
         Me.txtOS.ReadOnly = True
         Me.txtOS.Size = New System.Drawing.Size(121, 20)
@@ -352,7 +361,7 @@ Partial Class frmPracticas
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(3, 140)
+        Me.Label7.Location = New System.Drawing.Point(4, 205)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(57, 13)
         Me.Label7.TabIndex = 15
@@ -360,7 +369,7 @@ Partial Class frmPracticas
         '
         'txtServicio
         '
-        Me.txtServicio.Location = New System.Drawing.Point(87, 136)
+        Me.txtServicio.Location = New System.Drawing.Point(88, 201)
         Me.txtServicio.Name = "txtServicio"
         Me.txtServicio.ReadOnly = True
         Me.txtServicio.Size = New System.Drawing.Size(121, 20)
@@ -371,7 +380,7 @@ Partial Class frmPracticas
         Me.cbMedico.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
         Me.cbMedico.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbMedico.FormattingEnabled = True
-        Me.cbMedico.Location = New System.Drawing.Point(7, 70)
+        Me.cbMedico.Location = New System.Drawing.Point(7, 64)
         Me.cbMedico.Name = "cbMedico"
         Me.cbMedico.Size = New System.Drawing.Size(536, 21)
         Me.cbMedico.TabIndex = 1
@@ -379,7 +388,7 @@ Partial Class frmPracticas
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(214, 140)
+        Me.Label16.Location = New System.Drawing.Point(215, 205)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(84, 13)
         Me.Label16.TabIndex = 14
@@ -387,7 +396,7 @@ Partial Class frmPracticas
         '
         'txtEspecialidad
         '
-        Me.txtEspecialidad.Location = New System.Drawing.Point(304, 136)
+        Me.txtEspecialidad.Location = New System.Drawing.Point(305, 201)
         Me.txtEspecialidad.Name = "txtEspecialidad"
         Me.txtEspecialidad.ReadOnly = True
         Me.txtEspecialidad.Size = New System.Drawing.Size(239, 20)
@@ -398,8 +407,8 @@ Partial Class frmPracticas
         Me.Panel3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.Label15)
         Me.Panel3.Controls.Add(Me.txtObservaciones)
+        Me.Panel3.Controls.Add(Me.Label26)
         Me.Panel3.Controls.Add(Me.cbSubModulo)
         Me.Panel3.Controls.Add(Me.Label13)
         Me.Panel3.Controls.Add(Me.cbModulo)
@@ -407,27 +416,27 @@ Partial Class frmPracticas
         Me.Panel3.Controls.Add(Me.Label6)
         Me.Panel3.Controls.Add(Me.Label8)
         Me.Panel3.Controls.Add(Me.DTFecha)
-        Me.Panel3.Location = New System.Drawing.Point(12, 377)
+        Me.Panel3.Location = New System.Drawing.Point(12, 525)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(556, 319)
+        Me.Panel3.Size = New System.Drawing.Size(556, 187)
         Me.Panel3.TabIndex = 29
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(4, 144)
+        Me.Label15.Location = New System.Drawing.Point(-94, 235)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(98, 13)
         Me.Label15.TabIndex = 24
         Me.Label15.Text = "OBSERVACIONES"
         '
-        'txtObservaciones
+        'txtObservacionPac
         '
-        Me.txtObservaciones.Location = New System.Drawing.Point(34, 160)
-        Me.txtObservaciones.Multiline = True
-        Me.txtObservaciones.Name = "txtObservaciones"
-        Me.txtObservaciones.Size = New System.Drawing.Size(413, 117)
-        Me.txtObservaciones.TabIndex = 6
+        Me.txtObservacionPac.Location = New System.Drawing.Point(7, 104)
+        Me.txtObservacionPac.Multiline = True
+        Me.txtObservacionPac.Name = "txtObservacionPac"
+        Me.txtObservacionPac.Size = New System.Drawing.Size(526, 44)
+        Me.txtObservacionPac.TabIndex = 6
         '
         'cbSubModulo
         '
@@ -479,7 +488,7 @@ Partial Class frmPracticas
         Me.dgFechas.Name = "dgFechas"
         Me.dgFechas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.dgFechas.Size = New System.Drawing.Size(445, 647)
-        Me.dgFechas.TabIndex = 6
+        Me.dgFechas.TabIndex = 0
         '
         'btnLimpiarGrilla
         '
@@ -541,6 +550,7 @@ Partial Class frmPracticas
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.Label15)
         Me.Panel4.Controls.Add(Me.lblPrecioDif)
         Me.Panel4.Controls.Add(Me.Label24)
         Me.Panel4.Controls.Add(Me.lblPrecioLaV)
@@ -688,6 +698,49 @@ Partial Class frmPracticas
         Me.PracticasPrestadorToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.PracticasPrestadorToolStripMenuItem.Text = "Practicas pr&estador"
         '
+        'txtObservacionPre
+        '
+        Me.txtObservacionPre.Location = New System.Drawing.Point(19, 112)
+        Me.txtObservacionPre.Multiline = True
+        Me.txtObservacionPre.Name = "txtObservacionPre"
+        Me.txtObservacionPre.Size = New System.Drawing.Size(521, 53)
+        Me.txtObservacionPre.TabIndex = 25
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(4, 96)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(98, 13)
+        Me.Label17.TabIndex = 25
+        Me.Label17.Text = "OBSERVACIONES"
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(7, 88)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(98, 13)
+        Me.Label25.TabIndex = 31
+        Me.Label25.Text = "OBSERVACIONES"
+        '
+        'txtObservaciones
+        '
+        Me.txtObservaciones.Location = New System.Drawing.Point(111, 131)
+        Me.txtObservaciones.Multiline = True
+        Me.txtObservaciones.Name = "txtObservaciones"
+        Me.txtObservaciones.Size = New System.Drawing.Size(422, 43)
+        Me.txtObservaciones.TabIndex = 31
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(7, 129)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(98, 13)
+        Me.Label26.TabIndex = 31
+        Me.Label26.Text = "OBSERVACIONES"
+        '
         'frmPracticas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -745,7 +798,7 @@ Partial Class frmPracticas
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label15 As Label
-    Friend WithEvents txtObservaciones As TextBox
+    Friend WithEvents txtObservacionPac As TextBox
     Friend WithEvents dgFechas As DataGridView
     Friend WithEvents btnLimpiarGrilla As Button
     Friend WithEvents Label18 As Label
@@ -777,4 +830,9 @@ Partial Class frmPracticas
     Friend WithEvents VerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PracticasPacienteToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PracticasPrestadorToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label25 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents txtObservacionPre As TextBox
+    Friend WithEvents txtObservaciones As TextBox
+    Friend WithEvents Label26 As Label
 End Class

@@ -41,7 +41,8 @@ Public Class frmPracticas
             txtEspecialidad.Text = ""
             txtLocalidadPrest.Text = ""
             txtMat.Text = ""
-            txtObservaciones.Text = ""
+            txtObservacionPac.Text = ""
+            txtObservacionPre.Text = ""
             lblHoras.Text = ""
             lblMonto.Text = ""
             lblPaciente.Text = ""
@@ -117,6 +118,8 @@ Public Class frmPracticas
                 If ut.validarLiquidacion(cbMedico.SelectedValue, DTFecha.Value) Then
                     Throw New Exception("LIQUIDACION CERRADA PARA ESTE PRESTADOR - MES")
                 Else
+                    Dim obsPac = txtObservacionPac.Text
+                    Dim obsPre = txtObservacionPre.Text
                     Dim obs = txtObservaciones.Text
                     For Each r As DataGridViewRow In dgFechas.Rows
 
@@ -149,7 +152,7 @@ Public Class frmPracticas
                                 horasFer = 0
                             End If
 
-                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horasLaV, horasFer, horasDif, obs, r.Index)
+                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horasLaV, horasFer, horasDif, obs, obsPre, obsPac, r.Index)
 
                             practicas.Add(practica)
                             r.DefaultCellStyle.BackColor = Color.LightGreen
@@ -414,7 +417,8 @@ Public Class frmPracticas
         txtLocalidadPrest.Text = ""
         txtMat.Text = ""
         txtServicio.Text = ""
-        txtObservaciones.Text = ""
+        txtObservacionPac.Text = ""
+        txtObservacionPre.Text = ""
         lblHoras.Text = ""
         lblMonto.Text = ""
         txtLocalidadPac.Text = ""

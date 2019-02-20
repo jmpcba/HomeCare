@@ -8,6 +8,9 @@
     Private _apellido As String
     Private _localidad As String
     Private _obraSocial As String
+    Private _observaciones As String
+    Private _modulo As String
+    Private _subModulo As String
     Private _fechaBaja As Date
     Private _creoUser As String
     Private _modifUser As String
@@ -37,13 +40,16 @@
         End Try
     End Sub
 
-    Public Sub New(_afiliado As String, _dni As String, _nombre As String, _apellido As String, _obrasocial As String, _localidad As String, _fechaBaja As Date)
+    Public Sub New(_afiliado As String, _dni As String, _nombre As String, _apellido As String, _obrasocial As String, _localidad As String, _observaciones As String, _modulo As String, _subModulo As String, _fechaBaja As Date)
         Me._dni = _dni
         Me._afiliado = _afiliado
         Me._nombre = _nombre
         Me._apellido = _apellido
         Me._obraSocial = _obrasocial
         Me._localidad = _localidad
+        Me._observaciones = _observaciones
+        Me._subModulo = _subModulo
+        Me.modulo = _modulo
         Me._fechaBaja = _fechaBaja
         Me._modifUser = My.Settings.dni
         Me._creoUser = My.Settings.dni
@@ -81,6 +87,21 @@
                 _localidad = r(0)("localidad")
                 If Not IsDBNull(r(0)("fecha_baja")) Then
                     _fechaBaja = r(0)("fecha_baja")
+                End If
+                If IsDBNull(r(0)("observaciones")) Then
+                    _observaciones = ""
+                Else
+                    _observaciones = r(0)("observaciones")
+                End If
+                If IsDBNull(r(0)("modulo")) Then
+                    _modulo = ""
+                Else
+                    _modulo = r(0)("modulo")
+                End If
+                If IsDBNull(r(0)("subModulo")) Then
+                    _subModulo = ""
+                Else
+                    _subModulo = r(0)("subModulo")
                 End If
             Else
                 Throw New Exception("Codigo Inexistente")
@@ -130,7 +151,36 @@
         Get
             Return _localidad
         End Get
+    End Property
 
+    Public Property observaciones As String
+        Set(value As String)
+            _observaciones = value
+            _modificado = True
+        End Set
+        Get
+            Return _observaciones
+        End Get
+    End Property
+
+    Public Property modulo As String
+        Set(value As String)
+            _modulo = value
+            _modificado = True
+        End Set
+        Get
+            Return _modulo
+        End Get
+    End Property
+
+    Public Property subModulo As String
+        Set(value As String)
+            _subModulo = value
+            _modificado = True
+        End Set
+        Get
+            Return _subModulo
+        End Get
     End Property
 
     Public Property fechaBaja As Date

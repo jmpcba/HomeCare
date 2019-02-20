@@ -11,6 +11,8 @@ Public Class Practica
     Public fecha As Date
     Public fecha_registrado As Date
     Public observaciones As String
+    Public observacionPre As String
+    Public observacionPac As String
     Public creoUser As Integer
     Public modifUser As Integer
     Public fechaCarga As Date
@@ -23,7 +25,7 @@ Public Class Practica
     End Sub
 
 
-    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horasLaV As Decimal, _horasFer As Decimal, _horasDif As Decimal, _observaciones As String, _fila As Integer)
+    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horasLaV As Decimal, _horasFer As Decimal, _horasDif As Decimal, _observacionPre As String, _observacionPac As String, _observaciones As String, _fila As Integer)
 
         prestador = _prestador
         paciente = _paciente
@@ -32,6 +34,8 @@ Public Class Practica
         fecha = _fecha
         fecha_registrado = Date.Today.Date
         observaciones = _observaciones
+        observacionPac = _observacionPac
+        observacionPre = _observacionPre
         hsSemana = _horasLaV
         hsFeriado = _horasFer
         hsDif = _horasDif
@@ -45,6 +49,8 @@ Public Class Practica
     Public Sub insertar()
         Try
             observaciones = observaciones.Replace("'", " ")
+            observacionPac = observacionPac.Replace("'", " ")
+            observacionPre = observacionPre.Replace("'", " ")
             Dim db = New DB()
             db.insertar(Me)
 

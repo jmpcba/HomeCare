@@ -1,8 +1,11 @@
 ﻿Public Class frmPacientes
     Dim pac As Paciente
+    Dim modu As Modulo
+    Dim subModu As subModulo
     Dim ut As New utils
     Dim txtBoxes As TextBox()
     Dim txtBoxesDA As TextBox()
+    Dim carga As Boolean
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         If IsNothing(pac) Then
@@ -14,8 +17,16 @@
                 Else
                     ut.validarLargo(numAfiliado, 8)
                 End If
-                ut.validarLargo(numAfiliado, 12)
-                pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim, dtBaja.Text.Trim)
+                If cbModulo.SelectedIndex = -1 Then
+                    ut.mensaje("SELECCIONE UN MODULO", utils.mensajes.err)
+                    cbModulo.Focus()
+                End If
+                If cbSubModulo.SelectedIndex = -1 Then
+                    ut.mensaje("SELECCIONE UN SUB-MODULO", utils.mensajes.err)
+                    cbSubModulo.Focus()
+                End If
+                '  ut.validarLargo(numAfiliado, 12)
+                pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim, txtObservacionPac.Text.Trim, cbModulo.Text.Trim, cbSubModulo.Text.Trim, dtBaja.Text.Trim)
                 pac.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
@@ -89,6 +100,8 @@
         ut.iniciarTxtBoxes(txtBoxes)
         txtObSocial.Text = "PAMI"
         txtLocalidad.Text = "CORDOBA"
+        cbModulo.SelectedIndex = -1
+        cbSubModulo.SelectedIndex = -1
         numAfiliado.ReadOnly = False
         chbBaja.Enabled = False
         chbBaja.Checked = False
@@ -120,9 +133,28 @@
     End Sub
 
     Private Sub frmPacientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtBoxes = {numAfiliado, numDni, txtApellido, txtNombre, txtObSocial, txtLocalidad}
+        carga = True
+        txtBoxes = {numAfiliado, numDni, txtApellido, txtNombre, txtObSocial, txtLocalidad, txtObservacionPac}
         iniciarControles()
+        modu.llenarcombo(cbModulo)
+        subModu.llenarcombo(cbSubModulo)
         dtBaja.Enabled = False
+    End Sub
+
+    Private Sub cbModulo_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbModulo.SelectedIndexChanged
+        If Not carga Then
+            If cbModulo.SelectedIndex <> -1 Then
+                pac.afiliado = cbModulo.SelectedValue
+            End If
+        End If
+    End Sub
+
+    Private Sub cbSubModulo_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbSubModulo.SelectedIndexChanged
+        If Not carga Then
+            If cbSubModulo.SelectedIndex <> -1 Then
+                subModu.codigo = cbSubModulo.SelectedValue
+            End If
+        End If
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
