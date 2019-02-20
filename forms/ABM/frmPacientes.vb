@@ -1,7 +1,7 @@
 ﻿Public Class frmPacientes
     Dim pac As Paciente
-    Dim modu As Modulo
-    Dim subModu As subModulo
+    Dim modu As New Modulo
+    Dim subModu As New subModulo
     Dim ut As New utils
     Dim txtBoxes As TextBox()
     Dim txtBoxesDA As TextBox()
@@ -44,7 +44,7 @@
             Try
                 ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(numDni, 8)
-                If txtObSocial.Text = "PAMI" Then
+                If txtObSocial.Text.Trim.ToUpper = "PAMI" Then
                     ut.validarLargo(numAfiliado, 12)
                 Else
                     ut.validarLargo(numAfiliado, 8)
@@ -73,6 +73,15 @@
                 If numDni.Text.Trim <> pac.dni Then
                     pac.dni = numDni.Text.Trim
                 End If
+
+                If cbModulo.SelectedValue <> pac.modulo Then
+                    pac.modulo = cbModulo.SelectedValue
+                End If
+
+                If cbSubModulo.SelectedValue <> pac.subModulo Then
+                    pac.subModulo = cbSubModulo.SelectedValue
+                End If
+
                 If chbBaja.Checked Then
                     If dtBaja.Value.ToShortDateString <> pac.fechaBaja Then
                         pac.fechaBaja = dtBaja.Text
@@ -170,6 +179,9 @@
         txtObSocial.Text = _paciente.obrasocial
         txtLocalidad.Text = _paciente.localidad
         dtBaja.Text = _paciente.fechaBaja
+        txtObservacionPac.Text = _paciente.observaciones
+        cbModulo.SelectedValue = _paciente.modulo
+        cbSubModulo.SelectedValue = _paciente.subModulo
 
         If _paciente.fechaBaja <> Date.MinValue Then
             chbBaja.Checked = True

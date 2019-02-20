@@ -3,11 +3,10 @@ Imports System.Configuration
 Imports System.Collections.Specialized
 
 Public Class frmPracticas
-    Dim pac As Paciente
-    Dim med As Prestador
-    ' Dim prest As Prestacion
-    Dim modu As Modulo
-    Dim subModu As subModulo
+    Dim pac As New Paciente
+    Dim med As New Prestador
+    Dim modu As New Modulo
+    Dim subModu As New subModulo
     Dim index As Integer
     Dim edicion As Boolean = False
     Dim sel As Boolean = False
@@ -25,11 +24,6 @@ Public Class frmPracticas
             DTFecha.Value = DateTime.Today.AddMonths(-1)
             DTFecha.CustomFormat = "MMMM - yyyy"
             lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
-
-            pac = New Paciente()
-            med = New Prestador()
-            subModu = New subModulo
-            modu = New Modulo()
 
             pac.llenarcombo(cbPaciente)
             med.llenarcombo(cbMedico)
@@ -60,8 +54,6 @@ Public Class frmPracticas
         Finally
             carga = False
         End Try
-
-
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
@@ -77,6 +69,9 @@ Public Class frmPracticas
                     txtAfiliado.Text = pac.afiliado
                     txtBeneficio.Text = pac.obrasocial
                     txtLocalidadPac.Text = pac.localidad
+                    txtObservacionPac.Text = pac.observaciones
+                    cbModulo.SelectedValue = pac.modulo
+                    cbSubModulo.SelectedValue = pac.subModulo
                     PracticasPacienteToolStripMenuItem.Enabled = True
 
                 Catch ex As Exception
@@ -121,6 +116,7 @@ Public Class frmPracticas
                     Dim obsPac = txtObservacionPac.Text
                     Dim obsPre = txtObservacionPre.Text
                     Dim obs = txtObservaciones.Text
+
                     For Each r As DataGridViewRow In dgFechas.Rows
 
                         Dim horas As Integer
@@ -184,6 +180,38 @@ Public Class frmPracticas
                     Else
                         ut.mensaje("No se cargaron horas para ningun dia", utils.mensajes.err)
                     End If
+
+                    'ACTUALIZAR PACIENTE PRESTADOR
+                    If cbModulo.SelectedValue <> pac.modulo Then
+                        pac.modulo = cbModulo.SelectedValue
+                    End If
+
+                    If cbSubModulo.SelectedValue <> pac.subModulo Then
+                        pac.subModulo = cbSubModulo.SelectedValue
+                    End If
+
+                    If txtObservacionPac.Text <> pac.observaciones Then
+                        pac.observaciones = txtObservacionPac.Text
+                    End If
+
+                    If txtObservacionPre.Text.Trim <> med.observaciones Then
+                        med.observaciones = txtObservacionPre.Text.Trim
+                    End If
+
+                    Try
+                        If med.modificado Then
+                            med.actualizar()
+                            med.refrescar()
+                        End If
+
+                        If pac.modificado Then
+                            pac.actualizar()
+                            pac.refrescar()
+                        End If
+                    Catch ex As Exception
+                        Dim msg = "OCURRIO EL SIGUIENTE ERROR ACTUALIZANDO LOS DATOS DEL PACIENTE/PRESTADOR" & vbCrLf & "SE CONTINUARA CON LA CARGA DE PRACTICAS" & vbCrLf & ex.Message
+                        ut.mensaje(msg, utils.mensajes.err)
+                    End Try
                 End If
             End If
 
@@ -456,6 +484,7 @@ Public Class frmPracticas
                     txtOS.Text = med.obraSocial
                     lblPrecioDif.Text = med.montoDiferencial.ToString("F")
                     PracticasPrestadorToolStripMenuItem.Enabled = True
+                    txtObservacionPre.Text = med.observaciones
                 Catch ex As Exception
                     ut.mensaje(ex.Message, utils.mensajes.err)
                 End Try

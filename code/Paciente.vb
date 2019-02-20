@@ -19,8 +19,16 @@
     Private _modificado = False
 
     Public Sub New()
-        Dim db = New DB()
         Try
+            getPacientes()
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+    Private Sub getPacientes()
+        Try
+            Dim db = New DB()
             _pacientes = db.getTable(DB.tablas.pacientes)
             _pacientes.Columns.Add("COMBO")
 
@@ -32,9 +40,7 @@
 
                 r("COMBO") = String.Format("{0} {1}", ape, nom)
             Next
-
             _pacientes.DefaultView.Sort = "COMBO"
-
         Catch ex As Exception
             Throw
         End Try
@@ -88,20 +94,22 @@
                 If Not IsDBNull(r(0)("fecha_baja")) Then
                     _fechaBaja = r(0)("fecha_baja")
                 End If
-                If IsDBNull(r(0)("observaciones")) Then
+                If IsDBNull(r(0)("observacion")) Then
                     _observaciones = ""
                 Else
-                    _observaciones = r(0)("observaciones")
+                    _observaciones = r(0)("observacion")
                 End If
+
                 If IsDBNull(r(0)("modulo")) Then
                     _modulo = ""
                 Else
                     _modulo = r(0)("modulo")
                 End If
-                If IsDBNull(r(0)("subModulo")) Then
+
+                If IsDBNull(r(0)("subMod")) Then
                     _subModulo = ""
                 Else
-                    _subModulo = r(0)("subModulo")
+                    _subModulo = r(0)("subMod")
                 End If
             Else
                 Throw New Exception("Codigo Inexistente")
@@ -220,6 +228,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property modificado As Boolean
+        Get
+            Return _modificado
+        End Get
+    End Property
+
     Public Sub insertar()
         Try
             Dim db = New DB
@@ -263,5 +277,13 @@
         _combo.DisplayMember = "combo"
         _combo.ValueMember = "afiliado"
         _combo.SelectedIndex = -1
+    End Sub
+
+    Public Sub refrescar()
+        Try
+            getPacientes()
+        Catch ex As Exception
+            Throw
+        End Try
     End Sub
 End Class
