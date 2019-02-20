@@ -29,7 +29,8 @@ Public Class DB
         detalle
         medico
         paciente
-        liquidacionCerrada
+        cerrada
+        anual
     End Enum
 
     Sub New()
@@ -42,20 +43,6 @@ Public Class DB
         ds = New DataSet()
         cmd.Connection = cnn
     End Sub
-
-    Friend Function getVisitas(fec As Date) As DataTable
-        Dim query = "SELECT * FROM VISITAS WHERE  FECHA > " & fec.ToShortDateString
-
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
-
-        Try
-            da.Fill(ds, "RESULTADO")
-            Return ds.Tables("RESULTADO")
-        Catch ex As Exception
-            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
-        End Try
-    End Function
 
     Friend Sub InsertarFeriado(_fecha As Date, _desc As String)
         Try
@@ -146,11 +133,17 @@ Public Class DB
                                 WHERE (((PRACTICAS.FECHA_PRACTICA) Between #{0}# And #{1}#))
                                 GROUP BY PACIENTES.AFILIADO, PACIENTES.APELLIDO, PACIENTES.NOMBRE", desde, hasta)
 
-        ElseIf _liq = tiposLiquidacion.liquidacionCerrada Then
+        ElseIf _liq = tiposLiquidacion.cerrada Then
 
             cmd.CommandText = String.Format("SELECT LIQUIDACION.ID_PREST, LIQUIDACION.CUIT, PRESTADORES.APELLIDO, PRESTADORES.NOMBRE, LIQUIDACION.LOCALIDAD, LIQUIDACION.ESPECIALIDAD, LIQUIDACION.HS_NORMALES AS [HS LUN a VIE], LIQUIDACION.HS_FERIADOS AS [HS SAB DOM Y FER], LIQUIDACION.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]+[HS_FERIADOS]+[HS_DIFERENCIAL] AS [TOTAL HORAS], LIQUIDACION.MONTO_FIJO AS [MONTO FIJO], LIQUIDACION.IMPORTE_NORMAL AS [$ LUN a VIE], LIQUIDACION.IMPORTE_FERIADO AS [$ SAB DOM y FER], LIQUIDACION.IMPORTE_DIFERENCIAL AS [$ DIF], [$ DIF]+[$ LUN a VIE]+[$ SAB DOM y FER]+[MONTO FIJO] AS [$ TOTAL]
                                 FROM LIQUIDACION INNER JOIN PRESTADORES ON LIQUIDACION.ID_PREST = PRESTADORES.ID
                                 WHERE (((LIQUIDACION.MES)=#{0}#))", hasta)
+
+        ElseIf _liq = tiposLiquidacion.anual Then
+            cmd.CommandText = String.Format("SELECT LIQUIDACION.ID_PREST, LIQUIDACION.CUIT, PRESTADORES.APELLIDO, PRESTADORES.NOMBRE, LIQUIDACION.LOCALIDAD, LIQUIDACION.ESPECIALIDAD, LIQUIDACION.HS_NORMALES AS [HS LUN a VIE], LIQUIDACION.HS_FERIADOS AS [HS SAB DOM Y FER], LIQUIDACION.HS_DIFERENCIAL AS DIFERENCIAL, LIQUIDACION.MES AS MES, [HS_NORMALES]+[HS_FERIADOS]+[HS_DIFERENCIAL] AS [TOTAL HORAS], LIQUIDACION.MONTO_FIJO AS [MONTO FIJO], LIQUIDACION.IMPORTE_NORMAL AS [$ LUN a VIE], LIQUIDACION.IMPORTE_FERIADO AS [$ SAB DOM y FER], LIQUIDACION.IMPORTE_DIFERENCIAL AS [$ DIF], [$ DIF]+[$ LUN a VIE]+[$ SAB DOM y FER]+[MONTO FIJO] AS [$ TOTAL]
+                                FROM LIQUIDACION INNER JOIN PRESTADORES ON LIQUIDACION.ID_PREST = PRESTADORES.ID
+                                WHERE (((LIQUIDACION.MES)>#01/01/{0}#))", _fecha.Year)
+
         End If
 
         Try
