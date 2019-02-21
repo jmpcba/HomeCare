@@ -83,7 +83,7 @@ Partial Class frmLiquidar
         Me.gridLiqui.MultiSelect = False
         Me.gridLiqui.Name = "gridLiqui"
         Me.gridLiqui.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridLiqui.Size = New System.Drawing.Size(909, 333)
+        Me.gridLiqui.Size = New System.Drawing.Size(909, 344)
         Me.gridLiqui.TabIndex = 1
         '
         'HomeCareDataSet

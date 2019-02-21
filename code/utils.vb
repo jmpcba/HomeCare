@@ -8,6 +8,7 @@ Public Class utils
     Event progresoExportExcel()
     Private liquidaciones As DataTable
     Private cargoLiq As Boolean = False
+    Event cambioBarraDeProgreso()
 
     Public Sub New()
         feriados = New DataTable()

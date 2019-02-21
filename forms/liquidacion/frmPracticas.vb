@@ -89,7 +89,9 @@ Public Class frmPracticas
         Dim practicas As New List(Of Practica)
 
         ut = New utils
+
         Try
+            Cursor.Current = Cursors.WaitCursor
             btnGuardar.Enabled = False
             dgFechas.Columns("RESULTADO").ReadOnly = False
 
@@ -125,25 +127,31 @@ Public Class frmPracticas
                         Dim horasDif As Integer
                         Dim dia As Integer
 
-                        If IsDBNull(r.Cells("PRACTICAS-HS").Value) OrElse r.Cells("PRACTICAS-HS").Value = 0 OrElse r.Cells("PRACTICAS-HS").Value = "" Then
+                        If (IsDBNull(r.Cells("PRACTICAS-HS").Value) OrElse r.Cells("PRACTICAS-HS").Value = 0 OrElse r.Cells("PRACTICAS-HS").Value = "") And
+                           (IsDBNull(r.Cells("DIFERENCIAL-HS").Value) OrElse r.Cells("DIFERENCIAL-HS").Value = 0 OrElse r.Cells("DIFERENCIAL-HS").Value = "") Then
                             r.DefaultCellStyle.BackColor = Color.LightGray
                             Continue For
                         Else
-                            horas = r.Cells("PRACTICAS-HS").Value
                             dia = r.Cells("DIA_H").Value
 
                             Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
 
-                            If r.Cells(4).Value = "SI" Then
-                                horasDif = horas
-                                horasLaV = 0
-                                horasFer = 0
-                            ElseIf ut.esFindeOFeriado(fec) Then
+                            If IsDBNull(r.Cells("DIFERENCIAL-HS").Value) Then
                                 horasDif = 0
+                            Else
+                                horasDif = r.Cells("DIFERENCIAL-HS").Value
+                            End If
+
+                            If IsDBNull(r.Cells("PRACTICAS-HS").Value) Then
+                                horas = 0
+                            Else
+                                horas = r.Cells("PRACTICAS-HS").Value
+                            End If
+
+                            If ut.esFindeOFeriado(fec) Then
                                 horasLaV = 0
                                 horasFer = horas
                             Else
-                                horasDif = 0
                                 horasLaV = horas
                                 horasFer = 0
                             End If
@@ -218,7 +226,9 @@ Public Class frmPracticas
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
+
             btnGuardar.Enabled = True
+            Cursor.Current = Cursors.Default
 
             If carga Then
                 iniciarControles()
@@ -274,6 +284,7 @@ Public Class frmPracticas
         dt.Columns.Add("DIA")
         dt.Columns.Add("DIA_H")
         dt.Columns.Add("PRACTICAS-HS")
+        dt.Columns.Add("DIFERENCIAL-HS")
         dt.Columns.Add("RESULTADO")
 
         For i = 0 To days - 1
@@ -285,18 +296,12 @@ Public Class frmPracticas
         Next
 
         Dim chkclm As New DataGridViewCheckBoxColumn
-        Dim drpDiferencial As New DataGridViewComboBoxColumn
 
         With chkclm
             .HeaderText = ""
             .Name = ""
         End With
 
-        With drpDiferencial
-            .HeaderText = "DIFERENCIAL"
-            .Name = ""
-            .DataSource = {"SI", "NO"}
-        End With
 
         With dgFechas
             .Columns.Clear()
@@ -309,12 +314,12 @@ Public Class frmPracticas
             .Columns("RESULTADO").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
             .Columns("PRACTICAS-HS").DefaultCellStyle.Font = New Font("arial", 8)
+            .Columns("DIFERENCIAL-HS").DefaultCellStyle.Font = New Font("arial", 8)
 
             .Columns("DIA").ReadOnly = True
             .Columns("RESULTADO").ReadOnly = True
 
             .Columns.Insert(0, chkclm)
-            .Columns.Insert(.ColumnCount - 1, drpDiferencial)
 
             .AutoResizeColumns()
             .AutoResizeRows()
@@ -337,68 +342,85 @@ Public Class frmPracticas
     End Sub
 
     Private Sub calcularTotales(e As DataGridViewCellEventArgs)
-        Dim val = dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value
+        Dim val = dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
         Dim horas As Integer = 0
         Dim monto As Decimal = 0
 
         If IsNothing(med.cuit) Then
             ut.mensaje("Seleccione un Prestador", utils.mensajes.err)
-            dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
+            dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Nothing
             cbMedico.Focus()
         ElseIf IsNothing(modu.codigo) Then
             ut.mensaje("Seleccione un Modulo", utils.mensajes.err)
-            dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
+            dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Nothing
             cbModulo.Focus()
         Else
             If Not IsDBNull(val) Then
                 edicion = True
-                If Not IsNumeric(val) Then
+                If Not IsNumeric(val) And e.ColumnIndex <> 0 Then
                     ut.mensaje("Debe ingresar un valor numerico", utils.mensajes.err)
-                    dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
+                    dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Nothing
                 ElseIf val > 24 Then
                     ut.mensaje("No puede ingresar mas de 24hs en un dia", utils.mensajes.err)
-                    dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
+                    dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Nothing
+                End If
+            End If
+
+            If Not IsDBNull(dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value) Then
+                If dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value <> 0 Then
+                    If e.ColumnIndex = 3 Then
+                        dgFechas.Rows(e.RowIndex).Cells(4).Value = Nothing
+                    ElseIf e.ColumnIndex = 4 Then
+                        dgFechas.Rows(e.RowIndex).Cells(3).Value = Nothing
+                    End If
                 End If
             End If
 
             'SI SE MODIFICO LA COLUMNA HORAS (ES 3 PORQUE hay una columna oculta)
             If e.ColumnIndex = 3 Or e.ColumnIndex = 4 Then
+
                 For Each r As DataGridViewRow In dgFechas.Rows
 
                     If r.Cells(0).Value = True Then
-                        r.Cells("PRACTICAS-HS").Value = val
+                        r.Cells(e.ColumnIndex).Value = val
                         r.Cells(0).Value = False
+
+                        If e.ColumnIndex = 3 Then
+                            dgFechas.Rows(r.Index).Cells(4).Value = Nothing
+                        ElseIf e.ColumnIndex = 4 Then
+                            dgFechas.Rows(r.Index).Cells(3).Value = Nothing
+                        End If
                     End If
 
-                    If IsDBNull(r.Cells("PRACTICAS-HS").Value) OrElse r.Cells("PRACTICAS-HS").Value = 0 OrElse r.Cells("PRACTICAS-HS").Value = "" Then
+
+                    If (IsDBNull(r.Cells(3).Value) OrElse r.Cells(3).Value = 0 OrElse r.Cells(3).Value = "") And
+                            (IsDBNull(r.Cells(4).Value) OrElse r.Cells(4).Value = 0 OrElse r.Cells(4).Value = "") Then
                         Continue For
                     Else
                         Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-                        Dim hs = r.Cells("PRACTICAS-HS").Value
-                        If r.Cells(4).Value = "SI" Then
+                        Dim hs As Decimal
+                        If Not IsDBNull(r.Cells(4).Value) Then
                             If med.montoDiferencial = 0 Then
                                 ut.mensaje("Este prestador no tiene cargado un monto diferencial", utils.mensajes.err)
                                 hs = 0
-                                r.Cells("PRACTICAS-HS").Value = Nothing
-                                r.Cells(4).Value = "NO"
+                                r.Cells(e.ColumnIndex).Value = Nothing
                             Else
-                                monto += med.montoDiferencial * r.Cells("PRACTICAS-HS").Value
+                                monto += med.montoDiferencial * r.Cells(4).Value
+                                hs = r.Cells(4).Value
                             End If
-                        Else
+                        ElseIf Not IsDBNull(r.Cells(3).Value) Then
+                            hs = r.Cells(3).Value
                             If ut.esFindeOFeriado(fecha) Then
                                 If med.montoFeriado = 0 Then
-                                    monto += med.montoNormal * r.Cells("PRACTICAS-HS").Value
+                                    monto += med.montoNormal * r.Cells(3).Value
                                 Else
-                                    monto += med.montoFeriado * r.Cells("PRACTICAS-HS").Value
+                                    monto += med.montoFeriado * r.Cells(3).Value
                                 End If
                             Else
-                                monto += med.montoNormal * r.Cells("PRACTICAS-HS").Value
+                                monto += med.montoNormal * r.Cells(3).Value
                             End If
                         End If
 
-                        ' If r.Cells(4).Value = "SI" Then
-                        ' monto += med.montoDiferencial * r.Cells("PRACTICAS-HS").Value
-                        'End If
                         horas += hs
                     End If
                 Next

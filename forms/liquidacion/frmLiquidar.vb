@@ -303,6 +303,13 @@
             ds.Tables.Add(dtPrestadores)
             ds.Tables.Add(dtPracticas)
 
+            With pb
+                .Minimum = 0
+                .Maximum = dtPracticas.Rows.Count + dtPrestadores.Rows.Count
+                .Visible = True
+            End With
+
+
             ut.exportarExcel(ds)
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
@@ -310,7 +317,10 @@
             pb.Visible = False
             Me.Focus()
         End Try
+    End Sub
 
+    Private Sub progressBar() Handles ut.cambioBarraDeProgreso
+        pb.Increment(1)
     End Sub
 
     Public Sub progresoStatusBar() Handles ut.progresoExportExcel
