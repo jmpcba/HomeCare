@@ -103,6 +103,14 @@ Public Class utils
         Next
     End Sub
 
+    Public Sub validarCombos(_combos As ComboBox())
+        For Each c As ComboBox In _combos
+            If c.SelectedIndex = -1 Then
+                c.Focus()
+                Throw New Exception("Seleccione un valor de la grilla")
+            End If
+        Next
+    End Sub
     Public Sub iniciarTxtBoxes(_txtboxes As TextBox())
         activarTxtBoxes(_txtboxes)
         For Each t As TextBox In _txtboxes

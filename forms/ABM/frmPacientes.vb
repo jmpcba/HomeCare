@@ -17,16 +17,10 @@
                 Else
                     ut.validarLargo(numAfiliado, 8)
                 End If
-                If cbModulo.SelectedIndex = -1 Then
-                    ut.mensaje("SELECCIONE UN MODULO", utils.mensajes.err)
-                    cbModulo.Focus()
-                End If
-                If cbSubModulo.SelectedIndex = -1 Then
-                    ut.mensaje("SELECCIONE UN SUB-MODULO", utils.mensajes.err)
-                    cbSubModulo.Focus()
-                End If
+                Dim combos = {cbModulo, cbSubModulo}
+                ut.validarCombos(combos)
                 '  ut.validarLargo(numAfiliado, 12)
-                pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim, txtObservacionPac.Text.Trim, cbModulo.Text.Trim, cbSubModulo.Text.Trim, dtBaja.Text.Trim)
+                pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim, txtObservacionPac.Text.Trim, cbModulo.SelectedValue, cbSubModulo.SelectedValue, dtBaja.Text.Trim)
                 pac.insertar()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
@@ -49,6 +43,8 @@
                 Else
                     ut.validarLargo(numAfiliado, 8)
                 End If
+                Dim combos = {cbModulo, cbSubModulo}
+                ut.validarCombos(combos)
 
                 If txtObSocial.Text.Trim <> pac.obrasocial Then
                     pac.obrasocial = txtObSocial.Text.Trim
@@ -68,6 +64,10 @@
 
                 If txtLocalidad.Text.Trim <> pac.localidad Then
                     pac.localidad = txtLocalidad.Text.Trim
+                End If
+
+                If txtObservacionPac.Text.Trim <> pac.observaciones Then
+                    pac.observaciones = txtObservacionPac.Text.Trim
                 End If
 
                 If numDni.Text.Trim <> pac.dni Then
@@ -111,6 +111,7 @@
         txtLocalidad.Text = "CORDOBA"
         cbModulo.SelectedIndex = -1
         cbSubModulo.SelectedIndex = -1
+        txtObservacionPac.Text = " "
         numAfiliado.ReadOnly = False
         chbBaja.Enabled = False
         chbBaja.Checked = False
@@ -143,7 +144,7 @@
 
     Private Sub frmPacientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         carga = True
-        txtBoxes = {numAfiliado, numDni, txtApellido, txtNombre, txtObSocial, txtLocalidad, txtObservacionPac}
+        txtBoxes = {numAfiliado, numDni, txtApellido, txtNombre, txtObSocial, txtLocalidad}
         iniciarControles()
         modu.llenarcombo(cbModulo)
         subModu.llenarcombo(cbSubModulo)
