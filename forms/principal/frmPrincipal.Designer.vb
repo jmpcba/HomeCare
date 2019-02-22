@@ -114,7 +114,7 @@ Partial Class frmPrincipal
         Me.btnNvaLiq.Name = "btnNvaLiq"
         Me.btnNvaLiq.Size = New System.Drawing.Size(260, 53)
         Me.btnNvaLiq.TabIndex = 4
-        Me.btnNvaLiq.Text = "NUEVA LIQUIDACION"
+        Me.btnNvaLiq.Text = "LIQUIDACIONES PENDIENTES"
         Me.btnNvaLiq.UseVisualStyleBackColor = True
         '
         'btnCerrar

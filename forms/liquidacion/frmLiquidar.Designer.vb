@@ -187,7 +187,7 @@ Partial Class frmLiquidar
         '
         Me.CierreLiquidacionToolStripMenuItem.Name = "CierreLiquidacionToolStripMenuItem"
         Me.CierreLiquidacionToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
-        Me.CierreLiquidacionToolStripMenuItem.Text = "Cierre Liquidacion"
+        Me.CierreLiquidacionToolStripMenuItem.Text = "&Todos"
         '
         'Label3
         '
