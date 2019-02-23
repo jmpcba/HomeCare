@@ -43,6 +43,7 @@ Partial Class frmLiquidar
         Me.txtFiltro = New System.Windows.Forms.TextBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.pb = New System.Windows.Forms.ToolStripProgressBar()
+        Me.btnReAbrir = New System.Windows.Forms.Button()
         CType(Me.gridLiqui, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -151,7 +152,7 @@ Partial Class frmLiquidar
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtObservaciones.Location = New System.Drawing.Point(507, 83)
         Me.txtObservaciones.Name = "txtObservaciones"
-        Me.txtObservaciones.Size = New System.Drawing.Size(194, 20)
+        Me.txtObservaciones.Size = New System.Drawing.Size(78, 20)
         Me.txtObservaciones.TabIndex = 113
         '
         'MenuStrip1
@@ -220,12 +221,24 @@ Partial Class frmLiquidar
         Me.pb.Size = New System.Drawing.Size(100, 16)
         Me.pb.Visible = False
         '
+        'btnReAbrir
+        '
+        Me.btnReAbrir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReAbrir.Location = New System.Drawing.Point(595, 70)
+        Me.btnReAbrir.Name = "btnReAbrir"
+        Me.btnReAbrir.Size = New System.Drawing.Size(106, 33)
+        Me.btnReAbrir.TabIndex = 118
+        Me.btnReAbrir.Text = "&REABRIR"
+        Me.btnReAbrir.UseVisualStyleBackColor = True
+        Me.btnReAbrir.Visible = False
+        '
         'frmLiquidar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(937, 501)
+        Me.Controls.Add(Me.btnReAbrir)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.txtFiltro)
         Me.Controls.Add(Me.Label3)
@@ -274,4 +287,5 @@ Partial Class frmLiquidar
     Friend WithEvents CierreLiquidacionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents pb As ToolStripProgressBar
+    Friend WithEvents btnReAbrir As Button
 End Class

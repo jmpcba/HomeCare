@@ -2,17 +2,19 @@
 Imports System.Net
 Public Class Mail
 
+    Dim liqui As Liquidacion
     Dim client As SmtpClient = New SmtpClient()
     Dim NetworkCred As NetworkCredential = New System.Net.NetworkCredential()
 
     Public Sub New()
         Dim db As New DB
-        client.EnableSsl = True
-        client.Host = "smtp.gmail.com"
-        client.Port = 587
 
-        client.UseDefaultCredentials = True
-        client.Credentials = NetworkCred
+        With client
+            .EnableSsl = True
+            .Port = 587
+            .UseDefaultCredentials = True
+            .Credentials = NetworkCred
+        End With
     End Sub
 
     Public Sub send(_liq As Liquidacion)
@@ -33,7 +35,13 @@ Public Class Mail
             mail = mail.Replace("[SERVICIO]", _liq.prestador.obraSocial)
 
             zona.idzona = _liq.prestador.zona
-            Dim mailFrom = zona.email
+            Dim mailFrom = zona.email.ToLower
+
+            If mailFrom.EndsWith("gmail.com") Then
+                client.Host = "smtp.gmail.com"
+            ElseIf mailFrom.EndsWith("hotmail.com") Or mailFrom.EndsWith("outlook.com") Then
+                client.Host = "smtp.live.com"
+            End If
 
             NetworkCred.UserName = zona.email
             NetworkCred.Password = zona.pass
@@ -44,10 +52,10 @@ Public Class Mail
             mm.Body = mail
             mm.To.Add(New MailAddress(_liq.prestador.email))
             client.Send(mm)
+
         Catch ex As Exception
             Throw New Exception("Error enviando mail: " & ex.Message)
         End Try
     End Sub
-
 
 End Class

@@ -135,7 +135,7 @@ Public Class DB
 
         ElseIf _liq = tiposLiquidacion.cerrada Then
 
-            cmd.CommandText = String.Format("SELECT LIQUIDACION.ID_PREST, LIQUIDACION.CUIT, PRESTADORES.APELLIDO, PRESTADORES.NOMBRE, LIQUIDACION.LOCALIDAD, LIQUIDACION.ESPECIALIDAD, LIQUIDACION.HS_NORMALES AS [HS LUN a VIE], LIQUIDACION.HS_FERIADOS AS [HS SAB DOM Y FER], LIQUIDACION.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]+[HS_FERIADOS]+[HS_DIFERENCIAL] AS [TOTAL HORAS], LIQUIDACION.MONTO_FIJO AS [MONTO FIJO], LIQUIDACION.IMPORTE_NORMAL AS [$ LUN a VIE], LIQUIDACION.IMPORTE_FERIADO AS [$ SAB DOM y FER], LIQUIDACION.IMPORTE_DIFERENCIAL AS [$ DIF], [$ DIF]+[$ LUN a VIE]+[$ SAB DOM y FER]+[MONTO FIJO] AS [$ TOTAL]
+            cmd.CommandText = String.Format("SELECT LIQUIDACION.ID, LIQUIDACION.ID_PREST, LIQUIDACION.CUIT, PRESTADORES.APELLIDO, PRESTADORES.NOMBRE, LIQUIDACION.LOCALIDAD, LIQUIDACION.ESPECIALIDAD, LIQUIDACION.HS_NORMALES AS [HS LUN a VIE], LIQUIDACION.HS_FERIADOS AS [HS SAB DOM Y FER], LIQUIDACION.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]+[HS_FERIADOS]+[HS_DIFERENCIAL] AS [TOTAL HORAS], LIQUIDACION.MONTO_FIJO AS [MONTO FIJO], LIQUIDACION.IMPORTE_NORMAL AS [$ LUN a VIE], LIQUIDACION.IMPORTE_FERIADO AS [$ SAB DOM y FER], LIQUIDACION.IMPORTE_DIFERENCIAL AS [$ DIF], [$ DIF]+[$ LUN a VIE]+[$ SAB DOM y FER]+[MONTO FIJO] AS [$ TOTAL]
                                 FROM LIQUIDACION INNER JOIN PRESTADORES ON LIQUIDACION.ID_PREST = PRESTADORES.ID
                                 WHERE (((LIQUIDACION.MES)=#{0}#))", hasta)
 
@@ -897,6 +897,28 @@ Public Class DB
             cmd.ExecuteScalar()
             cmd.ExecuteNonQuery()
 
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
+    Public Sub eliminarLiquidaciones(_ids As List(Of Integer))
+        Try
+            Dim query = "DELETE FROM LIQUIDACION WHERE ID IN ("
+            For Each id In _ids
+                query += id.ToString & ","
+            Next
+            'remueve la ultima coma
+            query = query.Substring(0, query.Length - 1)
+            query += ")"
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
         Catch ex As Exception
             Throw
         Finally

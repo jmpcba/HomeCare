@@ -97,6 +97,7 @@
                         btnGuardar.Enabled = False
                         btnSelec.Enabled = False
                     End If
+                    .Columns("ID").Visible = False
                     .DataSource = dt
                 End With
             End If
@@ -132,11 +133,19 @@
         dtMes.Value = Today.AddMonths(-1)
         llenarGrilla()
         txtObservaciones.Text = " "
+
         If My.Settings.nivel > 1 Then
             btnGuardar.Visible = False
         Else
             btnGuardar.Visible = True
         End If
+
+        If My.Settings.nivel = 0 And tipo = liquidaciones.cerradas Then
+            btnReAbrir.Visible = True
+        Else
+            btnReAbrir.Visible = False
+        End If
+
         carga = False
     End Sub
 
@@ -325,5 +334,36 @@
 
     Public Sub progresoStatusBar() Handles ut.progresoExportExcel
         pb.Increment(1)
+    End Sub
+
+    Private Sub btnReAbrir_Click(sender As Object, e As EventArgs) Handles btnReAbrir.Click
+        If ut.mensaje("Esta liquidacion esta cerrada!!!" & vbCrLf & "Esta seguro de reabrirla?", utils.mensajes.preg) = MsgBoxResult.Yes Then
+            Try
+                Dim db As New DB()
+                Dim ids As New List(Of Integer)
+
+                gridLiqui.ClearSelection()
+
+                For Each r As DataGridViewRow In gridLiqui.Rows
+                    If r.Cells(0).Value Then
+                        Dim id = r.Cells("id").Value
+                        r.Cells("RESULTADO CARGA").Value = "Liquidacion reabierta"
+                        r.DefaultCellStyle.BackColor = Color.LightGreen
+                        ids.Add(id)
+                    End If
+                Next
+
+                db.eliminarLiquidaciones(ids)
+
+            Catch ex As Exception
+                For Each r As DataGridViewRow In gridLiqui.Rows
+                    If r.Cells(0).Value Then
+                        Dim id = r.Cells("id").Value
+                        r.Cells("RESULTADO CARGA").Value = ex.Message
+                        r.DefaultCellStyle.BackColor = Color.Red
+                    End If
+                Next
+            End Try
+        End If
     End Sub
 End Class

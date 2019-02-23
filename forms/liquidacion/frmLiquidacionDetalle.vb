@@ -47,12 +47,14 @@
             fecha = _fecha
             idPrestador = _idPrest
 
+            llenarGrilla()
+
             If dt.Rows.Count > 0 Then
                 ToolStripMenuItemDetalle.Enabled = True
             Else
                 ToolStripMenuItemDetalle.Enabled = False
             End If
-            llenarGrilla()
+
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
@@ -76,7 +78,6 @@
         For Each r As DataGridViewRow In dgDetalle.Rows
             If r.Cells(0).Value Then
                 Dim id = r.Cells("id").Value
-                Dim rIndex = r.Index
 
                 r.DefaultCellStyle.BackColor = Color.LightGreen
                 ids.Add(id)

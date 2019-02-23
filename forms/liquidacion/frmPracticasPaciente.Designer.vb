@@ -28,14 +28,18 @@ Partial Class frmPracticasPaciente
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ExportarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportarListaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.grPacientes, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'dtMes
         '
         Me.dtMes.CustomFormat = " MMMM - yyyy"
         Me.dtMes.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtMes.Location = New System.Drawing.Point(48, 19)
+        Me.dtMes.Location = New System.Drawing.Point(48, 36)
         Me.dtMes.Name = "dtMes"
         Me.dtMes.Size = New System.Drawing.Size(200, 20)
         Me.dtMes.TabIndex = 112
@@ -43,7 +47,7 @@ Partial Class frmPracticasPaciente
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(12, 23)
+        Me.Label8.Location = New System.Drawing.Point(12, 40)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(30, 13)
         Me.Label8.TabIndex = 111
@@ -70,7 +74,7 @@ Partial Class frmPracticasPaciente
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCerrar.Location = New System.Drawing.Point(820, 12)
+        Me.btnCerrar.Location = New System.Drawing.Point(820, 29)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 114
@@ -79,7 +83,7 @@ Partial Class frmPracticasPaciente
         '
         'txtFiltro
         '
-        Me.txtFiltro.Location = New System.Drawing.Point(322, 19)
+        Me.txtFiltro.Location = New System.Drawing.Point(322, 36)
         Me.txtFiltro.Name = "txtFiltro"
         Me.txtFiltro.Size = New System.Drawing.Size(200, 20)
         Me.txtFiltro.TabIndex = 120
@@ -87,11 +91,33 @@ Partial Class frmPracticasPaciente
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(272, 23)
+        Me.Label3.Location = New System.Drawing.Point(272, 40)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(45, 13)
         Me.Label3.TabIndex = 119
         Me.Label3.Text = "FILTRO"
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportarToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(943, 24)
+        Me.MenuStrip1.TabIndex = 121
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'ExportarToolStripMenuItem
+        '
+        Me.ExportarToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportarListaToolStripMenuItem})
+        Me.ExportarToolStripMenuItem.Name = "ExportarToolStripMenuItem"
+        Me.ExportarToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
+        Me.ExportarToolStripMenuItem.Text = "&Exportar"
+        '
+        'ExportarListaToolStripMenuItem
+        '
+        Me.ExportarListaToolStripMenuItem.Name = "ExportarListaToolStripMenuItem"
+        Me.ExportarListaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExportarListaToolStripMenuItem.Text = "Exportar &Lista"
         '
         'frmPracticasPaciente
         '
@@ -105,9 +131,13 @@ Partial Class frmPracticasPaciente
         Me.Controls.Add(Me.grPacientes)
         Me.Controls.Add(Me.dtMes)
         Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmPracticasPaciente"
         Me.Text = "PRACTICAS POR PACIENTE"
         CType(Me.grPacientes, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -119,4 +149,7 @@ Partial Class frmPracticasPaciente
     Friend WithEvents btnCerrar As Button
     Friend WithEvents txtFiltro As TextBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents ExportarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExportarListaToolStripMenuItem As ToolStripMenuItem
 End Class
