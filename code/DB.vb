@@ -150,6 +150,7 @@ Public Class DB
             'LLENAR EL DETALLE
             da.Fill(ds, "QUERY")
             ds.Tables("QUERY").Columns.Add("ESTADO")
+
             If _liq = tiposLiquidacion.medico Then
                 Dim liquidacionesCerradas As New List(Of DataRow)
                 If ds.Tables("QUERY").Rows.Count > 0 Then
