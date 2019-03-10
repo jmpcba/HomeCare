@@ -112,6 +112,9 @@ Public Class DB
         Dim dt As New DataTable
         Dim ut As New utils
 
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+
         desde = New Date(_fecha.Year, _fecha.Month, 1)
         hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
@@ -140,9 +143,11 @@ Public Class DB
                                 WHERE (((LIQUIDACION.MES)=#{0}#))", hasta)
 
         ElseIf _liq = tiposLiquidacion.anual Then
+            desde = New Date(_fecha.Year, 1, 1)
+            hasta = New Date(_fecha.Year, 12, 31)
             cmd.CommandText = String.Format("SELECT LIQUIDACION.ID_PREST, LIQUIDACION.CUIT, PRESTADORES.APELLIDO, PRESTADORES.NOMBRE, LIQUIDACION.LOCALIDAD, LIQUIDACION.ESPECIALIDAD, LIQUIDACION.HS_NORMALES AS [HS LUN a VIE], LIQUIDACION.HS_FERIADOS AS [HS SAB DOM Y FER], LIQUIDACION.HS_DIFERENCIAL AS DIFERENCIAL, LIQUIDACION.MES AS MES, [HS_NORMALES]+[HS_FERIADOS]+[HS_DIFERENCIAL] AS [TOTAL HORAS], LIQUIDACION.MONTO_FIJO AS [MONTO FIJO], LIQUIDACION.IMPORTE_NORMAL AS [$ LUN a VIE], LIQUIDACION.IMPORTE_FERIADO AS [$ SAB DOM y FER], LIQUIDACION.IMPORTE_DIFERENCIAL AS [$ DIF], [$ DIF]+[$ LUN a VIE]+[$ SAB DOM y FER]+[MONTO FIJO] AS [$ TOTAL]
-                                FROM LIQUIDACION INNER JOIN PRESTADORES ON LIQUIDACION.ID_PREST = PRESTADORES.ID
-                                WHERE (((LIQUIDACION.MES)>#01/01/{0}#))", _fecha.Year)
+                                        FROM LIQUIDACION INNER JOIN PRESTADORES ON LIQUIDACION.ID_PREST = PRESTADORES.ID
+                                        WHERE (((LIQUIDACION.MES) Between #{0}# And #{1}#));", desde, hasta)
 
         End If
 
@@ -176,6 +181,8 @@ Public Class DB
 
         Catch ex As Exception
             Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        Finally
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
         End Try
 
     End Function

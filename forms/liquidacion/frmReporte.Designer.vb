@@ -29,6 +29,8 @@ Partial Class frmReporte
         Me.ExportarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportarListadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblDetalle = New System.Windows.Forms.Label()
+        Me.cbAno = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.dgAnual, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
@@ -42,10 +44,10 @@ Partial Class frmReporte
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgAnual.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgAnual.Location = New System.Drawing.Point(12, 67)
+        Me.dgAnual.Location = New System.Drawing.Point(12, 82)
         Me.dgAnual.Name = "dgAnual"
         Me.dgAnual.ReadOnly = True
-        Me.dgAnual.Size = New System.Drawing.Size(643, 377)
+        Me.dgAnual.Size = New System.Drawing.Size(643, 362)
         Me.dgAnual.TabIndex = 0
         '
         'StatusStrip1
@@ -89,17 +91,37 @@ Partial Class frmReporte
         Me.lblDetalle.AutoSize = True
         Me.lblDetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDetalle.ForeColor = System.Drawing.Color.Red
-        Me.lblDetalle.Location = New System.Drawing.Point(12, 40)
+        Me.lblDetalle.Location = New System.Drawing.Point(12, 24)
         Me.lblDetalle.Name = "lblDetalle"
         Me.lblDetalle.Size = New System.Drawing.Size(178, 24)
         Me.lblDetalle.TabIndex = 112
         Me.lblDetalle.Text = "INFORME ANUAL"
+        '
+        'cbAno
+        '
+        Me.cbAno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbAno.FormattingEnabled = True
+        Me.cbAno.Location = New System.Drawing.Point(48, 55)
+        Me.cbAno.Name = "cbAno"
+        Me.cbAno.Size = New System.Drawing.Size(121, 21)
+        Me.cbAno.TabIndex = 113
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 59)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(30, 13)
+        Me.Label1.TabIndex = 114
+        Me.Label1.Text = "AÑO"
         '
         'frmReporte
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(675, 477)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.cbAno)
         Me.Controls.Add(Me.lblDetalle)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MenuStrip1)
@@ -124,4 +146,6 @@ Partial Class frmReporte
     Friend WithEvents ExportarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExportarListadoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblDetalle As Label
+    Friend WithEvents cbAno As ComboBox
+    Friend WithEvents Label1 As Label
 End Class

@@ -3,20 +3,31 @@
     Dim dtFinal As DataTable
     Dim db As DB
     Dim ut As New utils
+    Dim carga As Boolean
 
     Private Sub frmReporte_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        dt = New DataTable
-        dtFinal = New DataTable("INFORME ANUAL")
-        db = New DB
-
-        llenarGrilla()
+        carga = True
         ToolStripProgressBar1.Visible = False
         Me.WindowState = FormWindowState.Maximized
+
+        For i = 2018 To Today.Year
+            cbAno.Items.Add(i)
+        Next
+
+        cbAno.SelectedItem = Today.Year
+        llenarGrilla()
+
+        carga = False
     End Sub
 
     Private Sub llenarGrilla()
         Try
-            dt = db.getLiquidacion(Today, DB.tiposLiquidacion.anual)
+            dt = New DataTable
+            dtFinal = New DataTable("INFORME ANUAL")
+            db = New DB
+
+            Dim fec = New Date(cbAno.SelectedItem, 1, 1)
+            dt = db.getLiquidacion(fec, DB.tiposLiquidacion.anual)
 
             Dim datos = {"ID_PREST", "CUIT", "NOMBRE", "APELLIDO"}
 
@@ -84,5 +95,11 @@
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
+    End Sub
+
+    Private Sub cbAno_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbAno.SelectedIndexChanged
+        If Not carga Then
+            llenarGrilla()
+        End If
     End Sub
 End Class
