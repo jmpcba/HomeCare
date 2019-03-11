@@ -4,7 +4,7 @@ Public Class Mail
 
     Dim liqui As Liquidacion
     Dim client As SmtpClient = New SmtpClient()
-    Dim NetworkCred As NetworkCredential = New System.Net.NetworkCredential()
+    Dim NetworkCred As NetworkCredential
 
     Public Sub New()
         Dim db As New DB
@@ -13,7 +13,6 @@ Public Class Mail
             .EnableSsl = True
             .Port = 587
             .UseDefaultCredentials = True
-            .Credentials = NetworkCred
         End With
     End Sub
 
@@ -37,20 +36,19 @@ Public Class Mail
             zona.idzona = _liq.prestador.zona
             Dim mailFrom = zona.email.ToLower
 
+            mm.From = New MailAddress(mailFrom)
+            mm.Subject = "Liquidacion HomeCare " & MonthName(_liq.mes.Month)
+            mm.IsBodyHtml = True
+            mm.Body = mail
+            mm.To.Add(New MailAddress(_liq.prestador.email))
+
             If mailFrom.EndsWith("gmail.com") Then
                 client.Host = "smtp.gmail.com"
             ElseIf mailFrom.EndsWith("hotmail.com") Or mailFrom.EndsWith("outlook.com") Then
                 client.Host = "smtp.live.com"
             End If
 
-            NetworkCred.UserName = zona.email
-            NetworkCred.Password = zona.pass
-
-            mm.From = New MailAddress(mailFrom)
-            mm.Subject = "Liquidacion HomeCare " & MonthName(_liq.mes.Month)
-            mm.IsBodyHtml = True
-            mm.Body = mail
-            mm.To.Add(New MailAddress(_liq.prestador.email))
+            client.Credentials = New NetworkCredential(zona.email, zona.pass)
             client.Send(mm)
 
         Catch ex As Exception
