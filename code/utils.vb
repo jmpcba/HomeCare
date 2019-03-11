@@ -5,8 +5,10 @@ Public Class utils
 
     Dim db As DB
     Dim feriados As DataTable
+    Event progresoExportExcel()
     Private liquidaciones As DataTable
     Private cargoLiq As Boolean = False
+    Event cambioBarraDeProgreso()
 
     Public Sub New()
         feriados = New DataTable()
@@ -102,6 +104,14 @@ Public Class utils
         Next
     End Sub
 
+    Public Sub validarCombos(_combos As ComboBox())
+        For Each c As ComboBox In _combos
+            If c.SelectedIndex = -1 Then
+                c.Focus()
+                Throw New Exception("Seleccione un valor de la grilla")
+            End If
+        Next
+    End Sub
     Public Sub iniciarTxtBoxes(_txtboxes As TextBox())
         activarTxtBoxes(_txtboxes)
         For Each t As TextBox In _txtboxes
@@ -294,136 +304,103 @@ Public Class utils
 
     Public Sub exportarExcel(ByVal _dt As DataTable)
 
-        Dim _excel As New Excel.Application
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+
+        Dim sheetIndex As Integer
+        Dim exc As New Excel.Application
+        Dim Wb As Excel.Workbook
+        Dim Ws As Excel.Worksheet
         Dim saveFile As New SaveFileDialog
         Dim path As String
 
         saveFile.Filter = "Documento Excel (*.xlsx)|*.xlsx"
-        Dim wBook As Excel.Workbook
-        Dim wSheet As Excel.Worksheet
 
-        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
-        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
-        Try
-            If saveFile.ShowDialog = DialogResult.OK Then
-                path = saveFile.FileName
+        Wb = exc.Workbooks.Add
 
-                wBook = _excel.Workbooks.Add()
-                wSheet = wBook.ActiveSheet()
+        If saveFile.ShowDialog = DialogResult.OK Then
+            path = saveFile.FileName
 
-                Dim dc As System.Data.DataColumn
-                Dim dr As System.Data.DataRow
-                Dim colIndex As Integer = 0
-                Dim rowIndex As Integer = 0
+            Try
+                ' Copy each DataTable as a new Sheet
+                'On Error Resume Next
+                Dim col, row As Integer
+                ' Copy the DataTable to an object array
+                Dim rawData(_dt.Rows.Count, _dt.Columns.Count - 1) As Object
 
-                For Each dc In _dt.Columns
-                    colIndex = colIndex + 1
-                    wSheet.Cells(1, colIndex) = dc.ColumnName
+                ' Copy the column names to the first row of the object array
+
+                For col = 0 To _dt.Columns.Count - 1
+                    rawData(0, col) = _dt.Columns(col).ColumnName.ToUpper
                 Next
 
-                For Each dr In _dt.Rows
-                    rowIndex = rowIndex + 1
-                    colIndex = 0
-                    For Each dc In _dt.Columns
-                        colIndex = colIndex + 1
-                        wSheet.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
+                ' Copy the values to the object array
+
+                For col = 0 To _dt.Columns.Count - 1
+                    For row = 0 To _dt.Rows.Count - 1
+                        rawData(row + 1, col) = _dt.Rows(row).ItemArray(col)
                     Next
                 Next
-                wSheet.Columns.AutoFit()
-                wBook.SaveAs(path)
+                ' Calculate the final column letter
+                Dim finalColLetter As String = String.Empty
+                finalColLetter = columnaExcel(_dt.Columns.Count)
+                'Generate Excel Column Name (Column ID)
 
-                ReleaseObject(wSheet)
-                wBook.Close(False)
-                ReleaseObject(wBook)
-                _excel.Quit()
-                ReleaseObject(_excel)
-                GC.Collect()
+                sheetIndex += 1
+                Ws = Wb.Worksheets(sheetIndex)
+                Ws.Name = _dt.TableName
+                Dim excelRange As String = String.Format("A1:{0}{1}",
+                                           finalColLetter, _dt.Rows.Count + 1)
 
-                mensaje("Archivo exportado!", mensajes.info)
-            End If
-        Catch ex As Exception
-            Throw
-        Finally
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
-        End Try
-    End Sub
+                Ws.Range(excelRange, Type.Missing).Value2 = rawData
+                Ws.Columns.AutoFit()
 
-    Public Sub exportarExcel(ByVal _ds As DataSet)
+                Dim contador = 0
+                For Each c As DataColumn In _dt.Columns
+                    contador += 1
 
-        Dim _excel As New Excel.Application
-        Dim saveFile As New SaveFileDialog
-        Dim path As String
+                    If c.ColumnName.ToUpper.Contains("FECHA") Then
+                        Dim letraCol = columnaExcel(contador)
+                        Dim rango As String
+                        rango = letraCol & ":" & letraCol
+                        Ws.Columns(rango).numberformat = "dd-mmm-yy"
+                    End If
 
-        saveFile.Filter = "Documento Excel (*.xlsx)|*.xlsx"
-        Dim wBook As Excel.Workbook
-        Dim wSheet As Excel.Worksheet
-
-        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
-        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
-        Try
-            If saveFile.ShowDialog = DialogResult.OK Then
-                path = saveFile.FileName
-
-                wBook = _excel.Workbooks.Add()
-
-
-                For Each dt As DataTable In _ds.Tables
-                    wSheet = wBook.ActiveSheet()
-                    wSheet.Name = dt.TableName
-
-                    Dim dc As System.Data.DataColumn
-                    Dim dr As System.Data.DataRow
-                    Dim colIndex As Integer = 0
-                    Dim rowIndex As Integer = 0
-
-                    For Each dc In dt.Columns
-                        colIndex = colIndex + 1
-                        wSheet.Cells(1, colIndex) = dc.ColumnName
-                    Next
-
-                    For Each dr In dt.Rows
-                        rowIndex = rowIndex + 1
-                        colIndex = 0
-                        For Each dc In dt.Columns
-                            colIndex = colIndex + 1
-                            wSheet.Cells(rowIndex + 1, colIndex) = dr(dc.ColumnName)
-                        Next
-                    Next
-                    wSheet.Columns.AutoFit()
-                    wBook.Sheets.Add()
-                Next
-                For Each ws As Excel.Worksheet In wBook.Sheets
-                    If ws.Name.StartsWith("Sheet") Then
-                        ws.Delete()
+                    If c.ColumnName.ToUpper.Contains("AFILIADO") Then
+                        Dim letraCol = columnaExcel(contador)
+                        Dim rango As String
+                        rango = letraCol & ":" & letraCol
+                        Ws.Columns(rango).numberformat = "0"
                     End If
                 Next
-                wBook.SaveAs(path)
 
-                ReleaseObject(wSheet)
-                wBook.Close(False)
-                ReleaseObject(wBook)
-                _excel.Quit()
-                ReleaseObject(_excel)
+                Ws = Nothing
+
+
+                For Each w As Excel.Worksheet In Wb.Sheets
+                    If w.Name.StartsWith("Sheet") Then
+                        w.Delete()
+                    End If
+                Next
+
+                Wb.SaveAs(path)
+
+                Wb.Close(True, Type.Missing, Type.Missing)
+                Wb = Nothing
+                ' Release the Application object
+                exc.Quit()
+                exc = Nothing
+                ' Collect the unreferenced objects
                 GC.Collect()
 
                 mensaje("Archivo exportado!", mensajes.info)
 
-            End If
-        Catch ex As Exception
-            Throw
-        Finally
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
-        End Try
-    End Sub
-
-    Private Sub ReleaseObject(ByVal o As Object)
-        Try
-            While (System.Runtime.InteropServices.Marshal.ReleaseComObject(o) > 0)
-            End While
-        Catch
-        Finally
-            o = Nothing
-        End Try
+            Catch ex As Exception
+                Throw
+            Finally
+                System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
+            End Try
+        End If
     End Sub
 
     Public Sub habilitarBoton(_txtboxes As TextBox(), _btn As Button)
@@ -479,4 +456,131 @@ Public Class utils
             End Try
         End If
     End Sub
+
+    Public Sub exportarExcel(ds As DataSet)
+
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+
+        Dim sheetIndex As Integer
+        Dim exc As New Excel.Application
+        Dim Wb As Excel.Workbook
+        Dim Ws As Excel.Worksheet
+        Dim saveFile As New SaveFileDialog
+        Dim path As String
+
+        saveFile.Filter = "Documento Excel (*.xlsx)|*.xlsx"
+
+        Wb = exc.Workbooks.Add
+
+        If saveFile.ShowDialog = DialogResult.OK Then
+            path = saveFile.FileName
+
+            Try
+                ' Copy each DataTable as a new Sheet
+                For Each dt As System.Data.DataTable In ds.Tables
+                    'On Error Resume Next
+                    Dim col, row As Integer
+                    ' Copy the DataTable to an object array
+                    Dim rawData(dt.Rows.Count, dt.Columns.Count - 1) As Object
+
+                    ' Copy the column names to the first row of the object array
+
+                    For col = 0 To dt.Columns.Count - 1
+                        rawData(0, col) = dt.Columns(col).ColumnName.ToUpper
+                    Next
+
+                    ' Copy the values to the object array
+
+                    For col = 0 To dt.Columns.Count - 1
+                        For row = 0 To dt.Rows.Count - 1
+                            rawData(row + 1, col) = dt.Rows(row).ItemArray(col)
+                        Next
+                        RaiseEvent progresoExportExcel()
+                    Next
+                    ' Calculate the final column letter
+                    Dim finalColLetter As String = String.Empty
+                    finalColLetter = columnaExcel(dt.Columns.Count)
+                    'Generate Excel Column Name (Column ID)
+
+                    sheetIndex += 1
+                    Ws = Wb.Worksheets(sheetIndex)
+                    Ws.Name = dt.TableName
+                    Dim excelRange As String = String.Format("A1:{0}{1}",
+                                           finalColLetter, dt.Rows.Count + 1)
+
+                    Ws.Range(excelRange, Type.Missing).Value2 = rawData
+                    Ws.Columns.AutoFit()
+
+                    Dim contador = 0
+                    For Each c As DataColumn In dt.Columns
+                        contador += 1
+
+                        If c.ColumnName.ToUpper.Contains("FECHA") Then
+                            Dim letraCol = columnaExcel(contador)
+                            Dim rango As String
+                            rango = letraCol & ":" & letraCol
+                            Ws.Columns(rango).numberformat = "dd-mmm-yy"
+                        End If
+
+                        If c.ColumnName.ToUpper.Contains("AFILIADO") Then
+                            Dim letraCol = columnaExcel(contador)
+                            Dim rango As String
+                            rango = letraCol & ":" & letraCol
+                            Ws.Columns(rango).numberformat = "0"
+                        End If
+                    Next
+                    Ws = Nothing
+                Next
+
+                For Each w As Excel.Worksheet In Wb.Sheets
+                    If w.Name.StartsWith("Sheet") Then
+                        w.Delete()
+                    End If
+                Next
+
+                Wb.SaveAs(path)
+
+                Wb.Close(True, Type.Missing, Type.Missing)
+                Wb = Nothing
+                ' Release the Application object
+                exc.Quit()
+                exc = Nothing
+                ' Collect the unreferenced objects
+                GC.Collect()
+
+                mensaje("Archivo exportado!", mensajes.info)
+
+            Catch ex As Exception
+                Throw
+            Finally
+                System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
+            End Try
+        End If
+    End Sub
+
+    Private Function columnaExcel(ByVal Col As Integer) As String
+        If Col < 0 And Col > 256 Then
+            mensaje("Argumento Invalido", mensajes.err)
+            Return Nothing
+            Exit Function
+        End If
+
+        Dim i As Int16
+        Dim r As Int16
+        Dim S As String
+
+        If Col <= 26 Then
+            S = Chr(Col + 64)
+        Else
+            r = Col Mod 26
+            i = System.Math.Floor(Col / 26)
+            If r = 0 Then
+                r = 26
+                i = i - 1
+            End If
+            S = Chr(i + 64) & Chr(r + 64)
+        End If
+        columnaExcel = S
+    End Function
 End Class

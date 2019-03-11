@@ -23,6 +23,8 @@ Partial Class frmPrestadores
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.cbZona = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtComentario = New System.Windows.Forms.TextBox()
         Me.txtServicio = New System.Windows.Forms.TextBox()
@@ -57,8 +59,6 @@ Partial Class frmPrestadores
         Me.btnBuscar = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.cbZona = New System.Windows.Forms.ComboBox()
-        Me.Label17 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -102,10 +102,28 @@ Partial Class frmPrestadores
         Me.Panel1.Size = New System.Drawing.Size(643, 492)
         Me.Panel1.TabIndex = 0
         '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(326, 168)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(37, 13)
+        Me.Label17.TabIndex = 54
+        Me.Label17.Text = "ZONA"
+        '
+        'cbZona
+        '
+        Me.cbZona.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbZona.FormattingEnabled = True
+        Me.cbZona.Location = New System.Drawing.Point(396, 165)
+        Me.cbZona.Name = "cbZona"
+        Me.cbZona.Size = New System.Drawing.Size(220, 21)
+        Me.cbZona.TabIndex = 53
+        '
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(7, 193)
+        Me.Label16.Location = New System.Drawing.Point(6, 231)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(98, 13)
         Me.Label16.TabIndex = 52
@@ -113,16 +131,16 @@ Partial Class frmPrestadores
         '
         'txtComentario
         '
-        Me.txtComentario.Location = New System.Drawing.Point(111, 190)
+        Me.txtComentario.Location = New System.Drawing.Point(111, 228)
         Me.txtComentario.MaxLength = 255
         Me.txtComentario.Multiline = True
         Me.txtComentario.Name = "txtComentario"
-        Me.txtComentario.Size = New System.Drawing.Size(413, 92)
+        Me.txtComentario.Size = New System.Drawing.Size(505, 61)
         Me.txtComentario.TabIndex = 6
         '
         'txtServicio
         '
-        Me.txtServicio.Location = New System.Drawing.Point(97, 131)
+        Me.txtServicio.Location = New System.Drawing.Point(97, 168)
         Me.txtServicio.Name = "txtServicio"
         Me.txtServicio.Size = New System.Drawing.Size(203, 20)
         Me.txtServicio.TabIndex = 5
@@ -130,7 +148,7 @@ Partial Class frmPrestadores
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(7, 135)
+        Me.Label15.Location = New System.Drawing.Point(7, 171)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(57, 13)
         Me.Label15.TabIndex = 50
@@ -140,7 +158,7 @@ Partial Class frmPrestadores
         '
         Me.cbEspecialidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbEspecialidad.FormattingEnabled = True
-        Me.cbEspecialidad.Location = New System.Drawing.Point(97, 101)
+        Me.cbEspecialidad.Location = New System.Drawing.Point(97, 127)
         Me.cbEspecialidad.Name = "cbEspecialidad"
         Me.cbEspecialidad.Size = New System.Drawing.Size(203, 21)
         Me.cbEspecialidad.TabIndex = 3
@@ -256,7 +274,7 @@ Partial Class frmPrestadores
         '
         'txtEmail
         '
-        Me.txtEmail.Location = New System.Drawing.Point(97, 157)
+        Me.txtEmail.Location = New System.Drawing.Point(97, 196)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.Size = New System.Drawing.Size(358, 20)
         Me.txtEmail.TabIndex = 5
@@ -264,7 +282,7 @@ Partial Class frmPrestadores
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(7, 160)
+        Me.Label7.Location = New System.Drawing.Point(7, 203)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(39, 13)
         Me.Label7.TabIndex = 35
@@ -272,7 +290,7 @@ Partial Class frmPrestadores
         '
         'txtLocalidad
         '
-        Me.txtLocalidad.Location = New System.Drawing.Point(396, 102)
+        Me.txtLocalidad.Location = New System.Drawing.Point(396, 124)
         Me.txtLocalidad.Name = "txtLocalidad"
         Me.txtLocalidad.Size = New System.Drawing.Size(220, 20)
         Me.txtLocalidad.TabIndex = 4
@@ -280,7 +298,7 @@ Partial Class frmPrestadores
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(323, 104)
+        Me.Label6.Location = New System.Drawing.Point(310, 127)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(67, 13)
         Me.Label6.TabIndex = 33
@@ -288,7 +306,7 @@ Partial Class frmPrestadores
         '
         'txtApellido
         '
-        Me.txtApellido.Location = New System.Drawing.Point(97, 76)
+        Me.txtApellido.Location = New System.Drawing.Point(97, 89)
         Me.txtApellido.Name = "txtApellido"
         Me.txtApellido.Size = New System.Drawing.Size(203, 20)
         Me.txtApellido.TabIndex = 1
@@ -296,7 +314,7 @@ Partial Class frmPrestadores
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(4, 79)
+        Me.Label3.Location = New System.Drawing.Point(7, 92)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(59, 13)
         Me.Label3.TabIndex = 31
@@ -305,7 +323,7 @@ Partial Class frmPrestadores
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(323, 79)
+        Me.Label1.Location = New System.Drawing.Point(323, 92)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(54, 13)
         Me.Label1.TabIndex = 30
@@ -313,7 +331,7 @@ Partial Class frmPrestadores
         '
         'txtNombre
         '
-        Me.txtNombre.Location = New System.Drawing.Point(396, 72)
+        Me.txtNombre.Location = New System.Drawing.Point(396, 89)
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(220, 20)
         Me.txtNombre.TabIndex = 2
@@ -321,7 +339,7 @@ Partial Class frmPrestadores
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(7, 109)
+        Me.Label5.Location = New System.Drawing.Point(4, 130)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(84, 13)
         Me.Label5.TabIndex = 27
@@ -395,24 +413,6 @@ Partial Class frmPrestadores
         Me.btnLimpiar.TabIndex = 201
         Me.btnLimpiar.Text = "&LIMPIAR"
         Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'cbZona
-        '
-        Me.cbZona.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbZona.FormattingEnabled = True
-        Me.cbZona.Location = New System.Drawing.Point(396, 131)
-        Me.cbZona.Name = "cbZona"
-        Me.cbZona.Size = New System.Drawing.Size(220, 21)
-        Me.cbZona.TabIndex = 53
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(323, 135)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(37, 13)
-        Me.Label17.TabIndex = 54
-        Me.Label17.Text = "ZONA"
         '
         'frmPrestadores
         '

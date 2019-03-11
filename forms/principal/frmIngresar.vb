@@ -36,6 +36,7 @@
     Private Sub frmusuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Try
+            txtBoxes = {numDni, txtPassw}
             ut = New utils
             If My.Settings.DBPath = "" Then
                 ut.mensaje("Seleccione la ubicacion de la base de datos", utils.mensajes.err)
@@ -45,7 +46,6 @@
             Else
                 usuario = New Usuario()
                 db = New DB
-                txtBoxes = {numDni, txtPassw}
             End If
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)

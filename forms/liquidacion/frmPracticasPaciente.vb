@@ -1,11 +1,14 @@
 ﻿Public Class frmPracticasPaciente
     Dim ut As New utils
     Dim dt As New DataTable
+    Dim carga As Boolean
 
     Private Sub PracticasPacientevb_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        carga = True
         Me.WindowState = FormWindowState.Maximized
         dtMes.Value = Today.AddMonths(-1)
         llenarGrilla()
+        carga = false
     End Sub
 
     Public Sub llenarGrilla()
@@ -35,7 +38,9 @@
     End Sub
 
     Private Sub dtMes_ValueChanged(sender As Object, e As EventArgs) Handles dtMes.ValueChanged
-        llenarGrilla()
+        If Not carga Then
+            llenarGrilla()
+        End If
     End Sub
 
     Private Sub frmPracticasPaciente_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -49,5 +54,14 @@
     Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
         dt.DefaultView.RowFilter = String.Format("[APELLIDO PACIENTE] LIKE '%{0}%'", txtFiltro.Text.Trim)
         grPacientes.Refresh()
+    End Sub
+
+    Private Sub ExportarListaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarListaToolStripMenuItem.Click
+        Try
+            ut.exportarExcel(dt)
+            Focus()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
     End Sub
 End Class

@@ -1,4 +1,5 @@
 ﻿Public Class Liquidacion
+
     Private _prestador As Prestador
     Private _mes As Date
     Private _hsNormales As Decimal
@@ -14,7 +15,6 @@
     Private _fechaMod As Date
     Private _modificado = False
     Private _observaciones As String
-
 
     Public Sub New(_prestador As Prestador, _mes As Date, _hsNormales As Decimal, _hsFeriado As Decimal, _hsDiferencial As Decimal, _importeNormal As Decimal, _importeFeriado As Decimal, _importeDiferencial As Decimal, _montoFijo As Decimal, _observaciones As String)
 

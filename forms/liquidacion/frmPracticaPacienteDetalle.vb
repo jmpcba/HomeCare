@@ -165,4 +165,13 @@
         dt.DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] LIKE '%{0}%'", txtFiltro.Text.Trim)
         dgDetalle.Refresh()
     End Sub
+
+    Private Sub ExportarListaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarListaToolStripMenuItem.Click
+        Try
+            ut.exportarExcel(dt)
+            Focus()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+    End Sub
 End Class

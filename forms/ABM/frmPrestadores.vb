@@ -17,12 +17,15 @@
                 'ut.validarLargo(txtCuit, 11)
                 ut.validarMail(txtEmail.Text.Trim)
                 ut.validarNumerico({numFijo, numLunVie, numFeriados})
+
                 If cbEspecialidad.SelectedIndex = -1 Then
                     Throw New Exception("SELECCIONE UNA ESPECIALIDAD")
                 End If
+
                 If cbZona.SelectedIndex = -1 Then
                     Throw New Exception("SELECCIONE UNA ZONA")
                 End If
+
                 montoLaV = numLunVie.Text.Trim
                 montoFeriado = numFeriados.Text.Trim
                 montoFijo = numFijo.Text.Trim

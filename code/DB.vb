@@ -29,6 +29,8 @@ Public Class DB
         detalle
         medico
         paciente
+        cerrada
+        anual
     End Enum
 
     Sub New()
@@ -41,20 +43,6 @@ Public Class DB
         ds = New DataSet()
         cmd.Connection = cnn
     End Sub
-
-    Friend Function getVisitas(fec As Date) As DataTable
-        Dim query = "SELECT * FROM VISITAS WHERE  FECHA > " & fec.ToShortDateString
-
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
-
-        Try
-            da.Fill(ds, "RESULTADO")
-            Return ds.Tables("RESULTADO")
-        Catch ex As Exception
-            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
-        End Try
-    End Function
 
     Friend Sub InsertarFeriado(_fecha As Date, _desc As String)
         Try
@@ -84,11 +72,10 @@ Public Class DB
         desde = New Date(_fecha.Year, _fecha.Month, 1)
         hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
-        cmd.CommandType = CommandType.StoredProcedure
-        cmd.CommandText = "QUERY_DETALLE_PRACTICAS"
-
-        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
-        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("SELECT PRACTICAS.ID, PRACTICAS.CUIT, PRESTADORES.APELLIDO AS [APELLIDO PRESTADOR], PRESTADORES.NOMBRE AS [NOMBRE PRESTADOR], PRESTADORES.LOCALIDAD, PRESTADORES.ESPECIALIDAD, PRESTADORES.SERVICIO, PRACTICAS.AFILIADO, PACIENTES.APELLIDO AS [APELLIDO PACIENTE], PACIENTES.NOMBRE AS [NOMBRE PACIENTE], PRACTICAS.FECHA_PRACTICA AS [FECHA PRACTICA], MODULO.CODIGO AS MODULO, SUBMODULO.CODIGO AS [CODIGO SUBMODULO], SUBMODULO.DESCRIPCION AS [DESCRIPCION SUBMODULO], PRACTICAS.HS_NORMALES AS [HS LUN a VIE], PRACTICAS.HS_FERIADO AS [HS SAB DOM y FER], PRACTICAS.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]*[MONTO_SEMANA] AS [$ LUN a VIE], [HS_FERIADO]*[MONTO_FERIADO] AS [$ SAB DOM y FER], [HS_DIFERENCIAL]*[PORCENTAJE] AS [$ DIF], PRESTADORES.MONTO_FIJO AS [MONTO FIJO]
+                            FROM SUBMODULO INNER JOIN (PACIENTES INNER JOIN (MODULO INNER JOIN (PRESTADORES INNER JOIN PRACTICAS ON PRESTADORES.ID = PRACTICAS.ID_PREST) ON MODULO.CODIGO = PRACTICAS.MODULO) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO) ON SUBMODULO.CODIGO = PRACTICAS.SUB_MODULO
+                            WHERE (((PRACTICAS.FECHA_PRACTICA) Between #{0}# And #{1}#))", desde, hasta)
 
         Try
             da.Fill(ds, "PRACTICAS")
@@ -125,50 +112,77 @@ Public Class DB
         Dim dt As New DataTable
         Dim ut As New utils
 
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+
         desde = New Date(_fecha.Year, _fecha.Month, 1)
         hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
-        cmd.CommandType = CommandType.StoredProcedure
-        If _liq = tiposLiquidacion.detalle Then
-            cmd.CommandText = "QUERY_DETALLES"
+        cmd.CommandType = CommandType.Text
 
-        ElseIf _liq = tiposLiquidacion.medico Then
-            cmd.CommandText = "QUERY_SUMATORIA_MEDICOS"
+        If _liq = tiposLiquidacion.medico Then
+
+            'USAR QUERY_SUMATORIA_MEDICOS EN ACCESS PARA GENERAR SQL
+            cmd.CommandText = String.Format("SELECT PRACTICAS.ID_PREST, PRESTADORES.CUIT, PRESTADORES.APELLIDO AS [APELLIDO PRESTADOR], PRESTADORES.NOMBRE AS [NOMBRE PRESTADOR], PRESTADORES.SERVICIO, PRESTADORES.ESPECIALIDAD AS ESPECIALIDAD, PRESTADORES.LOCALIDAD AS LOCALIDAD, Sum(PRACTICAS.HS_NORMALES) AS [HS LUN a VIE], Sum(PRACTICAS.HS_FERIADO) AS [HS SAB DOM y FER], Sum(PRACTICAS.HS_DIFERENCIAL) AS DIFERENCIAL, Sum([HS_NORMALES]+[HS_FERIADO]+[HS_DIFERENCIAL]) AS [TOTAL HORAS], PRESTADORES.MONTO_FIJO AS [MONTO FIJO], Sum([HS_NORMALES]*[MONTO_SEMANA]) AS [$ LUN a VIE], IIF([MONTO_FERIADO]<>0, Sum([HS_FERIADO]*[MONTO_FERIADO]), Sum([HS_FERIADO]*[MONTO_SEMANA])) AS [$ SAB DOM y FER], Sum([HS_DIFERENCIAL]*[PORCENTAJE]) AS [$ DIF], [$ DIF] + [$ LUN a VIE] + [$ SAB DOM y FER] + [MONTO FIJO] AS [$ TOTAL]
+                                            FROM PRESTADORES INNER JOIN PRACTICAS ON PRESTADORES.ID = PRACTICAS.ID_PREST
+                                            WHERE (((PRACTICAS.FECHA_PRACTICA) Between #{0}# And #{1}#))
+                                            GROUP BY PRACTICAS.ID_PREST, PRESTADORES.CUIT, PRESTADORES.APELLIDO, PRESTADORES.NOMBRE, PRESTADORES.SERVICIO, PRESTADORES.ESPECIALIDAD, PRESTADORES.LOCALIDAD, PRESTADORES.MONTO_FIJO, PRESTADORES.MONTO_SEMANA, PRESTADORES.MONTO_FERIADO", desde, hasta)
 
         ElseIf _liq = tiposLiquidacion.paciente Then
-            cmd.CommandText = "QUERY_SUMATORIA_PACIENTE"
-        End If
 
-        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
-        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
+            'USAR QUERY_SUMATORIA_PACIENTE EN ACCESS PARA GENERAR SQL
+            cmd.CommandText = String.Format("Select PACIENTES.AFILIADO, PACIENTES.APELLIDO As [APELLIDO PACIENTE], PACIENTES.NOMBRE As [NOMBRE PACIENTE], Sum(PRACTICAS.HS_NORMALES) As [HS LUN a VIE], Sum(PRACTICAS.HS_FERIADO) As [HS SAB DOM y FER], Sum(PRACTICAS.HS_DIFERENCIAL) AS DIFERENCIAL
+                                From PACIENTES INNER JOIN (PRESTADORES INNER JOIN PRACTICAS ON PRESTADORES.ID = PRACTICAS.ID_PREST) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO
+                                WHERE (((PRACTICAS.FECHA_PRACTICA) Between #{0}# And #{1}#))
+                                GROUP BY PACIENTES.AFILIADO, PACIENTES.APELLIDO, PACIENTES.NOMBRE", desde, hasta)
+
+        ElseIf _liq = tiposLiquidacion.cerrada Then
+
+            cmd.CommandText = String.Format("SELECT LIQUIDACION.ID, LIQUIDACION.ID_PREST, LIQUIDACION.CUIT, PRESTADORES.APELLIDO, PRESTADORES.NOMBRE, LIQUIDACION.LOCALIDAD, LIQUIDACION.ESPECIALIDAD, LIQUIDACION.HS_NORMALES AS [HS LUN a VIE], LIQUIDACION.HS_FERIADOS AS [HS SAB DOM Y FER], LIQUIDACION.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]+[HS_FERIADOS]+[HS_DIFERENCIAL] AS [TOTAL HORAS], LIQUIDACION.MONTO_FIJO AS [MONTO FIJO], LIQUIDACION.IMPORTE_NORMAL AS [$ LUN a VIE], LIQUIDACION.IMPORTE_FERIADO AS [$ SAB DOM y FER], LIQUIDACION.IMPORTE_DIFERENCIAL AS [$ DIF], [$ DIF]+[$ LUN a VIE]+[$ SAB DOM y FER]+[MONTO FIJO] AS [$ TOTAL]
+                                FROM LIQUIDACION INNER JOIN PRESTADORES ON LIQUIDACION.ID_PREST = PRESTADORES.ID
+                                WHERE (((LIQUIDACION.MES)=#{0}#))", hasta)
+
+        ElseIf _liq = tiposLiquidacion.anual Then
+            desde = New Date(_fecha.Year, 1, 1)
+            hasta = New Date(_fecha.Year, 12, 31)
+            cmd.CommandText = String.Format("SELECT LIQUIDACION.ID_PREST, LIQUIDACION.CUIT, PRESTADORES.APELLIDO, PRESTADORES.NOMBRE, LIQUIDACION.LOCALIDAD, LIQUIDACION.ESPECIALIDAD, LIQUIDACION.HS_NORMALES AS [HS LUN a VIE], LIQUIDACION.HS_FERIADOS AS [HS SAB DOM Y FER], LIQUIDACION.HS_DIFERENCIAL AS DIFERENCIAL, LIQUIDACION.MES AS MES, [HS_NORMALES]+[HS_FERIADOS]+[HS_DIFERENCIAL] AS [TOTAL HORAS], LIQUIDACION.MONTO_FIJO AS [MONTO FIJO], LIQUIDACION.IMPORTE_NORMAL AS [$ LUN a VIE], LIQUIDACION.IMPORTE_FERIADO AS [$ SAB DOM y FER], LIQUIDACION.IMPORTE_DIFERENCIAL AS [$ DIF], [$ DIF]+[$ LUN a VIE]+[$ SAB DOM y FER]+[MONTO FIJO] AS [$ TOTAL]
+                                        FROM LIQUIDACION INNER JOIN PRESTADORES ON LIQUIDACION.ID_PREST = PRESTADORES.ID
+                                        WHERE (((LIQUIDACION.MES) Between #{0}# And #{1}#));", desde, hasta)
+
+        End If
 
         Try
             'LLENAR EL DETALLE
             da.Fill(ds, "QUERY")
             ds.Tables("QUERY").Columns.Add("ESTADO")
+
             If _liq = tiposLiquidacion.medico Then
+                Dim liquidacionesCerradas As New List(Of DataRow)
                 If ds.Tables("QUERY").Rows.Count > 0 Then
                     'CONTROLAR SI EXISTEN LIQUIDACIONES PARA ESE MEDICO
-                    Dim liquidacionesCerradas As New DataTable
-                    liquidacionesCerradas = getLiquidacionesCerradas(_fecha)
 
                     For Each r As DataRow In ds.Tables("QUERY").Rows
                         Dim id = r("ID_PREST")
 
                         If ut.validarLiquidacion(id, _fecha) Then
-                            r("ESTADO") = "CERRADA"
+                            liquidacionesCerradas.Add(r)
                         Else
                             r("ESTADO") = "PENDIENTE"
                         End If
                     Next
+
+                    For Each r As DataRow In liquidacionesCerradas
+                        ds.Tables("QUERY").Rows.Remove(r)
+                    Next
                 End If
             End If
-
 
             Return ds.Tables("QUERY")
 
         Catch ex As Exception
             Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        Finally
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
         End Try
 
     End Function
@@ -252,14 +266,10 @@ Public Class DB
         desde = New Date(_fecha.Year, _fecha.Month, 1)
         hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
-        cmd.CommandType = CommandType.StoredProcedure
-        cmd.CommandText = "QUERY_DETALLE_MEDICO"
-
-        cmd.Parameters.Clear()
-
-        cmd.Parameters.AddWithValue("DESDE", desde)
-        cmd.Parameters.AddWithValue("HASTA", hasta)
-        cmd.Parameters.AddWithValue("P_ID", _id)
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("SELECT PRACTICAS.ID, PRACTICAS.CUIT, PRACTICAS.AFILIADO, PACIENTES.APELLIDO AS [APELLIDO PACIENTE], PACIENTES.NOMBRE AS [NOMBRE PACIENTE], PRACTICAS.FECHA_PRACTICA AS [FECHA PRACTICA], MODULO.CODIGO AS MODULO, SUBMODULO.CODIGO AS [CODIGO SUBMODULO], SUBMODULO.DESCRIPCION AS [DESCRIPCION SUBMODULO], PRACTICAS.HS_NORMALES AS [HS LUN a VIE], PRACTICAS.HS_FERIADO AS [HS SAB DOM y FER], PRACTICAS.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]*[MONTO_SEMANA] AS [$ LUN a VIE], [HS_FERIADO]*[MONTO_FERIADO] AS [$ SAB DOM Y  FER], [HS_DIFERENCIAL]*[PORCENTAJE] AS [$ DIFERENCIAL]
+                                        FROM SUBMODULO INNER JOIN (PACIENTES INNER JOIN (MODULO INNER JOIN (PRESTADORES INNER JOIN PRACTICAS ON PRESTADORES.ID = PRACTICAS.ID_PREST) ON MODULO.CODIGO = PRACTICAS.MODULO) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO) ON SUBMODULO.CODIGO = PRACTICAS.SUB_MODULO
+                                        WHERE (((PRACTICAS.FECHA_PRACTICA) Between #{0}# And #{1}#) AND ((PRACTICAS.ID_PREST)={2}))", desde, hasta, _id)
 
         Try
             da.Fill(ds, "LIQUIDACION")
@@ -279,13 +289,10 @@ Public Class DB
         desde = New Date(_fecha.Year, _fecha.Month, 1)
         hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
-        cmd.CommandType = CommandType.StoredProcedure
-        cmd.CommandText = "QUERY_DETALLE_PACIENTE"
-
-        cmd.Parameters.Clear()
-        cmd.Parameters.AddWithValue("P_ID", _id)
-        cmd.Parameters.AddWithValue("DESDE", desde.ToShortDateString)
-        cmd.Parameters.AddWithValue("HASTA", hasta.ToShortDateString)
+        cmd.CommandType = CommandType.Text
+        cmd.CommandText = String.Format("SELECT PRACTICAS.ID, PRACTICAS.AFILIADO, PRACTICAS.CUIT, PRESTADORES.APELLIDO AS [APELLIDO PRESTADOR], PRESTADORES.NOMBRE AS [NOMBRE PRESTADOR], PRACTICAS.FECHA_PRACTICA AS [FECHA PRACTICA], MODULO.CODIGO AS MODULO, SUBMODULO.CODIGO AS [CODIGO SUBMODULO], SUBMODULO.DESCRIPCION AS [DESCRIPCION SUBMODULO], PRACTICAS.HS_NORMALES AS [HS LUN a VIE], PRACTICAS.HS_FERIADO AS [HS SAB DOM y FER], PRACTICAS.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]*[MONTO_SEMANA] AS [$ LUN a VIE], [HS_FERIADO]*[MONTO_FERIADO] AS [$ SAB DOM y FER], [HS_DIFERENCIAL]*[PORCENTAJE] AS [$ DIFERENCIAL], PRESTADORES.ID AS ID_PRESTADOR
+                            FROM SUBMODULO INNER JOIN (PACIENTES INNER JOIN (MODULO INNER JOIN (PRESTADORES INNER JOIN PRACTICAS ON PRESTADORES.ID = PRACTICAS.ID_PREST) ON MODULO.CODIGO = PRACTICAS.MODULO) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO) ON SUBMODULO.CODIGO = PRACTICAS.SUB_MODULO
+                            WHERE (((PRACTICAS.AFILIADO)='{0}') AND ((PRACTICAS.FECHA_PRACTICA) Between #{1}# And #{2}#))", _id, desde, hasta)
 
         Try
             da.Fill(ds, "PRACTICAS")
@@ -410,9 +417,9 @@ Public Class DB
 
     Friend Sub insertar(_paciente As Paciente)
 
-        Dim query = String.Format("INSERT INTO PACIENTES (AFILIADO, DNI, NOMBRE, APELLIDO, LOCALIDAD, OBRA_SOCIAL, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
-                        VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', #{8}#, #{9}#)",
-                                  _paciente.afiliado, _paciente.dni, _paciente.nombre, _paciente.apellido, _paciente.localidad, _paciente.obrasocial, _paciente.creoUser, _paciente.modifUser, _paciente.fechaCarga.ToShortDateString, _paciente.fechaMod.ToShortDateString)
+        Dim query = String.Format("INSERT INTO PACIENTES (AFILIADO, DNI, NOMBRE, APELLIDO, LOCALIDAD, OBRA_SOCIAL, OBSERVACION, MODULO, SUBMOD, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
+                        VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}','{10}',#{11}#, #{12}#)",
+                                  _paciente.afiliado, _paciente.dni, _paciente.nombre, _paciente.apellido, _paciente.localidad, _paciente.obrasocial, _paciente.observaciones, _paciente.modulo, _paciente.subModulo, _paciente.creoUser, _paciente.modifUser, _paciente.fechaCarga.ToShortDateString, _paciente.fechaMod.ToShortDateString)
 
 
         cmd.CommandType = CommandType.Text
@@ -433,7 +440,8 @@ Public Class DB
     End Sub
 
     Friend Sub insertar(_prestador As Prestador)
-        'Dim cult = New CultureInfo("en-US")
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
 
         Dim query = String.Format("INSERT INTO PRESTADORES (CUIT, APELLIDO, NOMBRE, EMAIL, ESPECIALIDAD, LOCALIDAD, MONTO_SEMANA, MONTO_FERIADO, MONTO_FIJO, PORCENTAJE, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, SERVICIO, COMENTARIO, ZONA) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}, {9}, '{10}', '{11}', #{12}#, #{13}#, '{14}', '{15}', {16})", _prestador.cuit, _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.montoDiferencial, _prestador.creoUser, _prestador.modifUser, _prestador.fechaCarga.ToShortDateString, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.observaciones, _prestador.zona)
 
@@ -450,6 +458,7 @@ Public Class DB
             Throw
         Finally
             cnn.Close()
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
             ut.backUpDBFinal(hacerBackup)
         End Try
 
@@ -487,7 +496,13 @@ Public Class DB
             cmd.ExecuteNonQuery()
         Catch ex As Exception
             hacerBackup = False
-            Throw
+
+            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+                Throw New ExcepcionDeSistema("Esta liquidacion ya esta cerrada")
+            Else
+                Throw
+            End If
+
         Finally
             cnn.Close()
             System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
@@ -613,11 +628,11 @@ Public Class DB
         System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
 
         If _paciente.fechaBaja = Date.MinValue Then
-            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION='{6}' WHERE AFILIADO='{7}'",
-                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.modifUser, _paciente.fechaMod, _paciente.afiliado)
+            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}',  OBSERVACION='{5}', MODULO='{6}', SUBMOD='{7}', MODIFICO_USUARIO='{8}', FECHA_MODIFICACION='{9}' WHERE AFILIADO='{10}'",
+                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.observaciones, _paciente.modulo, _paciente.subModulo, _paciente.modifUser, _paciente.fechaMod, _paciente.afiliado)
         Else
-            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}', MODIFICO_USUARIO='{5}', FECHA_MODIFICACION='{6}', FECHA_BAJA=#{7}# WHERE AFILIADO='{8}'",
-                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.modifUser, _paciente.fechaMod, _paciente.fechaBaja.ToShortDateString, _paciente.afiliado)
+            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}',  OBSERVACION='{5}', MODULO='{6}', SUBMOD='{7}', MODIFICO_USUARIO='{8}', FECHA_MODIFICACION='{9}', FECHA_BAJA=#{10}# WHERE AFILIADO='{11}'",
+                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.observaciones, _paciente.modulo, _paciente.subModulo, _paciente.modifUser, _paciente.fechaMod, _paciente.fechaBaja.ToShortDateString, _paciente.afiliado)
         End If
 
         cmd.CommandType = CommandType.Text
@@ -908,6 +923,28 @@ Public Class DB
             cmd.ExecuteScalar()
             cmd.ExecuteNonQuery()
 
+        Catch ex As Exception
+            Throw
+        Finally
+            cnn.Close()
+        End Try
+    End Sub
+
+    Public Sub eliminarLiquidaciones(_ids As List(Of Integer))
+        Try
+            Dim query = "DELETE FROM LIQUIDACION WHERE ID IN ("
+            For Each id In _ids
+                query += id.ToString & ","
+            Next
+            'remueve la ultima coma
+            query = query.Substring(0, query.Length - 1)
+            query += ")"
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = query
+
+            cnn.Open()
+            cmd.ExecuteNonQuery()
         Catch ex As Exception
             Throw
         Finally

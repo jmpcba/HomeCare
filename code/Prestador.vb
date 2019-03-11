@@ -24,6 +24,14 @@
     Private _zona As Integer
 
     Public Sub New()
+        Try
+            getPrestadores()
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+    Private Sub getPrestadores()
         Dim db = New DB()
         Try
             _prestadores = db.getTable(DB.tablas.prestadores)
@@ -325,6 +333,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property modificado As Boolean
+        Get
+            Return _modificado
+        End Get
+    End Property
+
     Public Sub insertar()
         Try
             _observaciones = _observaciones.Replace("'", " ")
@@ -371,5 +385,13 @@
         _combo.DisplayMember = "combo"
         _combo.ValueMember = "id"
         _combo.SelectedIndex = -1
+    End Sub
+
+    Public Sub refrescar()
+        Try
+            getPrestadores()
+        Catch ex As Exception
+            Throw
+        End Try
     End Sub
 End Class

@@ -10,7 +10,7 @@
     End Sub
     Private Sub btnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
         Me.Hide()
-        frmInformes.ShowDialog()
+        frmReporte.ShowDialog()
     End Sub
     Private Sub btnVerificar_Click(sender As Object, e As EventArgs)
         Me.Hide()
@@ -18,11 +18,13 @@
     End Sub
     Private Sub btnNvaLiq_Click(sender As Object, e As EventArgs) Handles btnNvaLiq.Click
         Me.Hide()
-        frmLiquidar.ShowDialog()
+        Dim frm = New frmLiquidar(frmLiquidar.liquidaciones.abiertas)
+        frm.ShowDialog()
     End Sub
     Private Sub btnCierreLiq_Click(sender As Object, e As EventArgs) Handles btnCierreLiq.Click
         Me.Hide()
-        frmCierreLiq.ShowDialog()
+        Dim frm = New frmLiquidar(frmLiquidar.liquidaciones.cerradas)
+        frm.ShowDialog()
     End Sub
     Private Sub btnPrestadores_Click(sender As Object, e As EventArgs) Handles btnPrestadores.Click
         Me.Hide()

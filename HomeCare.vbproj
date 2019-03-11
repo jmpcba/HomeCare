@@ -163,6 +163,12 @@
     <Compile Include="forms\ABM\FrmFeriados.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="forms\principal\barraDeProgreso.Designer.vb">
+      <DependentUpon>barraDeProgreso.vb</DependentUpon>
+    </Compile>
+    <Compile Include="forms\principal\barraDeProgreso.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmInformes.Designer.vb">
       <DependentUpon>frmInformes.vb</DependentUpon>
     </Compile>
@@ -229,10 +235,10 @@
     <Compile Include="forms\principal\frmPrincipal.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmReporte.Designer.vb">
+    <Compile Include="forms\liquidacion\frmReporte.Designer.vb">
       <DependentUpon>frmReporte.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmReporte.vb">
+    <Compile Include="forms\liquidacion\frmReporte.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\ABM\frmSubMod.Designer.vb">
@@ -313,6 +319,9 @@
     <EmbeddedResource Include="forms\ABM\FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\principal\barraDeProgreso.resx">
+      <DependentUpon>barraDeProgreso.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmInformes.resx">
       <DependentUpon>frmInformes.vb</DependentUpon>
     </EmbeddedResource>
@@ -346,7 +355,7 @@
     <EmbeddedResource Include="forms\principal\frmPrincipal.resx">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmReporte.resx">
+    <EmbeddedResource Include="forms\liquidacion\frmReporte.resx">
       <DependentUpon>frmReporte.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\liquidacion\frmPracticas.resx">

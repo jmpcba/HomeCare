@@ -3,11 +3,10 @@ Imports System.Configuration
 Imports System.Collections.Specialized
 
 Public Class frmPracticas
-    Dim pac As Paciente
-    Dim med As Prestador
-    ' Dim prest As Prestacion
-    Dim modu As Modulo
-    Dim subModu As subModulo
+    Dim pac As New Paciente
+    Dim med As New Prestador
+    Dim modu As New Modulo
+    Dim subModu As New subModulo
     Dim index As Integer
     Dim edicion As Boolean = False
     Dim sel As Boolean = False
@@ -26,11 +25,6 @@ Public Class frmPracticas
             DTFecha.CustomFormat = "MMMM - yyyy"
             lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
 
-            pac = New Paciente()
-            med = New Prestador()
-            subModu = New subModulo
-            modu = New Modulo()
-
             pac.llenarcombo(cbPaciente)
             med.llenarcombo(cbMedico)
             modu.llenarcombo(cbModulo)
@@ -41,7 +35,8 @@ Public Class frmPracticas
             txtEspecialidad.Text = ""
             txtLocalidadPrest.Text = ""
             txtMat.Text = ""
-            txtObservaciones.Text = ""
+            txtObservacionPac.Text = ""
+            txtObservacionPre.Text = ""
             lblHoras.Text = ""
             lblMonto.Text = ""
             lblPaciente.Text = ""
@@ -59,8 +54,6 @@ Public Class frmPracticas
         Finally
             carga = False
         End Try
-
-
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
@@ -76,6 +69,9 @@ Public Class frmPracticas
                     txtAfiliado.Text = pac.afiliado
                     txtBeneficio.Text = pac.obrasocial
                     txtLocalidadPac.Text = pac.localidad
+                    txtObservacionPac.Text = pac.observaciones
+                    cbModulo.SelectedValue = pac.modulo
+                    cbSubModulo.SelectedValue = pac.subModulo
                     PracticasPacienteToolStripMenuItem.Enabled = True
 
                 Catch ex As Exception
@@ -93,7 +89,9 @@ Public Class frmPracticas
         Dim practicas As New List(Of Practica)
 
         ut = New utils
+
         Try
+            Cursor.Current = Cursors.WaitCursor
             btnGuardar.Enabled = False
             dgFechas.Columns("RESULTADO").ReadOnly = False
 
@@ -117,7 +115,10 @@ Public Class frmPracticas
                 If ut.validarLiquidacion(cbMedico.SelectedValue, DTFecha.Value) Then
                     Throw New Exception("LIQUIDACION CERRADA PARA ESTE PRESTADOR - MES")
                 Else
+                    Dim obsPac = txtObservacionPac.Text
+                    Dim obsPre = txtObservacionPre.Text
                     Dim obs = txtObservaciones.Text
+
                     For Each r As DataGridViewRow In dgFechas.Rows
 
                         Dim horas As Integer
@@ -126,30 +127,36 @@ Public Class frmPracticas
                         Dim horasDif As Integer
                         Dim dia As Integer
 
-                        If IsDBNull(r.Cells("PRACTICAS-HS").Value) OrElse r.Cells("PRACTICAS-HS").Value = 0 OrElse r.Cells("PRACTICAS-HS").Value = "" Then
+                        If (IsDBNull(r.Cells("PRACTICAS-HS").Value) OrElse r.Cells("PRACTICAS-HS").Value = 0 OrElse r.Cells("PRACTICAS-HS").Value = "") And
+                           (IsDBNull(r.Cells("DIFERENCIAL-HS").Value) OrElse r.Cells("DIFERENCIAL-HS").Value = 0 OrElse r.Cells("DIFERENCIAL-HS").Value = "") Then
                             r.DefaultCellStyle.BackColor = Color.LightGray
                             Continue For
                         Else
-                            horas = r.Cells("PRACTICAS-HS").Value
                             dia = r.Cells("DIA_H").Value
 
                             Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
 
-                            If r.Cells(4).Value = "SI" Then
-                                horasDif = horas
-                                horasLaV = 0
-                                horasFer = 0
-                            ElseIf ut.esFindeOFeriado(fec) Then
+                            If IsDBNull(r.Cells("DIFERENCIAL-HS").Value) Then
                                 horasDif = 0
+                            Else
+                                horasDif = r.Cells("DIFERENCIAL-HS").Value
+                            End If
+
+                            If IsDBNull(r.Cells("PRACTICAS-HS").Value) Then
+                                horas = 0
+                            Else
+                                horas = r.Cells("PRACTICAS-HS").Value
+                            End If
+
+                            If ut.esFindeOFeriado(fec) Then
                                 horasLaV = 0
                                 horasFer = horas
                             Else
-                                horasDif = 0
                                 horasLaV = horas
                                 horasFer = 0
                             End If
 
-                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horasLaV, horasFer, horasDif, obs, r.Index)
+                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horasLaV, horasFer, horasDif, obs, obsPre, obsPac, r.Index)
 
                             practicas.Add(practica)
                             r.DefaultCellStyle.BackColor = Color.LightGreen
@@ -181,13 +188,47 @@ Public Class frmPracticas
                     Else
                         ut.mensaje("No se cargaron horas para ningun dia", utils.mensajes.err)
                     End If
+
+                    'ACTUALIZAR PACIENTE PRESTADOR
+                    If cbModulo.SelectedValue <> pac.modulo Then
+                        pac.modulo = cbModulo.SelectedValue
+                    End If
+
+                    If cbSubModulo.SelectedValue <> pac.subModulo Then
+                        pac.subModulo = cbSubModulo.SelectedValue
+                    End If
+
+                    If txtObservacionPac.Text <> pac.observaciones Then
+                        pac.observaciones = txtObservacionPac.Text
+                    End If
+
+                    If txtObservacionPre.Text.Trim <> med.observaciones Then
+                        med.observaciones = txtObservacionPre.Text.Trim
+                    End If
+
+                    Try
+                        If med.modificado Then
+                            med.actualizar()
+                            med.refrescar()
+                        End If
+
+                        If pac.modificado Then
+                            pac.actualizar()
+                            pac.refrescar()
+                        End If
+                    Catch ex As Exception
+                        Dim msg = "OCURRIO EL SIGUIENTE ERROR ACTUALIZANDO LOS DATOS DEL PACIENTE/PRESTADOR" & vbCrLf & "SE CONTINUARA CON LA CARGA DE PRACTICAS" & vbCrLf & ex.Message
+                        ut.mensaje(msg, utils.mensajes.err)
+                    End Try
                 End If
             End If
 
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
+
             btnGuardar.Enabled = True
+            Cursor.Current = Cursors.Default
 
             If carga Then
                 iniciarControles()
@@ -243,6 +284,7 @@ Public Class frmPracticas
         dt.Columns.Add("DIA")
         dt.Columns.Add("DIA_H")
         dt.Columns.Add("PRACTICAS-HS")
+        dt.Columns.Add("DIFERENCIAL-HS")
         dt.Columns.Add("RESULTADO")
 
         For i = 0 To days - 1
@@ -254,18 +296,12 @@ Public Class frmPracticas
         Next
 
         Dim chkclm As New DataGridViewCheckBoxColumn
-        Dim drpDiferencial As New DataGridViewComboBoxColumn
 
         With chkclm
             .HeaderText = ""
             .Name = ""
         End With
 
-        With drpDiferencial
-            .HeaderText = "DIFERENCIAL"
-            .Name = ""
-            .DataSource = {"SI", "NO"}
-        End With
 
         With dgFechas
             .Columns.Clear()
@@ -278,12 +314,12 @@ Public Class frmPracticas
             .Columns("RESULTADO").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
 
             .Columns("PRACTICAS-HS").DefaultCellStyle.Font = New Font("arial", 8)
+            .Columns("DIFERENCIAL-HS").DefaultCellStyle.Font = New Font("arial", 8)
 
             .Columns("DIA").ReadOnly = True
             .Columns("RESULTADO").ReadOnly = True
 
             .Columns.Insert(0, chkclm)
-            .Columns.Insert(.ColumnCount - 1, drpDiferencial)
 
             .AutoResizeColumns()
             .AutoResizeRows()
@@ -306,70 +342,85 @@ Public Class frmPracticas
     End Sub
 
     Private Sub calcularTotales(e As DataGridViewCellEventArgs)
-        Dim val = dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value
+        Dim val = dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
         Dim horas As Integer = 0
         Dim monto As Decimal = 0
 
         If IsNothing(med.cuit) Then
             ut.mensaje("Seleccione un Prestador", utils.mensajes.err)
-            dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
+            dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Nothing
             cbMedico.Focus()
         ElseIf IsNothing(modu.codigo) Then
             ut.mensaje("Seleccione un Modulo", utils.mensajes.err)
-            dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
+            dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Nothing
             cbModulo.Focus()
         Else
             If Not IsDBNull(val) Then
                 edicion = True
-                If Not IsNumeric(val) Then
+                If Not IsNumeric(val) And e.ColumnIndex <> 0 Then
                     ut.mensaje("Debe ingresar un valor numerico", utils.mensajes.err)
-                    dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
+                    dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Nothing
                 ElseIf val > 24 Then
                     ut.mensaje("No puede ingresar mas de 24hs en un dia", utils.mensajes.err)
-                    dgFechas.Rows(e.RowIndex).Cells("PRACTICAS-HS").Value = Nothing
+                    dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Nothing
+                End If
+            End If
+
+            If Not IsDBNull(dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value) Then
+                If dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value <> 0 Then
+                    If e.ColumnIndex = 3 Then
+                        dgFechas.Rows(e.RowIndex).Cells(4).Value = Nothing
+                    ElseIf e.ColumnIndex = 4 Then
+                        dgFechas.Rows(e.RowIndex).Cells(3).Value = Nothing
+                    End If
                 End If
             End If
 
             'SI SE MODIFICO LA COLUMNA HORAS (ES 3 PORQUE hay una columna oculta)
             If e.ColumnIndex = 3 Or e.ColumnIndex = 4 Then
+
                 For Each r As DataGridViewRow In dgFechas.Rows
 
                     If r.Cells(0).Value = True Then
-                        r.Cells("PRACTICAS-HS").Value = val
+                        r.Cells(e.ColumnIndex).Value = val
                         r.Cells(0).Value = False
+
+                        If e.ColumnIndex = 3 Then
+                            dgFechas.Rows(r.Index).Cells(4).Value = Nothing
+                        ElseIf e.ColumnIndex = 4 Then
+                            dgFechas.Rows(r.Index).Cells(3).Value = Nothing
+                        End If
                     End If
 
-                    If IsDBNull(r.Cells("PRACTICAS-HS").Value) OrElse r.Cells("PRACTICAS-HS").Value = 0 OrElse r.Cells("PRACTICAS-HS").Value = "" Then
+
+                    If (IsDBNull(r.Cells(3).Value) OrElse r.Cells(3).Value = 0 OrElse r.Cells(3).Value = "") And
+                            (IsDBNull(r.Cells(4).Value) OrElse r.Cells(4).Value = 0 OrElse r.Cells(4).Value = "") Then
                         Continue For
                     Else
                         Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-                        Dim hs = r.Cells("PRACTICAS-HS").Value
-                        If r.Cells(4).Value = "SI" Then
+                        Dim hs As Decimal
+                        If Not IsDBNull(r.Cells(4).Value) Then
                             If med.montoDiferencial = 0 Then
                                 ut.mensaje("Este prestador no tiene cargado un monto diferencial", utils.mensajes.err)
                                 hs = 0
-                                r.Cells("PRACTICAS-HS").Value = Nothing
-                                r.Cells(4).Value = "NO"
+                                r.Cells(e.ColumnIndex).Value = Nothing
                             Else
-                                monto += med.montoDiferencial * r.Cells("PRACTICAS-HS").Value
+                                monto += med.montoDiferencial * r.Cells(4).Value
+                                hs = r.Cells(4).Value
                             End If
-                        Else
-                                If ut.esFindeOFeriado(fecha) Then
+                        ElseIf Not IsDBNull(r.Cells(3).Value) Then
+                            hs = r.Cells(3).Value
+                            If ut.esFindeOFeriado(fecha) Then
                                 If med.montoFeriado = 0 Then
-                                    ut.mensaje("Este prestador no trabaja fines de semana o feriados", utils.mensajes.err)
-                                    hs = 0
-                                    r.Cells("PRACTICAS-HS").Value = Nothing
+                                    monto += med.montoNormal * r.Cells(3).Value
                                 Else
-                                    monto += med.montoFeriado * r.Cells("PRACTICAS-HS").Value
+                                    monto += med.montoFeriado * r.Cells(3).Value
                                 End If
                             Else
-                                monto += med.montoNormal * r.Cells("PRACTICAS-HS").Value
+                                monto += med.montoNormal * r.Cells(3).Value
                             End If
                         End If
 
-                        ' If r.Cells(4).Value = "SI" Then
-                        ' monto += med.montoDiferencial * r.Cells("PRACTICAS-HS").Value
-                        'End If
                         horas += hs
                     End If
                 Next
@@ -416,7 +467,8 @@ Public Class frmPracticas
         txtLocalidadPrest.Text = ""
         txtMat.Text = ""
         txtServicio.Text = ""
-        txtObservaciones.Text = ""
+        txtObservacionPac.Text = ""
+        txtObservacionPre.Text = ""
         lblHoras.Text = ""
         lblMonto.Text = ""
         txtLocalidadPac.Text = ""
@@ -454,6 +506,7 @@ Public Class frmPracticas
                     txtOS.Text = med.obraSocial
                     lblPrecioDif.Text = med.montoDiferencial.ToString("F")
                     PracticasPrestadorToolStripMenuItem.Enabled = True
+                    txtObservacionPre.Text = med.observaciones
                 Catch ex As Exception
                     ut.mensaje(ex.Message, utils.mensajes.err)
                 End Try

@@ -23,7 +23,7 @@ Partial Class frmLiquidar
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblTitulo = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.gridLiqui = New System.Windows.Forms.DataGridView()
         Me.HomeCareDataSet = New HomeCare.HomeCareDataSet()
@@ -32,31 +32,35 @@ Partial Class frmLiquidar
         Me.btnCerrar = New System.Windows.Forms.Button()
         Me.dtMes = New System.Windows.Forms.DateTimePicker()
         Me.btnSelec = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblObservaciones = New System.Windows.Forms.Label()
         Me.txtObservaciones = New System.Windows.Forms.TextBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ExportarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResumenDePrestadoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TodasLasPracticasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CierreLiquidacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
-        Me.CierreLiquidacionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.pb = New System.Windows.Forms.ToolStripProgressBar()
+        Me.btnReAbrir = New System.Windows.Forms.Button()
         CType(Me.gridLiqui, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblTitulo
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(12, 35)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(139, 24)
-        Me.Label1.TabIndex = 107
-        Me.Label1.Text = "LIQUIDACION"
+        Me.lblTitulo.AutoSize = True
+        Me.lblTitulo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitulo.ForeColor = System.Drawing.Color.Red
+        Me.lblTitulo.Location = New System.Drawing.Point(12, 35)
+        Me.lblTitulo.Name = "lblTitulo"
+        Me.lblTitulo.Size = New System.Drawing.Size(139, 24)
+        Me.lblTitulo.TabIndex = 107
+        Me.lblTitulo.Text = "LIQUIDACION"
         '
         'Label8
         '
@@ -80,7 +84,7 @@ Partial Class frmLiquidar
         Me.gridLiqui.MultiSelect = False
         Me.gridLiqui.Name = "gridLiqui"
         Me.gridLiqui.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.gridLiqui.Size = New System.Drawing.Size(909, 333)
+        Me.gridLiqui.Size = New System.Drawing.Size(909, 344)
         Me.gridLiqui.TabIndex = 1
         '
         'HomeCareDataSet
@@ -133,14 +137,14 @@ Partial Class frmLiquidar
         Me.btnSelec.Text = "Seleccionar Todos"
         Me.btnSelec.UseVisualStyleBackColor = True
         '
-        'Label2
+        'lblObservaciones
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(403, 87)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(98, 13)
-        Me.Label2.TabIndex = 112
-        Me.Label2.Text = "OBSERVACIONES"
+        Me.lblObservaciones.AutoSize = True
+        Me.lblObservaciones.Location = New System.Drawing.Point(403, 87)
+        Me.lblObservaciones.Name = "lblObservaciones"
+        Me.lblObservaciones.Size = New System.Drawing.Size(98, 13)
+        Me.lblObservaciones.TabIndex = 112
+        Me.lblObservaciones.Text = "OBSERVACIONES"
         '
         'txtObservaciones
         '
@@ -148,7 +152,7 @@ Partial Class frmLiquidar
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtObservaciones.Location = New System.Drawing.Point(507, 83)
         Me.txtObservaciones.Name = "txtObservaciones"
-        Me.txtObservaciones.Size = New System.Drawing.Size(194, 20)
+        Me.txtObservaciones.Size = New System.Drawing.Size(78, 20)
         Me.txtObservaciones.TabIndex = 113
         '
         'MenuStrip1
@@ -180,6 +184,12 @@ Partial Class frmLiquidar
         Me.TodasLasPracticasToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
         Me.TodasLasPracticasToolStripMenuItem.Text = "&Todas Las Practicas Del Mes"
         '
+        'CierreLiquidacionToolStripMenuItem
+        '
+        Me.CierreLiquidacionToolStripMenuItem.Name = "CierreLiquidacionToolStripMenuItem"
+        Me.CierreLiquidacionToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
+        Me.CierreLiquidacionToolStripMenuItem.Text = "&Todos"
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -196,11 +206,31 @@ Partial Class frmLiquidar
         Me.txtFiltro.Size = New System.Drawing.Size(200, 20)
         Me.txtFiltro.TabIndex = 116
         '
-        'CierreLiquidacionToolStripMenuItem
+        'StatusStrip1
         '
-        Me.CierreLiquidacionToolStripMenuItem.Name = "CierreLiquidacionToolStripMenuItem"
-        Me.CierreLiquidacionToolStripMenuItem.Size = New System.Drawing.Size(271, 26)
-        Me.CierreLiquidacionToolStripMenuItem.Text = "Cierre Liquidacion"
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.pb})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 479)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(937, 22)
+        Me.StatusStrip1.TabIndex = 117
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'pb
+        '
+        Me.pb.Name = "pb"
+        Me.pb.Size = New System.Drawing.Size(100, 16)
+        Me.pb.Visible = False
+        '
+        'btnReAbrir
+        '
+        Me.btnReAbrir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReAbrir.Location = New System.Drawing.Point(595, 70)
+        Me.btnReAbrir.Name = "btnReAbrir"
+        Me.btnReAbrir.Size = New System.Drawing.Size(106, 33)
+        Me.btnReAbrir.TabIndex = 118
+        Me.btnReAbrir.Text = "&REABRIR"
+        Me.btnReAbrir.UseVisualStyleBackColor = True
+        Me.btnReAbrir.Visible = False
         '
         'frmLiquidar
         '
@@ -208,17 +238,19 @@ Partial Class frmLiquidar
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(937, 501)
+        Me.Controls.Add(Me.btnReAbrir)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.txtFiltro)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtObservaciones)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lblObservaciones)
         Me.Controls.Add(Me.btnSelec)
         Me.Controls.Add(Me.dtMes)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.gridLiqui)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblTitulo)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmLiquidar"
@@ -228,12 +260,14 @@ Partial Class frmLiquidar
         CType(Me.HomeCareDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblTitulo As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents gridLiqui As DataGridView
     Friend WithEvents HomeCareDataSet As HomeCareDataSet
@@ -242,7 +276,7 @@ Partial Class frmLiquidar
     Friend WithEvents btnCerrar As Button
     Friend WithEvents dtMes As DateTimePicker
     Friend WithEvents btnSelec As Button
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblObservaciones As Label
     Friend WithEvents txtObservaciones As TextBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ExportarToolStripMenuItem As ToolStripMenuItem
@@ -251,4 +285,7 @@ Partial Class frmLiquidar
     Friend WithEvents Label3 As Label
     Friend WithEvents txtFiltro As TextBox
     Friend WithEvents CierreLiquidacionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents pb As ToolStripProgressBar
+    Friend WithEvents btnReAbrir As Button
 End Class
