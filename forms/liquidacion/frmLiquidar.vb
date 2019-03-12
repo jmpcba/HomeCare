@@ -118,6 +118,12 @@
                 Next
             End With
 
+            If dt.Rows.Count = 0 Then
+                btnSelec.Enabled = False
+            Else
+                btnSelec.Enabled = True
+            End If
+
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
@@ -172,9 +178,9 @@
         sel = Not sel
 
         If sel Then
-            btnSelec.Text = "Des-seleccionar todos"
+            btnSelec.Text = "NINGUNO"
         Else
-            btnSelec.Text = "Seleccionar todos"
+            btnSelec.Text = "TODOS"
         End If
 
         For Each r As DataGridViewRow In gridLiqui.Rows

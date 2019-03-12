@@ -5,6 +5,7 @@
     Dim fecha As Date
     Dim afiliado As String
     Dim frmParent As frmPracticasPaciente
+    Dim sel As Boolean = False
 
     Public Sub New(_afiliado As String, _fecha As Date, ByRef _parent As frmPracticasPaciente)
 
@@ -54,6 +55,10 @@
             dt.Clear()
             dt = db.getPracticasPaciente(afiliado, fecha)
 
+            If dt.Rows.Count = 0 Then
+                btnSel.Enabled = False
+            End If
+
             With chkclm
                 .HeaderText = ""
                 .Name = ""
@@ -75,8 +80,6 @@
             End With
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
-        Finally
-            btnEliminar.Enabled = True
         End Try
     End Sub
 
@@ -150,7 +153,7 @@
         If e.RowIndex <> -1 Then
             Dim sel = dgDetalle.Rows(e.RowIndex).Cells(0).Value
             sel = Not sel
-            btnEliminar.Enabled = True
+            btnEliminar.Enabled = sel
             dgDetalle.Rows(e.RowIndex).Cells(0).Value = sel
         Else
             btnEliminar.Enabled = False
@@ -173,5 +176,21 @@
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
+    End Sub
+
+    Private Sub btnSel_Click(sender As Object, e As EventArgs) Handles btnSel.Click
+        sel = Not sel
+
+        If sel Then
+            btnSel.Text = "NINGUNA"
+            btnEliminar.Enabled = True
+        Else
+            btnSel.Text = "TODAS"
+            btnEliminar.Enabled = False
+        End If
+
+        For Each r As DataGridViewRow In dgDetalle.Rows
+            r.Cells(0).Value = sel
+        Next
     End Sub
 End Class

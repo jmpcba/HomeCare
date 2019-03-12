@@ -10,6 +10,8 @@
         ToolStripProgressBar1.Visible = False
         Me.WindowState = FormWindowState.Maximized
 
+        cbAno.Items.Clear()
+
         For i = 2018 To Today.Year
             cbAno.Items.Add(i)
         Next

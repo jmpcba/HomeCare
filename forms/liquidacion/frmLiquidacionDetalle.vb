@@ -1,10 +1,11 @@
-﻿Public Class frmLiquidacionDetalle
+Public Class frmLiquidacionDetalle
     Dim ut As New utils
     Dim db As New DB
     Dim dt As New DataTable
     Dim fecha As Date
     Dim idPrestador As Integer
     Dim frmParent As frmLiquidar
+    Dim sel As Boolean = False
 
     Public Sub New(_idPrest As Integer, _fecha As Date, ByRef _parent As frmLiquidar)
 
@@ -107,7 +108,7 @@
         If e.RowIndex <> -1 Then
             Dim sel = dgDetalle.Rows(e.RowIndex).Cells(0).Value
             sel = Not sel
-            btnEliminar.Enabled = True
+            btnEliminar.Enabled = sel
             dgDetalle.Rows(e.RowIndex).Cells(0).Value = sel
         Else
             btnEliminar.Enabled = False
@@ -175,5 +176,21 @@
     Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
         dt.DefaultView.RowFilter = String.Format("[APELLIDO PACIENTE] LIKE '%{0}%'", txtFiltro.Text.Trim)
         dgDetalle.Refresh()
+    End Sub
+
+    Private Sub btnSelec_Click(sender As Object, e As EventArgs) Handles btnSelec.Click
+        sel = Not sel
+
+        If sel Then
+            btnSelec.Text = "NINGUNO"
+            btnEliminar.Enabled = True
+        Else
+            btnSelec.Text = "TODOS"
+            btnEliminar.Enabled = False
+        End If
+
+        For Each r As DataGridViewRow In dgDetalle.Rows
+            r.Cells(0).Value = sel
+        Next
     End Sub
 End Class
