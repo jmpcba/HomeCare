@@ -509,7 +509,7 @@ Public Class utils
 
                     Catch ex As Exception
                         Wb.Worksheets.Add()
-                        Ws = Wb.Worksheets(sheetIndex + 1)
+                        Ws = Wb.Worksheets(sheetIndex - 1)
                     End Try
 
                     Ws.Name = dt.TableName
