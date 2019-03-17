@@ -503,8 +503,15 @@ Public Class utils
                     finalColLetter = columnaExcel(dt.Columns.Count)
                     'Generate Excel Column Name (Column ID)
 
-                    sheetIndex += 1
-                    Ws = Wb.Worksheets(sheetIndex)
+                    Try
+                        sheetIndex += 1
+                        Ws = Wb.Worksheets(sheetIndex)
+
+                    Catch ex As Exception
+                        Wb.Worksheets.Add()
+                        Ws = Wb.Worksheets(sheetIndex + 1)
+                    End Try
+
                     Ws.Name = dt.TableName
                     Dim excelRange As String = String.Format("A1:{0}{1}",
                                            finalColLetter, dt.Rows.Count + 1)
@@ -533,11 +540,16 @@ Public Class utils
                     Ws = Nothing
                 Next
 
-                For Each w As Excel.Worksheet In Wb.Sheets
-                    If w.Name.StartsWith("Sheet") Then
-                        w.Delete()
-                    End If
-                Next
+                Try
+                    For Each w As Excel.Worksheet In Wb.Sheets
+                        If w.Name.StartsWith("Sheet") Or w.Name.StartsWith("Hoja") Then
+                            w.Delete()
+                        End If
+                    Next
+                Catch ex As Exception
+
+                End Try
+
 
                 Wb.SaveAs(path)
 

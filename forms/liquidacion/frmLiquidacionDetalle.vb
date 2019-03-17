@@ -1,7 +1,7 @@
 Public Class frmLiquidacionDetalle
     Dim ut As New utils
     Dim db As New DB
-    Dim dt As New DataTable
+    Dim ds As New DataSet
     Dim fecha As Date
     Dim idPrestador As Integer
     Dim frmParent As frmLiquidar
@@ -23,7 +23,7 @@ Public Class frmLiquidacionDetalle
 
             llenarGrilla()
 
-            If dt.Rows.Count > 0 Then
+            If ds.Tables("DETALLE").Rows.Count > 0 Then
                 ToolStripMenuItemDetalle.Enabled = True
             Else
                 ToolStripMenuItemDetalle.Enabled = False
@@ -50,7 +50,7 @@ Public Class frmLiquidacionDetalle
 
             llenarGrilla()
 
-            If dt.Rows.Count > 0 Then
+            If ds.Tables("DETALLE").Rows.Count > 0 Then
                 ToolStripMenuItemDetalle.Enabled = True
             Else
                 ToolStripMenuItemDetalle.Enabled = False
@@ -82,6 +82,8 @@ Public Class frmLiquidacionDetalle
 
                 r.DefaultCellStyle.BackColor = Color.LightGreen
                 ids.Add(id)
+            Else
+                r.DefaultCellStyle.BackColor = Color.White
             End If
         Next
 
@@ -93,8 +95,8 @@ Public Class frmLiquidacionDetalle
                 Else
                     db.eliminarPractica(ids)
                     llenarGrilla()
-                    dgDetalle.Refresh()
-
+                    'dgDetalle.Refresh()
+                    'grResumen.Refresh()
                 End If
 
             Catch ex As Exception
@@ -103,7 +105,7 @@ Public Class frmLiquidacionDetalle
         End If
     End Sub
 
-    Private Sub dgDetalle_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgDetalle.CellClick
+    Private Sub dgDetalle_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgDetalle.CellContentClick
 
         If e.RowIndex <> -1 Then
             Dim sel = dgDetalle.Rows(e.RowIndex).Cells(0).Value
@@ -127,7 +129,7 @@ Public Class frmLiquidacionDetalle
 
     Private Sub DetallePrestadorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDetalle.Click
         Try
-            ut.exportarExcel(dt)
+            ut.exportarExcel(ds.Tables("DETALLE"))
             Focus()
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
@@ -140,11 +142,11 @@ Public Class frmLiquidacionDetalle
 
     Private Sub llenarGrilla()
         Dim chkclm As New DataGridViewCheckBoxColumn
+
         Try
             btnEliminar.Enabled = False
-            dgDetalle.DataSource = Nothing
-            dt.Clear()
-            dt = db.getLiquidacion(idPrestador, fecha)
+            ds.Clear()
+            ds = db.getLiquidacion(idPrestador, fecha)
 
             With chkclm
                 .HeaderText = ""
@@ -153,16 +155,26 @@ Public Class frmLiquidacionDetalle
             End With
 
             With dgDetalle
+                .DataSource = Nothing
                 .Columns.Clear()
-                .DataSource = dt
+                .DataSource = ds.Tables("DETALLE")
                 .AutoResizeColumns()
                 .AutoResizeRows()
                 .ClearSelection()
                 .Columns("id").Visible = False
 
-                If dt.Rows.Count <> 0 Then
+                If ds.Tables("DETALLE").Rows.Count <> 0 Then
                     .Columns.Insert(0, chkclm)
                 End If
+            End With
+
+            With grResumen
+                .DataSource = Nothing
+                .Columns.Clear()
+                .DataSource = ds.Tables("RESUMEN")
+                .AutoResizeColumns()
+                .AutoResizeRows()
+                .ClearSelection()
             End With
 
         Catch ex As Exception
@@ -174,8 +186,14 @@ Public Class frmLiquidacionDetalle
     End Sub
 
     Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
-        dt.DefaultView.RowFilter = String.Format("[APELLIDO PACIENTE] LIKE '%{0}%'", txtFiltro.Text.Trim)
+
+        Dim filtro = String.Format("[APELLIDO PACIENTE] LIKE '%{0}%'", txtFiltro.Text.Trim)
+
+        ds.Tables("DETALLE").DefaultView.RowFilter = filtro
+        ds.Tables("RESUMEN").DefaultView.RowFilter = filtro
+
         dgDetalle.Refresh()
+        grResumen.Refresh()
     End Sub
 
     Private Sub btnSelec_Click(sender As Object, e As EventArgs) Handles btnSelec.Click
@@ -193,4 +211,5 @@ Public Class frmLiquidacionDetalle
             r.Cells(0).Value = sel
         Next
     End Sub
+
 End Class

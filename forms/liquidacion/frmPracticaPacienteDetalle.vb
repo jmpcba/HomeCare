@@ -1,7 +1,7 @@
 ﻿Public Class frmPracticaPacienteDetalle
     Dim ut As New utils
     Dim db As New DB
-    Dim dt As New DataTable
+    Dim ds As New DataSet
     Dim fecha As Date
     Dim afiliado As String
     Dim frmParent As frmPracticasPaciente
@@ -51,11 +51,10 @@
         Try
             Dim chkclm As New DataGridViewCheckBoxColumn
             btnEliminar.Enabled = False
-            dgDetalle.DataSource = Nothing
-            dt.Clear()
-            dt = db.getPracticasPaciente(afiliado, fecha)
+            ds.Clear()
+            ds = db.getPracticasPaciente(afiliado, fecha)
 
-            If dt.Rows.Count = 0 Then
+            If ds.Tables("DETALLE").Rows.Count = 0 Then
                 btnSel.Enabled = False
             End If
 
@@ -66,18 +65,29 @@
             End With
 
             With dgDetalle
+                .DataSource = Nothing
                 .Columns.Clear()
-                .DataSource = dt
+                .DataSource = ds.Tables("DETALLE")
                 .AutoResizeColumns()
                 .AutoResizeRows()
                 .ClearSelection()
                 .Columns("id").Visible = False
                 .Columns("id_prestador").Visible = False
 
-                If dt.Rows.Count <> 0 Then
+                If ds.Tables("DETALLE").Rows.Count <> 0 Then
                     .Columns.Insert(0, chkclm)
                 End If
             End With
+
+            With dgResumen
+                .DataSource = Nothing
+                .Columns.Clear()
+                .DataSource = ds.Tables("RESUMEN")
+                .AutoResizeColumns()
+                .AutoResizeRows()
+                .ClearSelection()
+            End With
+
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
@@ -165,13 +175,14 @@
     End Sub
 
     Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
-        dt.DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] LIKE '%{0}%'", txtFiltro.Text.Trim)
+        ds.Tables("DETALLE").DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] LIKE '%{0}%'", txtFiltro.Text.Trim)
+        ds.Tables("RESUMEN").DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] LIKE '%{0}%'", txtFiltro.Text.Trim)
         dgDetalle.Refresh()
     End Sub
 
     Private Sub ExportarListaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarListaToolStripMenuItem.Click
         Try
-            ut.exportarExcel(dt)
+            ut.exportarExcel(ds.Tables("DETALLE"))
             Focus()
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)

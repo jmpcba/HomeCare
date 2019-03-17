@@ -69,19 +69,24 @@ Public Class DB
         Dim desde As Date
         Dim hasta As Date
 
+        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+
         desde = New Date(_fecha.Year, _fecha.Month, 1)
         hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
         cmd.CommandType = CommandType.Text
         cmd.CommandText = String.Format("SELECT PRACTICAS.ID, PRACTICAS.CUIT, PRESTADORES.APELLIDO AS [APELLIDO PRESTADOR], PRESTADORES.NOMBRE AS [NOMBRE PRESTADOR], PRESTADORES.LOCALIDAD, PRESTADORES.ESPECIALIDAD, PRESTADORES.SERVICIO, PRACTICAS.AFILIADO, PACIENTES.APELLIDO AS [APELLIDO PACIENTE], PACIENTES.NOMBRE AS [NOMBRE PACIENTE], PRACTICAS.FECHA_PRACTICA AS [FECHA PRACTICA], MODULO.CODIGO AS MODULO, SUBMODULO.CODIGO AS [CODIGO SUBMODULO], SUBMODULO.DESCRIPCION AS [DESCRIPCION SUBMODULO], PRACTICAS.HS_NORMALES AS [HS LUN a VIE], PRACTICAS.HS_FERIADO AS [HS SAB DOM y FER], PRACTICAS.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]*[MONTO_SEMANA] AS [$ LUN a VIE], [HS_FERIADO]*[MONTO_FERIADO] AS [$ SAB DOM y FER], [HS_DIFERENCIAL]*[PORCENTAJE] AS [$ DIF], PRESTADORES.MONTO_FIJO AS [MONTO FIJO]
                             FROM SUBMODULO INNER JOIN (PACIENTES INNER JOIN (MODULO INNER JOIN (PRESTADORES INNER JOIN PRACTICAS ON PRESTADORES.ID = PRACTICAS.ID_PREST) ON MODULO.CODIGO = PRACTICAS.MODULO) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO) ON SUBMODULO.CODIGO = PRACTICAS.SUB_MODULO
-                            WHERE (((PRACTICAS.FECHA_PRACTICA) Between #{0}# And #{1}#))", desde, hasta)
+                            WHERE (((PRACTICAS.FECHA_PRACTICA) Between #{0}# And #{1}#))", desde.ToShortDateString, hasta.ToShortDateString)
 
         Try
             da.Fill(ds, "PRACTICAS")
             Return ds.Tables("PRACTICAS")
         Catch ex As Exception
             Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
+        Finally
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
         End Try
     End Function
 
@@ -140,7 +145,7 @@ Public Class DB
             'LIQUIDACIONES CERRADAS
         ElseIf _liq = tiposLiquidacion.cerrada Then
 
-            cmd.CommandText = String.Format("SELECT LIQUIDACION.ID, LIQUIDACION.ID_PREST, LIQUIDACION.CUIT, PRESTADORES.APELLIDO, PRESTADORES.NOMBRE, LIQUIDACION.LOCALIDAD, LIQUIDACION.ESPECIALIDAD, LIQUIDACION.HS_NORMALES AS [HS LUN a VIE], LIQUIDACION.HS_FERIADOS AS [HS SAB DOM Y FER], LIQUIDACION.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]+[HS_FERIADOS]+[HS_DIFERENCIAL] AS [TOTAL HORAS], LIQUIDACION.MONTO_FIJO AS [MONTO FIJO], LIQUIDACION.IMPORTE_NORMAL AS [$ LUN a VIE], LIQUIDACION.IMPORTE_FERIADO AS [$ SAB DOM y FER], LIQUIDACION.IMPORTE_DIFERENCIAL AS [$ DIF], [$ DIF]+[$ LUN a VIE]+[$ SAB DOM y FER]+[MONTO FIJO] AS [$ TOTAL]
+            cmd.CommandText = String.Format("SELECT LIQUIDACION.ID, LIQUIDACION.ID_PREST, LIQUIDACION.CUIT, PRESTADORES.APELLIDO AS [APELLIDO PRESTADOR], PRESTADORES.NOMBRE, LIQUIDACION.LOCALIDAD, LIQUIDACION.ESPECIALIDAD, LIQUIDACION.HS_NORMALES AS [HS LUN a VIE], LIQUIDACION.HS_FERIADOS AS [HS SAB DOM Y FER], LIQUIDACION.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]+[HS_FERIADOS]+[HS_DIFERENCIAL] AS [TOTAL HORAS], LIQUIDACION.MONTO_FIJO AS [MONTO FIJO], LIQUIDACION.IMPORTE_NORMAL AS [$ LUN a VIE], LIQUIDACION.IMPORTE_FERIADO AS [$ SAB DOM y FER], LIQUIDACION.IMPORTE_DIFERENCIAL AS [$ DIF], [$ DIF]+[$ LUN a VIE]+[$ SAB DOM y FER]+[MONTO FIJO] AS [$ TOTAL]
                                 FROM LIQUIDACION INNER JOIN PRESTADORES ON LIQUIDACION.ID_PREST = PRESTADORES.ID
                                 WHERE (((LIQUIDACION.MES)=#{0}#))", hasta.ToShortDateString)
 
@@ -258,7 +263,7 @@ Public Class DB
             cnn.Close()
         End Try
     End Sub
-    Friend Function getLiquidacion(_id As Integer, _fecha As Date) As DataTable
+    Friend Function getLiquidacion(_id As Integer, _fecha As Date) As DataSet
         Dim desde As Date
         Dim hasta As Date
 
@@ -274,8 +279,17 @@ Public Class DB
                                         WHERE (((PRACTICAS.FECHA_PRACTICA) Between #{0}# And #{1}#) AND ((PRACTICAS.ID_PREST)={2}))", desde, hasta, _id)
 
         Try
-            da.Fill(ds, "LIQUIDACION")
-            Return ds.Tables("LIQUIDACION")
+            da.Fill(ds, "DETALLE")
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = String.Format("SELECT PACIENTES.AFILIADO, PACIENTES.APELLIDO AS [APELLIDO PACIENTE], PACIENTES.NOMBRE, Count(PRACTICAS.ID) AS [CANT PRACTICAS], Sum(PRACTICAS.HS_NORMALES+HS_FERIADO+HS_DIFERENCIAL) AS [CANT HORAS]
+                                FROM PACIENTES INNER JOIN (PRESTADORES INNER JOIN PRACTICAS ON PRESTADORES.ID = PRACTICAS.ID_PREST) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO
+                                WHERE (((PRESTADORES.ID)={2}) AND ((PRACTICAS.FECHA_PRACTICA) Between #{0}# And #{1}#))
+                                GROUP BY PACIENTES.AFILIADO, PACIENTES.APELLIDO, PACIENTES.NOMBRE", desde, hasta, _id)
+
+            da.Fill(ds, "RESUMEN")
+            Return ds
+
         Catch ex As Exception
             Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
         Finally
@@ -284,25 +298,36 @@ Public Class DB
 
     End Function
 
-    Friend Function getPracticasPaciente(_id As String, _fecha As Date) As DataTable
+    Friend Function getPracticasPaciente(_id As String, _fecha As Date) As DataSet
         Dim desde As Date
         Dim hasta As Date
 
         Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
         System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
 
+        Try
 
-        desde = New Date(_fecha.Year, _fecha.Month, 1)
-        hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
+            desde = New Date(_fecha.Year, _fecha.Month, 1)
+            hasta = New Date(_fecha.Year, _fecha.Month, Date.DaysInMonth(_fecha.Year, _fecha.Month))
 
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = String.Format("SELECT PRACTICAS.ID, PRACTICAS.AFILIADO, PRACTICAS.CUIT, PRESTADORES.APELLIDO AS [APELLIDO PRESTADOR], PRESTADORES.NOMBRE AS [NOMBRE PRESTADOR], PRACTICAS.FECHA_PRACTICA AS [FECHA PRACTICA], MODULO.CODIGO AS MODULO, SUBMODULO.CODIGO AS [CODIGO SUBMODULO], SUBMODULO.DESCRIPCION AS [DESCRIPCION SUBMODULO], PRACTICAS.HS_NORMALES AS [HS LUN a VIE], PRACTICAS.HS_FERIADO AS [HS SAB DOM y FER], PRACTICAS.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]*[MONTO_SEMANA] AS [$ LUN a VIE], [HS_FERIADO]*[MONTO_FERIADO] AS [$ SAB DOM y FER], [HS_DIFERENCIAL]*[PORCENTAJE] AS [$ DIFERENCIAL], PRESTADORES.ID AS ID_PRESTADOR
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = String.Format("SELECT PRACTICAS.ID, PRACTICAS.AFILIADO, PRACTICAS.CUIT, PRESTADORES.APELLIDO AS [APELLIDO PRESTADOR], PRESTADORES.NOMBRE AS [NOMBRE PRESTADOR], PRACTICAS.FECHA_PRACTICA AS [FECHA PRACTICA], MODULO.CODIGO AS MODULO, SUBMODULO.CODIGO AS [CODIGO SUBMODULO], SUBMODULO.DESCRIPCION AS [DESCRIPCION SUBMODULO], PRACTICAS.HS_NORMALES AS [HS LUN a VIE], PRACTICAS.HS_FERIADO AS [HS SAB DOM y FER], PRACTICAS.HS_DIFERENCIAL AS DIFERENCIAL, [HS_NORMALES]*[MONTO_SEMANA] AS [$ LUN a VIE], [HS_FERIADO]*[MONTO_FERIADO] AS [$ SAB DOM y FER], [HS_DIFERENCIAL]*[PORCENTAJE] AS [$ DIFERENCIAL], PRESTADORES.ID AS ID_PRESTADOR
                             FROM SUBMODULO INNER JOIN (PACIENTES INNER JOIN (MODULO INNER JOIN (PRESTADORES INNER JOIN PRACTICAS ON PRESTADORES.ID = PRACTICAS.ID_PREST) ON MODULO.CODIGO = PRACTICAS.MODULO) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO) ON SUBMODULO.CODIGO = PRACTICAS.SUB_MODULO
                             WHERE (((PRACTICAS.AFILIADO)='{0}') AND ((PRACTICAS.FECHA_PRACTICA) Between #{1}# And #{2}#))", _id, desde.ToShortDateString, hasta.ToShortDateString)
 
-        Try
-            da.Fill(ds, "PRACTICAS")
-            Return ds.Tables("PRACTICAS")
+
+            da.Fill(ds, "DETALLE")
+
+            cmd.CommandType = CommandType.Text
+            cmd.CommandText = String.Format("SELECT PRESTADORES.CUIT, PRESTADORES.APELLIDO AS [APELLIDO PRESTADOR], PRESTADORES.NOMBRE, PRESTADORES.ESPECIALIDAD, Count(PRACTICAS.ID) AS [CANT PRACTICAS], Sum(PRACTICAS.HS_NORMALES + PRACTICAS.HS_FERIADO + PRACTICAS.HS_DIFERENCIAL) AS [CANT HORAS]
+                                FROM PACIENTES INNER JOIN (PRESTADORES INNER JOIN PRACTICAS ON PRESTADORES.ID = PRACTICAS.ID_PREST) ON PACIENTES.AFILIADO = PRACTICAS.AFILIADO
+                                WHERE (((PACIENTES.AFILIADO)='{0}') AND ((PRACTICAS.FECHA_PRACTICA) Between #{1}# And #{2}#))
+                                GROUP BY PRESTADORES.CUIT, PRESTADORES.APELLIDO, PRESTADORES.NOMBRE, PRESTADORES.ESPECIALIDAD;", _id, desde.ToShortDateString, hasta.ToShortDateString)
+
+
+            da.Fill(ds, "RESUMEN")
+
+            Return ds
         Catch ex As Exception
             Throw New Exception("Error DE BASE DE DATOS: " & ex.Message)
         Finally
