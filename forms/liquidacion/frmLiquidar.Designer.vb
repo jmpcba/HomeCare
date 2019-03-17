@@ -132,9 +132,9 @@ Partial Class frmLiquidar
         '
         Me.btnSelec.Location = New System.Drawing.Point(16, 82)
         Me.btnSelec.Name = "btnSelec"
-        Me.btnSelec.Size = New System.Drawing.Size(135, 23)
+        Me.btnSelec.Size = New System.Drawing.Size(79, 23)
         Me.btnSelec.TabIndex = 111
-        Me.btnSelec.Text = "Seleccionar Todos"
+        Me.btnSelec.Text = "TODOS"
         Me.btnSelec.UseVisualStyleBackColor = True
         '
         'lblObservaciones
