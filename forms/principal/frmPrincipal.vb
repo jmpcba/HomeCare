@@ -1,62 +1,132 @@
 ﻿Public Class frmPrincipal
     Dim ut As New utils
     Private Sub btnVisita_Click(sender As Object, e As EventArgs) Handles btnVisita.Click
-        Me.Hide()
-        frmPracticas.Show()
+        Try
+            Me.Hide()
+            frmPracticas.Show()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
-        Me.Hide()
-        frmPracticasPaciente.ShowDialog()
+        Try
+            Me.Hide()
+            frmPracticasPaciente.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnInformes_Click(sender As Object, e As EventArgs) Handles btnInformes.Click
-        Me.Hide()
-        frmReporte.ShowDialog()
+        Try
+            Me.Hide()
+            frmReporte.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnVerificar_Click(sender As Object, e As EventArgs)
-        Me.Hide()
-        frmVerificar.ShowDialog()
+        Try
+            Me.Hide()
+            frmVerificar.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnNvaLiq_Click(sender As Object, e As EventArgs) Handles btnNvaLiq.Click
-        Me.Hide()
-        Dim frm = New frmLiquidar(frmLiquidar.liquidaciones.abiertas)
-        frm.ShowDialog()
+        Try
+            Me.Hide()
+            Dim frm = New frmLiquidar(frmLiquidar.liquidaciones.abiertas)
+            frm.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnCierreLiq_Click(sender As Object, e As EventArgs) Handles btnCierreLiq.Click
-        Me.Hide()
-        Dim frm = New frmLiquidar(frmLiquidar.liquidaciones.cerradas)
-        frm.ShowDialog()
+        Try
+            Me.Hide()
+            Dim frm = New frmLiquidar(frmLiquidar.liquidaciones.cerradas)
+            frm.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnPrestadores_Click(sender As Object, e As EventArgs) Handles btnPrestadores.Click
-        Me.Hide()
-        frmPrestadores.ShowDialog()
+        Try
+            Me.Hide()
+            frmPrestadores.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnPacientes_Click(sender As Object, e As EventArgs) Handles btnPacientes.Click
-        Me.Hide()
-        frmPacientes.ShowDialog()
+        Try
+            Me.Hide()
+            frmPacientes.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnModulo_Click(sender As Object, e As EventArgs) Handles btnModulo.Click
-        Me.Hide()
-        frmModulo.ShowDialog()
+        Try
+            Me.Hide()
+            frmModulo.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnSubMod_Click(sender As Object, e As EventArgs) Handles btnSubMod.Click
-        Me.Hide()
-        frmSubMod.ShowDialog()
+        Try
+            Me.Hide()
+            frmSubMod.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnPrestacion_Click(sender As Object, e As EventArgs)
-        Me.Hide()
-        frmPrestacion.ShowDialog()
+        Try
+            Me.Hide()
+            frmPrestacion.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnFeriados_Click(sender As Object, e As EventArgs) Handles btnFeriados.Click
-        Me.Hide()
-        FrmFeriados.ShowDialog()
+        Try
+            Me.Hide()
+            FrmFeriados.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnUsuarios_Click(sender As Object, e As EventArgs) Handles btnUsuarios.Click
-        Me.Hide()
-        frmUsuarios.ShowDialog()
+        Try
+            Me.Hide()
+            frmUsuarios.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
     Private Sub btnZonas_Click(sender As Object, e As EventArgs) Handles btnZonas.Click
-        Me.Hide()
-        frmZonas.ShowDialog()
+        Try
+            Me.Hide()
+            frmZonas.ShowDialog()
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+            Me.Show()
+        End Try
     End Sub
 
     Private Sub frmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load

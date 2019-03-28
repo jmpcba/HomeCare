@@ -38,11 +38,11 @@
             Try
                 ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(numDni, 8)
-                If txtObSocial.Text.Trim.ToUpper = "PAMI" Then
-                    ut.validarLargo(numAfiliado, 12)
-                Else
-                    ut.validarLargo(numAfiliado, 8)
-                End If
+                'If txtObSocial.Text.Trim.ToUpper = "PAMI" Then
+                '    ut.validarLargo(numAfiliado, 12)
+                'Else
+                '    ut.validarLargo(numAfiliado, 8)
+                'End If
                 Dim combos = {cbModulo, cbSubModulo}
                 ut.validarCombos(combos)
 
