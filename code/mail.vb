@@ -1,5 +1,6 @@
 ﻿Imports System.Net.Mail
 Imports System.Net
+Imports System.IO
 Public Class Mail
 
     Dim liqui As Liquidacion
@@ -23,6 +24,7 @@ Public Class Mail
             Dim mail As String = My.Resources.mailTemplate
             Dim mm As MailMessage = New MailMessage()
             Dim totalFinal As Decimal
+            Dim attachment As Attachment
 
             mail = mail.Replace("[MES]", MonthName(_liq.mes.Month))
             mail = mail.Replace("[YEAR]", _liq.mes.Year)
@@ -41,6 +43,9 @@ Public Class Mail
             mm.IsBodyHtml = True
             mm.Body = mail
             mm.To.Add(New MailAddress(_liq.prestador.email))
+            attachment = New Attachment(Path.Combine(My.Application.Info.DirectoryPath, "Resources\logo.jpg"))
+            attachment.ContentId = "logo.jpg"
+            mm.Attachments.Add(attachment)
 
             If mailFrom.EndsWith("gmail.com") Then
                 client.Host = "smtp.gmail.com"

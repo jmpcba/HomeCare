@@ -61,23 +61,23 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Busca una cadena traducida similar a &lt;html&gt;
-        '''	&lt;p&gt;Buenos dias &lt;br&gt;
-        '''	los honorarios por prestaciones realizadas en el mes de &lt;b&gt;[MES] [YEAR]&lt;/b&gt; son de: &lt;br&gt;
-        '''	&lt;br&gt;
-        '''
-        '''	&lt;b&gt;HORAS PRACTICAS LUNES A VIERNES:&lt;/b&gt; [HS_LAV] &lt;br&gt;
-        '''	&lt;b&gt;HORAS PRACTICAS FERIADOS Y DOMINGOS:&lt;/b&gt; [HS_FER] &lt;br&gt;
-        '''	&lt;br&gt;
-        '''	&lt;b&gt;MONTO LUNES A VIERNES:&lt;/b&gt; $[MONTO_LAV] &lt;br&gt;
-        '''	&lt;b&gt;MONTO FERIADOS:&lt;/b&gt; $[MONTO_FER] &lt;br&gt;
-        '''	&lt;b&gt;MONTO FIJO:&lt;/b&gt; $[MONTO_FIJO] &lt;br&gt;
-        '''	&lt;br&gt;
-        '''	Cualquier duda o consulta sobre el calculo de prestaciones, comunicarse a este email.
-        '''	&lt;br&gt;
-        '''	&lt;br&gt;
-        '''	&lt;br&gt;
-        '''	&lt;center&gt;* [resto de la cadena truncado]&quot;;.
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Public ReadOnly Property logo() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("logo", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca una cadena traducida similar a &lt;p&gt;
+        '''    Buenos dias [APELLIDO], [NOMBRE]&lt;br /&gt;&lt;br /&gt;
+        '''    los honorarios PAMI del mes de &lt;b&gt;[MES] [YEAR]&lt;/b&gt; son de: $[MONTO_TOTAL]
+        '''    &lt;br /&gt;
+        '''    Cualquier duda o consulta sobre el calculo de prestaciones, comunicarse a este email.
+        '''    &lt;br /&gt;
+        '''    *Una vez informado el monto, recibida y verificada la correspondiente factura existe un plazo de hasta 72 hs hábiles para la acreditación del pago. Al momento de la acreditación recibirá un mail de confirmación de transferencia desde la Entidad Bancaria*&lt;br / [resto de la cadena truncado]&quot;;.
         '''</summary>
         Public ReadOnly Property mailTemplate() As String
             Get
