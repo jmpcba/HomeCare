@@ -124,6 +124,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="code\DB.vb" />
+    <Compile Include="code\dbHelper.vb" />
     <Compile Include="code\encriptador.vb" />
     <Compile Include="code\especialidad.vb" />
     <Compile Include="code\exceptiones\ExcepcionDeSistema.vb" />

@@ -111,6 +111,30 @@ Namespace My
                 Me("DBBackupPath") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property modoOficina() As Boolean
+            Get
+                Return CType(Me("modoOficina"),Boolean)
+            End Get
+            Set
+                Me("modoOficina") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property checksumDB() As String
+            Get
+                Return CType(Me("checksumDB"),String)
+            End Get
+            Set
+                Me("checksumDB") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

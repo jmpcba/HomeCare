@@ -26,6 +26,7 @@
 
     Private Sub frmPacientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtBoxes = {txtEmail, txtPass}
+        btnGuardar.Enabled = My.Settings.modoOficina
         Try
             txtEmail.Text = db.getEmail
             txtPass.Text = db.getEmailPass

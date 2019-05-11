@@ -49,10 +49,15 @@ Partial Class frmPrincipal
         Me.CopiarBaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestaurarBaseDeDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MailToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TrabajarDesdeCasaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TrabajarEnLaOficinaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.statusBar = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnVisita
@@ -121,7 +126,7 @@ Partial Class frmPrincipal
         '
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnCerrar.Location = New System.Drawing.Point(749, 179)
+        Me.btnCerrar.Location = New System.Drawing.Point(749, 219)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(106, 33)
         Me.btnCerrar.TabIndex = 20
@@ -245,7 +250,7 @@ Partial Class frmPrincipal
         '
         'ConfiguracionToolStripMenuItem
         '
-        Me.ConfiguracionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseDeDatosToolStripMenuItem, Me.MailToolStripMenuItem})
+        Me.ConfiguracionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaseDeDatosToolStripMenuItem, Me.MailToolStripMenuItem, Me.TrabajarDesdeCasaToolStripMenuItem, Me.TrabajarEnLaOficinaToolStripMenuItem})
         Me.ConfiguracionToolStripMenuItem.Name = "ConfiguracionToolStripMenuItem"
         Me.ConfiguracionToolStripMenuItem.Size = New System.Drawing.Size(95, 20)
         Me.ConfiguracionToolStripMenuItem.Text = "&Configuracion"
@@ -254,7 +259,7 @@ Partial Class frmPrincipal
         '
         Me.BaseDeDatosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UbicacionToolStripMenuItem, Me.CopiasDeSeguridadToolStripMenuItem1})
         Me.BaseDeDatosToolStripMenuItem.Name = "BaseDeDatosToolStripMenuItem"
-        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.BaseDeDatosToolStripMenuItem.Text = "&Base de Datos"
         '
         'UbicacionToolStripMenuItem
@@ -291,8 +296,20 @@ Partial Class frmPrincipal
         'MailToolStripMenuItem
         '
         Me.MailToolStripMenuItem.Name = "MailToolStripMenuItem"
-        Me.MailToolStripMenuItem.Size = New System.Drawing.Size(147, 22)
+        Me.MailToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
         Me.MailToolStripMenuItem.Text = "&Mail"
+        '
+        'TrabajarDesdeCasaToolStripMenuItem
+        '
+        Me.TrabajarDesdeCasaToolStripMenuItem.Name = "TrabajarDesdeCasaToolStripMenuItem"
+        Me.TrabajarDesdeCasaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.TrabajarDesdeCasaToolStripMenuItem.Text = "Trabajar Desde Casa"
+        '
+        'TrabajarEnLaOficinaToolStripMenuItem
+        '
+        Me.TrabajarEnLaOficinaToolStripMenuItem.Name = "TrabajarEnLaOficinaToolStripMenuItem"
+        Me.TrabajarEnLaOficinaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.TrabajarEnLaOficinaToolStripMenuItem.Text = "Trabajar En la Oficina"
         '
         'InfoToolStripMenuItem
         '
@@ -300,11 +317,32 @@ Partial Class frmPrincipal
         Me.InfoToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
         Me.InfoToolStripMenuItem.Text = "&Info"
         '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.statusBar})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 562)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(881, 22)
+        Me.StatusStrip1.TabIndex = 106
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'statusBar
+        '
+        Me.statusBar.ActiveLinkColor = System.Drawing.Color.Red
+        Me.statusBar.BackColor = System.Drawing.Color.Red
+        Me.statusBar.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.statusBar.ForeColor = System.Drawing.Color.White
+        Me.statusBar.Name = "statusBar"
+        Me.statusBar.Size = New System.Drawing.Size(153, 17)
+        Me.statusBar.Text = "MODO HOGAR ACTIVADO"
+        Me.statusBar.Visible = False
+        '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(881, 544)
+        Me.ClientSize = New System.Drawing.Size(881, 584)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.btnCerrar)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.MenuStrip2)
@@ -319,6 +357,8 @@ Partial Class frmPrincipal
         Me.Panel2.PerformLayout()
         Me.MenuStrip2.ResumeLayout(False)
         Me.MenuStrip2.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -352,4 +392,8 @@ Partial Class frmPrincipal
     Friend WithEvents CopiarBaseDeDatosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RestaurarBaseDeDatosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BtnZonas As Button
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents statusBar As ToolStripStatusLabel
+    Friend WithEvents TrabajarDesdeCasaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TrabajarEnLaOficinaToolStripMenuItem As ToolStripMenuItem
 End Class
