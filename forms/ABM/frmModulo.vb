@@ -147,17 +147,11 @@
     End Sub
 
     Private Sub frmModulo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'btnBuscar.Enabled = False
         txtboxes = {txtCodigo, txtMedico, txtEnfermeria, txtKinesio, txtFono, txtCuidador, txtNutricion}
     End Sub
 
     Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged
         Try
-            '  If txtCodigo.Text <> "" Then
-            '  btnBuscar.Enabled = True
-            '  Else
-            '  btnBuscar.Enabled = False
-            '  End If
 
             If Not IsNothing(modu) Then
                 modu = Nothing

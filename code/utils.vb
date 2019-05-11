@@ -1,5 +1,7 @@
 ﻿Imports System.IO
+Imports System.Security
 Imports Microsoft.Office.Interop
+Imports System.Security.Cryptography
 
 Public Class utils
 
@@ -295,9 +297,114 @@ Public Class utils
         End If
     End Sub
 
+    Friend Sub modoOficina()
+        Dim pathActual = My.Settings.DBPath
+        Dim bckpActual = My.Settings.DBBackupPath
+        Dim DBH As New dbHelper()
+        Dim pathAnterior As String
+        Dim bckpAnterior As String
+        Dim hashDBAnterior As String
+
+        Try
+            If Not My.Settings.modoOficina Then
+
+                pathAnterior = DBH.ejecutarEscalar("SELECT MAIL_PASS FROM CONFIG WHERE MAIL='DB_PATH'")
+                bckpAnterior = DBH.ejecutarEscalar("SELECT MAIL_PASS FROM CONFIG WHERE MAIL='DB_BCKP_PATH'")
+                hashDBAnterior = getmd5(pathAnterior)
+
+                If hashDBAnterior <> My.Settings.checksumDB Then
+                    If mensaje("Se realizaron cambios mientras usted trabajaba en casa" & vbCrLf & "Si continua se perderan" & vbCrLf & "Desea continuar", utils.mensajes.preg) = MsgBoxResult.No Then
+                        Return
+                    End If
+                End If
+
+                If File.Exists(pathAnterior) Then
+
+                    If bckpAnterior = "" Then
+                        bckpAnterior = Path.Combine(pathAnterior, "BCKP")
+                    End If
+
+                    Dim p = Path.GetFullPath(My.Settings.DBPath)
+                    Dim bckFileName = Path.GetFileName(My.Settings.DBPath)
+                    bckFileName = bckFileName.Insert(bckFileName.IndexOf(".accdb"), "_copia_usuario_" & Now.ToString("yyyy-MM-dd_HHmm"))
+                    'copia del archivo actual
+                    File.Copy(pathAnterior, Path.Combine(bckpAnterior, bckFileName), True)
+                    File.Copy(pathActual, pathAnterior, True)
+
+                    My.Settings.DBPath = pathAnterior
+                    My.Settings.DBBackupPath = bckpAnterior
+                    My.Settings.modoOficina = True
+
+                    'REFRESCAR OBJETO DBH CON EL NUEVO PATH A LA DB
+                    DBH = New dbHelper()
+                    Dim sql As New List(Of String)
+                    sql.Add("DELETE FROM CONFIG WHERE MAIL='DB_PATH'")
+                    sql.Add("DELETE FROM CONFIG WHERE MAIL='DB_BCKP_PATH'")
+                    sql.Add("DELETE FROM CONFIG WHERE MAIL='MD5'")
+
+                    DBH.ejecutarNonQueryMultiple(sql)
+
+                    mensaje("Modo Oficina Activo", mensajes.info)
+                Else
+                    Throw New Exception(String.Format("La ubicacion anterior de la base de datos" & vbCrLf & "{0}" & "No se encuentra disponible", pathAnterior))
+                End If
+            End If
+
+        Catch ex As Exception
+            My.Settings.DBPath = pathActual
+            My.Settings.DBBackupPath = bckpActual
+            My.Settings.modoOficina = False
+            Throw
+        Finally
+            My.Settings.Save()
+        End Try
+    End Sub
+
+    Friend Sub modoremoto()
+        Dim pathActual = My.Settings.DBPath
+        Dim bckpActual = My.Settings.DBBackupPath
+        Dim DBH As New dbHelper()
+
+        Try
+            If My.Settings.modoOficina Then
+                Dim sql As New List(Of String)
+                Dim NOMBRE_ARCHIVO_DB = Path.GetFileName(My.Settings.DBPath)
+                Dim MY_DOCS = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+
+                sql.Add(String.Format("INSERT INTO CONFIG VALUES ('{0}', '{1}','')", "DB_PATH", My.Settings.DBPath))
+                sql.Add(String.Format("INSERT INTO CONFIG VALUES ('{0}', '{1}','')", "DB_BCKP_PATH", My.Settings.DBBackupPath))
+
+                DBH.ejecutarNonQueryMultiple(sql)
+
+
+                FileCopy(pathActual, Path.Combine(MY_DOCS, NOMBRE_ARCHIVO_DB))
+
+                My.Settings.DBPath = Path.Combine(MY_DOCS, NOMBRE_ARCHIVO_DB)
+                My.Settings.DBBackupPath = Path.Combine(MY_DOCS, "BCKP")
+                My.Settings.modoOficina = False
+                My.Settings.checksumDB = getmd5(My.Settings.DBPath)
+            Else
+                Throw New Exception("Ya se encuentra en modo trabajo desde casa")
+            End If
+        Catch ex As Exception
+            My.Settings.DBPath = pathActual
+            My.Settings.DBBackupPath = bckpActual
+            My.Settings.modoOficina = True
+
+            Dim sql As New List(Of String)
+            sql.Add("DELETE FROM CONFIG WHERE MAIL='DB_PATH'")
+            sql.Add("DELETE FROM CONFIG WHERE MAIL='DB_BCKP_PATH'")
+            sql.Add("DELETE FROM CONFIG WHERE MAIL='MD5'")
+            DBH.ejecutarNonQueryMultiple(sql)
+            Throw
+        Finally
+            My.Settings.Save()
+        End Try
+    End Sub
+
     Public Sub validarMail(_mail As String)
         If _mail.Contains("@") And (_mail.Contains(".COM") Or _mail.Contains(".com")) Then
-            Else
+        Else
             Throw New Exception("El mail debe seguir el formato alguien@algo.com")
         End If
     End Sub
@@ -595,4 +702,38 @@ Public Class utils
         End If
         columnaExcel = S
     End Function
+
+    Public Function getmd5(_arch As String) As String
+        Dim hash = MD5.Create()
+        Dim hashValue As Byte()
+
+        Try
+            hashValue = hash.ComputeHash(File.ReadAllBytes(_arch))
+
+            Dim hash_hex = PrintByteArray(hashValue)
+            Return hash_hex
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Public Function PrintByteArray(ByVal array() As Byte)
+
+        Dim hex_value As String = ""
+
+        ' We traverse the array of bytes
+        Dim i As Integer
+        For i = 0 To array.Length - 1
+
+            ' We convert each byte in hexadecimal
+            hex_value += array(i).ToString("X2")
+
+        Next i
+
+        ' We return the string in lowercase
+        Return hex_value.ToLower
+
+    End Function
+
 End Class

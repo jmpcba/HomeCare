@@ -119,7 +119,7 @@
             Me.Show()
         End Try
     End Sub
-    Private Sub btnZonas_Click(sender As Object, e As EventArgs) Handles btnZonas.Click
+    Private Sub btnZonas_Click(sender As Object, e As EventArgs) Handles BtnZonas.Click
         Try
             Me.Hide()
             frmZonas.ShowDialog()
@@ -141,6 +141,17 @@
         Else
             btnUsuarios.Visible = True
         End If
+
+        If Not My.Settings.modoOficina Then
+            ut.mensaje("SE ENCUENTRA TABAJANDO DESDE CASA!!! RECUERDE CAMBIAR A MODO OFICINA", utils.mensajes.aviso)
+        End If
+
+        UbicacionToolStripMenuItem.Enabled = My.Settings.modoOficina
+        CopiasDeSeguridadToolStripMenuItem1.Enabled = My.Settings.modoOficina
+        statusBar.Visible = Not My.Settings.modoOficina
+        TrabajarEnLaOficinaToolStripMenuItem.Enabled = Not My.Settings.modoOficina
+        TrabajarDesdeCasaToolStripMenuItem.Enabled = My.Settings.modoOficina
+        statusBar.Visible = Not My.Settings.modoOficina
     End Sub
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
@@ -194,6 +205,40 @@
                 ut.restaurarDB()
             End If
 
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+    End Sub
+
+    Private Sub TrabajarDesdeCasaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TrabajarDesdeCasaToolStripMenuItem.Click
+        If ut.mensaje("se hara una copia de la DB en su computadora" & vbCrLf & "Desea continuar", utils.mensajes.preg) = MsgBoxResult.Yes Then
+            Try
+                ut.modoremoto()
+                UbicacionToolStripMenuItem.Enabled = My.Settings.modoOficina
+                CopiasDeSeguridadToolStripMenuItem1.Enabled = My.Settings.modoOficina
+                statusBar.Visible = Not My.Settings.modoOficina
+                TrabajarEnLaOficinaToolStripMenuItem.Enabled = Not My.Settings.modoOficina
+                TrabajarDesdeCasaToolStripMenuItem.Enabled = My.Settings.modoOficina
+                statusBar.Visible = Not My.Settings.modoOficina
+                ut.mensaje("Modo hogar activo", utils.mensajes.info)
+            Catch ex As Exception
+                ut.mensaje(ex.Message, utils.mensajes.err)
+            End Try
+        End If
+    End Sub
+
+    Private Sub TrabajarEnLaOficinaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TrabajarEnLaOficinaToolStripMenuItem.Click
+        Try
+            If ut.mensaje("sus version de la base de datos sera puesta a disposicion de los demas usuarios" & vbCrLf & "Desea continuar?", utils.mensajes.preg) = MsgBoxResult.Yes Then
+                ut.modoOficina()
+                UbicacionToolStripMenuItem.Enabled = My.Settings.modoOficina
+                CopiasDeSeguridadToolStripMenuItem1.Enabled = My.Settings.modoOficina
+                statusBar.Visible = Not My.Settings.modoOficina
+                TrabajarEnLaOficinaToolStripMenuItem.Enabled = Not My.Settings.modoOficina
+                TrabajarDesdeCasaToolStripMenuItem.Enabled = My.Settings.modoOficina
+                statusBar.Visible = Not My.Settings.modoOficina
+
+            End If
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try

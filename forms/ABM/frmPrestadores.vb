@@ -194,7 +194,7 @@
         dtCese.Enabled = False
         txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo, numDiferencial}
         iniciarControles()
-        'numDiferencial.ReadOnly = False
+
         ut.habilitarBoton(txtBoxes, btnGuardar)
     End Sub
 
