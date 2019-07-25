@@ -1,4 +1,8 @@
-﻿Public Class Paciente
+﻿Imports System.IO
+Imports System.Net
+Imports Newtonsoft
+
+Public Class Paciente
 
     Private _pacientes As DataTable
 
@@ -27,9 +31,25 @@
     End Sub
 
     Private Sub getPacientes()
+
+        Dim response As WebResponse
+        Dim dataStream As Stream
+        Dim reader As StreamReader
+
         Try
-            Dim db = New DB()
-            _pacientes = db.getTable(DB.tablas.pacientes)
+            Dim request As WebRequest = WebRequest.Create("https://2idw8jlsf6.execute-api.us-east-1.amazonaws.com/test/databroker?table=PACIENTES")
+            request.Method = "GET"
+
+            request.ContentType = "application/json"
+            response = request.GetResponse()
+            dataStream = response.GetResponseStream()
+            reader = New StreamReader(dataStream)
+            Dim responseFromServer As String = reader.ReadToEnd()
+
+
+
+            _pacientes = Json.JsonConvert.DeserializeObject(Of DataTable)(responseFromServer)
+
             _pacientes.Columns.Add("COMBO")
 
             For Each r As DataRow In _pacientes.Rows
@@ -41,8 +61,14 @@
                 r("COMBO") = String.Format("{0} {1}", ape, nom)
             Next
             _pacientes.DefaultView.Sort = "COMBO"
+
         Catch ex As Exception
             Throw
+
+        Finally
+            reader.Close()
+            dataStream.Close()
+            response.Close()
         End Try
     End Sub
 
@@ -77,11 +103,11 @@
         Set(value As String)
             Dim r As DataRow()
 
-            r = _pacientes.Select("afiliado='" & value & "'")
+            r = _pacientes.Select("id='" & value & "'")
 
             If r.Length = 1 Then
 
-                _afiliado = r(0)("afiliado")
+                _afiliado = r(0)("id")
                 _dni = r(0)("dni")
                 _nombre = r(0)("nombre")
                 _apellido = r(0)("apellido")
@@ -106,10 +132,10 @@
                     _modulo = r(0)("modulo")
                 End If
 
-                If IsDBNull(r(0)("subMod")) Then
+                If IsDBNull(r(0)("subModulo")) Then
                     _subModulo = ""
                 Else
-                    _subModulo = r(0)("subMod")
+                    _subModulo = r(0)("subModulo")
                 End If
             Else
                 Throw New Exception("Codigo Inexistente")
@@ -275,7 +301,7 @@
 
         _combo.DataSource = DV
         _combo.DisplayMember = "combo"
-        _combo.ValueMember = "afiliado"
+        _combo.ValueMember = "id"
         _combo.SelectedIndex = -1
     End Sub
 

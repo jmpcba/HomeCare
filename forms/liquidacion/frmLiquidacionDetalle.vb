@@ -129,7 +129,7 @@ Public Class frmLiquidacionDetalle
 
     Private Sub DetallePrestadorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDetalle.Click
         Try
-            ut.exportarExcel(ds.Tables("DETALLE"))
+            'ut.exportarExcel(ds.Tables("DETALLE"))
             Focus()
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
