@@ -46,8 +46,8 @@
                 Dim combos = {cbModulo, cbSubModulo}
                 ut.validarCombos(combos)
 
-                If txtObSocial.Text.Trim <> pac.obrasocial Then
-                    pac.obrasocial = txtObSocial.Text.Trim
+                If txtObSocial.Text.Trim <> pac.obra_social Then
+                    pac.obra_social = txtObSocial.Text.Trim
                 End If
 
                 If txtApellido.Text.Trim <> pac.apellido Then
@@ -58,38 +58,33 @@
                     pac.nombre = txtNombre.Text.Trim
                 End If
 
-                If txtObSocial.Text.Trim <> pac.obrasocial Then
-                    pac.obrasocial = txtObSocial.Text.Trim
+                If txtObSocial.Text.Trim <> pac.obra_social Then
+                    pac.obra_social = txtObSocial.Text.Trim
                 End If
 
                 If txtLocalidad.Text.Trim <> pac.localidad Then
                     pac.localidad = txtLocalidad.Text.Trim
                 End If
 
-                If txtObservacionPac.Text.Trim <> pac.observaciones Then
-                    pac.observaciones = txtObservacionPac.Text.Trim
+                If txtObservacionPac.Text.Trim <> pac.observacion Then
+                    pac.observacion = txtObservacionPac.Text.Trim
                 End If
 
-                If numDni.Text.Trim <> pac.dni Then
-                    pac.dni = numDni.Text.Trim
+                If numDni.Text.Trim <> pac.DNI Then
+                    pac.DNI = numDni.Text.Trim
                 End If
 
                 If cbModulo.SelectedValue <> pac.modulo Then
                     pac.modulo = cbModulo.SelectedValue
                 End If
 
-                If cbSubModulo.SelectedValue <> pac.subModulo Then
-                    pac.subModulo = cbSubModulo.SelectedValue
+                If cbSubModulo.SelectedValue <> pac.sub_modulo Then
+                    pac.sub_modulo = cbSubModulo.SelectedValue
                 End If
 
                 If chbBaja.Checked Then
-                    If dtBaja.Value.ToShortDateString <> pac.fechaBaja Then
-                        pac.fechaBaja = dtBaja.Text
-                    End If
-                Else
-                    If pac.fechaBaja <> Date.MinValue Then
-                        pac.fechaBaja = Date.MinValue
-                        pac.reactivar()
+                    If dtBaja.Value.ToShortDateString <> pac.baja Then
+                        pac.baja = dtBaja.Text
                     End If
                 End If
 
@@ -174,17 +169,17 @@
     Public Sub resultadoBusqueda(ByRef _paciente As Paciente)
         numAfiliado.ReadOnly = True
         numAfiliado.Text = _paciente.afiliado
-        numDni.Text = _paciente.dni
+        numDni.Text = _paciente.DNI
         txtApellido.Text = _paciente.apellido
         txtNombre.Text = _paciente.nombre
-        txtObSocial.Text = _paciente.obrasocial
+        txtObSocial.Text = _paciente.obra_social
         txtLocalidad.Text = _paciente.localidad
-        dtBaja.Text = _paciente.fechaBaja
-        txtObservacionPac.Text = _paciente.observaciones
+        'dtBaja.Text = _paciente.baja
+        txtObservacionPac.Text = _paciente.observacion
         cbModulo.SelectedValue = _paciente.modulo
-        cbSubModulo.SelectedValue = _paciente.subModulo
+        cbSubModulo.SelectedValue = _paciente.sub_modulo
 
-        If _paciente.fechaBaja <> Date.MinValue Then
+        If _paciente.baja Then
             chbBaja.Checked = True
             ut.desactivarTxtBoxes(txtBoxes)
         Else

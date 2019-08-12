@@ -81,7 +81,7 @@
                 If frmParent.GetType.Name = "frmPrestadores" Then
                     obj.id = r.Cells("ID").Value
                 ElseIf frmParent.GetType.Name = "frmPacientes" Then
-                    obj.afiliado = r.Cells("id").Value
+                    obj.afiliado = r.Cells("afiliado").Value
                 ElseIf frmParent.GetType.Name = "frmModulo" Then
                     obj.codigo = r.Cells("codigo").Value
                 ElseIf frmParent.GetType.Name = "frmSubMod" Then

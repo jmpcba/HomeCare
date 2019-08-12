@@ -14,7 +14,6 @@
         If IsNothing(prest) Then
             Try
                 ut.validarTxtBoxLleno(txtBoxes)
-                'ut.validarLargo(txtCuit, 11)
                 ut.validarMail(txtEmail.Text.Trim)
                 ut.validarNumerico({numFijo, numLunVie, numFeriados})
 
@@ -54,7 +53,6 @@
             Try
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarMail(txtEmail.Text.Trim)
-                'ut.validarLargo(txtCuit, 11)
                 ut.validarNumerico({numFijo, numLunVie, numFeriados})
                 montoLaV = numLunVie.Text.Trim
                 montoFeriado = numFeriados.Text.Trim
@@ -70,8 +68,8 @@
                 If txtApellido.Text.Trim <> prest.apellido Then
                     prest.apellido = txtApellido.Text.Trim
                 End If
-                If txtEmail.Text.Trim <> prest.email Then
-                    prest.email = txtEmail.Text.Trim
+                If txtEmail.Text.Trim <> prest.mail Then
+                    prest.mail = txtEmail.Text.Trim
                 End If
                 If cbEspecialidad.SelectedValue <> prest.especialidad Then
                     prest.especialidad = cbEspecialidad.SelectedValue
@@ -79,36 +77,31 @@
                 If txtLocalidad.Text.Trim <> prest.localidad Then
                     prest.localidad = txtLocalidad.Text.Trim
                 End If
-                If txtServicio.Text.Trim <> prest.obraSocial Then
-                    prest.obraSocial = txtServicio.Text.Trim
+                If txtServicio.Text.Trim <> prest.servicio Then
+                    prest.servicio = txtServicio.Text.Trim
                 End If
-                If montoLaV <> prest.montoNormal Then
-                    prest.montoNormal = montoLaV
+                If montoLaV <> prest.monto_semana Then
+                    prest.monto_semana = montoLaV
                 End If
-                If montoFeriado <> prest.montoFeriado Then
-                    prest.montoFeriado = montoFeriado
+                If montoFeriado <> prest.monto_feriado Then
+                    prest.monto_feriado = montoFeriado
                 End If
                 If numDiferencial.Text.Trim <> prest.montoDiferencial Then
                     prest.montoDiferencial = numDiferencial.Text.Trim
                 End If
-                If montoFijo <> prest.montoFijo Then
-                    prest.montoFijo = montoFijo
+                If montoFijo <> prest.monto_fijo Then
+                    prest.monto_fijo = montoFijo
                 End If
 
                 If chbCese.Checked Then
 
-                    If dtCese.Value.ToShortDateString <> prest.fechaCese Then
-                        prest.fechaCese = dtCese.Text
-                    End If
-                Else
-                    If prest.fechaCese <> Date.MinValue Then
-                        prest.fechaCese = Date.MinValue
-                        prest.reactivar()
+                    If dtCese.Value.ToShortDateString <> prest.baja Then
+                        prest.baja = dtCese.Text
                     End If
                 End If
 
-                If txtComentario.Text.Trim <> prest.observaciones Then
-                    prest.observaciones = txtComentario.Text.Trim
+                If txtComentario.Text.Trim <> prest.comentario Then
+                    prest.comentario = txtComentario.Text.Trim
                 End If
 
                 If cbZona.SelectedValue <> prest.zona Then
@@ -157,7 +150,6 @@
         ut.habilitarBoton(txtBoxes, btnGuardar)
         Try
 
-            'ut.validarNumerico(txtCuit)
             If Not IsNothing(prest) Then
                 prest = Nothing
             End If
@@ -218,27 +210,26 @@
 
     Public Sub resultadoBusqueda(ByRef _prestador As Prestador)
         txtCuit.ReadOnly = True
-        txtCuit.Text = _prestador.cuit
+        txtCuit.Text = _prestador.CUIT
         txtNombre.Text = _prestador.nombre
         txtApellido.Text = _prestador.apellido
-        txtEmail.Text = _prestador.email
+        txtEmail.Text = _prestador.mail
         cbEspecialidad.SelectedValue = _prestador.especialidad
         txtLocalidad.Text = _prestador.localidad
-        numLunVie.Text = _prestador.montoNormal
-        numFeriados.Text = _prestador.montoFeriado
+        numLunVie.Text = _prestador.monto_semana
+        numFeriados.Text = _prestador.monto_feriado
         numDiferencial.Text = _prestador.montoDiferencial
-        numFijo.Text = _prestador.montoFijo
-        txtServicio.Text = _prestador.obraSocial
-        dtCese.Text = _prestador.fechaCese
+        numFijo.Text = _prestador.monto_fijo
+        txtServicio.Text = _prestador.servicio
         chbCese.Checked = False
         cbZona.SelectedValue = _prestador.zona
 
-        If _prestador.fechaCese <> Date.MinValue Then
+        If _prestador.baja Then
             chbCese.Checked = True
             ut.desactivarTxtBoxes(txtBoxes)
         End If
 
-        txtComentario.Text = _prestador.observaciones
+        txtComentario.Text = _prestador.comentario
         prest = _prestador
         chbCese.Enabled = True
         btnGuardar.Enabled = True

@@ -258,7 +258,7 @@
 
             For Each r As DataRow In dtExport.Rows
                 prest.id = r("ID_PREST")
-                r("OBSERVACIONES") = prest.observaciones
+                r("OBSERVACIONES") = prest.comentario
             Next
 
             'ut.exportarExcel(dtExport)
@@ -308,7 +308,7 @@
 
             For Each r As DataRow In dtPrestadores.Rows
                 prest.id = r("ID_PREST")
-                r("OBSERVACIONES") = prest.observaciones
+                r("OBSERVACIONES") = prest.comentario
             Next
 
 
