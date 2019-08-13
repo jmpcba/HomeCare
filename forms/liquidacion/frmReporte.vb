@@ -92,7 +92,7 @@
 
     Private Sub ExportarListadoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarListadoToolStripMenuItem.Click
         Try
-            ut.exportarExcel(dtFinal)
+            'ut.exportarExcel(dtFinal)
             Focus()
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)

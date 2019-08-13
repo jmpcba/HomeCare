@@ -352,7 +352,7 @@ Public Class DB
 
         Try
             Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST, HS_DIFERENCIAL) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14})",
-                                      _practica.prestador.cuit, _practica.paciente.afiliado, _practica.modulo, _practica.subModulo,
+                                      _practica.prestador.CUIT, _practica.paciente.afiliado, _practica.modulo, _practica.subModulo,
                                       _practica.hsSemana, _practica.hsFeriado, _practica.fecha.ToShortDateString,
                                       DateTime.Today.ToShortDateString, _practica.observaciones, _practica.creoUser,
                                       _practica.fechaCarga.ToShortDateString, _practica.modifUser, _practica.fechaMod.ToShortDateString, _practica.prestador.id, _practica.hsDif)
@@ -388,7 +388,7 @@ Public Class DB
         For Each p As Practica In _practicas
             Try
                 Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST, HS_DIFERENCIAL) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14})",
-                                      p.prestador.cuit, p.paciente.afiliado, p.modulo, p.subModulo,
+                                      p.prestador.CUIT, p.paciente.afiliado, p.modulo, p.subModulo,
                                       p.hsSemana, p.hsFeriado, p.fecha.ToShortDateString,
                                       DateTime.Today.ToShortDateString, p.observaciones, p.creoUser,
                                       p.fechaCarga.ToShortDateString, p.modifUser, p.fechaMod.ToShortDateString, p.prestador.id, p.hsDif)
@@ -448,61 +448,13 @@ Public Class DB
         End Try
     End Sub
 
-    Friend Sub insertar(_paciente As Paciente)
-
-        Dim query = String.Format("INSERT INTO PACIENTES (AFILIADO, DNI, NOMBRE, APELLIDO, LOCALIDAD, OBRA_SOCIAL, OBSERVACION, MODULO, SUBMOD, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
-                        VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}','{10}',#{11}#, #{12}#)",
-                                  _paciente.afiliado, _paciente.dni, _paciente.nombre, _paciente.apellido, _paciente.localidad, _paciente.obrasocial, _paciente.observaciones, _paciente.modulo, _paciente.subModulo, _paciente.creoUser, _paciente.modifUser, _paciente.fechaCarga.ToShortDateString, _paciente.fechaMod.ToShortDateString)
-
-
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
-
-        Try
-            ut.backupDBTemp()
-
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
-
-    Friend Sub insertar(_prestador As Prestador)
-        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
-        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
-
-        Dim query = String.Format("INSERT INTO PRESTADORES (CUIT, APELLIDO, NOMBRE, EMAIL, ESPECIALIDAD, LOCALIDAD, MONTO_SEMANA, MONTO_FERIADO, MONTO_FIJO, PORCENTAJE, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, SERVICIO, COMENTARIO, ZONA) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {6}, {7}, {8}, {9}, '{10}', '{11}', #{12}#, #{13}#, '{14}', '{15}', {16})", _prestador.cuit, _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.montoDiferencial, _prestador.creoUser, _prestador.modifUser, _prestador.fechaCarga.ToShortDateString, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.observaciones, _prestador.zona)
-
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
-
-        Try
-            ut.backupDBTemp()
-
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-
-    End Sub
 
     Friend Sub insertar(_liq As Liquidacion)
         Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
         System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
 
         Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, ID_PREST, HS_DIFERENCIAL, IMPORTE_DIFERENCIAL) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#, {13}, {14}, {15})",
-                                  _liq.prestador.cuit,
+                                  _liq.prestador.CUIT,
                                   _liq.prestador.localidad,
                                   _liq.prestador.especialidad,
                                   _liq.mes.ToShortDateString,
@@ -654,70 +606,7 @@ Public Class DB
             ut.backUpDBFinal(hacerBackup)
         End Try
     End Sub
-    Friend Sub actualizar(_paciente As Paciente)
 
-        Dim query As String
-        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
-        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
-
-        If _paciente.fechaBaja = Date.MinValue Then
-            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}',  OBSERVACION='{5}', MODULO='{6}', SUBMOD='{7}', MODIFICO_USUARIO='{8}', FECHA_MODIFICACION='{9}' WHERE AFILIADO='{10}'",
-                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.observaciones, _paciente.modulo, _paciente.subModulo, _paciente.modifUser, _paciente.fechaMod, _paciente.afiliado)
-        Else
-            query = String.Format("UPDATE PACIENTES SET DNI={0}, APELLIDO='{1}', NOMBRE='{2}', LOCALIDAD='{3}', OBRA_SOCIAL='{4}',  OBSERVACION='{5}', MODULO='{6}', SUBMOD='{7}', MODIFICO_USUARIO='{8}', FECHA_MODIFICACION='{9}', FECHA_BAJA=#{10}# WHERE AFILIADO='{11}'",
-                                    _paciente.dni, _paciente.apellido, _paciente.nombre, _paciente.localidad, _paciente.obrasocial, _paciente.observaciones, _paciente.modulo, _paciente.subModulo, _paciente.modifUser, _paciente.fechaMod, _paciente.fechaBaja.ToShortDateString, _paciente.afiliado)
-        End If
-
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
-
-        Try
-            ut.backupDBTemp()
-
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
-        End Try
-    End Sub
-
-    Friend Sub actualizar(_prestador As Prestador)
-
-        Dim query As String
-
-        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
-        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
-
-        If _prestador.fechaCese = Date.MinValue Then
-            query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}', COMENTARIO='{12}', ZONA={13} WHERE ID={14}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.montoDiferencial, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.observaciones, _prestador.zona, _prestador.id)
-        Else
-            query = String.Format("UPDATE PRESTADORES SET APELLIDO='{0}', NOMBRE='{1}', EMAIL='{2}', ESPECIALIDAD='{3}', LOCALIDAD='{4}', MONTO_SEMANA={5}, MONTO_FERIADO={6}, MONTO_FIJO={7}, PORCENTAJE={8}, MODIFICO_USUARIO='{9}', FECHA_MODIFICACION='{10}', SERVICIO='{11}', FECHA_CESE=#{12}#, COMENTARIO='{13}', ZONA={14} WHERE ID={15}", _prestador.apellido, _prestador.nombre, _prestador.email, _prestador.especialidad, _prestador.localidad, _prestador.montoNormal, _prestador.montoFeriado, _prestador.montoFijo, _prestador.montoDiferencial, _prestador.modifUser, _prestador.fechaMod.ToShortDateString, _prestador.obraSocial, _prestador.fechaCese.ToShortDateString, _prestador.observaciones, _prestador.zona, _prestador.id)
-        End If
-
-
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
-
-        Try
-            ut.backupDBTemp()
-
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
-        End Try
-
-    End Sub
     Friend Sub actualizar(_feriado As Feriado)
 
     End Sub

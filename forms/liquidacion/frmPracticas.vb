@@ -67,11 +67,11 @@ Public Class frmPracticas
                     pac.afiliado = cbPaciente.SelectedValue
                     lblPaciente.Text = String.Format("{0} {1}", pac.apellido, pac.nombre)
                     txtAfiliado.Text = pac.afiliado
-                    txtBeneficio.Text = pac.obrasocial
+                    txtBeneficio.Text = pac.obra_social
                     txtLocalidadPac.Text = pac.localidad
-                    txtObservacionPac.Text = pac.observaciones
+                    txtObservacionPac.Text = pac.observacion
                     cbModulo.SelectedValue = pac.modulo
-                    cbSubModulo.SelectedValue = pac.subModulo
+                    cbSubModulo.SelectedValue = pac.sub_modulo
                     PracticasPacienteToolStripMenuItem.Enabled = True
 
                 Catch ex As Exception
@@ -118,6 +118,7 @@ Public Class frmPracticas
                     Dim obsPac = txtObservacionPac.Text
                     Dim obsPre = txtObservacionPre.Text
                     Dim obs = txtObservaciones.Text
+                    Dim gp = New GestorPracticas()
 
                     For Each r As DataGridViewRow In dgFechas.Rows
 
@@ -158,18 +159,17 @@ Public Class frmPracticas
 
                             Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horasLaV, horasFer, horasDif, obs, obsPre, obsPac, r.Index)
 
-                            practicas.Add(practica)
+                            gp.add(practica)
                             r.DefaultCellStyle.BackColor = Color.LightGreen
                             r.Cells("RESULTADO").Value = "Cargado"
                             carga = True
                         End If
                     Next
 
-                    Dim db As New DB
                     Dim re As New List(Of ResultadoCargaPracticas)
 
                     If carga Then
-                        re = db.insertar(practicas)
+                        gp.guardar()
                     End If
 
                     If re.Count > 0 Then
@@ -194,16 +194,16 @@ Public Class frmPracticas
                         pac.modulo = cbModulo.SelectedValue
                     End If
 
-                    If cbSubModulo.SelectedValue <> pac.subModulo Then
-                        pac.subModulo = cbSubModulo.SelectedValue
+                    If cbSubModulo.SelectedValue <> pac.sub_modulo Then
+                        pac.sub_modulo = cbSubModulo.SelectedValue
                     End If
 
-                    If txtObservacionPac.Text <> pac.observaciones Then
-                        pac.observaciones = txtObservacionPac.Text
+                    If txtObservacionPac.Text <> pac.observacion Then
+                        pac.observacion = txtObservacionPac.Text
                     End If
 
-                    If txtObservacionPre.Text.Trim <> med.observaciones Then
-                        med.observaciones = txtObservacionPre.Text.Trim
+                    If txtObservacionPre.Text.Trim <> med.comentario Then
+                        med.comentario = txtObservacionPre.Text.Trim
                     End If
 
                     Try
@@ -346,7 +346,7 @@ Public Class frmPracticas
         Dim horas As Integer = 0
         Dim monto As Decimal = 0
 
-        If IsNothing(med.cuit) Then
+        If IsNothing(med.CUIT) Then
             ut.mensaje("Seleccione un Prestador", utils.mensajes.err)
             dgFechas.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Nothing
             cbMedico.Focus()
@@ -411,13 +411,13 @@ Public Class frmPracticas
                         ElseIf Not IsDBNull(r.Cells(3).Value) Then
                             hs = r.Cells(3).Value
                             If ut.esFindeOFeriado(fecha) Then
-                                If med.montoFeriado = 0 Then
-                                    monto += med.montoNormal * r.Cells(3).Value
+                                If med.monto_feriado = 0 Then
+                                    monto += med.monto_semana * r.Cells(3).Value
                                 Else
-                                    monto += med.montoFeriado * r.Cells(3).Value
+                                    monto += med.monto_feriado * r.Cells(3).Value
                                 End If
                             Else
-                                monto += med.montoNormal * r.Cells(3).Value
+                                monto += med.monto_semana * r.Cells(3).Value
                             End If
                         End If
 
@@ -497,16 +497,16 @@ Public Class frmPracticas
                 med.id = cbMedico.SelectedValue.ToString
                 Try
                     lblMed.Text = String.Format("{0} {1}", med.apellido, med.nombre)
-                    txtMat.Text = med.cuit
+                    txtMat.Text = med.CUIT
                     txtLocalidadPrest.Text = med.localidad
                     txtEspecialidad.Text = med.especialidad
-                    txtServicio.Text = med.obraSocial
-                    lblPrecioFeriado.Text = med.montoFeriado.ToString("F")
-                    lblPrecioLaV.Text = med.montoNormal.ToString("F")
-                    txtOS.Text = med.obraSocial
+                    txtServicio.Text = med.servicio
+                    lblPrecioFeriado.Text = med.monto_feriado.ToString("F")
+                    lblPrecioLaV.Text = med.monto_semana.ToString("F")
+                    txtOS.Text = med.servicio
                     lblPrecioDif.Text = med.montoDiferencial.ToString("F")
                     PracticasPrestadorToolStripMenuItem.Enabled = True
-                    txtObservacionPre.Text = med.observaciones
+                    txtObservacionPre.Text = med.comentario
                 Catch ex As Exception
                     ut.mensaje(ex.Message, utils.mensajes.err)
                 End Try
