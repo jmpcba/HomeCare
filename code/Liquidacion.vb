@@ -157,7 +157,7 @@
 
     Friend Sub liquidar()
         Try
-            If _prestador.mail = "" Or IsDBNull(_prestador.mail) Then
+            If _prestador.email = "" Or IsDBNull(_prestador.email) Then
                 Throw New Exception("No hay un mail configurado para este prestador." & vbCrLf & "Ingrese un mail en la seccion ADMINISTRAR PRESTADORES")
             End If
 

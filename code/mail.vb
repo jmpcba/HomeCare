@@ -33,7 +33,7 @@ Public Class Mail
             mail = mail.Replace("[OBS]", _liq.observaciones)
             mail = mail.Replace("[APELLIDO]", _liq.prestador.apellido.ToUpper)
             mail = mail.Replace("[NOMBRE]", _liq.prestador.nombre.ToUpper)
-            mail = mail.Replace("[SERVICIO]", _liq.prestador.servicio)
+            mail = mail.Replace("[SERVICIO]", _liq.prestador.obraSocial)
 
             zona.idzona = _liq.prestador.zona
             Dim mailFrom = zona.email.ToLower
@@ -42,7 +42,7 @@ Public Class Mail
             mm.Subject = "Liquidacion HomeCare " & MonthName(_liq.mes.Month)
             mm.IsBodyHtml = True
             mm.Body = mail
-            mm.To.Add(New MailAddress(_liq.prestador.mail))
+            mm.To.Add(New MailAddress(_liq.prestador.email))
             attachment = New Attachment(Path.Combine(My.Application.Info.DirectoryPath, "Resources\logo.jpg"))
             attachment.ContentId = "logo.jpg"
             mm.Attachments.Add(attachment)

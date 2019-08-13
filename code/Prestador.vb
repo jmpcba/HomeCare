@@ -1,5 +1,4 @@
-﻿Imports Newtonsoft
-Public Class Prestador
+﻿Public Class Prestador
 
     Private _prestadores As DataTable
     Private _id As String
@@ -13,7 +12,7 @@ Public Class Prestador
     Private _montoFer As Decimal
     Private _montoFijo As Decimal
     Private _montoDiferencial As Decimal
-    Private _baja As Boolean
+    Private _fechaCese As Date
     Private _creoUser As String
     Private _modifUser As String
     Private _fechaCarga As Date
@@ -24,21 +23,19 @@ Public Class Prestador
     Private _observaciones As String
     Private _zona As Integer
 
-    Public Sub New(Optional loadAll As Boolean = True)
+    Public Sub New()
         Try
-            If loadAll Then
-                getPrestadores()
-            End If
+            getPrestadores()
         Catch ex As Exception
             Throw
         End Try
     End Sub
 
     Private Sub getPrestadores()
-        Dim api As New Backend(Backend.services.prestador)
+        Dim db = New DB()
         Try
-            _prestadores = api.get_table()
-            _prestadores.Columns.Add("COMBO").SetOrdinal(0)
+            _prestadores = db.getTable(DB.tablas.prestadores)
+            _prestadores.Columns.Add("COMBO")
             For Each r As DataRow In _prestadores.Rows
                 Dim nombre = r("nombre")
                 Dim apellido = r("apellido")
@@ -66,6 +63,7 @@ Public Class Prestador
         Me._montoFer = _montoFer
         Me._montoFijo = _montoFijo
         Me._montoDiferencial = _diferencial
+        Me._fechaCese = _fechaCese
         Me._observaciones = _comentario
         Me._modifUser = My.Settings.dni
         Me._creoUser = My.Settings.dni
@@ -85,10 +83,10 @@ Public Class Prestador
                 _nombre = r(0)("nombre")
                 _apellido = r(0)("apellido")
 
-                If IsDBNull(r(0)("mail")) Then
+                If IsDBNull(r(0)("email")) Then
                     _email = ""
                 Else
-                    _email = r(0)("mail")
+                    _email = r(0)("email")
                 End If
 
                 _especialidad = r(0)("especialidad")
@@ -114,6 +112,16 @@ Public Class Prestador
                     _montoFijo = r(0)("monto_fijo")
                 End If
 
+                If IsDBNull(r(0)("porcentaje")) Then
+                    _montoDiferencial = 0
+                Else
+                    _montoDiferencial = r(0)("porcentaje")
+                End If
+
+                If Not IsDBNull(r(0)("fecha_cese")) Then
+                    _fechaCese = r(0)("fecha_cese")
+                End If
+
                 If IsDBNull(r(0)("comentario")) Then
                     _observaciones = ""
                 Else
@@ -125,6 +133,11 @@ Public Class Prestador
                 Else
                     _zona = r(0)("zona")
                 End If
+
+                _modifUser = r(0)("modifico_usuario")
+                _creoUser = r(0)("cargo_usuario")
+                _fechaCarga = r(0)("fecha_carga")
+                _fechaMod = r(0)("fecha_modificacion")
             Else
                 Throw New Exception("No se encontro el prestador")
             End If
@@ -144,7 +157,7 @@ Public Class Prestador
         End Try
     End Sub
 
-    Public Property CUIT As String
+    Public Property cuit As String
         Set(value As String)
             _cuit = value
         End Set
@@ -193,7 +206,7 @@ Public Class Prestador
         End Get
     End Property
 
-    Public Property mail As String
+    Public Property email As String
         Set(value As String)
             _email = value
             _modificado = True
@@ -203,7 +216,7 @@ Public Class Prestador
         End Get
     End Property
 
-    Public Property servicio As String
+    Public Property obraSocial As String
         Set(value As String)
             _obraSocial = value
             _modificado = True
@@ -213,7 +226,7 @@ Public Class Prestador
         End Get
     End Property
 
-    Public Property monto_semana As Decimal
+    Public Property montoNormal As Decimal
         Set(value As Decimal)
             _montoLV = value
             _modificado = True
@@ -223,7 +236,7 @@ Public Class Prestador
         End Get
     End Property
 
-    Public Property monto_feriado As Decimal
+    Public Property montoFeriado As Decimal
         Set(value As Decimal)
             _montoFer = value
             _modificado = True
@@ -233,7 +246,7 @@ Public Class Prestador
         End Get
     End Property
 
-    Public Property monto_fijo As Decimal
+    Public Property montoFijo As Decimal
         Set(value As Decimal)
             _montoFijo = value
             _modificado = True
@@ -253,17 +266,17 @@ Public Class Prestador
         End Get
     End Property
 
-    Public Property baja As Boolean
-        Set(value As Boolean)
-            _baja = value
+    Public Property fechaCese As Date
+        Set(value As Date)
+            _fechaCese = value
             _modificado = True
         End Set
         Get
-            Return _baja
+            Return _fechaCese
         End Get
     End Property
 
-    Public Property comentario As String
+    Public Property observaciones As String
         Set(value As String)
             _observaciones = value
             _modificado = True
@@ -294,13 +307,10 @@ Public Class Prestador
         End Get
     End Property
 
-    Public Property prestadores As DataTable
+    Public ReadOnly Property prestadores As DataTable
         Get
             Return _prestadores
         End Get
-        Set(value As DataTable)
-            _prestadores = value
-        End Set
     End Property
 
     Public Property estado As Integer
@@ -336,21 +346,15 @@ Public Class Prestador
             Dim ut As New utils
             Dim r As DataRow()
             _prestadores = db.getTable(DB.tablas.prestadores)
-            r = _prestadores.Select("CUIT = '" & Me.CUIT.ToString & "'")
-            _prestadores = Nothing
+            r = _prestadores.Select("CUIT = '" & Me.cuit.ToString & "'")
 
-            ' SI SE ELIGE LA OPCION NO, LA RUTINA SE TERMINA
             If r.Length > 0 Then
-                If ut.mensaje("Ya existe un prestador con este CUIT" & vbCrLf & "Desea continuar?", utils.mensajes.preg) = MsgBoxResult.No Then
-                    Exit Sub
+                If ut.mensaje("Ya existe un prestador con este CUIT" & vbCrLf & "Desea continuar?", utils.mensajes.preg) = MsgBoxResult.Yes Then
+                    db.insertar(Me)
                 End If
+            Else
+                db.insertar(Me)
             End If
-
-            Dim api As New Backend(Backend.services.prestador)
-            Me.baja = False
-            Dim serialObject = Json.JsonConvert.SerializeObject(Me)
-            api.send_post_put(serialObject, Backend.methods.httpPOST)
-
         Catch ex As Exception
             Throw
         End Try
@@ -360,10 +364,10 @@ Public Class Prestador
         Dim db = New DB
         Try
             If _modificado Then
-                _prestadores = Nothing
-                Dim api As New Backend(Backend.services.prestador)
-                Dim serialObject = Json.JsonConvert.SerializeObject(Me)
-                api.send_post_put(serialObject, Backend.methods.httpPUT)
+                _observaciones = _observaciones.Replace("'", " ")
+                _fechaMod = Date.Today
+                _modifUser = My.Settings.dni
+                db.actualizar(Me)
             Else
                 Throw New Exception("No se realizaron modificaciones")
             End If
@@ -375,7 +379,7 @@ Public Class Prestador
 
     Public Sub llenarcombo(_combo As ComboBox)
         Dim DV = New DataView(_prestadores)
-        DV.RowFilter = "BAJA = FALSE"
+        DV.RowFilter = "FECHA_CESE IS NULL"
         DV.Sort = "APELLIDO ASC"
         _combo.DataSource = DV
         _combo.DisplayMember = "combo"

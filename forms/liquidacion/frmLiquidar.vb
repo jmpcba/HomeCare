@@ -258,10 +258,10 @@
 
             For Each r As DataRow In dtExport.Rows
                 prest.id = r("ID_PREST")
-                r("OBSERVACIONES") = prest.comentario
+                r("OBSERVACIONES") = prest.observaciones
             Next
 
-            'ut.exportarExcel(dtExport)
+            ut.exportarExcel(dtExport)
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
@@ -274,7 +274,7 @@
         Try
             pb.Visible = True
             Dim practicas = New Practica
-            'ut.exportarExcel(practicas.getPracticas(dtMes.Value))
+            ut.exportarExcel(practicas.getPracticas(dtMes.Value))
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
@@ -308,7 +308,7 @@
 
             For Each r As DataRow In dtPrestadores.Rows
                 prest.id = r("ID_PREST")
-                r("OBSERVACIONES") = prest.comentario
+                r("OBSERVACIONES") = prest.observaciones
             Next
 
 
@@ -325,7 +325,7 @@
             End With
 
 
-            'ut.exportarExcel(ds)
+            ut.exportarExcel(ds)
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         Finally
