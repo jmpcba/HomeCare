@@ -286,7 +286,7 @@ Public Class Paciente
 
         _combo.DataSource = DV
         _combo.DisplayMember = "combo"
-        _combo.ValueMember = "id"
+        _combo.ValueMember = "afiliado"
         _combo.SelectedIndex = -1
     End Sub
 

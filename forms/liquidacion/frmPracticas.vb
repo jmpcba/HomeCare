@@ -118,6 +118,7 @@ Public Class frmPracticas
                     Dim obsPac = txtObservacionPac.Text
                     Dim obsPre = txtObservacionPre.Text
                     Dim obs = txtObservaciones.Text
+                    Dim gp = New GestorPracticas()
 
                     For Each r As DataGridViewRow In dgFechas.Rows
 
@@ -158,18 +159,17 @@ Public Class frmPracticas
 
                             Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horasLaV, horasFer, horasDif, obs, obsPre, obsPac, r.Index)
 
-                            practicas.Add(practica)
+                            gp.add(practica)
                             r.DefaultCellStyle.BackColor = Color.LightGreen
                             r.Cells("RESULTADO").Value = "Cargado"
                             carga = True
                         End If
                     Next
 
-                    Dim db As New DB
                     Dim re As New List(Of ResultadoCargaPracticas)
 
                     If carga Then
-                        re = db.insertar(practicas)
+                        gp.guardar()
                     End If
 
                     If re.Count > 0 Then

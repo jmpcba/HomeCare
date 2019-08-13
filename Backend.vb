@@ -12,6 +12,7 @@ Public Class Backend
         zona
         modulo
         subModulo
+        liquidacion
     End Enum
 
     Public Enum methods
