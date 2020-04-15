@@ -128,10 +128,12 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Backend.vb" />
+    <Compile Include="code\api.vb" />
     <Compile Include="code\DB.vb" />
     <Compile Include="code\dbHelper.vb" />
     <Compile Include="code\encriptador.vb" />
     <Compile Include="code\especialidad.vb" />
+    <Compile Include="code\exceptiones\apiException.vb" />
     <Compile Include="code\exceptiones\ExcepcionDeSistema.vb" />
     <Compile Include="code\exceptiones\ResultadoCargaPracticas.vb" />
     <Compile Include="code\Feriados.vb" />

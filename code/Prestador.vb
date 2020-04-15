@@ -35,7 +35,7 @@ Public Class Prestador
     End Sub
 
     Private Sub getPrestadores()
-        Dim api As New Backend(Backend.services.prestador)
+        Dim api As New API(API.resources.PRESTADOR)
         Try
             _prestadores = api.get_table()
             _prestadores.Columns.Add("COMBO").SetOrdinal(0)

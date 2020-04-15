@@ -20,6 +20,7 @@
                 obj = New Prestador()
                 dt = obj.prestadores
                 dgBuscar.DataSource = dt
+                dgBuscar.Columns("id").Visible = False
                 filtro = "Apellido"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR PRESTADOR"
@@ -34,8 +35,9 @@
 
             ElseIf frmParent.GetType.Name = "frmModulo" Then
                 obj = New Modulo()
-                dt = obj.modulos
+                dt = obj.getModulos
                 dgBuscar.DataSource = dt
+                dgBuscar.Columns("id").Visible = False
                 filtro = "codigo"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR MODULO"
@@ -83,7 +85,7 @@
                 ElseIf frmParent.GetType.Name = "frmPacientes" Then
                     obj.afiliado = r.Cells("afiliado").Value
                 ElseIf frmParent.GetType.Name = "frmModulo" Then
-                    obj.codigo = r.Cells("codigo").Value
+                    obj.id = r.Cells("id").Value
                 ElseIf frmParent.GetType.Name = "frmSubMod" Then
                     obj.codigo = r.Cells("codigo").Value
                 ElseIf frmParent.GetType.Name = "frmUsuarios" Then

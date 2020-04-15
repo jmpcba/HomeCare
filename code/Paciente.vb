@@ -1,6 +1,4 @@
-﻿Imports System.IO
-Imports System.Net
-Imports Newtonsoft
+﻿Imports Newtonsoft
 
 Public Class Paciente
 
@@ -33,7 +31,7 @@ Public Class Paciente
     Private Sub getPacientes()
 
         Try
-            Dim api As New Backend(Backend.services.paciente)
+            Dim api As New API(API.resources.PACIENTE)
 
             _pacientes = api.get_table()
 
@@ -63,9 +61,8 @@ Public Class Paciente
         Me._localidad = _localidad
         Me._observaciones = _observaciones
         Me._subModulo = _subModulo
-        Me.modulo = _modulo
+        Me._modulo = _modulo
         Me._modifUser = My.Settings.dni
-        Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
     End Sub
@@ -208,14 +205,9 @@ Public Class Paciente
         End Get
     End Property
 
-    Public ReadOnly Property modifUser As Integer
+    Public ReadOnly Property usuario_ultima_modificacion As Integer
         Get
             Return _modifUser
-        End Get
-    End Property
-    Public ReadOnly Property creoUser As Integer
-        Get
-            Return _creoUser
         End Get
     End Property
     Public ReadOnly Property fechaCarga As Date
@@ -243,24 +235,23 @@ Public Class Paciente
 
     Public Sub insertar()
         Try
-            Dim api As New Backend(Backend.services.paciente)
+            Dim api As New API(API.resources.PACIENTE)
             Me.baja = False
             _pacientes = Nothing
             Dim serialObject = Json.JsonConvert.SerializeObject(Me)
-            api.send_post_put(serialObject, Backend.methods.httpPOST)
+            api.send_post_put(serialObject, API.httpMethods.httpPOST)
         Catch ex As Exception
             Throw
         End Try
     End Sub
 
     Public Sub actualizar()
-        Dim db = New DB
         Try
             If _modificado Then
-                Dim api As New Backend(Backend.services.paciente)
+                Dim api As New API(API.resources.PACIENTE)
                 _pacientes = Nothing
                 Dim serialObject = Json.JsonConvert.SerializeObject(Me)
-                api.send_post_put(serialObject, Backend.methods.httpPUT)
+                api.send_post_put(serialObject, API.httpMethods.httpPUT)
             Else
                 Throw New Exception("No se realizaron modificaciones")
             End If

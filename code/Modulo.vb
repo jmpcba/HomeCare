@@ -1,4 +1,7 @@
-﻿Public Class Modulo
+﻿Imports Newtonsoft
+
+Public Class Modulo
+    Private _id As Integer
     Private _codigo As String
     Private _topeMedico As Integer
     Private _topeEnfermeria As Integer
@@ -14,9 +17,14 @@
     Private _modulos As DataTable
 
     Public Sub New()
-        Dim db = New DB()
         Try
-            _modulos = db.getTable(DB.tablas.modulo)
+            Dim api As New API(API.resources.MODULO)
+            _modulos = api.get_table()
+            Dim c = _modulos.Columns.Count
+            _modulos.Columns("ultima_modificacion").SetOrdinal(c - 1)
+            _modulos.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
+            _modulos.Columns("codigo").SetOrdinal(0)
+
         Catch ex As Exception
             Throw
         End Try
@@ -31,22 +39,18 @@
         Me._topeFono = _topeFon
         Me._topeCuidador = _topeCuid
         Me._topeNutricionista = _topeNutri
-        Me._modifUser = My.Settings.dni
+        Me._modifUser = 1 'TODO replace with real users
         Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
     End Sub
 
-    Public ReadOnly Property modulos As DataTable
-        Get
-            Return _modulos
-        End Get
-    End Property
-    Public Property codigo As String
+    Public Property id As String
         Set(value As String)
             Dim r As DataRow()
-            r = _modulos.Select("codigo=" & value)
+            r = _modulos.Select("id=" & value)
             If r.Length = 1 Then
+                _id = value
                 _codigo = r(0)("codigo")
                 _topeMedico = r(0)("medico")
                 _topeEnfermeria = r(0)("enfermeria")
@@ -54,23 +58,30 @@
                 _topeFono = r(0)("fonoaudiologia")
                 _topeCuidador = r(0)("cuidador")
                 _topeNutricionista = r(0)("nutricion")
-                _modifUser = r(0)("modifico_usuario")
-                _creoUser = r(0)("cargo_usuario")
-                _fechaCarga = r(0)("fecha_carga")
-                _fechaMod = r(0)("fecha_modificacion")
+                _modifUser = r(0)("usuario_ultima_modificacion")
+                _fechaMod = r(0)("ultima_modificacion")
             Else
                 Throw New Exception("Codigo Inexistente")
             End If
         End Set
         Get
+            Return _id
+        End Get
+    End Property
+
+    Public Property codigo As String
+        Get
             Return _codigo
         End Get
+        Set(value As String)
+            _codigo = value
+        End Set
     End Property
 
     Friend Sub llenarcombo(_combo As ComboBox)
         _combo.DataSource = _modulos
         _combo.DisplayMember = "codigo"
-        _combo.ValueMember = "codigo"
+        _combo.ValueMember = "id"
         _combo.SelectedIndex = -1
     End Sub
 
@@ -94,7 +105,7 @@
         End Get
     End Property
 
-    Public Property topeMedico As Integer
+    Public Property medico As Integer
         Set(value As Integer)
             _topeMedico = value
             _modificado = True
@@ -103,7 +114,7 @@
             Return _topeMedico
         End Get
     End Property
-    Public Property topeEnfermeria As Integer
+    Public Property enfermeria As Integer
         Set(value As Integer)
             _topeEnfermeria = value
             _modificado = True
@@ -112,7 +123,7 @@
             Return _topeEnfermeria
         End Get
     End Property
-    Public Property topeKinesio As Integer
+    Public Property kinesiologia As Integer
         Set(value As Integer)
             _topeKinesio = value
             _modificado = True
@@ -121,7 +132,7 @@
             Return _topeKinesio
         End Get
     End Property
-    Public Property topeFono As Integer
+    Public Property fonoaudiologia As Integer
         Set(value As Integer)
             _topeFono = value
             _modificado = True
@@ -130,7 +141,7 @@
             Return _topeFono
         End Get
     End Property
-    Public Property topeCuidador As Integer
+    Public Property cuidador As Integer
         Set(value As Integer)
             _topeCuidador = value
             _modificado = True
@@ -140,7 +151,7 @@
         End Get
     End Property
 
-    Public Property topeNutricionista As Integer
+    Public Property nutricion As Integer
         Set(value As Integer)
             _topeNutricionista = value
             _modificado = True
@@ -151,48 +162,45 @@
     End Property
 
     Public Sub actualizar()
-        Dim db = New DB
         Try
             If _modificado Then
-                _fechaMod = Date.Today
-                _modifUser = My.Settings.dni
-                db.actualizar(Me)
+                Dim api As New API(API.resources.MODULO)
+                _modulos = Nothing
+                Dim serialObject = Json.JsonConvert.SerializeObject(Me)
+                api.send_post_put(serialObject, API.httpMethods.httpPUT)
             Else
                 Throw New Exception("No se realizaron modificaciones")
             End If
 
-        Catch ex As Exception
+        Catch ex As apiException
             Throw
         End Try
     End Sub
 
     Public Sub insertar()
         Try
-            Dim db = New DB
-            db.insertar(Me)
-        Catch ex As Exception
+            Dim api As New API(API.resources.MODULO)
+            _modulos = Nothing
+            Dim serialObject = Json.JsonConvert.SerializeObject(Me)
+            api.send_post_put(serialObject, API.httpMethods.httpPOST)
+        Catch ex As apiException
             Throw
         End Try
     End Sub
 
-    Public ReadOnly Property modifUser As Integer
+    Public ReadOnly Property usuario_ultima_modificacion As Integer
         Get
             Return _modifUser
         End Get
     End Property
-    Public ReadOnly Property creoUser As Integer
-        Get
-            Return _creoUser
-        End Get
-    End Property
-    Public ReadOnly Property fechaCarga As Date
-        Get
-            Return _fechaCarga
-        End Get
-    End Property
-    Public ReadOnly Property fechaMod As Date
+
+    Public ReadOnly Property ultima_modificacion As Date
         Get
             Return _fechaMod
         End Get
     End Property
+
+    Public Function getModulos() As DataTable
+        Return _modulos
+    End Function
 End Class

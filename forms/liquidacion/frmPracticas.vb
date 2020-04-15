@@ -118,7 +118,7 @@ Public Class frmPracticas
                     Dim obsPac = txtObservacionPac.Text
                     Dim obsPre = txtObservacionPre.Text
                     Dim obs = txtObservaciones.Text
-                    Dim gp = New GestorPracticas()
+                    'Dim gp = New GestorPracticas()
 
                     For Each r As DataGridViewRow In dgFechas.Rows
 
@@ -159,7 +159,7 @@ Public Class frmPracticas
 
                             Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horasLaV, horasFer, horasDif, obs, obsPre, obsPac, r.Index)
 
-                            gp.add(practica)
+                            'gp.add(practica)
                             r.DefaultCellStyle.BackColor = Color.LightGreen
                             r.Cells("RESULTADO").Value = "Cargado"
                             carga = True
@@ -169,7 +169,7 @@ Public Class frmPracticas
                     Dim re As New List(Of ResultadoCargaPracticas)
 
                     If carga Then
-                        gp.guardar()
+                        'gp.guardar()
                     End If
 
                     If re.Count > 0 Then

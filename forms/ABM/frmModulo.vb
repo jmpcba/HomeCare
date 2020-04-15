@@ -10,7 +10,7 @@
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtboxes)
 
-                modu = New Modulo(txtCodigo.Text, txtMedico.Text, txtEnfermeria.Text, txtKinesio.Text, txtFono.Text, txtCuidador.Text, txtNutricion.Text)
+                modu = New Modulo(txtCodigo.Text.Trim, txtMedico.Text.Trim, txtEnfermeria.Text.Trim, txtKinesio.Text.Trim, txtFono.Text.Trim, txtCuidador.Text.Trim, txtNutricion.Text.Trim)
                 modu.insertar()
                 MessageBox.Show("Guardado Exitoso")
                 ut.iniciarTxtBoxes(txtboxes)
@@ -20,24 +20,28 @@
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtboxes)
 
-                If txtMedico.Text <> modu.topeMedico Then
-                    modu.topeMedico = txtMedico.Text
+                If txtMedico.Text.Trim <> modu.medico Then
+                    modu.medico = txtMedico.Text.Trim
                 End If
 
-                If txtEnfermeria.Text <> modu.topeEnfermeria Then
-                    modu.topeEnfermeria = txtEnfermeria.Text
+                If txtEnfermeria.Text.Trim <> modu.enfermeria Then
+                    modu.enfermeria = txtEnfermeria.Text.Trim
                 End If
 
-                If txtKinesio.Text <> modu.topeKinesio Then
-                    modu.topeKinesio = txtKinesio.Text
+                If txtKinesio.Text.Trim <> modu.kinesiologia Then
+                    modu.kinesiologia = txtKinesio.Text.Trim
                 End If
 
-                If txtFono.Text <> modu.topeFono Then
-                    modu.topeFono = txtFono.Text
+                If txtFono.Text.Trim <> modu.fonoaudiologia Then
+                    modu.fonoaudiologia = txtFono.Text.Trim
                 End If
 
-                If txtNutricion.Text <> modu.topeNutricionista Then
-                    modu.topeNutricionista = txtNutricion.Text
+                If txtNutricion.Text.Trim <> modu.nutricion Then
+                    modu.nutricion = txtNutricion.Text.Trim
+                End If
+
+                If txtCuidador.Text.Trim <> modu.cuidador Then
+                    modu.cuidador = txtCuidador.Text.Trim
                 End If
 
                 modu.actualizar()
@@ -48,11 +52,7 @@
             End If
 
         Catch ex As Exception
-            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                ut.mensaje("Ya existe un Modulo con el mismo codigo", utils.mensajes.err)
-            Else
-                ut.mensaje(ex.Message, utils.mensajes.err)
-            End If
+            ut.mensaje(ex.Message, utils.mensajes.err)
             If ex.Message.Contains("No se realizaron modificaciones") Then
                 iniciarControles()
             End If
@@ -73,7 +73,6 @@
     Public Sub iniciarControles()
         txtCodigo.Text = ""
         txtCuidador.Text = ""
-        '   txtDescripcion.Text = ""
         txtEnfermeria.Text = ""
         txtFono.Text = ""
         txtKinesio.Text = ""
@@ -86,9 +85,6 @@
     End Sub
 
     Private Sub validarCampos()
-        '   If (txtCodigo.Text = "" Or txtDescripcion.Text = "") Then
-        '   Throw New Exception("Complete los campos necesarios")
-        '   End If
         If (txtMedico.Text = "" And txtEnfermeria.Text = "" And txtKinesio.Text = "" And txtFono.Text = "" And txtCuidador.Text = "" And txtNutricion.Text = "") Then
             Throw New Exception("Debe cargar algún tope")
         End If
@@ -173,13 +169,12 @@
     Public Sub resultadoBusqueda(ByRef _modulo As Modulo)
         txtCodigo.ReadOnly = True
         txtCodigo.Text = _modulo.codigo
-        txtCuidador.Text = _modulo.topeCuidador
-        ' txtDescripcion.Text = _modulo.descripcion
-        txtEnfermeria.Text = _modulo.topeEnfermeria
-        txtFono.Text = _modulo.topeFono
-        txtKinesio.Text = _modulo.topeKinesio
-        txtMedico.Text = _modulo.topeMedico
-        txtNutricion.Text = _modulo.topeNutricionista
+        txtCuidador.Text = _modulo.cuidador
+        txtEnfermeria.Text = _modulo.enfermeria
+        txtFono.Text = _modulo.fonoaudiologia
+        txtKinesio.Text = _modulo.kinesiologia
+        txtMedico.Text = _modulo.medico
+        txtNutricion.Text = _modulo.nutricion
         modu = _modulo
 
     End Sub

@@ -517,26 +517,26 @@ Public Class DB
         End Try
     End Sub
 
-    Friend Sub insertar(_mod As Modulo)
+    'Friend Sub insertar(_mod As Modulo)
 
-        Dim query = String.Format("INSERT INTO MODULO (CODIGO, MEDICO, ENFERMERIA, KINESIOLOGIA, FONOAUDIOLOGIA, CUIDADOR, NUTRICION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', {1}, {2}, {3}, {4}, {5}, {6}, {7}, #{8}#, {9}, #{10}#)", _mod.codigo, _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.topeNutricionista, _mod.creoUser, _mod.fechaCarga.ToShortDateString, _mod.modifUser, _mod.fechaMod.ToShortDateString)
+    '    Dim query = String.Format("INSERT INTO MODULO (CODIGO, MEDICO, ENFERMERIA, KINESIOLOGIA, FONOAUDIOLOGIA, CUIDADOR, NUTRICION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', {1}, {2}, {3}, {4}, {5}, {6}, {7}, #{8}#, {9}, #{10}#)", _mod.codigo, _mod.medico, _mod.enfermeria, _mod.kinesiologia, _mod.fonoaudiologia, _mod.cuidador, _mod.nutricion, _mod.creoUser, _mod.fechaCarga.ToShortDateString, _mod.modifUser, _mod.fechaMod.ToShortDateString)
 
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
+    '    cmd.CommandType = CommandType.Text
+    '    cmd.CommandText = query
 
-        Try
-            ut.backupDBTemp()
+    '    Try
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
+    '        Throw
+    '    Finally
+    '        cnn.Close()
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
     Friend Sub insertar(_feriado As Feriado)
 
         Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES (#{0}#, '{1}', {2}, #{3}#, {4}, #{5}#)", _feriado.fecha.ToShortDateString, _feriado.descripcion, _feriado.creoUser, _feriado.fechaCarga.ToShortDateString, _feriado.modifUser, _feriado.fechaMod.ToShortDateString)
@@ -631,26 +631,26 @@ Public Class DB
         End Try
     End Sub
 
-    Friend Sub actualizar(_mod As Modulo)
+    'Friend Sub actualizar(_mod As Modulo)
 
-        Dim query = String.Format("UPDATE MODULO SET MEDICO='{0}', ENFERMERIA='{1}', KINESIOLOGIA='{2}', FONOAUDIOLOGIA='{3}', CUIDADOR='{4}', NUTRICION='{5}', MODIFICO_USUARIO='{6}', FECHA_MODIFICACION=#{7}# WHERE CODIGO='{8}'", _mod.topeMedico, _mod.topeEnfermeria, _mod.topeKinesio, _mod.topeFono, _mod.topeCuidador, _mod.topeNutricionista, _mod.modifUser, _mod.fechaMod.ToShortDateString, _mod.codigo)
+    '    Dim query = String.Format("UPDATE MODULO SET MEDICO='{0}', ENFERMERIA='{1}', KINESIOLOGIA='{2}', FONOAUDIOLOGIA='{3}', CUIDADOR='{4}', NUTRICION='{5}', MODIFICO_USUARIO='{6}', FECHA_MODIFICACION=#{7}# WHERE CODIGO='{8}'", _mod.medico, _mod.enfermeria, _mod.kinesiologia, _mod.fonoaudiologia, _mod.cuidador, _mod.nutricion, _mod.modifUser, _mod.fechaMod.ToShortDateString, _mod.codigo)
 
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
+    '    cmd.CommandType = CommandType.Text
+    '    cmd.CommandText = query
 
-        Try
-            ut.backupDBTemp()
+    '    Try
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
+    '        Throw
+    '    Finally
+    '        cnn.Close()
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
 
     Friend Sub ACTUALIZAR(_prestacion As Prestacion)
 
