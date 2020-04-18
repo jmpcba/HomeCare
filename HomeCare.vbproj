@@ -159,6 +159,7 @@
     <Compile Include="code\especialidad.vb" />
     <Compile Include="code\exceptiones\apiException.vb" />
     <Compile Include="code\exceptiones\ExcepcionDeSistema.vb" />
+    <Compile Include="code\exceptiones\loginException.vb" />
     <Compile Include="code\exceptiones\ResultadoCargaPracticas.vb" />
     <Compile Include="code\Feriados.vb" />
     <Compile Include="code\Liquidacion.vb" />
@@ -196,6 +197,12 @@
     <Compile Include="forms\ABM\FrmFeriados.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="forms\login\frmConfirmarPass.Designer.vb">
+      <DependentUpon>frmConfirmarPass.vb</DependentUpon>
+    </Compile>
+    <Compile Include="forms\login\frmConfirmarPass.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="forms\principal\barraDeProgreso.Designer.vb">
       <DependentUpon>barraDeProgreso.vb</DependentUpon>
     </Compile>
@@ -208,10 +215,10 @@
     <Compile Include="frmInformes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\principal\frmIngresar.Designer.vb">
+    <Compile Include="forms\login\frmIngresar.Designer.vb">
       <DependentUpon>frmIngresar.vb</DependentUpon>
     </Compile>
-    <Compile Include="forms\principal\frmIngresar.vb">
+    <Compile Include="forms\login\frmIngresar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\liquidacion\frmLiquidacionDetalle.Designer.vb">
@@ -353,13 +360,16 @@
     <EmbeddedResource Include="forms\ABM\FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\login\frmConfirmarPass.resx">
+      <DependentUpon>frmConfirmarPass.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\principal\barraDeProgreso.resx">
       <DependentUpon>barraDeProgreso.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInformes.resx">
       <DependentUpon>frmInformes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\principal\frmIngresar.resx">
+    <EmbeddedResource Include="forms\login\frmIngresar.resx">
       <DependentUpon>frmIngresar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\liquidacion\frmLiquidacionDetalle.resx">

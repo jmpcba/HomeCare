@@ -4,34 +4,30 @@
     Dim txtBoxes As TextBox()
     Dim db As DB
 
-    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+    Private Async Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
         Try
             ut.validarTxtBoxLleno(txtBoxes)
-            ut.validarNumerico(numDni)
-            ut.validarLargo(numDni, 8)
-
-            usuario.dni = numDni.Text.Trim
-
-            If txtPassw.Text.Trim <> usuario.pass Then
-                numDni.Focus()
-                Throw New Exception("Contraseña invalida")
-            End If
-
-            Dim cg = New cognito()
-            cg.getCognitotoken()
-            My.Settings.dni = usuario.dni
-            My.Settings.nivel = usuario.nivel
+            My.Settings.userName = numDni.Text.Trim
+            My.Settings.userPass = txtPassw.Text.Trim
+            Dim cg As Cognito = Cognito.Instance
+            Await cg.login()
+            My.Settings.dni = "2918898"
+            My.Settings.nivel = 0
             Me.Hide()
             frmPrincipal.ShowDialog()
 
-        Catch ex As Exception
+        Catch ex As Amazon.CognitoIdentityProvider.Model.NotAuthorizedException
             numDni.Focus()
-            ut.mensaje(ex.Message, utils.mensajes.err)
+            ut.mensaje("Contraseña invalida", utils.mensajes.err)
+
+        Catch ex As Amazon.CognitoIdentityProvider.Model.UserNotFoundException
+        numDni.Focus()
+        ut.mensaje("No existe el usuario", utils.mensajes.err)
         End Try
     End Sub
 
-        Private Sub iniciarControles()
+    Private Sub iniciarControles()
             ut.iniciarTxtBoxes(txtBoxes)
         End Sub
 
@@ -55,6 +51,6 @@
 
     End Sub
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles BtnCerrar.Click
-            Me.Close()
-        End Sub
-    End Class
+        Me.Close()
+    End Sub
+End Class

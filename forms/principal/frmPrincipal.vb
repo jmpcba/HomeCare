@@ -165,6 +165,8 @@
     End Sub
 
     Private Sub frmPrincipal_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        Dim cg As Cognito = Cognito.Instance
+        cg.logout()
         Application.Exit()
     End Sub
 

@@ -138,18 +138,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property cognito() As String
-            Get
-                Return CType(Me("cognito"),String)
-            End Get
-            Set
-                Me("cognito") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("us-east-1_kpEVsMtA3")>  _
         Public Property poolID() As String
             Get
@@ -174,25 +162,25 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("hcapi")>  _
-        Public Property apiUser() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property userName() As String
             Get
-                Return CType(Me("apiUser"),String)
+                Return CType(Me("userName"),String)
             End Get
             Set
-                Me("apiUser") = value
+                Me("userName") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute(";L:jK%tF/Gqs^%s,a-L'8G")>  _
-        Public Property apiPassword() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property userPass() As String
             Get
-                Return CType(Me("apiPassword"),String)
+                Return CType(Me("userPass"),String)
             End Get
             Set
-                Me("apiPassword") = value
+                Me("userPass") = value
             End Set
         End Property
     End Class

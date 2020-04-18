@@ -4,6 +4,7 @@ Imports System.Text
 Imports Newtonsoft
 Public Class API
     Private apiEndpoint As String
+    Private cg As Cognito
     Public Enum resources
         PRESTADOR
         PACIENTE
@@ -26,6 +27,7 @@ Public Class API
 
     Public Sub New(r As resources)
         apiEndpoint = "https://cl86zb12f8.execute-api.us-east-1.amazonaws.com/DEV/v1/" & r.ToString()
+        cg = Cognito.Instance
     End Sub
 
     Public Function get_table() As DataTable
@@ -36,21 +38,14 @@ Public Class API
         Try
             Dim request As WebRequest = WebRequest.Create(apiEndpoint)
             request.Method = "GET"
-            request.Headers.Add("X-COG-ID", My.Settings.cognito)
+            request.Headers.Add("X-COG-ID", cg.token)
             request.ContentType = "application/json"
             response = request.GetResponse()
             dataStream = response.GetResponseStream()
             reader = New StreamReader(dataStream)
             Dim responseFromServer As String = reader.ReadToEnd()
 
-            Dim dt = Json.JsonConvert.DeserializeObject(Of DataTable)(responseFromServer)
-            Try
-                dt.Columns.Remove("_sa_instance_state")
-            Catch ex As Exception
-
-            End Try
-
-            Return dt
+            Return Json.JsonConvert.DeserializeObject(Of DataTable)(responseFromServer)
 
         Catch ex As WebException
             Dim exceptionReader = New StreamReader(ex.Response.GetResponseStream())
