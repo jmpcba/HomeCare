@@ -22,7 +22,7 @@ Partial Class frmUsuarios
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.numDni = New System.Windows.Forms.TextBox()
+        Me.txtUsuario = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -32,7 +32,7 @@ Partial Class frmUsuarios
         Me.txtApellido = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtNombre = New System.Windows.Forms.TextBox()
+        Me.txtMail = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtPassw = New System.Windows.Forms.TextBox()
         Me.btnLimpiar = New System.Windows.Forms.Button()
@@ -42,12 +42,12 @@ Partial Class frmUsuarios
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'numDni
+        'txtUsuario
         '
-        Me.numDni.Location = New System.Drawing.Point(259, 105)
-        Me.numDni.Name = "numDni"
-        Me.numDni.Size = New System.Drawing.Size(121, 20)
-        Me.numDni.TabIndex = 0
+        Me.txtUsuario.Location = New System.Drawing.Point(259, 105)
+        Me.txtUsuario.Name = "txtUsuario"
+        Me.txtUsuario.Size = New System.Drawing.Size(121, 20)
+        Me.txtUsuario.TabIndex = 0
         '
         'Label6
         '
@@ -86,11 +86,11 @@ Partial Class frmUsuarios
         Me.Panel1.Controls.Add(Me.txtApellido)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Controls.Add(Me.txtNombre)
+        Me.Panel1.Controls.Add(Me.txtMail)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.txtPassw)
         Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.numDni)
+        Me.Panel1.Controls.Add(Me.txtUsuario)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Location = New System.Drawing.Point(12, 12)
@@ -138,16 +138,16 @@ Partial Class frmUsuarios
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(106, 168)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(54, 13)
+        Me.Label5.Size = New System.Drawing.Size(32, 13)
         Me.Label5.TabIndex = 47
-        Me.Label5.Text = "NOMBRE"
+        Me.Label5.Text = "MAIL"
         '
-        'txtNombre
+        'txtMail
         '
-        Me.txtNombre.Location = New System.Drawing.Point(259, 158)
-        Me.txtNombre.Name = "txtNombre"
-        Me.txtNombre.Size = New System.Drawing.Size(197, 20)
-        Me.txtNombre.TabIndex = 1
+        Me.txtMail.Location = New System.Drawing.Point(259, 158)
+        Me.txtMail.Name = "txtMail"
+        Me.txtMail.Size = New System.Drawing.Size(197, 20)
+        Me.txtMail.TabIndex = 1
         '
         'Label3
         '
@@ -228,7 +228,7 @@ Partial Class frmUsuarios
 
     End Sub
 
-    Friend WithEvents numDni As TextBox
+    Friend WithEvents txtUsuario As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
@@ -239,7 +239,7 @@ Partial Class frmUsuarios
     Friend WithEvents txtApellido As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents txtNombre As TextBox
+    Friend WithEvents txtMail As TextBox
     Friend WithEvents btnLimpiar As Button
     Friend WithEvents btnCerrar As Button
     Friend WithEvents btnGuardar As Button

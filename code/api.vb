@@ -4,7 +4,7 @@ Imports System.Text
 Imports Newtonsoft
 Public Class API
     Private apiEndpoint As String
-    Private cg As Cognito
+    Private cg As userSesionCognito
     Public Enum resources
         PRESTADOR
         PACIENTE
@@ -27,7 +27,7 @@ Public Class API
 
     Public Sub New(r As resources)
         apiEndpoint = "https://cl86zb12f8.execute-api.us-east-1.amazonaws.com/DEV/v1/" & r.ToString()
-        cg = Cognito.Instance
+        cg = userSesionCognito.Instance
     End Sub
 
     Public Function get_table() As DataTable

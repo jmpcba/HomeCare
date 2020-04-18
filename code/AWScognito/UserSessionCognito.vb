@@ -5,13 +5,13 @@ Imports Amazon.CognitoIdentityProvider
 Imports Amazon.Extensions.CognitoAuthentication
 Imports Amazon.Runtime
 
-Public NotInheritable Class Cognito
+Public NotInheritable Class UserSesionCognito
     Private userName As String
     Private userPass As String
     Private _token As String
     Private _newPass As String
     Private user As CognitoUser
-    Private Shared _Instance As Cognito = Nothing
+    Private Shared _Instance As UserSesionCognito = Nothing
     Private Shared ReadOnly _Sync As New Object
     Private ut As utils
 
@@ -109,12 +109,12 @@ Public NotInheritable Class Cognito
         End Set
     End Property
 
-    Public Shared ReadOnly Property Instance() As Cognito
+    Public Shared ReadOnly Property Instance() As UserSesionCognito
         Get
             If _Instance Is Nothing Then
                 SyncLock _Sync
                     If _Instance Is Nothing Then
-                        _Instance = New Cognito()
+                        _Instance = New UserSesionCognito()
                     End If
                 End SyncLock
             End If

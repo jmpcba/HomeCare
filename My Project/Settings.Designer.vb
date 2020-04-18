@@ -138,7 +138,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("us-east-1_kpEVsMtA3")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("us-east-1_Y5dr9q6Cj")>  _
         Public Property poolID() As String
             Get
                 Return CType(Me("poolID"),String)
@@ -150,7 +150,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("289f8sb40ovi92igk4m338t9f8")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5edj2o7lsphvc2rmp8pv2krfsn")>  _
         Public Property clientID() As String
             Get
                 Return CType(Me("clientID"),String)
@@ -181,6 +181,18 @@ Namespace My
             End Get
             Set
                 Me("userPass") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("cognito-idp.us-east-1.amazonaws.com")>  _
+        Public Property IDENTITY_PROVIDER() As String
+            Get
+                Return CType(Me("IDENTITY_PROVIDER"),String)
+            End Get
+            Set
+                Me("IDENTITY_PROVIDER") = value
             End Set
         End Property
     End Class

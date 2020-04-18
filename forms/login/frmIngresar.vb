@@ -10,7 +10,7 @@
             ut.validarTxtBoxLleno(txtBoxes)
             My.Settings.userName = numDni.Text.Trim
             My.Settings.userPass = txtPassw.Text.Trim
-            Dim cg As Cognito = Cognito.Instance
+            Dim cg As userSesionCognito = userSesionCognito.Instance
             Await cg.login()
             My.Settings.dni = "2918898"
             My.Settings.nivel = 0

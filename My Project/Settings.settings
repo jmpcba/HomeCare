@@ -24,16 +24,19 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="poolID" Type="System.String" Scope="User">
-      <Value Profile="(Default)">us-east-1_kpEVsMtA3</Value>
+      <Value Profile="(Default)">us-east-1_Y5dr9q6Cj</Value>
     </Setting>
     <Setting Name="clientID" Type="System.String" Scope="User">
-      <Value Profile="(Default)">289f8sb40ovi92igk4m338t9f8</Value>
+      <Value Profile="(Default)">5edj2o7lsphvc2rmp8pv2krfsn</Value>
     </Setting>
     <Setting Name="userName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="userPass" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="IDENTITY_PROVIDER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cognito-idp.us-east-1.amazonaws.com</Value>
     </Setting>
   </Settings>
 </SettingsFile>

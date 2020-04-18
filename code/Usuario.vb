@@ -1,4 +1,7 @@
-﻿Public Class Usuario
+﻿Imports Amazon.CognitoIdentityProvider
+Imports Amazon.CognitoIdentityProvider.Model
+
+Public Class Usuario
 
     Private _usuarios As DataTable
     Private _dni As String

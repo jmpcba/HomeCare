@@ -1,8 +1,8 @@
 ﻿Public Class frmConfirmarPass
 
     Private Sub btnAceptar_Click(sender As Object, e As EventArgs) Handles btnAceptar.Click
-        Dim cg As Cognito
-        cg = Cognito.Instance
+        Dim cg As userSesionCognito
+        cg = userSesionCognito.Instance
         cg.newPassword = txtPass.Text.Trim()
     End Sub
 
