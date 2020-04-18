@@ -1,11 +1,11 @@
-﻿Public Class subModulo
+﻿Imports Newtonsoft
 
+Public Class subModulo
+    Private _id As Integer
     Private _codigo As String
     Private _descripcion As String
     Private _numTope As Integer
     Private _modifUser As Integer
-    Private _creoUser As Integer
-    Private _fechaCarga As Date
     Private _fechaMod As Date
     Private _modificado = False
     Private _subModulos As DataTable
@@ -14,16 +14,20 @@
 
         _codigo = _cod
         _descripcion = _desc
-        _modifUser = My.Settings.dni
-        _creoUser = My.Settings.dni
-        _fechaCarga = Date.Today
+        _modifUser = 1
         _fechaMod = Date.Today
     End Sub
 
     Public Sub New()
-        Dim db = New DB()
         Try
-            _subModulos = db.getTable(DB.tablas.subModulo)
+            Dim api As New API(API.resources.SUBMODULO)
+            _subModulos = api.get_table()
+            Dim c = _subModulos.Columns.Count
+            _subModulos.Columns("ultima_modificacion").SetOrdinal(c - 1)
+            _subModulos.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
+            _subModulos.Columns("codigo").SetOrdinal(1)
+            _subModulos.Columns("id").SetOrdinal(0)
+
             _subModulos.Columns.Add("COMBO")
             For Each r As DataRow In _subModulos.Rows
                 Dim codigo = r("codigo")
@@ -34,38 +38,46 @@
         Catch ex As Exception
             Throw
         End Try
+
     End Sub
 
-    Public Property codigo As String
+    Public Property id As String
         Set(value As String)
             Dim r As DataRow()
-            r = _subModulos.Select("codigo = " & value)
+            r = _subModulos.Select("id = " & value)
             If r.Length = 1 Then
-                _codigo = value
+                _id = value
+                _codigo = r(0)("codigo")
                 _descripcion = r(0)("descripcion")
-                _modifUser = r(0)("modifico_usuario")
-                _creoUser = r(0)("cargo_usuario")
-                _fechaCarga = r(0)("fecha")
-                _fechaMod = r(0)("fecha_modificacion")
+                _modifUser = r(0)("usuario_ultima_modificacion")
+                _fechaMod = r(0)("ultima_modificacion")
             Else
                 Throw New Exception("Codigo Inexistente")
             End If
         End Set
 
         Get
+            Return _id
+        End Get
+    End Property
+
+    Public Property codigo
+        Set(value)
+            _codigo = value
+        End Set
+        Get
             Return _codigo
         End Get
     End Property
 
-    Public ReadOnly Property subModulos As DataTable
-        Get
-            Return _subModulos
-        End Get
-    End Property
+    Public Function getSubModulos() As DataTable
+        Return _subModulos
+    End Function
+
     Friend Sub llenarcombo(_combo As ComboBox)
         _combo.DataSource = _subModulos
         _combo.DisplayMember = "combo"
-        _combo.ValueMember = "codigo"
+        _combo.ValueMember = "id"
         _combo.SelectedIndex = -1
     End Sub
 
@@ -79,56 +91,41 @@
         End Get
     End Property
 
-    Public Property tope As Integer
-        Set(value As Integer)
-            _numTope = value
-            _modificado = True
-        End Set
-        Get
-            Return _numTope
-        End Get
-    End Property
-    Public ReadOnly Property modifUser As Integer
+    Public ReadOnly Property usuario_ultima_modificacion As Integer
         Get
             Return _modifUser
         End Get
     End Property
-    Public ReadOnly Property creoUser As Integer
-        Get
-            Return _creoUser
-        End Get
-    End Property
-    Public ReadOnly Property fechaCarga As Date
-        Get
-            Return _fechaCarga
-        End Get
-    End Property
-    Public readonly Property fechaMod As Date
+
+    Public ReadOnly Property ultima_modificacion As Date
         Get
             Return _fechaMod
         End Get
     End Property
 
     Public Sub insertar()
-        Dim db As New DB
         Try
-            db.insertar(Me)
-        Catch ex As Exception
+            Dim api As New API(API.resources.SUBMODULO)
+            _subModulos = Nothing
+            Dim serialObject = Json.JsonConvert.SerializeObject(Me)
+            api.send_post_put(serialObject, API.httpMethods.httpPOST)
+        Catch ex As apiException
             Throw
         End Try
     End Sub
 
     Public Sub actualizar()
-        Dim db As New DB
         Try
             If _modificado Then
-                _modifUser = My.Settings.dni
-                _fechaMod = Date.Today
-                db.actualizar(Me)
+                Dim api As New API(API.resources.SUBMODULO)
+                _subModulos = Nothing
+                Dim serialObject = Json.JsonConvert.SerializeObject(Me)
+                api.send_post_put(serialObject, API.httpMethods.httpPUT)
             Else
                 Throw New Exception("No se realizaron modificaciones")
             End If
-        Catch ex As Exception
+
+        Catch ex As apiException
             Throw
         End Try
     End Sub

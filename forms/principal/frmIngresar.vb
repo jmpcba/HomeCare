@@ -18,6 +18,8 @@
                 Throw New Exception("Contraseña invalida")
             End If
 
+            Dim cg = New cognito()
+            cg.getCognitotoken()
             My.Settings.dni = usuario.dni
             My.Settings.nivel = usuario.nivel
             Me.Hide()

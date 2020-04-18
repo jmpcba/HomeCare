@@ -2,7 +2,6 @@
 Public Class Practica
     Public prestador As Prestador
     Public paciente As Paciente
-    'Public prestacion As Prestacion
     Public modulo As Integer
     Public subModulo As Integer
     Public hsSemana As Decimal

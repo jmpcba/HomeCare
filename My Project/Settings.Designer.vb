@@ -135,6 +135,66 @@ Namespace My
                 Me("checksumDB") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property cognito() As String
+            Get
+                Return CType(Me("cognito"),String)
+            End Get
+            Set
+                Me("cognito") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("us-east-1_kpEVsMtA3")>  _
+        Public Property poolID() As String
+            Get
+                Return CType(Me("poolID"),String)
+            End Get
+            Set
+                Me("poolID") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("289f8sb40ovi92igk4m338t9f8")>  _
+        Public Property clientID() As String
+            Get
+                Return CType(Me("clientID"),String)
+            End Get
+            Set
+                Me("clientID") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("hcapi")>  _
+        Public Property apiUser() As String
+            Get
+                Return CType(Me("apiUser"),String)
+            End Get
+            Set
+                Me("apiUser") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute(";L:jK%tF/Gqs^%s,a-L'8G")>  _
+        Public Property apiPassword() As String
+            Get
+                Return CType(Me("apiPassword"),String)
+            End Get
+            Set
+                Me("apiPassword") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

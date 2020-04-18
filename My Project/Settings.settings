@@ -23,5 +23,20 @@
     <Setting Name="checksumDB" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="cognito" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="poolID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">us-east-1_kpEVsMtA3</Value>
+    </Setting>
+    <Setting Name="clientID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">289f8sb40ovi92igk4m338t9f8</Value>
+    </Setting>
+    <Setting Name="apiUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">hcapi</Value>
+    </Setting>
+    <Setting Name="apiPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">;L:jK%tF/Gqs^%s,a-L'8G</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

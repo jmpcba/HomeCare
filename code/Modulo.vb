@@ -23,8 +23,8 @@ Public Class Modulo
             Dim c = _modulos.Columns.Count
             _modulos.Columns("ultima_modificacion").SetOrdinal(c - 1)
             _modulos.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
-            _modulos.Columns("codigo").SetOrdinal(0)
-
+            _modulos.Columns("codigo").SetOrdinal(1)
+            _modulos.Columns("id").SetOrdinal(0)
         Catch ex As Exception
             Throw
         End Try

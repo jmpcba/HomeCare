@@ -36,13 +36,12 @@ Public Class API
         Try
             Dim request As WebRequest = WebRequest.Create(apiEndpoint)
             request.Method = "GET"
-
+            request.Headers.Add("X-COG-ID", My.Settings.cognito)
             request.ContentType = "application/json"
             response = request.GetResponse()
             dataStream = response.GetResponseStream()
             reader = New StreamReader(dataStream)
             Dim responseFromServer As String = reader.ReadToEnd()
-
 
             Dim dt = Json.JsonConvert.DeserializeObject(Of DataTable)(responseFromServer)
             Try
@@ -53,8 +52,11 @@ Public Class API
 
             Return dt
 
-        Catch ex As Exception
-            Throw
+        Catch ex As WebException
+            Dim exceptionReader = New StreamReader(ex.Response.GetResponseStream())
+            Dim content = exceptionReader.ReadToEnd()
+            exceptionReader.Close()
+            Throw New apiException(content)
 
         Finally
             If Not IsNothing(reader) Then

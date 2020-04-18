@@ -43,7 +43,7 @@
                 Me.Text = "BUSCAR MODULO"
             ElseIf frmParent.GetType.Name = "frmSubMod" Then
                 obj = New subModulo()
-                dt = obj.subModulos
+                dt = obj.getsubModulos
                 dgBuscar.DataSource = dt
                 filtro = "codigo"
                 lblFiltro.Text = filtro

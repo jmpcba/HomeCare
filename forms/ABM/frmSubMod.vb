@@ -27,12 +27,8 @@
                 ut.iniciarTxtBoxes(txtBoxes)
                 subMod = Nothing
             End If
-        Catch ex As Exception
-            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                ut.mensaje("Ya existe un Sub Modulo con el mismo codigo", utils.mensajes.err)
-            Else
-                ut.mensaje(ex.Message, utils.mensajes.err)
-            End If
+        Catch ex As apiException
+            ut.mensaje(ex.Message, utils.mensajes.err)
             If ex.Message.Contains("No se realizaron modificaciones") Then
                 iniciarControles()
             End If
@@ -43,7 +39,7 @@
         Try
             Dim frmBuscar As New frmBuscar(Me)
             frmBuscar.ShowDialog()
-        Catch ex As Exception
+        Catch ex As apiException
             ut.mensaje(ex.Message, utils.mensajes.err)
             subMod = Nothing
             iniciarControles()
