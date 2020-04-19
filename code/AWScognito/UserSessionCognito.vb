@@ -2,6 +2,7 @@
 Imports Amazon
 Imports Amazon.CognitoIdentity
 Imports Amazon.CognitoIdentityProvider
+Imports Amazon.CognitoIdentityProvider.Model
 Imports Amazon.Extensions.CognitoAuthentication
 Imports Amazon.Runtime
 
@@ -30,28 +31,22 @@ Public NotInheritable Class UserSesionCognito
 
         Dim authResponse = Await user.StartWithSrpAuthAsync(authRequest).ConfigureAwait(False)
         _token = authResponse.AuthenticationResult.IdToken
+        Dim attr = user.Attributes
+    End Function
 
-        'While IsNothing(authResponse.AuthenticationResult)
-        '    If authResponse.ChallengeName = ChallengeNameType.NEW_PASSWORD_REQUIRED And Not changePassRequired Then
-        '        Dim newpass = New RespondToNewPasswordRequiredRequest()
-        '        newpass.SessionID = authResponse.SessionID
-        '        If IsNothing(newPassword) Then
-        '            newpass.NewPassword = newPassword
-        '        Else
-        '            ut.mensaje("Debe ingresa una nueva clave para continuar", utils.mensajes.err)
-        '            Exit Function
-        '        End If
+    Friend Async Function verify() As Task
+        userPass = My.Settings.userPass
+        userName = My.Settings.userName
+        Dim verificationCode = My.Settings.verificationCode
+        Dim client = New AmazonCognitoIdentityProviderClient(RegionEndpoint.USEast1)
+        Dim confirmRequest As ConfirmSignUpRequest
+        confirmRequest = New ConfirmSignUpRequest()
+        confirmRequest.ClientId = My.Settings.clientID
+        confirmRequest.Username = userName
+        confirmRequest.ConfirmationCode = My.Settings.verificationCode
+        Dim confirmResult = client.ConfirmSignUpAsync(confirmRequest)
+        Await login()
 
-        '        authResponse = Await user.RespondToNewPasswordRequiredAsync(newpass)
-        '        _token = authResponse.AuthenticationResult.IdToken
-        '    End If
-        'End While
-
-        'If Not IsNothing(authResponse.AuthenticationResult) Then
-        '    _token = authResponse.AuthenticationResult.IdToken
-        'Else
-        '    Throw New loginException()
-        'End If
     End Function
 
     'Public Async Function loginWithResetPassword() As Task

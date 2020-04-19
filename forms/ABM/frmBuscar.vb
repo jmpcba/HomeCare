@@ -27,7 +27,7 @@
 
             ElseIf frmParent.GetType.Name = "frmPacientes" Then
                 obj = New Paciente()
-                dt = obj.pacientes
+                dt = obj.getPacientes()
                 dgBuscar.DataSource = dt
                 filtro = "Apellido"
                 lblFiltro.Text = filtro

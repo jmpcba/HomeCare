@@ -212,7 +212,7 @@ Public Class frmPracticas
                             med.refrescar()
                         End If
 
-                        If pac.modificado Then
+                        If pac.getModificado Then
                             pac.actualizar()
                             pac.refrescar()
                         End If

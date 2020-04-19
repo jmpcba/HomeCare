@@ -3,7 +3,7 @@
 Public Class Paciente
 
     Private _pacientes As DataTable
-
+    Private _id As Integer
     Private _afiliado As String
     Private _dni As String
     Private _nombre As String
@@ -22,31 +22,30 @@ Public Class Paciente
 
     Public Sub New()
         Try
-            getPacientes()
-        Catch ex As Exception
-            Throw
-        End Try
-    End Sub
+            Try
+                Dim api As New API(API.resources.PACIENTE)
+                _pacientes = api.get_table()
+                Dim c = _pacientes.Columns.Count
+                _pacientes.Columns("ultima_modificacion").SetOrdinal(c - 1)
+                _pacientes.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
+                _pacientes.Columns("apellido").SetOrdinal(1)
+                _pacientes.Columns("apellido").SetOrdinal(2)
+                _pacientes.Columns("id").SetOrdinal(0)
 
-    Private Sub getPacientes()
+                _pacientes.Columns.Add("COMBO").SetOrdinal(0)
 
-        Try
-            Dim api As New API(API.resources.PACIENTE)
+                For Each r As DataRow In _pacientes.Rows
+                    Dim nom As String
+                    Dim ape As String
+                    nom = r("nombre")
+                    ape = r("apellido")
 
-            _pacientes = api.get_table()
-
-            _pacientes.Columns.Add("COMBO").SetOrdinal(0)
-
-            For Each r As DataRow In _pacientes.Rows
-                Dim nom As String
-                Dim ape As String
-                nom = r("nombre")
-                ape = r("apellido")
-
-                r("COMBO") = String.Format("{0} {1}", ape, nom)
-            Next
-            _pacientes.DefaultView.Sort = "COMBO"
-
+                    r("COMBO") = String.Format("{0} {1}", ape, nom)
+                Next
+                _pacientes.DefaultView.Sort = "COMBO"
+            Catch ex As Exception
+                Throw
+            End Try
         Catch ex As Exception
             Throw
         End Try
@@ -62,7 +61,7 @@ Public Class Paciente
         Me._observaciones = _observaciones
         Me._subModulo = _subModulo
         Me._modulo = _modulo
-        Me._modifUser = My.Settings.dni
+        Me._modifUser = My.Settings.userName
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
     End Sub
@@ -79,12 +78,22 @@ Public Class Paciente
 
     Public Property afiliado As String
         Set(value As String)
+            _dni = value
+            _modificado = True
+        End Set
+        Get
+            Return _dni
+        End Get
+    End Property
+
+    Public Property id As String
+        Set(value As String)
             Dim r As DataRow()
 
-            r = _pacientes.Select("afiliado='" & value & "'")
+            r = _pacientes.Select("id='" & value & "'")
 
             If r.Length = 1 Then
-
+                _id = value
                 _afiliado = r(0)("afiliado")
                 _dni = r(0)("dni")
                 _nombre = r(0)("nombre")
@@ -121,7 +130,7 @@ Public Class Paciente
 
         End Set
         Get
-            Return _afiliado
+            Return _id
         End Get
     End Property
 
@@ -210,34 +219,20 @@ Public Class Paciente
             Return _modifUser
         End Get
     End Property
-    Public ReadOnly Property fechaCarga As Date
-        Get
-            Return _fechaCarga
-        End Get
-    End Property
-    Public ReadOnly Property fechaMod As Date
+    Public ReadOnly Property ultima_modificacion As Date
         Get
             Return _fechaMod
         End Get
     End Property
 
-    Public ReadOnly Property pacientes As DataTable
-        Get
-            Return _pacientes
-        End Get
-    End Property
-
-    Public ReadOnly Property modificado As Boolean
-        Get
-            Return _modificado
-        End Get
-    End Property
+    Public Function getPacientes() As DataTable
+        Return _pacientes
+    End Function
 
     Public Sub insertar()
         Try
             Dim api As New API(API.resources.PACIENTE)
             Me.baja = False
-            _pacientes = Nothing
             Dim serialObject = Json.JsonConvert.SerializeObject(Me)
             api.send_post_put(serialObject, API.httpMethods.httpPOST)
         Catch ex As Exception
@@ -277,7 +272,7 @@ Public Class Paciente
 
         _combo.DataSource = DV
         _combo.DisplayMember = "combo"
-        _combo.ValueMember = "afiliado"
+        _combo.ValueMember = "id"
         _combo.SelectedIndex = -1
     End Sub
 
@@ -288,4 +283,8 @@ Public Class Paciente
             Throw
         End Try
     End Sub
+
+    Public Function getModificado() As Boolean
+        Return _modificado
+    End Function
 End Class

@@ -39,7 +39,7 @@ Public Class Modulo
         Me._topeFono = _topeFon
         Me._topeCuidador = _topeCuid
         Me._topeNutricionista = _topeNutri
-        Me._modifUser = 1 'TODO replace with real users
+        Me._modifUser = My.Settings.userName
         Me._creoUser = My.Settings.dni
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today

@@ -25,12 +25,15 @@ Partial Class frmIngresar
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.BtnCerrar = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtVerificacion = New System.Windows.Forms.TextBox()
+        Me.lblVerificacion = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtPassw = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.numDni = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblExplicacionVerCode = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -57,6 +60,9 @@ Partial Class frmIngresar
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.lblExplicacionVerCode)
+        Me.Panel1.Controls.Add(Me.txtVerificacion)
+        Me.Panel1.Controls.Add(Me.lblVerificacion)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.txtPassw)
         Me.Panel1.Controls.Add(Me.Label2)
@@ -67,6 +73,25 @@ Partial Class frmIngresar
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(550, 371)
         Me.Panel1.TabIndex = 103
+        '
+        'txtVerificacion
+        '
+        Me.txtVerificacion.Location = New System.Drawing.Point(249, 276)
+        Me.txtVerificacion.Name = "txtVerificacion"
+        Me.txtVerificacion.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtVerificacion.Size = New System.Drawing.Size(121, 20)
+        Me.txtVerificacion.TabIndex = 46
+        Me.txtVerificacion.Visible = False
+        '
+        'lblVerificacion
+        '
+        Me.lblVerificacion.AutoSize = True
+        Me.lblVerificacion.Location = New System.Drawing.Point(85, 279)
+        Me.lblVerificacion.Name = "lblVerificacion"
+        Me.lblVerificacion.Size = New System.Drawing.Size(144, 13)
+        Me.lblVerificacion.TabIndex = 45
+        Me.lblVerificacion.Text = "CODIGO DE VERIFICACION"
+        Me.lblVerificacion.Visible = False
         '
         'Label3
         '
@@ -106,7 +131,7 @@ Partial Class frmIngresar
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(109, 203)
+        Me.Label1.Location = New System.Drawing.Point(144, 203)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(70, 13)
         Me.Label1.TabIndex = 42
@@ -115,11 +140,21 @@ Partial Class frmIngresar
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(144, 128)
+        Me.Label6.Location = New System.Drawing.Point(179, 128)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(35, 13)
         Me.Label6.TabIndex = 34
         Me.Label6.Text = "D.N.I."
+        '
+        'lblExplicacionVerCode
+        '
+        Me.lblExplicacionVerCode.AutoSize = True
+        Me.lblExplicacionVerCode.Location = New System.Drawing.Point(225, 315)
+        Me.lblExplicacionVerCode.Name = "lblExplicacionVerCode"
+        Me.lblExplicacionVerCode.Size = New System.Drawing.Size(184, 13)
+        Me.lblExplicacionVerCode.TabIndex = 47
+        Me.lblExplicacionVerCode.Text = "Codigo de verificacion enviado por ail"
+        Me.lblExplicacionVerCode.Visible = False
         '
         'frmIngresar
         '
@@ -148,4 +183,7 @@ Partial Class frmIngresar
     Friend WithEvents numDni As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents txtVerificacion As TextBox
+    Friend WithEvents lblVerificacion As Label
+    Friend WithEvents lblExplicacionVerCode As Label
 End Class

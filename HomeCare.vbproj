@@ -153,7 +153,7 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Backend.vb" />
     <Compile Include="code\Api.vb" />
-    <Compile Include="code\AWScognito\CognitoUserStore .vb" />
+    <Compile Include="code\AWScognito\User.vb" />
     <Compile Include="code\DB.vb" />
     <Compile Include="code\dbHelper.vb" />
     <Compile Include="code\encriptador.vb" />

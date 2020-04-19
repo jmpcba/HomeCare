@@ -195,6 +195,18 @@ Namespace My
                 Me("IDENTITY_PROVIDER") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property verificationCode() As String
+            Get
+                Return CType(Me("verificationCode"),String)
+            End Get
+            Set
+                Me("verificationCode") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

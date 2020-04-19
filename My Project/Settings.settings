@@ -38,5 +38,8 @@
     <Setting Name="IDENTITY_PROVIDER" Type="System.String" Scope="User">
       <Value Profile="(Default)">cognito-idp.us-east-1.amazonaws.com</Value>
     </Setting>
+    <Setting Name="verificationCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

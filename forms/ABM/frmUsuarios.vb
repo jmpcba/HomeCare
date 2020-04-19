@@ -46,8 +46,9 @@
 
 
         Catch ex As Exception
-            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                ut.mensaje("Ya existe un paciente con el mismo numero", utils.mensajes.err)
+            If ex.Message.Contains("User already exists") Then
+                ut.mensaje("El nombre de usuario ya existe", utils.mensajes.err)
+                user = Nothing
             Else
                 ut.mensaje(ex.Message, utils.mensajes.err)
             End If
@@ -94,6 +95,7 @@
 
     Private Sub frmusuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtBoxes = {txtUsuario, txtMail, txtApellido, txtPassw}
+        user = Nothing
     End Sub
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs)
         Me.Close()
