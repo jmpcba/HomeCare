@@ -16,26 +16,23 @@ Public Class frmIngresar
             btnGuardar.Enabled = False
             If verificacion Then
                 My.Settings.verificationCode = txtVerificacion.Text.Trim
-                Await um.currentUser.verify()
+                Await um.verifyCurrentUser()
                 lblVerificacion.Visible = False
                 txtVerificacion.Visible = False
                 lblExplicacionVerCode.Visible = False
                 verificacion = False
             Else
-                Await um.currentUser.loginAsync()
+                Await um.loginCurrentUser()
             End If
 
             Me.Hide()
             frmPrincipal.ShowDialog()
 
-        Catch ex As NotAuthorizedException
+        Catch ex As loginException
             numDni.Focus()
-            ut.mensaje("Contraseña invalida", utils.mensajes.err)
-
-        Catch ex As UserNotFoundException
-            numDni.Focus()
-            ut.mensaje("No existe el usuario", utils.mensajes.err)
-        Catch ex As UserNotConfirmedException
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        Catch ex As UserConformationException
+            ut.mensaje(ex.Message, utils.mensajes.err)
             lblVerificacion.Visible = True
             txtVerificacion.Visible = True
             lblExplicacionVerCode.Visible = True

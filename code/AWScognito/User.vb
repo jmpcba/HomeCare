@@ -22,8 +22,7 @@ Friend NotInheritable Class User
 
     Public Async Function loginAsync() As Task
 
-        Try
-            pass = My.Settings.userPass
+        pass = My.Settings.userPass
             userName = My.Settings.userName
             Dim anonymousClient =
             New AmazonCognitoIdentityProviderClient(New Amazon.Runtime.AnonymousAWSCredentials(), RegionEndpoint.USEast1)
@@ -42,7 +41,8 @@ Friend NotInheritable Class User
             Dim userGroupResponse As AdminListGroupsForUserResponse
             userGroupResponse = client.AdminListGroupsForUser(userGroupRequest)
 
-            Dim group As GroupType
+        Dim group As GroupType
+        If userGroupResponse.Groups.Count > 0 Then
             group = userGroupResponse.Groups(0)
             _userGroup = group.GroupName
             If _userGroup = "admin" Then
@@ -52,9 +52,7 @@ Friend NotInheritable Class User
             ElseIf _userGroup = "operadores" Then
                 My.Settings.nivel = 2
             End If
-        Catch ex As Exception
-            Throw
-        End Try
+        End If
     End Function
 
     Public Sub logout()

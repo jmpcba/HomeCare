@@ -52,7 +52,7 @@
                 obj = New UserManager()
                 dt = obj.listallUsers
                 dgBuscar.DataSource = dt
-                filtro = "DNI"
+                filtro = "usuario"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR USUARIOS"
             ElseIf frmParent.GetType.Name = "frmZonas" Then

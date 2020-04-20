@@ -163,6 +163,7 @@
     <Compile Include="code\excepciones\ExcepcionDeSistema.vb" />
     <Compile Include="code\excepciones\loginException.vb" />
     <Compile Include="code\excepciones\ResultadoCargaPracticas.vb" />
+    <Compile Include="code\excepciones\UserConformationException.vb" />
     <Compile Include="code\Feriados.vb" />
     <Compile Include="code\Liquidacion.vb" />
     <Compile Include="code\mail.vb" />
