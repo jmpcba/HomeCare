@@ -12,21 +12,19 @@ Public Class frmIngresar
             ut.validarTxtBoxLleno(txtBoxes)
             My.Settings.userName = numDni.Text.Trim
             My.Settings.userPass = txtPassw.Text.Trim
-            Dim cg As UserSesionCognito = UserSesionCognito.Instance
+            Dim um = New UserManager
             btnGuardar.Enabled = False
             If verificacion Then
                 My.Settings.verificationCode = txtVerificacion.Text.Trim
-                Await cg.verify()
+                Await um.currentUser.verify()
                 lblVerificacion.Visible = False
                 txtVerificacion.Visible = False
                 lblExplicacionVerCode.Visible = False
                 verificacion = False
             Else
-                Await cg.login()
+                Await um.currentUser.loginAsync()
             End If
 
-            My.Settings.dni = "2918898"
-            My.Settings.nivel = 0
             Me.Hide()
             frmPrincipal.ShowDialog()
 

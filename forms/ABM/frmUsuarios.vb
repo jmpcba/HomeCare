@@ -13,8 +13,8 @@
                 'End If
                 'ut.validarTxtBoxLleno(txtBoxes)
                 'ut.validarLargo(txtUsuario, 8)
-                user = New User(txtUsuario.Text.Trim, txtPassw.Text.Trim, txtMail.Text.Trim)
-                Await user.registerAsync()
+                'user = New User(txtUsuario.Text.Trim, txtPassw.Text.Trim, txtMail.Text.Trim)
+                'Await user.registerAsync()
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
                 'Else

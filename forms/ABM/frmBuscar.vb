@@ -49,8 +49,8 @@
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR SUB-MODULO"
             ElseIf frmParent.GetType.Name = "frmUsuarios" Then
-                obj = New Usuario()
-                dt = obj.usuarios
+                obj = New UserManager()
+                dt = obj.listallUsers
                 dgBuscar.DataSource = dt
                 filtro = "DNI"
                 lblFiltro.Text = filtro

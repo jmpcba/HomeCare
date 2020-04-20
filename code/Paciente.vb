@@ -214,7 +214,7 @@ Public Class Paciente
         End Get
     End Property
 
-    Public ReadOnly Property usuario_ultima_modificacion As Integer
+    Public ReadOnly Property usuario_ultima_modificacion As String
         Get
             Return _modifUser
         End Get
