@@ -6,8 +6,8 @@ Imports Amazon.CognitoIdentityProvider.Model
 Imports Amazon.Extensions.CognitoAuthentication
 Imports Amazon.Runtime
 
-Friend NotInheritable Class User
-    Private Shared _instance As User
+Friend NotInheritable Class CurrentSession
+    Private Shared _instance As CurrentSession
     Private _userName As String
     Private _pass As String
     Private _token As String
@@ -23,23 +23,23 @@ Friend NotInheritable Class User
     Public Async Function loginAsync() As Task
 
         pass = My.Settings.userPass
-            userName = My.Settings.userName
-            Dim anonymousClient =
-            New AmazonCognitoIdentityProviderClient(New Amazon.Runtime.AnonymousAWSCredentials(), RegionEndpoint.USEast1)
-            Dim userPool = New CognitoUserPool(My.Settings.poolID, My.Settings.clientID, anonymousClient)
-            _cognitoUser = New CognitoUser(userName, My.Settings.clientID, userPool, anonymousClient)
-            Dim authRequest = New InitiateSrpAuthRequest()
-            authRequest.Password = pass
+        userName = My.Settings.userName
+        Dim anonymousClient =
+        New AmazonCognitoIdentityProviderClient(New Amazon.Runtime.AnonymousAWSCredentials(), RegionEndpoint.USEast1)
+        Dim userPool = New CognitoUserPool(My.Settings.poolID, My.Settings.clientID, anonymousClient)
+        _cognitoUser = New CognitoUser(userName, My.Settings.clientID, userPool, anonymousClient)
+        Dim authRequest = New InitiateSrpAuthRequest()
+        authRequest.Password = pass
 
-            Dim authResponse = Await _cognitoUser.StartWithSrpAuthAsync(authRequest).ConfigureAwait(False)
-            _token = authResponse.AuthenticationResult.IdToken
-            'pruebas para obtener los grupos
-            Dim client = New AmazonCognitoIdentityProviderClient(RegionEndpoint.USEast1)
-            Dim userGroupRequest = New AdminListGroupsForUserRequest
-            userGroupRequest.Username = _userName
-            userGroupRequest.UserPoolId = My.Settings.poolID
-            Dim userGroupResponse As AdminListGroupsForUserResponse
-            userGroupResponse = client.AdminListGroupsForUser(userGroupRequest)
+        Dim authResponse = Await _cognitoUser.StartWithSrpAuthAsync(authRequest).ConfigureAwait(False)
+        _token = authResponse.AuthenticationResult.IdToken
+
+        Dim client = New AmazonCognitoIdentityProviderClient(RegionEndpoint.USEast1)
+        Dim userGroupRequest = New AdminListGroupsForUserRequest
+        userGroupRequest.Username = _userName
+        userGroupRequest.UserPoolId = My.Settings.poolID
+        Dim userGroupResponse As AdminListGroupsForUserResponse
+        userGroupResponse = client.AdminListGroupsForUser(userGroupRequest)
 
         Dim group As GroupType
         If userGroupResponse.Groups.Count > 0 Then
@@ -124,12 +124,12 @@ Friend NotInheritable Class User
 
 
     'IMPLEMENTACION DE SINGLETON
-    Public Shared ReadOnly Property Instance() As User
+    Public Shared ReadOnly Property Instance() As CurrentSession
         Get
             If _instance Is Nothing Then
                 SyncLock _Sync
                     If _instance Is Nothing Then
-                        _instance = New User()
+                        _instance = New CurrentSession()
                     End If
                 End SyncLock
             End If

@@ -50,7 +50,7 @@
                 Me.Text = "BUSCAR SUB-MODULO"
             ElseIf frmParent.GetType.Name = "frmUsuarios" Then
                 obj = New UserManager()
-                dt = obj.listallUsers
+                dt = obj.allUsers
                 dgBuscar.DataSource = dt
                 filtro = "usuario"
                 lblFiltro.Text = filtro
@@ -77,6 +77,7 @@
     Private Sub dgBuscar_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgBuscar.CellDoubleClick
         If e.RowIndex <> -1 Then
             Try
+                Dim um = New UserManager
                 Dim r As DataGridViewRow
                 r = dgBuscar.Rows(e.RowIndex)
 
@@ -89,7 +90,7 @@
                 ElseIf frmParent.GetType.Name = "frmSubMod" Then
                     obj.codigo = r.Cells("codigo").Value
                 ElseIf frmParent.GetType.Name = "frmUsuarios" Then
-                    obj.dni = r.Cells("dni").Value
+                    obj = um.modelUser(r.Cells("usuario").Value)
                 ElseIf frmParent.GetType.Name = "frmZonas" Then
                     obj.idzona = r.Cells("id").Value
                 End If

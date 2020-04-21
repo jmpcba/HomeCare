@@ -4,7 +4,7 @@ Imports System.Text
 Imports Newtonsoft
 Public Class API
     Private apiEndpoint As String
-    Private cg As userSesionCognito
+    Private um As UserManager
     Public Enum resources
         PRESTADOR
         PACIENTE
@@ -27,7 +27,7 @@ Public Class API
 
     Public Sub New(r As resources)
         apiEndpoint = "https://cl86zb12f8.execute-api.us-east-1.amazonaws.com/DEV/v1/" & r.ToString()
-        cg = userSesionCognito.Instance
+        um = New UserManager()
     End Sub
 
     Public Function get_table() As DataTable
@@ -38,7 +38,7 @@ Public Class API
         Try
             Dim request As WebRequest = WebRequest.Create(apiEndpoint)
             request.Method = "GET"
-            request.Headers.Add("X-COG-ID", cg.token)
+            request.Headers.Add("X-COG-ID", um.currentSession.token)
             request.ContentType = "application/json"
             response = request.GetResponse()
             dataStream = response.GetResponseStream()

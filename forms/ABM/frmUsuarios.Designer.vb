@@ -56,9 +56,9 @@ Partial Class frmUsuarios
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(106, 108)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(43, 13)
+        Me.Label6.Size = New System.Drawing.Size(56, 13)
         Me.Label6.TabIndex = 34
-        Me.Label6.Text = "Usuario"
+        Me.Label6.Text = "USUARIO"
         '
         'Label2
         '
@@ -122,7 +122,6 @@ Partial Class frmUsuarios
         '
         Me.cbNivel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbNivel.FormattingEnabled = True
-        Me.cbNivel.Items.AddRange(New Object() {"0", "1", "2"})
         Me.cbNivel.Location = New System.Drawing.Point(259, 384)
         Me.cbNivel.Name = "cbNivel"
         Me.cbNivel.Size = New System.Drawing.Size(121, 21)

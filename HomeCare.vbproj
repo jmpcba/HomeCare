@@ -153,8 +153,9 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Backend.vb" />
     <Compile Include="code\Api.vb" />
-    <Compile Include="code\AWScognito\User.vb" />
+    <Compile Include="code\AWScognito\CurrentUser.vb" />
     <Compile Include="code\AWScognito\UserManager.vb" />
+    <Compile Include="code\AWScognito\UserModel.vb" />
     <Compile Include="code\DB.vb" />
     <Compile Include="code\dbHelper.vb" />
     <Compile Include="code\encriptador.vb" />
@@ -175,7 +176,6 @@
     <Compile Include="code\subModulo.vb" />
     <Compile Include="code\Usuario.vb" />
     <Compile Include="code\utils.vb" />
-    <Compile Include="code\AWScognito\UserSessionCognito.vb" />
     <Compile Include="forms\ABM\frmBuscar.Designer.vb">
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </Compile>

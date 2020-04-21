@@ -64,16 +64,16 @@
         End Try
     End Sub
 
-    'Public Sub resultadoBusqueda(ByRef _usuario As Usuario)
-    '    txtUsuario.ReadOnly = True
-    '    txtUsuario.Text = _usuario.dni
-    '    txtMail.Text = _usuario.nombre
-    '    txtApellido.Text = _usuario.apellido
-    '    txtPassw.Text = _usuario.pass
-    '    cbNivel.SelectedItem = _usuario.nivel
-    '    cbNivel.Enabled = True
-    '    user = _usuario
-    'End Sub
+    Public Sub resultadoBusqueda(ByRef _usuario As UserModel)
+        txtUsuario.ReadOnly = True
+        txtUsuario.Text = _usuario.usuario
+        txtMail.Text = _usuario.mail
+        txtApellido.Text = _usuario.apellido
+        txtNombre.Text = _usuario.nombre
+        cbNivel.SelectedValue = _usuario.grupo
+        cbNivel.Enabled = True
+        txtPassw.Enabled = False
+    End Sub
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
 
@@ -89,7 +89,11 @@
 
     Private Sub frmusuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtBoxes = {txtUsuario, txtMail, txtApellido, txtPassw}
-
+        Dim um = New UserManager
+        cbNivel.DataSource = um.allGroups
+        cbNivel.DisplayMember = "Descripcion"
+        cbNivel.ValueMember = "Nombre"
+        cbNivel.SelectedIndex = -1
     End Sub
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs)
         Me.Close()

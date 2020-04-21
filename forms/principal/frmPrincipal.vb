@@ -166,7 +166,7 @@
 
     Private Sub frmPrincipal_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Dim um = New UserManager
-        um.currentUser.logout()
+        um.currentSession.logout()
         Application.Exit()
     End Sub
 
