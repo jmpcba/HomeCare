@@ -9,9 +9,7 @@ Public Class Modulo
     Private _topeFono As Integer
     Private _topeCuidador As Integer
     Private _topeNutricionista As Integer
-    Private _modifUser As Integer
-    Private _creoUser As Integer
-    Private _fechaCarga As Date
+    Private _modifUser As String
     Private _fechaMod As Date
     Private _modificado = False
     Private _modulos As DataTable
@@ -40,8 +38,6 @@ Public Class Modulo
         Me._topeCuidador = _topeCuid
         Me._topeNutricionista = _topeNutri
         Me._modifUser = My.Settings.userName
-        Me._creoUser = My.Settings.dni
-        Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
     End Sub
 
@@ -188,7 +184,7 @@ Public Class Modulo
         End Try
     End Sub
 
-    Public ReadOnly Property usuario_ultima_modificacion As Integer
+    Public ReadOnly Property usuario_ultima_modificacion As String
         Get
             Return _modifUser
         End Get

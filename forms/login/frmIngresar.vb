@@ -1,7 +1,7 @@
 ﻿Imports Amazon.CognitoIdentityProvider.Model
 
 Public Class frmIngresar
-    Dim usuario As Usuario
+
     Dim ut As utils
     Dim txtBoxes As TextBox()
     Dim db As DB
@@ -60,7 +60,7 @@ Public Class frmIngresar
                 ut.mensaje("Base de datos configurada con exito - Reinicie la aplicacion", utils.mensajes.info)
                 Me.Close()
             Else
-                usuario = New Usuario()
+
                 db = New DB
             End If
         Catch ex As Exception

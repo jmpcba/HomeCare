@@ -5,16 +5,16 @@ Public Class subModulo
     Private _codigo As String
     Private _descripcion As String
     Private _numTope As Integer
-    Private _modifUser As Integer
+    Private _modifUser As String
     Private _fechaMod As Date
     Private _modificado = False
     Private _subModulos As DataTable
 
     Public Sub New(_cod As String, _desc As String)
-
+        Dim um = New UserManager()
         _codigo = _cod
         _descripcion = _desc
-        _modifUser = 1
+        _modifUser = um.currentSession.userName
         _fechaMod = Date.Today
     End Sub
 
@@ -25,8 +25,8 @@ Public Class subModulo
             Dim c = _subModulos.Columns.Count
             _subModulos.Columns("ultima_modificacion").SetOrdinal(c - 1)
             _subModulos.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
-            _subModulos.Columns("codigo").SetOrdinal(1)
             _subModulos.Columns("id").SetOrdinal(0)
+            _subModulos.Columns("codigo").SetOrdinal(1)
 
             _subModulos.Columns.Add("COMBO")
             For Each r As DataRow In _subModulos.Rows
@@ -91,7 +91,7 @@ Public Class subModulo
         End Get
     End Property
 
-    Public ReadOnly Property usuario_ultima_modificacion As Integer
+    Public ReadOnly Property usuario_ultima_modificacion As String
         Get
             Return _modifUser
         End Get
@@ -117,6 +117,7 @@ Public Class subModulo
     Public Sub actualizar()
         Try
             If _modificado Then
+                _modifUser = New UserManager().currentSession.userName
                 Dim api As New API(API.resources.SUBMODULO)
                 _subModulos = Nothing
                 Dim serialObject = Json.JsonConvert.SerializeObject(Me)

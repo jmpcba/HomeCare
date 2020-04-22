@@ -44,26 +44,26 @@ Public Class DB
         cmd.Connection = cnn
     End Sub
 
-    Friend Sub InsertarFeriado(_fecha As Date, _desc As String)
-        Try
-            Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
-                                      _fecha.Date.ToShortDateString, _desc, My.Settings.dni, Today.ToShortDateString, My.Settings.dni, Today.ToShortDateString)
+    'Friend Sub InsertarFeriado(_fecha As Date, _desc As String)
+    '    Try
+    '        Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
+    '                                  _fecha.Date.ToShortDateString, _desc, My.Settings.dni, Today.ToShortDateString, My.Settings.dni, Today.ToShortDateString)
 
-            cmd.CommandType = CommandType.Text
-            cmd.CommandText = query
+    '        cmd.CommandType = CommandType.Text
+    '        cmd.CommandText = query
 
-            ut.backupDBTemp()
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
+    '        Throw
+    '    Finally
+    '        cnn.Close()
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
 
     Friend Function getPracticas(_fecha As Date) As DataTable
         Dim desde As Date
@@ -90,26 +90,26 @@ Public Class DB
         End Try
     End Function
 
-    Friend Sub eliminarFeriado(_fecha As Date)
-        Try
+    'Friend Sub eliminarFeriado(_fecha As Date)
+    '    Try
 
-            cmd.CommandType = CommandType.StoredProcedure
-            cmd.CommandText = "DELETE_FERIADO"
-            cmd.Parameters.Clear()
-            cmd.Parameters.AddWithValue("FECHA_IN", _fecha.Date)
+    '        cmd.CommandType = CommandType.StoredProcedure
+    '        cmd.CommandText = "DELETE_FERIADO"
+    '        cmd.Parameters.Clear()
+    '        cmd.Parameters.AddWithValue("FECHA_IN", _fecha.Date)
 
-            ut.backupDBTemp()
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
+    '        Throw
+    '    Finally
+    '        cnn.Close()
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
 
     Friend Function getLiquidacion(_fecha As Date, _liq As tiposLiquidacion) As DataTable
         Dim desde As Date
@@ -335,18 +335,18 @@ Public Class DB
         End Try
     End Function
 
-    Public Function getUsuario(_dni As String) As DataTable
-        cmd.CommandText = String.Format("SELECT * FROM USUARIOS WHERE DNI = '{0}'", _dni)
-        cmd.CommandType = CommandType.Text
+    'Public Function getUsuario(_dni As String) As DataTable
+    '    cmd.CommandText = String.Format("SELECT * FROM USUARIOS WHERE DNI = '{0}'", _dni)
+    '    cmd.CommandType = CommandType.Text
 
-        Try
-            da.Fill(ds, "PACIENTES")
-            Return ds.Tables("PACIENTES")
-        Catch ex As Exception
-            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
-        End Try
+    '    Try
+    '        da.Fill(ds, "PACIENTES")
+    '        Return ds.Tables("PACIENTES")
+    '    Catch ex As Exception
+    '        Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
+    '    End Try
 
-    End Function
+    'End Function
 
     Friend Sub insertar(_practica As Practica)
 
@@ -424,31 +424,6 @@ Public Class DB
 
     End Function
 
-
-    Friend Sub insertar(_prestacion As Prestacion)
-
-        Dim query = String.Format("INSERT INTO PRESTACIONES (CODIGO, DESCRIPCION, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION)
-                        VALUES ({0}, '{1}', '{2}', '{3}', #{4}#, #{5}#)",
-                                  _prestacion.codigo, _prestacion.descripcion, _prestacion.creoUser, _prestacion.modifUser, _prestacion.fechaCarga.ToShortDateString, _prestacion.fechaMod.ToShortDateString)
-
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
-
-        Try
-            ut.backupDBTemp()
-
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
-
-
     Friend Sub insertar(_liq As Liquidacion)
         Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
         System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
@@ -495,124 +470,122 @@ Public Class DB
         End Try
     End Sub
 
-    Friend Sub insertar(_feriado As Feriado)
+    'Friend Sub insertar(_feriado As Feriado)
 
-        Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES (#{0}#, '{1}', {2}, #{3}#, {4}, #{5}#)", _feriado.fecha.ToShortDateString, _feriado.descripcion, _feriado.creoUser, _feriado.fechaCarga.ToShortDateString, _feriado.modifUser, _feriado.fechaMod.ToShortDateString)
+    '    Dim query = String.Format("INSERT INTO FERIADOS (FECHA, DESCRIPCION, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES (#{0}#, '{1}', {2}, #{3}#, {4}, #{5}#)", _feriado.fecha.ToShortDateString, _feriado.descripcion, _feriado.creoUser, _feriado.fechaCarga.ToShortDateString, _feriado.modifUser, _feriado.fechaMod.ToShortDateString)
 
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
+    '    cmd.CommandType = CommandType.Text
+    '    cmd.CommandText = query
 
-        Try
-            ut.backupDBTemp()
+    '    Try
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
-    Friend Sub insertar(_usuario As Usuario)
-        Dim enc As New Encriptador()
-        Try
-            Dim query = String.Format("INSERT INTO USUARIOS (DNI, APELLIDO, NOMBRE, NIVEL, PASS, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', {3}, '{4}', '{5}', '{6}', '{7}', '{8}')",
-                                      _usuario.dni, _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.encriptar(_usuario.pass), _usuario.creoUser, _usuario.fechaCarga.ToShortDateString, _usuario.modifUser, _usuario.fechaMod.ToShortDateString)
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
+    '        Throw
+    '    Finally
+    '        cnn.Close()
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
+    'Friend Sub insertar(_usuario As Usuario)
+    '    Dim enc As New Encriptador()
+    '    Try
+    '        Dim query = String.Format("INSERT INTO USUARIOS (DNI, APELLIDO, NOMBRE, NIVEL, PASS, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', {3}, '{4}', '{5}', '{6}', '{7}', '{8}')",
+    '                                  _usuario.dni, _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.encriptar(_usuario.pass), _usuario.creoUser, _usuario.fechaCarga.ToShortDateString, _usuario.modifUser, _usuario.fechaMod.ToShortDateString)
 
 
-            cmd.CommandType = CommandType.Text
-            cmd.CommandText = query
+    '        cmd.CommandType = CommandType.Text
+    '        cmd.CommandText = query
 
-            ut.backupDBTemp()
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
+    '        Throw
+    '    Finally
+    '        cnn.Close()
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
 
-    Friend Sub insertar(_zona As Zona)
+    'Friend Sub insertar(_zona As Zona)
 
-        Dim enc As New Encriptador()
-        Dim query = String.Format("INSERT INTO ZONAS (NOMBRE, EMAIL, PASS, PROPIETARIO, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}',#{5}#, '{6}', #{7}#)",
-                                  _zona.nombre, _zona.email, enc.encriptar(_zona.pass), _zona.propietario, _zona.creoUser, _zona.fechaCarga.ToShortDateString, _zona.modifUser, _zona.fechaMod.ToShortDateString)
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
+    '    Dim enc As New Encriptador()
+    '    Dim query = String.Format("INSERT INTO ZONAS (NOMBRE, EMAIL, PASS, PROPIETARIO, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}',#{5}#, '{6}', #{7}#)",
+    '                              _zona.nombre, _zona.email, enc.encriptar(_zona.pass), _zona.propietario, _zona.creoUser, _zona.fechaCarga.ToShortDateString, _zona.modifUser, _zona.fechaMod.ToShortDateString)
+    '    cmd.CommandType = CommandType.Text
+    '    cmd.CommandText = query
 
-        Try
-            ut.backupDBTemp()
+    '    Try
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
 
-            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                Throw New ExcepcionDeSistema("Ya existe una zona con este nombre")
-            Else
-                Throw
-            End If
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
+    '        If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+    '            Throw New ExcepcionDeSistema("Ya existe una zona con este nombre")
+    '        Else
+    '            Throw
+    '        End If
+    '    Finally
+    '        cnn.Close()
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
 
-    Friend Sub actualizar(_feriado As Feriado)
+    'Friend Sub actualizar(_feriado As Feriado)
 
-    End Sub
-    Friend Sub ACTUALIZAR(_prestacion As Prestacion)
+    'End Sub
 
-    End Sub
 
-    Friend Sub actualizar(_usuario As Usuario)
-        Dim enc As New Encriptador()
-        Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', NIVEL={2}, PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.encriptar(_usuario.pass), _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
+    'Friend Sub actualizar(_usuario As Usuario)
+    '    Dim enc As New Encriptador()
+    '    Dim query = String.Format("UPDATE USUARIOS SET APELLIDO='{0}', NOMBRE='{1}', NIVEL={2}, PASS='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE DNI='{6}'", _usuario.apellido, _usuario.nombre, _usuario.nivel, enc.encriptar(_usuario.pass), _usuario.modifUser, _usuario.fechaMod.ToShortDateString, _usuario.dni)
 
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
+    '    cmd.CommandType = CommandType.Text
+    '    cmd.CommandText = query
 
-        Try
-            ut.backupDBTemp()
+    '    Try
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
-    Friend Sub actualizar(_zona As Zona)
-        Dim enc As New Encriptador()
-        Dim query = String.Format("UPDATE ZONAS SET NOMBRE='{0}', EMAIL='{1}', PASS='{2}', PROPIETARIO='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE ID={6}",
-                                  _zona.nombre, _zona.email, enc.encriptar(_zona.pass), _zona.propietario, _zona.modifUser, _zona.fechaMod.ToShortDateString, _zona.idzona)
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
+    '        Throw
+    '    Finally
+    '        cnn.Close()
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
+    'Friend Sub actualizar(_zona As Zona)
+    '    Dim enc As New Encriptador()
+    '    Dim query = String.Format("UPDATE ZONAS SET NOMBRE='{0}', EMAIL='{1}', PASS='{2}', PROPIETARIO='{3}', MODIFICO_USUARIO='{4}', FECHA_MODIFICACION=#{5}# WHERE ID={6}",
+    '                              _zona.nombre, _zona.email, enc.encriptar(_zona.pass), _zona.propietario, _zona.modifUser, _zona.fechaMod.ToShortDateString, _zona.idzona)
 
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
+    '    cmd.CommandType = CommandType.Text
+    '    cmd.CommandText = query
 
-        Try
-            ut.backupDBTemp()
+    '    Try
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
+    '        Throw
+    '    Finally
+    '        cnn.Close()
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
 
     Public Function getTable(_tabla As tablas)
 
@@ -630,20 +603,20 @@ Public Class DB
 
     End Function
 
-    Public Function feriado(_fecha As Date) As DataTable
-        Dim query = String.Format("SELECT * FROM feriados where fecha > 1/1/{0}", _fecha.Year.ToString)
-        Dim ds As New DataSet
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
+    'Public Function feriado(_fecha As Date) As DataTable
+    '    Dim query = String.Format("SELECT * FROM feriados where fecha > 1/1/{0}", _fecha.Year.ToString)
+    '    Dim ds As New DataSet
+    '    cmd.CommandType = CommandType.Text
+    '    cmd.CommandText = query
 
-        Try
-            da.Fill(ds, "FERIADOS")
-            Return ds.Tables("FERIADOS")
-        Catch ex As Exception
-            Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
-        End Try
+    '    Try
+    '        da.Fill(ds, "FERIADOS")
+    '        Return ds.Tables("FERIADOS")
+    '    Catch ex As Exception
+    '        Throw New Exception("ERROR DE BASE DE DATOS: " & ex.Message)
+    '    End Try
 
-    End Function
+    'End Function
 
     Public Function getLiquidacionesCerradas(_fecha As Date) As DataTable
         Dim hasta As Date

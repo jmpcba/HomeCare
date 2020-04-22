@@ -151,7 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="Backend.vb" />
     <Compile Include="code\Api.vb" />
     <Compile Include="code\AWScognito\CurrentUser.vb" />
     <Compile Include="code\AWScognito\UserManager.vb" />
@@ -171,15 +170,19 @@
     <Compile Include="code\Modulo.vb" />
     <Compile Include="code\Prestador.vb" />
     <Compile Include="code\Paciente.vb" />
-    <Compile Include="code\Prestacion.vb" />
     <Compile Include="code\Practica.vb" />
     <Compile Include="code\subModulo.vb" />
-    <Compile Include="code\Usuario.vb" />
     <Compile Include="code\utils.vb" />
     <Compile Include="forms\ABM\frmBuscar.Designer.vb">
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </Compile>
     <Compile Include="forms\ABM\frmBuscar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\config\frmUsoInternovb.Designer.vb">
+      <DependentUpon>frmUsoInternovb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="forms\config\frmUsoInternovb.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\liquidacion\frmCierreLiq.Designer.vb">
@@ -198,12 +201,6 @@
       <DependentUpon>FrmFeriados.vb</DependentUpon>
     </Compile>
     <Compile Include="forms\ABM\FrmFeriados.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\login\frmConfirmarPass.Designer.vb">
-      <DependentUpon>frmConfirmarPass.vb</DependentUpon>
-    </Compile>
-    <Compile Include="forms\login\frmConfirmarPass.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\principal\barraDeProgreso.Designer.vb">
@@ -258,12 +255,6 @@
       <DependentUpon>frmPracticaPacienteDetalle.vb</DependentUpon>
     </Compile>
     <Compile Include="forms\liquidacion\frmPracticaPacienteDetalle.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="forms\ABM\frmPrestacion.Designer.vb">
-      <DependentUpon>frmPrestacion.vb</DependentUpon>
-    </Compile>
-    <Compile Include="forms\ABM\frmPrestacion.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\ABM\frmPrestadores.Designer.vb">
@@ -354,6 +345,9 @@
       <DependentUpon>frmBuscar.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\config\frmUsoInternovb.resx">
+      <DependentUpon>frmUsoInternovb.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\liquidacion\frmCierreLiq.resx">
       <DependentUpon>frmCierreLiq.vb</DependentUpon>
     </EmbeddedResource>
@@ -362,9 +356,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ABM\FrmFeriados.resx">
       <DependentUpon>FrmFeriados.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms\login\frmConfirmarPass.resx">
-      <DependentUpon>frmConfirmarPass.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\principal\barraDeProgreso.resx">
       <DependentUpon>barraDeProgreso.vb</DependentUpon>
@@ -392,9 +383,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\liquidacion\frmPracticaPacienteDetalle.resx">
       <DependentUpon>frmPracticaPacienteDetalle.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="forms\ABM\frmPrestacion.resx">
-      <DependentUpon>frmPrestacion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\ABM\frmPrestadores.resx">
       <DependentUpon>frmPrestadores.vb</DependentUpon>

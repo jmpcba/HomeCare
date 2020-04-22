@@ -149,13 +149,13 @@ Public Class frmPracticas
                                 horas = r.Cells("PRACTICAS-HS").Value
                             End If
 
-                            If ut.esFindeOFeriado(fec) Then
-                                horasLaV = 0
-                                horasFer = horas
-                            Else
-                                horasLaV = horas
-                                horasFer = 0
-                            End If
+                            'If ut.esFindeOFeriado(fec) Then
+                            '    horasLaV = 0
+                            '    horasFer = horas
+                            'Else
+                            '    horasLaV = horas
+                            '    horasFer = 0
+                            'End If
 
                             Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horasLaV, horasFer, horasDif, obs, obsPre, obsPac, r.Index)
 
@@ -329,9 +329,9 @@ Public Class frmPracticas
 
         For Each r As DataGridViewRow In dgFechas.Rows
             Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-            If ut.esFindeOFeriado(fecha) Then
-                r.DefaultCellStyle.ForeColor = Color.Red
-            End If
+            'If ut.esFindeOFeriado(fecha) Then
+            '    r.DefaultCellStyle.ForeColor = Color.Red
+            'End If
         Next
 
     End Sub
@@ -410,15 +410,15 @@ Public Class frmPracticas
                             End If
                         ElseIf Not IsDBNull(r.Cells(3).Value) Then
                             hs = r.Cells(3).Value
-                            If ut.esFindeOFeriado(fecha) Then
-                                If med.monto_feriado = 0 Then
-                                    monto += med.monto_semana * r.Cells(3).Value
-                                Else
-                                    monto += med.monto_feriado * r.Cells(3).Value
-                                End If
-                            Else
-                                monto += med.monto_semana * r.Cells(3).Value
-                            End If
+                            'If ut.esFindeOFeriado(fecha) Then
+                            '    If med.monto_feriado = 0 Then
+                            '        monto += med.monto_semana * r.Cells(3).Value
+                            '    Else
+                            '        monto += med.monto_feriado * r.Cells(3).Value
+                            '    End If
+                            'Else
+                            '    monto += med.monto_semana * r.Cells(3).Value
+                            'End If
                         End If
 
                         horas += hs

@@ -20,7 +20,6 @@
                 obj = New Prestador()
                 dt = obj.prestadores
                 dgBuscar.DataSource = dt
-                dgBuscar.Columns("id").Visible = False
                 filtro = "Apellido"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR PRESTADOR"
@@ -37,7 +36,6 @@
                 obj = New Modulo()
                 dt = obj.getModulos
                 dgBuscar.DataSource = dt
-                dgBuscar.Columns("id").Visible = False
                 filtro = "codigo"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR MODULO"
@@ -57,9 +55,9 @@
                 Me.Text = "BUSCAR USUARIOS"
             ElseIf frmParent.GetType.Name = "frmZonas" Then
                 obj = New Zona()
-                dt = obj.zonas
+                dt = obj.getzonas()
                 dgBuscar.DataSource = dt
-                filtro = "ID"
+                filtro = "id"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR ZONAS"
             End If
@@ -84,15 +82,15 @@
                 If frmParent.GetType.Name = "frmPrestadores" Then
                     obj.id = r.Cells("ID").Value
                 ElseIf frmParent.GetType.Name = "frmPacientes" Then
-                    obj.afiliado = r.Cells("afiliado").Value
+                    obj.id = r.Cells("id").Value
                 ElseIf frmParent.GetType.Name = "frmModulo" Then
                     obj.id = r.Cells("id").Value
                 ElseIf frmParent.GetType.Name = "frmSubMod" Then
-                    obj.codigo = r.Cells("codigo").Value
+                    obj.id = r.Cells("id").Value
                 ElseIf frmParent.GetType.Name = "frmUsuarios" Then
                     obj = um.modelUser(r.Cells("usuario").Value)
                 ElseIf frmParent.GetType.Name = "frmZonas" Then
-                    obj.idzona = r.Cells("id").Value
+                    obj.id = r.Cells("id").Value
                 End If
 
                 frmParent.resultadoBusqueda(obj)

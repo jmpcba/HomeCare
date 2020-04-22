@@ -82,10 +82,9 @@
                     pac.sub_modulo = cbSubModulo.SelectedValue
                 End If
 
-                If chbBaja.Checked Then
-                    If dtBaja.Value.ToShortDateString <> pac.baja Then
-                        pac.baja = dtBaja.Text
-                    End If
+
+                If chbBaja.Checked <> pac.baja Then
+                    pac.baja = chbBaja.Checked
                 End If
 
                 pac.actualizar()

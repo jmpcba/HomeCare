@@ -23,33 +23,33 @@ Public Class utils
         preg
     End Enum
 
-    Public Function esFindeOFeriado(_fecha As Date) As Boolean
-        'devuelve true si _fecha es fin de semana
+    'Public Function esFindeOFeriado(_fecha As Date) As Boolean
+    '    'devuelve true si _fecha es fin de semana
 
-        If _fecha.DayOfWeek = DayOfWeek.Saturday Or _fecha.DayOfWeek = DayOfWeek.Sunday Or esFeriado(_fecha) Then
-            Return True
-        Else
-            Return False
-        End If
+    '    If _fecha.DayOfWeek = DayOfWeek.Saturday Or _fecha.DayOfWeek = DayOfWeek.Sunday Or esFeriado(_fecha) Then
+    '        Return True
+    '    Else
+    '        Return False
+    '    End If
 
-    End Function
+    'End Function
 
-    Private Function esFeriado(_fecha As Date) As Boolean
-        'llenar la tabla si no esta llena todavia. Reduce las interacciones con la DB
-        db = New DB
-        Dim r As DataRow()
-        If feriados.Rows.Count = 0 Then
-            feriados = db.feriado(_fecha)
-        End If
+    'Private Function esFeriado(_fecha As Date) As Boolean
+    '    'llenar la tabla si no esta llena todavia. Reduce las interacciones con la DB
+    '    db = New DB
+    '    Dim r As DataRow()
+    '    If feriados.Rows.Count = 0 Then
+    '        feriados = db.feriado(_fecha)
+    '    End If
 
-        r = feriados.Select(String.Format("FECHA='{0}'", _fecha.ToShortDateString))
+    '    r = feriados.Select(String.Format("FECHA='{0}'", _fecha.ToShortDateString))
 
-        If r.Count = 1 Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
+    '    If r.Count = 1 Then
+    '        Return True
+    '    Else
+    '        Return False
+    '    End If
+    'End Function
 
     Public Sub setDB()
         Dim frmArchivo = New OpenFileDialog

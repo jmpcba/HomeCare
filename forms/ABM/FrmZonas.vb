@@ -37,11 +37,11 @@
                     zona.nombre = txtNombre.Text.Trim
                 End If
 
-                If txtEmail.Text.Trim <> zona.email Then
-                    zona.email = txtEmail.Text.Trim
+                If txtEmail.Text.Trim <> zona.mail Then
+                    zona.mail = txtEmail.Text.Trim
                 End If
-                If txtPassw.Text.Trim <> zona.pass Then
-                    zona.pass = txtPassw.Text.Trim
+                If txtPassw.Text.Trim <> zona.pwd Then
+                    zona.pwd = txtPassw.Text.Trim
                 End If
                 If TxtPropietario.Text.Trim <> zona.propietario Then
                     zona.propietario = TxtPropietario.Text.Trim
@@ -75,11 +75,11 @@
 
     Public Sub resultadoBusqueda(ByRef _zonas As Zona)
         numZona.ReadOnly = True
-        numZona.Text = _zonas.idzona
+        numZona.Text = _zonas.id
         txtNombre.Text = _zonas.nombre
         TxtPropietario.Text = _zonas.propietario
-        txtPassw.Text = _zonas.pass
-        txtEmail.Text = _zonas.email
+        txtPassw.Text = _zonas.pwd
+        txtEmail.Text = _zonas.mail
         zona = _zonas
     End Sub
 

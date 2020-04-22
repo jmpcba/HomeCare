@@ -74,6 +74,7 @@ Public Class API
         Try
             Dim data = Encoding.Default.GetBytes(json)
             Dim req As WebRequest = WebRequest.Create(apiEndpoint)
+            req.Headers.Add("X-COG-ID", um.currentSession.token)
             req.ContentType = "application/json"
 
             If httpMethod = httpMethods.httpPOST Then

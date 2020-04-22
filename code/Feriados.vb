@@ -1,6 +1,7 @@
-﻿Public Class Feriado
+﻿Imports Newtonsoft
+Public Class Feriado
 
-    Private _feriado As DataTable
+    Private _feriados As DataTable
     Private _fecha As Date
     Private _descripcion As String
     Private _creoUser As String
@@ -10,10 +11,20 @@
     Private _modificado = False
 
     Public Sub New()
-        Dim db = New DB()
         Try
-            _feriado = db.getTable(DB.tablas.feriados)
-
+            Try
+                Dim api As New API(API.resources.FERIADO)
+                _feriados = api.get_table()
+                Dim c = _feriados.Columns.Count
+                _feriados.Columns("ultima_modificacion").SetOrdinal(c - 1)
+                _feriados.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
+                _feriados.Columns("nombre").SetOrdinal(1)
+                _feriados.Columns("mail").SetOrdinal(2)
+                _feriados.Columns("pwd").SetOrdinal(2)
+                _feriados.Columns("id").SetOrdinal(0)
+            Catch ex As Exception
+                Throw
+            End Try
         Catch ex As Exception
             Throw
         End Try
@@ -23,8 +34,6 @@
         Me._fecha = _fecha
         Me._descripcion = _descripcion
         Me._modifUser = My.Settings.dni
-        Me._creoUser = My.Settings.dni
-        Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
     End Sub
 
@@ -41,7 +50,7 @@
     Public Property fecha As Date
         Set(value As Date)
             Dim r As DataRow()
-            r = _feriado.Select("fecha=" & value)
+            r = _feriados.Select("fecha=" & value)
             _descripcion = r(0)("descripcion")
         End Set
         Get
@@ -64,7 +73,7 @@
             Return _fechaCarga
         End Get
     End Property
-    Public ReadOnly Property fechaMod As Date
+    Public ReadOnly Property usuario_ultima_modificacion As Date
         Get
             Return _fechaMod
         End Get
@@ -72,20 +81,22 @@
 
     Public Sub insertar()
         Try
-            Dim db = New DB
-            db.insertar(Me)
+            _feriados = Nothing
+            Dim api As New API(API.resources.FERIADO)
+            Dim serialObject = Json.JsonConvert.SerializeObject(Me)
+            api.send_post_put(serialObject, API.httpMethods.httpPOST)
         Catch ex As Exception
             Throw
         End Try
     End Sub
 
     Public Sub actualizar()
-        Dim db = New DB
         Try
             If _modificado Then
-                _fechaMod = Date.Today
-                _modifUser = My.Settings.dni
-                db.actualizar(Me)
+                Dim api As New API(API.resources.FERIADO)
+                _feriados = Nothing
+                Dim serialObject = Json.JsonConvert.SerializeObject(Me)
+                api.send_post_put(serialObject, API.httpMethods.httpPUT)
             Else
                 Throw New Exception("No se realizaron modificaciones")
             End If
@@ -94,5 +105,4 @@
             Throw
         End Try
     End Sub
-
 End Class

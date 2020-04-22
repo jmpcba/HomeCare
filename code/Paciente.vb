@@ -28,11 +28,13 @@ Public Class Paciente
                 Dim c = _pacientes.Columns.Count
                 _pacientes.Columns("ultima_modificacion").SetOrdinal(c - 1)
                 _pacientes.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
-                _pacientes.Columns("apellido").SetOrdinal(1)
-                _pacientes.Columns("apellido").SetOrdinal(2)
                 _pacientes.Columns("id").SetOrdinal(0)
+                _pacientes.Columns("afiliado").SetOrdinal(1)
+                _pacientes.Columns("dni").SetOrdinal(2)
+                _pacientes.Columns("nombre").SetOrdinal(3)
+                _pacientes.Columns("apellido").SetOrdinal(4)
 
-                _pacientes.Columns.Add("COMBO").SetOrdinal(0)
+                _pacientes.Columns.Add("COMBO").SetOrdinal(5)
 
                 For Each r As DataRow In _pacientes.Rows
                     Dim nom As String
@@ -52,6 +54,7 @@ Public Class Paciente
     End Sub
 
     Public Sub New(_afiliado As String, _dni As String, _nombre As String, _apellido As String, _obrasocial As String, _localidad As String, _observaciones As String, _modulo As String, _subModulo As String, _fechaBaja As Date)
+        Dim um = New UserManager()
         Me._dni = _dni
         Me._afiliado = _afiliado
         Me._nombre = _nombre
@@ -61,7 +64,7 @@ Public Class Paciente
         Me._observaciones = _observaciones
         Me._subModulo = _subModulo
         Me._modulo = _modulo
-        Me._modifUser = My.Settings.userName
+        Me._modifUser = um.currentSession.userName
         Me._fechaCarga = Date.Today
         Me._fechaMod = Date.Today
     End Sub
@@ -78,11 +81,11 @@ Public Class Paciente
 
     Public Property afiliado As String
         Set(value As String)
-            _dni = value
+            _afiliado = value
             _modificado = True
         End Set
         Get
-            Return _dni
+            Return _afiliado
         End Get
     End Property
 

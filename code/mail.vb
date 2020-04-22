@@ -35,8 +35,8 @@ Public Class Mail
             mail = mail.Replace("[NOMBRE]", _liq.prestador.nombre.ToUpper)
             mail = mail.Replace("[SERVICIO]", _liq.prestador.servicio)
 
-            zona.idzona = _liq.prestador.zona
-            Dim mailFrom = zona.email.ToLower
+            zona.id = _liq.prestador.zona
+            Dim mailFrom = zona.mail.ToLower
 
             mm.From = New MailAddress(mailFrom)
             mm.Subject = "Liquidacion HomeCare " & MonthName(_liq.mes.Month)
@@ -53,7 +53,7 @@ Public Class Mail
                 client.Host = "smtp.live.com"
             End If
 
-            client.Credentials = New NetworkCredential(zona.email, zona.pass)
+            client.Credentials = New NetworkCredential(zona.mail, zona.pwd)
             client.Send(mm)
 
         Catch ex As Exception
