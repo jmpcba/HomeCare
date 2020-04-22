@@ -92,15 +92,7 @@
             Me.Show()
         End Try
     End Sub
-    Private Sub btnPrestacion_Click(sender As Object, e As EventArgs)
-        Try
-            Me.Hide()
-            frmPrestacion.ShowDialog()
-        Catch ex As Exception
-            ut.mensaje(ex.Message, utils.mensajes.err)
-            Me.Show()
-        End Try
-    End Sub
+
     Private Sub btnFeriados_Click(sender As Object, e As EventArgs) Handles btnFeriados.Click
         Try
             Me.Hide()
@@ -244,5 +236,9 @@
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        frmUsoInternovb.Show()
     End Sub
 End Class

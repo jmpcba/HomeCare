@@ -243,7 +243,7 @@ Public Class Prestador
         End Get
     End Property
 
-    Public Property montoDiferencial As Decimal
+    Public Property monto_diferencial As Decimal
         Set(value As Decimal)
             _montoDiferencial = value
             _modificado = True
@@ -273,22 +273,12 @@ Public Class Prestador
         End Get
     End Property
 
-    Public ReadOnly Property modifUser As Integer
+    Public ReadOnly Property usuario_ultima_modificacion As Integer
         Get
             Return _modifUser
         End Get
     End Property
-    Public ReadOnly Property creoUser As Integer
-        Get
-            Return _creoUser
-        End Get
-    End Property
-    Public ReadOnly Property fechaCarga As Date
-        Get
-            Return _fechaCarga
-        End Get
-    End Property
-    Public ReadOnly Property fechaMod As Date
+    Public ReadOnly Property ultima_modificacion As Date
         Get
             Return _fechaMod
         End Get

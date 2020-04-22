@@ -54,6 +54,7 @@ Partial Class frmPrincipal
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.statusBar = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
@@ -145,6 +146,7 @@ Partial Class frmPrincipal
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.btnReporte)
         Me.Panel1.Controls.Add(Me.btnVisita)
@@ -259,7 +261,7 @@ Partial Class frmPrincipal
         '
         Me.BaseDeDatosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UbicacionToolStripMenuItem, Me.CopiasDeSeguridadToolStripMenuItem1})
         Me.BaseDeDatosToolStripMenuItem.Name = "BaseDeDatosToolStripMenuItem"
-        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.BaseDeDatosToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
         Me.BaseDeDatosToolStripMenuItem.Text = "&Base de Datos"
         '
         'UbicacionToolStripMenuItem
@@ -296,19 +298,19 @@ Partial Class frmPrincipal
         'MailToolStripMenuItem
         '
         Me.MailToolStripMenuItem.Name = "MailToolStripMenuItem"
-        Me.MailToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.MailToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
         Me.MailToolStripMenuItem.Text = "&Mail"
         '
         'TrabajarDesdeCasaToolStripMenuItem
         '
         Me.TrabajarDesdeCasaToolStripMenuItem.Name = "TrabajarDesdeCasaToolStripMenuItem"
-        Me.TrabajarDesdeCasaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.TrabajarDesdeCasaToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
         Me.TrabajarDesdeCasaToolStripMenuItem.Text = "Trabajar Desde Casa"
         '
         'TrabajarEnLaOficinaToolStripMenuItem
         '
         Me.TrabajarEnLaOficinaToolStripMenuItem.Name = "TrabajarEnLaOficinaToolStripMenuItem"
-        Me.TrabajarEnLaOficinaToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.TrabajarEnLaOficinaToolStripMenuItem.Size = New System.Drawing.Size(184, 22)
         Me.TrabajarEnLaOficinaToolStripMenuItem.Text = "Trabajar En la Oficina"
         '
         'InfoToolStripMenuItem
@@ -336,6 +338,15 @@ Partial Class frmPrincipal
         Me.statusBar.Size = New System.Drawing.Size(153, 17)
         Me.statusBar.Text = "MODO HOGAR ACTIVADO"
         Me.statusBar.Visible = False
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(26, 411)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(260, 53)
+        Me.Button1.TabIndex = 105
+        Me.Button1.Text = "uso interno solo dev"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'frmPrincipal
         '
@@ -396,4 +407,5 @@ Partial Class frmPrincipal
     Friend WithEvents statusBar As ToolStripStatusLabel
     Friend WithEvents TrabajarDesdeCasaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TrabajarEnLaOficinaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Button1 As Button
 End Class

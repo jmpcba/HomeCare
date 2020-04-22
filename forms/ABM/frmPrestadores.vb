@@ -86,8 +86,8 @@
                 If montoFeriado <> prest.monto_feriado Then
                     prest.monto_feriado = montoFeriado
                 End If
-                If numDiferencial.Text.Trim <> prest.montoDiferencial Then
-                    prest.montoDiferencial = numDiferencial.Text.Trim
+                If numDiferencial.Text.Trim <> prest.monto_diferencial Then
+                    prest.monto_diferencial = numDiferencial.Text.Trim
                 End If
                 If montoFijo <> prest.monto_fijo Then
                     prest.monto_fijo = montoFijo
@@ -218,7 +218,7 @@
         txtLocalidad.Text = _prestador.localidad
         numLunVie.Text = _prestador.monto_semana
         numFeriados.Text = _prestador.monto_feriado
-        numDiferencial.Text = _prestador.montoDiferencial
+        numDiferencial.Text = _prestador.monto_diferencial
         numFijo.Text = _prestador.monto_fijo
         txtServicio.Text = _prestador.servicio
         chbCese.Checked = False

@@ -400,12 +400,12 @@ Public Class frmPracticas
                         Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
                         Dim hs As Decimal
                         If Not IsDBNull(r.Cells(4).Value) Then
-                            If med.montoDiferencial = 0 Then
+                            If med.monto_diferencial = 0 Then
                                 ut.mensaje("Este prestador no tiene cargado un monto diferencial", utils.mensajes.err)
                                 hs = 0
                                 r.Cells(e.ColumnIndex).Value = Nothing
                             Else
-                                monto += med.montoDiferencial * r.Cells(4).Value
+                                monto += med.monto_diferencial * r.Cells(4).Value
                                 hs = r.Cells(4).Value
                             End If
                         ElseIf Not IsDBNull(r.Cells(3).Value) Then
@@ -504,7 +504,7 @@ Public Class frmPracticas
                     lblPrecioFeriado.Text = med.monto_feriado.ToString("F")
                     lblPrecioLaV.Text = med.monto_semana.ToString("F")
                     txtOS.Text = med.servicio
-                    lblPrecioDif.Text = med.montoDiferencial.ToString("F")
+                    lblPrecioDif.Text = med.monto_diferencial.ToString("F")
                     PracticasPrestadorToolStripMenuItem.Enabled = True
                     txtObservacionPre.Text = med.comentario
                 Catch ex As Exception
