@@ -330,40 +330,47 @@ Public Class Prestador
     End Property
 
     Public Sub insertar()
+        'Try
+        '    _observaciones = _observaciones.Replace("'", " ")
+        '    Dim db = New DB
+        '    Dim ut As New utils
+        '    Dim r As DataRow()
+        '    _prestadores = db.getTable(DB.tablas.prestadores)
+        '    r = _prestadores.Select("CUIT = '" & Me.CUIT.ToString & "'")
+        '    _prestadores = Nothing
+
+        '    ' SI SE ELIGE LA OPCION NO, LA RUTINA SE TERMINA
+        '    If r.Length > 0 Then
+        '        If ut.mensaje("Ya existe un prestador con este CUIT" & vbCrLf & "Desea continuar?", utils.mensajes.preg) = MsgBoxResult.No Then
+        '            Exit Sub
+        '        End If
+        '    End If
+
+        '    Dim api As New Backend(Backend.services.prestador)
+        '    Me.baja = False
+        '    Dim serialObject = Json.JsonConvert.SerializeObject(Me)
+        '    api.send_post_put(serialObject, Backend.methods.httpPOST)
+
+        'Catch ex As Exception
+        '    Throw
+        'End Try
         Try
-            _observaciones = _observaciones.Replace("'", " ")
-            Dim db = New DB
-            Dim ut As New utils
-            Dim r As DataRow()
-            _prestadores = db.getTable(DB.tablas.prestadores)
-            r = _prestadores.Select("CUIT = '" & Me.CUIT.ToString & "'")
-            _prestadores = Nothing
-
-            ' SI SE ELIGE LA OPCION NO, LA RUTINA SE TERMINA
-            If r.Length > 0 Then
-                If ut.mensaje("Ya existe un prestador con este CUIT" & vbCrLf & "Desea continuar?", utils.mensajes.preg) = MsgBoxResult.No Then
-                    Exit Sub
-                End If
-            End If
-
-            Dim api As New Backend(Backend.services.prestador)
+            Dim api As New API(API.resources.PRESTADOR)
             Me.baja = False
             Dim serialObject = Json.JsonConvert.SerializeObject(Me)
-            api.send_post_put(serialObject, Backend.methods.httpPOST)
-
+            api.send_post_put(serialObject, API.httpMethods.httpPOST)
         Catch ex As Exception
             Throw
         End Try
     End Sub
 
     Public Sub actualizar()
-        Dim db = New DB
         Try
             If _modificado Then
+                Dim api As New API(API.resources.PRESTADOR)
                 _prestadores = Nothing
-                Dim api As New Backend(Backend.services.prestador)
                 Dim serialObject = Json.JsonConvert.SerializeObject(Me)
-                api.send_post_put(serialObject, Backend.methods.httpPUT)
+                api.send_post_put(serialObject, API.httpMethods.httpPUT)
             Else
                 Throw New Exception("No se realizaron modificaciones")
             End If
