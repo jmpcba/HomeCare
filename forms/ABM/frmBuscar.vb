@@ -18,7 +18,7 @@
         Try
             If frmParent.GetType.Name = "frmPrestadores" Then
                 obj = New Prestador()
-                dt = obj.prestadores
+                dt = obj.getPrestadores
                 dgBuscar.DataSource = dt
                 filtro = "Apellido"
                 lblFiltro.Text = filtro

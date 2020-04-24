@@ -64,7 +64,7 @@ Public Class frmPracticas
         If Not carga Then
             If cbPaciente.SelectedIndex <> -1 Then
                 Try
-                    pac.afiliado = cbPaciente.SelectedValue
+                    pac.id = cbPaciente.SelectedValue
                     lblPaciente.Text = String.Format("{0} {1}", pac.apellido, pac.nombre)
                     txtAfiliado.Text = pac.afiliado
                     txtBeneficio.Text = pac.obra_social
@@ -207,7 +207,7 @@ Public Class frmPracticas
                     End If
 
                     Try
-                        If med.modificado Then
+                        If med.getModificado Then
                             med.actualizar()
                             med.refrescar()
                         End If

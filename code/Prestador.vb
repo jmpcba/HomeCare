@@ -24,17 +24,7 @@ Public Class Prestador
     Private _observaciones As String
     Private _zona As Integer
 
-    Public Sub New(Optional loadAll As Boolean = True)
-        Try
-            If loadAll Then
-                getPrestadores()
-            End If
-        Catch ex As Exception
-            Throw
-        End Try
-    End Sub
-
-    Private Sub getPrestadores()
+    Public Sub New()
         Dim api As New API(API.resources.PRESTADOR)
         Try
             _prestadores = api.get_table()
@@ -112,6 +102,12 @@ Public Class Prestador
                     _montoFijo = 0
                 Else
                     _montoFijo = r(0)("monto_fijo")
+                End If
+
+                If IsDBNull(r(0)("monto_diferencial")) Then
+                    _montoDiferencial = 0
+                Else
+                    _montoDiferencial = r(0)("monto_diferencial")
                 End If
 
                 If IsDBNull(r(0)("comentario")) Then
@@ -284,24 +280,9 @@ Public Class Prestador
         End Get
     End Property
 
-    Public Property prestadores As DataTable
-        Get
-            Return _prestadores
-        End Get
-        Set(value As DataTable)
-            _prestadores = value
-        End Set
-    End Property
-
-    Public Property estado As Integer
-        Set(value As Integer)
-            _estado = value
-            _modificado = True
-        End Set
-        Get
-            Return _estado
-        End Get
-    End Property
+    Public Function getPrestadores() As DataTable
+        Return _prestadores
+    End Function
 
     Public Property zona As Integer
         Set(value As Integer)
@@ -310,12 +291,6 @@ Public Class Prestador
         End Set
         Get
             Return _zona
-        End Get
-    End Property
-
-    Public ReadOnly Property modificado As Boolean
-        Get
-            Return _modificado
         End Get
     End Property
 
@@ -387,4 +362,8 @@ Public Class Prestador
             Throw
         End Try
     End Sub
+
+    Public Function getModificado() As Boolean
+        Return _modificado
+    End Function
 End Class
