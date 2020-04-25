@@ -14,8 +14,10 @@ Public Class frmPracticas
     Dim selectedRows As DataGridViewSelectedRowCollection
     Dim ut As utils
     Dim carga As Boolean
+    Dim pc As PracticaControl
 
     Private Sub visitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        pc = New PracticaControl(DTFecha.Value.Year)
         ut = New utils
         Me.WindowState = FormWindowState.Maximized
         carga = True
@@ -149,35 +151,23 @@ Public Class frmPracticas
                                 horas = r.Cells("PRACTICAS-HS").Value
                             End If
 
-                            'If ut.esFindeOFeriado(fec) Then
-                            '    horasLaV = 0
-                            '    horasFer = horas
-                            'Else
-                            '    horasLaV = horas
-                            '    horasFer = 0
-                            'End If
-
-                            Dim practica = New Practica(med, pac, cbModulo.SelectedValue, cbSubModulo.SelectedValue, fec, horasLaV, horasFer, horasDif, obs, obsPre, obsPac, r.Index)
-
-                            'gp.add(practica)
+                            pc.addPractica(med, pac, modu, subModu, horas, horasDif, fec, obs, obsPac, obsPre)
                             r.DefaultCellStyle.BackColor = Color.LightGreen
                             r.Cells("RESULTADO").Value = "Cargado"
                             carga = True
                         End If
                     Next
 
-                    Dim re As New List(Of ResultadoCargaPracticas)
+                    Dim re = pc.InsertarPracticas()
 
                     If carga Then
                         'gp.guardar()
                     End If
 
-                    If re.Count > 0 Then
+                    If re.Rows.Count > 0 Then
                         err = True
-                        For Each r As ResultadoCargaPracticas In re
-                            dgFechas.Rows(r.filaError).DefaultCellStyle.BackColor = Color.Red
-                            dgFechas.Rows(r.filaError).DefaultCellStyle.ForeColor = Color.Black
-                            dgFechas.Rows(r.filaError).Cells("RESULTADO").Value = r.mensajeError
+                        For Each r In re.Rows
+                            'TODO como gestionar los errores
                         Next
                     End If
 
@@ -329,9 +319,9 @@ Public Class frmPracticas
 
         For Each r As DataGridViewRow In dgFechas.Rows
             Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-            'If ut.esFindeOFeriado(fecha) Then
-            '    r.DefaultCellStyle.ForeColor = Color.Red
-            'End If
+            If pc.findeFeriado(fecha) Then
+                r.DefaultCellStyle.ForeColor = Color.Red
+            End If
         Next
 
     End Sub

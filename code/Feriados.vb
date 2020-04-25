@@ -18,10 +18,8 @@ Public Class Feriado
                 Dim c = _feriados.Columns.Count
                 _feriados.Columns("ultima_modificacion").SetOrdinal(c - 1)
                 _feriados.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
-                _feriados.Columns("nombre").SetOrdinal(1)
-                _feriados.Columns("mail").SetOrdinal(2)
-                _feriados.Columns("pwd").SetOrdinal(2)
-                _feriados.Columns("id").SetOrdinal(0)
+                _feriados.Columns("fecha").SetOrdinal(1)
+                _feriados.Columns("descripcion").SetOrdinal(2)
             Catch ex As Exception
                 Throw
             End Try

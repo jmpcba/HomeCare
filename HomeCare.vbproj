@@ -160,19 +160,26 @@
     <Compile Include="code\encriptador.vb" />
     <Compile Include="code\especialidad.vb" />
     <Compile Include="code\excepciones\apiException.vb" />
+    <Compile Include="code\excepciones\ApiTableNotFoundException.vb" />
     <Compile Include="code\excepciones\ExcepcionDeSistema.vb" />
     <Compile Include="code\excepciones\loginException.vb" />
     <Compile Include="code\excepciones\ResultadoCargaPracticas.vb" />
     <Compile Include="code\excepciones\UserConformationException.vb" />
     <Compile Include="code\Feriados.vb" />
+    <Compile Include="code\resources\FeriadoControl.vb" />
     <Compile Include="code\Liquidacion.vb" />
     <Compile Include="code\mail.vb" />
+    <Compile Include="code\managers\manager.vb" />
+    <Compile Include="code\resources\practicasManager.vb" />
     <Compile Include="code\Modulo.vb" />
+    <Compile Include="code\resources\practica_nva.vb" />
     <Compile Include="code\Prestador.vb" />
     <Compile Include="code\Paciente.vb" />
     <Compile Include="code\Practica.vb" />
+    <Compile Include="code\Resource.vb" />
     <Compile Include="code\subModulo.vb" />
     <Compile Include="code\utils.vb" />
+    <Compile Include="feridos_nva.vb" />
     <Compile Include="forms\ABM\frmBuscar.Designer.vb">
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </Compile>
@@ -499,7 +506,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="code\practicas\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
