@@ -1,11 +1,12 @@
 ﻿Imports Newtonsoft
-Public Class PracticaControl
+Public Class ControllerPracticas
     Private _practicas As List(Of practica_nva)
     Private feriados As List(Of Date)
-    Private fm As FeriadoControl
+    Private fm As ControllerFeriados
 
     Public Sub New(year)
-        fm = New FeriadoControl(year)
+        fm = New ControllerFeriados(year)
+        _practicas = New List(Of practica_nva)
     End Sub
 
     Public Function findeFeriado(fecha) As Boolean

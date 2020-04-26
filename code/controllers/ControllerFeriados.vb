@@ -1,5 +1,5 @@
 ﻿Imports Newtonsoft
-Public Class FeriadoControl
+Public Class ControllerFeriados
     Private _feriados As DataTable
     Private _year As Integer
 
@@ -45,7 +45,7 @@ Public Class FeriadoControl
         End Try
     End Sub
 
-    Public Function getFeriado(fecha As Date) As feridos_nva
+    Public Function getFeriado(fecha As Date) As Feriado
         Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
         Dim r As DataRow()
         Dim feriado_fecha As Date
@@ -59,7 +59,7 @@ Public Class FeriadoControl
             If r.Length = 1 Then
                 feriado_descripcion = r(0)("descripcion")
                 feriado_fecha = r(0)("fecha")
-                Return New feridos_nva(feriado_fecha, feriado_descripcion)
+                Return New Feriado(feriado_fecha, feriado_descripcion)
             Else
                 Return Nothing
             End If
@@ -69,8 +69,8 @@ Public Class FeriadoControl
 
     End Function
 
-    Public Function createFeriado(fecha As Date, desc As String) As feridos_nva
-        Return New feridos_nva(fecha, desc)
+    Public Function createFeriado(fecha As Date, desc As String) As Feriado
+        Return New Feriado(fecha, desc)
     End Function
 
     Public Function esferiado(fecha) As Boolean
@@ -87,7 +87,7 @@ Public Class FeriadoControl
     End Function
 
     Public Sub insertNew(fecha As Date, descripcion As String)
-        Dim feriado = New feridos_nva(fecha, descripcion)
+        Dim feriado = New Feriado(fecha, descripcion)
         Try
             Dim api As New API(API.resources.FERIADO)
             Dim serialObject = Json.JsonConvert.SerializeObject(feriado)
@@ -97,7 +97,7 @@ Public Class FeriadoControl
         End Try
     End Sub
 
-    Public Sub modify(feriado As feridos_nva)
+    Public Sub modify(feriado As Feriado)
         Try
             Dim api As New API(API.resources.FERIADO)
             _feriados = Nothing

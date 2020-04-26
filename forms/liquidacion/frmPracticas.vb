@@ -3,10 +3,10 @@ Imports System.Configuration
 Imports System.Collections.Specialized
 
 Public Class frmPracticas
-    Dim pac As New Paciente
-    Dim med As New Prestador
-    Dim modu As New Modulo
-    Dim subModu As New subModulo
+    Dim pac As Paciente
+    Dim med As Prestador
+    Dim modu As Modulo
+    Dim subModu As subModulo
     Dim index As Integer
     Dim edicion As Boolean = False
     Dim sel As Boolean = False
@@ -14,11 +14,20 @@ Public Class frmPracticas
     Dim selectedRows As DataGridViewSelectedRowCollection
     Dim ut As utils
     Dim carga As Boolean
-    Dim pc As PracticaControl
+    Dim cp As ControllerPracticas
 
     Private Sub visitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        pc = New PracticaControl(DTFecha.Value.Year)
-        ut = New utils
+        Try
+            pac = New Paciente()
+            med = New Prestador()
+            modu = New Modulo()
+            subModu = New subModulo()
+            cp = New ControllerPracticas(DTFecha.Value.Year)
+            ut = New utils
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+
         Me.WindowState = FormWindowState.Maximized
         carga = True
         Try
@@ -151,14 +160,14 @@ Public Class frmPracticas
                                 horas = r.Cells("PRACTICAS-HS").Value
                             End If
 
-                            pc.addPractica(med, pac, modu, subModu, horas, horasDif, fec, obs, obsPac, obsPre)
+                            cp.addPractica(med, pac, modu, subModu, horas, horasDif, fec, obs, obsPac, obsPre)
                             r.DefaultCellStyle.BackColor = Color.LightGreen
                             r.Cells("RESULTADO").Value = "Cargado"
                             carga = True
                         End If
                     Next
 
-                    Dim re = pc.InsertarPracticas()
+                    Dim re = cp.InsertarPracticas()
 
                     If carga Then
                         'gp.guardar()
@@ -319,7 +328,7 @@ Public Class frmPracticas
 
         For Each r As DataGridViewRow In dgFechas.Rows
             Dim fecha = New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
-            If pc.findeFeriado(fecha) Then
+            If cp.findeFeriado(fecha) Then
                 r.DefaultCellStyle.ForeColor = Color.Red
             End If
         Next
@@ -400,17 +409,17 @@ Public Class frmPracticas
                             End If
                         ElseIf Not IsDBNull(r.Cells(3).Value) Then
                             hs = r.Cells(3).Value
-                            'If ut.esFindeOFeriado(fecha) Then
-                            '    If med.monto_feriado = 0 Then
-                            '        monto += med.monto_semana * r.Cells(3).Value
-                            '    Else
-                            '        monto += med.monto_feriado * r.Cells(3).Value
-                            '    End If
-                            'Else
-                            '    monto += med.monto_semana * r.Cells(3).Value
-                            'End If
-                        End If
+                            If cp.findeFeriado(fecha) Then
 
+                                If med.monto_feriado = 0 Then
+                                    monto += med.monto_semana * r.Cells(3).Value
+                                Else
+                                    monto += med.monto_feriado * r.Cells(3).Value
+                                End If
+                            Else
+                                monto += med.monto_semana * r.Cells(3).Value
+                            End If
+                        End If
                         horas += hs
                     End If
                 Next
@@ -521,7 +530,7 @@ Public Class frmPracticas
     Private Sub cbModulo_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbModulo.SelectedIndexChanged
         If Not carga Then
             If cbModulo.SelectedIndex <> -1 Then
-                modu.codigo = cbModulo.SelectedValue
+                modu.id = cbModulo.SelectedValue
             End If
         End If
     End Sub
@@ -544,6 +553,14 @@ Public Class frmPracticas
                 If cbMedico.DroppedDown Then
                     cbMedico.DroppedDown = False
                 End If
+            End If
+        End If
+    End Sub
+
+    Private Sub cbSubModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSubModulo.SelectedIndexChanged
+        If Not carga Then
+            If cbSubModulo.SelectedIndex <> -1 Then
+                subModu.id = cbSubModulo.SelectedValue
             End If
         End If
     End Sub

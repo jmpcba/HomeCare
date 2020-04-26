@@ -22,33 +22,29 @@ Public Class Paciente
 
     Public Sub New()
         Try
-            Try
-                Dim api As New API(API.resources.PACIENTE)
-                _pacientes = api.get_table()
-                Dim c = _pacientes.Columns.Count
-                _pacientes.Columns("ultima_modificacion").SetOrdinal(c - 1)
-                _pacientes.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
-                _pacientes.Columns("id").SetOrdinal(0)
-                _pacientes.Columns("afiliado").SetOrdinal(1)
-                _pacientes.Columns("dni").SetOrdinal(2)
-                _pacientes.Columns("nombre").SetOrdinal(3)
-                _pacientes.Columns("apellido").SetOrdinal(4)
+            Dim api As New API(API.resources.PACIENTE)
+            _pacientes = api.get_table()
+            Dim c = _pacientes.Columns.Count
+            _pacientes.Columns("ultima_modificacion").SetOrdinal(c - 1)
+            _pacientes.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
+            _pacientes.Columns("id").SetOrdinal(0)
+            _pacientes.Columns("afiliado").SetOrdinal(1)
+            _pacientes.Columns("dni").SetOrdinal(2)
+            _pacientes.Columns("nombre").SetOrdinal(3)
+            _pacientes.Columns("apellido").SetOrdinal(4)
 
-                _pacientes.Columns.Add("COMBO").SetOrdinal(5)
+            _pacientes.Columns.Add("COMBO").SetOrdinal(5)
 
-                For Each r As DataRow In _pacientes.Rows
-                    Dim nom As String
-                    Dim ape As String
-                    nom = r("nombre")
-                    ape = r("apellido")
+            For Each r As DataRow In _pacientes.Rows
+                Dim nom As String
+                Dim ape As String
+                nom = r("nombre")
+                ape = r("apellido")
 
-                    r("COMBO") = String.Format("{0} {1}", ape, nom)
-                Next
-                _pacientes.DefaultView.Sort = "COMBO"
-            Catch ex As Exception
-                Throw
-            End Try
-        Catch ex As Exception
+                r("COMBO") = String.Format("{0} {1}", ape, nom)
+            Next
+            _pacientes.DefaultView.Sort = "COMBO"
+        Catch ex As apiException
             Throw
         End Try
     End Sub

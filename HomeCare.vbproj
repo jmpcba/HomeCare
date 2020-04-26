@@ -165,12 +165,12 @@
     <Compile Include="code\excepciones\loginException.vb" />
     <Compile Include="code\excepciones\ResultadoCargaPracticas.vb" />
     <Compile Include="code\excepciones\UserConformationException.vb" />
-    <Compile Include="code\Feriados.vb" />
-    <Compile Include="code\resources\FeriadoControl.vb" />
+    <Compile Include="code\controllers\ControllerFeriados.vb" />
     <Compile Include="code\Liquidacion.vb" />
     <Compile Include="code\mail.vb" />
-    <Compile Include="code\managers\manager.vb" />
-    <Compile Include="code\resources\practicasManager.vb" />
+    <Compile Include="code\controllers\manager.vb" />
+    <Compile Include="code\resources\Feriado.vb" />
+    <Compile Include="code\controllers\ControllerPracticas.vb" />
     <Compile Include="code\Modulo.vb" />
     <Compile Include="code\resources\practica_nva.vb" />
     <Compile Include="code\Prestador.vb" />
@@ -179,7 +179,6 @@
     <Compile Include="code\Resource.vb" />
     <Compile Include="code\subModulo.vb" />
     <Compile Include="code\utils.vb" />
-    <Compile Include="feridos_nva.vb" />
     <Compile Include="forms\ABM\frmBuscar.Designer.vb">
       <DependentUpon>frmBuscar.vb</DependentUpon>
     </Compile>

@@ -1,5 +1,5 @@
 ﻿
-Public Class feridos_nva
+Public Class Feriado
     Inherits Resource
 
     Private _fecha As Date
