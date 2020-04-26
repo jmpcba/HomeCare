@@ -1,5 +1,5 @@
 ﻿Public Class practica_nva
-    Inherits Resource
+    Inherits BaseEntity
     Private _cuit As String
     Private _afiliado As Integer
     Private _modulo As Integer

@@ -4,6 +4,7 @@
     Dim ut As New utils
     Dim txtBoxes As TextBox()
     Dim db As New DB
+    Dim cz As ControllerZona
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
@@ -13,8 +14,7 @@
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarNumerico(numZona)
                 ut.validarMail(txtEmail.Text.Trim)
-                zona = New Zona(txtNombre.Text.Trim.ToUpper, txtEmail.Text.Trim, txtPassw.Text.Trim, TxtPropietario.Text.Trim)
-                zona.insertar()
+                cz.insertar(txtNombre.Text.Trim.ToUpper, txtEmail.Text.Trim, txtPassw.Text.Trim, TxtPropietario.Text.Trim)
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
 
@@ -29,29 +29,39 @@
 
         Else
             Try
+                Dim modificado As Boolean = False
                 Dim enc As New Encriptador()
                 ut.validarTxtBoxLleno(txtBoxes)
                 ut.validarNumerico(numZona)
                 ut.validarMail(txtEmail.Text.Trim)
+
                 If txtNombre.Text.Trim <> zona.nombre Then
                     zona.nombre = txtNombre.Text.Trim
+                    modificado = True
                 End If
 
                 If txtEmail.Text.Trim <> zona.mail Then
                     zona.mail = txtEmail.Text.Trim
+                    modificado = True
                 End If
                 If txtPassw.Text.Trim <> zona.pwd Then
                     zona.pwd = txtPassw.Text.Trim
+                    modificado = True
                 End If
                 If TxtPropietario.Text.Trim <> zona.propietario Then
                     zona.propietario = TxtPropietario.Text.Trim
+                    modificado = True
                 End If
 
-                zona.actualizar()
-                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
-                iniciarControles()
-                ut.iniciarTxtBoxes(txtBoxes)
-                zona = Nothing
+                If modificado Then
+                    cz.actualizar(zona)
+                    ut.mensaje("Guardado Exitoso", utils.mensajes.info)
+                    iniciarControles()
+                    ut.iniciarTxtBoxes(txtBoxes)
+                    zona = Nothing
+                Else
+                    ut.mensaje("No se realizaron cambios", utils.mensajes.err)
+                End If
 
             Catch ex As ExcepcionDeSistema
                 iniciarControles()
@@ -94,7 +104,12 @@
     End Sub
 
     Private Sub frmusuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtBoxes = {txtNombre, txtEmail, txtPassw, TxtPropietario}
+        Try
+            txtBoxes = {txtNombre, txtEmail, txtPassw, TxtPropietario}
+            cz = New ControllerZona(False)
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
     End Sub
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs)
         Me.Close()

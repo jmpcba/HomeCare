@@ -6,6 +6,7 @@
     Dim txtBoxes As TextBox()
     Dim txtBoxesDA As TextBox()
     Dim carga As Boolean
+    Dim cpac As ControllerPacientes
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         If IsNothing(pac) Then
@@ -20,8 +21,8 @@
                 Dim combos = {cbModulo, cbSubModulo}
                 ut.validarCombos(combos)
                 '  ut.validarLargo(numAfiliado, 12)
-                pac = New Paciente(numAfiliado.Text.Trim, numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim, txtObservacionPac.Text.Trim, cbModulo.SelectedValue, cbSubModulo.SelectedValue, dtBaja.Text.Trim)
-                pac.insertar()
+
+                cpac.insertar(numAfiliado.Text.Trim, numDni.Text.Trim, txtNombre.Text.Trim, txtApellido.Text.Trim, txtObSocial.Text.Trim, txtLocalidad.Text.Trim, txtObservacionPac.Text.Trim, cbModulo.SelectedValue, cbSubModulo.SelectedValue, dtBaja.Text.Trim)
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
             Catch ex As Exception
@@ -87,7 +88,7 @@
                     pac.baja = chbBaja.Checked
                 End If
 
-                pac.actualizar()
+                cpac.actualizar(pac)
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
             Catch ex As Exception
@@ -143,6 +144,7 @@
         modu.llenarcombo(cbModulo)
         subModu.llenarcombo(cbSubModulo)
         dtBaja.Enabled = False
+        cpac = New ControllerPacientes(False)
     End Sub
 
     Private Sub cbModulo_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbModulo.SelectedIndexChanged

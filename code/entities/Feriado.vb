@@ -1,6 +1,6 @@
 ﻿
 Public Class Feriado
-    Inherits Resource
+    Inherits BaseEntity
 
     Private _fecha As Date
     Private _descripcion As String

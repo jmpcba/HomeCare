@@ -1,5 +1,6 @@
 ﻿Public Class frmPrestadores
     Dim prest As Prestador
+    Dim cz As ControllerZona
     Dim ut As New utils
     Dim txtBoxes As TextBox()
     Dim txtBoxesDA As TextBox()
@@ -179,14 +180,18 @@
     Private Sub frmprestadores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim esp As New especialidad
         Dim zona As New Zona()
-
-        zona.llenarcombo(cbZona)
-
-        esp.llenarcombo(cbEspecialidad)
-        dtCese.Enabled = False
         txtBoxes = {txtCuit, txtNombre, txtApellido, txtEmail, txtLocalidad, txtServicio, numLunVie, numFeriados, numFijo, numDiferencial}
-        iniciarControles()
 
+        Try
+            cz = New ControllerZona()
+            cz.llenarcombo(cbZona)
+            esp.llenarcombo(cbEspecialidad)
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+
+        dtCese.Enabled = False
+        iniciarControles()
         ut.habilitarBoton(txtBoxes, btnGuardar)
     End Sub
 

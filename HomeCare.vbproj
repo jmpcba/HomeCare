@@ -155,10 +155,12 @@
     <Compile Include="code\AWScognito\CurrentUser.vb" />
     <Compile Include="code\AWScognito\UserManager.vb" />
     <Compile Include="code\AWScognito\UserModel.vb" />
+    <Compile Include="code\controllers\ControllerPacientes.vb" />
+    <Compile Include="code\controllers\ControllerZona.vb" />
     <Compile Include="code\DB.vb" />
     <Compile Include="code\dbHelper.vb" />
     <Compile Include="code\encriptador.vb" />
-    <Compile Include="code\especialidad.vb" />
+    <Compile Include="code\entities\especialidad.vb" />
     <Compile Include="code\excepciones\apiException.vb" />
     <Compile Include="code\excepciones\ApiTableNotFoundException.vb" />
     <Compile Include="code\excepciones\ExcepcionDeSistema.vb" />
@@ -166,18 +168,18 @@
     <Compile Include="code\excepciones\ResultadoCargaPracticas.vb" />
     <Compile Include="code\excepciones\UserConformationException.vb" />
     <Compile Include="code\controllers\ControllerFeriados.vb" />
-    <Compile Include="code\Liquidacion.vb" />
+    <Compile Include="code\entities\Liquidacion.vb" />
     <Compile Include="code\mail.vb" />
     <Compile Include="code\controllers\manager.vb" />
-    <Compile Include="code\resources\Feriado.vb" />
+    <Compile Include="code\entities\Feriado.vb" />
     <Compile Include="code\controllers\ControllerPracticas.vb" />
-    <Compile Include="code\Modulo.vb" />
-    <Compile Include="code\resources\practica_nva.vb" />
-    <Compile Include="code\Prestador.vb" />
-    <Compile Include="code\Paciente.vb" />
-    <Compile Include="code\Practica.vb" />
-    <Compile Include="code\Resource.vb" />
-    <Compile Include="code\subModulo.vb" />
+    <Compile Include="code\entities\Modulo.vb" />
+    <Compile Include="code\entities\practica_nva.vb" />
+    <Compile Include="code\entities\Prestador.vb" />
+    <Compile Include="code\entities\Paciente.vb" />
+    <Compile Include="code\entities\Practica.vb" />
+    <Compile Include="code\entities\BaseEntity.vb" />
+    <Compile Include="code\entities\subModulo.vb" />
     <Compile Include="code\utils.vb" />
     <Compile Include="forms\ABM\frmBuscar.Designer.vb">
       <DependentUpon>frmBuscar.vb</DependentUpon>
@@ -344,7 +346,7 @@
     <Compile Include="forms\liquidacion\frmPracticasPaciente.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="code\Zona.vb" />
+    <Compile Include="code\entities\Zona.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="forms\ABM\frmBuscar.resx">

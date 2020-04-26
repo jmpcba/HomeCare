@@ -14,14 +14,15 @@ Public Class frmPracticas
     Dim selectedRows As DataGridViewSelectedRowCollection
     Dim ut As utils
     Dim carga As Boolean
+    Dim cpac As ControllerPacientes
     Dim cp As ControllerPracticas
 
     Private Sub visitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-            pac = New Paciente()
             med = New Prestador()
             modu = New Modulo()
             subModu = New subModulo()
+            cpac = New ControllerPacientes
             cp = New ControllerPracticas(DTFecha.Value.Year)
             ut = New utils
         Catch ex As Exception
@@ -36,7 +37,7 @@ Public Class frmPracticas
             DTFecha.CustomFormat = "MMMM - yyyy"
             lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
 
-            pac.llenarcombo(cbPaciente)
+            cpac.llenarcombo(cbPaciente)
             med.llenarcombo(cbMedico)
             modu.llenarcombo(cbModulo)
             subModu.llenarcombo(cbSubModulo)
@@ -75,7 +76,7 @@ Public Class frmPracticas
         If Not carga Then
             If cbPaciente.SelectedIndex <> -1 Then
                 Try
-                    pac.id = cbPaciente.SelectedValue
+                    pac = cpac.paciente(cbPaciente.SelectedValue)
                     lblPaciente.Text = String.Format("{0} {1}", pac.apellido, pac.nombre)
                     txtAfiliado.Text = pac.afiliado
                     txtBeneficio.Text = pac.obra_social
@@ -134,8 +135,6 @@ Public Class frmPracticas
                     For Each r As DataGridViewRow In dgFechas.Rows
 
                         Dim horas As Integer
-                        Dim horasLaV As Integer
-                        Dim horasFer As Integer
                         Dim horasDif As Integer
                         Dim dia As Integer
 
@@ -189,36 +188,36 @@ Public Class frmPracticas
                     End If
 
                     'ACTUALIZAR PACIENTE PRESTADOR
-                    If cbModulo.SelectedValue <> pac.modulo Then
-                        pac.modulo = cbModulo.SelectedValue
-                    End If
+                    'If cbModulo.SelectedValue <> pac.modulo Then
+                    '    pac.modulo = cbModulo.SelectedValue
+                    'End If
 
-                    If cbSubModulo.SelectedValue <> pac.sub_modulo Then
-                        pac.sub_modulo = cbSubModulo.SelectedValue
-                    End If
+                    'If cbSubModulo.SelectedValue <> pac.sub_modulo Then
+                    '    pac.sub_modulo = cbSubModulo.SelectedValue
+                    'End If
 
-                    If txtObservacionPac.Text <> pac.observacion Then
-                        pac.observacion = txtObservacionPac.Text
-                    End If
+                    'If txtObservacionPac.Text <> pac.observacion Then
+                    '    pac.observacion = txtObservacionPac.Text
+                    'End If
 
-                    If txtObservacionPre.Text.Trim <> med.comentario Then
-                        med.comentario = txtObservacionPre.Text.Trim
-                    End If
+                    'If txtObservacionPre.Text.Trim <> med.comentario Then
+                    '    med.comentario = txtObservacionPre.Text.Trim
+                    'End If
 
-                    Try
-                        If med.getModificado Then
-                            med.actualizar()
-                            med.refrescar()
-                        End If
+                    'Try
+                    '    If med.getModificado Then
+                    '        med.actualizar()
+                    '        med.refrescar()
+                    '    End If
 
-                        If pac.getModificado Then
-                            pac.actualizar()
-                            pac.refrescar()
-                        End If
-                    Catch ex As Exception
-                        Dim msg = "OCURRIO EL SIGUIENTE ERROR ACTUALIZANDO LOS DATOS DEL PACIENTE/PRESTADOR" & vbCrLf & "SE CONTINUARA CON LA CARGA DE PRACTICAS" & vbCrLf & ex.Message
-                        ut.mensaje(msg, utils.mensajes.err)
-                    End Try
+                    '    If pac.getModificado Then
+                    '        pac.actualizar()
+                    '        pac.refrescar()
+                    '    End If
+                    'Catch ex As Exception
+                    '    Dim msg = "OCURRIO EL SIGUIENTE ERROR ACTUALIZANDO LOS DATOS DEL PACIENTE/PRESTADOR" & vbCrLf & "SE CONTINUARA CON LA CARGA DE PRACTICAS" & vbCrLf & ex.Message
+                    '    ut.mensaje(msg, utils.mensajes.err)
+                    'End Try
                 End If
             End If
 
