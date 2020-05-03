@@ -497,7 +497,7 @@ Public Class frmPracticas
 
     Private Sub PracticasPacienteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PracticasPacienteToolStripMenuItem.Click
         Dim fecha = DTFecha.Value
-        Dim frm As New frmPracticaPacienteDetalle(pac.afiliado, fecha)
+        Dim frm As New frmPracticaPacienteDetalle(pac.id, fecha)
         frm.ShowDialog()
     End Sub
 

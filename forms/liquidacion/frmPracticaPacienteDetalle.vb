@@ -7,7 +7,7 @@
     Dim frmParent As frmPracticasPaciente
     Dim sel As Boolean = False
 
-    Public Sub New(_afiliado As String, _fecha As Date, ByRef _parent As frmPracticasPaciente)
+    Public Sub New(_afiliado As Integer, _fecha As Date, ByRef _parent As frmPracticasPaciente)
 
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
@@ -50,10 +50,12 @@
     Private Sub llenarGrilla()
         Try
             Dim chkclm As New DataGridViewCheckBoxColumn
+            Dim cpac = New ControllerPractica()
+            Dim dt = New DataTable
             btnEliminar.Enabled = False
             ds.Clear()
-            ds = db.getPracticasPaciente(afiliado, fecha)
-
+            'ds = db.getPracticasPaciente(afiliado, fecha)
+            dt = cpac.practicas(fecha, ControllerPractica.tipoPracticas.paciente, afiliado)
             If ds.Tables("DETALLE").Rows.Count = 0 Then
                 btnSel.Enabled = False
             End If

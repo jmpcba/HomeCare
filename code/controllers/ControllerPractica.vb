@@ -1,10 +1,20 @@
 ﻿Imports Newtonsoft
+Imports System.DateTime
+
 Public Class ControllerPractica
     Private _practicas As List(Of Practica)
     Private feriados As List(Of Date)
     Private fm As ControllerFeriado
     Private ut = New utils()
 
+    Public Enum tipoPracticas
+        paciente
+        prestador
+    End Enum
+
+    Public Sub New()
+        _practicas = New List(Of Practica)
+    End Sub
     Public Sub New(year)
         fm = New ControllerFeriado(year)
         _practicas = New List(Of Practica)
@@ -49,4 +59,36 @@ Public Class ControllerPractica
             Throw
         End Try
     End Function
+
+    Public ReadOnly Property practicas(fecha As Date, tipo As tipoPracticas, id As Integer)
+        Get
+            Dim startDate As Date
+            Dim endDate As Date
+            Dim type_parameter As String
+            Dim query_string As String
+
+            Dim oldCI As Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+            Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+            startDate = New Date(fecha.Year, fecha.Month, 1)
+            endDate = New Date(fecha.Year, fecha.Month, DaysInMonth(fecha.Year, fecha.Month))
+
+            If tipo = tipoPracticas.paciente Then
+                type_parameter = "id_paciente"
+            ElseIf tipo = tipoPracticas.prestador Then
+                type_parameter = "id_prestador"
+            End If
+
+            query_string = String.Format("{0}={1}&start_date={2}&end_date={3}", type_parameter, id, startDate, endDate)
+            Dim api As New API(API.resources.PRACTICA)
+            Try
+                Return api.get_table(query_string)
+            Catch ex As apiException
+                Throw
+            Finally
+                System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
+            End Try
+
+
+        End Get
+    End Property
 End Class
