@@ -19,7 +19,8 @@
         Try
             If frmParent.GetType.Name = "frmPrestadores" Then
                 obj = New Prestador()
-                dt = obj.getPrestadores
+                ctrl = New ControllerPrestador
+                dt = ctrl.Prestadores
                 dgBuscar.DataSource = dt
                 filtro = "Apellido"
                 lblFiltro.Text = filtro
@@ -27,7 +28,7 @@
 
             ElseIf frmParent.GetType.Name = "frmPacientes" Then
                 obj = New Paciente()
-                ctrl = New ControllerPacientes
+                ctrl = New ControllerPaciente
                 dt = ctrl.Pacientes
                 dgBuscar.DataSource = dt
                 filtro = "Apellido"
@@ -36,14 +37,16 @@
 
             ElseIf frmParent.GetType.Name = "frmModulo" Then
                 obj = New Modulo()
-                dt = obj.getModulos
+                ctrl = New ControllerModulo
+                dt = ctrl.Modulos
                 dgBuscar.DataSource = dt
                 filtro = "codigo"
                 lblFiltro.Text = filtro
                 Me.Text = "BUSCAR MODULO"
             ElseIf frmParent.GetType.Name = "frmSubMod" Then
                 obj = New subModulo()
-                dt = obj.getsubModulos
+                ctrl = New ControllerSubModulo
+                dt = ctrl.subModulos
                 dgBuscar.DataSource = dt
                 filtro = "codigo"
                 lblFiltro.Text = filtro
@@ -82,13 +85,13 @@
                 r = dgBuscar.Rows(e.RowIndex)
 
                 If frmParent.GetType.Name = "frmPrestadores" Then
-                    obj.id = r.Cells("ID").Value
+                    obj = ctrl.prestador(r.Cells("ID").Value)
                 ElseIf frmParent.GetType.Name = "frmPacientes" Then
                     obj = ctrl.paciente(r.Cells("id").Value)
                 ElseIf frmParent.GetType.Name = "frmModulo" Then
-                    obj.id = r.Cells("id").Value
+                    obj = ctrl.modulo(r.Cells("id").Value)
                 ElseIf frmParent.GetType.Name = "frmSubMod" Then
-                    obj.id = r.Cells("id").Value
+                    obj = ctrl.subModulo(r.Cells("id").Value)
                 ElseIf frmParent.GetType.Name = "frmUsuarios" Then
                     obj = um.modelUser(r.Cells("usuario").Value)
                 ElseIf frmParent.GetType.Name = "frmZonas" Then

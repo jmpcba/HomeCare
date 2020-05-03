@@ -2,6 +2,7 @@
     Dim modu As Modulo
     Dim ut As New utils
     Dim txtboxes As TextBox()
+    Dim cmod As ControllerModulo
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
@@ -9,10 +10,9 @@
             If IsNothing(modu) Then
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtboxes)
+                cmod.insertar(txtCodigo.Text.Trim, txtMedico.Text.Trim, txtEnfermeria.Text.Trim, txtKinesio.Text.Trim, txtFono.Text.Trim, txtCuidador.Text.Trim, txtNutricion.Text.Trim)
 
-                modu = New Modulo(txtCodigo.Text.Trim, txtMedico.Text.Trim, txtEnfermeria.Text.Trim, txtKinesio.Text.Trim, txtFono.Text.Trim, txtCuidador.Text.Trim, txtNutricion.Text.Trim)
-                modu.insertar()
-                MessageBox.Show("Guardado Exitoso")
+                ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 ut.iniciarTxtBoxes(txtboxes)
                 txtCodigo.ReadOnly = False
                 modu = Nothing
@@ -44,7 +44,7 @@
                     modu.cuidador = txtCuidador.Text.Trim
                 End If
 
-                modu.actualizar()
+                cmod.actualizar(modu)
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 ut.iniciarTxtBoxes(txtboxes)
                 modu = Nothing
@@ -143,7 +143,9 @@
     End Sub
 
     Private Sub frmModulo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        cmod = New ControllerModulo(False)
         txtboxes = {txtCodigo, txtMedico, txtEnfermeria, txtKinesio, txtFono, txtCuidador, txtNutricion}
+        ut.iniciarTxtBoxes(txtboxes)
     End Sub
 
     Private Sub txtCodigo_TextChanged(sender As Object, e As EventArgs) Handles txtCodigo.TextChanged

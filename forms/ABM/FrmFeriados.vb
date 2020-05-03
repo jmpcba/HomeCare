@@ -3,7 +3,7 @@
     Dim ut As New utils
     Dim txtBoxes As TextBox()
     Dim fecha As Date
-    Dim cf As ControllerFeriados
+    Dim cf As ControllerFeriado
 
     Private Sub btnCerrar_Click(sender As Object, e As EventArgs) Handles btnCerrar.Click
         Me.Close()
@@ -12,7 +12,7 @@
     Private Sub FrmFeriados_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             txtBoxes = {txtDescripcion}
-            cf = New ControllerFeriados(DtCalendario.Value.Year)
+            cf = New ControllerFeriado(DtCalendario.Value.Year)
             cargarGrilla()
             txtBoxes = {txtDescripcion}
             btnEliminar.Enabled = False

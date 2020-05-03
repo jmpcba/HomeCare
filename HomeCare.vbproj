@@ -155,7 +155,10 @@
     <Compile Include="code\AWScognito\CurrentUser.vb" />
     <Compile Include="code\AWScognito\UserManager.vb" />
     <Compile Include="code\AWScognito\UserModel.vb" />
-    <Compile Include="code\controllers\ControllerPacientes.vb" />
+    <Compile Include="code\controllers\ControllerModulo.vb" />
+    <Compile Include="code\controllers\ControllerPaciente.vb" />
+    <Compile Include="code\controllers\ControllerPrestador.vb" />
+    <Compile Include="code\controllers\ControllerSubModulo.vb" />
     <Compile Include="code\controllers\ControllerZona.vb" />
     <Compile Include="code\DB.vb" />
     <Compile Include="code\dbHelper.vb" />
@@ -167,17 +170,16 @@
     <Compile Include="code\excepciones\loginException.vb" />
     <Compile Include="code\excepciones\ResultadoCargaPracticas.vb" />
     <Compile Include="code\excepciones\UserConformationException.vb" />
-    <Compile Include="code\controllers\ControllerFeriados.vb" />
+    <Compile Include="code\controllers\ControllerFeriado.vb" />
     <Compile Include="code\entities\Liquidacion.vb" />
     <Compile Include="code\mail.vb" />
     <Compile Include="code\controllers\manager.vb" />
     <Compile Include="code\entities\Feriado.vb" />
-    <Compile Include="code\controllers\ControllerPracticas.vb" />
+    <Compile Include="code\controllers\ControllerPractica.vb" />
     <Compile Include="code\entities\Modulo.vb" />
-    <Compile Include="code\entities\practica_nva.vb" />
+    <Compile Include="code\entities\Practica.vb" />
     <Compile Include="code\entities\Prestador.vb" />
     <Compile Include="code\entities\Paciente.vb" />
-    <Compile Include="code\entities\Practica.vb" />
     <Compile Include="code\entities\BaseEntity.vb" />
     <Compile Include="code\entities\subModulo.vb" />
     <Compile Include="code\utils.vb" />
@@ -507,9 +509,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="code\practicas\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

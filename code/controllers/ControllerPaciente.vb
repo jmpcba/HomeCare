@@ -1,5 +1,5 @@
 ﻿Imports Newtonsoft
-Public Class ControllerPacientes
+Public Class ControllerPaciente
     Private _pacientes As DataTable
 
     Public Sub New(Optional loadAll As Boolean = True)

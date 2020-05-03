@@ -14,17 +14,20 @@ Public Class frmPracticas
     Dim selectedRows As DataGridViewSelectedRowCollection
     Dim ut As utils
     Dim carga As Boolean
-    Dim cpac As ControllerPacientes
-    Dim cp As ControllerPracticas
+    Dim cpac As ControllerPaciente
+    Dim cprest As ControllerPrestador
+    Dim cp As ControllerPractica
+    Dim cSubMod As ControllerSubModulo
+    Dim cmod As ControllerModulo
 
     Private Sub visitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-            med = New Prestador()
-            modu = New Modulo()
-            subModu = New subModulo()
-            cpac = New ControllerPacientes
-            cp = New ControllerPracticas(DTFecha.Value.Year)
             ut = New utils
+            cpac = New ControllerPaciente
+            cprest = New ControllerPrestador
+            cp = New ControllerPractica(DTFecha.Value.Year)
+            cSubMod = New ControllerSubModulo()
+            cmod = New ControllerModulo()
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
         End Try
@@ -38,9 +41,9 @@ Public Class frmPracticas
             lblMes.Text = MonthName(DTFecha.Value.Month).ToUpper
 
             cpac.llenarcombo(cbPaciente)
-            med.llenarcombo(cbMedico)
-            modu.llenarcombo(cbModulo)
-            subModu.llenarcombo(cbSubModulo)
+            cprest.llenarcombo(cbMedico)
+            cmod.llenarcombo(cbModulo)
+            cSubMod.llenarcombo(cbSubModulo)
 
             txtAfiliado.Text = ""
             txtBeneficio.Text = ""
@@ -99,7 +102,7 @@ Public Class frmPracticas
         Dim err = False
         Dim carga = False
         Dim practicas As New List(Of Practica)
-
+        Dim oldCI As Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
         ut = New utils
 
         Try
@@ -130,7 +133,6 @@ Public Class frmPracticas
                     Dim obsPac = txtObservacionPac.Text
                     Dim obsPre = txtObservacionPre.Text
                     Dim obs = txtObservaciones.Text
-                    'Dim gp = New GestorPracticas()
 
                     For Each r As DataGridViewRow In dgFechas.Rows
 
@@ -161,23 +163,33 @@ Public Class frmPracticas
 
                             cp.addPractica(med, pac, modu, subModu, horas, horasDif, fec, obs, obsPac, obsPre)
                             r.DefaultCellStyle.BackColor = Color.LightGreen
+                            r.DefaultCellStyle.ForeColor = Color.Black
                             r.Cells("RESULTADO").Value = "Cargado"
-                            carga = True
                         End If
                     Next
 
                     Dim re = cp.InsertarPracticas()
 
-                    If carga Then
-                        'gp.guardar()
-                    End If
-
                     If re.Rows.Count > 0 Then
                         err = True
-                        For Each r In re.Rows
-                            'TODO como gestionar los errores
+                        Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+                        For Each r As DataGridViewRow In dgFechas.Rows
+                            Dim reRow As DataRow()
+                            Dim dia = r.Cells("DIA_H").Value
+                            Dim fecha As New Date(DTFecha.Value.Year, DTFecha.Value.Month, r.Cells("DIA_H").Value)
+                            reRow = re.Select(String.Format("date = #{0}#", fecha))
+                            If reRow.Count > 0 Then
+                                r.DefaultCellStyle.BackColor = Color.Red
+                                r.DefaultCellStyle.ForeColor = Color.Black
+                                r.Cells("RESULTADO").Value = reRow(0)("err")
+                            End If
                         Next
                     End If
+
+                    cpac.refrescar()
+                    cprest.refrescar()
+                    cprest.llenarcombo(cbMedico)
+                    cpac.llenarcombo(cbPaciente)
 
                     If err Then
                         ut.mensaje("Ocurrieron Errores durante la carga", utils.mensajes.err)
@@ -186,38 +198,6 @@ Public Class frmPracticas
                     Else
                         ut.mensaje("No se cargaron horas para ningun dia", utils.mensajes.err)
                     End If
-
-                    'ACTUALIZAR PACIENTE PRESTADOR
-                    'If cbModulo.SelectedValue <> pac.modulo Then
-                    '    pac.modulo = cbModulo.SelectedValue
-                    'End If
-
-                    'If cbSubModulo.SelectedValue <> pac.sub_modulo Then
-                    '    pac.sub_modulo = cbSubModulo.SelectedValue
-                    'End If
-
-                    'If txtObservacionPac.Text <> pac.observacion Then
-                    '    pac.observacion = txtObservacionPac.Text
-                    'End If
-
-                    'If txtObservacionPre.Text.Trim <> med.comentario Then
-                    '    med.comentario = txtObservacionPre.Text.Trim
-                    'End If
-
-                    'Try
-                    '    If med.getModificado Then
-                    '        med.actualizar()
-                    '        med.refrescar()
-                    '    End If
-
-                    '    If pac.getModificado Then
-                    '        pac.actualizar()
-                    '        pac.refrescar()
-                    '    End If
-                    'Catch ex As Exception
-                    '    Dim msg = "OCURRIO EL SIGUIENTE ERROR ACTUALIZANDO LOS DATOS DEL PACIENTE/PRESTADOR" & vbCrLf & "SE CONTINUARA CON LA CARGA DE PRACTICAS" & vbCrLf & ex.Message
-                    '    ut.mensaje(msg, utils.mensajes.err)
-                    'End Try
                 End If
             End If
 
@@ -227,7 +207,7 @@ Public Class frmPracticas
 
             btnGuardar.Enabled = True
             Cursor.Current = Cursors.Default
-
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
             If carga Then
                 iniciarControles()
                 With dgFechas
@@ -492,7 +472,8 @@ Public Class frmPracticas
         If Not carga Then
             If cbMedico.SelectedIndex <> -1 Then
 
-                med.id = cbMedico.SelectedValue.ToString
+
+                med = cprest.prestador(cbMedico.SelectedValue.ToString)
                 Try
                     lblMed.Text = String.Format("{0} {1}", med.apellido, med.nombre)
                     txtMat.Text = med.CUIT
@@ -529,7 +510,7 @@ Public Class frmPracticas
     Private Sub cbModulo_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbModulo.SelectedIndexChanged
         If Not carga Then
             If cbModulo.SelectedIndex <> -1 Then
-                modu.id = cbModulo.SelectedValue
+                modu = cmod.modulo(cbModulo.SelectedValue)
             End If
         End If
     End Sub
@@ -559,7 +540,7 @@ Public Class frmPracticas
     Private Sub cbSubModulo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSubModulo.SelectedIndexChanged
         If Not carga Then
             If cbSubModulo.SelectedIndex <> -1 Then
-                subModu.id = cbSubModulo.SelectedValue
+                subModu = cSubMod.subModulo(cbSubModulo.SelectedValue)
             End If
         End If
     End Sub

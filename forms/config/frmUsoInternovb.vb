@@ -4,8 +4,9 @@ Imports System.Text
 Imports Newtonsoft
 
 Public Class frmUsoInternovb
+    Dim ut = New utils
     Private Sub btnDrop_Click(sender As Object, e As EventArgs) Handles btnDrop.Click
-        Dim json = "{""operation"":   ""drop""}"
+        Dim json = "{""operation"":   ""recreate""}"
         Dim apiEndpoint = "https://cl86zb12f8.execute-api.us-east-1.amazonaws.com/DEV/v1/ADMIN"
         Dim stream As Stream
         Dim response As Stream
@@ -35,7 +36,7 @@ Public Class frmUsoInternovb
             Dim exceptionReader = New StreamReader(ex.Response.GetResponseStream())
             Dim content = exceptionReader.ReadToEnd()
             exceptionReader.Close()
-            Throw New apiException(content)
+            ut.mensaje(ex.Message, utils.mensajes.err)
 
         Finally
             If Not IsNothing(reader) Then

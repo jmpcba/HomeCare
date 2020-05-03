@@ -1,69 +1,132 @@
-﻿Imports System
-Public Class Practica
-    Public prestador As Prestador
-    Public paciente As Paciente
-    Public modulo As Integer
-    Public subModulo As Integer
-    Public hsSemana As Decimal
-    Public hsFeriado As Decimal
-    Public hsDif As Decimal
-    Public fecha As Date
-    Public fecha_registrado As Date
-    Public observaciones As String
-    Public observacionPre As String
-    Public observacionPac As String
-    Public creoUser As Integer
-    Public modifUser As Integer
-    Public fechaCarga As Date
-    Public fechaMod As Date
-    Public fila As Integer
-    Dim util As New utils
+﻿Public Class Practica
+    Inherits BaseEntity
+    Private _afiliado As Integer
+    Private _modulo As Integer
+    Private _subModulo As Integer
+    Private _hsSemana As Decimal
+    Private _hsFeriado As Decimal
+    Private _hsDif As Decimal
+    Private _fecha As Date
+    Private _observaciones As String
+    Private _observacionPre As String
+    Private _observacionPac As String
+    Private _id_prestador As Integer
 
     Public Sub New()
-        'CONTRSUCTOR VACIO PARA USAR GETPRACTICAS
+        MyBase.New()
+    End Sub
+    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horasLaV As Decimal, _horasFer As Decimal, _horasDif As Decimal, _observacionPre As String, _observacionPac As String, _observaciones As String)
+        MyBase.New()
+        Me._id_prestador = _prestador.id
+        Me._afiliado = _paciente.id
+        Me._modulo = _modulo
+        Me._subModulo = _subModulo
+        Me._fecha = _fecha
+        Me._observaciones = _observaciones
+        Me._observacionPac = _observacionPac
+        Me._observacionPre = _observacionPre
+        Me._hsSemana = _horasLaV
+        Me._hsFeriado = _horasFer
+        Me._hsDif = _horasDif
     End Sub
 
+    Public Property paciente
+        Set(value)
+            _afiliado = value
+        End Set
+        Get
+            Return _afiliado
+        End Get
+    End Property
 
-    Public Sub New(_prestador As Prestador, _paciente As Paciente, _modulo As Integer, _subModulo As Integer, _fecha As Date, _horasLaV As Decimal, _horasFer As Decimal, _horasDif As Decimal, _observacionPre As String, _observacionPac As String, _observaciones As String, _fila As Integer)
+    Public Property modulo As Integer
+        Set(value As Integer)
+            _modulo = value
+        End Set
+        Get
+            Return _modulo
+        End Get
+    End Property
 
-        prestador = _prestador
-        paciente = _paciente
-        modulo = _modulo
-        subModulo = _subModulo
-        fecha = _fecha
-        fecha_registrado = Date.Today.Date
-        observaciones = _observaciones
-        observacionPac = _observacionPac
-        observacionPre = _observacionPre
-        hsSemana = _horasLaV
-        hsFeriado = _horasFer
-        hsDif = _horasDif
-        creoUser = My.Settings.dni
-        modifUser = My.Settings.dni
-        fechaCarga = Today.ToShortDateString
-        fechaMod = Today.ToShortDateString
-        fila = _fila
-    End Sub
+    Public Property sub_modulo As Integer
+        Set(value As Integer)
+            _subModulo = value
+        End Set
+        Get
+            Return _subModulo
+        End Get
+    End Property
 
-    Public Sub insertar()
-        Try
-            observaciones = observaciones.Replace("'", " ")
-            observacionPac = observacionPac.Replace("'", " ")
-            observacionPre = observacionPre.Replace("'", " ")
-            Dim db = New DB()
-            db.insertar(Me)
+    Public Property prestador As Integer
+        Set(value As Integer)
+            _id_prestador = value
+        End Set
+        Get
+            Return _id_prestador
+        End Get
+    End Property
 
-        Catch ex As Exception
-            Throw
-        End Try
-    End Sub
+    Public Property hs_normales As Decimal
+        Set(value As Decimal)
+            _hsSemana = value
+        End Set
+        Get
+            Return _hsSemana
+        End Get
+    End Property
 
-    Public Function getPracticas(_mes As Date) As DataTable
-        Dim db As New DB
-        Try
-            Return db.getPracticas(_mes)
-        Catch ex As Exception
-            Throw
-        End Try
-    End Function
+    Public Property hs_feriados As Decimal
+        Set(value As Decimal)
+            _hsFeriado = value
+        End Set
+        Get
+            Return _hsFeriado
+        End Get
+    End Property
+
+    Public Property hs_diferencial As Decimal
+        Set(value As Decimal)
+            _hsDif = value
+        End Set
+        Get
+            Return _hsDif
+        End Get
+    End Property
+
+    Public Property fecha As Date
+        Set(value As Date)
+            _fecha = value
+        End Set
+        Get
+            Return _fecha
+        End Get
+    End Property
+
+    Public Property observaciones As String
+        Set(value As String)
+            _observaciones = value
+        End Set
+        Get
+            Return _observaciones
+        End Get
+    End Property
+
+    Public Property observaciones_paciente As String
+        Set(value As String)
+            _observacionPac = value
+        End Set
+        Get
+            Return _observacionPac
+        End Get
+    End Property
+
+    Public Property observaciones_prestador As String
+        Set(value As String)
+            _observacionPre = value
+        End Set
+        Get
+            Return _observacionPre
+        End Get
+    End Property
 End Class
+

@@ -1,12 +1,13 @@
 ﻿Imports Newtonsoft
-Public Class ControllerPracticas
-    Private _practicas As List(Of practica_nva)
+Public Class ControllerPractica
+    Private _practicas As List(Of Practica)
     Private feriados As List(Of Date)
-    Private fm As ControllerFeriados
+    Private fm As ControllerFeriado
+    Private ut = New utils()
 
     Public Sub New(year)
-        fm = New ControllerFeriados(year)
-        _practicas = New List(Of practica_nva)
+        fm = New ControllerFeriado(year)
+        _practicas = New List(Of Practica)
     End Sub
 
     Public Function findeFeriado(fecha) As Boolean
@@ -22,7 +23,7 @@ Public Class ControllerPracticas
         'definir si semana o finde o feriado
         Dim hsLaV As Decimal
         Dim hsferiado As Decimal
-        Dim p As practica_nva
+        Dim p As Practica
 
         If findeFeriado(fecha) Then
             hsLaV = 0
@@ -32,16 +33,19 @@ Public Class ControllerPracticas
             hsferiado = 0
         End If
 
-        p = New practica_nva(_pre, pac, modulo.id, submodulo.id, fecha, hsLaV, hsferiado, hs_diferencial, obsPres, obsPac, obs)
+        p = New Practica(_pre, pac, modulo.id, submodulo.id, fecha, hsLaV, hsferiado, hs_diferencial, obsPres, obsPac, obs)
         _practicas.Add(p)
     End Sub
 
     Public Function InsertarPracticas() As DataTable
+        Dim result = New DataTable()
         Try
             Dim api As New API(API.resources.PRACTICA)
             Dim serialObject = Json.JsonConvert.SerializeObject(_practicas)
-            Return api.send_post_put(serialObject, API.httpMethods.httpPOST, True)
-        Catch ex As Exception
+            result = api.send_post_put(serialObject, API.httpMethods.httpPOST, True)
+
+            Return result
+        Catch ex As apiException
             Throw
         End Try
     End Function

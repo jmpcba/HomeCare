@@ -2,14 +2,14 @@
     Dim subMod As subModulo
     Dim ut As New utils
     Dim txtBoxes As TextBox()
+    Dim csm As ControllerSubModulo
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
             If IsNothing(subMod) Then
                 ut.validarLargo(txtCodigo, 6)
                 ut.validarTxtBoxLleno(txtBoxes)
-                subMod = New subModulo(txtCodigo.Text, txtDescripcion.Text)
-                subMod.insertar()
+                csm.insertar(txtCodigo.Text, txtDescripcion.Text)
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
                 subMod = Nothing
@@ -21,7 +21,7 @@
                     subMod.descripcion = txtDescripcion.Text.Trim
                 End If
 
-                subMod.actualizar()
+                csm.actualizar(subMod)
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
                 ut.iniciarTxtBoxes(txtBoxes)
@@ -69,6 +69,7 @@
     Private Sub frmSubMod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         iniciarControles()
         txtBoxes = {txtCodigo, txtDescripcion}
+        csm = New ControllerSubModulo(False)
     End Sub
 
     Private Sub txtDescripcion_TextChanged(sender As Object, e As EventArgs) Handles txtDescripcion.TextChanged

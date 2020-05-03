@@ -348,127 +348,127 @@ Public Class DB
 
     'End Function
 
-    Friend Sub insertar(_practica As Practica)
+    'Friend Sub insertar(_practica As Practica)
 
-        Try
-            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST, HS_DIFERENCIAL) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14})",
-                                      _practica.prestador.CUIT, _practica.paciente.afiliado, _practica.modulo, _practica.subModulo,
-                                      _practica.hsSemana, _practica.hsFeriado, _practica.fecha.ToShortDateString,
-                                      DateTime.Today.ToShortDateString, _practica.observaciones, _practica.creoUser,
-                                      _practica.fechaCarga.ToShortDateString, _practica.modifUser, _practica.fechaMod.ToShortDateString, _practica.prestador.id, _practica.hsDif)
+    '    Try
+    '        Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST, HS_DIFERENCIAL) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14})",
+    '                                  _practica.prestador.CUIT, _practica.paciente.afiliado, _practica.modulo, _practica.subModulo,
+    '                                  _practica.hsSemana, _practica.hsFeriado, _practica.fecha.ToShortDateString,
+    '                                  DateTime.Today.ToShortDateString, _practica.observaciones, _practica.creoUser,
+    '                                  _practica.fechaCarga.ToShortDateString, _practica.modifUser, _practica.fechaMod.ToShortDateString, _practica.prestador.id, _practica.hsDif)
 
-            cmd.CommandType = CommandType.Text
-            cmd.CommandText = query
+    '        cmd.CommandType = CommandType.Text
+    '        cmd.CommandText = query
 
-            ut.backupDBTemp()
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
-            Throw
-        Finally
-            cnn.Close()
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
+    '        Throw
+    '    Finally
+    '        cnn.Close()
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
 
-    Friend Function insertar(_practicas As List(Of Practica)) As List(Of ResultadoCargaPracticas)
-        Dim errores As New List(Of ResultadoCargaPracticas)
+    'Friend Function insertar(_practicas As List(Of Practica)) As List(Of ResultadoCargaPracticas)
+    '    Dim errores As New List(Of ResultadoCargaPracticas)
 
-        Try
-            ut.backupDBTemp()
-        Catch ex As Exception
+    '    Try
+    '        ut.backupDBTemp()
+    '    Catch ex As Exception
 
-        End Try
+    '    End Try
 
-        cmd.CommandType = CommandType.Text
-        cnn.Open()
+    '    cmd.CommandType = CommandType.Text
+    '    cnn.Open()
 
-        For Each p As Practica In _practicas
-            Try
-                Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST, HS_DIFERENCIAL) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14})",
-                                      p.prestador.CUIT, p.paciente.afiliado, p.modulo, p.subModulo,
-                                      p.hsSemana, p.hsFeriado, p.fecha.ToShortDateString,
-                                      DateTime.Today.ToShortDateString, p.observaciones, p.creoUser,
-                                      p.fechaCarga.ToShortDateString, p.modifUser, p.fechaMod.ToShortDateString, p.prestador.id, p.hsDif)
+    '    For Each p As Practica In _practicas
+    '        Try
+    '            Dim query = String.Format("INSERT INTO PRACTICAS (CUIT, AFILIADO, MODULO, SUB_MODULO, HS_NORMALES, HS_FERIADO, FECHA_PRACTICA, FECHA_INICIO, OBSERVACIONES, CARGO_USUARIO, FECHA_CARGA, MODIFICO_USUARIO, FECHA_MODIFICACION, ID_PREST, HS_DIFERENCIAL) VALUES ('{0}', '{1}', '{2}', '{3}', {4}, {5}, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}', '{13}', {14})",
+    '                                  p.prestador.CUIT, p.paciente.afiliado, p.modulo, p.subModulo,
+    '                                  p.hsSemana, p.hsFeriado, p.fecha.ToShortDateString,
+    '                                  DateTime.Today.ToShortDateString, p.observaciones, p.creoUser,
+    '                                  p.fechaCarga.ToShortDateString, p.modifUser, p.fechaMod.ToShortDateString, p.prestador.id, p.hsDif)
 
-                cmd.CommandText = query
-                cmd.ExecuteNonQuery()
-            Catch ex As Exception
-                Dim msg As String
+    '            cmd.CommandText = query
+    '            cmd.ExecuteNonQuery()
+    '        Catch ex As Exception
+    '            Dim msg As String
 
-                If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                    msg = "Ya existe una practica igual para este dia"
-                Else
-                    msg = ex.Message
-                End If
+    '            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+    '                msg = "Ya existe una practica igual para este dia"
+    '            Else
+    '                msg = ex.Message
+    '            End If
 
-                errores.Add(New ResultadoCargaPracticas(p.fila, msg))
-            End Try
-        Next
+    '            errores.Add(New ResultadoCargaPracticas(p.fila, msg))
+    '        End Try
+    '    Next
 
-        If errores.Count = _practicas.Count Then
-            hacerBackup = False
-        End If
+    '    If errores.Count = _practicas.Count Then
+    '        hacerBackup = False
+    '    End If
 
-        cnn.Close()
+    '    cnn.Close()
 
-        Try
-            ut.backUpDBFinal(hacerBackup)
-        Catch ex As Exception
+    '    Try
+    '        ut.backUpDBFinal(hacerBackup)
+    '    Catch ex As Exception
 
-        End Try
+    '    End Try
 
-        Return errores
+    '    Return errores
 
-    End Function
+    'End Function
 
-    Friend Sub insertar(_liq As Liquidacion)
-        Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
-        System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
+    'Friend Sub insertar(_liq As Liquidacion)
+    '    Dim oldCI As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture
+    '    System.Threading.Thread.CurrentThread.CurrentCulture = New System.Globalization.CultureInfo("en-US")
 
-        Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, ID_PREST, HS_DIFERENCIAL, IMPORTE_DIFERENCIAL) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#, {13}, {14}, {15})",
-                                  _liq.prestador.CUIT,
-                                  _liq.prestador.localidad,
-                                  _liq.prestador.especialidad,
-                                  _liq.mes.ToShortDateString,
-                                  _liq.hsNormales,
-                                  _liq.hsFeriado,
-                                  _liq.importeNormal,
-                                  _liq.importeFeriado,
-                                  _liq.montoFijo,
-                                  _liq.creoUser,
-                                  _liq.modifUser,
-                                  _liq.fechaCarga.ToShortDateString,
-                                  _liq.fechaMod.ToShortDateString,
-                                  _liq.idPrestador,
-                                  _liq.hsDiferencial,
-                                  _liq.importeDiferencial)
+    '    Dim query = String.Format("INSERT INTO LIQUIDACION (CUIT, LOCALIDAD, ESPECIALIDAD, MES, HS_NORMALES, HS_FERIADOS, IMPORTE_NORMAL, IMPORTE_FERIADO, MONTO_FIJO, CARGO_USUARIO, MODIFICO_USUARIO, FECHA_CARGA, FECHA_MODIFICACION, ID_PREST, HS_DIFERENCIAL, IMPORTE_DIFERENCIAL) VALUES ('{0}', '{1}', '{2}', #{3}#, {4}, {5}, {6}, {7}, {8}, {9}, {10}, #{11}#, #{12}#, {13}, {14}, {15})",
+    '                              _liq.prestador.CUIT,
+    '                              _liq.prestador.localidad,
+    '                              _liq.prestador.especialidad,
+    '                              _liq.mes.ToShortDateString,
+    '                              _liq.hsNormales,
+    '                              _liq.hsFeriado,
+    '                              _liq.importeNormal,
+    '                              _liq.importeFeriado,
+    '                              _liq.montoFijo,
+    '                              _liq.creoUser,
+    '                              _liq.modifUser,
+    '                              _liq.fechaCarga.ToShortDateString,
+    '                              _liq.fechaMod.ToShortDateString,
+    '                              _liq.idPrestador,
+    '                              _liq.hsDiferencial,
+    '                              _liq.importeDiferencial)
 
-        cmd.CommandType = CommandType.Text
-        cmd.CommandText = query
+    '    cmd.CommandType = CommandType.Text
+    '    cmd.CommandText = query
 
-        Try
-            ut.backupDBTemp()
+    '    Try
+    '        ut.backupDBTemp()
 
-            cnn.Open()
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            hacerBackup = False
+    '        cnn.Open()
+    '        cmd.ExecuteNonQuery()
+    '    Catch ex As Exception
+    '        hacerBackup = False
 
-            If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
-                Throw New ExcepcionDeSistema("Esta liquidacion ya esta cerrada")
-            Else
-                Throw
-            End If
+    '        If ex.Message.Contains("duplicate values in the index") Or ex.Message.Contains("valores duplicados en el índice") Then
+    '            Throw New ExcepcionDeSistema("Esta liquidacion ya esta cerrada")
+    '        Else
+    '            Throw
+    '        End If
 
-        Finally
-            cnn.Close()
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
-            ut.backUpDBFinal(hacerBackup)
-        End Try
-    End Sub
+    '    Finally
+    '        cnn.Close()
+    '        System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
+    '        ut.backUpDBFinal(hacerBackup)
+    '    End Try
+    'End Sub
 
     'Friend Sub insertar(_feriado As Feriado)
 

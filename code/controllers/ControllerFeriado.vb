@@ -1,5 +1,5 @@
 ﻿Imports Newtonsoft
-Public Class ControllerFeriados
+Public Class ControllerFeriado
     Private _feriados As DataTable
     Private _year As Integer
 
@@ -22,19 +22,24 @@ Public Class ControllerFeriados
                 Dim raw_result = New DataTable
                 raw_result = api.get_table(String.Format("year={0}", year))
 
-                _feriados = raw_result.Clone()
-                _feriados.Columns("fecha").DataType = GetType(Date)
+                If raw_result.Rows.Count > 0 Then
+                    _feriados = raw_result.Clone()
+                    _feriados.Columns("fecha").DataType = GetType(Date)
 
-                For Each r As DataRow In raw_result.Rows
-                    _feriados.ImportRow(r)
-                Next
+                    For Each r As DataRow In raw_result.Rows
+                        _feriados.ImportRow(r)
+                    Next
 
-                Dim c = _feriados.Columns.Count
-                _feriados.Columns("ultima_modificacion").SetOrdinal(c - 1)
-                _feriados.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
-                _feriados.Columns("id").SetOrdinal(0)
-                _feriados.Columns("fecha").SetOrdinal(1)
-                _feriados.Columns("descripcion").SetOrdinal(2)
+                    Dim c = _feriados.Columns.Count
+                    _feriados.Columns("ultima_modificacion").SetOrdinal(c - 1)
+                    _feriados.Columns("usuario_ultima_modificacion").SetOrdinal(c - 2)
+                    _feriados.Columns("id").SetOrdinal(0)
+                    _feriados.Columns("fecha").SetOrdinal(1)
+                    _feriados.Columns("descripcion").SetOrdinal(2)
+                Else
+                    _feriados = Nothing
+                End If
+
             Catch ex As ApiTableNotFoundException
                 _feriados = Nothing
             End Try

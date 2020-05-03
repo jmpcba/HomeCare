@@ -11,7 +11,7 @@
         Dim montoFeriado As Decimal
         Dim montoFijo As Decimal
         Dim montoDiferencial As Decimal
-
+        Dim cp = New ControllerPrestador(False)
         If IsNothing(prest) Then
             Try
                 ut.validarTxtBoxLleno(txtBoxes)
@@ -35,8 +35,7 @@
                     cuit = cuit.Insert(2, "-")
                     cuit = cuit.Insert(cuit.Length - 1, "-")
                 End If
-                prest = New Prestador(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, montoLaV, montoFeriado, montoFijo, numDiferencial.Text.Trim, dtCese.Text.Trim, txtServicio.Text.Trim, txtComentario.Text.Trim, cbZona.SelectedValue)
-                prest.insertar()
+                cp.insertar(cuit, txtNombre.Text, txtApellido.Text.Trim, txtEmail.Text.Trim, cbEspecialidad.SelectedValue, txtLocalidad.Text.Trim, montoLaV, montoFeriado, montoFijo, numDiferencial.Text.Trim, dtCese.Text.Trim, txtServicio.Text.Trim, txtComentario.Text.Trim, cbZona.SelectedValue)
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
 
@@ -109,7 +108,7 @@
                     prest.zona = cbZona.SelectedValue
                 End If
 
-                prest.actualizar()
+                cp.actualizar(prest)
                 ut.mensaje("Guardado Exitoso", utils.mensajes.info)
                 iniciarControles()
                 prest = Nothing

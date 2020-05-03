@@ -45,7 +45,12 @@ Public Class API
             reader = New StreamReader(dataStream)
             Dim responseFromServer As String = reader.ReadToEnd()
 
-            Return Json.JsonConvert.DeserializeObject(Of DataTable)(responseFromServer)
+            If responseFromServer = """""" Then
+                Return New DataTable()
+            Else
+                Return Json.JsonConvert.DeserializeObject(Of DataTable)(responseFromServer)
+            End If
+
 
         Catch ex As WebException
             Dim exceptionReader = New StreamReader(ex.Response.GetResponseStream())

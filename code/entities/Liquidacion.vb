@@ -149,7 +149,7 @@
         Try
             _observaciones = _observaciones.Replace("'", " ")
             Dim db As New DB
-            db.insertar(Me)
+            'db.insertar(Me)
         Catch ex As Exception
             Throw
         End Try

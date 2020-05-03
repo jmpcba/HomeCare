@@ -6,7 +6,9 @@
     Dim txtBoxes As TextBox()
     Dim txtBoxesDA As TextBox()
     Dim carga As Boolean
-    Dim cpac As ControllerPacientes
+    Dim cpac As ControllerPaciente
+    Dim csubMod As ControllerSubModulo
+    Dim cmod As ControllerModulo
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         If IsNothing(pac) Then
@@ -138,13 +140,20 @@
     End Sub
 
     Private Sub frmPacientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        carga = True
-        txtBoxes = {numAfiliado, numDni, txtApellido, txtNombre, txtObSocial, txtLocalidad}
-        iniciarControles()
-        modu.llenarcombo(cbModulo)
-        subModu.llenarcombo(cbSubModulo)
-        dtBaja.Enabled = False
-        cpac = New ControllerPacientes(False)
+        Try
+            cpac = New ControllerPaciente(False)
+            csubMod = New ControllerSubModulo()
+            cmod = New ControllerModulo
+            carga = True
+            txtBoxes = {numAfiliado, numDni, txtApellido, txtNombre, txtObSocial, txtLocalidad}
+            iniciarControles()
+            cmod.llenarcombo(cbModulo)
+            csubMod.llenarcombo(cbSubModulo)
+            dtBaja.Enabled = False
+        Catch ex As Exception
+            ut.mensaje(ex.Message, utils.mensajes.err)
+        End Try
+
     End Sub
 
     Private Sub cbModulo_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbModulo.SelectedIndexChanged
