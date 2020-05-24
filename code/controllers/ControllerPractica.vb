@@ -81,7 +81,7 @@ Public Class ControllerPractica
             query_string = String.Format("{0}={1}&start_date={2}&end_date={3}", type_parameter, id, startDate, endDate)
             Dim api As New API(API.resources.PRACTICA)
             Try
-                Return api.get_table(query_string)
+                Return api.get_table(query_string, True)
             Catch ex As apiException
                 Throw
             Finally

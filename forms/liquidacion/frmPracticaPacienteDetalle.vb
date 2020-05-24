@@ -51,12 +51,13 @@
         Try
             Dim chkclm As New DataGridViewCheckBoxColumn
             Dim cpac = New ControllerPractica()
-            Dim dt = New DataTable
+            Dim dt = New DataTable()
+            Dim ds = New DataSet()
             btnEliminar.Enabled = False
             ds.Clear()
-            'ds = db.getPracticasPaciente(afiliado, fecha)
-            dt = cpac.practicas(fecha, ControllerPractica.tipoPracticas.paciente, afiliado)
-            If ds.Tables("DETALLE").Rows.Count = 0 Then
+
+            ds = cpac.practicas(fecha, ControllerPractica.tipoPracticas.paciente, afiliado)
+            If ds.Tables("detail").Rows.Count = 0 Then
                 btnSel.Enabled = False
             End If
 
@@ -69,14 +70,28 @@
             With dgDetalle
                 .DataSource = Nothing
                 .Columns.Clear()
-                .DataSource = ds.Tables("DETALLE")
+                .DataSource = ds.Tables("detail")
+                .Columns("id").Visible = False
+                .Columns("AFILIADO").DisplayIndex = 0
+                .Columns("CUIT").DisplayIndex = 1
+                .Columns("APELLIDO PRESTADOR").DisplayIndex = 2
+                .Columns("NOMBRE PRESTADOR").DisplayIndex = 3
+                .Columns("FECHA PRACTICA").DisplayIndex = 4
+                .Columns("MODULO").DisplayIndex = 5
+                .Columns("CODIGO SUBMODULO").DisplayIndex = 6
+                .Columns("DESCRIPCION SUBMODULO").DisplayIndex = 7
+                .Columns("HS LUN A VIER").DisplayIndex = 8
+                .Columns("HS SAB DOM Y FER").DisplayIndex = 9
+                .Columns("DIFERENCIAL").DisplayIndex = 10
+                .Columns("$ LUN A VIER").DisplayIndex = 11
+                .Columns("$ SAB DOM Y FER").DisplayIndex = 12
+                .Columns("$ DIFERENCIAL").DisplayIndex = 13
+
                 .AutoResizeColumns()
                 .AutoResizeRows()
                 .ClearSelection()
-                .Columns("id").Visible = False
-                .Columns("id_prestador").Visible = False
 
-                If ds.Tables("DETALLE").Rows.Count <> 0 Then
+                If ds.Tables("detail").Rows.Count <> 0 Then
                     .Columns.Insert(0, chkclm)
                 End If
             End With
@@ -84,10 +99,18 @@
             With dgResumen
                 .DataSource = Nothing
                 .Columns.Clear()
-                .DataSource = ds.Tables("RESUMEN")
+                .DataSource = ds.Tables("summary")
+                .Columns("CUIT").DisplayIndex = 0
+                .Columns("APELLIDO PRESTADOR").DisplayIndex = 1
+                .Columns("NOMBRE PRESTADOR").DisplayIndex = 1
+                .Columns("ESPECIALIDAD").DisplayIndex = 3
+                .Columns("CANT PRACTICAS").DisplayIndex = 4
+                .Columns("CANT HORAS").DisplayIndex = 5
+
                 .AutoResizeColumns()
                 .AutoResizeRows()
                 .ClearSelection()
+
             End With
 
         Catch ex As Exception

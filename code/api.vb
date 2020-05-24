@@ -70,7 +70,7 @@ Public Class API
 
     End Function
 
-    Public Function get_table(queryString) As DataTable
+    Public Function get_table(queryString, Optional practicas = False)
         Dim response As WebResponse
         Dim dataStream As Stream
         Dim reader As StreamReader
@@ -86,7 +86,11 @@ Public Class API
             reader = New StreamReader(dataStream)
             Dim responseFromServer As String = reader.ReadToEnd()
 
-            Return Json.JsonConvert.DeserializeObject(Of DataTable)(responseFromServer)
+            If practicas Then
+                Return Json.JsonConvert.DeserializeObject(Of DataSet)(responseFromServer)
+            Else
+                Return Json.JsonConvert.DeserializeObject(Of DataTable)(responseFromServer)
+            End If
 
         Catch ex As WebException
             Dim exceptionReader = New StreamReader(ex.Response.GetResponseStream())
