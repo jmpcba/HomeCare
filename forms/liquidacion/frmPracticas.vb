@@ -145,8 +145,8 @@ Public Class frmPracticas
                             r.DefaultCellStyle.BackColor = Color.LightGray
                             Continue For
                         Else
+                            carga = True
                             dia = r.Cells("DIA_H").Value
-
                             Dim fec = New Date(DTFecha.Value.Year.ToString, DTFecha.Value.Month.ToString, dia)
 
                             If IsDBNull(r.Cells("DIFERENCIAL-HS").Value) Then
@@ -208,14 +208,12 @@ Public Class frmPracticas
             btnGuardar.Enabled = True
             Cursor.Current = Cursors.Default
             System.Threading.Thread.CurrentThread.CurrentCulture = oldCI
-            If carga Then
-                iniciarControles()
-                With dgFechas
-                    .Columns("RESULTADO").ReadOnly = True
-                    .AutoResizeColumns()
-                    .AutoResizeRows()
-                End With
-            End If
+
+            With dgFechas
+                .Columns("RESULTADO").ReadOnly = True
+                .AutoResizeColumns()
+                .AutoResizeRows()
+            End With
         End Try
     End Sub
     Private Sub btnSelec_Click(sender As Object, e As EventArgs) Handles btnSelec.Click

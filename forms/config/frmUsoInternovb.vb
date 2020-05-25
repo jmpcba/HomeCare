@@ -19,7 +19,7 @@ Public Class frmUsoInternovb
             Dim req As WebRequest = WebRequest.Create(apiEndpoint)
             req.ContentType = "application/json"
 
-            req.Method = "POST"
+            req.Method = "PUT"
             req.ContentLength = data.Length
             req.Headers.Add("X-COG-ID", um.currentSession.token)
 

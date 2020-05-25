@@ -10,7 +10,7 @@
     Private _observaciones As String
     Private _observacionPre As String
     Private _observacionPac As String
-    Private _id_prestador As Integer
+    Private _id_prestador As String
 
     Public Sub New()
         MyBase.New()
@@ -57,8 +57,8 @@
         End Get
     End Property
 
-    Public Property prestador As Integer
-        Set(value As Integer)
+    Public Property prestador As String
+        Set(value As String)
             _id_prestador = value
         End Set
         Get

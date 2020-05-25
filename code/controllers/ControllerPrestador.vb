@@ -33,7 +33,7 @@ Public Class ControllerPrestador
         End Get
     End Property
 
-    Public ReadOnly Property prestador(id As Integer) As Prestador
+    Public ReadOnly Property prestador(id As String) As Prestador
         Get
             Dim p = New Prestador()
             Dim r As DataRow()

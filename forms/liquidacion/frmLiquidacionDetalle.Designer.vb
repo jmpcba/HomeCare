@@ -200,6 +200,7 @@ Partial Class frmLiquidacionDetalle
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCerrar
         Me.ClientSize = New System.Drawing.Size(791, 477)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.lblDetalle)

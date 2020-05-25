@@ -17,6 +17,7 @@ Public Class Prestador
     Private _estado As Integer
     Private _observaciones As String
     Private _zona As Integer
+    Private _id As String
 
     Public Sub New()
         MyBase.New()
@@ -38,6 +39,15 @@ Public Class Prestador
         Me._observaciones = _comentario
         Me._zona = _zona
     End Sub
+
+    Public Property id As String
+        Set(value As String)
+            _id = value
+        End Set
+        Get
+            Return _id
+        End Get
+    End Property
 
     Public Property CUIT As String
         Set(value As String)

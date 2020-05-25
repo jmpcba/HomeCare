@@ -51,8 +51,6 @@
         Try
             Dim chkclm As New DataGridViewCheckBoxColumn
             Dim cpac = New ControllerPractica()
-            Dim dt = New DataTable()
-            Dim ds = New DataSet()
             btnEliminar.Enabled = False
             ds.Clear()
 
@@ -67,25 +65,37 @@
                 .ReadOnly = False
             End With
 
+            With ds.Tables("summary")
+                .Columns("CUIT").SetOrdinal(0)
+                .Columns("APELLIDO PRESTADOR").SetOrdinal(1)
+                .Columns("NOMBRE PRESTADOR").SetOrdinal(2)
+                .Columns("ESPECIALIDAD").SetOrdinal(3)
+                .Columns("CANT PRACTICAS").SetOrdinal(4)
+                .Columns("CANT HORAS").SetOrdinal(5)
+            End With
+
+            With ds.Tables("detail")
+                .Columns("AFILIADO").SetOrdinal(0)
+                .Columns("CUIT").SetOrdinal(1)
+                .Columns("APELLIDO PRESTADOR").SetOrdinal(2)
+                .Columns("NOMBRE PRESTADOR").SetOrdinal(3)
+                .Columns("FECHA PRACTICA").SetOrdinal(4)
+                .Columns("MODULO").SetOrdinal(5)
+                .Columns("CODIGO SUBMODULO").SetOrdinal(6)
+                .Columns("DESCRIPCION SUBMODULO").SetOrdinal(7)
+                .Columns("HS LUN A VIER").SetOrdinal(8)
+                .Columns("HS SAB DOM Y FER").SetOrdinal(9)
+                .Columns("DIFERENCIAL").SetOrdinal(10)
+                .Columns("$ LUN A VIER").SetOrdinal(11)
+                .Columns("$ SAB DOM Y FER").SetOrdinal(12)
+                .Columns("$ DIFERENCIAL").SetOrdinal(13)
+            End With
+
             With dgDetalle
                 .DataSource = Nothing
                 .Columns.Clear()
                 .DataSource = ds.Tables("detail")
                 .Columns("id").Visible = False
-                .Columns("AFILIADO").DisplayIndex = 0
-                .Columns("CUIT").DisplayIndex = 1
-                .Columns("APELLIDO PRESTADOR").DisplayIndex = 2
-                .Columns("NOMBRE PRESTADOR").DisplayIndex = 3
-                .Columns("FECHA PRACTICA").DisplayIndex = 4
-                .Columns("MODULO").DisplayIndex = 5
-                .Columns("CODIGO SUBMODULO").DisplayIndex = 6
-                .Columns("DESCRIPCION SUBMODULO").DisplayIndex = 7
-                .Columns("HS LUN A VIER").DisplayIndex = 8
-                .Columns("HS SAB DOM Y FER").DisplayIndex = 9
-                .Columns("DIFERENCIAL").DisplayIndex = 10
-                .Columns("$ LUN A VIER").DisplayIndex = 11
-                .Columns("$ SAB DOM Y FER").DisplayIndex = 12
-                .Columns("$ DIFERENCIAL").DisplayIndex = 13
 
                 .AutoResizeColumns()
                 .AutoResizeRows()
@@ -100,12 +110,6 @@
                 .DataSource = Nothing
                 .Columns.Clear()
                 .DataSource = ds.Tables("summary")
-                .Columns("CUIT").DisplayIndex = 0
-                .Columns("APELLIDO PRESTADOR").DisplayIndex = 1
-                .Columns("NOMBRE PRESTADOR").DisplayIndex = 1
-                .Columns("ESPECIALIDAD").DisplayIndex = 3
-                .Columns("CANT PRACTICAS").DisplayIndex = 4
-                .Columns("CANT HORAS").DisplayIndex = 5
 
                 .AutoResizeColumns()
                 .AutoResizeRows()
@@ -129,16 +133,16 @@
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        Dim ids As New List(Of Integer())
-        Dim idsError As New List(Of Integer)
+        Dim ids As New List(Of String())
+        Dim idsError As New List(Of String)
 
         btnEliminar.Enabled = False
         dgDetalle.ClearSelection()
 
         For Each r As DataGridViewRow In dgDetalle.Rows
             If r.Cells(0).Value Then
-                Dim id As Integer
-                Dim idPrest As Integer
+                Dim id As String
+                Dim idPrest As String
                 Dim rIndex As Integer
 
                 id = r.Cells("id").Value
@@ -153,7 +157,7 @@
         If ut.mensaje("Desea eliminar las practicas seleccionadas?", utils.mensajes.preg) = MsgBoxResult.Yes Then
 
             Try
-                For Each id As Integer() In ids
+                For Each id As String() In ids
                     If ut.validarLiquidacion(id(1), fecha) Then
                         idsError.Add(id(0))
                     End If
@@ -170,7 +174,7 @@
                 End If
 
                 Dim idsEliminar As New List(Of Integer)
-                For Each i As Integer() In ids
+                For Each i As String() In ids
                     idsEliminar.Add(i(0))
                 Next
 
@@ -199,9 +203,9 @@
         Me.Close()
     End Sub
 
-    Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
-        ds.Tables("DETALLE").DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] LIKE '%{0}%'", txtFiltro.Text.Trim)
-        ds.Tables("RESUMEN").DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] LIKE '%{0}%'", txtFiltro.Text.Trim)
+   Private Sub txtFiltro_TextChanged(sender As Object, e As EventArgs) Handles txtFiltro.TextChanged
+        ds.Tables("detail").DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] LIKE '%{0}%'", txtFiltro.Text.Trim)
+        ds.Tables("summary").DefaultView.RowFilter = String.Format("[APELLIDO PRESTADOR] LIKE '%{0}%'", txtFiltro.Text.Trim)
         dgDetalle.Refresh()
     End Sub
 

@@ -50,7 +50,7 @@ Public Class frmLiquidacionDetalle
 
             llenarGrilla()
 
-            If ds.Tables("DETALLE").Rows.Count > 0 Then
+            If ds.Tables("detail").Rows.Count > 0 Then
                 ToolStripMenuItemDetalle.Enabled = True
             Else
                 ToolStripMenuItemDetalle.Enabled = False
@@ -141,12 +141,42 @@ Public Class frmLiquidacionDetalle
     End Sub
 
     Private Sub llenarGrilla()
-        Dim chkclm As New DataGridViewCheckBoxColumn
 
         Try
+            Dim chkclm As New DataGridViewCheckBoxColumn
+            Dim cpac = New ControllerPractica()
             btnEliminar.Enabled = False
             ds.Clear()
-            ds = db.getLiquidacion(idPrestador, fecha)
+
+            ds = cpac.practicas(fecha, ControllerPractica.tipoPracticas.prestador, idPrestador)
+            If ds.Tables("detail").Rows.Count = 0 Then
+                btnSelec.Enabled = False
+            End If
+
+            With ds.Tables("detail")
+                .Columns("AFILIADO").SetOrdinal(0)
+                .Columns("CUIT").SetOrdinal(1)
+                .Columns("APELLIDO PACIENTE").SetOrdinal(2)
+                .Columns("NOMBRE PACIENTE").SetOrdinal(3)
+                .Columns("FECHA PRACTICA").SetOrdinal(4)
+                .Columns("MODULO").SetOrdinal(5)
+                .Columns("CODIGO SUBMODULO").SetOrdinal(6)
+                .Columns("DESCRIPCION SUBMODULO").SetOrdinal(7)
+                .Columns("HS LUN A VIER").SetOrdinal(8)
+                .Columns("HS SAB DOM Y FER").SetOrdinal(9)
+                .Columns("DIFERENCIAL").SetOrdinal(10)
+                .Columns("$ LUN A VIER").SetOrdinal(11)
+                .Columns("$ SAB DOM Y FER").SetOrdinal(12)
+                .Columns("$ DIFERENCIAL").SetOrdinal(13)
+            End With
+
+            With ds.Tables("summary")
+                .Columns("AFILIADO").SetOrdinal(0)
+                .Columns("APELLIDO PACIENTE").SetOrdinal(1)
+                .Columns("NOMBRE PACIENTE").SetOrdinal(2)
+                .Columns("CANT PRACTICAS").SetOrdinal(3)
+                .Columns("CANT HORAS").SetOrdinal(4)
+            End With
 
             With chkclm
                 .HeaderText = ""
@@ -157,13 +187,12 @@ Public Class frmLiquidacionDetalle
             With dgDetalle
                 .DataSource = Nothing
                 .Columns.Clear()
-                .DataSource = ds.Tables("DETALLE")
+                .DataSource = ds.Tables("detail")
+                .Columns("id").Visible = False
                 .AutoResizeColumns()
                 .AutoResizeRows()
                 .ClearSelection()
-                .Columns("id").Visible = False
-
-                If ds.Tables("DETALLE").Rows.Count <> 0 Then
+                If ds.Tables("detail").Rows.Count <> 0 Then
                     .Columns.Insert(0, chkclm)
                 End If
             End With
@@ -171,7 +200,7 @@ Public Class frmLiquidacionDetalle
             With grResumen
                 .DataSource = Nothing
                 .Columns.Clear()
-                .DataSource = ds.Tables("RESUMEN")
+                .DataSource = ds.Tables("summary")
                 .AutoResizeColumns()
                 .AutoResizeRows()
                 .ClearSelection()
