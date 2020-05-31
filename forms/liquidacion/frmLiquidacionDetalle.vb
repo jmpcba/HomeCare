@@ -3,9 +3,10 @@ Public Class frmLiquidacionDetalle
     Dim db As New DB
     Dim ds As New DataSet
     Dim fecha As Date
-    Dim idPrestador As Integer
+    Dim idPrestador As String
     Dim frmParent As frmLiquidar
     Dim sel As Boolean = False
+    Dim pc As ControllerPractica
 
     Public Sub New(_idPrest As Integer, _fecha As Date, ByRef _parent As frmLiquidar)
 
@@ -20,7 +21,7 @@ Public Class frmLiquidacionDetalle
             lblDetalle.Text = "DETALLE PRESTADOR"
             fecha = _fecha
             idPrestador = _idPrest
-
+            pc = New ControllerPractica()
             llenarGrilla()
 
             If ds.Tables("DETALLE").Rows.Count > 0 Then
@@ -34,7 +35,7 @@ Public Class frmLiquidacionDetalle
         End Try
     End Sub
 
-    Public Sub New(_idPrest As Integer, _fecha As Date)
+    Public Sub New(_idPrest As String, _fecha As Date)
 
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
@@ -47,7 +48,7 @@ Public Class frmLiquidacionDetalle
             lblDetalle.Text = "DETALLE PRESTADOR"
             fecha = _fecha
             idPrestador = _idPrest
-
+            pc = New ControllerPractica()
             llenarGrilla()
 
             If ds.Tables("detail").Rows.Count > 0 Then
@@ -71,33 +72,48 @@ Public Class frmLiquidacionDetalle
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        Dim ids As New List(Of Integer)
-        Dim idsError As New List(Of Integer)
+        Dim ids As New List(Of String)
+        Dim idsError As New DataTable
 
+        btnEliminar.Enabled = False
         dgDetalle.ClearSelection()
 
         For Each r As DataGridViewRow In dgDetalle.Rows
             If r.Cells(0).Value Then
-                Dim id = r.Cells("id").Value
+                Dim id As String
+                Dim rIndex As Integer
+
+                id = r.Cells("id").Value
+
+                rIndex = r.Index
 
                 r.DefaultCellStyle.BackColor = Color.LightGreen
                 ids.Add(id)
-            Else
-                r.DefaultCellStyle.BackColor = Color.White
             End If
         Next
+
 
         If ut.mensaje("Desea eliminar las practicas seleccionadas?", utils.mensajes.preg) = MsgBoxResult.Yes Then
 
             Try
-                If ut.validarLiquidacion(idPrestador, fecha) Then
-                    Throw New Exception("LIQUIDACION CERRADA - NO SE PUEDE ELIMINAR")
-                Else
-                    db.eliminarPractica(ids)
-                    llenarGrilla()
-                    'dgDetalle.Refresh()
-                    'grResumen.Refresh()
+                Dim err = pc.delete(ids, fecha.Month, fecha.Year)
+
+                If err.Rows.Count > 0 Then
+                    For Each r As DataGridViewRow In dgDetalle.Rows
+                        Dim id As String
+                        Dim reRow As DataRow()
+
+                        id = r.Cells("id").Value
+                        reRow = err.Select(String.Format("id={0}", id))
+                        If reRow.Count <> 0 Then
+                            r.DefaultCellStyle.BackColor = Color.Red
+                        End If
+                    Next
+                    Throw New Exception("LAS PRACTICAS EN ROJO NO PUEDEN ELIMINARSE" & vbCrLf & "Liquidacion cerrada")
                 End If
+
+                llenarGrilla()
+                dgDetalle.Refresh()
 
             Catch ex As Exception
                 ut.mensaje(ex.Message, utils.mensajes.err)
@@ -218,8 +234,8 @@ Public Class frmLiquidacionDetalle
 
         Dim filtro = String.Format("[APELLIDO PACIENTE] LIKE '%{0}%'", txtFiltro.Text.Trim)
 
-        ds.Tables("DETALLE").DefaultView.RowFilter = filtro
-        ds.Tables("RESUMEN").DefaultView.RowFilter = filtro
+        ds.Tables("detail").DefaultView.RowFilter = filtro
+        ds.Tables("summary").DefaultView.RowFilter = filtro
 
         dgDetalle.Refresh()
         grResumen.Refresh()

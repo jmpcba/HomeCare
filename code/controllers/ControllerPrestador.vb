@@ -123,7 +123,7 @@ Public Class ControllerPrestador
 
             Dim api As New API(API.resources.PRESTADOR)
             Dim serialObject = Json.JsonConvert.SerializeObject(p)
-            api.send_post_put(serialObject, API.httpMethods.httpPOST)
+            api.send_request(serialObject, API.httpMethods.httpPOST)
         Catch ex As Exception
             Throw
         End Try
@@ -134,7 +134,7 @@ Public Class ControllerPrestador
             Dim api As New API(API.resources.PRESTADOR)
             _prestadores = Nothing
             Dim serialObject = Json.JsonConvert.SerializeObject(p)
-            api.send_post_put(serialObject, API.httpMethods.httpPUT)
+            api.send_request(serialObject, API.httpMethods.httpPUT)
         Catch ex As Exception
             Throw
         End Try

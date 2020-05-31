@@ -53,7 +53,7 @@ Public Class ControllerZona
             Dim z = New Zona(_nombre, _email, _pass, _propietario)
             Dim api As New API(API.resources.ZONA)
             Dim serialObject = Json.JsonConvert.SerializeObject(z)
-            api.send_post_put(serialObject, API.httpMethods.httpPOST)
+            api.send_request(serialObject, API.httpMethods.httpPOST)
         Catch ex As apiException
             Throw
         End Try
@@ -63,7 +63,7 @@ Public Class ControllerZona
         Try
             Dim api As New API(API.resources.ZONA)
             Dim serialObject = Json.JsonConvert.SerializeObject(z)
-            api.send_post_put(serialObject, API.httpMethods.httpPUT)
+            api.send_request(serialObject, API.httpMethods.httpPUT)
         Catch ex As Exception
             Throw
         End Try

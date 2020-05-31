@@ -50,7 +50,7 @@ Public Class ControllerPaciente
             Dim p = New Paciente(_afiliado, _dni, _nombre, _apellido, _obrasocial, _localidad, _observaciones, _modulo, _subModulo, _fechaBaja)
             Dim api As New API(API.resources.PACIENTE)
             Dim serialObject = Json.JsonConvert.SerializeObject(p)
-            api.send_post_put(serialObject, API.httpMethods.httpPOST)
+            api.send_request(serialObject, API.httpMethods.httpPOST)
         Catch ex As Exception
             Throw
         End Try
@@ -60,7 +60,7 @@ Public Class ControllerPaciente
         Try
             Dim api As New API(API.resources.PACIENTE)
             Dim serialObject = Json.JsonConvert.SerializeObject(p)
-            api.send_post_put(serialObject, API.httpMethods.httpPUT)
+            api.send_request(serialObject, API.httpMethods.httpPUT)
         Catch ex As Exception
             Throw
         End Try

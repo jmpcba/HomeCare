@@ -58,7 +58,7 @@ Public Class ControllerModulo
         Try
             Dim api As New API(API.resources.MODULO)
             Dim serialObject = Json.JsonConvert.SerializeObject(m)
-            api.send_post_put(serialObject, API.httpMethods.httpPUT)
+            api.send_request(serialObject, API.httpMethods.httpPUT)
         Catch ex As apiException
             Throw
         End Try
@@ -69,7 +69,7 @@ Public Class ControllerModulo
             Dim m = New Modulo(_cod, _topeMedico, _topeEnfer, _topeKine, _topeFon, _topeCuid, _topeNutri)
             Dim api As New API(API.resources.MODULO)
             Dim serialObject = Json.JsonConvert.SerializeObject(m)
-            api.send_post_put(serialObject, API.httpMethods.httpPOST)
+            api.send_request(serialObject, API.httpMethods.httpPOST)
         Catch ex As apiException
             Throw
         End Try

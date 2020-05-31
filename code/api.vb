@@ -115,13 +115,16 @@ Public Class API
 
     End Function
 
-    Public Function send_post_put(payload As String, httpMethod As httpMethods, Optional expectResponse As Boolean = False) As DataTable
+    Public Function send_request(payload As String, httpMethod As httpMethods, Optional expectResponse As Boolean = False, Optional queryString As String = "") As DataTable
         Dim stream As Stream
         Dim response As Stream
         Dim reader As StreamReader
         Dim res As String
 
         Try
+            If queryString <> "" Then
+                apiEndpoint = apiEndpoint & "?" & queryString
+            End If
             Dim data = Encoding.Default.GetBytes(payload)
             Dim req As WebRequest = WebRequest.Create(apiEndpoint)
             req.Headers.Add("X-COG-ID", um.currentSession.token)
@@ -131,6 +134,8 @@ Public Class API
                 req.Method = "POST"
             ElseIf httpMethod = httpMethods.httpPUT Then
                 req.Method = "PUT"
+            ElseIf httpMethods.httpDELETE Then
+                req.Method = "DELETE"
             End If
 
             req.ContentLength = data.Length
@@ -145,7 +150,11 @@ Public Class API
             res = reader.ReadToEnd()
 
             If expectResponse Then
-                Return Json.JsonConvert.DeserializeObject(Of DataTable)(res)
+                If res = """""" Then
+                    Return New DataTable()
+                Else
+                    Return Json.JsonConvert.DeserializeObject(Of DataTable)(res)
+                End If
             Else
                 Return Nothing
             End If

@@ -52,7 +52,7 @@ Public Class ControllerPractica
         Try
             Dim api As New API(API.resources.PRACTICA)
             Dim serialObject = Json.JsonConvert.SerializeObject(_practicas)
-            result = api.send_post_put(serialObject, API.httpMethods.httpPOST, True)
+            result = api.send_request(serialObject, API.httpMethods.httpPOST, True)
 
             Return result
         Catch ex As apiException
@@ -60,7 +60,7 @@ Public Class ControllerPractica
         End Try
     End Function
 
-    Public ReadOnly Property practicas(fecha As Date, tipo As tipoPracticas, id As Integer)
+    Public ReadOnly Property practicas(fecha As Date, tipo As tipoPracticas, id As String)
         Get
             Dim startDate As Date
             Dim endDate As Date
@@ -91,4 +91,16 @@ Public Class ControllerPractica
 
         End Get
     End Property
+
+    Friend Function delete(ids As List(Of String), month As Integer, year As Integer) As DataTable
+        Try
+            Dim query_string = String.Format("year={0}&month={1}", year, month)
+            Dim api As New API(API.resources.PRACTICA)
+            Dim serialObject = Json.JsonConvert.SerializeObject(ids)
+            Dim ret = api.send_request(serialObject, API.httpMethods.httpDELETE, True, query_string)
+            Return ret
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
 End Class

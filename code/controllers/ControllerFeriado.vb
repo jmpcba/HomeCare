@@ -96,7 +96,7 @@ Public Class ControllerFeriado
         Try
             Dim api As New API(API.resources.FERIADO)
             Dim serialObject = Json.JsonConvert.SerializeObject(feriado)
-            api.send_post_put(serialObject, API.httpMethods.httpPOST)
+            api.send_request(serialObject, API.httpMethods.httpPOST)
         Catch ex As Exception
             Throw
         End Try
@@ -107,7 +107,7 @@ Public Class ControllerFeriado
             Dim api As New API(API.resources.FERIADO)
             _feriados = Nothing
             Dim serialObject = Json.JsonConvert.SerializeObject(feriado)
-            api.send_post_put(serialObject, API.httpMethods.httpPUT)
+            api.send_request(serialObject, API.httpMethods.httpPUT)
         Catch ex As Exception
             Throw
         End Try

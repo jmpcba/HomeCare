@@ -60,7 +60,7 @@ Public Class ControllerSubModulo
             Dim sm = New subModulo(_cod, _desc)
             Dim api As New API(API.resources.SUBMODULO)
             Dim serialObject = Json.JsonConvert.SerializeObject(sm)
-            api.send_post_put(serialObject, API.httpMethods.httpPOST)
+            api.send_request(serialObject, API.httpMethods.httpPOST)
         Catch ex As apiException
             Throw
         End Try
@@ -71,7 +71,7 @@ Public Class ControllerSubModulo
             Dim api As New API(API.resources.SUBMODULO)
             _subModulos = Nothing
             Dim serialObject = Json.JsonConvert.SerializeObject(sm)
-            api.send_post_put(serialObject, API.httpMethods.httpPUT)
+            api.send_request(serialObject, API.httpMethods.httpPUT)
         Catch ex As apiException
             Throw
         End Try

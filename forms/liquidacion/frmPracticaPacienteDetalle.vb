@@ -6,12 +6,13 @@
     Dim afiliado As String
     Dim frmParent As frmPracticasPaciente
     Dim sel As Boolean = False
+    Dim pc As ControllerPractica
 
     Public Sub New(_afiliado As Integer, _fecha As Date, ByRef _parent As frmPracticasPaciente)
 
         ' Esta llamada es exigida por el diseñador.
         InitializeComponent()
-
+        pc = New ControllerPractica
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
         Me.WindowState = FormWindowState.Maximized
         frmParent = _parent
@@ -40,7 +41,7 @@
 
             fecha = _fecha
             afiliado = _afiliado
-
+            pc = New ControllerPractica()
             llenarGrilla()
         Catch ex As Exception
             ut.mensaje(ex.Message, utils.mensajes.err)
@@ -133,8 +134,8 @@
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        Dim ids As New List(Of String())
-        Dim idsError As New List(Of String)
+        Dim ids As New List(Of String)
+        Dim idsError As New DataTable
 
         btnEliminar.Enabled = False
         dgDetalle.ClearSelection()
@@ -142,43 +143,37 @@
         For Each r As DataGridViewRow In dgDetalle.Rows
             If r.Cells(0).Value Then
                 Dim id As String
-                Dim idPrest As String
                 Dim rIndex As Integer
 
                 id = r.Cells("id").Value
-                idPrest = r.Cells("id_prestador").Value
+
                 rIndex = r.Index
 
                 r.DefaultCellStyle.BackColor = Color.LightGreen
-                ids.Add({id, idPrest})
+                ids.Add(id)
             End If
         Next
+
 
         If ut.mensaje("Desea eliminar las practicas seleccionadas?", utils.mensajes.preg) = MsgBoxResult.Yes Then
 
             Try
-                For Each id As String() In ids
-                    If ut.validarLiquidacion(id(1), fecha) Then
-                        idsError.Add(id(0))
-                    End If
-                Next
+                Dim err = pc.delete(ids, fecha.Month, fecha.Year)
 
-                If idsError.Count > 0 Then
+                If err.Rows.Count > 0 Then
                     For Each r As DataGridViewRow In dgDetalle.Rows
-                        Dim idPractica As Integer = r.Cells("id").Value
-                        If idsError.Contains(idPractica) Then
+                        Dim id As String
+                        Dim reRow As DataRow()
+
+                        id = r.Cells("id").Value
+                        reRow = err.Select(String.Format("id={0}", id))
+                        If reRow.Count <> 0 Then
                             r.DefaultCellStyle.BackColor = Color.Red
                         End If
                     Next
                     Throw New Exception("LAS PRACTICAS EN ROJO NO PUEDEN ELIMINARSE" & vbCrLf & "Liquidacion cerrada")
                 End If
 
-                Dim idsEliminar As New List(Of Integer)
-                For Each i As String() In ids
-                    idsEliminar.Add(i(0))
-                Next
-
-                db.eliminarPractica(idsEliminar)
                 llenarGrilla()
                 dgDetalle.Refresh()
 
